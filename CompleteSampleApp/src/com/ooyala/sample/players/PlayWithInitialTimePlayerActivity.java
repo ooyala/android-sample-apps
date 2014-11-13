@@ -19,7 +19,6 @@ import com.ooyala.sample.R;
  * This can be used in conjunction with Cross Device Resume (XDR) to start videos where
  * an end user left off
  *
- * @author michael.len
  *
  */
 public class PlayWithInitialTimePlayerActivity extends Activity implements Observer {

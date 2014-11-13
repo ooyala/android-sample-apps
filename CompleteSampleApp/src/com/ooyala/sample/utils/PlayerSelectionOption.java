@@ -4,7 +4,6 @@ import android.app.Activity;
 
 /**
  * This is used to store information of a sample activity for use in a Map or List
- * @author michael.len
  *
  */
 public class PlayerSelectionOption {

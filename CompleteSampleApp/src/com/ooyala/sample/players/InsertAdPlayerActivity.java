@@ -28,7 +28,6 @@ import com.ooyala.sample.R;
  * If you want to play an advertisement immediately, you can set the time of your Ad Spot to
  * the current playhead time
  *
- * @author michael.len
  *
  */
 public class InsertAdPlayerActivity extends Activity implements Observer {
