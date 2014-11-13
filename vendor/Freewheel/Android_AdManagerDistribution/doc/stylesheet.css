@@ -1,0 +1,122 @@
+/*
+ * Copyright 2009 Red Hat, Inc.
+ *
+ * Red Hat licenses this file to you under the Apache License, version 2.0
+ * (the "License"); you may not use this file except in compliance with the
+ * License.  You may obtain a copy of the License at:
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+* {
+  font-family: "Liberation Sans", "DejaVu Sans", "Lucida Grande", Geneva, Verdana, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color:#000000;
+  font-size: 11pt;
+}
+
+a:link {color:#0033cc;}
+a:visited {color:#0044cc;}
+
+tt, tt *, pre, pre *, code, code * {
+  font-family: "Liberation Mono", "DejaVu Sans Mono", Consolas, Monaco, "Lucida Console", "Courier New", monospace;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color:#4a5d75;
+    line-height:130%;
+    margin-top:0em;
+    font-family:'Lucida Grande', Geneva, Verdana, Arial, sans-serif;
+    background-color:transparent;
+}
+
+h1 {
+  font-size:2em;
+  padding: 0em;
+  margin: 0.8em 0em 0.35em 0em;
+}
+
+h2 {
+  font-size:1.6em;
+  padding: 0em;
+  margin: 0.8em 0em 0.35em 0em;
+}
+
+h3 {
+  font-size:1.3em;
+  padding: 0em;
+  margin: 0.8em 0em 0.35em 0em;
+}
+
+h4 {
+  font-size:1.1em;
+  padding: 0em;
+  margin: 0.8em 0em 0.35em 0em;
+}
+
+h5 {
+  font-size:1em;
+  padding: 0em;
+  margin: 0.8em 0em 0.35em 0em;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-color: black;
+}
+
+th {
+  text-align: left;
+  background: #CCCCFF;
+  color:#000000;
+  padding: 3px 6px;
+  border-color: black;
+}
+
+td {
+  vertical-align: top;
+  padding: 3px 6px;
+  border-color: black;
+}
+
+/* Table colors */
+.TableHeadingColor {
+  background: #CCCCFF; /* Dark mauve */
+  color:#000000;
+}
+.TableHeadingColor TH * {
+  font-size: 1.2em !important;
+}
+.TableSubHeadingColor {
+  background: #EEEEFF; /* Light mauve */
+  color:#000000
+}
+.TableRowColor {
+  background: #FFFFFF; /* White */
+  color:#000000
+}
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: 100%; color:#000000 }
+.FrameHeadingFont { font-size:  90%; color:#000000 }
+.FrameItemFont    { font-size:  90%; color:#000000 }
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { background-color:#EEEEFF; color:#000000} /* Light mauve */
+.NavBarCell1Rev { background-color:#00008B; color:#FFFFFF} /* Dark Blue */
+.NavBarFont1    { color:#000000;color:#000000;}
+.NavBarFont1Rev { color:#FFFFFF;color:#FFFFFF;}
+
+.NavBarCell2    { background-color:#FFFFFF; color:#000000}
+.NavBarCell3    { background-color:#FFFFFF; color:#000000}

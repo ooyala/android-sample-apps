@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
+import com.ooyala.sample.lists.FreewheelListActivity;
 
 /**
  * This is the opening activity for the app.
@@ -36,6 +37,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     // Begin List of Sample List Activities
     // If you add to this, you must add your activities to AndroidManifest
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
+    activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
 
     mainListAdapter.addAll(activityMap.keySet());
     mainListAdapter.notifyDataSetChanged();
