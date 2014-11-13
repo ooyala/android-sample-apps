@@ -65,6 +65,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
       player.play();
     }
 
+    /** DITA_START:<ph id="insert_ad_vast"> **/
     //Setup the left button, which will immediately insert a VAST advertisement
     Button leftButton = (Button) findViewById(R.id.doubleLeftButton);
     leftButton.setText("Insert VAST Ad");
@@ -82,7 +83,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
         }
       }
     });
-
+    /** DITA_END:</ph> **/
 
     //Setup the right button, which will immediately insert an Ooyala advertisement
     Button rightButton = (Button) findViewById(R.id.doubleRightButton);
