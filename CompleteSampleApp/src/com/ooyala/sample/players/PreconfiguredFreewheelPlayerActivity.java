@@ -1,7 +1,5 @@
 package com.ooyala.sample.players;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,13 +18,14 @@ import com.ooyala.sample.R;
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
  *
  * In order for Freewheel to work this simply, you need the following parameters set in your Third Party Module Parameters
- * fw_android_ad_server
- * fw_android_player_profile
+ * - fw_android_ad_server
+ * - fw_android_player_profile
  * 
  * And an Freewheel Ad Spot configured in Backlot with at least the following:
- * Network ID
- * Video Asset Network ID
- * Site Section ID
+ * - Network ID
+ * - Video Asset Network ID
+ * - Site Section ID
+ * 
  */
 public class PreconfiguredFreewheelPlayerActivity extends Activity implements Observer {
   public final static String getName() {
@@ -59,7 +58,8 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     player = playerLayoutController.getPlayer();
     player.addObserver(this);
 
-    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
+    @SuppressWarnings("unused")
+	OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
     
     if (player.setEmbedCode(EMBED)) {
       player.play();

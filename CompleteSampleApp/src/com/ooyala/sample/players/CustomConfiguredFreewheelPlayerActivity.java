@@ -20,12 +20,12 @@ import com.ooyala.sample.R;
  * This activity illustrates how to use Freewheel while manually configuring Freewheel settings
  *
  * Supported parameters for Freewheel Configuration:
- * fw_android_mrm_network_id
- * fw_android_ad_server
- * fw_android_player_profile
- * FRMSegment
- * fw_android_site_section_id
- * fw_android_video_asset_id
+ * - fw_android_mrm_network_id
+ * - fw_android_ad_server
+ * - fw_android_player_profile
+ * - FRMSegment
+ * - fw_android_site_section_id
+ * - fw_android_video_asset_id
  */
 public class CustomConfiguredFreewheelPlayerActivity extends Activity implements Observer {
   public final static String getName() {
@@ -51,13 +51,13 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
 
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    /** DITA_START:<ph id="freewheel_custom"> **/
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, PCODE, new PlayerDomain(DOMAIN));
     player = playerLayoutController.getPlayer();
     player.addObserver(this);
 
+    /** DITA_START:<ph id="freewheel_custom"> **/
     OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
     
     Map<String, String> freewheelParameters = new HashMap<String, String>();    
@@ -69,11 +69,11 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
     freewheelParameters.put("fw_android_video_asset_id",  "NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-");
 
     fwManager.overrideFreewheelParameters(freewheelParameters);
+    /** DITA_END:</ph> **/
     
     if (player.setEmbedCode(EMBED)) {
       player.play();
     }
-    /** DITA_END:</ph> **/
   }
 
   @Override

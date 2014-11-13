@@ -23,7 +23,7 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;
-  ArrayAdapter<String> selectionAdapter = null;
+  ArrayAdapter<String> selectionAdapter;
 
   /**
    * Called when the activity is first created.
