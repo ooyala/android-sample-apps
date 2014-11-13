@@ -30,11 +30,13 @@ public class MainActivity extends Activity implements OnItemClickListener {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.list_activity_layout);
-
     activityMap = new LinkedHashMap<String, Class<? extends Activity>>();
+    mainListAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
+
+    // Begin List of Sample List Activities
+    // If you add to this, you must add your activities to AndroidManifest
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
 
-    mainListAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
     mainListAdapter.addAll(activityMap.keySet());
     mainListAdapter.notifyDataSetChanged();
 
