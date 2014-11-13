@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Complete Sample App</string>
-    <string name="listNameAdvanced">Advanced Playback Samples</string>
+    <string name="app_name">Ooyala Complete Sample App</string>
 
 </resources>

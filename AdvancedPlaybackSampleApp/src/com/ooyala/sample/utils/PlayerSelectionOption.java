@@ -1,4 +1,4 @@
-package com.ooyala.sample.lists;
+package com.ooyala.sample.utils;
 
 import android.app.Activity;
 
