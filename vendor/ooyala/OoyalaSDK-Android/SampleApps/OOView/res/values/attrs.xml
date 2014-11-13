@@ -1,0 +1,5 @@
+<resources>
+    <attr name="video_title" format="reference"/>
+    <attr name="label" format="reference"/>
+    <attr name="add_watch" format="reference"/>
+</resources>

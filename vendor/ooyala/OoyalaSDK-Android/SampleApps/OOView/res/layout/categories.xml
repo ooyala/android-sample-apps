@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <RelativeLayout
+            android:id="@+id/header"
+            android:background="@drawable/bg_header"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.ooyala.demo.widget.LabelView
+                android:text="@string/app_name"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/header_text_size"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/ic_ooyala"
+                android:layout_gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_margin="74.5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+        <com.ooyala.demo.widget.VideoTitleText
+                android:id="@+id/popular"
+                android:drawableLeft="@drawable/popular"
+                android:text="@string/popular"
+                android:drawablePadding="20dp"
+                android:textSize="26sp"
+                android:gravity="left|center_vertical"
+                android:background="@drawable/category_item"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+<!--
+        <View
+                android:background="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                />
+-->
+        <com.ooyala.demo.widget.VideoTitleText
+                android:id="@+id/most_rated"
+                android:drawableLeft="@drawable/rating"
+                android:text="@string/most_rated"
+                android:textSize="26sp"
+                android:gravity="left|center_vertical"
+                android:drawablePadding="20dp"
+                android:background="@drawable/category_item"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+<!--
+        <View
+                android:background="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                />
+-->
+        <com.ooyala.demo.widget.VideoTitleText
+                android:id="@+id/recent"
+                android:drawableLeft="@drawable/recent"
+                android:text="@string/recent"
+                android:gravity="left|center_vertical"
+                android:textSize="26sp"
+                android:drawablePadding="20dp"
+
+                android:background="@drawable/category_item"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+<!--
+        <View
+                android:background="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                />
+-->
+        <com.ooyala.demo.widget.VideoTitleText
+                android:id="@+id/watch_later"
+                android:drawableLeft="@drawable/watch_later"
+                android:text="@string/watch_later"
+                android:gravity="left|center_vertical"
+                android:textSize="26sp"
+                android:drawablePadding="20dp"
+
+                android:background="@drawable/category_item"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+    </LinearLayout>
+</LinearLayout>

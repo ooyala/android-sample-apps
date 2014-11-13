@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="popular">Most Popular</string>
+    <string name="most_rated">Highest Rated</string>
+    <string name="recent">Most Recent</string>
+    <string name="watch_later">Watch Later</string>
+</resources>

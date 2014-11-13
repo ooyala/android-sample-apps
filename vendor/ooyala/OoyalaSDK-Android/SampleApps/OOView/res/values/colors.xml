@@ -1,0 +1,9 @@
+<resources>
+    <color name="bluish_gray">#8c9099</color>
+    <color name="white">#ffffff</color>
+    <color name="orange1">#e79c50</color>
+    <color name="orange2">#e79100</color>
+    <color name="grey">#808080</color>
+    <color name="yellow1">#e7e750</color>
+    <color name="yellow2">#fef768</color>
+</resources>

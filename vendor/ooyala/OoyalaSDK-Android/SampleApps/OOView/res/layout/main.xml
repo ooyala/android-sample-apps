@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_flipper"
+        android:fillAfter="false"
+        android:fillBefore="false"
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <LinearLayout
+            android:orientation="vertical"
+
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <ImageView
+
+                android:src="@drawable/ic_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                />
+        <ImageView
+
+                android:id="@+id/loading"
+
+
+                android:src="@drawable/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fillAfter="false"
+                android:fillBefore="false"
+                />
+        <TextView
+
+                android:id="@+id/createdBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Content by Joe Simon // Mutiny Bikes"
+                />
+                
+    </LinearLayout>
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <RelativeLayout
+                android:id="@+id/header"
+                android:background="@drawable/bg_header"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageButton
+                    android:id="@+id/categories"
+                    android:src="@drawable/ic_menu"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/btn_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            <ImageView
+                    android:id="@+id/search"
+                    android:src="@drawable/ic_search"
+                    android:padding="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            <com.ooyala.demo.widget.LabelView
+                    android:text=""
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/header_text_size"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ooyalatv_small"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <com.ooyala.demo.widget.LabelView
+                android:id="@+id/search_text"
+                android:visibility="gone"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="@dimen/video_title_size"
+                android:layout_below="@+id/header"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+        <com.ooyala.demo.widget.LabelView
+                android:id="@+id/no_results"
+                android:visibility="gone"
+                android:text="@string/no_video_found"
+                android:textSize="@dimen/video_title_size"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+        <LinearLayout
+                android:id="@+id/no_network"
+                android:visibility="gone"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <com.ooyala.demo.widget.LabelView
+                    android:text="@string/no_network_connection"
+                    android:drawableLeft="@drawable/fs_error"
+                    android:singleLine="false"
+                    android:drawablePadding="10dp"
+                    android:ellipsize="none"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"/>
+            <Button
+                    android:id="@+id/retry"
+
+                    android:textColor="@color/white"
+                    android:text="@string/retry"
+                    android:padding="10dp"
+                    android:background="@drawable/btn_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ListView
+                android:id="@+id/channel_listview"
+                android:layout_below="@id/search_text"
+                android:divider="@null"
+                android:dividerHeight="0dip"
+                android:listSelector="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:alwaysDrawnWithCache="true"
+                android:animationCache="true"
+                android:scrollingCache="true"
+                android:persistentDrawingCache="all"
+                android:drawingCacheQuality="low"
+
+                />
+
+        <!--
+        -->
+
+    </RelativeLayout>
+</ViewFlipper>
+
+

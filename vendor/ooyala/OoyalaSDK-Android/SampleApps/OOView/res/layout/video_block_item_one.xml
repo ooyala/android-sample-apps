@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:padding="2dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+
+            android:background="@drawable/round_shape"
+            android:padding="4dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/video_thumb_webviewFull"
+
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        <com.ooyala.demo.widget.TransparentPanel
+                android:id="@+id/tpFull"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <com.ooyala.demo.widget.VideoTitleText
+                    android:id="@+id/video_full_title"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <WebView
+                    android:id="@+id/facebook_like_full"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:layout_width="@dimen/web_view_width"
+                    android:layout_height="@dimen/web_view_height"
+                    />
+
+        </com.ooyala.demo.widget.TransparentPanel>
+
+    </RelativeLayout>
+</LinearLayout>

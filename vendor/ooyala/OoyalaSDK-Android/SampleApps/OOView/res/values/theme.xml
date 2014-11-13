@@ -1,0 +1,7 @@
+<resources>
+    <style name="OoyalaTheme">
+        <item name="video_title">@style/VideoTitle</item>
+        <item name="label">@style/LabelView</item>
+        <item name="add_watch">@style/AddWatch</item>
+    </style>
+</resources>
