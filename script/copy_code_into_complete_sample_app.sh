@@ -11,3 +11,7 @@ cp AdvancedPlaybackSampleApp/src/com/ooyala/sample/lists/* CompleteSampleApp/src
 echo "Copying FreewheelSampleApp into CompleteSampleApp"
 cp FreewheelSampleApp/src/com/ooyala/sample/players/* CompleteSampleApp/src/com/ooyala/sample/players/
 cp FreewheelSampleApp/src/com/ooyala/sample/lists/* CompleteSampleApp/src/com/ooyala/sample/lists/
+
+echo "Copying IMASampleApp into CompleteSampleApp"
+cp IMASampleApp/src/com/ooyala/sample/players/* CompleteSampleApp/src/com/ooyala/sample/players/
+cp IMASampleApp/src/com/ooyala/sample/lists/* CompleteSampleApp/src/com/ooyala/sample/lists/

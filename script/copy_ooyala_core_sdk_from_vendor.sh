@@ -7,8 +7,11 @@ cd ${BASE_DIR}
 echo "Copying OoyalaSDK into CompleteSampleApp"
 cp vendor/ooyala/OoyalaSDK-Android/OoyalaSDK.jar CompleteSampleApp/libs/
 
+echo "Copying OoyalaSDK into AdvancedPlaybackSampleApp"
+cp vendor/ooyala/OoyalaSDK-Android/OoyalaSDK.jar AdvancedPlaybackSampleApp/libs/
+
 echo "Copying OoyalaSDK into FreewheelSampleApp"
 cp vendor/ooyala/OoyalaSDK-Android/OoyalaSDK.jar FreewheelSampleApp/libs/
 
-echo "Copying OoyalaSDK into AdvancedPlaybackSampleApp"
-cp vendor/ooyala/OoyalaSDK-Android/OoyalaSDK.jar AdvancedPlaybackSampleApp/libs/
+echo "Copying OoyalaSDK into IMASampleApp"
+cp vendor/ooyala/OoyalaSDK-Android/OoyalaSDK.jar IMASampleApp/libs/

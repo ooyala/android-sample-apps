@@ -16,6 +16,9 @@ This application was designed to illustrate some advanced functionality you can 
 
 This application was designed to illustrate how correctly configured Freewheel assets play back using the Ooyala SDK.
 
+### IMASampleApp
+
+This application was designed to illustrate how correctly configured Google IMA assets play back using the Ooyala SDK.
 
 ## Using the CompleteSampleApp
 

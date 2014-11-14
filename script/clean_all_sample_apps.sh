@@ -17,3 +17,6 @@ rm -rf AdvancedPlaybackSampleApp/libs/*
 
 echo "Removing libs in FreewheelSampleApp"
 rm -rf FreewheelSampleApp/libs/*
+
+echo "Removing libs in IMASampleApp"
+rm -rf IMASampleApp/libs/*
