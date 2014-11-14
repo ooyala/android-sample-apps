@@ -1,8 +1,0 @@
-<resources>
-    <dimen name="item_image_margin">4dp</dimen>
-    <dimen name="header_text_size">28sp</dimen>
-    <dimen name="video_title_size">22sp</dimen>
-
-    <dimen name="web_view_height">24dp</dimen>
-    <dimen name="web_view_width">84dp</dimen>
-</resources>
