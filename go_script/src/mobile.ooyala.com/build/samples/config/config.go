@@ -23,6 +23,7 @@ type Config struct {
 	VendorOoyalaCoreFolderPath DirAbs
 
 	MergableSampleAppPaths []DirAbs
+	AllSampleAppsPaths     []DirAbs
 }
 
 func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config {
@@ -38,7 +39,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	ooyalaCoreDirName := MakeDirName("OoyalaSDK-" + platformName)
 
 	completeSampleAppName := MakeDirName("CompleteSampleApp")
-
+	completeSampleAppPath := MakeDirAbs(Join(rootPath, completeSampleAppName))
 	// Get All Sample Apps in Repo
     appNamesListString, err := util.RunBashCommandInDir(rootPath, "ls -d *SampleApp", logger)
 	util.MaybeDie(err, logger)
@@ -55,7 +56,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 		RootPath: rootPath,
 
 		CompleteSampleAppName:           completeSampleAppName,
-		CompleteSampleAppPath:           MakeDirAbs(Join(rootPath, completeSampleAppName)),
+		CompleteSampleAppPath:           completeSampleAppPath,
 
 		VendorFreewheelFolderPath:       MakeDirAbs(Join(vendorPath, freewheelDirName)),
 		VendorIMAFolderPath:             MakeDirAbs(Join(vendorPath, googleDirName)),
@@ -64,6 +65,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 		VendorOoyalaCoreFolderPath:      MakeDirAbs(Join(vendorPath, ooyalaDirName, ooyalaCoreDirName)),
 
 		MergableSampleAppPaths:          appNamesDirSlice,
+		AllSampleAppsPaths:              append(appNamesDirSlice, completeSampleAppPath),
 
 	}
 	util.RequireFullStructOrDie(c, logger)
