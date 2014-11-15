@@ -33,7 +33,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	//Names of all folders in vendor
 	freewheelDirName  := MakeDirName("Freewheel")
 	googleDirName     := MakeDirName("Google")
-	ooyalaDirName     := MakeDirName("ooyala")
+	ooyalaDirName     := MakeDirName("Ooyala")
 	ooyalaIMADirName  := MakeDirName("OoyalaIMASDK-" + platformName)
 	ooyalaFWDirName   := MakeDirName("OoyalaFreewheelSDK-" + platformName)
 	ooyalaCoreDirName := MakeDirName("OoyalaSDK-" + platformName)

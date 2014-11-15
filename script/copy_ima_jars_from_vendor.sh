@@ -6,10 +6,10 @@ cd ${BASE_DIR}
 
 
 echo "Copying OoyalaIMASDK into IMASampleApp"
-cp vendor/ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar IMASampleApp/libs/
+cp vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar IMASampleApp/libs/
 
 echo "Copying OoyalaIMASDK into CompleteSampleApp"
-cp vendor/ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar CompleteSampleApp/libs/
+cp vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar CompleteSampleApp/libs/
 
 echo "Copying FWAdManager into IMASampleApp"
 cp vendor/Google/ima-android-sdk-beta8.jar IMASampleApp/libs/

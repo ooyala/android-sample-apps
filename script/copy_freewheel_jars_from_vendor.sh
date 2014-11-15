@@ -6,10 +6,10 @@ cd ${BASE_DIR}
 
 
 echo "Copying OoyalaFreewheelSDK into FreewheelSampleApp"
-cp vendor/ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar FreewheelSampleApp/libs/
+cp vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar FreewheelSampleApp/libs/
 
 echo "Copying OoyalaFreewheelSDK into CompleteSampleApp"
-cp vendor/ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar CompleteSampleApp/libs/
+cp vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar CompleteSampleApp/libs/
 
 echo "Copying FWAdManager into FreewheelSampleApp"
 cp vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar FreewheelSampleApp/libs/
