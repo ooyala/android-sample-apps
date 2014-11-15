@@ -15,16 +15,32 @@ func main() {
 
 	config := c.MakeConfig("Android", rootDir, l);
 
-    for _,element := range config.MergableSampleAppPaths {
+	l.Println("We found the following apps:")
+    for _, element := range config.MergableSampleAppPaths {
     	l.Println(element.String())
     }
 
     removeLibraries (config.AllSampleAppsPaths, l)
+
+    //Remove the code that is duplicated in the CompleteSampleApp
+    removeCompleteCode(config.CompleteSampleAppPath, l)
 }
 
 func removeLibraries (sampleAppPaths []DirAbs, l *log.Logger) {
-	for _,element := range sampleAppPaths {
+	l.Println("clean_sample_apps.removeLibraries")
+	for _, element := range sampleAppPaths {
 		util.DeletePath(MakeDirAbs(Join(element, MakeDirName("libs"))), l);
 		util.EnsurePath(MakeDirAbs(Join(element, MakeDirName("libs"))), l);
 	}
+}
+
+func removeCompleteCode (completeSampleAppPath DirAbs, l *log.Logger) {
+	l.Println("clean_sample_apps.removeCompleteCode")
+	samplePackageRelPath  := MakePath("src/com/ooyala/sample")
+
+	util.DeletePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("players"))), l);
+	util.EnsurePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("players"))), l);
+
+	util.DeletePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("lists"))), l);
+	util.EnsurePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("lists"))), l);
 }
