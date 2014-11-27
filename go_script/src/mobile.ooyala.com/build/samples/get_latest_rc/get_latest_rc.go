@@ -40,9 +40,9 @@ func removeOldOoyalaVendorFolders(config c.Config, l *log.Logger) {
 
 func downloadNewRCPackages(config c.Config, l *log.Logger) {
 	l.Println("get_latest_rc.downloadNewRCPackages")
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.CoreSDKURL + "' -O " + config.CoreSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.FreewheelSDKURL + "' -O " + config.FreewheelSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.IMASDKURL + "' -O " + config.IMASDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.CoreSDKCandidateURL + "' -O " + config.CoreSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.FreewheelSDKCandidateURL + "' -O " + config.FreewheelSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.IMASDKCandidateURL + "' -O " + config.IMASDKFileNameStr, l)
 }
 
 
