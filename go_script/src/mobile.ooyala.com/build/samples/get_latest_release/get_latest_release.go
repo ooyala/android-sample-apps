@@ -3,8 +3,8 @@ import ol "mobile.ooyala.com/build/common/log"
 import "log"
 import "mobile.ooyala.com/build/common/util"
 import . "mobile.ooyala.com/build/common/path"
-import c "mobile.ooyala.com/build/samples/config"
-
+import vc "mobile.ooyala.com/build/samples/config/vendor_config"
+import zc "mobile.ooyala.com/build/samples/config/zip_config"
 
 func main() {
 	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/ios-build-log"))
@@ -13,15 +13,17 @@ func main() {
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
 	util.MaybeDie(err, l)
 
-	config := c.MakeConfig("Android", rootDir, l);
+	config := vc.MakeConfig("Android", rootDir, l);
+	zipConfig := zc.MakeConfig("Android", rootDir, l);
+
 
 	removeOldOoyalaVendorFolders(config, l)
 
-	downloadNewRCPackages(config, l)
+	downloadNewRCPackages(config, zipConfig, l)
 
-	unzipNewRCPackages(config, l)
+	unzipNewRCPackages(config, zipConfig, l)
 
-	removeZipFiles(config, l)
+	removeZipFiles(config, zipConfig, l)
 
 	//TEMPORARY: Remove all sample apps provided in the packages, until the sample apps are no longer included
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("SampleApps"))), l);
@@ -31,31 +33,31 @@ func main() {
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath,MakeFileName("IMASampleApp"))), l);
 }
 
-func removeOldOoyalaVendorFolders(config c.Config, l *log.Logger) {
+func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
 	l.Println("get_latest_rc.removeOldOoyalaVendorFolders")
 		util.DeletePath(config.VendorOoyalaFreewheelFolderPath, l);
 		util.DeletePath(config.VendorOoyalaCoreFolderPath, l);
 		util.DeletePath(config.VendorOoyalaIMAFolderPath, l);
 }
 
-func downloadNewRCPackages(config c.Config, l *log.Logger) {
+func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	l.Println("get_latest_rc.downloadNewRCPackages")
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.CoreSDKURL + "' -O " + config.CoreSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.FreewheelSDKURL + "' -O " + config.FreewheelSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.IMASDKURL + "' -O " + config.IMASDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.FreewheelSDKURL + "' -O " + zipConfig.FreewheelSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.IMASDKURL + "' -O " + zipConfig.IMASDKFileNameStr, l)
 }
 
 
-func unzipNewRCPackages(config c.Config, l *log.Logger) {
+func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	l.Println("get_latest_rc.unzipNewRCPackages")
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + config.CoreSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + config.FreewheelSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + config.IMASDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.CoreSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.FreewheelSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.IMASDKFileNameStr, l)
 }
 
-func removeZipFiles(config c.Config, l *log.Logger) {
+func removeZipFiles(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	l.Println("get_latest_rc.removeZipFiles")
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + config.CoreSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + config.FreewheelSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + config.IMASDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.CoreSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.FreewheelSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.IMASDKFileNameStr, l)
 }
