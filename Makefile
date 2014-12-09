@@ -16,6 +16,7 @@ clean-scripts:
 install-scripts: clean-scripts
 	cd go_script/src/mobile.ooyala.com/build/samples/clean_sample_apps/ && go install
 	cd go_script/src/mobile.ooyala.com/build/samples/get_latest_rc/ && go install
+	cd go_script/src/mobile.ooyala.com/build/samples/get_latest_release/ && go install
 
 clean: install-scripts
 	go_script/bin/clean_sample_apps

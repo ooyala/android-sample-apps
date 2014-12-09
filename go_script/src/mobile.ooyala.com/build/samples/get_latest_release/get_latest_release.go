@@ -25,12 +25,10 @@ func main() {
 
 	//TEMPORARY: Remove all sample apps provided in the packages, until the sample apps are no longer included
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("SampleApps"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("APIDocs"))), l);
+	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("Documentation"))), l);
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("DefaultControlsSource"))), l);
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("FreewheelSampleApp"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("APIDocs"))), l);
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath,MakeFileName("IMASampleApp"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath, MakeFileName("APIDocs"))), l);
 }
 
 func removeOldOoyalaVendorFolders(config c.Config, l *log.Logger) {
@@ -42,9 +40,9 @@ func removeOldOoyalaVendorFolders(config c.Config, l *log.Logger) {
 
 func downloadNewRCPackages(config c.Config, l *log.Logger) {
 	l.Println("get_latest_rc.downloadNewRCPackages")
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.CoreSDKCandidateURL + "' -O " + config.CoreSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.FreewheelSDKCandidateURL + "' -O " + config.FreewheelSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.IMASDKCandidateURL + "' -O " + config.IMASDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.CoreSDKURL + "' -O " + config.CoreSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.FreewheelSDKURL + "' -O " + config.FreewheelSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + config.IMASDKURL + "' -O " + config.IMASDKFileNameStr, l)
 }
 
 
