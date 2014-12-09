@@ -7,7 +7,7 @@ import vc "mobile.ooyala.com/build/samples/config/vendor_config"
 import zc "mobile.ooyala.com/build/samples/config/zip_config"
 
 func main() {
-	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/ios-build-log"))
+	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.get_latest_rc"))
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
