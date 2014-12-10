@@ -7,7 +7,7 @@ import vc "mobile.ooyala.com/build/samples/config/vendor_config"
 import zc "mobile.ooyala.com/build/samples/config/zip_config"
 
 func main() {
-	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.get_latest_rc"))
+	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.get_latest_release"))
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
@@ -15,6 +15,7 @@ func main() {
 
 	config := vc.MakeConfig("Android", rootDir, l);
 	zipConfig := zc.MakeConfig("Android", rootDir, l);
+
 
 	removeOldOoyalaVendorFolders(config, l)
 
@@ -26,12 +27,10 @@ func main() {
 
 	//TEMPORARY: Remove all sample apps provided in the packages, until the sample apps are no longer included
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("SampleApps"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("APIDocs"))), l);
+	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("Documentation"))), l);
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("DefaultControlsSource"))), l);
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("FreewheelSampleApp"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("APIDocs"))), l);
 	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath,MakeFileName("IMASampleApp"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath, MakeFileName("APIDocs"))), l);
 }
 
 func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
@@ -43,9 +42,9 @@ func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
 
 func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	l.Println("get_latest_rc.downloadNewRCPackages")
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKCandidateURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.FreewheelSDKCandidateURL + "' -O " + zipConfig.FreewheelSDKFileNameStr, l)
-	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.IMASDKCandidateURL + "' -O " + zipConfig.IMASDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.FreewheelSDKURL + "' -O " + zipConfig.FreewheelSDKFileNameStr, l)
+	util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.IMASDKURL + "' -O " + zipConfig.IMASDKFileNameStr, l)
 }
 
 

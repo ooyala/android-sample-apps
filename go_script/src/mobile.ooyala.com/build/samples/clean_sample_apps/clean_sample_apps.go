@@ -3,17 +3,17 @@ import ol "mobile.ooyala.com/build/common/log"
 import "log"
 import "mobile.ooyala.com/build/common/util"
 import . "mobile.ooyala.com/build/common/path"
-import c "mobile.ooyala.com/build/samples/config"
+import sc "mobile.ooyala.com/build/samples/config/sample_app_config"
 
 
 func main() {
-	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/ios-build-log"))
+	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.clean-sample-apps"))
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
 	util.MaybeDie(err, l)
 
-	config := c.MakeConfig("Android", rootDir, l);
+	config := sc.MakeConfig("Android", rootDir, l);
 
 	l.Println("We found the following apps:")
     for _, element := range config.MergableSampleAppPaths {
