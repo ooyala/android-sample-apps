@@ -20,6 +20,9 @@ type Config struct {
 	FreewheelEnabledSampleAppsPaths []DirAbs
 	IMAEnabledSampleAppPaths        []DirAbs
 
+	PlayersPackageDirRel DirRel
+	ListPackageDirRel    DirRel
+	LayoutDirRel         DirRel
 }
 
 func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config {
@@ -52,10 +55,12 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 
 		MergableSampleAppPaths:          appNamesDirSlice,
 		AllSampleAppsPaths:              append(appNamesDirSlice, completeSampleAppPath),
-		
 		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath},
 		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath},
 
+        PlayersPackageDirRel: MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("players"))),
+        ListPackageDirRel:    MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("lists"))),
+        LayoutDirRel:         MakeDirRel(Join(MakeDirName("res"), MakeDirName("layout"))),
 	}
 	util.RequireFullStructOrDie(c, logger)
 	return c

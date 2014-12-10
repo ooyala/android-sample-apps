@@ -1,4 +1,13 @@
 #!/bin/bash
+echo
+echo
+echo
+echo "WARRRRNINGGGG THIS SHOULD NOT BE USED"
+echo
+echo
+echo
+
+exit 1
 
 echo "Cleaning CompleteSampleApp"
 echo "Removing old files from CompleteSampleApp"
