@@ -27,13 +27,16 @@ func main() {
 func copyFilesFromSampleApp(sampleAppRootDirAbs DirAbs, config sc.Config, l *log.Logger) {
 	srcPlayersDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.PlayersPackageDirRel))
 	srcListsDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.ListPackageDirRel))
+	srcUtilsDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.UtilsPackageDirRel))
 	srcLayoutDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.LayoutDirRel))
 
 	dstPlayersDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.PlayersPackageDirRel))
 	dstListsDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.ListPackageDirRel))
+	dstUtilsDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.UtilsPackageDirRel))
 	dstLayoutDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.LayoutDirRel))
 
 	util.CopyPathContents(srcPlayersDirAbs, dstPlayersDirAbs, l)
 	util.CopyPathContents(srcListsDirAbs, dstListsDirAbs, l)
+	util.CopyPathContents(srcUtilsDirAbs, dstUtilsDirAbs, l)
 	util.CopyPathContents(srcLayoutDirAbs, dstLayoutDirAbs, l)
 }

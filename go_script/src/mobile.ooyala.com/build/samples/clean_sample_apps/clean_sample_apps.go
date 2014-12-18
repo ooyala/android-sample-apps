@@ -23,7 +23,7 @@ func main() {
     removeLibraries (config.AllSampleAppsPaths, l)
 
     //Remove the code that is duplicated in the CompleteSampleApp
-    removeCompleteCode(config.CompleteSampleAppPath, l)
+    removeCompleteCode(config, l)
 }
 
 func removeLibraries (sampleAppPaths []DirAbs, l *log.Logger) {
@@ -34,13 +34,23 @@ func removeLibraries (sampleAppPaths []DirAbs, l *log.Logger) {
 	}
 }
 
-func removeCompleteCode (completeSampleAppPath DirAbs, l *log.Logger) {
+func removeCompleteCode (config sc.Config, l *log.Logger) {
 	l.Println("clean_sample_apps.removeCompleteCode")
-	samplePackageRelPath  := MakePath("src/com/ooyala/sample")
 
-	util.DeletePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("players"))), l);
-	util.EnsurePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("players"))), l);
+	playersDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.PlayersPackageDirRel))
+	listsDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.ListPackageDirRel))
+	utilsDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.UtilsPackageDirRel))
+	layoutDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.LayoutDirRel))
 
-	util.DeletePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("lists"))), l);
-	util.EnsurePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("lists"))), l);
+	util.DeletePath(playersDirAbs, l);
+	util.EnsurePath(playersDirAbs, l);
+
+	util.DeletePath(listsDirAbs, l);
+	util.EnsurePath(listsDirAbs, l);
+
+	util.DeletePath(utilsDirAbs, l);
+	util.EnsurePath(utilsDirAbs, l);
+
+	util.DeletePath(layoutDirAbs, l);
+	util.EnsurePath(layoutDirAbs, l);
 }
