@@ -1,4 +1,4 @@
-package sample_app_config
+package config
 
 import "log"
 import "strings"
@@ -9,34 +9,29 @@ import . "mobile.ooyala.com/build/common/path"
  * This config file represents folders to access sample apps.
  * Consistent between Android and iOS sample app
  */
-type Config struct {
+type SampleAppConfig struct {
 	RootPath         DirAbs
 
 	CompleteSampleAppName DirName
 	CompleteSampleAppPath DirAbs
+
 
 	MergableSampleAppPaths          []DirAbs
 	AllSampleAppsPaths              []DirAbs
 	FreewheelEnabledSampleAppsPaths []DirAbs
 	IMAEnabledSampleAppPaths        []DirAbs
 
-	PlayersPackageDirRel DirRel
-	ListPackageDirRel    DirRel
-	UtilsPackageDirRel   DirRel
-	LayoutDirRel         DirRel
+
 }
 
-func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config {
+func MakeSampleAppConfig(platformName string, rootPath DirAbs, logger *log.Logger) SampleAppConfig {
 
 	completeSampleAppName := MakeDirName("CompleteSampleApp")
 	freewheelSampleAppName := MakeDirName("FreewheelSampleApp")
 	imaSampleAppName := MakeDirName("IMASampleApp")
-	optionsSampleAppName := MakeDirName("OptionsSampleApp")
-
 	completeSampleAppPath := MakeDirAbs(Join(rootPath, completeSampleAppName))
 	freewheelSampleAppPath := MakeDirAbs(Join(rootPath, freewheelSampleAppName))
 	imaSampleAppPath := MakeDirAbs(Join(rootPath, imaSampleAppName))
-	optionsSampleAppPath := MakeDirAbs(Join(rootPath, optionsSampleAppName))
 
 
 	// Get All Sample Apps in Repo
@@ -51,7 +46,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
     	}
     }
 
-	c := Config{
+	c := SampleAppConfig{
 		RootPath: rootPath,
 
 		CompleteSampleAppName:           completeSampleAppName,
@@ -59,13 +54,10 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 
 		MergableSampleAppPaths:          appNamesDirSlice,
 		AllSampleAppsPaths:              append(appNamesDirSlice, completeSampleAppPath),
-		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
-		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
+		
+		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath},
+		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath},
 
-        PlayersPackageDirRel: MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("players"))),
-        ListPackageDirRel:    MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("lists"))),
-        UtilsPackageDirRel:   MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("utils"))),
-        LayoutDirRel:         MakeDirRel(Join(MakeDirName("res"), MakeDirName("layout"))),
 	}
 	util.RequireFullStructOrDie(c, logger)
 	return c

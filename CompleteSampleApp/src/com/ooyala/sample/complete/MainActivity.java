@@ -16,6 +16,7 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
+import com.ooyala.sample.lists.OptionsListActivity;
 
 /**
  * This is the opening activity for the app.
@@ -40,6 +41,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
     activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
+    activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
+
 
     mainListAdapter.addAll(activityMap.keySet());
     mainListAdapter.notifyDataSetChanged();

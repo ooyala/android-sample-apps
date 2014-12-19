@@ -16,11 +16,12 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.players.CuePointsOptionsFreewheelPlayerActivity;
 import com.ooyala.sample.players.PreloadOptionsPlayerActivity;
 import com.ooyala.sample.players.PreloadWithInitTimePlayerActivity;
+import com.ooyala.sample.players.ServerConfiguredTVRatingsPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 public class OptionsListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
-    return "Freewheel Integration";
+    return "Player Configuration with Options";
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;
@@ -39,6 +40,7 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
     selectionMap.put("CuePoints and AdsControl Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", CuePointsOptionsFreewheelPlayerActivity.class)); 
     selectionMap.put("Preload and PromoImage Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", PreloadOptionsPlayerActivity.class)); 
     selectionMap.put("Preload and Promo Options with Initial Time", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", PreloadWithInitTimePlayerActivity.class));
+    selectionMap.put("Server-Side TV Ratings", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", ServerConfiguredTVRatingsPlayerActivity.class));
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView

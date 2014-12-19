@@ -8,7 +8,6 @@ import java.util.Observer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,7 +30,7 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
   private final String TAG = this.getClass().toString();
   private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   private final String DOMAIN = "http://ooyala.com";
-  private String EMBEDCODE = "NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-";
+  private String EMBEDCODE = "";
 
   private OptimizedOoyalaPlayerLayoutController playerLayoutController;
   private OoyalaPlayer player;
@@ -69,7 +68,7 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
   protected void onStop() {
 	super.onStop();
 	Log.d(TAG, "App Stopped");
-	if (playerLayoutController.getPlayer() != null) {
+	if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
 	  playerLayoutController.getPlayer().suspend();
 	}
   }
@@ -78,11 +77,11 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
   protected void onRestart() {
 	super.onRestart();
 	Log.d(TAG, "App Restarted");
-	if (playerLayoutController.getPlayer() != null) {
+	if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
 	  playerLayoutController.getPlayer().resume();
 	}
   }
-	
+
   @Override
   public void onClick(View v) {
 	OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
@@ -110,33 +109,13 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
 	freewheelManager.overrideFreewheelParameters(freewheelParameters);
 	player.setEmbedCode(EMBEDCODE);
   }
-	
-  @Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-	if (playerLayoutController.onKeyUp(keyCode, event)) {
-	  return true;
-	}
-	return super.onKeyDown(keyCode, event);
-	}
-	
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
 	  return;
 	}
 	Log.d(TAG,
-	    "Notification Recieved: " + arg1 + " - state: " + player.getState());
-	}
-	
-	public void onToggleClicked(View view) {
-	    // Is the toggle on?
-	    boolean on = ((ToggleButton) view).isChecked();
-	    
-	    if (on) {
-	       // do something
-	    } else {
-	        // do something
-	    }
+	    "Notification Received: " + arg1 + " - state: " + player.getState());
 	}
 }
-
