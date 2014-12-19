@@ -31,9 +31,12 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	completeSampleAppName := MakeDirName("CompleteSampleApp")
 	freewheelSampleAppName := MakeDirName("FreewheelSampleApp")
 	imaSampleAppName := MakeDirName("IMASampleApp")
+	optionsSampleAppName := MakeDirName("OptionsSampleApp")
+
 	completeSampleAppPath := MakeDirAbs(Join(rootPath, completeSampleAppName))
 	freewheelSampleAppPath := MakeDirAbs(Join(rootPath, freewheelSampleAppName))
 	imaSampleAppPath := MakeDirAbs(Join(rootPath, imaSampleAppName))
+	optionsSampleAppPath := MakeDirAbs(Join(rootPath, optionsSampleAppName))
 
 
 	// Get All Sample Apps in Repo
@@ -56,8 +59,8 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 
 		MergableSampleAppPaths:          appNamesDirSlice,
 		AllSampleAppsPaths:              append(appNamesDirSlice, completeSampleAppPath),
-		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath},
-		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath},
+		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
+		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
 
         PlayersPackageDirRel: MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("players"))),
         ListPackageDirRel:    MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("lists"))),
