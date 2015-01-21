@@ -8,6 +8,7 @@ import zc "mobile.ooyala.com/build/samples/config/zip_config"
 
 func main() {
 	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.get_latest_release"))
+	l.Println("get_latest_release")
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
@@ -34,14 +35,14 @@ func main() {
 }
 
 func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.removeOldOoyalaVendorFolders")
-		util.DeletePath(config.VendorOoyalaFreewheelFolderPath, l);
-		util.DeletePath(config.VendorOoyalaCoreFolderPath, l);
-		util.DeletePath(config.VendorOoyalaIMAFolderPath, l);
+	l.Println("get_latest_release.removeOldOoyalaVendorFolders")
+	util.DeletePath(config.VendorOoyalaFreewheelFolderPath, l);
+	util.DeletePath(config.VendorOoyalaCoreFolderPath, l);
+	util.DeletePath(config.VendorOoyalaIMAFolderPath, l);
 }
 
 func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.downloadNewRCPackages")
+	l.Println("get_latest_release.downloadNewRCPackages")
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKCandidateURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
@@ -54,7 +55,7 @@ func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger)
 
 
 func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.unzipNewRCPackages")
+	l.Println("get_latest_release.unzipNewRCPackages")
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
@@ -66,8 +67,7 @@ func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 }
 
 func removeZipFiles(config vc.Config, zipConfig zc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.removeZipFiles")
-	l.Println("get_latest_rc.removeZipFiles")
+	l.Println("get_latest_release.removeZipFiles")
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
