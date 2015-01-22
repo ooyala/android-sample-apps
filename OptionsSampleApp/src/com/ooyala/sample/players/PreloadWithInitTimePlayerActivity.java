@@ -81,6 +81,11 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
 	
   @Override
   public void onClick(View v) {
+	if(player != null){
+		player.suspend();
+		player.removeVideoView();
+	}
+	
 	OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 	PlayerDomain domain = new PlayerDomain(DOMAIN);
 	boolean showPromoImage = this.showPromoImageButton.isChecked();
