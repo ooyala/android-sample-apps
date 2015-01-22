@@ -85,6 +85,10 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
 
   @Override
   public void onClick(View v) {
+	if(player != null){
+		player.suspend();
+		player.removeVideoView();
+	}  
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain domain = new PlayerDomain(DOMAIN);
     boolean showAdsControls = this.adsControlsButton.isChecked();
