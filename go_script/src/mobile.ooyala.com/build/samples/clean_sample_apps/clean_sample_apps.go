@@ -29,8 +29,8 @@ func main() {
 func removeLibraries (sampleAppPaths []DirAbs, l *log.Logger) {
 	l.Println("clean_sample_apps.removeLibraries")
 	for _, element := range sampleAppPaths {
-		util.DeletePath(MakeDirAbs(Join(element, MakeDirName("libs"))), l);
-		util.EnsurePath(MakeDirAbs(Join(element, MakeDirName("libs"))), l);
+		util.DeletePath(MakeDirAbs(Join(element, MakeDirRel("app/libs"))), l);
+		util.EnsurePath(MakeDirAbs(Join(element, MakeDirRel("app/libs"))), l);
 	}
 }
 

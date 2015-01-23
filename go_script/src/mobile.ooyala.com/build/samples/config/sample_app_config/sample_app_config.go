@@ -62,10 +62,10 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
 		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
 
-        PlayersPackageDirRel: MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("players"))),
-        ListPackageDirRel:    MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("lists"))),
-        UtilsPackageDirRel:   MakeDirRel(Join(MakeDirRel("src/com/ooyala/sample"), MakeDirName("utils"))),
-        LayoutDirRel:         MakeDirRel(Join(MakeDirName("res"), MakeDirName("layout"))),
+        PlayersPackageDirRel: MakeDirRel(Join(MakeDirRel("app/src/main/java/com/ooyala/sample"), MakeDirName("players"))),
+        ListPackageDirRel:    MakeDirRel(Join(MakeDirRel("app/src/main/java/com/ooyala/sample"), MakeDirName("lists"))),
+        UtilsPackageDirRel:   MakeDirRel(Join(MakeDirRel("app/src/main/java/com/ooyala/sample"), MakeDirName("utils"))),
+        LayoutDirRel:         MakeDirRel(Join(MakeDirName("app/src/main/res"), MakeDirName("layout"))),
 	}
 	util.RequireFullStructOrDie(c, logger)
 	return c
