@@ -40,7 +40,7 @@ func copyOoyalaIMASDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Confi
 
 func copyLibrariesFromVendor(libraryPaths []Pather, sampleAppPaths []DirAbs, l *log.Logger) {
 	for _, appPath := range sampleAppPaths {
-		appLibsDir := MakeDirAbs(Join(appPath, MakeDirName("libs")))
+		appLibsDir := MakeDirAbs(Join(appPath, MakeDirRel("app/libs")))
 		util.EnsurePath(appLibsDir, l)
 
 		for _, libraryPath := range libraryPaths {
@@ -48,15 +48,4 @@ func copyLibrariesFromVendor(libraryPaths []Pather, sampleAppPaths []DirAbs, l *
 			util.CopyPath(libraryPath, appLibsDir, l)
 		} 
 	}
-}
-
-func removeCompleteCode (completeSampleAppPath DirAbs, l *log.Logger) {
-	l.Println("clean_sample_apps.removeCompleteCode")
-	samplePackageRelPath  := MakePath("src/com/ooyala/sample")
-
-	util.DeletePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("players"))), l);
-	util.EnsurePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("players"))), l);
-
-	util.DeletePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("lists"))), l);
-	util.EnsurePath(MakeDirAbs(Join(completeSampleAppPath, samplePackageRelPath, MakeDirName("lists"))), l);
 }
