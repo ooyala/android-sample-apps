@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
+import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OptionsListActivity;
@@ -42,7 +43,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
-
+    activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
 
     mainListAdapter.addAll(activityMap.keySet());
     mainListAdapter.notifyDataSetChanged();
