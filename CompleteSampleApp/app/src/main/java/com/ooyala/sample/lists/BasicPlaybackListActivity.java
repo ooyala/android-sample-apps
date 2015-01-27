@@ -71,6 +71,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("selection_name", selectionAdapter.getItem(pos));
     startActivity(intent);
     return;
   }
