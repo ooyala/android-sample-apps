@@ -69,8 +69,8 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
   protected void onStop() {
     super.onStop();
     Log.d(TAG, "App Stopped");
-    if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
-      playerLayoutController.getPlayer().suspend();
+    if (player != null) {
+      player.suspend();
     }
   }
 
@@ -78,17 +78,17 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
   protected void onRestart() {
     super.onRestart();
     Log.d(TAG, "App Restarted");
-    if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
-      playerLayoutController.getPlayer().resume();
+    if (player != null) {
+      player.resume();
     }
   }
 
   @Override
   public void onClick(View v) {
-	if(player != null){
-		player.suspend();
-		player.removeVideoView();
-	}  
+    if(player != null){
+      player.suspend();
+      player.removeVideoView();
+    }
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain domain = new PlayerDomain(DOMAIN);
     boolean showAdsControls = this.adsControlsButton.isChecked();

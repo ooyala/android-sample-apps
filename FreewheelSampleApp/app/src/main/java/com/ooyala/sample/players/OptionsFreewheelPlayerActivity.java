@@ -70,8 +70,8 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
   protected void onStop() {
     super.onStop();
     Log.d(TAG, "App Stopped");
-    if (playerLayoutController.getPlayer() != null) {
-      playerLayoutController.getPlayer().suspend();
+    if (player != null) {
+      player.suspend();
     }
   }
 
@@ -79,8 +79,8 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
   protected void onRestart() {
     super.onRestart();
     Log.d(TAG, "App Restarted");
-    if (playerLayoutController.getPlayer() != null) {
-      playerLayoutController.getPlayer().resume();
+    if (player != null) {
+      player.resume();
     }
   }
 
@@ -111,14 +111,6 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
 
     freewheelManager.overrideFreewheelParameters(freewheelParameters);
     player.setEmbedCode(EMBEDCODE);
-  }
-
-  @Override
-  public boolean onKeyUp(int keyCode, KeyEvent event) {
-    if (playerLayoutController.onKeyUp(keyCode, event)) {
-      return true;
-    }
-    return super.onKeyDown(keyCode, event);
   }
 
   @Override
