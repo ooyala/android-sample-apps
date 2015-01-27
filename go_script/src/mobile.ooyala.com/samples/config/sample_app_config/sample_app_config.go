@@ -27,7 +27,7 @@ type Config struct {
 }
 
 func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config {
-
+    // You do not need to specify your sample app here, unless you require vendor-copied libraries?
 	completeSampleAppName := MakeDirName("CompleteSampleApp")
 	freewheelSampleAppName := MakeDirName("FreewheelSampleApp")
 	imaSampleAppName := MakeDirName("IMASampleApp")
@@ -37,7 +37,6 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	freewheelSampleAppPath := MakeDirAbs(Join(rootPath, freewheelSampleAppName))
 	imaSampleAppPath := MakeDirAbs(Join(rootPath, imaSampleAppName))
 	optionsSampleAppPath := MakeDirAbs(Join(rootPath, optionsSampleAppName))
-
 
 	// Get All Sample Apps in Repo
     appNamesListString, err := util.RunBashCommandInDir(rootPath, "ls -d *SampleApp", logger)
