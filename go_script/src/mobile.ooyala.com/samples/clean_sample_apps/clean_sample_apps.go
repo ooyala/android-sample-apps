@@ -8,6 +8,7 @@ import sc "mobile.ooyala.com/samples/config/sample_app_config"
 
 func main() {
 	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.clean-sample-apps"))
+	ol.ColorizedPrintln(l, "CleanSampleApps")
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
@@ -27,7 +28,7 @@ func main() {
 }
 
 func removeLibraries (sampleAppPaths []DirAbs, l *log.Logger) {
-	l.Println("clean_sample_apps.removeLibraries")
+	ol.ColorizedMethodPrintln(l)
 	for _, element := range sampleAppPaths {
 		util.DeletePath(MakeDirAbs(Join(element, MakeDirRel("app/libs"))), l);
 		util.EnsurePath(MakeDirAbs(Join(element, MakeDirRel("app/libs"))), l);
@@ -35,7 +36,7 @@ func removeLibraries (sampleAppPaths []DirAbs, l *log.Logger) {
 }
 
 func removeCompleteCode (config sc.Config, l *log.Logger) {
-	l.Println("clean_sample_apps.removeCompleteCode")
+	ol.ColorizedMethodPrintln(l)
 
 	playersDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.PlayersPackageDirRel))
 	listsDirAbs := MakeDirAbs(Join(config.CompleteSampleAppPath, config.ListPackageDirRel))

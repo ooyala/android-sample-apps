@@ -9,6 +9,7 @@ import sc "mobile.ooyala.com/samples/config/sample_app_config"
 
 func main() {
 	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.copy_from_vendor"))
+	ol.ColorizedPrintln(l, "CopyFromVendor")
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
@@ -24,17 +25,17 @@ func main() {
 }
 
 func copyOoyalaCoreSDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Config, l *log.Logger) {
-	l.Println("copy_from_vendor.copyOoyalaCoreSDKFromVendor")
+	ol.ColorizedMethodPrintln(l)
 	copyLibrariesFromVendor(vendorConfig.OoyalaCoreSDKFilePaths, sampleAppConfig.AllSampleAppsPaths, l)
 }
 
 func copyOoyalaFreewheelSDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Config, l *log.Logger) {
-	l.Println("copy_from_vendor.copyOoyalaFreewheelSDKFromVendor")
+	ol.ColorizedMethodPrintln(l)
 	copyLibrariesFromVendor(vendorConfig.FreewheelSDKFilePaths, sampleAppConfig.FreewheelEnabledSampleAppsPaths, l)
 }
 
 func copyOoyalaIMASDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Config, l *log.Logger) {
-	l.Println("copy_from_vendor.copyOoyalaIMASDKFromVendor")
+	ol.ColorizedMethodPrintln(l)
 	copyLibrariesFromVendor(vendorConfig.IMASDKFilePaths, sampleAppConfig.IMAEnabledSampleAppPaths, l)
 }
 

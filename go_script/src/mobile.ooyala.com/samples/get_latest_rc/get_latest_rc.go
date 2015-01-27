@@ -8,6 +8,7 @@ import zc "mobile.ooyala.com/samples/config/zip_config"
 
 func main() {
 	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.get_latest_rc"))
+	ol.ColorizedPrintln(l, "GetLatestRc")
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
@@ -35,14 +36,14 @@ func main() {
 }
 
 func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.removeOldOoyalaVendorFolders")
+	ol.ColorizedMethodPrintln(l)
 		util.DeletePath(config.VendorOoyalaFreewheelFolderPath, l);
 		util.DeletePath(config.VendorOoyalaCoreFolderPath, l);
 		util.DeletePath(config.VendorOoyalaIMAFolderPath, l);
 }
 
 func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.downloadNewRCPackages")
+	ol.ColorizedMethodPrintln(l)
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKCandidateURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
@@ -55,7 +56,7 @@ func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger)
 
 
 func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.unzipNewRCPackages")
+	ol.ColorizedMethodPrintln(l)
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
@@ -67,7 +68,7 @@ func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 }
 
 func removeZipFiles(config vc.Config, zipConfig zc.Config, l *log.Logger) {
-	l.Println("get_latest_rc.removeZipFiles")
+	ol.ColorizedMethodPrintln(l)
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 

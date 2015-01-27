@@ -7,7 +7,8 @@ import sc "mobile.ooyala.com/samples/config/sample_app_config"
 
 
 func main() {
-	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.m"))
+	l, err := ol.NewFileAndStdoutLoggerNow(MakeFileAbs("/tmp/android-sample-apps.merge"))
+	ol.ColorizedPrintln(l, "MergeIntoCompleteSampleApp")
 	util.MaybeDie(err, nil)
 
 	rootDir, err := util.ToDirAbs(MakeDirRel("."))
@@ -25,6 +26,7 @@ func main() {
 }
 
 func copyFilesFromSampleApp(sampleAppRootDirAbs DirAbs, config sc.Config, l *log.Logger) {
+	ol.ColorizedPrintln(l, "Copying from " + sampleAppRootDirAbs.Base().S + " into Complete App")
 	srcPlayersDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.PlayersPackageDirRel))
 	srcListsDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.ListPackageDirRel))
 	srcUtilsDirAbs := MakeDirAbs(Join(sampleAppRootDirAbs, config.UtilsPackageDirRel))
