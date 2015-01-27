@@ -16,6 +16,7 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.players.ChangeVideoPlayerActivity;
 import com.ooyala.sample.players.InsertAdPlayerActivity;
 import com.ooyala.sample.players.PlayWithInitialTimePlayerActivity;
+import com.ooyala.sample.players.PluginPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 public class AdvancedPlaybackListActivity extends Activity implements OnItemClickListener {
@@ -39,6 +40,8 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap.put(PlayWithInitialTimePlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", PlayWithInitialTimePlayerActivity.class) );
     selectionMap.put( InsertAdPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", InsertAdPlayerActivity.class) );
     selectionMap.put( ChangeVideoPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", ChangeVideoPlayerActivity.class) );
+    selectionMap.put("Plugin Player", new PlayerSelectionOption("lrZmRiMzrr8cP77PPW0W8AsjjhMJ1BBe", PluginPlayerActivity.class));
+
 //    embedMap.put("MP4 Video",    "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");
 //    embedMap.put("VOD with CCs", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww");
 //    embedMap.put("WV-MP4",       "N3ZnF1ZDo2cUf0JIIFMaxv-gKgmF6Dvv");
