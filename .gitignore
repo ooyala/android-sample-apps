@@ -8,3 +8,5 @@ CompleteSampleApp/src/com/ooyala/sample/lists
 CompleteSampleApp/src/com/ooyala/sample/players
 vendor/google_play_services/samples
 go_script/pkg
+
+**/local.properties
