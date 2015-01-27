@@ -40,7 +40,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	ooyalaFWFileName   := MakeFileName("OoyalaFreewheelSDK.jar")
 	ooyalaIMAFileName  := MakeFileName("OoyalaIMASDK.jar")
 
-	imaFileName        := MakeFileName("ima-android-sdk-beta8.jar")
+	imaFileName        := MakeFileName("ima-android-sdk-beta9.jar")
 	freewheelFileName  := MakeFileRel(Join(MakeDirName("Android_AdManagerDistribution"), MakeFileName("FWAdManager.jar")))
 	
 	vendorFreewheelFolderPath := MakeDirAbs(Join(vendorPath, freewheelDirName))
