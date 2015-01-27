@@ -13,10 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.AspectRatioVideoPlayerActivity;
-import com.ooyala.sample.players.HLSVideoPlayerActivity;
-import com.ooyala.sample.players.MP4VideoPlayerActivity;
-import com.ooyala.sample.players.VODVideoPlayerActivity;
+import com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 public class BasicPlaybackListActivity extends Activity implements OnItemClickListener {
@@ -37,10 +34,10 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( AspectRatioVideoPlayerActivity.getName(), new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", AspectRatioVideoPlayerActivity.class) );
-    selectionMap.put( MP4VideoPlayerActivity.getName(), new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", MP4VideoPlayerActivity.class) );
-    selectionMap.put( HLSVideoPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", HLSVideoPlayerActivity.class) );
-    selectionMap.put( VODVideoPlayerActivity.getName(), new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", VODVideoPlayerActivity.class) );
+    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", BasicPlaybackVideoPlayerActivity.class) );
     
     
 //    embedMap.put("MP4 Video",    "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");

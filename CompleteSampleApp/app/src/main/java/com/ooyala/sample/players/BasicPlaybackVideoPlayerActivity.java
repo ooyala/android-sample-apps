@@ -1,14 +1,8 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -16,19 +10,21 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
- * This activity illustrates how you can HLS Video
+ * This activity illustrates how you can MP4 Video
  * through the SDK
  *
  */
-public class HLSVideoPlayerActivity extends Activity implements Observer {
+public class BasicPlaybackVideoPlayerActivity extends Activity implements Observer {
   public final static String getName() {
-    return "HLS Video";
+    return "Basic Playback Video";
   }
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  String EMBED_TWO = "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1";
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
 
