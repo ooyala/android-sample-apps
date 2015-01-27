@@ -19,9 +19,6 @@ import java.util.Observer;
  *
  */
 public class BasicPlaybackVideoPlayerActivity extends Activity implements Observer {
-  public final static String getName() {
-    return "Basic Playback Video";
-  }
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
@@ -37,9 +34,8 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTitle(getName());
+    setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
-
     EMBED = getIntent().getExtras().getString("embed_code");
 
     //Initialize the player
