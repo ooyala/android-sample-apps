@@ -25,16 +25,8 @@
             </intent-filter>
         </activity>
         
-      <activity android:name="com.ooyala.sample.players.VODVideoPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity android:name="com.ooyala.sample.players.HLSVideoPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity android:name="com.ooyala.sample.players.AspectRatioVideoPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity android:name="com.ooyala.sample.players.MP4VideoPlayerActivity"
+
+        <activity android:name="com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <meta-data android:name="com.google.android.gms.version"

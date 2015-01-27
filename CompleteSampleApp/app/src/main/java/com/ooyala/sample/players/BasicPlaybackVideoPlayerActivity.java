@@ -1,14 +1,8 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -16,19 +10,19 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * This activity illustrates how you can MP4 Video
  * through the SDK
  *
  */
-public class AspectRatioVideoPlayerActivity extends Activity implements Observer {
-  public final static String getName() {
-    return "4:3 Aspect Ratio";
-  }
+public class BasicPlaybackVideoPlayerActivity extends Activity implements Observer {
+
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  String EMBED_TWO = "FwaXZjcjrkydIftLal2cq9ymQMuvjvD8";
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
 
@@ -41,7 +35,7 @@ public class AspectRatioVideoPlayerActivity extends Activity implements Observer
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTitle(getName());
+    setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");

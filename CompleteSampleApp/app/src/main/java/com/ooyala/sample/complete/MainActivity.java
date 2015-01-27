@@ -1,8 +1,5 @@
 package com.ooyala.sample.complete;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +15,9 @@ import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OptionsListActivity;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * This is the opening activity for the app.

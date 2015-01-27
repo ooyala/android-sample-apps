@@ -92,19 +92,11 @@
         <activity android:name="com.ooyala.sample.players.ServerConfiguredTVRatingsPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
-        
-        <activity android:name="com.ooyala.sample.players.VODVideoPlayerActivity"
+
+        <activity android:name="com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
-        <activity android:name="com.ooyala.sample.players.HLSVideoPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity android:name="com.ooyala.sample.players.AspectRatioVideoPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity android:name="com.ooyala.sample.players.MP4VideoPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
