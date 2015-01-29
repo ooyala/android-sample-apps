@@ -45,7 +45,9 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
 
     //Create the adapter for the ListView
     selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
-    selectionAdapter.addAll(selectionMap.keySet());
+    for(String key : selectionMap.keySet()) {
+      selectionAdapter.add(key);
+    }
     selectionAdapter.notifyDataSetChanged();
 
     //Load the data into the ListView

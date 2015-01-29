@@ -45,7 +45,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
 
-    mainListAdapter.addAll(activityMap.keySet());
+    for(String key : activityMap.keySet()) {
+      mainListAdapter.add(key);
+    }
     mainListAdapter.notifyDataSetChanged();
 
     ListView mainListView = (ListView) findViewById(R.id.mainActivityListView);
