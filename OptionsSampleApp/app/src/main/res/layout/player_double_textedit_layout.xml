@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical" >
+
+    <LinearLayout
+      android:layout_gravity="center_horizontal|bottom"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:id="@+id/controlsLayout">
+        <EditText
+          android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/edit1"
+              android:hint="text1"/>
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit2"
+            android:hint="text2"/>
+        <Button
+             android:id="@+id/setButton"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent" />
+
+    </LinearLayout>
+    
+    <com.ooyala.android.OoyalaPlayerLayout
+      android:id="@+id/ooyalaPlayer"
+      android:layout_gravity="center_horizontal|top"
+      android:layout_width="300dp"
+      android:layout_height="150dp"
+      android:layout_marginTop="20dp"
+      android:background="#666">
+    </com.ooyala.android.OoyalaPlayerLayout>
+
+</FrameLayout>
