@@ -14,7 +14,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you can MP4 Video
+ * This activity illustrates how you can play basicPlayback Video
+ * you can also play Ooyala and VAST advertisements programmatically
  * through the SDK
  *
  */
