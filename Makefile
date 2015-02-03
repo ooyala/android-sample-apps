@@ -8,6 +8,10 @@ get-latest-rc: install-scripts
 	go_script/bin/get_latest_rc
 	make install
 
+update-vendor-from-target-location:
+	go_script/bin/update-vendor-from-target-location /user/yigu/repos/android-sdk
+	// get the zip files from the folder
+
 clean-scripts:
 	rm -f go_script/bin/*
 
