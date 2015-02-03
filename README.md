@@ -11,6 +11,9 @@ Below is a short description of the sample applications provided in the reposito
 
 This application was designed to illustrate some advanced functionality you can add into a Player Activity through the OoyalaSDK.
 
+### BasicPlaybackSampleApp
+
+This applicaton was designed to illustrate some basic functionality you can add into a Player Activity through the OoyalaSDK.
 
 ### FreewheelSampleApp
 
