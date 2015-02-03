@@ -80,6 +80,7 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
 
   @Override
   public void onClick(View v) {
+    // remove the previous player to only play the current player
 	if(player != null){
 		player.suspend();
 		player.removeVideoView();
