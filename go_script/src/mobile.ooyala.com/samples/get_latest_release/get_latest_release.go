@@ -43,13 +43,13 @@ func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
 
 func downloadNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	ol.ColorizedMethodPrintln(l)
-	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKCandidateURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
+	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.CoreSDKURL + "' -O " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.FreewheelSDKCandidateURL + "' -O " + zipConfig.FreewheelSDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.FreewheelSDKURL + "' -O " + zipConfig.FreewheelSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.IMASDKCandidateURL + "' -O " + zipConfig.IMASDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "wget '" + zipConfig.IMASDKURL + "' -O " + zipConfig.IMASDKFileNameStr, l)
 	util.MaybeDie(err, l)
 }
 
