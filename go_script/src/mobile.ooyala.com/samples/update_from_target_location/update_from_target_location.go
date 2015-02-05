@@ -2,7 +2,7 @@ package main
 
 import gl "log"
 import ol "mobile.ooyala.com/common/log"
-import args "mobile.ooyala.com/common/args/build"
+import args "mobile.ooyala.com/common/args/parse"
 import "log"
 import "mobile.ooyala.com/common/util"
 import . "mobile.ooyala.com/common/path"
