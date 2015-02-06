@@ -8,6 +8,10 @@ get-latest-rc: install-scripts
 	go_script/bin/get_latest_rc
 	make install
 
+get-latest-release: install-scripts
+	go_script/bin/get_latest_release
+	make install
+
 update-from-target-location:
 	go_script/bin/update_from_target_location -path=/Users/yigu/repos/android-sdk/
 
