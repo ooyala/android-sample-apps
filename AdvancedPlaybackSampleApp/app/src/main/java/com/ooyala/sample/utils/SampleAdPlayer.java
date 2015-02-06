@@ -70,6 +70,16 @@ public class SampleAdPlayer extends TextView implements PlayerInterface,
   }
 
   @Override
+  public int livePlayheadPercentage() {
+    return 0;
+  }
+
+  @Override
+  public void seekToPercentLive(int i) {
+
+  }
+
+  @Override
   public void pause() {
 
   }
