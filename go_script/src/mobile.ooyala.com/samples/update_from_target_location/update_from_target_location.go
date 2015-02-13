@@ -89,13 +89,13 @@ func copyFromTargetFolders(config vc.Config, zipConfig zc.Config, l *log.Logger,
 
 func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	ol.ColorizedMethodPrintln(l)
-	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.CoreSDKFileNameStr, l)
+	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.FreewheelSDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.FreewheelSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip " + zipConfig.IMASDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.IMASDKFileNameStr, l)
 	util.MaybeDie(err, l)
 }
 
