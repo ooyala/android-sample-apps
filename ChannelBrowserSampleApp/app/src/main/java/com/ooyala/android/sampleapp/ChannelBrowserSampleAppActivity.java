@@ -1,11 +1,5 @@
 package com.ooyala.android.sampleapp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.ooyala.android.ContentTreeCallback;
 import com.ooyala.android.OoyalaAPIClient;
 import com.ooyala.android.OoyalaException;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.apis.ContentTreeCallback;
 import com.ooyala.android.item.Channel;
 import com.ooyala.android.item.ContentItem;
 import com.ooyala.android.item.Video;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ChannelBrowserSampleAppActivity extends ListActivity {
   private static final String TAG = "OoyalaAndroidSampleAppActivity";
