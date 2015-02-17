@@ -21,10 +21,6 @@ type Config struct {
 	CoreSDKURL      string
 	FreewheelSDKURL string
 	IMASDKURL       string
-
-	IMASDKTargetPath		string
-	FreewheelSDKTargetPath	string
-	CoreSDKTargetPath		string
 }
 
 
@@ -49,12 +45,6 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 		CoreSDKURL:                      "https://ooyala.box.com/shared/static/90wup42cbi7ywel2all2.zip",
 		FreewheelSDKURL:                 "https://ooyala.box.com/shared/static/i17ps4vjmne3bsnnc9sz.zip",
 		IMASDKURL:                       "https://ooyala.box.com/shared/static/j1189d1o59t3sdaony7l.zip",
-
-
-		IMASDKTargetPath:				"OoyalaIMASDK-Android.zip",
-		FreewheelSDKTargetPath:			"OoyalaFreewheelSDK-Android.zip",
-		CoreSDKTargetPath:				"OoyalaSDK-Android.zip",
-
 	}
 	util.RequireFullStructOrDie(c, logger)
 	return c

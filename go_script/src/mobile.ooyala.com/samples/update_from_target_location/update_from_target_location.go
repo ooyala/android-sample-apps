@@ -8,6 +8,7 @@ import "mobile.ooyala.com/common/util"
 import . "mobile.ooyala.com/common/path"
 import vc "mobile.ooyala.com/samples/config/vendor_config"
 import zc "mobile.ooyala.com/samples/config/zip_config"
+import "os"
 
 func run(fn func() error, l *gl.Logger) {
 	err := fn()
@@ -34,32 +35,33 @@ func main() {
 	zipConfig := zc.MakeConfig("Android", rootDir, l);
 
 	var configArgs args.Config
-	run(
-		func() error { 
-			var err error; 
-			configArgs, err = loadFlags(l); 
-			return err 
-		}, 
-	l)
+	run( func() error { var err error; configArgs, err = loadFlags(l); return err }, l)
 
 	sdkFolderPath := *configArgs.Path
 
-	removeOldOoyalaVendorFolders(config, l)
+	if sdkFolderPath == "" {
+ 		sdkFolderPath = "/Users/yigu/repos/android-sdk/"
+ 	}
+ 
+ 	// if the sdk from target location really exists
+ 	if exist, err := sdksExist(sdkFolderPath + zipConfig.CoreSDKFileNameStr, sdkFolderPath + zipConfig.FreewheelSDKFileNameStr, sdkFolderPath + zipConfig.IMASDKFileNameStr); exist == true && err == nil {
+		removeOldOoyalaVendorFolders(config, l)
 
-	copyFromTargetFolders(config, zipConfig, l, sdkFolderPath)
+		copyFromTargetFolders(config, zipConfig, l, sdkFolderPath)
 
-	unzipNewRCPackages(config, zipConfig, l)
+		unzipNewRCPackages(config, zipConfig, l)
 
-	removeZipFiles(config, zipConfig, l)
+		removeZipFiles(config, zipConfig, l)
 
-	//TEMPORARY: Remove all sample apps provided in the packages, until the sample apps are no longer included
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("SampleApps"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("APIDocs"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("DefaultControlsSource"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("FreewheelSampleApp"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("APIDocs"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath,MakeFileName("IMASampleApp"))), l);
-	util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath, MakeFileName("APIDocs"))), l);
+		//TEMPORARY: Remove all sample apps provided in the packages, until the sample apps are no longer included
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("SampleApps"))), l);
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("APIDocs"))), l);
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaCoreFolderPath, MakeFileName("DefaultControlsSource"))), l);
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("FreewheelSampleApp"))), l);
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaFreewheelFolderPath, MakeFileName("APIDocs"))), l);
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath,MakeFileName("IMASampleApp"))), l);
+		util.DeletePath(MakeFileAbs(Join(config.VendorOoyalaIMAFolderPath, MakeFileName("APIDocs"))), l);
+	}
 }
 
 func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
@@ -76,13 +78,13 @@ func copyFromTargetFolders(config vc.Config, zipConfig zc.Config, l *log.Logger,
 		sdkFolderPath = "/Users/yigu/repos/android-sdk/"
 	}
 
-	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.CoreSDKTargetPath +  " " + zipConfig.CoreSDKFileNameStr, l)
+	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.CoreSDKFileNameStr +  " " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.FreewheelSDKTargetPath +  " " + zipConfig.FreewheelSDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.FreewheelSDKFileNameStr +  " " + zipConfig.FreewheelSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.IMASDKTargetPath + " " + zipConfig.IMASDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.IMASDKFileNameStr + " " + zipConfig.IMASDKFileNameStr, l)
 	util.MaybeDie(err, l)
 }
 
@@ -110,3 +112,18 @@ func removeZipFiles(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.IMASDKFileNameStr, l)
 	util.MaybeDie(err, l)
 }
+
+func sdksExist(CoreSDKTargetPath string, FreewheelSDKTargetPath string, IMASDKTargetPath string) (bool, error) {
+     _, err := os.Stat(CoreSDKTargetPath)
+     if os.IsNotExist(err) { return false, nil }
+ 
+     _, err = os.Stat(FreewheelSDKTargetPath)
+     if os.IsNotExist(err) { return false, nil }
+ 
+     _, err = os.Stat(IMASDKTargetPath)
+     if os.IsNotExist(err) { return false, nil }
+ 
+     if err == nil { return true, nil }
+ 
+     return false, err
+ }
