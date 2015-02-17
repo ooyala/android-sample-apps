@@ -75,10 +75,6 @@ func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
 func copyFromTargetFolders(config vc.Config, zipConfig zc.Config, l *log.Logger, sdkFolderPath string) {
 	ol.ColorizedMethodPrintln(l)
 
-	if sdkFolderPath == "" {
-		sdkFolderPath = "/Users/yigu/repos/android-sdk/"
-	}
-
 	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.CoreSDKFileNameStr +  " " + zipConfig.CoreSDKFileNameStr, l)
 	util.MaybeDie(err, l)
 
