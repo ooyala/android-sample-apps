@@ -13,7 +13,7 @@ get-latest-release: install-scripts
 	make install
 
 update-from-target-location: install-scripts
-	go_script/bin/update_from_target_location -path=/Users/yigu/repos/android-sdk/
+	go_script/bin/update_from_target_location -path=~/repos/android-sdk/
 
 clean-scripts:
 	rm -f go_script/bin/*
