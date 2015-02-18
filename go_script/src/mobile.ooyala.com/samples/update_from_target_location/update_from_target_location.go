@@ -9,7 +9,6 @@ import "mobile.ooyala.com/common/util"
 import . "mobile.ooyala.com/common/path"
 import vc "mobile.ooyala.com/samples/config/vendor_config"
 import zc "mobile.ooyala.com/samples/config/zip_config"
-import "os"
 
 func run(fn func() error, l *gl.Logger) {
 	err := fn()
@@ -110,12 +109,11 @@ func removeZipFiles(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 }
 
 func checkSdkExist(sdkFolderPathStr string, zipConfig zc.Config, l *log.Logger) {
-     _, err := os.Stat(sdkFolderPathStr + zipConfig.CoreSDKFileNameStr)
-     util.MaybeDie(err, l)
- 
-     _, err = os.Stat(sdkFolderPathStr + zipConfig.FreewheelSDKFileNameStr)
-     util.MaybeDie(err, l)
- 
-     _, err = os.Stat(sdkFolderPathStr + zipConfig.IMASDKFileNameStr)
-     util.MaybeDie(err, l)
+     CoreSDKPath := MakeFileAbs(sdkFolderPathStr + zipConfig.CoreSDKFileNameStr)
+     FreewheelSDKPath := MakeFileAbs(sdkFolderPathStr + zipConfig.FreewheelSDKFileNameStr)
+     IMASDKPath := MakeFileAbs(sdkFolderPathStr + zipConfig.IMASDKFileNameStr)
+
+     sdkPaths := []Pather{CoreSDKPath, FreewheelSDKPath, IMASDKPath}
+
+     run( func() error { var err error; err = util.RequirePaths(sdkPaths, l); return err }, l)
  }
