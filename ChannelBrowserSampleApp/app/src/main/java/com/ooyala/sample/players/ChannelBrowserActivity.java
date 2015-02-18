@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,7 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/*
+  ChannelBrowserActivity shows how to use ooyalaapiclient to retrieve
+ */
 public class ChannelBrowserActivity extends ListActivity {
   private static final String TAG = "ChannelBrowserActivity";
 
@@ -39,13 +40,19 @@ public class ChannelBrowserActivity extends ListActivity {
 
   private Channel rootItem = null;
 
+  /*
+    The private class to handle clientAPI callback.
+    This activity renders a list of streams in the channel with title, thumbnail and duration.
+   */
   class MyContentTreeCallback implements ContentTreeCallback {
     private ChannelBrowserActivity _self;
 
     public MyContentTreeCallback(ChannelBrowserActivity self) {
       _self = self;
     }
-
+    /*
+     This is called when content tree is retrieved.
+     */
     @Override
     public void callback(ContentItem item, OoyalaException ex) {
       if (ex != null) {
@@ -60,11 +67,14 @@ public class ChannelBrowserActivity extends ListActivity {
         getListView().setTextFilterEnabled(false);
 
       } else {
-        Log.e(TAG, "Should not be here!");
+        DebugMode.logE(TAG, "Should not be here!");
       }
     }
   }
 
+  /*
+    The list adapter to populate the channel list view.
+   */
   class OoyalaVideoListAdapter extends SimpleAdapter {
     private ImageDownloader imageDownloader = new ImageDownloader();
 
@@ -86,6 +96,7 @@ public class ChannelBrowserActivity extends ListActivity {
     String embedCode = getIntent().getExtras().getString("embed_code");
     List<String> embedCodes = new ArrayList<String>();
     embedCodes.add(embedCode);
+    // try to retrieve the content tree.
     api.contentTree(embedCodes, new MyContentTreeCallback(this));
   }
 
