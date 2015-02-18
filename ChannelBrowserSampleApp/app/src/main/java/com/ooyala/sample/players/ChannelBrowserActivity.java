@@ -1,13 +1,17 @@
-package com.ooyala.android.sampleapp;
+package com.ooyala.sample.players;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
+import com.ooyala.android.DebugMode;
 import com.ooyala.android.OoyalaAPIClient;
 import com.ooyala.android.OoyalaException;
 import com.ooyala.android.PlayerDomain;
@@ -15,39 +19,37 @@ import com.ooyala.android.apis.ContentTreeCallback;
 import com.ooyala.android.item.Channel;
 import com.ooyala.android.item.ContentItem;
 import com.ooyala.android.item.Video;
+import com.ooyala.sample.R;
+import com.ooyala.sample.utils.ImageDownloader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChannelBrowserSampleAppActivity extends ListActivity {
-  private static final String TAG = "OoyalaAndroidSampleAppActivity";
+public class ChannelBrowserActivity extends ListActivity {
+  private static final String TAG = "ChannelBrowserActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   public static final String APIKEY = "R2d3I6s06RyB712DN0_2GsQS-R-Y.nCFrd";
   public static final String SECRETKEY = "UpmPCeDJspTKqLHO5IyZSRbsSiC7AM_rAqGztDRN";
   public static final String PLAYERDOMAIN = "http://www.ooyala.com";
 
-  public static final String CHANNEL_CODE = "txaGRiMzqQZSmFpMML92QczdIYUrcYVe";
-
   public static OoyalaAPIClient api = new OoyalaAPIClient(APIKEY, SECRETKEY, PCODE, new PlayerDomain(PLAYERDOMAIN));
 
-  private String[] embedCodes = { CHANNEL_CODE };
   private Channel rootItem = null;
 
   class MyContentTreeCallback implements ContentTreeCallback {
-    private ChannelBrowserSampleAppActivity _self;
+    private ChannelBrowserActivity _self;
 
-    public MyContentTreeCallback(ChannelBrowserSampleAppActivity self) {
-      this._self = self;
+    public MyContentTreeCallback(ChannelBrowserActivity self) {
+      _self = self;
     }
 
     @Override
     public void callback(ContentItem item, OoyalaException ex) {
       if (ex != null) {
-        Log.e(TAG, "can not find content tree from api");
+        DebugMode.logE(TAG, "can not find content tree from api");
         return;
       }
       if (item != null && item instanceof Channel) {
@@ -63,11 +65,28 @@ public class ChannelBrowserSampleAppActivity extends ListActivity {
     }
   }
 
+  class OoyalaVideoListAdapter extends SimpleAdapter {
+    private ImageDownloader imageDownloader = new ImageDownloader();
+
+    public OoyalaVideoListAdapter(Context context, List<? extends Map<String, ?>> data, int resource,
+                                  String[] from, int[] to) {
+      super(context, data, resource, from, to);
+    }
+
+    @Override
+    public void setViewImage(ImageView v, String value) {
+      imageDownloader.download(value, v);
+    }
+  }
+
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    api.contentTree(Arrays.asList(embedCodes), new MyContentTreeCallback(this));
+    String embedCode = getIntent().getExtras().getString("embed_code");
+    List<String> embedCodes = new ArrayList<String>();
+    embedCodes.add(embedCode);
+    api.contentTree(embedCodes, new MyContentTreeCallback(this));
   }
 
   protected List<Map<String, Object>> getData() {

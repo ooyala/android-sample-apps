@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ooyala.android.sampleapp"
+    package="com.ooyala.sample"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name=".ChannelBrowserSampleAppActivity"
+            android:name="com.ooyala.sample.lists.ChannelBrowserListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name" >
             <intent-filter>
@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="PlayerDetailActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity android:name="com.ooyala.sample.players.PlayerDetailActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity android:name="com.ooyala.sample.players.ChannelBrowserActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>

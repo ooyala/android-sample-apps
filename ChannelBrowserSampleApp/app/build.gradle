@@ -5,9 +5,9 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ooyala.android.sampleapp"
+        applicationId "com.ooyala.sample"
         minSdkVersion 9
-        targetSdkVersion 9
+        targetSdkVersion 21
     }
 
     buildTypes {

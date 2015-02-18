@@ -1,4 +1,4 @@
-package com.ooyala.android.sampleapp;
+package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,8 +8,9 @@ import android.util.Log;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
+import com.ooyala.sample.R;
 
 public class PlayerDetailActivity extends Activity {
   private static final String TAG = "PlayerDetailActivity";
@@ -30,8 +31,8 @@ public class PlayerDetailActivity extends Activity {
       e.printStackTrace();
     }
     OptimizedOoyalaPlayerLayoutController layoutController = new OptimizedOoyalaPlayerLayoutController(
-        (OoyalaPlayerLayout) findViewById(R.id.player), ChannelBrowserSampleAppActivity.PCODE,
-        new PlayerDomain(ChannelBrowserSampleAppActivity.PLAYERDOMAIN));
+        (OoyalaPlayerLayout) findViewById(R.id.player), ChannelBrowserActivity.PCODE,
+        new PlayerDomain(ChannelBrowserActivity.PLAYERDOMAIN));
     player = layoutController.getPlayer();
     if (player.setEmbedCode(embedCode)) {
       Log.d(TAG, "TEST - yay!");
