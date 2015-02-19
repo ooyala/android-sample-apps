@@ -106,6 +106,18 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
+        <activity android:name="com.ooyala.sample.lists.ChannelBrowserListActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity android:name="com.ooyala.sample.players.ChannelBrowserActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity android:name="com.ooyala.sample.players.PlayerDetailActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
