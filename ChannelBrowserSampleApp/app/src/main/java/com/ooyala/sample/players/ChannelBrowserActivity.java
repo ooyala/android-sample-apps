@@ -32,8 +32,8 @@ public class ChannelBrowserActivity extends ListActivity {
   private static final String TAG = "ChannelBrowserActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  public static final String APIKEY = "R2d3I6s06RyB712DN0_2GsQS-R-Y.nCFrd";
-  public static final String SECRETKEY = "UpmPCeDJspTKqLHO5IyZSRbsSiC7AM_rAqGztDRN";
+  public static final String APIKEY = "";
+  public static final String SECRETKEY = "";
   public static final String PLAYERDOMAIN = "http://www.ooyala.com";
 
   public static OoyalaAPIClient api = new OoyalaAPIClient(APIKEY, SECRETKEY, PCODE, new PlayerDomain(PLAYERDOMAIN));
