@@ -19,6 +19,7 @@ type Config struct {
 	AllSampleAppsPaths              []DirAbs
 	FreewheelEnabledSampleAppsPaths []DirAbs
 	IMAEnabledSampleAppPaths        []DirAbs
+	AdobePassEnabledSampleAppPaths  []DirAbs
 
 	PlayersPackageDirRel DirRel
 	ListPackageDirRel    DirRel
@@ -32,11 +33,13 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	freewheelSampleAppName := MakeDirName("FreewheelSampleApp")
 	imaSampleAppName := MakeDirName("IMASampleApp")
 	optionsSampleAppName := MakeDirName("OptionsSampleApp")
+	adobepassSampleAppName := MakeDirName("AdobePassSampleApp")
 
 	completeSampleAppPath := MakeDirAbs(Join(rootPath, completeSampleAppName))
 	freewheelSampleAppPath := MakeDirAbs(Join(rootPath, freewheelSampleAppName))
 	imaSampleAppPath := MakeDirAbs(Join(rootPath, imaSampleAppName))
 	optionsSampleAppPath := MakeDirAbs(Join(rootPath, optionsSampleAppName))
+	adobepassSampleAppPath := MakeDirAbs(Join(rootPath, adobepassSampleAppName))
 
 	// Get All Sample Apps in Repo
     appNamesListString, err := util.RunBashCommandInDir(rootPath, "ls -d *SampleApp", logger)
@@ -60,6 +63,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 		AllSampleAppsPaths:              append(appNamesDirSlice, completeSampleAppPath),
 		FreewheelEnabledSampleAppsPaths: []DirAbs{freewheelSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
 		IMAEnabledSampleAppPaths:        []DirAbs{imaSampleAppPath, completeSampleAppPath, optionsSampleAppPath},
+		AdobePassEnabledSampleAppPaths:  []DirAbs{completeSampleAppPath, adobepassSampleAppPath},
 
         PlayersPackageDirRel: MakeDirRel(Join(MakeDirRel("app/src/main/java/com/ooyala/sample"), MakeDirName("players"))),
         ListPackageDirRel:    MakeDirRel(Join(MakeDirRel("app/src/main/java/com/ooyala/sample"), MakeDirName("lists"))),

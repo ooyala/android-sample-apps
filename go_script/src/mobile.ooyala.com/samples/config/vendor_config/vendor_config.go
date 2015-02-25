@@ -22,6 +22,7 @@ type Config struct {
 	OoyalaCoreSDKFilePaths []Pather
 	IMASDKFilePaths []Pather
 	FreewheelSDKFilePaths []Pather
+	AdobePassSDKFilePaths []Pather
 }
 
 func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config {
@@ -31,6 +32,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	//Names of all folders in vendor
 	freewheelDirName  := MakeDirName("Freewheel")
 	googleDirName     := MakeDirName("Google")
+	adobepassDirName  := MakeDirName("AdobePass")
 	ooyalaDirName     := MakeDirName("Ooyala")
 	ooyalaIMADirName  := MakeDirName("OoyalaIMASDK-" + platformName)
 	ooyalaFWDirName   := MakeDirName("OoyalaFreewheelSDK-" + platformName)
@@ -42,9 +44,11 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 
 	imaFileName        := MakeFileName("ima-android-sdk-beta9.jar")
 	freewheelFileName  := MakeFileRel(Join(MakeDirName("Android_AdManagerDistribution"), MakeFileName("FWAdManager.jar")))
+	adobepassFileName  := MakeFileName("android_accessenabler-1.7.3.jar")
 	
 	vendorFreewheelFolderPath := MakeDirAbs(Join(vendorPath, freewheelDirName))
 	vendorIMAFolderPath       := MakeDirAbs(Join(vendorPath, googleDirName))
+	vendorAdobePassFolderPath       := MakeDirAbs(Join(vendorPath, adobepassDirName))
 
 	vendorOoyalaRootFolderPath      := MakeDirAbs(Join(vendorPath, ooyalaDirName))
 	vendorOoyalaFreewheelFolderPath := MakeDirAbs(Join(vendorPath, ooyalaDirName, ooyalaFWDirName))
@@ -69,6 +73,8 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 
 		FreewheelSDKFilePaths: []Pather{ MakeFileAbs(Join(vendorFreewheelFolderPath, freewheelFileName)),
 			                             MakeFileAbs(Join(vendorOoyalaFreewheelFolderPath, ooyalaFWFileName)) },
+
+		AdobePassSDKFilePaths:      []Pather{ MakeFileAbs(Join(vendorAdobePassFolderPath, adobepassFileName)) },
 	}
 	util.RequireFullStructOrDie(c, logger)
 	return c

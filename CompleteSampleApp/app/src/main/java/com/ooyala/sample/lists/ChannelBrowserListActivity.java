@@ -16,9 +16,12 @@ import com.ooyala.sample.utils.PlayerSelectionOption;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ChannelBrowserListActivity extends Activity implements OnItemClickListener
+/*
+  The list of channels to be browsed
+  Channel Browser Activity will be launched if a channel is selected.
+*/
 
-{
+public class ChannelBrowserListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
     return "Channel Browser";
   }
