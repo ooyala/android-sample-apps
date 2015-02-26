@@ -70,48 +70,56 @@ func removeOldOoyalaVendorFolders(config vc.Config, l *log.Logger) {
 		util.DeletePath(config.VendorOoyalaIMAFolderPath, l);
 }
 
-func copyFromTargetFolders(config vc.Config, zipConfig zc.Config, l *log.Logger, sdkFolderPath string) {
+func copyFromTargetFolders(config vc.Config, zipConfig zc.Config, l *log.Logger, sdkFolderPathString string) {
 	ol.ColorizedMethodPrintln(l)
 
-	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.CoreSDKFileNameStr +  " " + zipConfig.CoreSDKFileNameStr, l)
+	if sdkFolderPathString == "" {
+		util.Die(util.NewErrorWithMessageAndStack("Folder Path String was empty"), l)
+	}
+	
+	sdkFolderPath := MakeDirAbs(sdkFolderPathString)
+
+	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + MakeFileAbs(Join(sdkFolderPath, zipConfig.CoreSDKFileName)).S +  " " + zipConfig.CoreSDKFileName.S, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.FreewheelSDKFileNameStr +  " " + zipConfig.FreewheelSDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + MakeFileAbs(Join(sdkFolderPath, zipConfig.FreewheelSDKFileName)).S +  " " + zipConfig.FreewheelSDKFileName.S, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + sdkFolderPath + zipConfig.IMASDKFileNameStr + " " + zipConfig.IMASDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "cp " + MakeFileAbs(Join(sdkFolderPath, zipConfig.IMASDKFileName)).S + " " + zipConfig.IMASDKFileName.S, l)
 	util.MaybeDie(err, l)
 }
 
 
 func unzipNewRCPackages(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	ol.ColorizedMethodPrintln(l)
-	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.CoreSDKFileNameStr, l)
+	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.CoreSDKFileName.S, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.FreewheelSDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.FreewheelSDKFileName.S, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.IMASDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "unzip -o " + zipConfig.IMASDKFileName.S, l)
 	util.MaybeDie(err, l)
 }
 
 func removeZipFiles(config vc.Config, zipConfig zc.Config, l *log.Logger) {
 	ol.ColorizedMethodPrintln(l)
-	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.CoreSDKFileNameStr, l)
+	_, err := util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.CoreSDKFileName.S, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.FreewheelSDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.FreewheelSDKFileName.S, l)
 	util.MaybeDie(err, l)
 
-	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.IMASDKFileNameStr, l)
+	_, err = util.RunBashCommandInDir(config.VendorOoyalaRootFolderPath, "rm " + zipConfig.IMASDKFileName.S, l)
 	util.MaybeDie(err, l)
 }
 
-func checkSdkExist(sdkFolderPathStr string, zipConfig zc.Config, l *log.Logger) {
-     CoreSDKPath := MakeFileAbs(sdkFolderPathStr + zipConfig.CoreSDKFileNameStr)
-     FreewheelSDKPath := MakeFileAbs(sdkFolderPathStr + zipConfig.FreewheelSDKFileNameStr)
-     IMASDKPath := MakeFileAbs(sdkFolderPathStr + zipConfig.IMASDKFileNameStr)
+func checkSdkExist(sdkFolderPathString string, zipConfig zc.Config, l *log.Logger) {
+	sdkFolderPath := MakeDirAbs(sdkFolderPathString)
+
+     CoreSDKPath := MakeFileAbs(Join(sdkFolderPath, zipConfig.CoreSDKFileName))
+     FreewheelSDKPath := MakeFileAbs(Join(sdkFolderPath, zipConfig.FreewheelSDKFileName))
+     IMASDKPath := MakeFileAbs(Join(sdkFolderPath, zipConfig.IMASDKFileName))
 
      sdkPaths := []Pather{CoreSDKPath, FreewheelSDKPath, IMASDKPath}
 
