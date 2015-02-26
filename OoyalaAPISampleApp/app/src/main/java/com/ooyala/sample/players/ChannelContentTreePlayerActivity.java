@@ -28,12 +28,13 @@ import java.util.Map;
 /*
   ChannelBrowserActivity shows how to use ooyalaapiclient to retrieve
  */
-public class ChannelBrowserActivity extends ListActivity {
+public class ChannelContentTreePlayerActivity extends ListActivity {
   private static final String TAG = "ChannelBrowserActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  public static final String APIKEY = "";
-  public static final String SECRETKEY = "";
+
+  public static final String APIKEY = "PUT YOUR APIKEY HERE";
+  public static final String SECRETKEY = "PUT YOUR SECRETKEY HERE";
   public static final String PLAYERDOMAIN = "http://www.ooyala.com";
 
   public static OoyalaAPIClient api = new OoyalaAPIClient(APIKEY, SECRETKEY, PCODE, new PlayerDomain(PLAYERDOMAIN));
@@ -45,9 +46,9 @@ public class ChannelBrowserActivity extends ListActivity {
     This activity renders a list of streams in the channel with title, thumbnail and duration.
    */
   class MyContentTreeCallback implements ContentTreeCallback {
-    private ChannelBrowserActivity _self;
+    private ChannelContentTreePlayerActivity _self;
 
-    public MyContentTreeCallback(ChannelBrowserActivity self) {
+    public MyContentTreeCallback(ChannelContentTreePlayerActivity self) {
       _self = self;
     }
     /*
@@ -113,8 +114,8 @@ public class ChannelBrowserActivity extends ListActivity {
 
   protected Intent browseIntent(String embedCode) {
     Intent result = new Intent();
-    result.setClass(this, PlayerDetailActivity.class);
-    result.putExtra("com.ooyala.embedcode", embedCode);
+    result.setClass(this, ChannelContentTreePlayerActivity.class);
+    result.putExtra("embed_code", embedCode);
     return result;
   }
 

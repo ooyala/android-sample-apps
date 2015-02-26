@@ -10,7 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.ChannelBrowserActivity;
+
+import com.ooyala.sample.players.ChannelContentTreePlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
@@ -18,10 +19,10 @@ import java.util.Map;
 
 /*
   The list of channels to be browsed
-  Channel Browser Activity will be launched if a channel is selected.
+  Channel ContentTree Player Activity will be launched if a channel is selected.
 */
 
-public class ChannelBrowserListActivity extends Activity implements OnItemClickListener {
+public class OoyalaAPIListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
     return "Channel Browser";
   }
@@ -38,7 +39,7 @@ public class ChannelBrowserListActivity extends Activity implements OnItemClickL
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Channel", new PlayerSelectionOption(CHANNEL_CODE, ChannelBrowserActivity.class) );
+    selectionMap.put("Channel", new PlayerSelectionOption(CHANNEL_CODE, ChannelContentTreePlayerActivity.class) );
 
     setContentView(R.layout.list_activity_layout);
 
