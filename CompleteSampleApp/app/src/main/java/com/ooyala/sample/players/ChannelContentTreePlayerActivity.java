@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,26 +25,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-public class ChannelBrowserActivity extends ListActivity {
-  private static final String TAG = "ChannelBrowserActivity";
+/*
+  ChannelContentTreePlayerActivity shows how to use ooyalaapiclient to retrieve
+  videos from a channel and show the preview image, title and duration for each video.
+ */
+public class ChannelContentTreePlayerActivity extends ListActivity {
+  private static final String TAG = "ChannelContentTreePlayerActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  public static final String APIKEY = "R2d3I6s06RyB712DN0_2GsQS-R-Y.nCFrd";
-  public static final String SECRETKEY = "UpmPCeDJspTKqLHO5IyZSRbsSiC7AM_rAqGztDRN";
+
+  public static final String APIKEY = "PUT YOUR APIKEY HERE";
+  public static final String SECRETKEY = "PUT YOUR SECRETKEY HERE";
   public static final String PLAYERDOMAIN = "http://www.ooyala.com";
 
   public static OoyalaAPIClient api = new OoyalaAPIClient(APIKEY, SECRETKEY, PCODE, new PlayerDomain(PLAYERDOMAIN));
 
   private Channel rootItem = null;
 
+  /*
+    The private class to handle clientAPI callback.
+    This activity renders a list of streams in the channel with title, thumbnail and duration.
+   */
   class MyContentTreeCallback implements ContentTreeCallback {
-    private ChannelBrowserActivity _self;
+    private ChannelContentTreePlayerActivity _self;
 
-    public MyContentTreeCallback(ChannelBrowserActivity self) {
+    public MyContentTreeCallback(ChannelContentTreePlayerActivity self) {
       _self = self;
     }
-
+    /*
+     This is called when content tree is retrieved.
+     */
     @Override
     public void callback(ContentItem item, OoyalaException ex) {
       if (ex != null) {
@@ -60,11 +69,14 @@ public class ChannelBrowserActivity extends ListActivity {
         getListView().setTextFilterEnabled(false);
 
       } else {
-        Log.e(TAG, "Should not be here!");
+        DebugMode.logE(TAG, "Should not be here!");
       }
     }
   }
 
+  /*
+    The list adapter to populate the channel list view.
+   */
   class OoyalaVideoListAdapter extends SimpleAdapter {
     private ImageDownloader imageDownloader = new ImageDownloader();
 
@@ -86,6 +98,7 @@ public class ChannelBrowserActivity extends ListActivity {
     String embedCode = getIntent().getExtras().getString("embed_code");
     List<String> embedCodes = new ArrayList<String>();
     embedCodes.add(embedCode);
+    // try to retrieve the content tree.
     api.contentTree(embedCodes, new MyContentTreeCallback(this));
   }
 
@@ -95,15 +108,16 @@ public class ChannelBrowserActivity extends ListActivity {
 
     for (Video v : rootItem.getVideos()) {
       addItem(myData, v.getTitle(), v.getDuration(), v.getPromoImageURL(50, 50),
-          browseIntent(v.getEmbedCode()));
+          browseIntent(v.getEmbedCode(), v.getTitle()));
     }
     return myData;
   }
 
-  protected Intent browseIntent(String embedCode) {
+  protected Intent browseIntent(String embedCode, String title) {
     Intent result = new Intent();
-    result.setClass(this, PlayerDetailActivity.class);
-    result.putExtra("com.ooyala.embedcode", embedCode);
+    result.setClass(this, BasicPlaybackVideoPlayerActivity.class);
+    result.putExtra("embed_code", embedCode);
+    result.putExtra("selection_name", title);
     return result;
   }
 

@@ -1,6 +1,7 @@
 package com.ooyala.sample.complete;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,9 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
-import com.ooyala.sample.lists.ChannelBrowserListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
+import com.ooyala.sample.lists.OoyalaAPIListActivity;
 import com.ooyala.sample.lists.OptionsListActivity;
 
 import java.util.LinkedHashMap;
@@ -45,7 +46,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
-    activityMap.put(ChannelBrowserListActivity.getName(), ChannelBrowserListActivity.class);
+    activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
 
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);

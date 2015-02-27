@@ -23,6 +23,9 @@ import java.util.Map;
 */
 
 public class OoyalaAPIListActivity extends Activity implements OnItemClickListener {
+  public static String getName() {
+    return "OoyalaAPI Sample";
+  }
   private static final String TAG = "OoyalaAPIListActivity";
   private static final String CHANNEL_CODE = "txaGRiMzqQZSmFpMML92QczdIYUrcYVe";
   private static Map<String, PlayerSelectionOption> selectionMap;
