@@ -38,7 +38,7 @@ public class OoyalaAPIListActivity extends Activity implements OnItemClickListen
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Channel", new PlayerSelectionOption(CHANNEL_CODE, ChannelContentTreePlayerActivity.class) );
+    selectionMap.put("ContentTree for Channel", new PlayerSelectionOption(CHANNEL_CODE, ChannelContentTreePlayerActivity.class) );
 
     setContentView(R.layout.list_activity_layout);
 
