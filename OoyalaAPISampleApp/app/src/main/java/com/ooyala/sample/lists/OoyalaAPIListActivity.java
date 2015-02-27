@@ -23,10 +23,7 @@ import java.util.Map;
 */
 
 public class OoyalaAPIListActivity extends Activity implements OnItemClickListener {
-  public final static String getName() {
-    return "Channel Browser";
-  }
-  private static final String TAG = "ChannelBrowserListActivity";
+  private static final String TAG = "OoyalaAPIListActivity";
   private static final String CHANNEL_CODE = "txaGRiMzqQZSmFpMML92QczdIYUrcYVe";
   private static Map<String, PlayerSelectionOption> selectionMap;
   ArrayAdapter<String> selectionAdapter;
@@ -35,7 +32,6 @@ public class OoyalaAPIListActivity extends Activity implements OnItemClickListen
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTitle(getName());
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map

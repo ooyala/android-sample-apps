@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name="com.ooyala.sample.lists.ChannelBrowserListActivity"
+            android:name="com.ooyala.sample.lists.OoyalaAPIListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name" >
             <intent-filter>
@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ooyala.sample.players.PlayerDetailActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
-        <activity android:name="com.ooyala.sample.players.ChannelBrowserActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity android:name="com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity android:name="com.ooyala.sample.players.ChannelContentTreePlayerActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>

@@ -30,7 +30,7 @@ import java.util.Map;
   videos from a channel and show the preview image, title and duration for each video.
  */
 public class ChannelContentTreePlayerActivity extends ListActivity {
-  private static final String TAG = "ChannelBrowserActivity";
+  private static final String TAG = "ChannelContentTreePlayerActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
 
@@ -108,15 +108,16 @@ public class ChannelContentTreePlayerActivity extends ListActivity {
 
     for (Video v : rootItem.getVideos()) {
       addItem(myData, v.getTitle(), v.getDuration(), v.getPromoImageURL(50, 50),
-          browseIntent(v.getEmbedCode()));
+          browseIntent(v.getEmbedCode(), v.getTitle()));
     }
     return myData;
   }
 
-  protected Intent browseIntent(String embedCode) {
+  protected Intent browseIntent(String embedCode, String title) {
     Intent result = new Intent();
-    result.setClass(this, ChannelContentTreePlayerActivity.class);
+    result.setClass(this, BasicPlaybackVideoPlayerActivity.class);
     result.putExtra("embed_code", embedCode);
+    result.putExtra("selection_name", title);
     return result;
   }
 
