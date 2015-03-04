@@ -121,15 +121,4 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
     Log.d(TAG,
         "Notification Recieved: " + arg1 + " - state: " + player.getState());
   }
-  
-  public void onToggleClicked(View view) {
-	    // Is the toggle on?
-	    boolean on = ((ToggleButton) view).isChecked();
-	    
-	    if (on) {
-	       // do something
-	    } else {
-	        // do something
-	    }
-	}
 }
