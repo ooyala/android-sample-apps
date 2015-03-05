@@ -10,14 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.lists.AdobePassListActivity;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.ChannelBrowserListActivity;
+import com.ooyala.sample.lists.ContentProtectionSampleAppListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OptionsListActivity;
-import com.ooyala.sample.players.AdobePassDemoAppActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -43,7 +42,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     // Begin List of Sample List Activities
     // If you add to this, you must add your activities to AndroidManifest
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
-    activityMap.put(AdobePassDemoAppActivity.getName(), AdobePassListActivity.class);
+    activityMap.put(ContentProtectionSampleAppListActivity.getName(), ContentProtectionSampleAppListActivity.class);
     activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);

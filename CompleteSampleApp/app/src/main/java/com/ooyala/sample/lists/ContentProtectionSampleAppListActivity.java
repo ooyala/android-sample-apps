@@ -10,15 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.AdobePassDemoAppActivity;
+import com.ooyala.sample.players.AdobePassSampleAppAcitivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class AdobePassListActivity extends Activity implements OnItemClickListener {
+public class ContentProtectionSampleAppListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
-    return "AdobePassListActivity";
+    return "Content Protection Player";
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;
@@ -34,7 +34,7 @@ public class AdobePassListActivity extends Activity implements OnItemClickListen
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("AdobePassSampleApp", new PlayerSelectionOption("VybW5lODrJ0uM9FBo7XTT6TNjTJfr_7G", AdobePassDemoAppActivity.class) );
+    selectionMap.put("AdobePassSampleApp", new PlayerSelectionOption("VybW5lODrJ0uM9FBo7XTT6TNjTJfr_7G", AdobePassSampleAppAcitivity.class) );
     setContentView(R.layout.list_activity_layout);
 
     //Create the adapter for the ListView

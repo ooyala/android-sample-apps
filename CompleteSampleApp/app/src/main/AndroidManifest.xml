@@ -82,7 +82,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <activity android:name="com.ooyala.sample.lists.AdobePassListActivity"
+        <activity android:name=".lists.ContentProtectionSampleAppListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
@@ -126,7 +126,7 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.players.AdobePassDemoAppActivity"
+        <activity android:name=".players.AdobePassSampleAppAcitivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

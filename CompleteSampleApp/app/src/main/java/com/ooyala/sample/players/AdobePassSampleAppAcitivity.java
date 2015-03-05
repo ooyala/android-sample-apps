@@ -17,7 +17,7 @@ import com.ooyala.sample.utils.OnAuthorizationChangedListener;
 import java.util.Observable;
 import java.util.Observer;
 
-public class AdobePassDemoAppActivity extends Activity implements OnAuthorizationChangedListener, Observer {
+public class AdobePassSampleAppAcitivity extends Activity implements OnAuthorizationChangedListener, Observer {
 
   private AdobePassLoginController adobePassController;
 
