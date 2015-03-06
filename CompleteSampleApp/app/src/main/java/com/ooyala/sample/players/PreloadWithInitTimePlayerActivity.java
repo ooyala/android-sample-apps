@@ -63,20 +63,20 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
 
   @Override
   protected void onStop() {
-	super.onStop();
-	Log.d(TAG, "App Stopped");
-	if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
-	  playerLayoutController.getPlayer().suspend();
-	}
+    super.onStop();
+    Log.d(TAG, "App Stopped");
+    if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
+      playerLayoutController.getPlayer().suspend();
+    }
   }
 	
   @Override
   protected void onRestart() {
-	super.onRestart();
-	Log.d(TAG, "App Restarted");
-	if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
-	  playerLayoutController.getPlayer().resume();
-	}
+    super.onRestart();
+    Log.d(TAG, "App Restarted");
+    if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
+      playerLayoutController.getPlayer().resume();
+    }
   }
 	
   @Override

@@ -26,14 +26,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /*
-  ChannelBrowserActivity shows how to use ooyalaapiclient to retrieve
+  ChannelContentTreePlayerActivity shows how to use ooyalaapiclient to retrieve
+  videos from a channel and show the preview image, title and duration for each video.
  */
-public class ChannelBrowserActivity extends ListActivity {
-  private static final String TAG = "ChannelBrowserActivity";
+public class ChannelContentTreePlayerActivity extends ListActivity {
+  private static final String TAG = "ChannelContentTreePlayerActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  public static final String APIKEY = "";
-  public static final String SECRETKEY = "";
+
+  public static final String APIKEY = "PUT YOUR APIKEY HERE";
+  public static final String SECRETKEY = "PUT YOUR SECRETKEY HERE";
   public static final String PLAYERDOMAIN = "http://www.ooyala.com";
 
   public static OoyalaAPIClient api = new OoyalaAPIClient(APIKEY, SECRETKEY, PCODE, new PlayerDomain(PLAYERDOMAIN));
@@ -45,9 +47,9 @@ public class ChannelBrowserActivity extends ListActivity {
     This activity renders a list of streams in the channel with title, thumbnail and duration.
    */
   class MyContentTreeCallback implements ContentTreeCallback {
-    private ChannelBrowserActivity _self;
+    private ChannelContentTreePlayerActivity _self;
 
-    public MyContentTreeCallback(ChannelBrowserActivity self) {
+    public MyContentTreeCallback(ChannelContentTreePlayerActivity self) {
       _self = self;
     }
     /*
@@ -106,15 +108,16 @@ public class ChannelBrowserActivity extends ListActivity {
 
     for (Video v : rootItem.getVideos()) {
       addItem(myData, v.getTitle(), v.getDuration(), v.getPromoImageURL(50, 50),
-          browseIntent(v.getEmbedCode()));
+          browseIntent(v.getEmbedCode(), v.getTitle()));
     }
     return myData;
   }
 
-  protected Intent browseIntent(String embedCode) {
+  protected Intent browseIntent(String embedCode, String title) {
     Intent result = new Intent();
-    result.setClass(this, PlayerDetailActivity.class);
-    result.putExtra("com.ooyala.embedcode", embedCode);
+    result.setClass(this, BasicPlaybackVideoPlayerActivity.class);
+    result.putExtra("embed_code", embedCode);
+    result.putExtra("selection_name", title);
     return result;
   }
 
