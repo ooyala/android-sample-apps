@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ooyala.AdobePassDemoApp"
+        applicationId "com.ooyala.ContentProtectionSampleApp"
         minSdkVersion 9
         targetSdkVersion 15
     }

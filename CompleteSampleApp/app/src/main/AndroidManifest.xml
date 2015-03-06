@@ -114,15 +114,11 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.lists.ChannelBrowserListActivity"
+        <activity android:name="com.ooyala.sample.lists.OoyalaAPIListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.players.ChannelBrowserActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-
-        <activity android:name="com.ooyala.sample.players.PlayerDetailActivity"
+        <activity android:name="com.ooyala.sample.players.ChannelContentTreePlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

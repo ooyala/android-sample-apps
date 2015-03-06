@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class ContentProtectionSampleAppListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
-    return "Content Protection Player";
+    return "ContentProtectionSampleAppListActivity";
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;

@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/FrameLayout"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             android:layout_gravity="bottom" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/controlsLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <View 
+        android:id="@+id/centerShim"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/doubleLeftButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/centerShim"
+            android:text="" />
+
+        <Button
+            android:id="@+id/doubleRightButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/centerShim"
+            android:text="" />
+
 
     <com.ooyala.android.OoyalaPlayerLayout
         android:id="@+id/ooyalaPlayer"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/doubleLeftButton"
         android:layout_marginTop="20dp"
-        android:layout_gravity="top|center_horizontal"
-        android:background="#000000">
+        android:background="#666" >
     </com.ooyala.android.OoyalaPlayerLayout>
 
-    <Button
-        android:id="@+id/doubleRightButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        />
-
-    <Button
-        android:id="@+id/doubleLeftButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        />
-
-</FrameLayout>
+        
+</RelativeLayout>

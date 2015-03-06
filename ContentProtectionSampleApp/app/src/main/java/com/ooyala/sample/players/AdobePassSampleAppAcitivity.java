@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
+import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.AdobePassLoginController;
 import com.ooyala.sample.utils.OnAuthorizationChangedListener;
@@ -31,7 +31,7 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
   final String PCODE  = "pqdHc6rN2_wYW2z-pOmDqkUmMnI1";
   final String DOMAIN = "http://www.ooyala.com";
 
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+  protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
 
@@ -52,7 +52,7 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, PCODE, new PlayerDomain(DOMAIN));
+    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, PCODE, new PlayerDomain(DOMAIN));
     player = playerLayoutController.getPlayer();
     player.addObserver(this);
 

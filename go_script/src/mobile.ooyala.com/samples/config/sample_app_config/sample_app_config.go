@@ -33,7 +33,7 @@ func MakeConfig(platformName string, rootPath DirAbs, logger *log.Logger) Config
 	freewheelSampleAppName := MakeDirName("FreewheelSampleApp")
 	imaSampleAppName := MakeDirName("IMASampleApp")
 	optionsSampleAppName := MakeDirName("OptionsSampleApp")
-	adobepassSampleAppName := MakeDirName("AdobePassSampleApp")
+	adobepassSampleAppName := MakeDirName("ContentProtectionSampleApp")
 
 	completeSampleAppPath := MakeDirAbs(Join(rootPath, completeSampleAppName))
 	freewheelSampleAppPath := MakeDirAbs(Join(rootPath, freewheelSampleAppName))
