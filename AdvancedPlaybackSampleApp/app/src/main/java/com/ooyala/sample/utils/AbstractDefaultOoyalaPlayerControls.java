@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
-import com.ooyala.android.ClosedCaptionsStyle;
+import com.ooyala.android.captions.ClosedCaptionsStyle;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OoyalaPlayerControls;
