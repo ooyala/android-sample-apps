@@ -82,7 +82,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <activity android:name=".lists.ContentProtectionSampleAppListActivity"
+        <activity android:name=".lists.ContentProtectionListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

@@ -16,9 +16,9 @@ import com.ooyala.sample.utils.PlayerSelectionOption;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ContentProtectionSampleAppListActivity extends Activity implements OnItemClickListener {
+public class ContentProtectionListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
-    return "ContentProtectionSampleAppListActivity";
+    return "Content Protection";
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;
