@@ -27,6 +27,10 @@ This application was designed to illustrate how correctly configured Google IMA 
 
 This application was designed to illustrate how correctly configured Options assets play back using the Ooyala SDK.
 
+### ContentProtectionSampleApp
+
+This application was designed to illustrate various ways to provide content protection using the Ooyala SDK.
+
 
 ## Using the CompleteSampleApp
 
