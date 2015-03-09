@@ -22,6 +22,7 @@ func main() {
     copyOoyalaCoreSDKFromVendor(sampleAppConfig, vendorConfig, l)
     copyOoyalaFreewheelSDKFromVendor(sampleAppConfig, vendorConfig, l)
     copyOoyalaIMASDKFromVendor(sampleAppConfig, vendorConfig, l)
+    copyAdobePassSDKFromVendor(sampleAppConfig, vendorConfig, l)
 }
 
 func copyOoyalaCoreSDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Config, l *log.Logger) {
@@ -37,6 +38,11 @@ func copyOoyalaFreewheelSDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc
 func copyOoyalaIMASDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Config, l *log.Logger) {
 	ol.ColorizedMethodPrintln(l)
 	copyLibrariesFromVendor(vendorConfig.IMASDKFilePaths, sampleAppConfig.IMAEnabledSampleAppPaths, l)
+}
+
+func copyAdobePassSDKFromVendor(sampleAppConfig sc.Config, vendorConfig vc.Config, l *log.Logger) {
+	ol.ColorizedMethodPrintln(l)
+	copyLibrariesFromVendor(vendorConfig.AdobePassSDKFilePaths, sampleAppConfig.AdobePassEnabledSampleAppPaths, l)
 }
 
 func copyLibrariesFromVendor(libraryPaths []Pather, sampleAppPaths []DirAbs, l *log.Logger) {
