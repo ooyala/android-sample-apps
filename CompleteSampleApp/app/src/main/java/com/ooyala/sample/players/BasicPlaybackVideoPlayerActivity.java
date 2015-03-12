@@ -48,6 +48,9 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
     if (player.setEmbedCode(EMBED)) {
       player.play();
     }
+    else {
+      Log.e(TAG, "Asset Failure");
+    }
   }
 
   @Override
@@ -73,10 +76,26 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
    */
   @Override
   public void update(Observable arg0, Object arg1) {
+    if (arg0 != player) {
+      return;
+    }
+
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
       return;
     }
-    Log.d(TAG, "Notification Recieved: " + arg1 + " - state: " + player.getState());
+
+    if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION) {
+      final String msg = "Error Event Received";
+      if (player != null && player.getError() != null) {
+        Log.e(TAG, msg, player.getError());
+      }
+      else {
+        Log.e(TAG, msg);
+      }
+      return;
+    }
+
+    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
 }

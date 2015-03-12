@@ -119,6 +119,6 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
       return;
     }
     Log.d(TAG,
-        "Notification Recieved: " + arg1 + " - state: " + player.getState());
+        "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 }

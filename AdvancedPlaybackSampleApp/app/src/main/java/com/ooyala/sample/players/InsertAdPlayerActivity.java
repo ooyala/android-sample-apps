@@ -124,7 +124,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
       return;
     }
-    Log.d(TAG, "Notification Recieved: " + arg1 + " - state: " + player.getState());
+    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
 }
