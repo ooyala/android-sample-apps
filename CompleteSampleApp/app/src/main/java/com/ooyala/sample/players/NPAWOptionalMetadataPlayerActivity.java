@@ -22,9 +22,7 @@ import java.util.Observer;
  * well as how to override the metadata that is passed by default to Youbora
  * You can find more information on Ooyala's Support website, or from your CSM
  *
- *
  */
-
 public class NPAWOptionalMetadataPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 

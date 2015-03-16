@@ -19,7 +19,6 @@ import com.ooyala.sample.R;
  * You can find more information on Ooyala's Support website, or from your CSM
  *
  */
-
 public class NPAWDefaultPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
