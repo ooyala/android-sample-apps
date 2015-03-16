@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="youbora-plugin-base">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/youbora-plugin-base.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
