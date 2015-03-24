@@ -1,8 +1,5 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +10,9 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -69,18 +69,18 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
   }
 
   @Override
-  protected void onStop() {
-    super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
+  protected void onPause() {
+    super.onPause();
+    Log.d(TAG, "Player Activity Paused");
     if (player != null) {
       player.suspend();
     }
   }
 
   @Override
-  protected void onRestart() {
-    super.onRestart();
-    Log.d(TAG, "Player Activity Restarted");
+  protected void onResume() {
+    super.onResume();
+    Log.d(TAG, "Player Activity Resumed");
     if (player != null) {
       player.resume();
     }
