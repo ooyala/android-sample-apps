@@ -4,14 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-
+/*
+  plays a certain video from channel browser
+ */
 public class PlayerDetailActivity extends Activity {
   private static final String TAG = "PlayerDetailActivity";
 
@@ -30,23 +32,22 @@ public class PlayerDetailActivity extends Activity {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    OptimizedOoyalaPlayerLayoutController layoutController = new OptimizedOoyalaPlayerLayoutController(
-        (OoyalaPlayerLayout) findViewById(R.id.player), ChannelBrowserActivity.PCODE,
-        new PlayerDomain(ChannelBrowserActivity.PLAYERDOMAIN));
-    player = layoutController.getPlayer();
+
+    player = new OoyalaPlayer(ChannelBrowserActivity.PCODE, new PlayerDomain(ChannelBrowserActivity.PLAYERDOMAIN));
+    OptimizedOoyalaPlayerLayoutController layoutController = new OptimizedOoyalaPlayerLayoutController((OoyalaPlayerLayout) findViewById(R.id.player), player);
+
     if (player.setEmbedCode(embedCode)) {
-      Log.d(TAG, "TEST - yay!");
+      DebugMode.logD(TAG, "the embed code is set successfully");
       player.play();
     } else {
-      Log.d(TAG, "TEST - lame :(" + embedCode);
+      DebugMode.logE(TAG, "set embed code " + embedCode + " failed!");
     }
-
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    Log.d(TAG, "---------------- Stop -----------");
+    DebugMode.logD(TAG, "OnStop");
     if (player != null && !isSuspended) {
       player.suspend();
       isSuspended = true;
@@ -56,7 +57,7 @@ public class PlayerDetailActivity extends Activity {
   @Override
   protected void onRestart() {
     super.onRestart();
-    Log.d(TAG, "---------------- Restart -----------");
+    DebugMode.logD(TAG, "OnRestart");
     if (player != null) {
       player.resume();
       isSuspended = false;
@@ -71,13 +72,13 @@ public class PlayerDetailActivity extends Activity {
 
   @Override
   public void onConfigurationChanged(Configuration newConfig) {
-    Log.d(TAG, "TEST - onConfigurationChangedd");
+    DebugMode.logD(TAG, "onConfigurationChanged");
     super.onConfigurationChanged(newConfig);
   }
 
   private Thread.UncaughtExceptionHandler onUncaughtException = new Thread.UncaughtExceptionHandler() {
     public void uncaughtException(Thread thread, Throwable ex) {
-      Log.e(TAG, "Uncaught exception", ex);
+      DebugMode.logE(TAG, "Uncaught exception", ex);
       showErrorDialog(ex);
     }
   };

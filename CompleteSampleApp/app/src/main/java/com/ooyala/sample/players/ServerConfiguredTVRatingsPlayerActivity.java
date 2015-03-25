@@ -50,8 +50,8 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
 	FCCTVRatingConfiguration tvRatingConfiguration = builder.setPosition(Position.TopLeft).setDurationSeconds(5).build();
 	Options options = new Options.Builder().setTVRatingConfiguration(tvRatingConfiguration).build();
 	
-	playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, PCODE, domain, options);
-	player = playerLayoutController.getPlayer();
+    player = new OoyalaPlayer(PCODE, domain, options);
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 	player.addObserver(this);
 	
 	player.setEmbedCode(EMBEDCODE);

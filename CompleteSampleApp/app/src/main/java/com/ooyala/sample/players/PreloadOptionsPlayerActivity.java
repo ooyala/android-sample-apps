@@ -13,7 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-import com.ooyala.android.DebugMode;
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -95,9 +95,9 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
 	DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
 	    + " preload: " + preload);
 	Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).build();
-	playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-	    playerLayout, PCODE, domain, options);
-	player = playerLayoutController.getPlayer();
+
+    player = new OoyalaPlayer(PCODE, domain, options);
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 	player.addObserver(this);
 	
 	OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,

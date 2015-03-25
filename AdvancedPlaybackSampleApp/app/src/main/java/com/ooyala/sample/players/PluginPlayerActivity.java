@@ -18,7 +18,9 @@ public class PluginPlayerActivity extends Activity {
   private String EMBED = "";
   private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   private final String DOMAIN = "http://www.ooyala.com";
-  OoyalaPlayer player;
+
+  protected OoyalaPlayer player;
+  protected OoyalaPlayerLayoutController playerLayoutController;
 
   /**
    * Called when the activity is first created.
@@ -31,9 +33,9 @@ public class PluginPlayerActivity extends Activity {
     EMBED = getIntent().getExtras().getString("embed_code");
 
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(
-            playerLayout, PCODE, new PlayerDomain(DOMAIN));
-    player = playerLayoutController.getPlayer();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+
     SampleAdPlugin plugin = new SampleAdPlugin(this, player);
     player.registerPlugin(plugin);
     if (player.setEmbedCode(EMBED)) {

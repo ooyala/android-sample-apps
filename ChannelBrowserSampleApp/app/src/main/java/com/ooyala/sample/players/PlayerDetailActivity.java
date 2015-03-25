@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import com.ooyala.android.DebugMode;
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -32,10 +32,10 @@ public class PlayerDetailActivity extends Activity {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    OptimizedOoyalaPlayerLayoutController layoutController = new OptimizedOoyalaPlayerLayoutController(
-        (OoyalaPlayerLayout) findViewById(R.id.player), ChannelBrowserActivity.PCODE,
-        new PlayerDomain(ChannelBrowserActivity.PLAYERDOMAIN));
-    player = layoutController.getPlayer();
+
+    player = new OoyalaPlayer(ChannelBrowserActivity.PCODE, new PlayerDomain(ChannelBrowserActivity.PLAYERDOMAIN));
+    OptimizedOoyalaPlayerLayoutController layoutController = new OptimizedOoyalaPlayerLayoutController((OoyalaPlayerLayout) findViewById(R.id.player), player);
+
     if (player.setEmbedCode(embedCode)) {
       DebugMode.logD(TAG, "the embed code is set successfully");
       player.play();

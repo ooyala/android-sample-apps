@@ -53,8 +53,8 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, PCODE, new PlayerDomain(DOMAIN));
-    player = playerLayoutController.getPlayer();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
     /** DITA_START:<ph id="freewheel_custom"> **/
