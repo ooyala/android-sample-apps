@@ -10,27 +10,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.ChannelBrowserActivity;
+import com.ooyala.sample.players.AdobePassSampleAppAcitivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/*
-  The list of channels to be browsed
-  Channel Browser Activity will be launched if a channel is selected.
-*/
-
-public class ChannelBrowserListActivity extends Activity implements OnItemClickListener {
+public class ContentProtectionListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
-    return "Channel Browser";
+    return "Content Protection";
   }
-  private static final String TAG = "ChannelBrowserListActivity";
-  private static final String CHANNEL_CODE = "txaGRiMzqQZSmFpMML92QczdIYUrcYVe";
+
   private static Map<String, PlayerSelectionOption> selectionMap;
   ArrayAdapter<String> selectionAdapter;
 
-  /** Called when the activity is first created. */
+  /**
+   * Called when the activity is first created.
+   */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -38,8 +34,7 @@ public class ChannelBrowserListActivity extends Activity implements OnItemClickL
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Channel", new PlayerSelectionOption(CHANNEL_CODE, ChannelBrowserActivity.class) );
-
+    selectionMap.put("AdobePassSampleApp", new PlayerSelectionOption("VybW5lODrJ0uM9FBo7XTT6TNjTJfr_7G", AdobePassSampleAppAcitivity.class) );
     setContentView(R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
@@ -53,7 +48,6 @@ public class ChannelBrowserListActivity extends Activity implements OnItemClickL
     ListView selectionListView = (ListView) findViewById(R.id.mainActivityListView);
     selectionListView.setAdapter(selectionAdapter);
     selectionListView.setOnItemClickListener(this);
-
   }
 
   @Override

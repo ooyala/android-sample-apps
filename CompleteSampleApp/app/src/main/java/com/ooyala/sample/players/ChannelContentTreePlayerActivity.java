@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /*
   ChannelContentTreePlayerActivity shows how to use ooyalaapiclient to retrieve
   videos from a channel and show the preview image, title and duration for each video.

@@ -41,8 +41,8 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, PCODE, new PlayerDomain(DOMAIN));
+    player = playerLayoutController.getPlayer();
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
