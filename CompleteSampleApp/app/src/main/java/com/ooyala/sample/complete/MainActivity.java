@@ -12,7 +12,8 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
-import com.ooyala.sample.lists.ChannelBrowserListActivity;
+import com.ooyala.sample.lists.ContentProtectionListActivity;
+import com.ooyala.sample.lists.OoyalaAPIListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OptionsListActivity;
@@ -41,12 +42,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
     // Begin List of Sample List Activities
     // If you add to this, you must add your activities to AndroidManifest
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
+    activityMap.put(ContentProtectionListActivity.getName(), ContentProtectionListActivity.class);
     activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
-    activityMap.put(ChannelBrowserListActivity.getName(), ChannelBrowserListActivity.class);
-
+    activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);
     }

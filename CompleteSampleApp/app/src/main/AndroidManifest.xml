@@ -12,6 +12,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
+
+        <service android:name="com.adobe.adobepass.accessenabler.api.AccessEnablerService"
+                 android:label="AccessEnabler service"/>
+
         <activity
             android:name="com.ooyala.sample.lists.AdvancedPlaybackListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
@@ -77,7 +81,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
         </activity>
-        
+
+        <activity android:name=".lists.ContentProtectionListActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
         <activity android:name="com.ooyala.sample.players.CuePointsOptionsFreewheelPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
@@ -106,15 +114,15 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.lists.ChannelBrowserListActivity"
+        <activity android:name="com.ooyala.sample.lists.OoyalaAPIListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.players.ChannelBrowserActivity"
+        <activity android:name="com.ooyala.sample.players.ChannelContentTreePlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.players.PlayerDetailActivity"
+        <activity android:name=".players.AdobePassSampleAppAcitivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

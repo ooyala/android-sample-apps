@@ -14,6 +14,7 @@ import com.ooyala.sample.players.CuePointsOptionsFreewheelPlayerActivity;
 import com.ooyala.sample.players.PreloadOptionsPlayerActivity;
 import com.ooyala.sample.players.PreloadWithInitTimePlayerActivity;
 import com.ooyala.sample.players.ServerConfiguredTVRatingsPlayerActivity;
+import com.ooyala.sample.players.TVRatingsPlayerActivity;
 import com.ooyala.sample.players.TimeoutOptionsPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
@@ -43,6 +44,7 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
     selectionMap.put("Preload and Promo Options with Initial Time", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", PreloadWithInitTimePlayerActivity.class));
     selectionMap.put("Timeout Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", TimeoutOptionsPlayerActivity.class));
     selectionMap.put("Server-Side TV Ratings", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", ServerConfiguredTVRatingsPlayerActivity.class));
+    selectionMap.put("TV Ratings Configuration", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", TVRatingsPlayerActivity.class));
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView

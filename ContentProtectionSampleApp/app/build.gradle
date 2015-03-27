@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 15
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.ooyala.ContentProtectionSampleApp"
+        minSdkVersion 9
+        targetSdkVersion 15
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.2'
+    compile 'com.google.android.gms:play-services:+'
+    compile files('libs/android_accessenabler-1.7.3.jar')
+    compile files('libs/OoyalaSDK.jar')
+}
