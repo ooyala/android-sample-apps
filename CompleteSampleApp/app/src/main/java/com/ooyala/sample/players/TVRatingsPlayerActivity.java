@@ -101,9 +101,9 @@ public class TVRatingsPlayerActivity extends Activity implements OnClickListener
     FCCTVRatingConfiguration fccConfig = new FCCTVRatingConfiguration.Builder().setPosition(getTVRatingPosition()).setDurationSeconds(TVRATING_DURATION).build();
     Options options = new Options.Builder().setTVRatingConfiguration(fccConfig).build();
 
+    player = new OoyalaPlayer(PCODE, domain, options);
     playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-            playerLayout, PCODE, domain, options);
-    player = playerLayoutController.getPlayer();
+            playerLayout, player);
     player.addObserver(this);
 
     player.setEmbedCode(EMBEDCODE);
