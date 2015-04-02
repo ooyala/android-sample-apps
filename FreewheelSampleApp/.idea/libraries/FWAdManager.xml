@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="FWAdManager">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/FWAdManager.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
