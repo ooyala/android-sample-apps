@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ima-android-sdk-beta9">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/ima-android-sdk-beta9.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -93,9 +93,9 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
 	DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
 	    + " preload: " + preload);
 	Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).build();
-	playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-	    playerLayout, PCODE, domain, options);
-	player = playerLayoutController.getPlayer();
+
+    player = new OoyalaPlayer(PCODE, domain, options);
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 	player.addObserver(this);
 	
 	player.setEmbedCode(EMBEDCODE);

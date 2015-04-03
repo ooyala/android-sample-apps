@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ooyala.sample"
+        applicationId "com.ooyala.sample.FreewheelSampleApp"
         minSdkVersion 9
         targetSdkVersion 21
     }

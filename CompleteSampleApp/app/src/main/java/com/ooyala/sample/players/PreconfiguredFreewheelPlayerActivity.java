@@ -54,12 +54,12 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     /** DITA_START:<ph id="freewheel_preconfigured"> **/
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, PCODE, new PlayerDomain(DOMAIN));
-    player = playerLayoutController.getPlayer();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
     @SuppressWarnings("unused")
-	OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
+    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
     
     if (player.setEmbedCode(EMBED)) {
       player.play();

@@ -91,12 +91,12 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
 	int readTimeoutMs = Integer.valueOf(this.readTimeout.getText().toString());
 	DebugMode.logD(TAG, "connectionTimeout: " + connectionTimeoutMs
 	    + " readTimeout: " + readTimeoutMs);
-  //TODO: uncomment when 3.5.0 is released
 	  Options options =
-    new Options.Builder().build();//.setConnectionTimeout(connectionTimeoutMs).setReadTimeout(readTimeoutMs).build();
-	playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-	    playerLayout, PCODE, domain, options);
-	player = playerLayoutController.getPlayer();
+    new Options.Builder().setConnectionTimeout(connectionTimeoutMs).setReadTimeout(readTimeoutMs).build();
+
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+
 	player.addObserver(this);
 	
 	OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,

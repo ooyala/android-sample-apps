@@ -95,9 +95,9 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
 	DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
 	    + " preload: " + preload);
 	Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).build();
-	playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-	    playerLayout, PCODE, domain, options);
-	player = playerLayoutController.getPlayer();
+
+    player = new OoyalaPlayer(PCODE, domain, options);
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 	player.addObserver(this);
 	
 	OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,

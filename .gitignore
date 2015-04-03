@@ -3,6 +3,7 @@
 **/build
 **/.gradle
 **/workspace.xml
+**/.idea/libraries
 
 CompleteSampleApp/src/com/ooyala/sample/lists
 CompleteSampleApp/src/com/ooyala/sample/players
