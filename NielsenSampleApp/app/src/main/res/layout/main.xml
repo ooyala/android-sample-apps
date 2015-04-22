@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxWidth="800dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:orientation="vertical" >
+
+            <Spinner
+                android:id="@+id/embedSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/setButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Set EC" />
+
+        <Button
+            android:id="@+id/optInOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Opt In/Out" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/urlText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <com.ooyala.android.OoyalaPlayerLayout
+        android:id="@+id/ooyalaPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </com.ooyala.android.OoyalaPlayerLayout>
+
+</LinearLayout>
