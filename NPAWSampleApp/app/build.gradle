@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ooyala.sample.CompleteSampleApp"
+        applicationId "com.ooyala.sample.npaw"
         minSdkVersion 9
         targetSdkVersion 21
     }
@@ -20,12 +20,7 @@ android {
 
 dependencies {
     compile 'com.google.android.gms:play-services:+'
-    compile files('libs/FWAdManager.jar')
-    compile files('libs/OoyalaFreewheelSDK.jar')
-    compile files('libs/OoyalaIMASDK.jar')
     compile files('libs/OoyalaSDK.jar')
-    compile files('libs/ima-android-sdk-beta9.jar')
-    compile files('libs/android_accessenabler-1.7.3.jar')
     compile files('libs/youbora-plugin-base.jar')
     compile files('libs/youbora-plugin-ooyala.jar')
 }
