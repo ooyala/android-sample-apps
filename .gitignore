@@ -11,3 +11,7 @@ vendor/google_play_services/samples
 go_script/pkg
 
 **/local.properties
+**/vo*.jar
+**/vo*.dat
+**/Dx*.jar
+**/libvo*.so
