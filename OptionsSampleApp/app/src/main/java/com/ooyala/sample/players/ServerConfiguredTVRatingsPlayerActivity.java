@@ -6,7 +6,7 @@ import java.util.Observer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import com.ooyala.android.LocalizationSupport;
+
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -39,7 +39,7 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
   @Override
   public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.player_simple_layout);
+	setContentView(R.layout.player_simple_frame_layout);
 	EMBEDCODE = getIntent().getExtras().getString("embed_code");
 	
 	OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);

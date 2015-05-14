@@ -41,7 +41,7 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setTitle(getName());
-    setContentView(R.layout.player_simple_layout);
+    setContentView(R.layout.player_simple_frame_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
 
