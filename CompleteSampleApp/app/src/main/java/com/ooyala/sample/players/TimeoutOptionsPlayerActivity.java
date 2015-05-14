@@ -86,16 +86,34 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
 		player.removeVideoView();
 	}
 	OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-	PlayerDomain domain = new PlayerDomain(DOMAIN);
-	int connectionTimeoutMs = Integer.valueOf(this.connectionTimeout.getText().toString());
-	int readTimeoutMs = Integer.valueOf(this.readTimeout.getText().toString());
-	DebugMode.logD(TAG, "connectionTimeout: " + connectionTimeoutMs
-	    + " readTimeout: " + readTimeoutMs);
-	  Options options =
-    new Options.Builder().setConnectionTimeout(connectionTimeoutMs).setReadTimeout(readTimeoutMs).build();
 
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+  //If the connection timeout is specified, add it to the builder
+  Options.Builder builder = new Options.Builder();
+  if (!this.connectionTimeout.getText().toString().equals("")) {
+    try {
+      int connectionTimeoutMs = Integer.valueOf(this.connectionTimeout.getText().toString());
+      builder.setConnectionTimeout(connectionTimeoutMs);
+    } catch (Exception e) {
+      DebugMode.logE(TAG, "The value provided was not a number. Cannot continue");
+      return;
+    }
+  }
+
+  //If read timeout is specified, add it to the builder
+  if (!this.readTimeout.getText().toString().equals("")) {
+    try {
+      int readTimeoutMs = Integer.valueOf(this.readTimeout.getText().toString());
+      builder.setReadTimeout(readTimeoutMs);
+    } catch (Exception e) {
+      DebugMode.logE(TAG, "The value provided was not a number. Cannot continue");
+      return;
+    }
+  }
+
+  //Build the options with the potentially updated builder
+  Options options = builder.build();
+  player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+  playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
 	player.addObserver(this);
 	

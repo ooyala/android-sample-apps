@@ -106,6 +106,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
+        <activity android:name="com.ooyala.sample.players.TVRatingsPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
         <activity android:name="com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
