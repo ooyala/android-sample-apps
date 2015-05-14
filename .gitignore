@@ -14,4 +14,7 @@ go_script/pkg
 **/vo*.jar
 **/vo*.dat
 **/Dx*.jar
+**/assets.jar
+**/libdx*.so
+**/libdx*.so.info
 **/libvo*.so
