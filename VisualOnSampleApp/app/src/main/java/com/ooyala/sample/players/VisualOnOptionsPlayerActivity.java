@@ -7,8 +7,6 @@ import android.util.Log;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.configuration.Options;
-import com.ooyala.android.configuration.VisualOnConfiguration;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
@@ -18,8 +16,11 @@ import java.util.Observer;
 /**
  * This activity illustrates how you enable VisualOn video playback.
  *
+ * This application will playback even if VisualOn Libraries were not properly added.
+ * You will know VisualOn is being used if you see logs with "VisualOnStreamPlayer" in it
+ *
  */
-public class VisualOnPlayerActivity extends Activity implements Observer {
+public class VisualOnOptionsPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
@@ -39,16 +40,11 @@ public class VisualOnPlayerActivity extends Activity implements Observer {
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    //get the VisualOn configuration information
-    VisualOnConfiguration voConfig = getVisualOnConfiguration();
-    Options options = new Options.Builder().setVisualOnConfiguration(voConfig).build();
-
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
 
     OoyalaPlayer.enableCustomHLSPlayer = true;
-
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
@@ -58,30 +54,6 @@ public class VisualOnPlayerActivity extends Activity implements Observer {
     else {
       Log.e(TAG, "Asset Failure");
     }
-  }
-
-  private VisualOnConfiguration getVisualOnConfiguration() {
-    VisualOnConfiguration.Builder voConfigBuilder = new VisualOnConfiguration.Builder();
-
-    // The target bitrate to start video playback
-    voConfigBuilder.setInitialBitrate(1200);
-
-    // The upper and lower bounds of bitrates that should be selected
-    voConfigBuilder.setLowerBitrateThreshold(200).setUpperBitrateThreshold(1400);
-
-    // The amount of video in ms to buffer when video is initialized or seeked
-    voConfigBuilder.setInitialBufferingTime(10000);
-
-    // The maximum buffer size to be downloaded during video playback
-    voConfigBuilder.setMaxBufferingTime(10000);
-
-    // The amount of video to buffer if buffer underruns
-    voConfigBuilder.setPlaybackBufferingTime(2000);
-
-    // Disable the check for the correct version of VisualOn Libraries with the Ooyala SDK
-    voConfigBuilder.setDisableLibraryVersionChecks(true);
-
-    return voConfigBuilder.build();
   }
 
   @Override

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
+import com.ooyala.sample.players.VisualOnOptionsPlayerActivity;
 import com.ooyala.sample.players.VisualOnPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
@@ -36,6 +37,7 @@ public class VisualOnListActivity extends Activity implements OnItemClickListene
     //Populate the embed map
     selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", VisualOnPlayerActivity.class) );
     selectionMap.put( "Ooyala Sample Encrypted HLS VOD", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", VisualOnPlayerActivity.class) );
+    selectionMap.put( "VisualOn Configuration Options", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", VisualOnOptionsPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 

@@ -14,7 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you enable VisualOn video playback.
+ * This activity illustrates how you enable SecurePlayer video playback.
  *
  */
 public class SecurePlayerPlayerActivity extends Activity implements Observer {

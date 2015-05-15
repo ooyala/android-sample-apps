@@ -16,14 +16,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you enable VisualOn video playback.
+ * This activity illustrates how you enable SecurePlayer video playback, and using our VisualOn
+ * Configuration class to configure the player experience.
  *
  */
-public class VisualOnPlayerActivity extends Activity implements Observer {
+public class SecurePlayerOptionsPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
+  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
   final String DOMAIN = "http://ooyala.com";
 
   protected OoyalaPlayerLayoutController playerLayoutController;
@@ -45,9 +46,11 @@ public class VisualOnPlayerActivity extends Activity implements Observer {
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 
     OoyalaPlayer.enableCustomHLSPlayer = true;
+    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
