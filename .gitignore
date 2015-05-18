@@ -11,3 +11,10 @@ vendor/google_play_services/samples
 go_script/pkg
 
 **/local.properties
+**/vo*.jar
+**/vo*.dat
+**/Dx*.jar
+**/assets.jar
+**/libdx*.so
+**/libdx*.so.info
+**/libvo*.so
