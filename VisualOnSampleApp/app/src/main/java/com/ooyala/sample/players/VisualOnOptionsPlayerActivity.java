@@ -7,6 +7,8 @@ import android.util.Log;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
+import com.ooyala.android.configuration.VisualOnConfiguration;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
@@ -40,9 +42,13 @@ public class VisualOnOptionsPlayerActivity extends Activity implements Observer 
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
+    //get the VisualOn configuration information
+    VisualOnConfiguration voConfig = getVisualOnConfiguration();
+    Options options = new Options.Builder().setVisualOnConfiguration(voConfig).build();
+
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 
     OoyalaPlayer.enableCustomHLSPlayer = true;
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
@@ -55,6 +61,31 @@ public class VisualOnOptionsPlayerActivity extends Activity implements Observer 
       Log.e(TAG, "Asset Failure");
     }
   }
+
+  private VisualOnConfiguration getVisualOnConfiguration() {
+    VisualOnConfiguration.Builder voConfigBuilder = new VisualOnConfiguration.Builder();
+
+    // The target bitrate to start video playback
+    voConfigBuilder.setInitialBitrate(1200);
+
+    // The upper and lower bounds of bitrates that should be selected
+    voConfigBuilder.setLowerBitrateThreshold(200).setUpperBitrateThreshold(1400);
+
+    // The amount of video in ms to buffer when video is initialized or seeked
+    voConfigBuilder.setInitialBufferingTime(10000);
+
+    // The maximum buffer size to be downloaded during video playback
+    voConfigBuilder.setMaxBufferingTime(10000);
+
+    // The amount of video to buffer if buffer underruns
+    voConfigBuilder.setPlaybackBufferingTime(2000);
+
+    // Disable the check for the correct version of VisualOn Libraries with the Ooyala SDK
+    voConfigBuilder.setDisableLibraryVersionChecks(true);
+
+    return voConfigBuilder.build();
+  }
+
 
   @Override
   protected void onStop() {
