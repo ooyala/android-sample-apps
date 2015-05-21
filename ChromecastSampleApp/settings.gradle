@@ -1,0 +1,4 @@
+include ':app'
+
+include ':CastCompanionLibrary'
+project(':CastCompanionLibrary').projectDir = new File(settingsDir, 'CastCompanionLibrary')

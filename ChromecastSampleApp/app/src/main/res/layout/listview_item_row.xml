@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="16dp"
+    android:paddingTop="5dp" >
+    
+     <ImageView
+        android:id="@+id/itemImageInRow"
+        android:layout_width="256px"
+        android:layout_height="144px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/ic_ooyala" />
+    
+      <TextView
+            android:id="@+id/itemTitleInRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/itemImageInRow"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />  
+
+</RelativeLayout>
