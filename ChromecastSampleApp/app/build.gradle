@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.ooyala.chromecastsampleapp"
+        minSdkVersion 19
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:21.+'
+    compile 'com.android.support:mediarouter-v7:21.+'
+    compile 'com.google.android.gms:play-services:6.5.87'
+    compile project(':CastCompanionLibrary')
+    compile(name:'OoyalaCastSDK', ext:'aar')
+    compile(name:'OoyalaSDK', ext:'aar')
+}

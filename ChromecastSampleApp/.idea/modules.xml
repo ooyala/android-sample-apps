@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CastCompanionLibrary/CastCompanionLibrary.iml" filepath="$PROJECT_DIR$/CastCompanionLibrary/CastCompanionLibrary.iml" />
+      <module fileurl="file://$USER_HOME$/CastCompanionLibrary/CastCompanionLibrary.iml" filepath="$USER_HOME$/CastCompanionLibrary/CastCompanionLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../vendor/CastCompanionLibrary/CastCompanionLibrary.iml" filepath="$PROJECT_DIR$/../../vendor/CastCompanionLibrary/CastCompanionLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../sdk/CastCompanionLibrary/CastCompanionLibrary.iml" filepath="$PROJECT_DIR$/../../sdk/CastCompanionLibrary/CastCompanionLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChromecastSampleApp.iml" filepath="$PROJECT_DIR$/ChromecastSampleApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../sdk/ooyalaCastSDK/ooyalaCastSDK.iml" filepath="$PROJECT_DIR$/../../sdk/ooyalaCastSDK/ooyalaCastSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../sdk/ooyalaCoreSDK/ooyalaCoreSDK.iml" filepath="$PROJECT_DIR$/../../sdk/ooyalaCoreSDK/ooyalaCoreSDK.iml" />
+    </modules>
+  </component>
+</project>
+
