@@ -1,0 +1,17 @@
+<resources>
+  <string name="hello">Hello World, ChromecastSampleAppActivity!</string>
+  <string name="app_name">OoyalaChromecastSampleApp</string>
+  <string name="media_route_menu_title">Play on..</string>
+  <string name="asset1">Black and white documentory</string>
+  <string name="setCastImage">Set Cast Image</string>
+  <string name="setEmbedcode">Set EmbedCode</string>
+  <string name="title_activity_video_broswer">VideoBroswerActivity</string>
+  <string name="hello_world">Hello world!</string>
+  <string name="action_settings">Settings</string>
+  <string name="title_activity_video_browsing">VideoBrowsingActivity</string>
+  <string name="HLS_asset_ec">Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1</string>
+  <string name="MP4_asset_ec">h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx</string>
+  <string name="smooth_asset_ec">pxY3gwYjrEiFX9bh9_AKCPNbfLH7czoz</string>
+  <string name="video_title">Title of the video</string>
+  <string name="video_description">The description of the video</string>
+</resources>
