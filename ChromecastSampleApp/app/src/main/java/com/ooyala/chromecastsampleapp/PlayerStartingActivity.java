@@ -41,7 +41,6 @@ public class PlayerStartingActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
     embedCode = getIntent().getExtras().getString("embedcode");
-    
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain domain = new PlayerDomain(DOMAIN);
@@ -75,11 +74,14 @@ public class PlayerStartingActivity extends ActionBarActivity {
 
   private void buildThumbnailMap() {
     thumbnailMap = new HashMap<String, Integer>();
-    thumbnailMap.put("wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV", R.drawable.test1);
-    thumbnailMap.put("IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm", R.drawable.test2);
-    thumbnailMap.put("xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS", R.drawable.test3);
-    thumbnailMap.put("Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc", R.drawable.test4);
-    thumbnailMap.put("o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP", R.drawable.test5);
+    thumbnailMap.put("wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV", R.drawable.chromecast_test_1);
+    thumbnailMap.put("IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm", R.drawable.dog_movie);
+    thumbnailMap.put("xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS", R.drawable.happy_fit2);
+    thumbnailMap.put("Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc", R.drawable.weird_dad);
+    thumbnailMap.put("o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP", R.drawable.heinz);
+    thumbnailMap.put("FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ", R.drawable.clear_ehls_high);
+    thumbnailMap.put("MyZjYydTqIR435DzaFUqqrrRg8HdQypx", R.drawable.clear_ehls_high);
+    thumbnailMap.put("Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos", R.drawable.elephants_dream);
   }
 
   private void setupCastView() {

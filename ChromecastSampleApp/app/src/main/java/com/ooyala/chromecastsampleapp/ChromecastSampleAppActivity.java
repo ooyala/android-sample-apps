@@ -31,7 +31,6 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
   private List<Integer> castViewImages;
   ListView _listView;
 
-  /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     Log.d(TAG, "onCreate()");
@@ -43,11 +42,14 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
     
     Video videoList[] = new Video[] {
-        new Video(R.drawable.test1, "Ooyala Mexico Harlem Shake"),
-        new Video(R.drawable.test2, "Super Corgi"),
-        new Video(R.drawable.test3, "Arcade Fire - Reflecktor"),
-        new Video(R.drawable.test4, "Google I/O Keynote"),
-        new Video(R.drawable.test5, "Sweater Weather")
+        new Video(R.drawable.chromecast_test_1, "CHROMECAST TEST1 (HLS)"),
+        new Video(R.drawable.dog_movie, "DOGMOVIE"),
+        new Video(R.drawable.happy_fit2, "HAPPYFIT2"),
+        new Video(R.drawable.weird_dad, "WEIRDAD"),
+        new Video(R.drawable.heinz, "HEINZ"),
+        new Video(R.drawable.clear_ehls_high, "remote_hls_baseline_vod"),
+        new Video(R.drawable.clear_ehls_high, "clear_ehls_high"),
+        new Video(R.drawable.elephants_dream, "ElephantsDream (HLS high Does not work.)")
     };
 
     VideoListAdapter adapter = new VideoListAdapter(this, R.layout.listview_item_row, videoList);
@@ -72,8 +74,18 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
           intent.putExtra("embedcode", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS");
         } else if (position == 3) {
           intent.putExtra("embedcode", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc");
-        } else {
+        } else if (position == 4) {
           intent.putExtra("embedcode", "o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP");
+        } else if (position == 5) {
+          // HLS baseline
+          intent.putExtra("embedcode", "FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ");
+        } else if (position == 6) {
+          // eHLS baseline
+          intent.putExtra("embedcode", "MyZjYydTqIR435DzaFUqqrrRg8HdQypx");
+        } else {
+          // HLS high
+          // locally but not receiver side
+          intent.putExtra("embedcode", "Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos");
         }
         startActivity(intent);
       }
