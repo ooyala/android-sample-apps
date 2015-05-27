@@ -86,9 +86,9 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
     
     
     defualtMiniController = (OOMiniController) findViewById(R.id.miniController1);
-    
+
+// Uncomment it if you want to activate the customized sample app in our sample app
 //    customizedMiniController = (OOMiniController) findViewById(R.id.miniController2);
-//    castManager.addMiniController(customizedMiniController);
   }
 
   @Override
@@ -127,8 +127,6 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
   @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
-//    castManager.destroy(this);
-//    castManager = null;
     super.onDestroy();
   }
 
@@ -139,6 +137,8 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
     if (castManager != null && castManager.isInCastMode()){
       castManager.addMiniController(defualtMiniController);
       defualtMiniController.show();
+// Uncomment it if you want to activate the customized sample app in our sample app
+//      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
       castManager.onResume();
     }
@@ -149,6 +149,7 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
   public void onPause() {
     super.onPause();
     ChromecastSampleAppActivity.activatedActivity--;
+    castManager.removeMiniController(defualtMiniController);
     Log.d(TAG, "onPause()");
   }
   
