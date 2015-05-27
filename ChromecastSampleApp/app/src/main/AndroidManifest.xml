@@ -29,7 +29,7 @@
             android:name=".PlayerStartingActivity"
             android:label="@string/app_name" android:textColor="#ffffff"
             android:parentActivityName=".ChromecastSampleAppActivity"
-            android:launchMode="singleTop">>
+            android:launchMode="singleInstance">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ChromecastSampleAppActivity"/>
