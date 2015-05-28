@@ -9,7 +9,7 @@
         android:layout_marginBottom="40dp"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:src="@drawable/test3"
+        android:src="@drawable/heinz"
         android:alpha="0.5"
         android:scaleType="centerCrop"></ImageView>
     
