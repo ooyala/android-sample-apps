@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.ooyala.android.castsdk.OODefaultMiniController
+    <com.ooyala.android.castsdk.DefaultCastMiniController
         android:id="@+id/miniController1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shadow7"
         android:visibility="gone" >
-    </com.ooyala.android.castsdk.OODefaultMiniController>
+    </com.ooyala.android.castsdk.DefaultCastMiniController>
 
     <!--<com.ooyala.chromecastsampleapp.CustomizedMiniController-->
         <!--android:id="@+id/miniController2"-->

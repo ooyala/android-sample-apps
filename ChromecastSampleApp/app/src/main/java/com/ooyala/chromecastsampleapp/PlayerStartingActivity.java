@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.castsdk.OOCastManager;
+import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class PlayerStartingActivity extends ActionBarActivity {
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://www.ooyala.com";
   private OoyalaPlayer player;
-  private OOCastManager castManager;
+  private CastManager castManager;
   private View castView;
   private Map<String, Integer> thumbnailMap;
 
@@ -48,7 +48,7 @@ public class PlayerStartingActivity extends ActionBarActivity {
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     // Initialize CastManager
-    castManager = OOCastManager.initialize(this, "4172C76F", "urn:x-cast:ooyala");
+    castManager = CastManager.initialize(this, "4172C76F", "urn:x-cast:ooyala");
     castManager.destroyNotificationService(this);
     castManager.registerWithOoyalaPlayer(player);
     castManager.setTargetActivity(PlayerStartingActivity.class);

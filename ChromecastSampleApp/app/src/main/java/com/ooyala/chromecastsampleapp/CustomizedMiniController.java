@@ -14,18 +14,18 @@ import android.widget.TextView;
 import com.google.sample.castcompanionlibrary.cast.exceptions.NoConnectionException;
 import com.google.sample.castcompanionlibrary.cast.exceptions.TransientNetworkDisconnectionException;
 import com.ooyala.android.OoyalaPlayer.State;
-import com.ooyala.android.castsdk.OOCastManager;
-import com.ooyala.android.castsdk.OOCastPlayer;
-import com.ooyala.android.castsdk.OOMiniController;
+import com.ooyala.android.castsdk.CastManager;
+import com.ooyala.android.castsdk.CastPlayer;
+import com.ooyala.android.castsdk.CastMiniController;
 import com.ooyala.android.util.DebugMode;
 
 import java.lang.ref.WeakReference;
 
-public class CustomizedMiniController extends RelativeLayout implements OOMiniController {
+public class CustomizedMiniController extends RelativeLayout implements CastMiniController {
 
   private static final String TAG = "CustomizedMiniController";
 
-  private WeakReference<OOCastManager> castManager;
+  private WeakReference<CastManager> castManager;
 
   protected ImageView icon;
   protected TextView title;
@@ -45,8 +45,8 @@ public class CustomizedMiniController extends RelativeLayout implements OOMiniCo
     setupCallbacks();
   }
 
-  public void setCastManager(OOCastManager castManager) {
-    this.castManager = new WeakReference<OOCastManager>(castManager);
+  public void setCastManager(CastManager castManager) {
+    this.castManager = new WeakReference<CastManager>(castManager);
   }
 
   private void loadViews(View miniControllerView) {
@@ -64,7 +64,7 @@ public class CustomizedMiniController extends RelativeLayout implements OOMiniCo
       @Override
       public void onClick(View v) {
         DebugMode.assertCondition((castManager.get().getCastPlayer() != null), TAG, "castPlayer should never be null when we have a mini controller");
-        OOCastPlayer castPlayer = castManager.get().getCastPlayer();
+        CastPlayer castPlayer = castManager.get().getCastPlayer();
         State state = castPlayer.getState();
         DebugMode.logD(TAG, "Play/Pause button is clicked in default mini controller with state = " + state);
         if (state == State.PLAYING){
