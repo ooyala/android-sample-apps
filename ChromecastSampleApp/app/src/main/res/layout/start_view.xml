@@ -11,11 +11,7 @@
         android:background="@drawable/shadow7"
         android:visibility="gone" >
     </com.ooyala.android.castsdk.OODefaultMiniController>
-    
-    <ListView android:id="@+id/listView"
-              android:layout_height="wrap_content"
-              android:layout_width="match_parent"/>
-    
+
     <!--<com.ooyala.chromecastsampleapp.CustomizedMiniController-->
         <!--android:id="@+id/miniController2"-->
         <!--android:layout_width="fill_parent"-->
@@ -23,6 +19,12 @@
         <!--android:background="@drawable/shadow7"-->
         <!--android:visibility="gone" >-->
     <!--</com.ooyala.chromecastsampleapp.CustomizedMiniController>-->
+
+    <ListView android:id="@+id/listView"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"/>
+    
+
     
     
 </LinearLayout>

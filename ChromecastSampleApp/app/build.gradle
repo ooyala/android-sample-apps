@@ -32,4 +32,7 @@ dependencies {
     compile project(':CastCompanionLibrary')
     compile(name:'OoyalaCastSDK', ext:'aar')
     compile(name:'OoyalaSDK', ext:'aar')
+
+//    compile project(':ooyalaCoreSDK')
+//    compile project(':ooyalaCastSDK')
 }

@@ -2,3 +2,11 @@ include ':app'
 
 include ':CastCompanionLibrary'
 project(':CastCompanionLibrary').projectDir = new File(settingsDir, 'CastCompanionLibrary')
+
+include ':ooyalaCoreSDK'
+project(':ooyalaCoreSDK').projectDir = new File(settingsDir, '../../android-sdk/sdk/ooyalaCoreSDK')
+
+
+include ':ooyalaCastSDK'
+project(':ooyalaCastSDK').projectDir=new File(settingsDir, '../../android-sdk/sdk/ooyalaCastSDK')
+
