@@ -133,7 +133,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
     Log.d(TAG, "onDestroy()");
     castManager.destroyNotificationService(this);
     castManager.unregisterLockScreenControls();
-    castManager.deregisterOoyalaPlayer();
     player = null;
     super.onDestroy();
   }

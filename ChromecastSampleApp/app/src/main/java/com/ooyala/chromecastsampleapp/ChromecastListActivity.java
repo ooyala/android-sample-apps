@@ -42,7 +42,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
     
     Video videoList[] = new Video[] {
-        new Video(R.drawable.chromecast_test_1, "CHROMECAST TEST1 (HLS)"),
+        new Video(R.drawable.chromecast_test_1, "CHROMECAST TEST1"),
         new Video(R.drawable.dog_movie, "DOGMOVIE"),
         new Video(R.drawable.happy_fit2, "HAPPYFIT2"),
         new Video(R.drawable.weird_dad, "WEIRDAD"),
@@ -153,6 +153,7 @@ public class ChromecastListActivity extends ActionBarActivity {
 //      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
       castManager.onResume();
+      castManager.deregisterOoyalaPlayer();
     }
     Log.d(TAG, "onResume()");
   }
