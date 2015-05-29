@@ -17,7 +17,7 @@ import com.ooyala.android.castsdk.CastMiniController;
 
 import java.util.List;
 
-public class ChromecastSampleAppActivity extends ActionBarActivity {
+public class ChromecastListActivity extends ActionBarActivity {
   
   public static int activatedActivity = 0;
   
@@ -59,7 +59,7 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
 
 
 
-    final Intent intent = new Intent(this, PlayerStartingActivity.class);
+    final Intent intent = new Intent(this, ChromecastPlayerActivity.class);
     _listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       
       @Override
@@ -114,7 +114,7 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
   protected void onStop() {
     Log.d(TAG, "onStop()");
     super.onStop();
-    if (ChromecastSampleAppActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
+    if (ChromecastListActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
       castManager.createNotificationService(this);
       castManager.registerLockScreenControls(this);
     }
@@ -145,7 +145,7 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
   @Override
   public void onResume() {
     super.onResume();
-    ChromecastSampleAppActivity.activatedActivity++;
+    ChromecastListActivity.activatedActivity++;
     if (castManager != null && castManager.isInCastMode()){
       castManager.addMiniController(defualtMiniController);
       defualtMiniController.show();
@@ -160,7 +160,7 @@ public class ChromecastSampleAppActivity extends ActionBarActivity {
   @Override
   public void onPause() {
     super.onPause();
-    ChromecastSampleAppActivity.activatedActivity--;
+    ChromecastListActivity.activatedActivity--;
     castManager.removeMiniController(defualtMiniController);
     Log.d(TAG, "onPause()");
   }

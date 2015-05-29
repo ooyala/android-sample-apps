@@ -20,7 +20,7 @@ import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerStartingActivity extends ActionBarActivity {
+public class ChromecastPlayerActivity extends ActionBarActivity {
   
   private static final String TAG = "PlayerStartingActivity";
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
@@ -51,7 +51,7 @@ public class PlayerStartingActivity extends ActionBarActivity {
     castManager = CastManager.initialize(this, "4172C76F", "urn:x-cast:ooyala");
     castManager.destroyNotificationService(this);
     castManager.registerWithOoyalaPlayer(player);
-    castManager.setTargetActivity(PlayerStartingActivity.class);
+    castManager.setTargetActivity(ChromecastPlayerActivity.class);
 
 
     // Initialize action bar
@@ -101,7 +101,7 @@ public class PlayerStartingActivity extends ActionBarActivity {
   @Override
   public void onPause() {
     Log.d(TAG, "onPause()");
-    ChromecastSampleAppActivity.activatedActivity --;
+    ChromecastListActivity.activatedActivity --;
     super.onPause();
   }
   
@@ -116,7 +116,7 @@ public class PlayerStartingActivity extends ActionBarActivity {
   protected void onStop() {
     Log.d(TAG, "onStop()");
     super.onStop();
-    if (ChromecastSampleAppActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
+    if (ChromecastListActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
       castManager.createNotificationService(this);
       castManager.registerLockScreenControls(this);
     }
@@ -141,7 +141,7 @@ public class PlayerStartingActivity extends ActionBarActivity {
   @Override
   protected void onResume() {
     Log.d(TAG, "onResume()");
-    ChromecastSampleAppActivity.activatedActivity++;
+    ChromecastListActivity.activatedActivity++;
 
     if (castManager != null && castManager.getCastPlayer() != null) {
       castManager.destroyNotificationService(this);
