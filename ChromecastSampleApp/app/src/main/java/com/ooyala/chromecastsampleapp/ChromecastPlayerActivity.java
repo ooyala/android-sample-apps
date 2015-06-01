@@ -25,6 +25,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
   private static final String TAG = "ChromecastPlayerActivity";
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
+  private int icon;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://www.ooyala.com";
   private OoyalaPlayer player;
@@ -38,9 +39,12 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     Log.d(TAG, "onCreate()");
+    // Setup castView
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
     embedCode = getIntent().getExtras().getString("embedcode");
+    icon = getIntent().getExtras().getInt("icon");
+
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain domain = new PlayerDomain(DOMAIN);
@@ -61,8 +65,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
     actionBar.setTitle(R.string.app_name);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-    // Setup castView
-    buildThumbnailMap();
 
     setupCastView();
 
@@ -72,23 +74,11 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
     }
   }
 
-  private void buildThumbnailMap() {
-    thumbnailMap = new HashMap<String, Integer>();
-    thumbnailMap.put("wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV", R.drawable.chromecast_test_1);
-    thumbnailMap.put("IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm", R.drawable.dog_movie);
-    thumbnailMap.put("xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS", R.drawable.happy_fit2);
-    thumbnailMap.put("Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc", R.drawable.weird_dad);
-    thumbnailMap.put("o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP", R.drawable.heinz);
-    thumbnailMap.put("FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ", R.drawable.clear_ehls_high);
-    thumbnailMap.put("MyZjYydTqIR435DzaFUqqrrRg8HdQypx", R.drawable.clear_ehls_high);
-    thumbnailMap.put("Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos", R.drawable.elephants_dream);
-  }
-
   private void setupCastView() {
     castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
 
     final ImageView castBackgroundImage = (ImageView) castView.findViewById(R.id.castBackgroundImage);
-    castBackgroundImage.setImageResource(thumbnailMap.get(embedCode));
+    castBackgroundImage.setImageResource(icon);
     TextView videoTitle = (TextView) castView.findViewById(R.id.videoTitle);
     videoTitle.setText("TITLE");
     TextView videoDescription = (TextView) castView.findViewById(R.id.videoDescription);

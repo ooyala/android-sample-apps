@@ -10,11 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.castsdk.CastMiniController;
-import com.ooyala.android.util.DebugMode;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class ChromecastListActivity extends ActionBarActivity {
   private CastMiniController defualtMiniController;
   private CastMiniController customizedMiniController;
   private List<Integer> castViewImages;
-  ListView _listView;
+  Video[] videoList;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -41,53 +41,33 @@ public class ChromecastListActivity extends ActionBarActivity {
     castManager.setStopOnDisconnect(false);
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
-    
-    Video videoList[] = new Video[] {
-        new Video(R.drawable.chromecast_test_1, "CHROMECAST TEST1"),
-        new Video(R.drawable.dog_movie, "DOGMOVIE"),
-        new Video(R.drawable.happy_fit2, "HAPPYFIT2"),
-        new Video(R.drawable.weird_dad, "WEIRDAD"),
-        new Video(R.drawable.heinz, "HEINZ"),
-        new Video(R.drawable.clear_ehls_high, "remote_hls_baseline_vod"),
-        new Video(R.drawable.clear_ehls_high, "clear_ehls_high"),
-        new Video(R.drawable.elephants_dream, "ElephantsDream (HLS high Does not work.)")
+
+    videoList = new Video[] {
+        new Video(R.drawable.chromecast_test_1, "HLS Asset(modified listview)", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
+        new Video(R.drawable.dog_movie, "DOGMOVIE", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm"),
+        new Video(R.drawable.happy_fit2, "HAPPYFIT2", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS"),
+        new Video(R.drawable.weird_dad, "WEIRDAD", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc"),
+        new Video(R.drawable.heinz, "HEINZ", "o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP"),
+        new Video(R.drawable.clear_ehls_high, "remote_hls_baseline_vod", "FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ"),
+        new Video(R.drawable.clear_ehls_high, "clear_ehls_high", "MyZjYydTqIR435DzaFUqqrrRg8HdQypx"),
+        new Video(R.drawable.elephants_dream, "ElephantsDream (HLS high Does not work.)", "Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos")
     };
+    //Create the adapter for the ListView
+    ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
+    for(Video video : videoList) {
+      selectionAdapter.add(video.title);
+    }
+    selectionAdapter.notifyDataSetChanged();
 
-    VideoListAdapter adapter = new VideoListAdapter(this, R.layout.listview_item_row, videoList);
-    
-    _listView = (ListView) findViewById(R.id.listView);
-    _listView.setAdapter(adapter);
-
-
+    ListView listView = (ListView) findViewById(R.id.listView);
+    listView.setAdapter(selectionAdapter);
 
     final Intent intent = new Intent(this, ChromecastPlayerActivity.class);
-    _listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      
+    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // TODO Auto-generated method stub
-        if (position == 0) {
-          // smooth asset
-          intent.putExtra("embedcode", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV");
-        } else if (position == 1) {
-          intent.putExtra("embedcode", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm");
-        } else if (position == 2) {
-          intent.putExtra("embedcode", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS");
-        } else if (position == 3) {
-          intent.putExtra("embedcode", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc");
-        } else if (position == 4) {
-          intent.putExtra("embedcode", "o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP");
-        } else if (position == 5) {
-          // HLS baseline
-          intent.putExtra("embedcode", "FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ");
-        } else if (position == 6) {
-          // eHLS baseline
-          intent.putExtra("embedcode", "MyZjYydTqIR435DzaFUqqrrRg8HdQypx");
-        } else {
-          // HLS high
-          // locally but not receiver side
-          intent.putExtra("embedcode", "Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos");
-        }
+        intent.putExtra("embedcode",videoList[position].embedCode);
+        intent.putExtra("icon",videoList[position].icon);
         startActivity(intent);
       }
     });
