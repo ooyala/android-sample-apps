@@ -21,8 +21,11 @@ import java.util.Observer;
 
 /**
  * This activity illustrates how you use Ooyala Player Token.
- * Ooyala Player Token can also be used in conjunction with Device Management, Concurrent Streams,
- * and Entitlements security mechanisms
+ * Ooyala Player Token can also be used in conjunction with the following security mechanisms
+ * 1) Device Management,
+ * 2) Concurrent Streams,
+ * 3) Entitlements, and
+ * 4) Stream Takedown
  *
  * This activity will NOT Playback any video.  You will need to:
  *  1) provide your own embed code, restricted with Ooyala Player Token
