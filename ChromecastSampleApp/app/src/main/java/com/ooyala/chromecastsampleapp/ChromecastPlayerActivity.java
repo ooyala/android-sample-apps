@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class ChromecastPlayerActivity extends ActionBarActivity {
   
-  private static final String TAG = "PlayerStartingActivity";
+  private static final String TAG = "ChromecastPlayerActivity";
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";

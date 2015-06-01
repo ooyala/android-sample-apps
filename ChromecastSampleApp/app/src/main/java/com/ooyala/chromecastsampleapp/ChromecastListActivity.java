@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.castsdk.CastMiniController;
+import com.ooyala.android.util.DebugMode;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ChromecastListActivity extends ActionBarActivity {
   public static int activatedActivity = 0;
   
   private RemoteControlClient remoteControlClient;
-  private static final String TAG = "ChromscastSampleAppActivty";
+  private static final String TAG = "ChromecastListActivity";
   private final String NAMESPACE = "urn:x-cast:ooyala";
   private final String APP_ID = "4172C76F";
   private CastManager castManager;
