@@ -58,10 +58,10 @@ public class NielsenSampleAppActivity extends Activity implements Observer, IApp
   public final static int OPTOUT_REQUEST_CODE = 100;
 
   private final static String TAG = NielsenSampleAppActivity.class.getSimpleName();
-  private final static String PCODE = "42Zms6h4wdcI1R1uFzepD-KZ0kkk";
-  private final static String DOMAIN = "http://www.ooyala.com";
-  private final static String NIELSEN_SFCODE = "UAT-CERT";
-  private final static String NIELSEN_APPID = "T70BC66D4-C904-4DA1-AB9D-BB658F70E9A7";
+  private final static String PCODE = "<set-me>";
+  private final static String DOMAIN = "<set-me>";
+  private final static String NIELSEN_SFCODE = "<set-me>";
+  private final static String NIELSEN_APPID = "<set-me>";
 
   private Spinner embedSpinner;
   private HashMap<String, String> embedMap;
