@@ -11,27 +11,37 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ooyala.android.EmbedTokenGenerator;
+import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
+import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ChromecastPlayerActivity extends ActionBarActivity {
+public class ChromecastPlayerActivity extends ActionBarActivity implements EmbedTokenGenerator{
   
   private static final String TAG = "ChromecastPlayerActivity";
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
   private int icon;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
+  final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
   final String DOMAIN = "http://www.ooyala.com";
   private OoyalaPlayer player;
   private CastManager castManager;
   private View castView;
-  private Map<String, Integer> thumbnailMap;
+  private final String ACCOUNT_ID = "accountID";
+  /*
+   * The API Key and Secret should not be saved inside your applciation (even in git!).
+   * However, for debugging you can use them to locally generate Ooyala Player Tokens.
+   */
+  private final String APIKEY = "fill me in";
+  private final String SECRET = "fill me in";
 
   /**
    * Called when the activity is first created.
@@ -48,7 +58,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    player = new OoyalaPlayer(PCODE, domain);
+    player = new OoyalaPlayer(PCODE, domain, this, null);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     // Initialize CastManager
@@ -179,6 +189,32 @@ public class ChromecastPlayerActivity extends ActionBarActivity {
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }
+  }
+  /*
+    * Get the Ooyala Player Token to play the embed code.
+    * This should contact your servers to generate the OPT server-side.
+    * For debugging, you can use Ooyala's EmbeddedSecureURLGenerator to create local embed tokens
+    */
+  @Override
+  public void getTokenForEmbedCodes(List<String> embedCodes,
+                                    EmbedTokenGeneratorCallback callback) {
+    String embedCodesString = "";
+    for (String ec : embedCodes) {
+      if(ec.equals("")) embedCodesString += ",";
+      embedCodesString += ec;
+    }
+
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("account_id", ACCOUNT_ID);
+
+    String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
+
+    //In 4.3.0, this class will be public in the com.ooyala.android package
+    EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
+
+    URL tokenUrl  = urlGen.secureURL("http://player.ooyala.com", uri, params);
+
+    callback.setEmbedToken(tokenUrl.toString());
   }
 
 }

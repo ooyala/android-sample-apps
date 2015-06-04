@@ -43,6 +43,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
     videoList = new Video[] {
+        new Video(R.drawable.chromecast_test_1, "Ooyala Player Token", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
         new Video(R.drawable.chromecast_test_1, "HLS Asset(modified listview)", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
         new Video(R.drawable.dog_movie, "DOGMOVIE", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm"),
         new Video(R.drawable.happy_fit2, "HAPPYFIT2", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS"),
