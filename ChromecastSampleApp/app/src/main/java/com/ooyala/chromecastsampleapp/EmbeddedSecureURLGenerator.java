@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-class EmbeddedSecureURLGenerator implements SecureURLGenerator {
+public class EmbeddedSecureURLGenerator implements SecureURLGenerator {
   static final String KEY_API_KEY = "api_key";
   static final String KEY_DEVICE = "device";
 

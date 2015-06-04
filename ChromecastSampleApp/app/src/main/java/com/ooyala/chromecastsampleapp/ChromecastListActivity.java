@@ -30,7 +30,7 @@ public class ChromecastListActivity extends ActionBarActivity {
   private CastMiniController defualtMiniController;
   private CastMiniController customizedMiniController;
   private List<Integer> castViewImages;
-  Video[] videoList;
+  ChromecastPlayerSelectionOption[] videoList;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -42,20 +42,20 @@ public class ChromecastListActivity extends ActionBarActivity {
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
-    videoList = new Video[] {
-        new Video(R.drawable.chromecast_test_1, "Ooyala Player Token", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
-        new Video(R.drawable.chromecast_test_1, "HLS Asset(modified listview)", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
-        new Video(R.drawable.dog_movie, "DOGMOVIE", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm"),
-        new Video(R.drawable.happy_fit2, "HAPPYFIT2", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS"),
-        new Video(R.drawable.weird_dad, "WEIRDAD", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc"),
-        new Video(R.drawable.heinz, "HEINZ", "o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP"),
-        new Video(R.drawable.clear_ehls_high, "remote_hls_baseline_vod", "FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ"),
-        new Video(R.drawable.clear_ehls_high, "clear_ehls_high", "MyZjYydTqIR435DzaFUqqrrRg8HdQypx"),
-        new Video(R.drawable.elephants_dream, "ElephantsDream (HLS high Does not work.)", "Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos")
+    videoList = new ChromecastPlayerSelectionOption[] {
+        new ChromecastPlayerSelectionOption("Ooyala Player Token", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
+        new ChromecastPlayerSelectionOption("HLS Asset(modified listview)", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
+        new ChromecastPlayerSelectionOption("DOGMOVIE", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm"),
+        new ChromecastPlayerSelectionOption("HAPPYFIT2", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS"),
+        new ChromecastPlayerSelectionOption("WEIRDAD", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc"),
+        new ChromecastPlayerSelectionOption("HEINZ", "o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP"),
+        new ChromecastPlayerSelectionOption("remote_hls_baseline_vod", "FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ"),
+        new ChromecastPlayerSelectionOption("clear_ehls_high", "MyZjYydTqIR435DzaFUqqrrRg8HdQypx"),
+        new ChromecastPlayerSelectionOption("ElephantsDream (HLS high Does not work.)", "Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos")
     };
     //Create the adapter for the ListView
     ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
-    for(Video video : videoList) {
+    for(ChromecastPlayerSelectionOption video : videoList) {
       selectionAdapter.add(video.title);
     }
     selectionAdapter.notifyDataSetChanged();
@@ -68,7 +68,6 @@ public class ChromecastListActivity extends ActionBarActivity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent.putExtra("embedcode",videoList[position].embedCode);
-        intent.putExtra("icon",videoList[position].icon);
         startActivity(intent);
       }
     });

@@ -2,6 +2,7 @@ package com.ooyala.chromecastsampleapp;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -17,19 +18,20 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
+import com.ooyala.android.item.*;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ChromecastPlayerActivity extends ActionBarActivity implements EmbedTokenGenerator{
+public class ChromecastPlayerActivity extends ActionBarActivity implements EmbedTokenGenerator, Observer{
   
-  private static final String TAG = "ChromecastPlayerActivity";
+  private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
-  private int icon;
   final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
   final String DOMAIN = "http://www.ooyala.com";
   private OoyalaPlayer player;
@@ -53,7 +55,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
     embedCode = getIntent().getExtras().getString("embedcode");
-    icon = getIntent().getExtras().getInt("icon");
 
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
@@ -75,28 +76,17 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     actionBar.setTitle(R.string.app_name);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+    castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
+    castManager.setCastView(castView);
 
-    setupCastView();
 
+
+    player.addObserver(this);
     player.setEmbedCode(embedCode);
     if (!castManager.isInCastMode()) {
       player.play();
     }
   }
-
-  private void setupCastView() {
-    castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
-
-    final ImageView castBackgroundImage = (ImageView) castView.findViewById(R.id.castBackgroundImage);
-    castBackgroundImage.setImageResource(icon);
-    TextView videoTitle = (TextView) castView.findViewById(R.id.videoTitle);
-    videoTitle.setText("TITLE");
-    TextView videoDescription = (TextView) castView.findViewById(R.id.videoDescription);
-    videoDescription.setText("VIDEO DESCRIPTION");
-
-    castManager.setCastView(castView);
-  }
-
 
   @Override
   public void onPause() {
@@ -184,12 +174,60 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
       return;
     }
     try {
-      Log.d(TAG, "Increase DeviceVolume!!!!!!!!!!!" + volumeIncrement);
+      Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
       castManager.incrementDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }
   }
+
+
+  /**
+   * Listen to all notifications from the OoyalaPlayer
+   */
+  @Override
+  public void update(Observable arg0, Object arg1) {
+    if (arg0 != player) {
+      return;
+    }
+
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+      return;
+    }
+
+    if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION) {
+      configureCastPlaybackViewBasedOnItem(player.getCurrentItem());
+    } else if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION) {
+      final String msg = "Error Event Received";
+      if (player != null && player.getError() != null) {
+        Log.e(TAG, msg, player.getError());
+      }
+      else {
+        Log.e(TAG, msg);
+      }
+    }
+
+    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+  }
+
+  /**
+   * Configure the information on the CastView whenever a new video is put into the OoyalaPlayer
+   * @param video
+   */
+  private void configureCastPlaybackViewBasedOnItem(Video video) {
+    final ImageView castBackgroundImage = (ImageView) castView.findViewById(R.id.castBackgroundImage);
+
+    // Update the ImageView on a separate thread
+
+    new Thread(new UpdateImageViewRunnable(castBackgroundImage, video.getPromoImageURL(0, 0))).start();
+
+    TextView videoTitle = (TextView) castView.findViewById(R.id.videoTitle);
+    videoTitle.setText(video.getTitle());
+
+    TextView videoDescription = (TextView) castView.findViewById(R.id.videoDescription);
+    videoDescription.setText(video.getDescription());
+  }
+
   /*
     * Get the Ooyala Player Token to play the embed code.
     * This should contact your servers to generate the OPT server-side.

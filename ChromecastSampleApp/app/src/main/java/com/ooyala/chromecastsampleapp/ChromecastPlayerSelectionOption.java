@@ -1,17 +1,11 @@
 package com.ooyala.chromecastsampleapp;
 
-public class Video {
+public class ChromecastPlayerSelectionOption {
   public String title;
-  public int icon;
   public String embedCode;
 
-  public Video() {
+  public ChromecastPlayerSelectionOption(String title, String embedCode) {
     super();
-  }
-
-  public Video(int icon, String title, String embedCode) {
-    super();
-    this.icon = icon;
     this.title = title;
     this.embedCode = embedCode;
   }

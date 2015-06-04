@@ -7,11 +7,11 @@
         android:id="@+id/castBackgroundImage"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="40dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:src="@drawable/heinz"
         android:alpha="0.5"
-        android:scaleType="centerCrop"></ImageView>
+        android:scaleType="fitCenter"></ImageView>
     
     <TextView
         android:id="@+id/videoTitle"

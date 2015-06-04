@@ -6,7 +6,7 @@ import com.ooyala.android.SignatureGenerator;
 
 import java.security.MessageDigest;
 
-class EmbeddedSignatureGenerator implements SignatureGenerator {
+public class EmbeddedSignatureGenerator implements SignatureGenerator {
   private String _secret = null;
 
   public EmbeddedSignatureGenerator(String secret) {
