@@ -44,7 +44,7 @@ public class ChromecastListActivity extends ActionBarActivity {
 
     videoList = new ChromecastPlayerSelectionOption[] {
         new ChromecastPlayerSelectionOption("Ooyala Player Token", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
-        new ChromecastPlayerSelectionOption("HLS Asset(modified listview)", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
+        new ChromecastPlayerSelectionOption("HLS Asset", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
         new ChromecastPlayerSelectionOption("DOGMOVIE", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm"),
         new ChromecastPlayerSelectionOption("HAPPYFIT2", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS"),
         new ChromecastPlayerSelectionOption("WEIRDAD", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc"),
