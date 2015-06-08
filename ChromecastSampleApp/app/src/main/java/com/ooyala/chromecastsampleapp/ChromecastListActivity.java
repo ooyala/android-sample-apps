@@ -43,15 +43,16 @@ public class ChromecastListActivity extends ActionBarActivity {
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
     videoList = new ChromecastPlayerSelectionOption[] {
-        new ChromecastPlayerSelectionOption("Ooyala Player Token", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
-        new ChromecastPlayerSelectionOption("HLS Asset", "wxaWd5bTrJFI--Ga7TgbJtzcPrbzENBV"),
-        new ChromecastPlayerSelectionOption("DOGMOVIE", "IzNGg3bzoHHjEfnJP-fj2jB0-oci0Jnm"),
-        new ChromecastPlayerSelectionOption("HAPPYFIT2", "xiNmg3bzpFkkwsYqkb5UtGvNOpcwiOCS"),
-        new ChromecastPlayerSelectionOption("WEIRDAD", "Y4OWg3bzoNtSZ9TOg3wl9BPUspXZiMYc"),
-        new ChromecastPlayerSelectionOption("HEINZ", "o0OWg3bzrLBNfadaXSaCA7HbknPLFRPP"),
-        new ChromecastPlayerSelectionOption("remote_hls_baseline_vod", "FndjQydTr_aPzVwEEGDSR9CwzIPWjAlQ"),
-        new ChromecastPlayerSelectionOption("clear_ehls_high", "MyZjYydTqIR435DzaFUqqrrRg8HdQypx"),
-        new ChromecastPlayerSelectionOption("ElephantsDream (HLS high Does not work.)", "Nqc2d4bzoG4MidnEcgKAwVqWd_ug3Hos")
+        new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1"),
+        new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx"),
+        new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-"),
+        new ChromecastPlayerSelectionOption("4:3 Aspect Ratio", "FwaXZjcjrkydIftLal2cq9ymQMuvjvD8"),
+
+        //This asset will not be configured correctly. To test your OPT-enabled assets, you need:
+        // 1. an OPT-enabled embed code (set here)
+        // 2. the correlating PCode (set in the PlayerViewController)
+        // 3. an API Key and Secret for the provider to locally-sign the authorization (set in the PlayerViewController)
+        new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
     };
     //Create the adapter for the ListView
     ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
