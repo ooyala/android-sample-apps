@@ -46,7 +46,6 @@ public class ChromecastListActivity extends ActionBarActivity {
         new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1"),
         new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx"),
         new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-"),
-        new ChromecastPlayerSelectionOption("4:3 Aspect Ratio", "FwaXZjcjrkydIftLal2cq9ymQMuvjvD8"),
 
         //This asset will not be configured correctly. To test your OPT-enabled assets, you need:
         // 1. an OPT-enabled embed code (set here)
