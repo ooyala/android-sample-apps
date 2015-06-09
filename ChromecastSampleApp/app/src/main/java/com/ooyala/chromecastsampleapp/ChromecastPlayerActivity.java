@@ -83,9 +83,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
 
     player.addObserver(this);
     player.setEmbedCode(embedCode);
-    if (!castManager.isInCastMode()) {
-      player.play();
-    }
+    player.play();
   }
 
   @Override
