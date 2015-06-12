@@ -1,4 +1,4 @@
-package com.ooyala.chromecastsampleapp;
+package com.ooyala.sample.ChromecastSampleApp;
 
 import android.content.Context;
 import android.content.Intent;

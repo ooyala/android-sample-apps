@@ -12,13 +12,13 @@
         android:visibility="gone" >
     </com.ooyala.android.castsdk.DefaultCastMiniController>
 
-    <!--<com.ooyala.chromecastsampleapp.CustomizedMiniController-->
+    <!--<com.ooyala.sample.chromecastsampleapp.CustomizedMiniController-->
         <!--android:id="@+id/miniController2"-->
         <!--android:layout_width="fill_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:background="@drawable/shadow7"-->
         <!--android:visibility="gone" >-->
-    <!--</com.ooyala.chromecastsampleapp.CustomizedMiniController>-->
+    <!--</com.ooyala.sample.chromecastsampleapp.CustomizedMiniController>-->
 
     <ListView android:id="@+id/listView"
               android:layout_height="wrap_content"

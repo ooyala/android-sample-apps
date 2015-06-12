@@ -1,4 +1,4 @@
-package com.ooyala.chromecastsampleapp;
+package com.ooyala.sample.ChromecastSampleApp;
 
 import com.ooyala.android.SecureURLGenerator;
 import com.ooyala.android.SignatureGenerator;

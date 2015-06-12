@@ -1,4 +1,4 @@
-package com.ooyala.chromecastsampleapp;
+package com.ooyala.sample.ChromecastSampleApp;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
