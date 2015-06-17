@@ -33,7 +33,9 @@ public class UpdateImageViewRunnable implements Runnable {
     Handler handler = new Handler(Looper.getMainLooper());
     handler.post(new Runnable() {
       public void run() {
-        view.setImageBitmap(bitmap);
+        if (bitmap != null) {
+          view.setImageBitmap(bitmap);
+        }
       }
     });
   }
