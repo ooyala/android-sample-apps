@@ -31,7 +31,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.5.87'
     compile project(':CastCompanionLibrary')
     compile(name:'OoyalaCastSDK', ext:'aar')
-    compile(name:'OoyalaSDK', ext:'aar')
+    compile(name:'OoyalaSDK')
 
 //    compile project(':ooyalaCoreSDK')
 //    compile project(':ooyalaCastSDK')
