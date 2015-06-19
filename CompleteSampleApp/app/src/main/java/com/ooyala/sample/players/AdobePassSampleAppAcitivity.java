@@ -19,17 +19,12 @@ import java.util.Observer;
 
 
 public class AdobePassSampleAppAcitivity extends Activity implements OnAuthorizationChangedListener, Observer {
-
-  private AdobePassLoginController adobePassController;
-
-  public final static String getName() {
-    return "AdobePass Player";
-  }
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
   final String PCODE  = "pqdHc6rN2_wYW2z-pOmDqkUmMnI1";
   final String DOMAIN = "http://www.ooyala.com";
+  private AdobePassLoginController adobePassController;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -40,13 +35,11 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_double_button_layout);
+    setTitle(getIntent().getExtras().getString("selection_name"));
 
     adobePassController = new AdobePassLoginController(this, "ooyala",
         getResources().openRawResource(R.raw.adobepass), "adobepass", this);
     adobePassController.checkAuth();
-
-    setTitle(getName());
-    setContentView(R.layout.player_double_button_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
 
