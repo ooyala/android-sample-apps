@@ -66,7 +66,7 @@ public class VisualOnOptionsPlayerActivity extends Activity implements Observer 
     VisualOnConfiguration.Builder voConfigBuilder = new VisualOnConfiguration.Builder();
 
     // The target bitrate to start video playback
-    voConfigBuilder.setInitialBitrate(1200);
+    voConfigBuilder.setInitialBitrate(600);
 
     // The upper and lower bounds of bitrates that should be selected
     voConfigBuilder.setLowerBitrateThreshold(200).setUpperBitrateThreshold(1400);
