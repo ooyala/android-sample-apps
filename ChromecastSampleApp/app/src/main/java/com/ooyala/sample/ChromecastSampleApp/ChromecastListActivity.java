@@ -43,18 +43,21 @@ public class ChromecastListActivity extends ActionBarActivity {
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
     videoList = new ChromecastPlayerSelectionOption[] {
-        new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1"),
-        new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx"),
-        new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww"),
-        new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-"),
+        new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
         // Will play Playready Smooth on Chromecast, Clear HLS on device
-        new ChromecastPlayerSelectionOption("Playready Smooth, Clear HLS Backup", "pkMm1rdTqIAxx9DQ4-8Hyp9P_AHRe4pt"),
+        new ChromecastPlayerSelectionOption("Playready Smooth, Clear HLS Backup", "pkMm1rdTqIAxx9DQ4-8Hyp9P_AHRe4pt", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
 
-        //This asset will not be configured correctly. To test your OPT-enabled assets, you need:
+
+        //These asset will not be configured correctly. To test your OPT-enabled assets, you need:
         // 1. an OPT-enabled embed code (set here)
         // 2. the correlating PCode (set in the PlayerViewController)
         // 3. an API Key and Secret for the provider to locally-sign the authorization (set in the PlayerViewController)
-        new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
+        new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("Concurrent Streams (unconfigured)", "pwc3J0dTpAL7gMLFNVt2ks2v8j3qOKCS", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+
     };
     //Create the adapter for the ListView
     ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
@@ -71,6 +74,8 @@ public class ChromecastListActivity extends ActionBarActivity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent.putExtra("embedcode",videoList[position].embedCode);
+        intent.putExtra("pcode",videoList[position].pcode);
+        intent.putExtra("domain",videoList[position].domain);
         startActivity(intent);
       }
     });

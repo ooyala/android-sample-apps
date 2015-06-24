@@ -31,8 +31,8 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
-  final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
-  final String DOMAIN = "http://www.ooyala.com";
+  private String pcode;
+  private String domain;
   private OoyalaPlayer player;
   private CastManager castManager;
   private View castView;
@@ -54,11 +54,13 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
     embedCode = getIntent().getExtras().getString("embedcode");
+    pcode = getIntent().getExtras().getString("pcode");
+    domain = getIntent().getExtras().getString("domain");
 
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    player = new OoyalaPlayer(PCODE, domain, this, null);
+    PlayerDomain playerDomain = new PlayerDomain(domain);
+    player = new OoyalaPlayer(pcode, playerDomain, this, null);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     // Initialize CastManager
@@ -243,7 +245,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     HashMap<String, String> params = new HashMap<String, String>();
     params.put("account_id", ACCOUNT_ID);
 
-    String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
+    String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
 
     //In 4.3.0, this class will be public in the com.ooyala.android package
     EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
