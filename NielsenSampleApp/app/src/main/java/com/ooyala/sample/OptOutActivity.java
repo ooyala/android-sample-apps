@@ -1,4 +1,4 @@
-package com.ooyala.android.nielsensample;
+package com.ooyala.sample;
 
 // taken from Nielsen sample app.
 
@@ -14,10 +14,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import com.ooyala.android.util.DebugMode;
+import com.ooyala.sample.players.NielsenDefaultPlayerActivity;
+
 import java.util.Arrays;
 
 public class OptOutActivity extends Activity {
   private static final String TAG = OptOutActivity.class.getSimpleName();
+  public final static String OPT_OUT_URL_EXTRAS_KEY = "opt_out_url";
+  public final static String OPT_OUT_RESULT_KEY = "opt_out_result";
+  public final static int OPTOUT_REQUEST_CODE = 100;
 
   private WebView webView;
 
@@ -36,7 +41,7 @@ public class OptOutActivity extends Activity {
 
     final Bundle extras = getIntent().getExtras();
 
-    String url = extras.getString(NielsenSampleAppActivity.OPT_OUT_URL_EXTRAS_KEY);
+    String url = extras.getString(OPT_OUT_URL_EXTRAS_KEY);
     webView = (WebView) findViewById(R.id.webView);
     webView.getSettings().setJavaScriptEnabled(true);
 
@@ -58,7 +63,7 @@ public class OptOutActivity extends Activity {
   {
     Log.d( TAG, "bailOut: result = " + result + ", from " + Arrays.toString( Thread.currentThread().getStackTrace() ) );
     Intent i = new Intent();
-    i.putExtra(NielsenSampleAppActivity.OPT_OUT_RESULT_KEY, result);
+    i.putExtra(OPT_OUT_RESULT_KEY, result);
     setResult( RESULT_OK, i );
     finish();
   }
@@ -72,14 +77,14 @@ public class OptOutActivity extends Activity {
   protected void onStop() {
     DebugMode.logD( TAG, "onStop" );
     super.onStop();
-    NielsenSampleAppActivity.decrementRunningActivityCount();
+    NielsenDefaultPlayerActivity.decrementRunningActivityCount();
   }
 
   @Override
   protected void onStart() {
     DebugMode.logD( TAG, "onStart" );
     super.onStart();
-    NielsenSampleAppActivity.incrementRunningActivityCount();
+    NielsenDefaultPlayerActivity.incrementRunningActivityCount();
   }
 
   private class MonitorWebView extends WebViewClient
