@@ -80,6 +80,11 @@ public class SampleAdPlayer extends TextView implements PlayerInterface,
   }
 
   @Override
+  public void setClosedCaptionsLanguage(String s) {
+    
+  }
+
+  @Override
   public void pause() {
 
   }

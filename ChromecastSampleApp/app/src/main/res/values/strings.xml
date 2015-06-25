@@ -1,0 +1,5 @@
+<resources>
+  <string name="hello">Hello World, ChromecastSampleAppActivity!</string>
+  <string name="app_name">Ooyala Chromecast Sample App</string>
+  <string name="media_route_menu_title">Play on..</string>
+</resources>
