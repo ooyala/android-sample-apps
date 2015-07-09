@@ -6,12 +6,12 @@ import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
+import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -20,26 +20,18 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you use Ooyala Player Token.
- * Ooyala Player Token can also be used in conjunction with the following security mechanisms
- * 1) Device Management,
- * 2) Concurrent Streams,
- * 3) Entitlements, and
- * 4) Stream Takedown
+ * This activity illustrates how you enable SecurePlayer video playback.
+ * This activity contains code to generate local Ooyala Player Tokens, to more easily test DRM'ed
+ * assets
  *
- * This activity will NOT Playback any video.  You will need to:
- *  1) provide your own embed code, restricted with Ooyala Player Token
- *  2) provide your own PCODE, which owns the embed code
- *  3) have your API Key and Secret, which correlate to a user from the provider
- *
- * To play OPT-enabled videos, you must implement the EmbedTokenGenerator interface
+ * While this Player is not actively used in the SecurePlayerSampleApp, you can modify the
+ * ListActivity to use this Player instead of the default.
  */
-public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observer, EmbedTokenGenerator {
+public class SecurePlayerOPTPlayerActivity extends Activity implements Observer, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  private final String ACCOUNT_ID = "accountID";
+  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
   final String DOMAIN = "http://www.ooyala.com";
 
   /*
@@ -48,6 +40,9 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
    */
   private final String APIKEY = "Use this for testing, don't keep your secret in the application";
   private final String SECRET = "Use this for testing, don't keep your secret in the application";
+
+  // An account ID, if you are using Concurrent Streams or Entitlements
+  private final String ACCOUNT_ID = "accountID";
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -64,9 +59,11 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
-    //Need to pass `this` as the embedTokenGenerator
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), this, null);
+
+    OoyalaPlayer.enableCustomHLSPlayer = true;
+    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
+
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
@@ -133,23 +130,23 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
                                     EmbedTokenGeneratorCallback callback) {
     String embedCodesString = "";
     for (String ec : embedCodes) {
-      if(ec.equals("")) embedCodesString += ",";
+      if (ec.equals("")) embedCodesString += ",";
       embedCodesString += ec;
     }
 
     HashMap<String, String> params = new HashMap<String, String>();
     params.put("account_id", ACCOUNT_ID);
 
-    // Uncommenting this will bypass all syndication rules on your asset
-    // This will not work unless you have a working API Key and Secret.
-    // This is one reason why you shouldn't keep the Secret in your app/source control
-    // params.put("override_syndication_group", "override_all_synd_groups"); 
+    /* Uncommenting this will bypass all syndication rules on your asset
+       This will not work unless you have a working API Key and Secret.
+       This is one reason why you shouldn't keep the Secret in your app/source control */
+//     params.put("override_syndication_group", "override_all_synd_groups");
 
     String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
 
     EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
 
-    URL tokenUrl  = urlGen.secureURL("http://player.ooyala.com", uri, params);
+    URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
 
     callback.setEmbedToken(tokenUrl.toString());
   }
