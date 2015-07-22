@@ -45,6 +45,9 @@
         <activity android:name="com.ooyala.sample.players.CustomControlsPlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
+        <activity android:name="com.ooyala.sample.players.CustomOverlayPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
         <activity
             android:name="com.ooyala.sample.lists.FreewheelListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >

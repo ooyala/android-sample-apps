@@ -34,12 +34,12 @@ public class ChannelContentTreePlayerActivity extends ListActivity {
   private static final String TAG = "ChannelContentTreePlayerActivity";
 
   public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-
-  public static final String APIKEY = "PUT YOUR APIKEY HERE";
-  public static final String SECRETKEY = "PUT YOUR SECRETKEY HERE";
+;
   public static final String PLAYERDOMAIN = "http://www.ooyala.com";
 
-  public static OoyalaAPIClient api = new OoyalaAPIClient(APIKEY, SECRETKEY, PCODE, new PlayerDomain(PLAYERDOMAIN));
+  // OoyalaAPIClient accepts APIKey and Secret, however this should only be used for debugging only
+  // API Secrets should not be coded into applications, or even saved in Git.
+  public static OoyalaAPIClient api = new OoyalaAPIClient(null, null, PCODE, new PlayerDomain(PLAYERDOMAIN));
 
   private Channel rootItem = null;
 

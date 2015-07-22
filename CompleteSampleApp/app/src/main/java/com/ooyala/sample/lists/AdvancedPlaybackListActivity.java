@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.ChangeVideoPlayerActivity;
 import com.ooyala.sample.players.CustomControlsPlayerActivity;
+import com.ooyala.sample.players.CustomOverlayPlayerActivity;
 import com.ooyala.sample.players.InsertAdPlayerActivity;
 import com.ooyala.sample.players.PlayWithInitialTimePlayerActivity;
 import com.ooyala.sample.players.PluginPlayerActivity;
@@ -43,6 +44,7 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap.put(ChangeVideoPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", ChangeVideoPlayerActivity.class) );
     selectionMap.put(PluginPlayerActivity.getName(), new PlayerSelectionOption("lrZmRiMzrr8cP77PPW0W8AsjjhMJ1BBe", PluginPlayerActivity.class));
     selectionMap.put(CustomControlsPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomControlsPlayerActivity.class) );
+    selectionMap.put(CustomOverlayPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomOverlayPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
