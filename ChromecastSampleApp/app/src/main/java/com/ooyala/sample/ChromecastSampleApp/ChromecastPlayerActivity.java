@@ -62,7 +62,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     // Initialize CastManager
-    castManager = CastManager.initialize(this, "4172C76F", "urn:x-cast:ooyala");
+    castManager = CastManager.getCastManager();
     castManager.destroyNotificationService(this);
     castManager.registerWithOoyalaPlayer(player);
     castManager.setTargetActivity(ChromecastPlayerActivity.class);
