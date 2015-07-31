@@ -96,7 +96,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   protected void onStart() {
     Log.d(TAG, "onStart()");
     super.onStart();
-    castManager.setCurrentContext(this);
   }
 
   @Override
@@ -118,9 +117,10 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
+    castManager.onResume(this);
     castManager.destroyNotificationService(this);
     castManager.unregisterLockScreenControls();
-    castManager.deregisterOoyalaPlayer();
+    castManager.deregisterFromOoyalaPlayer();
     player = null;
     super.onDestroy();
   }
@@ -173,7 +173,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.incrementDeviceVolume(volumeIncrement);
+      castManager.getDataCastManager().incrementDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }

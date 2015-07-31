@@ -38,7 +38,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.start_view);
     castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
-    castManager.setStopOnDisconnect(false);
+    castManager.getDataCastManager().setStopOnDisconnect(false);
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
@@ -117,7 +117,6 @@ public class ChromecastListActivity extends ActionBarActivity {
   protected void onStart() {
     Log.d(TAG, "onStart()");
     super.onStart();
-    castManager.setCurrentContext(this);
   }
   
   @Override
@@ -136,8 +135,8 @@ public class ChromecastListActivity extends ActionBarActivity {
 // Uncomment it if you want to activate the customized sample app in our sample app
 //      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
-      castManager.onResume();
-      castManager.deregisterOoyalaPlayer();
+      castManager.onResume(this);
+      castManager.deregisterFromOoyalaPlayer();
     }
     Log.d(TAG, "onResume()");
   }
