@@ -173,7 +173,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.getDataCastManager().incrementDeviceVolume(volumeIncrement);
+      castManager.getDataCastManager().adjustDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }

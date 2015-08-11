@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
 <resources>
 
-    <string-array name="prefs_volume_names">
-        <item>Device Volume</item>
-        <item>Stream Volume</item>
-    </string-array>
-
-    <string-array name="prefs_caption_font_scale_names">
+    <string-array name="ccl_prefs_caption_font_scale_names">
         <item>Very Small</item>
         <item>Small</item>
         <item>Normal</item>
@@ -14,26 +24,26 @@
         <item>Very Large</item>
     </string-array>
 
-    <string-array name="prefs_caption_font_family_names">
+    <string-array name="ccl_prefs_caption_font_family_names">
         <item>San-serif</item>
         <item>Serif</item>
         <item>Monospace</item>
     </string-array>
 
-    <string-array name="prefs_caption_opacity_names">
+    <string-array name="ccl_prefs_caption_opacity_names">
         <item>25%</item>
         <item>50%</item>
         <item>75%</item>
         <item>100%</item>
     </string-array>
 
-    <string-array name="prefs_caption_edge_type_names">
+    <string-array name="ccl_prefs_caption_edge_type_names">
         <item>None</item>
         <item>Outline</item>
         <item>Drop Shadow</item>
     </string-array>
 
-    <string-array name="prefs_caption_color_names">
+    <string-array name="ccl_prefs_caption_color_names">
         <item>White</item>
         <item>Black</item>
         <item>Red</item>
@@ -45,12 +55,7 @@
     </string-array>
 
     <!-- Do not translate below this line -->
-    <string-array name="prefs_volume_values">
-        <item>device</item>
-        <item>stream</item>
-    </string-array>
-
-    <string-array name="prefs_caption_font_scale_values">
+    <string-array name="ccl_prefs_caption_font_scale_values">
         <item>0.5</item>
         <item>0.75</item>
         <item>1.0</item>
@@ -58,26 +63,26 @@
         <item>2.0</item>
     </string-array>
 
-    <string-array name="prefs_caption_font_family_values">
+    <string-array name="ccl_prefs_caption_font_family_values">
         <item>FONT_FAMILY_SANS_SERIF</item>
         <item>FONT_FAMILY_SERIF</item>
         <item>FONT_FAMILY_MONOSPACED_SANS_SERIF</item>
     </string-array>
 
-    <string-array name="prefs_caption_opacity_values">
+    <string-array name="ccl_prefs_caption_opacity_values">
         <item>3F</item>
         <item>80</item>
         <item>BF</item>
         <item>FF</item>
     </string-array>
 
-    <string-array name="prefs_caption_edge_type_values">
+    <string-array name="ccl_prefs_caption_edge_type_values">
         <item>EDGE_TYPE_NONE</item>
         <item>EDGE_TYPE_OUTLINE</item>
         <item>EDGE_TYPE_DROP_SHADOW</item>
     </string-array>
 
-    <string-array name="prefs_caption_color_values">
+    <string-array name="ccl_prefs_caption_color_values">
         <item>#FFFFFF</item> <!-- white -->
         <item>#000000</item> <!-- black -->
         <item>#FF0000</item> <!-- red -->
@@ -87,4 +92,5 @@
         <item>#0000FF</item> <!-- blue -->
         <item>#FF00FF</item> <!-- magenta -->
     </string-array>
+
 </resources>
