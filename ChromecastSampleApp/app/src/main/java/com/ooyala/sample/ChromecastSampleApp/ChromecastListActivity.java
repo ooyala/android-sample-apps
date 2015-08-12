@@ -27,7 +27,7 @@ public class ChromecastListActivity extends ActionBarActivity {
   private final String NAMESPACE = "urn:x-cast:ooyala";
   private final String APP_ID = "4172C76F";
   private CastManager castManager;
-  private CastMiniController defualtMiniController;
+  private CastMiniController defaultMiniController;
   private CastMiniController customizedMiniController;
   private List<Integer> castViewImages;
   ChromecastPlayerSelectionOption[] videoList;
@@ -38,7 +38,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.start_view);
     castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
-    castManager.setStopOnDisconnect(false);
+    castManager.getDataCastManager().setStopOnDisconnect(false);
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
@@ -86,7 +86,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     
     
-    defualtMiniController = (CastMiniController) findViewById(R.id.miniController1);
+    defaultMiniController = (CastMiniController) findViewById(R.id.miniController1);
 
 // Uncomment it if you want to activate the customized sample app in our sample app
 //    customizedMiniController = (OOMiniController) findViewById(R.id.miniController2);
@@ -122,7 +122,6 @@ public class ChromecastListActivity extends ActionBarActivity {
   protected void onStart() {
     Log.d(TAG, "onStart()");
     super.onStart();
-    castManager.setCurrentContext(this);
   }
   
   @Override
@@ -136,13 +135,12 @@ public class ChromecastListActivity extends ActionBarActivity {
     super.onResume();
     ChromecastListActivity.activatedActivity++;
     if (castManager != null && castManager.isInCastMode()){
-      castManager.addMiniController(defualtMiniController);
-      defualtMiniController.show();
+      castManager.addMiniController( defaultMiniController );
+      defaultMiniController.show();
 // Uncomment it if you want to activate the customized sample app in our sample app
 //      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
-      castManager.onResume();
-      castManager.deregisterOoyalaPlayer();
+      castManager.onResume(this);
     }
     Log.d(TAG, "onResume()");
   }
@@ -151,7 +149,8 @@ public class ChromecastListActivity extends ActionBarActivity {
   public void onPause() {
     super.onPause();
     ChromecastListActivity.activatedActivity--;
-    castManager.removeMiniController(defualtMiniController);
+    castManager.removeMiniController( defaultMiniController );
+    defaultMiniController.dismiss();
     Log.d(TAG, "onPause()");
   }
   
