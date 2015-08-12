@@ -91,6 +91,9 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   public void onPause() {
     Log.d(TAG, "onPause()");
     ChromecastListActivity.activatedActivity --;
+    if (player != null) {
+      player.suspend();
+    }
     super.onPause();
   }
   
@@ -135,7 +138,8 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     if (castManager != null && castManager.getCastPlayer() != null) {
       castManager.destroyNotificationService(this);
       castManager.unregisterLockScreenControls();
-    } else if (player != null) {
+    }
+    if (player != null) {
       player.resume();
     }  
   super.onResume();
@@ -175,7 +179,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.getDataCastManager().incrementDeviceVolume(volumeIncrement);
+      castManager.getDataCastManager().adjustDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }
