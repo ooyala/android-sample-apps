@@ -53,10 +53,13 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     // Setup castView
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    embedCode = getIntent().getExtras().getString("embedcode");
-    pcode = getIntent().getExtras().getString("pcode");
-    domain = getIntent().getExtras().getString("domain");
 
+    // onClick of a DefaultMiniController only provides an embedcode through the extras
+    Bundle extras = getIntent().getExtras();
+    embedCode = extras.getString("embedcode");
+    pcode = extras.getString("pcode") != null ? extras.getString("pcode") : "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+    domain = extras.getString("domain") != null ? extras.getString("domain") :  "http://ooyala.com";
+    
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain playerDomain = new PlayerDomain(domain);
