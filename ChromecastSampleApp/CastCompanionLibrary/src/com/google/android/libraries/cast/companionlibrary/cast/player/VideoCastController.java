@@ -30,7 +30,6 @@ public interface VideoCastController {
     int CC_DISABLED = 2;
     int CC_HIDDEN = 3;
 
-
     int NEXT_PREV_VISIBILITY_POLICY_HIDDEN = 1;
     int NEXT_PREV_VISIBILITY_POLICY_DISABLED = 2;
     int NEXT_PREV_VISIBILITY_POLICY_ALWAYS = 3;

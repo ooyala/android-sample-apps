@@ -58,6 +58,19 @@ public class PreferenceAccessor {
     }
 
     /**
+     * Saves an integer value under the provided key in the preference manager. If {@code value}
+     * is {@code null}, then the provided key will be removed from the preferences.
+     */
+    public void saveIntToPreference(String key, Integer value) {
+        if (value == null) {
+            // we want to remove
+            mSharedPreference.edit().remove(key).apply();
+        } else {
+            mSharedPreference.edit().putInt(key, value).apply();
+        }
+    }
+
+    /**
      * Saves a long value under the provided key in the preference manager. If {@code value}
      * is {@code null}, then the provided key will be removed from the preferences.
      */
@@ -106,6 +119,22 @@ public class PreferenceAccessor {
      */
     public float getFloatFromPreference(String key) {
         return mSharedPreference.getFloat(key, Float.MIN_VALUE);
+    }
+
+    /**
+     * Retrieves an integer value from preference manager. If no such key exists, it will return
+     * <code>Integer.MIN_VALUE</code>.
+     */
+    public int getIntFromPreference(String key) {
+        return mSharedPreference.getInt(key, Integer.MIN_VALUE);
+    }
+
+    /**
+     * Retrieves an integer value from preference manager. If no such key exists, it will return
+     * value provided by the {@code defaultValue}.
+     */
+    public int getIntFromPreference(String key, int defaultValue) {
+        return mSharedPreference.getInt(key, defaultValue);
     }
 
     /**

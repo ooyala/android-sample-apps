@@ -16,7 +16,7 @@
   -->
 <resources>
 
-    <string name="ccl_version">2.2</string>
+    <string name="ccl_version">2.3</string>
     <string name="ccl_media_route_menu_title">Play on&#8230;</string>
     <string name="ccl_live">Live</string>
     <string name="ccl_cancel">Cancel</string>
@@ -24,6 +24,7 @@
     <string name="ccl_off">Off</string>
     <string name="ccl_info_na">Information Not Available</string>
     <string name="ccl_pause">Pause</string>
+    <string name="ccl_play">Play</string>
     <string name="ccl_disconnect">Disconnect</string>
     <string name="ccl_none">None</string>
 
