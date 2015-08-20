@@ -16,6 +16,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ChromecastListActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"
                   android:label="@string/app_name" android:textColor="#ffffff"
                   android:launchMode="singleTop">
             <intent-filter>
@@ -27,6 +28,7 @@
 
         <activity
             android:name=".ChromecastPlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" android:textColor="#ffffff"
             android:parentActivityName=".ChromecastListActivity"
             android:launchMode="singleTop">

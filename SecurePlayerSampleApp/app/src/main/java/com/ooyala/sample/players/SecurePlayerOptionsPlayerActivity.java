@@ -67,10 +67,10 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     VisualOnConfiguration.Builder voConfigBuilder = new VisualOnConfiguration.Builder();
 
     // The target bitrate to start video playback
-    voConfigBuilder.setInitialBitrate(1200);
+    voConfigBuilder.setInitialBitrate(1200000);
 
     // The upper and lower bounds of bitrates that should be selected
-    voConfigBuilder.setLowerBitrateThreshold(200).setUpperBitrateThreshold(1400);
+    voConfigBuilder.setLowerBitrateThreshold(200000).setUpperBitrateThreshold(1400000);
 
     // The amount of video in ms to buffer when video is initialized or seeked
     voConfigBuilder.setInitialBufferingTime(10000);

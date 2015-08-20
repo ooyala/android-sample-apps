@@ -5,8 +5,11 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$/../../android-sdk/sdk/ooyalaCastSDK" />
+            <option value="$PROJECT_DIR$/../../android-sdk/sdk/ooyalaCoreSDK" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CastCompanionLibrary" />
             <option value="$PROJECT_DIR$/app" />
@@ -16,4 +19,3 @@
     </option>
   </component>
 </project>
-

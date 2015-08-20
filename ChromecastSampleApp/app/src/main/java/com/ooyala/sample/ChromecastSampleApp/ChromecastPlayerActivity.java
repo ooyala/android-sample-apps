@@ -31,8 +31,8 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
-  final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
-  final String DOMAIN = "http://www.ooyala.com";
+  private String pcode;
+  private String domain;
   private OoyalaPlayer player;
   private CastManager castManager;
   private View castView;
@@ -53,12 +53,17 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     // Setup castView
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    embedCode = getIntent().getExtras().getString("embedcode");
 
+    // onClick of a DefaultMiniController only provides an embedcode through the extras
+    Bundle extras = getIntent().getExtras();
+    embedCode = extras.getString("embedcode");
+    pcode = extras.getString("pcode") != null ? extras.getString("pcode") : "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+    domain = extras.getString("domain") != null ? extras.getString("domain") :  "http://ooyala.com";
+    
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    player = new OoyalaPlayer(PCODE, domain, this, null);
+    PlayerDomain playerDomain = new PlayerDomain(domain);
+    player = new OoyalaPlayer(pcode, playerDomain, this, null);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     // Initialize CastManager
@@ -89,6 +94,9 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   public void onPause() {
     Log.d(TAG, "onPause()");
     ChromecastListActivity.activatedActivity --;
+    if (player != null) {
+      player.suspend();
+    }
     super.onPause();
   }
   
@@ -96,7 +104,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   protected void onStart() {
     Log.d(TAG, "onStart()");
     super.onStart();
-    castManager.setCurrentContext(this);
   }
 
   @Override
@@ -118,9 +125,10 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
+    castManager.onResume(this);
     castManager.destroyNotificationService(this);
     castManager.unregisterLockScreenControls();
-    castManager.deregisterOoyalaPlayer();
+    castManager.deregisterFromOoyalaPlayer();
     player = null;
     super.onDestroy();
   }
@@ -133,7 +141,8 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     if (castManager != null && castManager.getCastPlayer() != null) {
       castManager.destroyNotificationService(this);
       castManager.unregisterLockScreenControls();
-    } else if (player != null) {
+    }
+    if (player != null) {
       player.resume();
     }  
   super.onResume();
@@ -173,7 +182,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.incrementDeviceVolume(volumeIncrement);
+      castManager.getDataCastManager().adjustDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }
@@ -243,7 +252,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     HashMap<String, String> params = new HashMap<String, String>();
     params.put("account_id", ACCOUNT_ID);
 
-    String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
+    String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
 
     //In 4.3.0, this class will be public in the com.ooyala.android package
     EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);

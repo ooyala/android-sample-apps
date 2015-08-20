@@ -27,7 +27,7 @@ public class ChromecastListActivity extends ActionBarActivity {
   private final String NAMESPACE = "urn:x-cast:ooyala";
   private final String APP_ID = "4172C76F";
   private CastManager castManager;
-  private CastMiniController defualtMiniController;
+  private CastMiniController defaultMiniController;
   private CastMiniController customizedMiniController;
   private List<Integer> castViewImages;
   ChromecastPlayerSelectionOption[] videoList;
@@ -38,23 +38,26 @@ public class ChromecastListActivity extends ActionBarActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.start_view);
     castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
-    castManager.setStopOnDisconnect(false);
+    castManager.getDataCastManager().setStopOnDisconnect(false);
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
     videoList = new ChromecastPlayerSelectionOption[] {
-        new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1"),
-        new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx"),
-        new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww"),
-        new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-"),
+        new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
         // Will play Playready Smooth on Chromecast, Clear HLS on device
-        new ChromecastPlayerSelectionOption("Playready Smooth, Clear HLS Backup", "pkMm1rdTqIAxx9DQ4-8Hyp9P_AHRe4pt"),
+        new ChromecastPlayerSelectionOption("Playready Smooth, Clear HLS Backup", "pkMm1rdTqIAxx9DQ4-8Hyp9P_AHRe4pt", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
 
-        //This asset will not be configured correctly. To test your OPT-enabled assets, you need:
+
+        //These asset will not be configured correctly. To test your OPT-enabled assets, you need:
         // 1. an OPT-enabled embed code (set here)
         // 2. the correlating PCode (set in the PlayerViewController)
         // 3. an API Key and Secret for the provider to locally-sign the authorization (set in the PlayerViewController)
-        new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52"),
+        new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+        new ChromecastPlayerSelectionOption("Concurrent Streams (unconfigured)", "pwc3J0dTpAL7gMLFNVt2ks2v8j3qOKCS", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+
     };
     //Create the adapter for the ListView
     ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
@@ -71,6 +74,8 @@ public class ChromecastListActivity extends ActionBarActivity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         intent.putExtra("embedcode",videoList[position].embedCode);
+        intent.putExtra("pcode",videoList[position].pcode);
+        intent.putExtra("domain",videoList[position].domain);
         startActivity(intent);
       }
     });
@@ -81,7 +86,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     
     
-    defualtMiniController = (CastMiniController) findViewById(R.id.miniController1);
+    defaultMiniController = (CastMiniController) findViewById(R.id.miniController1);
 
 // Uncomment it if you want to activate the customized sample app in our sample app
 //    customizedMiniController = (OOMiniController) findViewById(R.id.miniController2);
@@ -117,7 +122,6 @@ public class ChromecastListActivity extends ActionBarActivity {
   protected void onStart() {
     Log.d(TAG, "onStart()");
     super.onStart();
-    castManager.setCurrentContext(this);
   }
   
   @Override
@@ -131,13 +135,12 @@ public class ChromecastListActivity extends ActionBarActivity {
     super.onResume();
     ChromecastListActivity.activatedActivity++;
     if (castManager != null && castManager.isInCastMode()){
-      castManager.addMiniController(defualtMiniController);
-      defualtMiniController.show();
+      castManager.addMiniController( defaultMiniController );
+      defaultMiniController.show();
 // Uncomment it if you want to activate the customized sample app in our sample app
 //      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
-      castManager.onResume();
-      castManager.deregisterOoyalaPlayer();
+      castManager.onResume(this);
     }
     Log.d(TAG, "onResume()");
   }
@@ -146,7 +149,8 @@ public class ChromecastListActivity extends ActionBarActivity {
   public void onPause() {
     super.onPause();
     ChromecastListActivity.activatedActivity--;
-    castManager.removeMiniController(defualtMiniController);
+    castManager.removeMiniController( defaultMiniController );
+    defaultMiniController.dismiss();
     Log.d(TAG, "onPause()");
   }
   
