@@ -37,7 +37,12 @@ public class ChromecastListActivity extends ActionBarActivity {
     Log.d(TAG, "onCreate()");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.start_view);
-    castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
+    try {
+      castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
+    }
+    catch( CastManager.CastManagerInitializationException cie ) {
+      throw new RuntimeException( cie );
+    }
     castManager.getDataCastManager().setStopOnDisconnect(false);
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
