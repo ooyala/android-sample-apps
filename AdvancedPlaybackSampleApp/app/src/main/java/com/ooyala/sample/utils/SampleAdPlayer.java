@@ -11,14 +11,17 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ooyala.android.OoyalaException;
 import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.StateNotifier;
 import com.ooyala.android.player.PlayerInterface;
 import com.ooyala.android.plugin.LifeCycleInterface;
 
-public class SampleAdPlayer extends TextView implements PlayerInterface,
+public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
     LifeCycleInterface {
   private final int DURATION = 5000;
   private final int REFRESH_RATE = 250;
@@ -30,14 +33,17 @@ public class SampleAdPlayer extends TextView implements PlayerInterface,
   private int _playhead = 0;
   private String _adText;
   private Handler _timerHandler;
+  private TextView textView;
 
   public SampleAdPlayer(Context context, StateNotifier notifier,
       ViewGroup parent) {
     super(context);
     this.setLayoutParams(new FrameLayout.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
     this.setBackgroundColor(Color.BLACK);
+    textView = new TextView(context);
+    this.addView(textView);
     parent.addView(this);
     _stateNotifier = notifier;
     _timerHandler = new Handler() {
@@ -80,6 +86,11 @@ public class SampleAdPlayer extends TextView implements PlayerInterface,
   }
 
   @Override
+  public boolean isLiveClosedCaptionsAvailable() {
+    return false;
+  }
+
+  @Override
   public void setClosedCaptionsLanguage(String s) {
     
   }
@@ -119,7 +130,7 @@ public class SampleAdPlayer extends TextView implements PlayerInterface,
   private void refresh() {
     _playhead += REFRESH_RATE;
     String text = _adText + " " + String.valueOf((DURATION - _playhead) / 1000);
-    this.setText(text);
+    textView.setText(text);
     if (_playhead >= DURATION) {
       _timer.cancel();
       _timer = null;
@@ -163,8 +174,11 @@ public class SampleAdPlayer extends TextView implements PlayerInterface,
     } else {
       _adText = "null";
     }
-    this.setText(_adText);
+    textView.setText(_adText);
     _stateNotifier.setState(State.READY);
   }
 
+  public OoyalaException getError() {
+    return null;
+  }
 }
