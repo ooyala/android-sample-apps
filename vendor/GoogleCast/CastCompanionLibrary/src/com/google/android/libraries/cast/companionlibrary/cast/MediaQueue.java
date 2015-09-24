@@ -74,14 +74,24 @@ public class MediaQueue {
         mRepeatMode = repeatMode;
     }
 
+    /**
+     * Returns the size of queue, or 0 if it is {@code null}
+     */
     public final int getCount() {
         return mQueueItems == null || mQueueItems.isEmpty() ? 0 : mQueueItems.size();
     }
 
+    /**
+     * Returns {@code true} if and only if the queue is empty or {@code null}
+     */
     public final boolean isEmpty() {
         return mQueueItems == null || mQueueItems.isEmpty();
     }
 
+    /**
+     * Returns the position of the current item in the queue. If the queue is {@code null}, it
+     * will return {@link #INVALID_POSITION}. If the queue is empty, it returns 0.
+     */
     public final int getCurrentItemPosition() {
         if (mQueueItems == null) {
             return INVALID_POSITION;
@@ -92,22 +102,5 @@ public class MediaQueue {
         }
 
         return mQueueItems.indexOf(mCurrentItem);
-    }
-
-    public static int getPositionInQueue(List<MediaQueueItem> queueList, MediaQueueItem item) {
-        if (item == null) {
-            return INVALID_POSITION;
-        }
-        if (queueList == null || queueList.isEmpty()) {
-            return INVALID_POSITION;
-        }
-
-
-        for(MediaQueueItem queueItem : queueList) {
-            if (queueItem.getItemId() == item.getItemId()) {
-
-            }
-        }
-        return 0;
     }
 }

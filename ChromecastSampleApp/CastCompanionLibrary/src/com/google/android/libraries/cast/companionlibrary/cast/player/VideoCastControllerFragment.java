@@ -63,13 +63,13 @@ import java.util.TimerTask;
 
 /**
  * A fragment that provides a mechanism to retain the state and other needed objects for
- * {@link com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastControllerActivity} (or more generally, for any class implementing
- * {@link com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastController} interface). This can come very handy when set up of that activity
+ * {@link VideoCastControllerActivity} (or more generally, for any class implementing
+ * {@link VideoCastController} interface). This can come very handy when set up of that activity
  * allows for a configuration changes. Most of the logic required for
- * {@link com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastControllerActivity} is maintained in this fragment to enable application
+ * {@link VideoCastControllerActivity} is maintained in this fragment to enable application
  * developers provide a different implementation, if desired.
  * <p/>
- * This fragment also provides an implementation of {@link com.google.android.libraries.cast.companionlibrary.cast.player.MediaAuthListener} which can be useful
+ * This fragment also provides an implementation of {@link MediaAuthListener} which can be useful
  * if a pre-authorization is required for playback of a media.
  */
 public class VideoCastControllerFragment extends Fragment implements
@@ -433,6 +433,7 @@ public class VideoCastControllerFragment extends Fragment implements
 
     private void updatePlayerStatus() {
         int mediaStatus = mCastManager.getPlaybackStatus();
+        mMediaStatus = mCastManager.getMediaStatus();
         LOGD(TAG, "updatePlayerStatus(), state: " + mediaStatus);
         if (mSelectedMedia == null) {
             return;
@@ -469,7 +470,8 @@ public class VideoCastControllerFragment extends Fragment implements
             case MediaStatus.PLAYER_STATE_IDLE:
                 switch (mCastManager.getIdleReason()) {
                     case MediaStatus.IDLE_REASON_FINISHED:
-                        if (!mIsFresh && mMediaStatus.getLoadingItemId() == MediaQueueItem.INVALID_ITEM_ID) {
+                        if (!mIsFresh && mMediaStatus.getLoadingItemId()
+                                == MediaQueueItem.INVALID_ITEM_ID) {
                             mCastController.closeActivity();
                         }
                         break;
@@ -508,9 +510,9 @@ public class VideoCastControllerFragment extends Fragment implements
         super.onResume();
         try {
             if (mCastManager.isRemoteMediaPaused() || mCastManager.isRemoteMediaPlaying()) {
-                if (mCastManager.getRemoteMediaInformation() != null
-                        && mSelectedMedia.getContentId()
-                        .equals(mCastManager.getRemoteMediaInformation().getContentId())) {
+                if (mCastManager.getRemoteMediaInformation() != null && mSelectedMedia
+                        .getContentId().equals(
+                                mCastManager.getRemoteMediaInformation().getContentId())) {
                     mIsFresh = false;
                 }
             }

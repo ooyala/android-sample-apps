@@ -142,7 +142,6 @@ public class VideoCastManager extends BaseCastManager
     public static final String EXTRA_MEDIA = "media";
     public static final String EXTRA_START_POINT = "startPoint";
     public static final String EXTRA_SHOULD_START = "shouldStart";
-    public static final String EXTRA_NEXT_PREVIOUS_VISIBILITY_POLICY = "nextPrevPolicy";
     public static final String EXTRA_CUSTOM_DATA = "customData";
     public static final double DEFAULT_VOLUME_STEP = 0.05;
     private static final long PROGRESS_UPDATE_INTERVAL_MS = TimeUnit.SECONDS.toMillis(1);
@@ -157,8 +156,6 @@ public class VideoCastManager extends BaseCastManager
     private MediaStatus mMediaStatus;
     private Timer mProgressTimer;
     private UpdateProgressTask mProgressTask;
-    private int mNextPreviousVisibilityPolicy
-            = VideoCastController.NEXT_PREV_VISIBILITY_POLICY_DISABLED;
 
     /**
      * Volume can be controlled at two different layers, one is at the "stream" level and one at
@@ -1798,7 +1795,7 @@ public class VideoCastManager extends BaseCastManager
                         @Override
                         public void onPreloadStatusUpdated() {
                             LOGD(TAG,
-                                    "[preload] RemoteMediaPlayer::onPreloadStatusUpdated() is "
+                                    "RemoteMediaPlayer::onPreloadStatusUpdated() is "
                                             + "reached");
                             VideoCastManager.this.onRemoteMediaPreloadStatusUpdated();
                         }
@@ -2877,7 +2874,6 @@ public class VideoCastManager extends BaseCastManager
             case VideoCastController.NEXT_PREV_VISIBILITY_POLICY_DISABLED:
             case VideoCastController.NEXT_PREV_VISIBILITY_POLICY_ALWAYS:
             case VideoCastController.NEXT_PREV_VISIBILITY_POLICY_HIDDEN:
-                mNextPreviousVisibilityPolicy = policy;
                 mPreferenceAccessor.saveIntToPreference(PREFS_KEY_NEXT_PREV_POLICY, policy);
                 return;
             default:

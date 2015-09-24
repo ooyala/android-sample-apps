@@ -22,6 +22,7 @@ Google Interactive Media Ads SDK and is provided under other
 licenses and/or has source available from other locations.
 
 * Apache Commons Lang
+* Jake Wharton, AutoGson
   License: Apache License v. 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html)
   Source code availability: http://commons.apache.org/proper/commons-lang/
 

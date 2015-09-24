@@ -431,12 +431,12 @@ public class MiniController extends RelativeLayout implements IMiniController {
                 throws TransientNetworkDisconnectionException, NoConnectionException;
 
         /**
-         * Is called when the "play" button in the upcoming area is clicked.
+         * Called when the "play" button in the upcoming area is clicked.
          */
         void onUpcomingPlayClicked(View v, MediaQueueItem upcomingItem);
 
         /**
-         * Is called when the "stop" button in the upcoming area is clicked.
+         * Called when the "stop" button in the upcoming area is clicked.
          */
         void onUpcomingStopClicked(View view, MediaQueueItem upcomingItem);
 

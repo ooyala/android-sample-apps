@@ -29,5 +29,5 @@ public interface OnFailedListener {
      * {@link com.google.android.libraries.cast.companionlibrary.cast.BaseCastManager#NO_STATUS_CODE}  //NOLINT
      * would be interpreted as no status code available.
      */
-    public void onFailed(int resourceId, int statusCode);
+    void onFailed(int resourceId, int statusCode);
 }

@@ -43,6 +43,7 @@ import com.google.android.libraries.cast.companionlibrary.utils.Utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RemoteControlClient;
@@ -918,6 +919,17 @@ public abstract class BaseCastManager
 
         for (BaseCastConsumer consumer : mBaseCastConsumers) {
             consumer.onConnectionFailed(result);
+        }
+
+        if (result != null) {
+            PendingIntent pendingIntent = result.getResolution();
+            if (pendingIntent != null) {
+                try {
+                    pendingIntent.send();
+                } catch (PendingIntent.CanceledException e) {
+                    LOGE(TAG, "Failed to show recovery from the recoverable error", e);
+                }
+            }
         }
     }
 

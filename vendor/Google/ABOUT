@@ -5,5 +5,7 @@ Visit https://developers.google.com/interactive-media-ads/
 This product includes software developed by:
  - The Apache Software Foundation (http://www.apache.org/).
    - Apache Commons Lang (http://commons.apache.org/proper/commons-lang/)
+ - Jake Wharton (https://github.com/JakeWharton)
+   - AutoGson (https://gist.github.com/JakeWharton/0d67d01badcee0ae7bc9/)
 
 For source availability and license information see COPYING.

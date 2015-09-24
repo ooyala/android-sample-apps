@@ -140,12 +140,19 @@ public interface VideoCastConsumer extends BaseCastConsumer {
 
     /**
      * A callback to inform the client that pre-loading of a queue item has started
-     * @param item
      */
     void onRemoteMediaPreloadStatusUpdated(MediaQueueItem item);
 
-    void onUpcomingPlayClicked(View v, MediaQueueItem item);
+    /**
+     * A callback to inform the clients that the "Play" button for the upcoming item has been
+     * clicked,
+     */
+    void onUpcomingPlayClicked(View view, MediaQueueItem item);
 
+    /**
+     * A callback to inform the clients thay the "Stop" button for the upcoming item has been
+     * clicked.
+     */
     void onUpcomingStopClicked(View view, MediaQueueItem upcomingItem);
 
     /**
@@ -160,8 +167,4 @@ public interface VideoCastConsumer extends BaseCastConsumer {
      * {@link com.google.android.gms.cast.CastStatusCodes#SUCCESS} signifies a successful request.
      */
     void onMediaQueueOperationResult(int operationId, int statusCode);
-
-
-
-
 }

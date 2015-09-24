@@ -57,7 +57,7 @@ public interface VideoCastController {
 
     /**
      * Assigns a {@link OnVideoCastControllerListener} listener to be notified of the changes in
-     * the {@link }VideoCastController}
+     * the {@link VideoCastController}
      */
     void setOnVideoCastControllerChangedListener(OnVideoCastControllerListener listener);
 
@@ -102,7 +102,28 @@ public interface VideoCastController {
      */
     void setClosedCaptionState(int status);
 
+    /**
+     * Called when the queue items are updated and provides information about the updated size of
+     * the queue and the position of the current item in the queue. This can be useful to update
+     * the UI if the relative position of the current item is relevant (e.g. to disable or hide
+     * "skip next/prev" buttons).
+     */
     void onQueueItemsUpdated(int queueLength, int position);
 
+    /**
+     * Sets the policy for the visibility/status of the Skip Next/Prev buttons. The policy declares
+     * what should the visibility or status of these buttons be when the position of the current
+     * item is at the edges of the queue. For example, if the current item is the last item in the
+     * queue, what should be the visibility or status of the "Skip Next" button. Available policies
+     * are:
+     * <ul>
+     *   <li>{@link VideoCastController#NEXT_PREV_VISIBILITY_POLICY_ALWAYS}: always show the button
+     *   </li>
+     *   <li>{@link VideoCastController#NEXT_PREV_VISIBILITY_POLICY_DISABLED}: disable the button
+     *   </li>
+     *   <li>{@link VideoCastController#NEXT_PREV_VISIBILITY_POLICY_HIDDEN}: hide the button</li>
+     * </ul>
+     * The default behavior is {@link VideoCastController#NEXT_PREV_VISIBILITY_POLICY_DISABLED}
+     */
     void setNextPreviousVisibilityPolicy(int policy);
 }

@@ -23,6 +23,7 @@ import com.google.android.gms.cast.ApplicationMetadata;
 import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.Cast.CastOptions.Builder;
 import com.google.android.gms.cast.CastDevice;
+import com.google.android.gms.cast.CastStatusCodes;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.ResultCallback;
@@ -351,9 +352,22 @@ public class DataCastManager extends BaseCastManager implements Cast.MessageRece
 
     @Override
     public void onApplicationConnectionFailed(int errorCode) {
-        onDeviceSelected(null);
-        for (DataCastConsumer consumer : mDataConsumers) {
-            consumer.onApplicationConnectionFailed(errorCode);
+        if (mReconnectionStatus == RECONNECTION_STATUS_IN_PROGRESS) {
+            if (errorCode == CastStatusCodes.APPLICATION_NOT_RUNNING) {
+                // while trying to re-establish session, we found out that the app is not running
+                // so we need to disconnect
+                mReconnectionStatus = RECONNECTION_STATUS_INACTIVE;
+                onDeviceSelected(null);
+            }
+        } else {
+            for (DataCastConsumer consumer : mDataConsumers) {
+                consumer.onApplicationConnectionFailed(errorCode);
+            }
+            onDeviceSelected(null);
+            if (mMediaRouter != null) {
+                LOGD(TAG, "onApplicationConnectionFailed(): Setting route to default");
+                mMediaRouter.selectRoute(mMediaRouter.getDefaultRoute());
+            }
         }
     }
 
@@ -390,6 +404,16 @@ public class DataCastManager extends BaseCastManager implements Cast.MessageRece
         for (DataCastConsumer consumer : mDataConsumers) {
             consumer.onApplicationStopFailed(errorCode);
         }
+    }
+
+    @Override
+    public void onConnectivityRecovered() {
+        try {
+            attachDataChannels();
+        } catch (IOException | IllegalStateException e) {
+            LOGE(TAG, "onConnectivityRecovered(): Failed to reattach data channels", e);
+        }
+        super.onConnectivityRecovered();
     }
 
     @Override
