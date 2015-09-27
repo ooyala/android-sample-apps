@@ -17,7 +17,7 @@ import java.util.Observer;
  * This activity illustrates how you enable SecurePlayer video playback.
  *
  */
-public class EHLSPlayerActivity extends Activity implements Observer {
+public class SecurePlayerEHLSPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
