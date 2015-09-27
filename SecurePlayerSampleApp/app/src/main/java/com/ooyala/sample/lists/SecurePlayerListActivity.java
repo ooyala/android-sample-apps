@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
+import com.ooyala.sample.players.EHLSPlayerActivity;
 import com.ooyala.sample.players.SecurePlayerOptionsPlayerActivity;
 import com.ooyala.sample.players.SecurePlayerPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
@@ -40,7 +41,7 @@ public class SecurePlayerListActivity extends Activity implements OnItemClickLis
     selectionMap.put( "Microsoft-Ingested Playready Smooth VOD", new PlayerSelectionOption("V2NWk2bTpI1ac0IaicMaFuMcIrmE9U-_", SecurePlayerPlayerActivity.class) );
     selectionMap.put( "Microsoft-Ingested Clear Smooth VOD", new PlayerSelectionOption("1nNGk2bTq5ECsz5cRlZ4ONAAk96drr6T", SecurePlayerPlayerActivity.class) );
     selectionMap.put( "Ooyala-Ingested Clear HLS VOD", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", SecurePlayerPlayerActivity.class) );
-    selectionMap.put( "Ooyala Sample Encrypted HLS VOD", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", SecurePlayerPlayerActivity.class) );
+    selectionMap.put( "Ooyala Sample Encrypted HLS VOD", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", EHLSPlayerActivity.class) );
     selectionMap.put( "VisualOn Configuration Options", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", SecurePlayerOptionsPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
