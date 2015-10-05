@@ -25,7 +25,8 @@ public class ChromecastListActivity extends ActionBarActivity {
   private RemoteControlClient remoteControlClient;
   private static final String TAG = "ChromecastListActivity";
   private final String NAMESPACE = "urn:x-cast:ooyala";
-  private final String APP_ID = "4172C76F";
+//  private final String APP_ID = "4172C76F";
+  private final String APP_ID = "1F894B93";
   private CastManager castManager;
   private CastMiniController defaultMiniController;
   private CastMiniController customizedMiniController;
@@ -43,7 +44,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     catch( CastManager.CastManagerInitializationException cie ) {
       throw new RuntimeException( cie );
     }
-    castManager.getDataCastManager().setStopOnDisconnect(false);
+    castManager.getVideoCastManager().setStopOnDisconnect(false);
     castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
     castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
