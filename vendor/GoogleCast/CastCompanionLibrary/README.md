@@ -30,6 +30,10 @@ Google Cast Developers Community on Google+ [http://goo.gl/TPLDxj](http://goo.gl
 
 ## Change List
 
+2.5.1
+ * Fixed an issue where not setting the LaunchOptions would have resulted in receiver not loading. Now the
+   default behavior is to launch the app with the default value of relaunchIfRunning set to false.
+
 2.5
  * MiniController component now has an attribute "auto_setup" that if set to "true", it instructs the
    framework to fully configure the component, so that clients would only need to add the MiniController

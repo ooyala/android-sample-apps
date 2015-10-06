@@ -206,6 +206,7 @@ public abstract class BaseCastManager
         mPreferenceAccessor = new PreferenceAccessor(mContext);
         mUiVisibilityHandler = new Handler(new UpdateUiVisibilityHandlerCallback());
         mApplicationId = applicationId;
+        mLaunchOptions = new LaunchOptions.Builder().setRelaunchIfRunning(false).build();
         mPreferenceAccessor.saveStringToPreference(PREFS_KEY_APPLICATION_ID, applicationId);
 
         mMediaRouter = MediaRouter.getInstance(mContext);
