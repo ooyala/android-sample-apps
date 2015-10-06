@@ -39,7 +39,7 @@ public class CastMediaRouterCallback extends MediaRouter.Callback {
     private boolean mRouteAvailable = false;
 
     public CastMediaRouterCallback(BaseCastManager castManager) {
-        this.mCastManager = castManager;
+        mCastManager = castManager;
     }
 
     @Override

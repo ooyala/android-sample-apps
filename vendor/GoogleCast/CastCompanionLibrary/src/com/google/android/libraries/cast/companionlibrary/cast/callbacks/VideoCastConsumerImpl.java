@@ -39,7 +39,7 @@ public class VideoCastConsumerImpl extends BaseCastConsumerImpl
     }
 
     @Override
-    public void onApplicationConnectionFailed(int errorCode){
+    public void onApplicationConnectionFailed(int errorCode) {
     }
 
     @Override

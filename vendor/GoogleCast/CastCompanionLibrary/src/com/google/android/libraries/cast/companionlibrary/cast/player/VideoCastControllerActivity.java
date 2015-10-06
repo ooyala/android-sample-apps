@@ -20,7 +20,6 @@ import static com.google.android.libraries.cast.companionlibrary.utils.LogUtils.
 import static com.google.android.libraries.cast.companionlibrary.utils.LogUtils.LOGE;
 
 import com.google.android.gms.cast.MediaInfo;
-import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.MediaStatus;
 import com.google.android.libraries.cast.companionlibrary.R;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
@@ -96,7 +95,6 @@ public class VideoCastControllerActivity extends AppCompatActivity implements
     private ImageButton mSkipNext;
     private ImageButton mSkipPrevious;
     private View mPlaybackControls;
-    private MiniController mMini;
     private Toolbar mToolbar;
     private int mNextPreviousVisibilityPolicy
             = VideoCastController.NEXT_PREV_VISIBILITY_POLICY_DISABLED;
@@ -131,18 +129,6 @@ public class VideoCastControllerActivity extends AppCompatActivity implements
             setOnVideoCastControllerChangedListener(videoCastControllerFragment);
             mListener.onConfigurationChanged();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mCastManager.addMiniController(mMini);
-    }
-
-    @Override
-    protected void onPause() {
-        mCastManager.removeMiniController(mMini);
-        super.onPause();
     }
 
     @Override
@@ -184,8 +170,7 @@ public class VideoCastControllerActivity extends AppCompatActivity implements
         mSkipNext = (ImageButton) findViewById(R.id.next);
         mSkipPrevious = (ImageButton) findViewById(R.id.previous);
         mPlaybackControls = findViewById(R.id.playback_controls);
-        mMini = (MiniController) findViewById(R.id.miniController1);
-        mMini.setCurrentVisibility(false);
+        ((MiniController) findViewById(R.id.miniController1)).setCurrentVisibility(false);
         setClosedCaptionState(CC_DISABLED);
         mPlayPause.setOnClickListener(new OnClickListener() {
 
@@ -339,7 +324,7 @@ public class VideoCastControllerActivity extends AppCompatActivity implements
 
     @Override
     public void onQueueItemsUpdated(int queueLength, int position) {
-        boolean prevAvailable = position > 0 ;
+        boolean prevAvailable = position > 0;
         boolean nextAvailable = position < queueLength - 1;
         switch(mNextPreviousVisibilityPolicy) {
             case VideoCastController.NEXT_PREV_VISIBILITY_POLICY_HIDDEN:
@@ -409,12 +394,6 @@ public class VideoCastControllerActivity extends AppCompatActivity implements
                         mCastManager.getDeviceName()));
                 break;
             case MediaStatus.PLAYER_STATE_IDLE:
-                mLoading.setVisibility(View.INVISIBLE);
-                mPlayPause.setImageDrawable(mPlayDrawable);
-                mPlaybackControls.setVisibility(View.VISIBLE);
-                mLine2.setText(getString(R.string.ccl_casting_to_device,
-                        mCastManager.getDeviceName()));
-                break;
             case MediaStatus.PLAYER_STATE_BUFFERING:
                 mPlaybackControls.setVisibility(View.INVISIBLE);
                 mLoading.setVisibility(View.VISIBLE);
