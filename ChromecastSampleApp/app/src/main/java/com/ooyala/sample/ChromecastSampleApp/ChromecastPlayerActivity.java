@@ -159,18 +159,9 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
  
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (castManager != null && castManager.getCastPlayer() != null) {
-      if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-        Log.w(TAG, "KeyEvent.KEYCODE_VOLUME_UP");
-        onVolumeChange(DEFAULT_VOLUME_INCREMENT);
+    if (castManager != null && castManager.getVideoCastManager() != null) {
+      if (castManager.getVideoCastManager().onDispatchVolumeKeyEvent(event, DEFAULT_VOLUME_INCREMENT)) {
         return true;
-      } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-        Log.w(TAG, "KeyEvent.KEYCODE_VOLUME_DOWN");
-        onVolumeChange(-DEFAULT_VOLUME_INCREMENT);
-        return true;
-      } else {
-        // we don't want to consume non-volume key events
-        return super.onKeyDown(keyCode, event);
       }
     }
     return super.onKeyDown(keyCode, event);
@@ -182,12 +173,11 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.getDataCastManager().adjustDeviceVolume(volumeIncrement);
+      castManager.getVideoCastManager().adjustDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }
   }
-
 
   /**
    * Listen to all notifications from the OoyalaPlayer
