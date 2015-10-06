@@ -124,13 +124,7 @@ public class VideoCastNotificationService extends Service {
         if (intent != null) {
 
             String action = intent.getAction();
-            if (ACTION_TOGGLE_PLAYBACK.equals(action) && Utils.IS_ICS_OR_ABOVE) {
-                LOGD(TAG, "onStartCommand(): Action: ACTION_TOGGLE_PLAYBACK");
-                togglePlayback();
-            } else if (ACTION_STOP.equals(action) && Utils.IS_ICS_OR_ABOVE) {
-                LOGD(TAG, "onStartCommand(): Action: ACTION_STOP");
-                stopApplication();
-            } else if (ACTION_VISIBILITY.equals(action)) {
+            if (ACTION_VISIBILITY.equals(action)) {
                 mVisible = intent.getBooleanExtra(NOTIFICATION_VISIBILITY, false);
                 LOGD(TAG, "onStartCommand(): Action: ACTION_VISIBILITY " + mVisible);
                 onRemoteMediaPlayerStatusUpdated(mCastManager.getPlaybackStatus());
@@ -285,7 +279,7 @@ public class VideoCastNotificationService extends Service {
         // Main Content PendingIntent
         Bundle mediaWrapper = Utils.mediaInfoToBundle(mCastManager.getRemoteMediaInformation());
         Intent contentIntent = new Intent(this, mTargetActivity);
-        contentIntent.putExtra("media", mediaWrapper);
+        contentIntent.putExtra(VideoCastManager.EXTRA_MEDIA, mediaWrapper);
 
         // Media metadata
         MediaMetadata metadata = info.getMetadata();
@@ -295,7 +289,7 @@ public class VideoCastNotificationService extends Service {
         stackBuilder.addParentStack(mTargetActivity);
         stackBuilder.addNextIntent(contentIntent);
         if (stackBuilder.getIntentCount() > 1) {
-            stackBuilder.editIntentAt(1).putExtra("media", mediaWrapper);
+            stackBuilder.editIntentAt(1).putExtra(VideoCastManager.EXTRA_MEDIA, mediaWrapper);
         }
         PendingIntent contentPendingIntent =
                 stackBuilder.getPendingIntent(NOTIFICATION_ID, PendingIntent.FLAG_UPDATE_CURRENT);

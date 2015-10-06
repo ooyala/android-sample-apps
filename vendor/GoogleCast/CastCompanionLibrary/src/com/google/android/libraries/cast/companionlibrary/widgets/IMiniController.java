@@ -34,75 +34,75 @@ public interface IMiniController {
     /**
      * Sets the uri for the album art
      */
-    public void setIcon(Uri uri);
+    void setIcon(Uri uri);
 
     /**
      * Sets the bitmap for the album art
      */
-    public void setIcon(Bitmap bitmap);
+    void setIcon(Bitmap bitmap);
 
     /**
      * Sets the title
      */
-    public void setTitle(String title);
+    void setTitle(String title);
 
     /**
      * Sets the subtitle
      */
-    public void setSubtitle(String subtitle);
+    void setSubtitle(String subtitle);
 
     /**
      * Sets the playback state, and the idleReason (this is only reliable when the state is idle).
      * Values that can be passed to this method are from {@link MediaStatus}
      */
-    public void setPlaybackStatus(int state, int idleReason);
+    void setPlaybackStatus(int state, int idleReason);
 
     /**
      * Sets whether this component should be visible or hidden.
      */
-    public void setVisibility(int visibility);
+    void setVisibility(int visibility);
 
     /**
      * Returns the visibility state of this widget
      */
-    public boolean isVisible();
+    boolean isVisible();
 
     /**
      * Assigns a {@link OnMiniControllerChangedListener} listener to be notified of the changes in
      * the mini controller
      */
-    public void setOnMiniControllerChangedListener(OnMiniControllerChangedListener listener);
+    void setOnMiniControllerChangedListener(OnMiniControllerChangedListener listener);
 
     /**
-     * Sets the type of stream. <code>streamType</code> can be {@link MediaInfo#STREAM_TYPE_LIVE}
+     * Sets the type of stream. {@code streamType} can be {@link MediaInfo#STREAM_TYPE_LIVE}
      * or {@link MediaInfo#STREAM_TYPE_BUFFERED}
      */
-    public void setStreamType(int streamType);
+    void setStreamType(int streamType);
 
     /**
      * Sets the progress of stream.
      */
-    public void setProgress(int progress, int duration);
+    void setProgress(int progress, int duration);
 
     /**
      * Sets the visibility of the progress indicator
      */
-    public void setProgressVisibility(boolean visible);
+    void setProgressVisibility(boolean visible);
 
     /**
      * Sets whether the "upcoming" sub-component should be visible or not
      */
-    public void setUpcomingVisibility(boolean visible);
+    void setUpcomingVisibility(boolean visible);
 
     /**
      * Sets the upcoming item, which can be {@code null}.
      */
-    public void setUpcomingItem(MediaQueueItem item);
+    void setUpcomingItem(MediaQueueItem item);
 
     /**
      * Controls the visibility of the currently playing item.
      */
-    public void setCurrentVisibility(boolean visible);
+    void setCurrentVisibility(boolean visible);
 
 
 }
