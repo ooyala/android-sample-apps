@@ -34,7 +34,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private String pcode;
   private String domain;
   private OoyalaPlayer player;
-  private CastManager castManager;
   private View castView;
   private final String ACCOUNT_ID = "accountID";
   /*
@@ -74,7 +73,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
-    castManager = CastManager.getCastManager();
+    CastManager castManager = CastManager.getCastManager();
     castManager.setCastView(castView);
     castManager.registerWithOoyalaPlayer(player);
 
@@ -89,6 +88,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     if (player != null) {
       player.suspend();
     }
+    CastManager.getCastManager().onPause();
     super.onPause();
   }
   
@@ -101,18 +101,18 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
-    castManager.deregisterFromOoyalaPlayer();
+    CastManager.getCastManager().deregisterFromOoyalaPlayer();
     player = null;
     super.onDestroy();
   }
 
   @Override
   protected void onResume() {
-    castManager.getVideoCastManager().incrementUiCounter();
+    super.onResume();
     if (player != null) {
       player.resume();
     }  
-    super.onResume();
+    CastManager.getCastManager().onResume();
   }
 
   @Override
@@ -120,15 +120,15 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     Log.d(TAG, "onCreateOptionsMenu()");
     super.onCreateOptionsMenu(menu);
     getMenuInflater().inflate(R.menu.main, menu);
-    castManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
+    CastManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
     return true;
   }
 
  
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (castManager != null && castManager.getVideoCastManager() != null) {
-      if (castManager.getVideoCastManager().onDispatchVolumeKeyEvent(event, DEFAULT_VOLUME_INCREMENT)) {
+    if (CastManager.getVideoCastManager() != null) {
+      if (CastManager.getVideoCastManager().onDispatchVolumeKeyEvent(event, DEFAULT_VOLUME_INCREMENT)) {
         return true;
       }
     }
@@ -136,12 +136,9 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   }
 
   private void onVolumeChange(double volumeIncrement) {
-    if (castManager == null) {
-      return;
-    }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.getVideoCastManager().adjustDeviceVolume(volumeIncrement);
+      CastManager.getVideoCastManager().adjustDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }

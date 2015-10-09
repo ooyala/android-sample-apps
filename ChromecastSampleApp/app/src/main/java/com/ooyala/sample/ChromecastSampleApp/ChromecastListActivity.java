@@ -22,10 +22,7 @@ import java.util.List;
 public class ChromecastListActivity extends ActionBarActivity {
   private RemoteControlClient remoteControlClient;
   private static final String TAG = "ChromecastListActivity";
-  private final String NAMESPACE = "urn:x-cast:ooyala";
-//  private final String APP_ID = "4172C76F";
-  private final String APP_ID = "1F894B93";
-  private CastManager castManager;
+
   private MiniController defaultMiniController;
   private IMiniController customizedMiniController;
   private List<Integer> castViewImages;
@@ -36,14 +33,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     Log.d(TAG, "onCreate()");
     super.onCreate(savedInstanceState);
 
-    try {
-      castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
-    }
-    catch( CastManager.CastManagerInitializationException cie ) {
-      throw new RuntimeException( cie );
-    }
-
-    castManager.getVideoCastManager().setStopOnDisconnect(false);
+    CastManager.getCastManager().getVideoCastManager().setStopOnDisconnect(false);
     setContentView(R.layout.start_view);
 
     videoList = new ChromecastPlayerSelectionOption[] {
@@ -90,7 +80,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     defaultMiniController = (MiniController) findViewById(R.id.miniController1);
-    castManager.getVideoCastManager().addMiniController(defaultMiniController);
+    CastManager.getVideoCastManager().addMiniController(defaultMiniController);
 
 // Uncomment it if you want to activate the customized sample app in our sample app
 //    customizedMiniController = (OOMiniController) findViewById(R.id.miniController2);
@@ -100,7 +90,7 @@ public class ChromecastListActivity extends ActionBarActivity {
   public boolean onCreateOptionsMenu(Menu menu) {
     super.onCreateOptionsMenu(menu);
     getMenuInflater().inflate(R.menu.main, menu);
-    castManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
+    CastManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
     return true;
   }
 
@@ -113,27 +103,27 @@ public class ChromecastListActivity extends ActionBarActivity {
   @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
-    castManager.getVideoCastManager().removeMiniController(defaultMiniController);
+    CastManager.getVideoCastManager().removeMiniController(defaultMiniController);
     super.onDestroy();
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    if (castManager.isInCastMode()) {
+    if (CastManager.getCastManager().isInCastMode()) {
       defaultMiniController.setVisibility(View.VISIBLE);
     }
 // Uncomment it if you want to activate the customized sample app in our sample app
 //      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
-    castManager.onResume();
+    CastManager.getCastManager().onResume();
     Log.d(TAG, "onResume()");
   }
   
   @Override
   public void onPause() {
     Log.d(TAG, "onPause()");
-    castManager.onPause();
+    CastManager.getCastManager().onPause();
     super.onPause();
   }
 }
