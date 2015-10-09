@@ -66,13 +66,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     player = new OoyalaPlayer(pcode, playerDomain, this, null);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
-    // Initialize CastManager
-    castManager = CastManager.getCastManager();
-    castManager.destroyNotificationService(this);
-    castManager.registerWithOoyalaPlayer(player);
-    castManager.setTargetActivity(ChromecastPlayerActivity.class);
-
-
     // Initialize action bar
     ActionBar actionBar = getSupportActionBar();
     actionBar.setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
@@ -81,9 +74,9 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
+    castManager = CastManager.getCastManager();
     castManager.setCastView(castView);
-
-
+    castManager.registerWithOoyalaPlayer(player);
 
     player.addObserver(this);
     player.setEmbedCode(embedCode);
@@ -93,7 +86,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   @Override
   public void onPause() {
     Log.d(TAG, "onPause()");
-    ChromecastListActivity.activatedActivity --;
     if (player != null) {
       player.suspend();
     }
@@ -107,27 +99,8 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   }
 
   @Override
-  protected void onStop() {
-    Log.d(TAG, "onStop()");
-    super.onStop();
-    if (ChromecastListActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
-      castManager.createNotificationService(this);
-      castManager.registerLockScreenControls(this);
-    }
-  }
-
-  @Override
-  protected void onRestart() {
-    Log.d(TAG, "onRestart()");
-    super.onRestart();
-  }
-
-  @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
-    castManager.onResume(this);
-    castManager.destroyNotificationService(this);
-    castManager.unregisterLockScreenControls();
     castManager.deregisterFromOoyalaPlayer();
     player = null;
     super.onDestroy();
@@ -135,24 +108,19 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
 
   @Override
   protected void onResume() {
-    Log.d(TAG, "onResume()");
-    ChromecastListActivity.activatedActivity++;
-
-    if (castManager != null && castManager.getCastPlayer() != null) {
-      castManager.destroyNotificationService(this);
-      castManager.unregisterLockScreenControls();
-    }
+    castManager.getVideoCastManager().incrementUiCounter();
     if (player != null) {
       player.resume();
     }  
-  super.onResume();
+    super.onResume();
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     Log.d(TAG, "onCreateOptionsMenu()");
     super.onCreateOptionsMenu(menu);
-    castManager.addCastButton(this, menu);
+    getMenuInflater().inflate(R.menu.main, menu);
+    castManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
     return true;
   }
 
