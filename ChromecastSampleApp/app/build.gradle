@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "com.ooyala.sample.ChromecastSampleApp"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -26,12 +26,12 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.+'
-    compile 'com.android.support:mediarouter-v7:21.+'
+    compile 'com.android.support:appcompat-v7:22.2.+'
+    compile 'com.android.support:mediarouter-v7:22.2.+'
     compile project(':CastCompanionLibrary')
-    compile(name:'OoyalaCastSDK', ext:'aar')
-    compile(name:'OoyalaSDK')
+//    compile(name:'OoyalaCastSDK', ext:'aar')
+//    compile(name:'OoyalaSDK')
 
-//    compile project(':ooyalaCoreSDK')
-//    compile project(':ooyalaCastSDK')
+    compile project(':ooyalaCoreSDK')
+    compile project(':ooyalaCastSDK')
 }
