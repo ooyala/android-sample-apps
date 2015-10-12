@@ -30,6 +30,7 @@ import com.google.android.libraries.cast.companionlibrary.utils.FetchBitmapTask;
 import com.google.android.libraries.cast.companionlibrary.utils.Utils;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -45,23 +46,33 @@ import android.widget.TextView;
 
 /**
  * A compound component that provides a superset of functionalities required for the global access
- * requirement. This component provides an image for the album art, a play/pause button, a seekbar
- * for trick-play with current time and duration and a mute/unmute button. Clients can add this
- * compound component to their layout xml and register that with the instance of
+ * requirement. This component provides an image for the album art, a play/pause button, and a
+ * progressbar to show the current position. When an auto-play queue is playing and pre-loading is
+ * set, then this component can show an additional view to inform the user of the upcoming item and
+ * to allow immediate playback of the next item or to stop the auto-play.
+ *
+ * <p>Clients can add this
+ * compound component to their layout xml and preferably set the {@code auto_setup} attribute to
+ * {@code true} to have the CCL manage the visibility and behavior of this component. Alternatively,
+ * clients can register this component with the instance of
  * {@link VideoCastManager} by using the following pattern:<br/>
  *
  * <pre>
- * mMiniController = (MiniController) findViewById(R.id.miniController1);
+ * mMiniController = (MiniController) findViewById(R.id.miniController);
  * mCastManager.addMiniController(mMiniController);
  * mMiniController.setOnMiniControllerChangedListener(mCastManager);
  * </pre>
  *
+ * In this case, clients should remember to unregister the component themselves.
  * Then the {@link VideoCastManager} will manage the behavior, including its state and metadata and
- * interactions.
+ * interactions. Note that using the {@code auto_setup} attribute hand;les all of these
+ * automatically.
  */
 public class MiniController extends RelativeLayout implements IMiniController {
 
     public static final int UNDEFINED_STATUS_CODE = -1;
+    private boolean mAutoSetup;
+    private VideoCastManager mCastManager;
     private Handler mHandler;
     protected ImageView mIcon;
     protected TextView mTitle;
@@ -90,12 +101,24 @@ public class MiniController extends RelativeLayout implements IMiniController {
         super(context, attrs);
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.mini_controller, this);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MiniController);
+        mAutoSetup = a.getBoolean(R.styleable.MiniController_auto_setup, false);
+        a.recycle();
         mPauseDrawable = getResources().getDrawable(R.drawable.ic_mini_controller_pause);
         mPlayDrawable = getResources().getDrawable(R.drawable.ic_mini_controller_play);
         mStopDrawable = getResources().getDrawable(R.drawable.ic_mini_controller_stop);
         mHandler = new Handler();
+        mCastManager = VideoCastManager.getInstance();
         loadViews();
         setUpCallbacks();
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        if (visibility == View.VISIBLE) {
+            mProgressBar.setProgress(0);
+        }
     }
 
     /**
@@ -280,11 +303,22 @@ public class MiniController extends RelativeLayout implements IMiniController {
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (mAutoSetup) {
+            mCastManager.addMiniController(this);
+        }
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (mFetchBitmapTask != null) {
             mFetchBitmapTask.cancel(true);
             mFetchBitmapTask = null;
+        }
+        if (mAutoSetup) {
+            mCastManager.removeMiniController(this);
         }
     }
 

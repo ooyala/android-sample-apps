@@ -47,7 +47,11 @@ public class MediaQueue {
     }
 
     public final void setQueueItems(List<MediaQueueItem> queue) {
-        mQueueItems = queue;
+        if (queue == null) {
+            mQueueItems = null;
+        } else {
+            mQueueItems = new CopyOnWriteArrayList<>(queue);
+        }
     }
 
     public final MediaQueueItem getCurrentItem() {

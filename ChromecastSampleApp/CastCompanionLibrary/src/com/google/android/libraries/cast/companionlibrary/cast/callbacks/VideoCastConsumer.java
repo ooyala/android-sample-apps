@@ -130,28 +130,39 @@ public interface VideoCastConsumer extends BaseCastConsumer {
      */
     void onMediaLoadResult(int statusCode);
 
-
-
     /**
      * A callback to inform the clients that queue has been updated.
+     *
+     * @param queueItems The updated list of queue items
+     * @param item The item that was updated
+     * @param repeatMode The repeat mode of the updated item
+     * @param shuffle The shuffle status of the updated item
      */
     void onMediaQueueUpdated(List<MediaQueueItem> queueItems, MediaQueueItem item,
             int repeatMode, boolean shuffle);
 
     /**
      * A callback to inform the client that pre-loading of a queue item has started
+     *
+     * @param item The queue item that the receiver has started to preload (if supported)
      */
     void onRemoteMediaPreloadStatusUpdated(MediaQueueItem item);
 
     /**
      * A callback to inform the clients that the "Play" button for the upcoming item has been
      * clicked,
+     *
+     * @param view The view that was clicked
+     * @param upcomingItem The queue item that represents the item that is being preloaded
      */
-    void onUpcomingPlayClicked(View view, MediaQueueItem item);
+    void onUpcomingPlayClicked(View view, MediaQueueItem upcomingItem);
 
     /**
-     * A callback to inform the clients thay the "Stop" button for the upcoming item has been
+     * A callback to inform the clients that the "Stop" button for the upcoming item has been
      * clicked.
+     *
+     * @param view The view that was clicked
+     * @param upcomingItem The queue item that represents the item that is being preloaded
      */
     void onUpcomingStopClicked(View view, MediaQueueItem upcomingItem);
 

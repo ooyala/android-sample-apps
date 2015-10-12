@@ -358,7 +358,7 @@ public final class Utils {
         }
         MediaQueueItem[] rebuiltQueue = new MediaQueueItem[items.size()];
         for (int i = 0; i < items.size(); i++) {
-            rebuiltQueue[i] =rebuildQueueItem(items.get(i));
+            rebuiltQueue[i] = rebuildQueueItem(items.get(i));
         }
 
         return rebuiltQueue;

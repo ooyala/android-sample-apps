@@ -30,6 +30,27 @@ Google Cast Developers Community on Google+ [http://goo.gl/TPLDxj](http://goo.gl
 
 ## Change List
 
+2.5.1
+ * Fixed an issue where not setting the LaunchOptions would have resulted in receiver not loading. Now the
+   default behavior is to launch the app with the default value of relaunchIfRunning set to false.
+
+2.5
+ * MiniController component now has an attribute "auto_setup" that if set to "true", it instructs the
+   framework to fully configure the component, so that clients would only need to add the MiniController
+   to their layout and the rest will be handled by the library (i.e. if that attribute is set to true,
+   there is no need to register or unregister that component with the cast manger anymore). The default
+   value is "false" which falls back to the old behavior.
+ * You can now set the LaunchOptions soon after initializing the Cast Manager by calling VideoCastManager.setLaunchOptions()
+   (same with DataCastManager).
+ * A new callback (onDisconnectionReason(int reason)) has been added that can inform the registered listeners
+   of the reason a disconnect has happened. Understanding the reason behind a disconnect is somewhat non-trivial
+   so this will hopefully make that task easier; see the JavaDoc for more details.
+ * Now you can have the library automatically try to reconnect by enabling the FEATURE_AUTO_RECONNECT after
+   initializing the Cast Manager; this means clients don't need to call reconnectSessionIfPossible() if that
+   feature is enabled.
+ * Updated the documentation.
+ * Some cleanup, fixing some JavaDocs and comments, etc.
+
 2.4
  * Fixed a number of bugs (#205, #204, #203)
  * Prepared the library for Marshmallow permissions related to the Play Services
