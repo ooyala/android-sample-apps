@@ -11,13 +11,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.utils.Utils;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
-import com.ooyala.android.item.*;
+import com.ooyala.android.item.Video;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
 import java.net.URL;
@@ -52,13 +55,19 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     // Setup castView
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
+    pcode = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+    domain = "http://ooyala.com";
 
     // onClick of a DefaultMiniController only provides an embedcode through the extras
     Bundle extras = getIntent().getExtras();
-    embedCode = extras.getString("embedcode");
-    pcode = extras.getString("pcode") != null ? extras.getString("pcode") : "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
-    domain = extras.getString("domain") != null ? extras.getString("domain") :  "http://ooyala.com";
-    
+    if (extras.containsKey(VideoCastManager.EXTRA_MEDIA)) {
+      Bundle mediaInfoBundle = extras.getBundle(VideoCastManager.EXTRA_MEDIA);
+      MediaInfo mediaInfo = Utils.bundleToMediaInfo(mediaInfoBundle);
+      embedCode = mediaInfo.getContentId();
+    } else {
+      embedCode = extras.getString("embedcode");
+    }
+
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain playerDomain = new PlayerDomain(domain);
