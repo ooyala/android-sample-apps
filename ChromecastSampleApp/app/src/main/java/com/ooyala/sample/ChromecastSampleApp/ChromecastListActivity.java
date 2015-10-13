@@ -1,6 +1,7 @@
 package com.ooyala.sample.ChromecastSampleApp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.RemoteControlClient;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.libraries.cast.companionlibrary.widgets.IMiniController;
 import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
@@ -80,6 +82,10 @@ public class ChromecastListActivity extends ActionBarActivity {
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     defaultMiniController = (MiniController) findViewById(R.id.miniController1);
+    TextView title = (TextView)defaultMiniController.findViewById(R.id.title_view);
+    title.setTextColor(Color.BLACK);
+    TextView subtitle = (TextView)defaultMiniController.findViewById(R.id.subtitle_view);
+    subtitle.setTextColor(Color.GRAY);
     CastManager.getVideoCastManager().addMiniController(defaultMiniController);
 
 // Uncomment it if you want to activate the customized sample app in our sample app
