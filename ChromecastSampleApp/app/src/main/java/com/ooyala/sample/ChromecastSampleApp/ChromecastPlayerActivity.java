@@ -23,6 +23,8 @@ import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.item.Video;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
+import org.json.JSONObject;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -55,8 +57,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     // Setup castView
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    pcode = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
-    domain = "http://ooyala.com";
+
 
     // onClick of a DefaultMiniController only provides an embedcode through the extras
     Bundle extras = getIntent().getExtras();
@@ -64,8 +65,18 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
       Bundle mediaInfoBundle = extras.getBundle(VideoCastManager.EXTRA_MEDIA);
       MediaInfo mediaInfo = Utils.bundleToMediaInfo(mediaInfoBundle);
       embedCode = mediaInfo.getContentId();
+      JSONObject json = mediaInfo.getCustomData();
+      try {
+        pcode = json.getString("pcode");
+        domain = json.getString("domain");
+      } catch(Exception e) {
+        pcode = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+        domain = "http://www.ooyala.com";
+      }
     } else {
       embedCode = extras.getString("embedcode");
+      pcode = extras.getString("pcode");
+      domain = extras.getString("domain");
     }
 
     // Initialize Ooyala Player
