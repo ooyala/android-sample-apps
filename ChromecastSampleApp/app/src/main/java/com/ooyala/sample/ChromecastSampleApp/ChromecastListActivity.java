@@ -1,6 +1,7 @@
 package com.ooyala.sample.ChromecastSampleApp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.RemoteControlClient;
 import android.os.Bundle;
@@ -12,23 +13,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.android.libraries.cast.companionlibrary.widgets.IMiniController;
+import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
 import com.ooyala.android.castsdk.CastManager;
-import com.ooyala.android.castsdk.CastMiniController;
 
 import java.util.List;
 
 public class ChromecastListActivity extends ActionBarActivity {
-  
-  public static int activatedActivity = 0;
-  
   private RemoteControlClient remoteControlClient;
   private static final String TAG = "ChromecastListActivity";
-  private final String NAMESPACE = "urn:x-cast:ooyala";
-  private final String APP_ID = "4172C76F";
-  private CastManager castManager;
-  private CastMiniController defaultMiniController;
-  private CastMiniController customizedMiniController;
+
+  private MiniController defaultMiniController;
+  private IMiniController customizedMiniController;
   private List<Integer> castViewImages;
   ChromecastPlayerSelectionOption[] videoList;
 
@@ -36,16 +34,9 @@ public class ChromecastListActivity extends ActionBarActivity {
   public void onCreate(Bundle savedInstanceState) {
     Log.d(TAG, "onCreate()");
     super.onCreate(savedInstanceState);
+
+    CastManager.getCastManager().getVideoCastManager().setStopOnDisconnect(false);
     setContentView(R.layout.start_view);
-    try {
-      castManager = CastManager.initialize(this, APP_ID, NAMESPACE);
-    }
-    catch( CastManager.CastManagerInitializationException cie ) {
-      throw new RuntimeException( cie );
-    }
-    castManager.getDataCastManager().setStopOnDisconnect(false);
-    castManager.setNotificationMiniControllerLayout(R.layout.oo_default_notification);
-    castManager.setNotificationImageResourceId(R.drawable.ic_ooyala);
 
     videoList = new ChromecastPlayerSelectionOption[] {
         new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
@@ -78,9 +69,9 @@ public class ChromecastListActivity extends ActionBarActivity {
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        intent.putExtra("embedcode",videoList[position].embedCode);
-        intent.putExtra("pcode",videoList[position].pcode);
-        intent.putExtra("domain",videoList[position].domain);
+        intent.putExtra("embedcode", videoList[position].embedCode);
+        intent.putExtra("pcode", videoList[position].pcode);
+        intent.putExtra("domain", videoList[position].domain);
         startActivity(intent);
       }
     });
@@ -89,9 +80,13 @@ public class ChromecastListActivity extends ActionBarActivity {
     actionBar.setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
-    
-    
-    defaultMiniController = (CastMiniController) findViewById(R.id.miniController1);
+
+    defaultMiniController = (MiniController) findViewById(R.id.miniController1);
+    TextView title = (TextView)defaultMiniController.findViewById(R.id.title_view);
+    title.setTextColor(Color.BLACK);
+    TextView subtitle = (TextView)defaultMiniController.findViewById(R.id.subtitle_view);
+    subtitle.setTextColor(Color.GRAY);
+    CastManager.getVideoCastManager().addMiniController(defaultMiniController);
 
 // Uncomment it if you want to activate the customized sample app in our sample app
 //    customizedMiniController = (OOMiniController) findViewById(R.id.miniController2);
@@ -100,29 +95,11 @@ public class ChromecastListActivity extends ActionBarActivity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     super.onCreateOptionsMenu(menu);
-    castManager.addCastButton(this, menu);
+    getMenuInflater().inflate(R.menu.main, menu);
+    CastManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
     return true;
   }
 
-  @Override
-  protected void onStop() {
-    Log.d(TAG, "onStop()");
-    super.onStop();
-    if (ChromecastListActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
-      castManager.createNotificationService(this);
-      castManager.registerLockScreenControls(this);
-    }
-  }
-  
-  @Override
-  protected void onRestart() {
-    Log.d(TAG, "onRestart()");
-    super.onRestart();
-    castManager.destroyNotificationService(this);
-    castManager.unregisterLockScreenControls();
-  }
-
-  
   @Override
   protected void onStart() {
     Log.d(TAG, "onStart()");
@@ -132,32 +109,27 @@ public class ChromecastListActivity extends ActionBarActivity {
   @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
+    CastManager.getVideoCastManager().removeMiniController(defaultMiniController);
     super.onDestroy();
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    ChromecastListActivity.activatedActivity++;
-    if (castManager != null && castManager.isInCastMode()){
-      castManager.addMiniController( defaultMiniController );
-      defaultMiniController.show();
+    if (CastManager.getCastManager().isInCastMode()) {
+      defaultMiniController.setVisibility(View.VISIBLE);
+    }
 // Uncomment it if you want to activate the customized sample app in our sample app
 //      castManager.addMiniController(customizedMiniController);
 //      this.customizedMiniController.show();
-      castManager.onResume(this);
-    }
+    CastManager.getCastManager().onResume();
     Log.d(TAG, "onResume()");
   }
   
   @Override
   public void onPause() {
-    super.onPause();
-    ChromecastListActivity.activatedActivity--;
-    castManager.removeMiniController( defaultMiniController );
-    defaultMiniController.dismiss();
     Log.d(TAG, "onPause()");
+    CastManager.getCastManager().onPause();
+    super.onPause();
   }
-  
-
 }

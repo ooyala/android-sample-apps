@@ -4,27 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.ooyala.android.castsdk.DefaultCastMiniController
+    <com.google.android.libraries.cast.companionlibrary.widgets.MiniController
         android:id="@+id/miniController1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shadow7"
         android:visibility="gone" >
-    </com.ooyala.android.castsdk.DefaultCastMiniController>
+    </com.google.android.libraries.cast.companionlibrary.widgets.MiniController>
 
-    <!--<com.ooyala.sample.chromecastsampleapp.CustomizedMiniController-->
-        <!--android:id="@+id/miniController2"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/shadow7"-->
-        <!--android:visibility="gone" >-->
-    <!--</com.ooyala.sample.chromecastsampleapp.CustomizedMiniController>-->
 
     <ListView android:id="@+id/listView"
               android:layout_height="wrap_content"
               android:layout_width="match_parent"/>
-    
-
-    
     
 </LinearLayout>
