@@ -11,14 +11,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.utils.Utils;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
-import com.ooyala.android.item.*;
+import com.ooyala.android.item.Video;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
+
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -34,7 +39,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private String pcode;
   private String domain;
   private OoyalaPlayer player;
-  private CastManager castManager;
   private View castView;
   private final String ACCOUNT_ID = "accountID";
   /*
@@ -54,24 +58,32 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
+
     // onClick of a DefaultMiniController only provides an embedcode through the extras
     Bundle extras = getIntent().getExtras();
-    embedCode = extras.getString("embedcode");
-    pcode = extras.getString("pcode") != null ? extras.getString("pcode") : "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
-    domain = extras.getString("domain") != null ? extras.getString("domain") :  "http://ooyala.com";
-    
+    if (extras.containsKey(VideoCastManager.EXTRA_MEDIA)) {
+      Bundle mediaInfoBundle = extras.getBundle(VideoCastManager.EXTRA_MEDIA);
+      MediaInfo mediaInfo = Utils.bundleToMediaInfo(mediaInfoBundle);
+      embedCode = mediaInfo.getContentId();
+      JSONObject json = mediaInfo.getCustomData();
+      try {
+        pcode = json.getString("pcode");
+        domain = json.getString("domain");
+      } catch(Exception e) {
+        pcode = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+        domain = "http://www.ooyala.com";
+      }
+    } else {
+      embedCode = extras.getString("embedcode");
+      pcode = extras.getString("pcode");
+      domain = extras.getString("domain");
+    }
+
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     PlayerDomain playerDomain = new PlayerDomain(domain);
     player = new OoyalaPlayer(pcode, playerDomain, this, null);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-
-    // Initialize CastManager
-    castManager = CastManager.getCastManager();
-    castManager.destroyNotificationService(this);
-    castManager.registerWithOoyalaPlayer(player);
-    castManager.setTargetActivity(ChromecastPlayerActivity.class);
-
 
     // Initialize action bar
     ActionBar actionBar = getSupportActionBar();
@@ -81,9 +93,9 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
+    CastManager castManager = CastManager.getCastManager();
     castManager.setCastView(castView);
-
-
+    castManager.registerWithOoyalaPlayer(player);
 
     player.addObserver(this);
     player.setEmbedCode(embedCode);
@@ -93,10 +105,10 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   @Override
   public void onPause() {
     Log.d(TAG, "onPause()");
-    ChromecastListActivity.activatedActivity --;
     if (player != null) {
       player.suspend();
     }
+    CastManager.getCastManager().onPause();
     super.onPause();
   }
   
@@ -107,87 +119,50 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   }
 
   @Override
-  protected void onStop() {
-    Log.d(TAG, "onStop()");
-    super.onStop();
-    if (ChromecastListActivity.activatedActivity == 0 && castManager != null && castManager.isInCastMode()) {
-      castManager.createNotificationService(this);
-      castManager.registerLockScreenControls(this);
-    }
-  }
-
-  @Override
-  protected void onRestart() {
-    Log.d(TAG, "onRestart()");
-    super.onRestart();
-  }
-
-  @Override
   protected void onDestroy() {
     Log.d(TAG, "onDestroy()");
-    castManager.onResume(this);
-    castManager.destroyNotificationService(this);
-    castManager.unregisterLockScreenControls();
-    castManager.deregisterFromOoyalaPlayer();
+    CastManager.getCastManager().deregisterFromOoyalaPlayer();
     player = null;
     super.onDestroy();
   }
 
   @Override
   protected void onResume() {
-    Log.d(TAG, "onResume()");
-    ChromecastListActivity.activatedActivity++;
-
-    if (castManager != null && castManager.getCastPlayer() != null) {
-      castManager.destroyNotificationService(this);
-      castManager.unregisterLockScreenControls();
-    }
+    super.onResume();
     if (player != null) {
       player.resume();
     }  
-  super.onResume();
+    CastManager.getCastManager().onResume();
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     Log.d(TAG, "onCreateOptionsMenu()");
     super.onCreateOptionsMenu(menu);
-    castManager.addCastButton(this, menu);
+    getMenuInflater().inflate(R.menu.main, menu);
+    CastManager.getVideoCastManager().addMediaRouterButton(menu, R.id.media_route_menu_item);
     return true;
   }
 
  
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (castManager != null && castManager.getCastPlayer() != null) {
-      if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-        Log.w(TAG, "KeyEvent.KEYCODE_VOLUME_UP");
-        onVolumeChange(DEFAULT_VOLUME_INCREMENT);
+    if (CastManager.getVideoCastManager() != null) {
+      if (CastManager.getVideoCastManager().onDispatchVolumeKeyEvent(event, DEFAULT_VOLUME_INCREMENT)) {
         return true;
-      } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-        Log.w(TAG, "KeyEvent.KEYCODE_VOLUME_DOWN");
-        onVolumeChange(-DEFAULT_VOLUME_INCREMENT);
-        return true;
-      } else {
-        // we don't want to consume non-volume key events
-        return super.onKeyDown(keyCode, event);
       }
     }
     return super.onKeyDown(keyCode, event);
   }
 
   private void onVolumeChange(double volumeIncrement) {
-    if (castManager == null) {
-      return;
-    }
     try {
       Log.d(TAG, "Increase DeviceVolume: " + volumeIncrement);
-      castManager.getDataCastManager().adjustDeviceVolume(volumeIncrement);
+      CastManager.getVideoCastManager().adjustDeviceVolume(volumeIncrement);
     } catch (Exception e) {
       Log.e(TAG, "onVolumeChange() Failed to change volume", e);
     }
   }
-
 
   /**
    * Listen to all notifications from the OoyalaPlayer
