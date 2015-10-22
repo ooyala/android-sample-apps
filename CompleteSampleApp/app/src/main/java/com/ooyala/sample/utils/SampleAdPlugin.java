@@ -75,7 +75,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   public boolean onContentChanged() {
     // load ads info.
     _preroll = new SampleAdSpot(0, "PREROLL");
-    _midroll = new SampleAdSpot(6000, "MIDROLL");
+    _midroll = new SampleAdSpot(20000, "MIDROLL");
     _postroll = new SampleAdSpot(Integer.MAX_VALUE - 1000, "POSTROLL");
     return false;
   }
