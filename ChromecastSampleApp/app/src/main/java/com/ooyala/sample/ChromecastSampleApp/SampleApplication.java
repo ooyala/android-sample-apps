@@ -12,7 +12,7 @@ import com.ooyala.android.castsdk.CastOptions;
 
 public class SampleApplication extends Application {
   private final String NAMESPACE = "urn:x-cast:ooyala";
-  private final String APP_ID = "1F894B93";
+  private final String APP_ID = "D4C7BD4A";
 
   @Override
   public void onCreate() {
