@@ -36,6 +36,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
   private String embedCode;
+  private String embedCode2;
   private String pcode;
   private String domain;
   private OoyalaPlayer player;
@@ -75,6 +76,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
       }
     } else {
       embedCode = extras.getString("embedcode");
+      embedCode2 = extras.getString("embedcode2");
       pcode = extras.getString("pcode");
       domain = extras.getString("domain");
     }
@@ -98,7 +100,11 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     castManager.registerWithOoyalaPlayer(player);
 
     player.addObserver(this);
-    player.setEmbedCode(embedCode);
+    play( embedCode );
+  }
+
+  private void play( String ec ) {
+    player.setEmbedCode( ec );
     player.play();
   }
 
@@ -187,6 +193,11 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
       else {
         Log.e(TAG, msg);
       }
+    }
+
+    if( arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION && embedCode2 != null ) {
+      play( embedCode2 );
+      embedCode2 = null;
     }
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
