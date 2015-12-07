@@ -13,6 +13,7 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.players.CuePointsOptionsFreewheelPlayerActivity;
 import com.ooyala.sample.players.PreloadOptionsPlayerActivity;
 import com.ooyala.sample.players.PreloadWithInitTimePlayerActivity;
+import com.ooyala.sample.players.PreventVideoViewSharingPlayerActivity;
 import com.ooyala.sample.players.ServerConfiguredTVRatingsPlayerActivity;
 import com.ooyala.sample.players.TVRatingsPlayerActivity;
 import com.ooyala.sample.players.TimeoutOptionsPlayerActivity;
@@ -45,6 +46,7 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
     selectionMap.put("Timeout Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", TimeoutOptionsPlayerActivity.class));
     selectionMap.put("Server-Side TV Ratings", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", ServerConfiguredTVRatingsPlayerActivity.class));
     selectionMap.put("TV Ratings Configuration", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", TVRatingsPlayerActivity.class));
+    selectionMap.put("Prevent Video View Sharing Option", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", PreventVideoViewSharingPlayerActivity.class));
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
