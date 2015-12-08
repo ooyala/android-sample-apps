@@ -100,7 +100,7 @@ public class LogUtils {
         Log.e(tag, getVersionPrefix() + message, cause);
     }
 
-    public static final String getVersionPrefix(){
+    public static final String getVersionPrefix() {
         return "[v" + BaseCastManager.getCclVersion() + "] ";
     }
 

@@ -108,6 +108,7 @@
         android:paddingTop="10dp"
         android:text="@string/ccl_no_media_info"
         android:textAlignment="center"
+        android:textColor="@color/ccl_mr_custom_line_1"
         android:textSize="15sp"
         android:visibility="gone"/>
 

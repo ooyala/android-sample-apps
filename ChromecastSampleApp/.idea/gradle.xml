@@ -8,11 +8,11 @@
         <option name="gradleJvm" value="1.7" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../../../sdk/ooyalaCastSDK" />
-            <option value="$PROJECT_DIR$/../../../sdk/ooyalaCoreSDK" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/../vendor/GoogleCast/CastCompanionLibrary" />
+            <option value="$USER_HOME$/sdk/ooyalaCastSDK" />
+            <option value="$USER_HOME$/sdk/ooyalaCoreSDK" />
           </set>
         </option>
       </GradleProjectSettings>

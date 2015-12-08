@@ -41,11 +41,13 @@ import com.google.android.gms.common.images.WebImage;
 import com.google.android.libraries.cast.companionlibrary.R;
 import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumer;
 import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
-import com.google.android.libraries.cast.companionlibrary.cast.dialog.video.VideoMediaRouteDialogFactory;
+import com.google.android.libraries.cast.companionlibrary.cast.dialog.video
+        .VideoMediaRouteDialogFactory;
 import com.google.android.libraries.cast.companionlibrary.cast.exceptions.CastException;
 import com.google.android.libraries.cast.companionlibrary.cast.exceptions.NoConnectionException;
 import com.google.android.libraries.cast.companionlibrary.cast.exceptions.OnFailedListener;
-import com.google.android.libraries.cast.companionlibrary.cast.exceptions.TransientNetworkDisconnectionException;
+import com.google.android.libraries.cast.companionlibrary.cast.exceptions
+        .TransientNetworkDisconnectionException;
 import com.google.android.libraries.cast.companionlibrary.cast.player.MediaAuthService;
 import com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastController;
 import com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastControllerActivity;
@@ -58,10 +60,12 @@ import com.google.android.libraries.cast.companionlibrary.utils.LogUtils;
 import com.google.android.libraries.cast.companionlibrary.utils.Utils;
 import com.google.android.libraries.cast.companionlibrary.widgets.IMiniController;
 import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
-import com.google.android.libraries.cast.companionlibrary.widgets.MiniController.OnMiniControllerChangedListener;
+import com.google.android.libraries.cast.companionlibrary.widgets.MiniController
+        .OnMiniControllerChangedListener;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -156,6 +160,8 @@ public class VideoCastManager extends BaseCastManager
     private MediaStatus mMediaStatus;
     private Timer mProgressTimer;
     private UpdateProgressTask mProgressTask;
+    private FetchBitmapTask mLockScreenFetchTask;
+    private FetchBitmapTask mMediaSessionIconFetchTask;
 
     /**
      * Volume can be controlled at two different layers, one is at the "stream" level and one at
@@ -1881,11 +1887,11 @@ public class VideoCastManager extends BaseCastManager
      *
      * @return Returns one of the values
      * <ul>
-     * <li> <code>MediaStatus.PLAYER_STATE_PLAYING</code>
-     * <li> <code>MediaStatus.PLAYER_STATE_PAUSED</code>
-     * <li> <code>MediaStatus.PLAYER_STATE_BUFFERING</code>
-     * <li> <code>MediaStatus.PLAYER_STATE_IDLE</code>
-     * <li> <code>MediaStatus.PLAYER_STATE_UNKNOWN</code>
+     * <li> <code>MediaStatus.PLAYER_STATE_UNKNOWN</code></li>
+     * <li> <code>MediaStatus.PLAYER_STATE_IDLE</code></li>
+     * <li> <code>MediaStatus.PLAYER_STATE_PLAYING</code></li>
+     * <li> <code>MediaStatus.PLAYER_STATE_PAUSED</code></li>
+     * <li> <code>MediaStatus.PLAYER_STATE_BUFFERING</code></li>
      * </ul>
      */
     public int getPlaybackStatus() {
@@ -1904,6 +1910,15 @@ public class VideoCastManager extends BaseCastManager
      * Returns the Idle reason, defined in <code>MediaStatus.IDLE_*</code>. Note that the returned
      * value is only meaningful if the status is truly <code>MediaStatus.PLAYER_STATE_IDLE
      * </code>
+     *
+     * <p>Possible values are:
+     * <ul>
+     *     <li>IDLE_REASON_NONE</li>
+     *     <li>IDLE_REASON_FINISHED</li>
+     *     <li>IDLE_REASON_CANCELED</li>
+     *     <li>IDLE_REASON_INTERRUPTED</li>
+     *     <li>IDLE_REASON_ERROR</li>
+     * </ul>
      */
     public int getIdleReason() {
         return mIdleReason;
@@ -2031,11 +2046,6 @@ public class VideoCastManager extends BaseCastManager
         } else {
             onQueueUpdated(null, null, MediaStatus.REPEAT_MODE_REPEAT_OFF, false);
         }
-        if (queueItems != null && !queueItems.isEmpty()) {
-            for (MediaQueueItem item : queueItems) {
-                LOGD(TAG, "[queue] Queue Item is: " + item.toJson());
-            }
-        }
         mState = mMediaStatus.getPlayerState();
         mIdleReason = mMediaStatus.getIdleReason();
 
@@ -2054,11 +2064,15 @@ public class VideoCastManager extends BaseCastManager
                 updateMediaSession(false);
                 startNotificationService();
             } else if (mState == MediaStatus.PLAYER_STATE_IDLE) {
-                LOGD(TAG, "onRemoteMediaPlayerStatusUpdated(): Player status = idle");
+                LOGD(TAG, "onRemoteMediaPlayerStatusUpdated(): Player status = IDLE with reason: "
+                        + mIdleReason );
                 updateMediaSession(false);
                 switch (mIdleReason) {
                     case MediaStatus.IDLE_REASON_FINISHED:
-                        clearMediaSession();
+                        if (mMediaStatus.getLoadingItemId() == MediaQueueItem.INVALID_ITEM_ID) {
+                            // we have reached the end of queue
+                            clearMediaSession();
+                        }
                         makeUiHidden = true;
                         break;
                     case MediaStatus.IDLE_REASON_ERROR:
@@ -2220,6 +2234,10 @@ public class VideoCastManager extends BaseCastManager
         mAudioManager.requestAudioFocus(null, AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
 
+        PendingIntent pi = getCastControllerPendingIntent();
+        if (pi != null) {
+            mMediaSessionCompat.setSessionActivity(pi);
+        }
         mMediaSessionCompat.setPlaybackState(new PlaybackStateCompat.Builder()
                 .setState(PlaybackStateCompat.STATE_PLAYING, 0, 1.0f)
                 .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build());
@@ -2231,6 +2249,23 @@ public class VideoCastManager extends BaseCastManager
         updateMediaSessionMetadata();
 
         mMediaRouter.setMediaSessionCompat(mMediaSessionCompat);
+    }
+
+    /*
+     * Returns a PendingIntent that can open the target activity for controlling the cast experience
+     */
+    private PendingIntent getCastControllerPendingIntent() {
+        try {
+            Bundle mediaWrapper = Utils.mediaInfoToBundle(getRemoteMediaInformation());
+            Intent contentIntent = new Intent(mContext, mTargetActivity);
+            contentIntent.putExtra(VideoCastManager.EXTRA_MEDIA, mediaWrapper);
+            return PendingIntent
+                    .getActivity(mContext, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        } catch (TransientNetworkDisconnectionException | NoConnectionException e) {
+            LOGE(TAG,
+                    "getCastControllerPendingIntent(): Failed to get the remote media information");
+        }
+        return null;
     }
 
     /*
@@ -2278,22 +2313,29 @@ public class VideoCastManager extends BaseCastManager
                     ? new MediaMetadataCompat.Builder()
                     : new MediaMetadataCompat.Builder(currentMetadata);
             mMediaSessionCompat.setMetadata(newBuilder
-                    .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, bm)
+                    .putBitmap(MediaMetadataCompat.METADATA_KEY_ART, bm)
                     .build());
         } else {
-            new FetchBitmapTask() {
+            if (mLockScreenFetchTask != null) {
+                mLockScreenFetchTask.cancel(true);
+            }
+            mLockScreenFetchTask = new FetchBitmapTask() {
                 @Override
                 protected void onPostExecute(Bitmap bitmap) {
-                    MediaMetadataCompat currentMetadata = mMediaSessionCompat.getController()
-                            .getMetadata();
-                    MediaMetadataCompat.Builder newBuilder = currentMetadata == null
-                            ? new MediaMetadataCompat.Builder()
-                            : new MediaMetadataCompat.Builder(currentMetadata);
-                    mMediaSessionCompat.setMetadata(newBuilder
-                            .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, bitmap)
-                            .build());
+                    if (mMediaSessionCompat != null) {
+                        MediaMetadataCompat currentMetadata = mMediaSessionCompat.getController()
+                                .getMetadata();
+                        MediaMetadataCompat.Builder newBuilder = currentMetadata == null
+                                ? new MediaMetadataCompat.Builder()
+                                : new MediaMetadataCompat.Builder(currentMetadata);
+                        mMediaSessionCompat.setMetadata(newBuilder
+                                .putBitmap(MediaMetadataCompat.METADATA_KEY_ART, bitmap)
+                                .build());
+                    }
+                    mLockScreenFetchTask = null;
                 }
-            }.execute(imgUrl);
+            };
+            mLockScreenFetchTask.execute(imgUrl);
         }
     }
     /*
@@ -2315,7 +2357,10 @@ public class VideoCastManager extends BaseCastManager
                 int playState = isRemoteStreamLive() ? PlaybackStateCompat.STATE_BUFFERING
                         : PlaybackStateCompat.STATE_PLAYING;
                 int state = playing ? playState : PlaybackStateCompat.STATE_PAUSED;
-
+                PendingIntent pi = getCastControllerPendingIntent();
+                if (pi != null) {
+                    mMediaSessionCompat.setSessionActivity(pi);
+                }
                 mMediaSessionCompat.setPlaybackState(new PlaybackStateCompat.Builder()
                         .setState(state, 0, 1.0f)
                         .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE).build());
@@ -2344,16 +2389,54 @@ public class VideoCastManager extends BaseCastManager
             MediaMetadataCompat.Builder newBuilder = currentMetadata == null
                     ? new MediaMetadataCompat.Builder()
                     : new MediaMetadataCompat.Builder(currentMetadata);
-            mMediaSessionCompat.setMetadata(
-                    newBuilder
-                            .putString(MediaMetadataCompat.METADATA_KEY_TITLE,
-                                    mm.getString(MediaMetadata.KEY_TITLE))
-                            .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST,
-                                    mContext.getResources().getString(
-                                            R.string.ccl_casting_to_device, getDeviceName()))
-                            .putLong(MediaMetadataCompat.METADATA_KEY_DURATION,
-                                    info.getStreamDuration())
-                            .build());
+            MediaMetadataCompat metadata = newBuilder
+                    // used in lock screen for pre-lollipop
+                    .putString(MediaMetadataCompat.METADATA_KEY_TITLE,
+                            mm.getString(MediaMetadata.KEY_TITLE))
+                    // used in lock screen for pre-lollipop
+                    .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST,
+                            mContext.getResources().getString(
+                                    R.string.ccl_casting_to_device, getDeviceName()))
+                    // used in MediaRouteController dialog
+                    .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE,
+                            mm.getString(MediaMetadata.KEY_TITLE))
+                    // used in MediaRouteController dialog
+                    .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_SUBTITLE,
+                            mm.getString(MediaMetadata.KEY_SUBTITLE))
+                    .putLong(MediaMetadataCompat.METADATA_KEY_DURATION,
+                            info.getStreamDuration())
+                    .build();
+            mMediaSessionCompat.setMetadata(metadata);
+
+            Uri iconUri = mm.hasImages() ? mm.getImages().get(0).getUrl() : null;
+            if (iconUri == null) {
+                Bitmap bm = BitmapFactory.decodeResource(
+                        mContext.getResources(), R.drawable.album_art_placeholder);
+                mMediaSessionCompat.setMetadata(newBuilder
+                        .putBitmap(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, bm)
+                        .build());
+            } else {
+                if (mMediaSessionIconFetchTask != null) {
+                    mMediaSessionIconFetchTask.cancel(true);
+                }
+                mMediaSessionIconFetchTask = new FetchBitmapTask() {
+                    @Override
+                    protected void onPostExecute(Bitmap bitmap) {
+                        if (mMediaSessionCompat != null) {
+                            MediaMetadataCompat currentMetadata = mMediaSessionCompat
+                                    .getController().getMetadata();
+                            MediaMetadataCompat.Builder newBuilder = currentMetadata == null
+                                    ? new MediaMetadataCompat.Builder()
+                                    : new MediaMetadataCompat.Builder(currentMetadata);
+                            mMediaSessionCompat.setMetadata(newBuilder.putBitmap(
+                                    MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, bitmap).build());
+                        }
+                        mMediaSessionIconFetchTask = null;
+                    }
+                };
+                mMediaSessionIconFetchTask.execute(iconUri);
+            }
+
         } catch (NotFoundException e) {
             LOGE(TAG, "Failed to update Media Session due to resource not found", e);
         } catch (TransientNetworkDisconnectionException | NoConnectionException e) {
@@ -2367,10 +2450,20 @@ public class VideoCastManager extends BaseCastManager
     public void clearMediaSession() {
         LOGD(TAG, "clearMediaSession()");
         if (isFeatureEnabled(FEATURE_LOCKSCREEN)) {
+            if (mLockScreenFetchTask != null) {
+                mLockScreenFetchTask.cancel(true);
+            }
+            if (mMediaSessionIconFetchTask != null) {
+                mMediaSessionIconFetchTask.cancel(true);
+            }
             mAudioManager.abandonAudioFocus(null);
             if (mMediaSessionCompat != null) {
-                mMediaSessionCompat.setActive(false);
+                mMediaSessionCompat.setMetadata(null);
+                PlaybackStateCompat playbackState = new PlaybackStateCompat.Builder()
+                        .setState(PlaybackStateCompat.STATE_NONE, 0, 1.0f).build();
+                mMediaSessionCompat.setPlaybackState(playbackState);
                 mMediaSessionCompat.release();
+                mMediaSessionCompat.setActive(false);
                 mMediaSessionCompat = null;
             }
         }

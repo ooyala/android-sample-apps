@@ -30,6 +30,27 @@ Google Cast Developers Community on Google+ [http://goo.gl/TPLDxj](http://goo.gl
 
 ## Change List
 
+2.6.1
+ * Addressing #245
+ * Fixing a small bug where in the custom CastControllerDialog, text was not readable when there was no
+ media information
+ * Added the appropriate PendingIntent to the MediaSessionCompat; this is in preparation to move
+ to the CastControllerDialog from the media router library; there is currently a missing feature in
+ that library that doesn't allow us to use this PendingIntent but when that feature gets added, this
+ PendingIntent will be used to send the user to the appropriate target activity.
+ * Updated Play Services and support libraries to the latest versions.
+
+2.6
+ * Addressing #242, #243
+ * Some enhancement around usage of MediaSessionCompat and its setup.
+ * Updated the appcompat and mediarouter support libraries to the latest version (23.1.0). Due to
+ the changes in this version of media router library, the styling of the VideoCastControllerDialog
+ is somewhat different, please make sure colors are fine with your application theme and if needed,
+ update the appropriate resource aliases and color in your client application.
+
+2.5.2
+ * Fixing issue #233
+
 2.5.1
  * Fixed an issue where not setting the LaunchOptions would have resulted in receiver not loading. Now the
    default behavior is to launch the app with the default value of relaunchIfRunning set to false.

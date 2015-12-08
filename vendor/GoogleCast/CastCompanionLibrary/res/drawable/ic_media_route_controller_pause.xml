@@ -15,4 +15,4 @@
   limitations under the License.
   -->
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/ic_av_pause_sm_dark" />
+    android:src="@drawable/ic_pause_black_36dp" />

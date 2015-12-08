@@ -31,7 +31,8 @@ import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
 import com.google.android.libraries.cast.companionlibrary.cast.exceptions.CastException;
 import com.google.android.libraries.cast.companionlibrary.cast.exceptions.NoConnectionException;
-import com.google.android.libraries.cast.companionlibrary.cast.exceptions.TransientNetworkDisconnectionException;
+import com.google.android.libraries.cast.companionlibrary.cast.exceptions
+        .TransientNetworkDisconnectionException;
 import com.google.android.libraries.cast.companionlibrary.utils.FetchBitmapTask;
 import com.google.android.libraries.cast.companionlibrary.utils.LogUtils;
 import com.google.android.libraries.cast.companionlibrary.utils.Utils;
@@ -600,6 +601,9 @@ public class VideoCastControllerFragment extends Fragment implements
             return;
         }
         mUrlAndBitmap = null;
+        if (mImageAsyncTask != null) {
+            mImageAsyncTask.cancel(true);
+        }
         mImageAsyncTask = new FetchBitmapTask() {
             @Override
             protected void onPostExecute(Bitmap bitmap) {
@@ -607,7 +611,7 @@ public class VideoCastControllerFragment extends Fragment implements
                     mUrlAndBitmap = new UrlAndBitmap();
                     mUrlAndBitmap.mBitmap = bitmap;
                     mUrlAndBitmap.mUrl = uri;
-                    if (!mImageAsyncTask.isCancelled()) {
+                    if (!isCancelled()) {
                         mCastController.setImage(bitmap);
                     }
                 }

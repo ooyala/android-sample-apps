@@ -17,8 +17,8 @@
 <resources>
 
     <!-- Custom Media Router Dialog -->
-    <color name="ccl_mr_custom_line_1">#FFFFFF</color>
-    <color name="ccl_mr_custom_line_2">#AAFFFFFF</color>
+    <color name="ccl_mr_custom_line_1">#000000</color>
+    <color name="ccl_mr_custom_line_2">#AA000000</color>
     <color name="ccl_mr_custom_title">#33b5e5</color>
 
     <!-- VideoCastControllerActivity/Fragment -->
