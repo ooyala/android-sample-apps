@@ -32,12 +32,22 @@
         android:layout_alignLeft="@+id/videoTitle"
         android:layout_alignRight="@+id/videoTitle"
         android:layout_below="@+id/videoTitle"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-light"
         android:textColor="#FFFFFF"
-        android:lines="50"
-        android:gravity="center_horizontal"
-        android:scrollbars="vertical"/>
+        android:lines="4"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/castStateTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:layout_alignLeft="@+id/videoTitle"
+        android:layout_alignRight="@+id/videoTitle"
+        android:layout_below="@+id/videoDescription"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condense"
+        android:gravity="center_horizontal"/>
 
 </RelativeLayout>

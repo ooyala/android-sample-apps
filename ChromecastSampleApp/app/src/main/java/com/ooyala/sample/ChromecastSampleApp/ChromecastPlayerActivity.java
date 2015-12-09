@@ -41,6 +41,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private String domain;
   private OoyalaPlayer player;
   private View castView;
+  private TextView castStateTextView;
   private final String ACCOUNT_ID = "accountID";
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
@@ -98,13 +99,14 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     CastManager castManager = CastManager.getCastManager();
     castManager.setCastView(castView);
     castManager.registerWithOoyalaPlayer(player);
+    castStateTextView = (TextView)castView.findViewById(R.id.castStateTextView);
 
     player.addObserver(this);
     play( embedCode );
   }
 
   private void play( String ec ) {
-    player.setEmbedCode( ec );
+    player.setEmbedCode(ec);
     player.play();
   }
 
@@ -195,12 +197,31 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
       }
     }
 
+    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION) {
+      updateCastState();
+    }
+
     if( arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION && embedCode2 != null ) {
       play( embedCode2 );
       embedCode2 = null;
     }
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+  }
+
+  private void updateCastState() {
+    if (player.isInCastMode()) {
+      OoyalaPlayer.State state =  player.getState();
+      String castDeviceName = CastManager.getVideoCastManager().getDeviceName();
+
+      if (state == OoyalaPlayer.State.LOADING) {
+        castStateTextView.setText(getString(R.string.loading));
+      } else if (state == OoyalaPlayer.State.PLAYING || state == OoyalaPlayer.State.PAUSED) {
+        castStateTextView.setText(getString(R.string.castingTo) + castDeviceName);
+      } else {
+        castStateTextView.setText("");
+      }
+    }
   }
 
   /**
