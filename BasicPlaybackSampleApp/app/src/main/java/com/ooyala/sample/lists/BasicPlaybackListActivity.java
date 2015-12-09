@@ -1,8 +1,5 @@
 package com.ooyala.sample.lists;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +11,11 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity;
+import com.ooyala.sample.players.MultiVideosPlaybackVideoPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class BasicPlaybackListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
@@ -47,6 +48,11 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", BasicPlaybackVideoPlayerActivity.class));
     selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", BasicPlaybackVideoPlayerActivity.class));
     selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", BasicPlaybackVideoPlayerActivity.class));
+
+    selectionMap.put("Video + Preroll Vast", new PlayerSelectionOption("UwZGZ5NDqTTBRT4-WL1IiUEyLJJOyYdv", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Video + Midroll Vast", new PlayerSelectionOption("Z2ZDNjMjq8C5embhh1zues-loA3nFFly", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Video + Postroll Vast", new PlayerSelectionOption("94eG93NDoaBRAAfn1iOS1SrthDOsnJMi", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Multi Video combination(HLS + MP4)", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", MultiVideosPlaybackVideoPlayerActivity.class));
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
