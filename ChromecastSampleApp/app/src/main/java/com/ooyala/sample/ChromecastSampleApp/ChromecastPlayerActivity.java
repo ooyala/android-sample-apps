@@ -217,7 +217,8 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
       if (state == OoyalaPlayer.State.LOADING) {
         castStateTextView.setText(getString(R.string.loading));
       } else if (state == OoyalaPlayer.State.PLAYING || state == OoyalaPlayer.State.PAUSED) {
-        castStateTextView.setText(getString(R.string.castingTo) + castDeviceName);
+        String statusString = String.format(getString(R.string.castingTo), castDeviceName);
+        castStateTextView.setText(statusString);
       } else {
         castStateTextView.setText("");
       }

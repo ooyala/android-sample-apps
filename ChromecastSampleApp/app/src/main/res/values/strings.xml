@@ -3,5 +3,5 @@
   <string name="app_name">Ooyala Chromecast Sample App</string>
   <string name="media_route_menu_title">Play on..</string>
   <string name="loading">Loading</string>
-  <string name="castingTo">Casting to   </string>
+  <string name="castingTo">Casting to %s</string>
 </resources>
