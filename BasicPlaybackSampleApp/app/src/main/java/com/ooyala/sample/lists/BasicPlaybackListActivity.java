@@ -49,8 +49,6 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", BasicPlaybackVideoPlayerActivity.class));
     selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", BasicPlaybackVideoPlayerActivity.class));
 
-    selectionMap.put("Multi Video combination(HLS + MP4)", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", MultiVideosPlaybackVideoPlayerActivity.class));
-
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView

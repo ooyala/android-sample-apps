@@ -20,7 +20,10 @@ import java.util.Observer;
  * through the SDK
  *
  */
-public class MultiVideosPlaybackVideoPlayerActivity extends Activity implements Observer {
+public class MultipleVideosPlayerActivity extends Activity implements Observer {
+  public final static String getName() {
+    return "Multiple Video Playback";
+  }
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
