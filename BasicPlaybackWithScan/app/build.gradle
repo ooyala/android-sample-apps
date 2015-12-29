@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23"
+
+    defaultConfig {
+        applicationId "com.ooyala.sample.BasicPlaybackSampleApp"
+        minSdkVersion 9
+        targetSdkVersion 23
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.android.gms:play-services:8.4.+'
+    compile files('libs/OoyalaSDK.jar')
+    compile project(':AndroidVisionQRReader')
+}
