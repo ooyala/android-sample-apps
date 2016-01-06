@@ -13,6 +13,12 @@ import com.ooyala.sample.R;
 import java.util.Observable;
 import java.util.Observer;
 
+import java.io.IOException;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 /**
  * This activity illustrates how you can play basicPlayback Video
  * you can also play Ooyala and VAST advertisements programmatically
@@ -25,6 +31,7 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
   String EMBED = null;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
+  int count=0;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -93,6 +100,48 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
         Log.e(TAG, msg);
       }
       return;
+    }
+
+  // Hook to write Notifications to a temporary file on the device/emulator
+    // Keeps track of incoming notifications and makes sure count is right
+    count++ ;
+    String text="Notification Received: " + arg1 + " - state: " + player.getState() + "count: " +count;
+
+    //Empty Logcat buffer
+    if(count==1) {
+
+      try {
+        Process process = new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
+      } catch (IOException e) {
+      }
+    }
+
+    //Writing events into file on device
+    File logFile = new File("sdcard/log.file");
+    if (!logFile.exists())
+    {
+      try
+      {
+        logFile.createNewFile();
+      }
+      catch (IOException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+    try
+    {
+      //BufferedWriter for performance, true to set append to file flag
+      BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+      buf.append(text);
+      buf.newLine();
+      buf.close();
+    }
+    catch (IOException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
