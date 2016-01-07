@@ -1,29 +1,42 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<head>
-<title>Source code</title>
-<link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
-</head>
-<body>
-<div class="sourceContainer">
-<pre><span class="sourceLineNo">001</span>package tv.freewheel.ad.interfaces;<a name="line.1"></a>
-<span class="sourceLineNo">002</span><a name="line.2"></a>
-<span class="sourceLineNo">003</span><a name="line.3"></a>
-<span class="sourceLineNo">004</span>/**<a name="line.4"></a>
-<span class="sourceLineNo">005</span> * IRendererController is the common interface for controlling ad renderers.<a name="line.5"></a>
-<span class="sourceLineNo">006</span> */<a name="line.6"></a>
-<span class="sourceLineNo">007</span>public abstract interface IRendererController {<a name="line.7"></a>
-<span class="sourceLineNo">008</span>        /**<a name="line.8"></a>
-<span class="sourceLineNo">009</span>         * Pass the event to ad renderer.<a name="line.9"></a>
-<span class="sourceLineNo">010</span>         *<a name="line.10"></a>
-<span class="sourceLineNo">011</span>         * @param type name of the event<a name="line.11"></a>
-<span class="sourceLineNo">012</span>         * &lt;br/&gt;<a name="line.12"></a>
-<span class="sourceLineNo">013</span>         * &lt;br/&gt;<a name="line.13"></a>
-<span class="sourceLineNo">014</span>         * Available event:&lt;br/&gt;<a name="line.14"></a>
-<span class="sourceLineNo">015</span>         *      EVENT_AD_CLICK          -               click on the ad&lt;br/&gt;<a name="line.15"></a>
-<span class="sourceLineNo">016</span>         */<a name="line.16"></a>
-<span class="sourceLineNo">017</span>        public void processEvent(String type);<a name="line.17"></a>
-<span class="sourceLineNo">018</span>}<a name="line.18"></a>
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package tv.freewheel.ad.interfaces;<a name="line.1"></a>
+<FONT color="green">002</FONT>    import java.util.HashMap;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    /**<a name="line.5"></a>
+<FONT color="green">006</FONT>     * IRendererController is the common interface for controlling ad renderers.<a name="line.6"></a>
+<FONT color="green">007</FONT>     */<a name="line.7"></a>
+<FONT color="green">008</FONT>    public abstract interface IRendererController {<a name="line.8"></a>
+<FONT color="green">009</FONT>            /**<a name="line.9"></a>
+<FONT color="green">010</FONT>             * Pass the event to ad renderer.<a name="line.10"></a>
+<FONT color="green">011</FONT>             *<a name="line.11"></a>
+<FONT color="green">012</FONT>             * @param type name of the event<a name="line.12"></a>
+<FONT color="green">013</FONT>             * &lt;br&gt;<a name="line.13"></a>
+<FONT color="green">014</FONT>             * &lt;br&gt;<a name="line.14"></a>
+<FONT color="green">015</FONT>             * Available event:&lt;br&gt;<a name="line.15"></a>
+<FONT color="green">016</FONT>             *      EVENT_AD_CLICK          -               click on the ad&lt;br&gt;<a name="line.16"></a>
+<FONT color="green">017</FONT>             */<a name="line.17"></a>
+<FONT color="green">018</FONT>            public void processEvent(String type);<a name="line.18"></a>
+<FONT color="green">019</FONT>    <a name="line.19"></a>
+<FONT color="green">020</FONT>            /**<a name="line.20"></a>
+<FONT color="green">021</FONT>             * See also {@link #processEvent(String)}.<a name="line.21"></a>
+<FONT color="green">022</FONT>             *<a name="line.22"></a>
+<FONT color="green">023</FONT>             * @param type name of the event.<a name="line.23"></a>
+<FONT color="green">024</FONT>             * &lt;br&gt;<a name="line.24"></a>
+<FONT color="green">025</FONT>             * &lt;br&gt;<a name="line.25"></a>
+<FONT color="green">026</FONT>             * Available event:&lt;br&gt;<a name="line.26"></a>
+<FONT color="green">027</FONT>             *      EVENT_AD_MEASUREMENT    -       measurement triggered<a name="line.27"></a>
+<FONT color="green">028</FONT>             * &lt;br&gt;<a name="line.28"></a>
+<FONT color="green">029</FONT>             * &lt;br&gt;<a name="line.29"></a>
+<FONT color="green">030</FONT>             * @param extraInfo additional information need to be processed by AdManager. Available keys:<a name="line.30"></a>
+<FONT color="green">031</FONT>             * &lt;br&gt;<a name="line.31"></a>
+<FONT color="green">032</FONT>             *                      &lt;br&gt;- INFO_KEY_CONCRETE_EVENT_ID Required when the eventName is EVENT_AD_MEASUREMENT.<a name="line.32"></a>
+<FONT color="green">033</FONT>             *                      &lt;br&gt;use this key to specify which measurement event is triggerd.<a name="line.33"></a>
+<FONT color="green">034</FONT>             */<a name="line.34"></a>
+<FONT color="green">035</FONT>            public void processEvent(String type, HashMap&lt;String, Object&gt; extraInfo);<a name="line.35"></a>
+<FONT color="green">036</FONT>    }<a name="line.36"></a>
 
 
 
@@ -84,7 +97,6 @@
 
 
 
-</pre>
-</div>
-</body>
-</html>
+</PRE>
+</BODY>
+</HTML>
