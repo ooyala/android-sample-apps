@@ -17,6 +17,7 @@ import com.ooyala.sample.players.ChangeVideoPlayerActivity;
 import com.ooyala.sample.players.CustomControlsPlayerActivity;
 import com.ooyala.sample.players.CustomOverlayPlayerActivity;
 import com.ooyala.sample.players.InsertAdPlayerActivity;
+import com.ooyala.sample.players.MultipleVideosPlayerActivity;
 import com.ooyala.sample.players.PlayWithInitialTimePlayerActivity;
 import com.ooyala.sample.players.PluginPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
@@ -40,6 +41,7 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
     selectionMap.put(PlayWithInitialTimePlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", PlayWithInitialTimePlayerActivity.class) );
+    selectionMap.put(MultipleVideosPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", MultipleVideosPlayerActivity.class) );
     selectionMap.put(InsertAdPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", InsertAdPlayerActivity.class) );
     selectionMap.put(ChangeVideoPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", ChangeVideoPlayerActivity.class) );
     selectionMap.put(PluginPlayerActivity.getName(), new PlayerSelectionOption("lrZmRiMzrr8cP77PPW0W8AsjjhMJ1BBe", PluginPlayerActivity.class));
