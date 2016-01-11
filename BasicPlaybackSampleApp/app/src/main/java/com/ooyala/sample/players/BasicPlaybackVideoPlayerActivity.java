@@ -9,15 +9,10 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.sample.utils.BasicPlaybackSampleAppLog;
 
 import java.util.Observable;
 import java.util.Observer;
-
-import java.io.IOException;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
 
 /**
  * This activity illustrates how you can play basicPlayback Video
@@ -107,42 +102,9 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
     count++ ;
     String text="Notification Received: " + arg1 + " - state: " + player.getState() + "count: " +count;
 
-    //Empty Logcat buffer
-    if(count==1) {
-
-      try {
-        Process process = new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
-      } catch (IOException e) {
-      }
-    }
-
-    //Writing events into file on device
-    File logFile = new File("sdcard/log.file");
-    if (!logFile.exists())
-    {
-      try
-      {
-        logFile.createNewFile();
-      }
-      catch (IOException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    }
-    try
-    {
-      //BufferedWriter for performance, true to set append to file flag
-      BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
-      buf.append(text);
-      buf.newLine();
-      buf.close();
-    }
-    catch (IOException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    // Write the event text along with event count to log file in sdcard if the log file exists
+    BasicPlaybackSampleAppLog BasicPlaybacklog= new BasicPlaybackSampleAppLog();
+    BasicPlaybacklog.writeToSdcardLog(count,text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
