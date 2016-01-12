@@ -9,6 +9,7 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.sample.utils.BasicPlaybackSampleAppLog;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -25,6 +26,7 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
   String EMBED = null;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
+  int count=0;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -94,6 +96,15 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
       }
       return;
     }
+
+  // Hook to write Notifications to a temporary file on the device/emulator
+    // Keeps track of incoming notifications and makes sure count is right
+    count++ ;
+    String text="Notification Received: " + arg1 + " - state: " + player.getState() + "count: " +count;
+
+    // Write the event text along with event count to log file in sdcard if the log file exists
+    BasicPlaybackSampleAppLog BasicPlaybacklog= new BasicPlaybackSampleAppLog();
+    BasicPlaybacklog.writeToSdcardLog(count,text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
