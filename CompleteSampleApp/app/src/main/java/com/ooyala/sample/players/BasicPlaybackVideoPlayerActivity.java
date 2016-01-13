@@ -3,12 +3,12 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.ui.OoyalaPlayerLayoutController;
-import com.ooyala.sample.R;
+import com.ooyala.android.configuration.Options;
+import com.ooyala.android.ooyalaskinsampleapp.R;
+import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
+import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayoutController;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -26,7 +26,7 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
 
-  protected OoyalaPlayerLayoutController playerLayoutController;
+  protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
   /**
@@ -40,13 +40,24 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
     EMBED = getIntent().getExtras().getString("embed_code");
 
     //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-    player.addObserver(this);
+//    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaSkin);
+//    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+//    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+//    player.addObserver(this);
+
+    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
+    PlayerDomain domain = new PlayerDomain(DOMAIN);
+    Options options = new Options.Builder().setShowAdsControls(false)
+            .setShowCuePoints(true).setShowPromoImage(true)
+            .setPreloadContent(false).build();
+    player = new OoyalaPlayer(PCODE, domain, options);
+    skinLayout.setupViews(getApplication(), player);
+//    playerLayoutController = new OoyalaSkinLayoutController(context,skinLayout, player);
+//    player.addObserver(this);
+
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");

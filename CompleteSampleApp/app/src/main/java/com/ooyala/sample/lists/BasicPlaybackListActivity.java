@@ -9,9 +9,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ooyala.sample.R;
+import com.ooyala.android.ooyalaskinsampleapp.R;
 import com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity;
-import com.ooyala.sample.players.MultiVideosPlaybackVideoPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
@@ -49,9 +48,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", BasicPlaybackVideoPlayerActivity.class));
     selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", BasicPlaybackVideoPlayerActivity.class));
 
-    selectionMap.put("Multi Video combination(HLS + MP4)", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", MultiVideosPlaybackVideoPlayerActivity.class));
-
-    setContentView(com.ooyala.sample.R.layout.list_activity_layout);
+    setContentView(R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
     selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
