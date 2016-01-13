@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity;
-import com.ooyala.sample.players.MultiVideosPlaybackVideoPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
