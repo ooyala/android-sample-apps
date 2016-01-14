@@ -93,7 +93,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
     castManager.registerWithOoyalaPlayer(player);
     castViewManager = new CastViewManager(this, castManager);
 
-        player.addObserver(this);
+    player.addObserver(this);
     play( embedCode );
   }
 
