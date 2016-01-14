@@ -1,15 +1,13 @@
 package com.ooyala.sample.ChromecastSampleApp;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
@@ -20,7 +18,6 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
-import com.ooyala.android.item.Video;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
 import org.json.JSONObject;
@@ -31,7 +28,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ChromecastPlayerActivity extends ActionBarActivity implements EmbedTokenGenerator, Observer{
+public class ChromecastPlayerActivity extends AppCompatActivity implements EmbedTokenGenerator, Observer{
   
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
   private static final double DEFAULT_VOLUME_INCREMENT = 0.05;
@@ -40,8 +37,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   private String pcode;
   private String domain;
   private OoyalaPlayer player;
-  private View castView;
-  private TextView castStateTextView;
+  private CastViewManager castViewManager;
   private final String ACCOUNT_ID = "accountID";
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
@@ -56,7 +52,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
   @Override
   public void onCreate(Bundle savedInstanceState) {
     Log.d(TAG, "onCreate()");
-    // Setup castView
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
@@ -90,18 +85,15 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
 
     // Initialize action bar
     ActionBar actionBar = getSupportActionBar();
-    actionBar.setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+    actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     actionBar.setTitle(R.string.app_name);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-    castView = getLayoutInflater().inflate(R.layout.cast_video_view, null);
     CastManager castManager = CastManager.getCastManager();
-    castManager.setCastView(castView);
     castManager.registerWithOoyalaPlayer(player);
-    castStateTextView = (TextView)castView.findViewById(R.id.castStateTextView);
+    castViewManager = new CastViewManager(this, castManager);
 
-    player.addObserver(this);
+        player.addObserver(this);
     play( embedCode );
   }
 
@@ -186,7 +178,7 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
 
     if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION) {
-      configureCastPlaybackViewBasedOnItem(player.getCurrentItem());
+      castViewManager.configureCastView(player.getCurrentItem());
     } else if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION) {
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
@@ -198,7 +190,10 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
 
     if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION) {
-      updateCastState();
+      if (player.isInCastMode()) {
+        OoyalaPlayer.State state =  player.getState();
+        castViewManager.updateCastState(this, state);
+      }
     }
 
     if( arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION && embedCode2 != null ) {
@@ -207,40 +202,6 @@ public class ChromecastPlayerActivity extends ActionBarActivity implements Embed
     }
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-  }
-
-  private void updateCastState() {
-    if (player.isInCastMode()) {
-      OoyalaPlayer.State state =  player.getState();
-      String castDeviceName = CastManager.getVideoCastManager().getDeviceName();
-
-      if (state == OoyalaPlayer.State.LOADING) {
-        castStateTextView.setText(getString(R.string.loading));
-      } else if (state == OoyalaPlayer.State.PLAYING || state == OoyalaPlayer.State.PAUSED) {
-        String statusString = String.format(getString(R.string.castingTo), castDeviceName);
-        castStateTextView.setText(statusString);
-      } else {
-        castStateTextView.setText("");
-      }
-    }
-  }
-
-  /**
-   * Configure the information on the CastView whenever a new video is put into the OoyalaPlayer
-   * @param video
-   */
-  private void configureCastPlaybackViewBasedOnItem(Video video) {
-    final ImageView castBackgroundImage = (ImageView) castView.findViewById(R.id.castBackgroundImage);
-
-    // Update the ImageView on a separate thread
-
-    new Thread(new UpdateImageViewRunnable(castBackgroundImage, video.getPromoImageURL(0, 0))).start();
-
-    TextView videoTitle = (TextView) castView.findViewById(R.id.videoTitle);
-    videoTitle.setText(video.getTitle());
-
-    TextView videoDescription = (TextView) castView.findViewById(R.id.videoDescription);
-    videoDescription.setText(video.getDescription());
   }
 
   /*

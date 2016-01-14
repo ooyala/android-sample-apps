@@ -3,10 +3,9 @@ package com.ooyala.sample.ChromecastSampleApp;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.RemoteControlClient;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -15,19 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.libraries.cast.companionlibrary.widgets.IMiniController;
 import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
 import com.ooyala.android.castsdk.CastManager;
 
-import java.util.List;
-
-public class ChromecastListActivity extends ActionBarActivity {
-  private RemoteControlClient remoteControlClient;
+public class ChromecastListActivity extends AppCompatActivity {
   private static final String TAG = "ChromecastListActivity";
 
   private MiniController defaultMiniController;
-  private IMiniController customizedMiniController;
-  private List<Integer> castViewImages;
   ChromecastPlayerSelectionOption[] videoList;
 
   @Override
@@ -76,8 +69,7 @@ public class ChromecastListActivity extends ActionBarActivity {
     });
     
     ActionBar actionBar = getSupportActionBar();
-    actionBar.setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+    actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     defaultMiniController = (MiniController) findViewById(R.id.miniController1);
