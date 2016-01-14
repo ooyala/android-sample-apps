@@ -1,0 +1,398 @@
+{
+  "description" : "Base UI Configuration for the Ooyala Player. See also: https://facebook.github.io/react and https://facebook.github.io/react-native.",
+  "type" : "object",
+  "additionalProperties" : false,
+  "required": ["localization"],
+  "properties" : {
+    "general": { // TODO: I'd like to get rid of this. There's only the watermark in here.
+      "description" : "Configuration of things that do not appear in only one part of the UI.",
+      "type": "object",
+      "properties": {
+        "watermark": {
+          "type": "object",
+          "additionalProperties" : false,
+          "properties" : {
+            "imageResource" : { "$ref" : "#/definitions/image" }
+          }
+        }
+      }
+    },
+    "localization" : {
+      "description": "Defines the string values used in the player. Languages listed in the array require a separate json file included in the bundle, named '<language>.json' e.g. 'en.json'.",
+      "type" : "object",
+      "properties": {
+        "defaultLanguage" : {"type" : "string", "pattern" : "^[a-z]{2}$"},
+        "availableLanguageFile" : {
+          "type": "array",
+          "items": {"type": "object", "pattern": "^[a-z]{2}$"}
+        }
+      },
+      "required" : ["defaultLanguage"]
+    },
+    "startScreen" : {
+      "description" : "The screen displayed after an asset loads, but before playback begins.",
+      "type" : "object",
+      "properties" : {
+        "playIconStyle" : {
+          "description" : "Default color is white with an opacity of 1",
+          "$ref" : "#/definitions/iconStyle"
+        },
+        // TODO: showPromo could be folded into promoImageSize as a 'none' enum value.
+        "showPromo": { "type" : "boolean" },
+        "promoImageSize" : {
+          // TODO: "deafult" could be called "fullscreen"?
+          "description" : "Configure how large the promo image should be when displayed. The 'small' setting will use styling out of the style sheets.",
+          "enum" : ["default", "small"]
+        },
+        // TODO: showPlayButton could be folded into playButtonPosition as a 'none' enum value.
+        "showPlayButton" : { "type" : "boolean" },
+        "playButtonPosition" : {
+          "enum" : [ "center", "topLeft", "topRight", "bottomLeft", "bottomRight" ]
+        },
+        "showTitle" : { "type" : "boolean" },
+        "showDescription" : { "type" : "boolean" },
+        "titleFont" : {
+          "description" : "The font of the title",
+          "$ref" : "#/definitions/fontStyle"
+        },
+        "descriptionFont" : {
+          "description" : "The font of the description",
+          "$ref" : "#/definitions/fontStyle"
+        },
+        // TODO: could we support a 'none' enum?
+        "infoPanelPosition" : {
+          "enum" : [ "topLeft", "topRight", "bottomLeft", "bottomRight" ]
+        }
+      }
+    },
+    "pauseScreen" : {
+      "description" : "The screen displayed when playback is paused.",
+      "type" : "object",
+      "properties" : {
+        "pauseIconStyle" : {
+          "description" : "Default color is white with an opacity of 1",
+          "$ref" : "#/definitions/iconStyle"
+        },
+        "screenToShowOnPause" : { // TODO: this is not used in the mobile code, that I could find with grep,
+          // TODO: what is "default"!? We could use more explicit naming.
+          "enum" : ["default", "discovery"]
+        },
+        // TODO: showPauseIcon could be folded into pauseIconPosition as a 'none' enum value.
+        "showPauseIcon" : { "type" : "boolean" },
+        "pauseIconPosition" : {
+          "enum" : [ "center", "topLeft", "topRight", "bottomLeft", "bottomRight" ]
+        },
+        "showTitle" : { "type" : "boolean" },
+        "showDescription" : { "type" : "boolean" },
+        "infoPanelPosition" : {
+          "enum" : [ "topLeft", "topRight", "bottomLeft", "bottomRight" ]
+        }
+      }
+    },
+    "endScreen" : {
+      "description" : "The screen displayed after an asset has completed playing.",
+      "type" : "object",
+      "properties" : {
+        "replayIconStyle" : {
+          "description" : "Default color is white with an opacity of 1",
+          "$ref" : "#/definitions/iconStyle"
+        },
+        "screenToShowOnEnd" : {
+          // TODO: what is "default"!? We could use more explicit naming.
+          "enum" : ["default", "discovery"]
+        },
+        "showReplayButton" : { "type" : "boolean" },
+        "showTitle" : { "type" : "boolean" },
+        "showDescription" : { "type" : "boolean" }
+      }
+    },
+    "adScreen" : {
+      "description" : "The screen to show during ads playback",
+      "type" : "object",
+      "properties" : {
+        "showAdMarquee" : { "type" : "boolean" },
+        "showControlBar" : { "type" : "boolean"}
+      }
+    },
+    "discoveryScreen" : {
+      "description" : "The screen showing other recommended content.",
+      "type" : "object",
+      "properties" : {
+        "panelTitle" : {
+          "type" : "object",
+          "additionalProperties" : false,
+          "required" : [ "titleFont" ],
+          "properties" : {
+            "titleFont" : {
+              "type": "object",
+              "description" : "The font of the title",
+              "$ref" : "#/definitions/fontStyle"
+            }
+          }
+        },
+        "contentTitle" : {
+          "description" : "The setting for discovery content title",
+          "type" : "object",
+          "additionalProperties" : false,
+          "required" : [ "show", "font" ],
+          "properties" :  {
+            "show": {"type" : "boolean"},
+            "font" : {"$ref" : "#/definitions/fontStyle"}
+          }
+        },
+        "contentDuration": {
+          "description" : "The setting for discovery content duration",
+          "type" : "object",
+          "additionalProperties" : false,
+          "required" : [ "show", "font"],
+          "properties" : {
+            "show": {"type" : "boolean"},
+            "font" : {"$ref" : "#/definitions/fontStyle"}
+          }
+        }
+      }
+    },
+    "shareScreen": {
+      "description" : "The list of sharing buttons (e.g. Twitter, Facebook, etc.).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties" : false,
+        "properties": {
+          "buttonName": { "type": "string" },
+          "icon" : {"$ref" : "#/definitions/icon"}
+        }
+      }
+    },
+    "moreOptionsScreen": {
+      "description" : "The more options / overflow panel. The set of items to show comes from the 'buttons' part of the schema.",
+      "type": "object",
+      "required" : ["iconSize", "color"], // TODO: anything else? Are there defaults in code for the opacities?
+      "additionalProperties" : false,
+      "patternProperties" : {
+        "brightOpacity": {"type": "number"},
+        "darkOpacity": {"type": "number"}
+      },
+      "properties": {
+        "iconSize": {"type": "number"},
+        "color": {"$ref": "#/definitions/color"},
+        "iconStyle" : {
+          "description" : "Default color is white with an opacity of 1",
+          "$ref" : "#/definitions/iconStyle"
+        }
+      }
+    },
+    "closedCaptionOptions" : {
+      "description" : "Settings regarding closed captioning.",
+      "type" : "object",
+      "properties" : {
+        // TODO: What is "defaultEnabled"? Mobile doesn't use it anywhere.
+        "defaultEnabled" : { "type" : "boolean" },
+        "defaultLanguage" : { "type" : "string" }
+      }
+    },
+    "upNext" : {
+      "description" : "The screen to show as an asset is ending, indicating what assets can follow.",
+      "type" : "object",
+      "properties" : {
+        // TODO: showUpNext could be folded into timeToShow using "oneOf".
+        "showUpNext" : { "type" : "boolean" },
+        "timeToShow": {
+          "type" : "string",
+          "pattern": "^[0-9]+$|^[0-9]{1,2}%$"
+        }
+      }
+    },
+    "controlBar" : {
+      "description" : "The playback control bar. Generally contains a play-pause button, scrubber control, etc. The set of items to show comes from the 'buttons' part of the schema.",
+      "type" : "object",
+      "additionalProperties" : false,
+      "required" : [ "height", "autoHide", "watermark" ],
+      "properties" : {
+        "iconStyle" : {
+          "description" : "Default color is #8E8E8E with an opacity of 1",
+          "$ref" : "#/definitions/iconStyle"
+        },
+        "height" : { "type" : "number" },
+        "autoHide" : { "type" : "boolean" },
+        // TODO: how is this different than general.watermark?
+        // And it really isn't a watermark, as it doesn't alpha-overlay anything else.
+        "watermark": {
+          "type": "object",
+          "additionalProperties" : false,
+          "properties": {
+            "imageResource" : { "$ref" : "#/definitions/image" },
+            "width": {"type" : "number"},
+            "height": {"type" : "number"}
+          }
+        }
+      }
+    },
+    "buttons" : {
+      "description" : "Defines the buttons that can appear on the controlBar and/or the moreOptions panel. Desktop and Mobile platforms can be configured individually.",
+      "type" : "object",
+      "additionalProperties" : false,
+      // TODO: should we really require both? For our own UX yes, but what about for 3rd parties who only care about 1 platform?
+      "required" : ["desktopContent", "mobileContent"],
+      "properties" : {
+        // TODO: should these have any requirements about their length?
+        "desktopContent" : { "$ref" : "#/definitions/buttonArray" },
+        "desktopAd" : { "$ref" : "#/definitions/buttonArray" },
+        "mobileContent" : { "$ref" : "#/definitions/buttonArray" },
+        "mobileAd" : { "$ref" : "#/definitions/buttonArray" }
+      }
+    },
+    "icons" : {
+      "description" : "The set of all required icons, for rendering all the various buttons' states.",
+      "type" : "object",
+      "patternProperties" : { "" : { "$ref" : "#/definitions/icon" } },
+      "required" : ["play", "pause", "volume", "volumeOff", "expand", "compress", "ellipsis", "replay", "share", "cc", "discovery", "quality", "setting", "dismiss", "toggleOff", "toggleOn", "left", "right"]
+    }
+  },
+  "definitions": {
+    "color" : {
+      "description" : "Any color string as supported by React / React Native.",
+      "type" : "string"
+    },
+    "image" : {
+      "description" : "Specify how to obtain an image's data. Desktop will use the url. Mobile will first lookup the native resource, with fall back to the url.",
+      "type" : "object",
+      "additionalProperties" : false,
+      "minProperties" : 1,
+      "properties" : {
+        "url" : { "type" : "string" },
+        "ios-resource" : { "type" : "string" },
+        "android-resource" : { "type" : "string" }
+      }
+    },
+    "button" : {
+      "type" : "object",
+      "oneOf" : [
+        {"$ref":"#/definitions/controlBarButton"},
+        {"$ref":"#/definitions/moreOptionsButton"}
+      ]
+    },
+    "controlBarButton" : {
+      "description" : "Buttons that start off in the control bar and thus need to say how they react when the control bar is too narrow for them to fit.",
+      "type" : "object",
+      "required" : ["name", "location", "whenDoesNotFit", "minWidth"],
+      "properties" : {
+        "name" : { "$ref" : "#/definitions/buttonNames" },
+        "location" : { "enum" : ["controlBar"] },
+        "whenDoesNotFit" : {
+          "description" : "Sets how the button should be dealt with when it doesn't fit in the control bar. Keep: keep the button visible in the control bar. Drop: hide it from the UI. MoveToMoreOptions: show it in the more options / overflow UI.",
+          "enum" : ["keep", "drop", "moveToMoreOptions"]
+        },
+        "minWidth" : { "type" : "number" }
+      }
+    },
+    "moreOptionsButton" : {
+      "description" : "Buttons that only appear in the more options UI, and never leave.",
+      "type" : "object",
+      "required" : ["name", "location"],
+      "properties" : {
+        "name" : { "$ref" : "#/definitions/buttonNames" },
+        "location" : { "enum" : ["moreOptions"] }
+      }
+    },
+    "buttonNames" : {
+      "description" : "These are the only buttons currently supported by the UI SDK.",
+      "additionalProperties" : false,
+      "enum" : ["playPause", "volume", "timeDuration", "flexibleSpace", "discovery", "fullscreen", "moreOptions", "watermark", "share", "closedCaption", "bitrateSelector", "quality", "live"]
+    },
+    "buttonArray" : {
+      "description" : "Used to list the buttons for a single platform (desktop vs. mobile).",
+      "type" : "array",
+      "items" : { "$ref" : "#/definitions/button" }
+    },
+    "icon" : {
+      "description" : "Icons are renderable from fonts. Bitmaps are not supported.",
+      "type" : "object",
+      "required" : ["fontFamilyName", "fontString", "fontStyleClass"],
+      "additionalProperties" : false,
+      "properties" : {
+        "fontFamilyName" : {
+          "description" : "The name of the font family to use.",
+          "type" : "string"
+        },
+        "fontString" : {
+          "description" : "The string used for displaying the icon. (Usually a single Unicode code point.)",
+          "type" : "string"
+        },
+        "fontStyleClass" : {
+          "description" : "The CSS class string for displaying the icon, which only applies to HTML5 player",
+          "type"  : "string"
+        }
+      }
+    },
+    "iconStyle" : {
+      "description" : "A collection of styles that can be used by icon renderings throughout the UI. Any value placed in here gets directly parsed as a react stylesheet. Supported style customizations are color, opacity, shadowColor, shadowOffset, shadowOpacity, shadowRadius, borderColor, borderRadius, and borderStyle. See React stylesheets for more specifics on each field. All values are optional, and have defaults specified in the code depending on the section. See each section for default values.",
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "color" : {
+          "type" : "string"
+        },
+        "opacity" : {
+          "type" : "number"
+        },
+        "active": {
+          "color" : {
+            "type" : "string"
+          },
+          "opacity" : {
+            "type" : "number"
+          }
+        },
+        "inactive": {
+          "color" : {
+            "type" : "string"
+          },
+          "opacity" : {
+            "type" : "number"
+          }
+        },
+        "shadowColor" : {
+          "type" : "string"
+        },
+        "shadowOffset" : {
+          "type" : "object",
+          "properties" : {
+            "width" : {"type" : "number"},
+            "height" : {"type" : "number"}
+          }
+        },
+        "shadowOpacity" : {
+          "type" : "number"
+        },
+        "shadowRadius" : {
+          "type" : "number"
+        },
+        "borderColor" : {
+          "type" : "string"
+        },
+        "borderRadius" : {
+          "type" : "number"
+        },
+        "borderWidth" : {
+          "type" : "number"
+        },
+        "borderStyle" : {
+          "type" : "string",
+          "enum" : ["solid", "dotted", "dashed"]
+        }
+      }
+    },
+    "fontStyle" : {
+      "description" : "A collection of styles that can be used by font renderings throughout the UI. Any value placed in here gets directly parsed as a react stylesheet. Supported style customizations are color, fontFamily, weight, fontSize. See React stylesheets for more specifics on each field. All values are optional, and have defaults specified in the code depending on the section. See each section for default values.",
+      "type": "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "fontFamily": {"type" : "string"},
+        "color": {"type" : "string"},
+        "weight": {"type" : "string"},
+        "fontSize": {"type" : "number"}
+      }
+    }
+  }
+}
