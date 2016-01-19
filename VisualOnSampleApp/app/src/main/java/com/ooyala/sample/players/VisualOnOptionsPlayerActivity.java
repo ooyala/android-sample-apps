@@ -11,6 +11,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.configuration.VisualOnConfiguration;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.sample.utils.VisualOnSampleAppLog;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -28,6 +29,7 @@ public class VisualOnOptionsPlayerActivity extends Activity implements Observer 
   String EMBED = null;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
+  int count = 0;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -128,6 +130,15 @@ public class VisualOnOptionsPlayerActivity extends Activity implements Observer 
       }
       return;
     }
+
+    // Hook to write Notifications to a temporary file on the device/emulator
+    // Keeps track of incoming notifications and makes sure count is right
+    count++ ;
+    String text="Notification Received: " + arg1 + " - state: " + player.getState() + "count: " +count;
+
+    // Write the event text along with event count to log file in sdcard if the log file exists
+    VisualOnSampleAppLog VisualOnLog= new VisualOnSampleAppLog();
+    VisualOnLog.writeToSdcardLog(count,text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
