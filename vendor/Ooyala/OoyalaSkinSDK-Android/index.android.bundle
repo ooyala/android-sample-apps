@@ -59946,10 +59946,6 @@ OoyalaSkinCoreInstance=new OoyalaSkinCore(this,eventBridge);
 OoyalaSkinCoreInstance.mount(DeviceEventEmitter);},
 
 
-componentDidMount:function(){
-eventBridge.onUIReady();},
-
-
 componentWillUnmount:function(){
 Log.log("componentWillUnmount");
 OoyalaSkinCoreInstance.unmount();},
@@ -61549,4 +61545,4 @@ __d('OoyalaSkin/style/languageSelectionPanelStyles.json',function(global, requir
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("OoyalaSkin/index.android.js");
-__SSTOKENSTRING = "@generated SignedSource<<5172f0678da0f73ca3638a4364711c00>>";
+__SSTOKENSTRING = "@generated SignedSource<<942ebe899eeee14f1ac7fcfc74181617>>";
