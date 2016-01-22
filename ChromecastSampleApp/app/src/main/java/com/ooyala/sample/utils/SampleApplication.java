@@ -8,6 +8,11 @@ import com.ooyala.android.castsdk.CastOptions;
 
 import com.ooyala.sample.players.ChromecastPlayerActivity;
 
+/**
+ * This application is made to initialize the CastManager right at the start of the app load
+ *
+ * This step does not necessarily have to happen in the Application class, but is a reccomended option
+ */
 public class SampleApplication extends Application {
   private final String NAMESPACE = "urn:x-cast:ooyala";
   private final String APP_ID = "4172C76F";

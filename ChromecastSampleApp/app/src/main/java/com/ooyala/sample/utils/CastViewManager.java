@@ -12,6 +12,9 @@ import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.item.Video;
 import com.ooyala.sample.R;
 
+/**
+ * This is an example of a way to manage the view that is displayed in the player while casting
+ */
 public class CastViewManager {
   private View castView;
   private TextView stateTextView;

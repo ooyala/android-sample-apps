@@ -1,9 +1,6 @@
 package com.ooyala.sample.players;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -32,6 +29,17 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * This activity demonstrates all functionality supported by the Ooyala Cast Integration.
+ *
+ * This includes, but is not limited to:
+ * Multi video playback
+ * OPT and OPT-related content protection
+ * CastViews - views that display in the player during Cast playback
+ *   Updating of Cast View based on the state of the player
+ * Responding to hardware volume buttons
+ * Notifications support
+ */
 public class ChromecastPlayerActivity extends AppCompatActivity implements EmbedTokenGenerator, Observer{
   
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
@@ -86,16 +94,12 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
     player = new OoyalaPlayer(pcode, playerDomain, this, null);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
-    // Initialize action bar
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    actionBar.setTitle(R.string.app_name);
-    getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+    //Create a CastManager, and connect to the OoyalaPlayer
     CastManager castManager = CastManager.getCastManager();
     castManager.registerWithOoyalaPlayer(player);
     castViewManager = new CastViewManager(this, castManager);
 
+    //Observe, set the embed code, and play
     player.addObserver(this);
     play( embedCode );
   }
@@ -111,6 +115,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
     if (player != null) {
       player.suspend();
     }
+    //onPause and onResume, call CCL code to support Cast Notifications
     CastManager.getCastManager().onPause();
     super.onPause();
   }
@@ -134,10 +139,14 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
     super.onResume();
     if (player != null) {
       player.resume();
-    }  
+    }
+    //onPause and onResume, call CCL code to support Cast Notifications
     CastManager.getCastManager().onResume();
   }
 
+  /**
+   * Populate the ActionBar Menu with the Cast button
+   */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     Log.d(TAG, "onCreateOptionsMenu()");
@@ -226,7 +235,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
 
     String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
 
-    //In 4.3.0, this class will be public in the com.ooyala.android package
     EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
 
     URL tokenUrl  = urlGen.secureURL("http://player.ooyala.com", uri, params);
