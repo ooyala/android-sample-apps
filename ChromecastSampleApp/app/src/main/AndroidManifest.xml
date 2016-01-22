@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ooyala.sample.ChromecastSampleApp">
+          package="com.ooyala.sample">
 
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="19" />
 
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".SampleApplication"
+        android:name=".utils.SampleApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat" >
@@ -16,7 +16,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ChromecastListActivity"
+        <activity android:name=".lists.ChromecastListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize"
                   android:label="@string/app_name" android:textColor="#ffffff"
                   android:launchMode="singleTop">
@@ -26,14 +26,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChromecastPlayerActivity"
+            android:name=".players.ChromecastPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" android:textColor="#ffffff"
-            android:parentActivityName=".ChromecastListActivity"
+            android:parentActivityName=".lists.ChromecastListActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ChromecastListActivity"/>
+                android:value=".lists.ChromecastListActivity"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

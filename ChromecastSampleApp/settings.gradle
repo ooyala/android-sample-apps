@@ -3,11 +3,11 @@ include ':app'
 include ':CastCompanionLibrary'
 project(':CastCompanionLibrary').projectDir = new File(settingsDir, '../vendor/GoogleCast/CastCompanionLibrary')
 
-include ':ooyalaCoreSDK'
-project(':ooyalaCoreSDK').projectDir = new File(settingsDir, '../../../sdk/ooyalaCoreSDK')
-
-include ':ooyalaCastSDK'
-project(':ooyalaCastSDK').projectDir=new File(settingsDir, '../../../sdk/ooyalaCastSDK')
+//include ':ooyalaCoreSDK'
+//project(':ooyalaCoreSDK').projectDir = new File(settingsDir, '../../../sdk/ooyalaCoreSDK')
+//
+//include ':ooyalaCastSDK'
+//project(':ooyalaCastSDK').projectDir=new File(settingsDir, '../../../sdk/ooyalaCastSDK')
 
 
 

@@ -1,4 +1,4 @@
-package com.ooyala.sample.ChromecastSampleApp;
+package com.ooyala.sample.players;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,11 +14,15 @@ import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 import com.google.android.libraries.cast.companionlibrary.utils.Utils;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
+import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
+import com.ooyala.sample.R;
+
+import com.ooyala.sample.utils.CastViewManager;
 
 import org.json.JSONObject;
 
@@ -54,7 +58,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
     Log.d(TAG, "onCreate()");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-
 
     // onClick of a DefaultMiniController only provides an embedcode through the extras
     Bundle extras = getIntent().getExtras();

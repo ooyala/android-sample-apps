@@ -1,4 +1,4 @@
-package com.ooyala.sample.ChromecastSampleApp;
+package com.ooyala.sample.utils;
 
 public class ChromecastPlayerSelectionOption {
   public String title;
