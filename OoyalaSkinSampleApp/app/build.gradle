@@ -10,6 +10,12 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        // Added due to https://github.com/facebook/react-native/issues/2814
+        ndk {
+            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
     buildTypes {
         release {
