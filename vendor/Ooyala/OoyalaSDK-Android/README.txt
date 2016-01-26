@@ -1,4 +1,4 @@
-Current Version: 4.10.0_RC3
+Current Version: 4.10.0_GA
 
 For the latest release notes, please refer to http://support.ooyala.com/documentation/concepts/mobile_sdk_android_release_notes.html
 
