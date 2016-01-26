@@ -1,4 +1,4 @@
-package com.ooyala.sample.ChromecastSampleApp;
+package com.ooyala.sample.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,9 +10,10 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.item.Video;
+import com.ooyala.sample.R;
 
 /**
- * Created by zchen on 1/13/16.
+ * This is an example of a way to manage the view that is displayed in the player while casting
  */
 public class CastViewManager {
   private View castView;
