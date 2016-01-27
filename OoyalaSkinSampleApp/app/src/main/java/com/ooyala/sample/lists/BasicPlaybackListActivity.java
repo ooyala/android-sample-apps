@@ -2,7 +2,10 @@ package com.ooyala.sample.lists;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,6 +20,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BasicPlaybackListActivity extends Activity implements OnItemClickListener {
+  private static final int LOAD_REACT_BUNDLE_PERMISSION_REQ_CODE = 666;
+
   public final static String getName() {
     return "Basic Playback";
   }
@@ -61,7 +66,19 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     ListView selectionListView = (ListView) findViewById(R.id.mainActivityListView);
     selectionListView.setAdapter(selectionAdapter);
     selectionListView.setOnItemClickListener(this);
+
+    //Force request android.permission.SYSTEM_ALERT_WINDOW
+    // that is ignored in Manifest on Marshmallow devices.
+    if(Build.VERSION_CODES.M == Build.VERSION.SDK_INT) {
+      showDevOptionsDialog();
+    }
   }
+
+  private void showDevOptionsDialog() {
+    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+    startActivityForResult(intent, LOAD_REACT_BUNDLE_PERMISSION_REQ_CODE);
+  }
+  
 
   @Override
   public void onItemClick(AdapterView<?> l, View v, int pos, long id) {
