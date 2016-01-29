@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:6.5.87'
+    compile 'com.google.android.gms:play-services-ads:6.5.87'
     compile files('libs/OoyalaNielsenSDK.jar')
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/appsdk.jar')
