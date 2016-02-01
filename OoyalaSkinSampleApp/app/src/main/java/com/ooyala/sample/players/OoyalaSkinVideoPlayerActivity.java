@@ -19,11 +19,11 @@ import java.util.Observer;
  * through the SDK
  *
  */
-public class BasicPlaybackVideoPlayerActivity extends Activity implements Observer {
+public class OoyalaSkinVideoPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
+  final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
   final String DOMAIN = "http://ooyala.com";
 
   protected OoyalaSkinLayoutController playerLayoutController;
@@ -48,8 +48,8 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
     PlayerDomain domain = new PlayerDomain(DOMAIN);
     Options options = new Options.Builder().setShowAdsControls(false)
-            .setShowCuePoints(true).setShowPromoImage(true)
-            .setPreloadContent(false).build();
+            .setShowCuePoints(true).setShowPromoImage(false)
+            .setPreloadContent(true).build();
     player = new OoyalaPlayer(PCODE, domain, options);
     skinLayout.setupViews(getApplication(), player);
 //    playerLayoutController = new OoyalaSkinLayoutController(context,skinLayout, player);
