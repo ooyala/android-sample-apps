@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services-ads:+'
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/youbora-plugin-base-1.0.5.jar')
     compile files('libs/youbora-plugin-ooyala-2.0.0.jar')

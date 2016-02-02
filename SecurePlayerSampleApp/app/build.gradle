@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services-ads:+'
     compile 'com.android.support:support-v4:+'
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/DxDrmDlc.jar')

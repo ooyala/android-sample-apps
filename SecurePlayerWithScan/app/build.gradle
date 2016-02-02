@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:8.4.+'
+    compile 'com.google.android.gms:play-services-ads:8.4.+'
     compile 'com.android.support:support-v4:+'
     compile project(':AndroidVisionQRReader')
     compile files('libs/OoyalaSDK.jar')

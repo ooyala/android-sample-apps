@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services-ads:+'
     compile files('libs/OoyalaIMASDK.jar')
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/ima-android-v3-3.b13.3.jar')

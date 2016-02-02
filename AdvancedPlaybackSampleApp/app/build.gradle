@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services-ads:+'
     compile files('libs/OoyalaSDK.jar')
 }

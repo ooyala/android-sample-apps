@@ -20,7 +20,7 @@ android {
 
 dependencies {
     compile 'com.google.code.gson:gson:2.2.2'
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services-ads:+'
     compile files('libs/android_accessenabler-1.7.3.jar')
     compile files('libs/OoyalaSDK.jar')
 }
