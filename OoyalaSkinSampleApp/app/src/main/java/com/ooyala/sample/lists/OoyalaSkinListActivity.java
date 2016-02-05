@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.android.ooyalaskinsampleapp.R;
-import com.ooyala.sample.players.OoyalaSkinVideoPlayerActivity;
+import com.ooyala.sample.players.OoyalaSkinPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
@@ -39,19 +39,19 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinVideoPlayerActivity.class) );
-    selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", OoyalaSkinVideoPlayerActivity.class) );
-    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", OoyalaSkinVideoPlayerActivity.class) );
-    selectionMap.put( "VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", OoyalaSkinVideoPlayerActivity.class) );
+    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinPlayerActivity.class) );
+    selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", OoyalaSkinPlayerActivity.class) );
+    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", OoyalaSkinPlayerActivity.class) );
+    selectionMap.put( "VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", OoyalaSkinPlayerActivity.class) );
 
-    selectionMap.put("VAST Ad Pre-roll", new PlayerSelectionOption("Zlcmp0ZDrpHlAFWFsOBsgEXFepeSXY4c", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("VAST Ad Mid-roll", new PlayerSelectionOption("pncmp0ZDp7OKlwTPJlMZzrI59j8Imefa", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("VAST Ad Post-roll", new PlayerSelectionOption("Zpcmp0ZDpaB-90xK8MIV9QF973r1ZdUf", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("VAST Ad Wrapper", new PlayerSelectionOption("pqaWp0ZDqo17Z-Dn_5YiVhjcbQYs5lhq", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("Ooyala Ad Pre-roll", new PlayerSelectionOption("M4cmp0ZDpYdy8kiL4UD910Rw_DWwaSnU", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", OoyalaSkinVideoPlayerActivity.class));
-    selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", OoyalaSkinVideoPlayerActivity.class));
+    selectionMap.put("VAST Ad Pre-roll", new PlayerSelectionOption("Zlcmp0ZDrpHlAFWFsOBsgEXFepeSXY4c", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST Ad Mid-roll", new PlayerSelectionOption("pncmp0ZDp7OKlwTPJlMZzrI59j8Imefa", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST Ad Post-roll", new PlayerSelectionOption("Zpcmp0ZDpaB-90xK8MIV9QF973r1ZdUf", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST Ad Wrapper", new PlayerSelectionOption("pqaWp0ZDqo17Z-Dn_5YiVhjcbQYs5lhq", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Ooyala Ad Pre-roll", new PlayerSelectionOption("M4cmp0ZDpYdy8kiL4UD910Rw_DWwaSnU", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", OoyalaSkinPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
 

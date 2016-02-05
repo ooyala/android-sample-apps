@@ -22,7 +22,7 @@ import java.util.Observer;
  * through the SDK
  *
  */
-public class OoyalaSkinVideoPlayerActivity extends Activity implements Observer {
+public class OoyalaSkinPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;

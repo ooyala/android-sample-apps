@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ooyala.sample.players.OoyalaSkinVideoPlayerActivity"
+        <activity android:name="com.ooyala.sample.players.OoyalaSkinPlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
