@@ -23,7 +23,7 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
   private static final int LOAD_REACT_BUNDLE_PERMISSION_REQ_CODE = 666;
 
   public final static String getName() {
-    return "Basic Playback";
+    return "Skin Basic Playback";
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;

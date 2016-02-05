@@ -17,7 +17,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you can play basicPlayback Video
+ * This activity illustrates how you can play basic playback video using the Skin SDK
  * you can also play Ooyala and VAST advertisements programmatically
  * through the SDK
  *
@@ -41,7 +41,6 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
-
 
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
