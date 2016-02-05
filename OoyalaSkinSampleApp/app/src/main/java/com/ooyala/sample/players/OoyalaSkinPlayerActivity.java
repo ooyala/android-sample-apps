@@ -9,17 +9,20 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ooyalaskinsampleapp.R;
 import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
 import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayoutController;
+import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
+
+import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you can play basicPlayback Video
+ * This activity illustrates how you can play basic playback video using the Skin SDK
  * you can also play Ooyala and VAST advertisements programmatically
  * through the SDK
  *
  */
-public class OoyalaSkinVideoPlayerActivity extends Activity implements Observer {
+public class OoyalaSkinPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
@@ -39,29 +42,46 @@ public class OoyalaSkinVideoPlayerActivity extends Activity implements Observer 
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    //Initialize the player
-//    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaSkin);
-//    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
-//    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-//    player.addObserver(this);
-
+    // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false)
-            .setShowCuePoints(true).setShowPromoImage(false)
-            .setPreloadContent(true).build();
-    player = new OoyalaPlayer(PCODE, domain, options);
-    skinLayout.setupViews(getApplication(), player);
-//    playerLayoutController = new OoyalaSkinLayoutController(context,skinLayout, player);
-//    player.addObserver(this);
 
+    // Create the OoyalaPlayer, with some built-in UI disabled
+    PlayerDomain domain = new PlayerDomain(DOMAIN);
+    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).build();
+    player = new OoyalaPlayer(PCODE, domain, options);
+
+    //Create the SkinOptions, and setup React
+    JSONObject overrides = createSkinOverrides();
+    SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).setEnableReactJSServer(true).build();
+    skinLayout.initializeSkin(getApplication(), player, skinOptions);
 
     if (player.setEmbedCode(EMBED)) {
+      //Uncomment for autoplay
       //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");
     }
+  }
+
+  /**
+   * Create skin overrides to show up in the skin.
+   * Default commented. Uncomment to show changes to the start screen.
+   * @return the overrides to apply to the skin.json in the assets folder
+   */
+  private JSONObject createSkinOverrides() {
+    JSONObject overrides = new JSONObject();
+//    JSONObject startScreenOverrides = new JSONObject();
+//    JSONObject playIconStyleOverrides = new JSONObject();
+//    try {
+//      playIconStyleOverrides.put("color", "red");
+//      startScreenOverrides.put("playButtonPosition", "bottomLeft");
+//      startScreenOverrides.put("playIconStyle", playIconStyleOverrides);
+//      overrides.put("startScreen", startScreenOverrides);
+//    } catch (Exception e) {
+//      Log.e(TAG, "Exception Thrown", e);
+//    }
+    return overrides;
   }
 
   @Override
