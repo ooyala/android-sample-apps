@@ -54,9 +54,10 @@ public class OoyalaSkinVideoPlayerActivity extends Activity implements Observer 
     //Create the SkinOptions, and setup React
     JSONObject overrides = createSkinOverrides();
     SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).setEnableReactJSServer(true).build();
-    skinLayout.setupViews(getApplication(), player, skinOptions);
+    skinLayout.initializeSkin(getApplication(), player, skinOptions);
 
     if (player.setEmbedCode(EMBED)) {
+      //Uncomment for autoplay
       //player.play();
     }
     else {
