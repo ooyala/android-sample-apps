@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OoyalaSkinSampleApp.iml" filepath="$PROJECT_DIR$/OoyalaSkinSampleApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../ios-skin/sdk/android/ooyalaSkinSDK/ooyalaSkinSDK.iml" filepath="$PROJECT_DIR$/../../ios-skin/sdk/android/ooyalaSkinSDK/ooyalaSkinSDK.iml" />
     </modules>
   </component>
 </project>

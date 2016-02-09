@@ -8,7 +8,7 @@ import android.app.Activity;
  */
 public class PlayerSelectionOption {
   private String embedCode;
-  private Class<? extends Activity> activity;
+  private Class <? extends Activity> activity;
   public PlayerSelectionOption(String embedCode, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
     this.activity = activity;
@@ -26,7 +26,7 @@ public class PlayerSelectionOption {
    * Get the activity to use for this sample
    * @return the activity to launch
    */
-  public Class<? extends Activity> getActivity() {
+  public Class <? extends Activity> getActivity() {
     return this.activity;
   }
 }
