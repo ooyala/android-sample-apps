@@ -12,7 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ooyala.android.ooyalaskinsampleapp.R;
+import com.ooyala.sample.R;
 import com.ooyala.sample.players.OoyalaSkinPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 

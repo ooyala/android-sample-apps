@@ -1,4 +1,4 @@
-<manifest package="com.ooyala.android.ooyalaskinsampleapp"
+<manifest package="com.ooyala.sample"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />

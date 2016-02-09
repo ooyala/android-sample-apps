@@ -6,7 +6,7 @@ import android.util.Log;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.ooyalaskinsampleapp.R;
+import com.ooyala.sample.R;
 import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
 import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayoutController;
 import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
@@ -39,7 +39,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setTitle(getIntent().getExtras().getString("selection_name"));
-    setContentView(R.layout.player_simple_layout);
+    setContentView(R.layout.player_skin_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
     // Get the SkinLayout from our layout xml
