@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.CustomConfiguredFreewheelPlayerActivity;
-import com.ooyala.sample.players.OptionsFreewheelPlayerActivity;
 import com.ooyala.sample.players.PreconfiguredFreewheelPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
@@ -44,7 +43,6 @@ public class FreewheelListActivity extends Activity implements OnItemClickListen
     selectionMap.put("Freewheel Multi Midroll", new PlayerSelectionOption("htdnB3cDpMzXVL7fecaIWdv9rTd125As", PreconfiguredFreewheelPlayerActivity.class) );
     selectionMap.put("Freewheel PreMidPost Overlay", new PlayerSelectionOption("NscGg4bzpO9s5rUMyW-AAfoeEA7CX6hP", PreconfiguredFreewheelPlayerActivity.class) );
     selectionMap.put("Freewheel Application-Configured", new PlayerSelectionOption("Q5MXg2bzq0UAXXMjLIFWio_6U0Jcfk6v", CustomConfiguredFreewheelPlayerActivity.class) );
-    selectionMap.put("CuePoints and AdsControl Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", OptionsFreewheelPlayerActivity.class)); 
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
