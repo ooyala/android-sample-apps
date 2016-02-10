@@ -12,10 +12,7 @@ import android.util.Log;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
-import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
-import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -59,19 +56,13 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
     EMBED = getIntent().getExtras().getString("embed_code");
 
     //Initialize the player
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
-
-    // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).build();
-    player = new OoyalaPlayer(PCODE, domain, options);
-
-    //Create the SkinOptions, and setup React
-    SkinOptions skinOptions = new SkinOptions.Builder().build();
-    skinLayout.initializeSkin(getApplication(), player, skinOptions);
+    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+    player.addObserver(this);
 
     /** DITA_START:<ph id="freewheel_custom"> **/
-    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout, player);
+    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
     
     Map<String, String> freewheelParameters = new HashMap<String, String>();    
     freewheelParameters.put("fw_android_mrm_network_id",  "380912");
@@ -85,7 +76,7 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
     /** DITA_END:</ph> **/
     
     if (player.setEmbedCode(EMBED)) {
-//      player.play();
+      player.play();
     }
   }
 

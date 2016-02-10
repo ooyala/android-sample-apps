@@ -10,10 +10,7 @@ import android.util.Log;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
-import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
-import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
@@ -54,23 +51,18 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
 
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
-
-    // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).build();
-    player = new OoyalaPlayer(PCODE, domain, options);
-
-    //Create the SkinOptions, and setup React
-    SkinOptions skinOptions = new SkinOptions.Builder().build();
-    skinLayout.initializeSkin(getApplication(), player, skinOptions);
+    /** DITA_START:<ph id="ima_preconfigured"> **/
+    //Initialize the player
+    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+    player.addObserver(this);
 
     @SuppressWarnings("unused")
-	  OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
+	OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
     
     if (player.setEmbedCode(EMBED)) {
-//      player.play();
+      player.play();
     }
     /** DITA_END:</ph> **/
 
