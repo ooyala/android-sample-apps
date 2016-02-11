@@ -128,6 +128,10 @@
     "timeToShow": "10"
   },
   "controlBar": {
+    "volumeView": {
+      "progressColor": "#FFFF00FF",
+      "thumbColor": "#FFFFFFFF"
+    },
     "iconStyle": {
       "active": {
         "color": "#FFFFFF",
