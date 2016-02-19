@@ -10,6 +10,7 @@ import com.ooyala.sample.R;
 import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
 import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayoutController;
 import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import org.json.JSONObject;
 
@@ -28,6 +29,9 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
   String EMBED = null;
   final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
   final String DOMAIN = "http://ooyala.com";
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -54,6 +58,8 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
     JSONObject overrides = createSkinOverrides();
     SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
     skinLayout.initializeSkin(getApplication(), player, skinOptions);
+
+    player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
       //Uncomment for autoplay
@@ -125,6 +131,11 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
       }
       return;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
