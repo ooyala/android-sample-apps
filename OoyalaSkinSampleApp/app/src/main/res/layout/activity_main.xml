@@ -37,13 +37,13 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout
+    <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/ooyalaSkin"
         android:layout_gravity="center_horizontal|top"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
         android:background="#666">
-    </com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout>
+    </com.ooyala.android.skin.OoyalaSkinLayout>
 
 </FrameLayout>

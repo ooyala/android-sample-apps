@@ -6,7 +6,7 @@
     android:layout_gravity="center_horizontal|bottom"
     android:orientation="vertical" >
 
-    <com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout
+    <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/ooyalaPlayer"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -14,6 +14,6 @@
         android:layout_marginTop="20dp"
         android:layout_weight="4"
         android:background="#666" >
-    </com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout>
+    </com.ooyala.android.skin.OoyalaSkinLayout>
 
 </FrameLayout>
