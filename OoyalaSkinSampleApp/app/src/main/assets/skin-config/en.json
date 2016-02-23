@@ -23,6 +23,7 @@
   "Start at": "Start at",
   "Embed": "Embed",
   "Email": "Email",
+  "Check out this video": "I found a video you might be interested in! Check it out: ",
   "To": "To",
   "Subject": "Subject",
   "Message": "Message",
@@ -85,5 +86,8 @@
   "EMPTY CHANNEL SET ERROR": "EMPTY CHANNEL SET ERROR",
   "This channel set is empty": "This channel set is empty",
   "CHANNEL CONTENT ERROR": "CHANNEL CONTENT ERROR",
-  "This channel is not playable at this time": "This channel is not playable at this time"
+  "This channel is not playable at this time": "This channel is not playable at this time",
+  "SOMETHING NOT RIGHT! THERE SHOULD BE VIDEOS HERE.": "SOMETHING NOT RIGHT! THERE SHOULD BE VIDEOS HERE.",
+  "(Try Clicking The Discover Button Again On Reload Your Page)": "(Try Clicking The Discover Button Again On Reload Your Page)",
+  "Something happened while we were trying to play your video! Click replay or simply reload your page.": "Something happened while we were trying to play your video! Click replay or simply reload your page."
 }
