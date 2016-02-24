@@ -19,11 +19,11 @@ import com.ooyala.sample.utils.PlayerSelectionOption;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class OoyalaSkinListActivity extends Activity implements OnItemClickListener {
+public class BasicPlaybackListActivity extends Activity implements OnItemClickListener {
   private static final int LOAD_REACT_BUNDLE_PERMISSION_REQ_CODE = 666;
 
   public final static String getName() {
-    return "Skin Playback";
+    return "Basic Playback";
   }
 
   private static Map<String, PlayerSelectionOption> selectionMap;

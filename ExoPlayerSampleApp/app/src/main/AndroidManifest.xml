@@ -14,10 +14,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat">
 
-        <service android:name="com.adobe.adobepass.accessenabler.api.AccessEnablerService"
-                 android:label="AccessEnabler service"/>
         <activity
-            android:name="com.ooyala.sample.complete.MainActivity"
+            android:name=".complete.MainExoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
@@ -31,29 +29,23 @@
             android:name=".lists.FreewheelListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
-
-        <activity
-            android:name=".players.PreconfiguredFreewheelPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
-        </activity>
-        <activity android:name=".players.OptionsFreewheelPlayerActivity"
+        <activity android:name=".lists.BasicPlaybackListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".lists.IMAListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
+
+        <activity
+            android:name=".players.PreconfiguredFreewheelPlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
         
         <activity android:name=".players.PreconfiguredIMAPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
-
-
         <activity android:name=".players.OoyalaSkinPlayerActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-
-        <activity android:name=".lists.OoyalaSkinListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

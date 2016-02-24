@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
-import com.ooyala.sample.lists.OoyalaSkinListActivity;
+import com.ooyala.sample.lists.BasicPlaybackListActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @author michael.len
  *
  */
-public class MainActivity extends Activity implements OnItemClickListener {
+public class MainExoPlayerActivity extends Activity implements OnItemClickListener {
   final String TAG = this.getClass().toString();
 
   private static Map<String, Class<? extends Activity>> activityMap;
@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 //    activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
 //    activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
 //    activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
-    activityMap.put(OoyalaSkinListActivity.getName(), OoyalaSkinListActivity.class);
+    activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
 
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);
