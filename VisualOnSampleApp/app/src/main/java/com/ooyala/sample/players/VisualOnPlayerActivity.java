@@ -80,7 +80,7 @@ public class VisualOnPlayerActivity extends Activity implements Observer {
    */
   @Override
   public void update(Observable arg0, Object argN) {
-    final String arg1 = ((OoyalaNotification)argN).getName();
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg0 != player) {
       return;
     }

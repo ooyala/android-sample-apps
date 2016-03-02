@@ -81,7 +81,7 @@ public class SecurePlayerPlayerActivity extends Activity implements Observer {
       return;
     }
 
-    final String arg1 = ((OoyalaNotification)argN).getName();
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }

@@ -296,7 +296,7 @@ SeekBar.OnSeekBarChangeListener, Button.OnClickListener, Observer {
 
   @Override
   public void update(Observable arg0, Object argN) {
-    final String arg1 = ((OoyalaNotification)argN).getName();
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (_seek != null && !_seeking) {
       _seek.setProgress(_player.getPlayheadPercentage());
       _seek.setSecondaryProgress(_player.getBufferPercentage());
