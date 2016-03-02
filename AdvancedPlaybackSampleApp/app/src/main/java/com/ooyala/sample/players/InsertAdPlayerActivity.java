@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.ooyala.android.OoyalaAdSpot;
 import com.ooyala.android.OoyalaManagedAdsPlugin;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ads.vast.VASTAdSpot;
@@ -120,8 +121,9 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
    * Listen to all notifications from the OoyalaPlayer
    */
   @Override
-  public void update(Observable arg0, Object arg1) {
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+  public void update(Observable arg0, Object argN) {
+    final String arg1 = ((OoyalaNotification)argN).getName();
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());

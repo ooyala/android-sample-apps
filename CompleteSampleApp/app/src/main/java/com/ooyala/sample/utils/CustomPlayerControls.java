@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer.SeekStyle;
 import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -294,7 +295,8 @@ SeekBar.OnSeekBarChangeListener, Button.OnClickListener, Observer {
   }
 
   @Override
-  public void update(Observable arg0, Object arg1) {
+  public void update(Observable arg0, Object argN) {
+    final String arg1 = ((OoyalaNotification)argN).getName();
     if (_seek != null && !_seeking) {
       _seek.setProgress(_player.getPlayheadPercentage());
       _seek.setSecondaryProgress(_player.getBufferPercentage());
@@ -322,7 +324,7 @@ SeekBar.OnSeekBarChangeListener, Button.OnClickListener, Observer {
     }
 
     // update UI on adStarted/adCompleted
-    if(arg1 == OoyalaPlayer.AD_STARTED_NOTIFICATION) {
+    if(arg1 == OoyalaPlayer.AD_STARTED_NOTIFICATION_NAME) {
       _isPlayerReady = true;
       if (_player.options().getShowAdsControls() == false) {
         hide();
@@ -331,15 +333,15 @@ SeekBar.OnSeekBarChangeListener, Button.OnClickListener, Observer {
       }
     }
 
-    if(arg1 == OoyalaPlayer.AD_COMPLETED_NOTIFICATION ||
-        arg1 == OoyalaPlayer.AD_SKIPPED_NOTIFICATION ||
-        arg1 == OoyalaPlayer.AD_ERROR_NOTIFICATION ) {
+    if(arg1 == OoyalaPlayer.AD_COMPLETED_NOTIFICATION_NAME ||
+        arg1 == OoyalaPlayer.AD_SKIPPED_NOTIFICATION_NAME ||
+        arg1 == OoyalaPlayer.AD_ERROR_NOTIFICATION_NAME ) {
       _isPlayerReady = false;
       updateButtonStates();
     }
 
     // update spinner
-    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION) {
+    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
       State currentState = _player.getState();
 
       updateButtonStates();

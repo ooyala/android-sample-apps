@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.sample.R;
@@ -106,16 +107,17 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
    * Listen to all notifications from the OoyalaPlayer
    */
   @Override
-  public void update(Observable arg0, Object arg1) {
+  public void update(Observable arg0, Object argN) {
     if (arg0 != player) {
       return;
     }
 
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+    final String arg1 = ((OoyalaNotification)argN).getName();
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
 
-    if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION) {
+    if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
         Log.e(TAG, msg, player.getError());

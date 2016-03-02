@@ -16,6 +16,7 @@ import android.widget.ToggleButton;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -115,8 +116,9 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
   }
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+	public void update(Observable arg0, Object argN) {
+  final String arg1 = ((OoyalaNotification)argN).getName();
+	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
 	  return;
 	}
 	Log.d(TAG,
