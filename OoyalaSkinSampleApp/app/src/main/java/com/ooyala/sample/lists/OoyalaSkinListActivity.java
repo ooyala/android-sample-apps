@@ -57,6 +57,7 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("VAST3 Ad Overlay", new PlayerSelectionOption("NuMGp1MDE6EKUv7rAmkSQ3iuLU5N5Ik0", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST3 Ad With All Of The New Events", new PlayerSelectionOption("x3MWp1MDE6yIedkirT0to1t1uy2oA8y3", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST3 AD With Icon", new PlayerSelectionOption("1qNGp1MDE6GBl7PkPlWA_FA9NJDhBp_I" , OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST3 Podded with Skippable", new PlayerSelectionOption("1uNGp1MDE6DJElG8YeQJ8D7tuuJo9T-t", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST3 Skippable Ad", new PlayerSelectionOption("1oNGp1MDE6V512gRnkTcz2o3RnFDSxNZ" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST3 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G" , OoyalaSkinPlayerActivity.class));
     setContentView(R.layout.list_activity_layout);
