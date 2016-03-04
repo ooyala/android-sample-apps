@@ -71,6 +71,8 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
+    player.addObserver(this);
+
     /** DITA_START:<ph id="freewheel_custom"> **/
     OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout, player);
     

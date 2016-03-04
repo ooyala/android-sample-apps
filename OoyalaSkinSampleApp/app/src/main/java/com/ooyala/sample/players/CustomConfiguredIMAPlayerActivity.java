@@ -17,6 +17,7 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how to override IMA parameters in application code
@@ -34,6 +35,9 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
   String EMBED = null;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -61,6 +65,8 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+
+    player.addObserver(this);
 
 
     /** DITA_START:<ph id="ima_custom"> **/
@@ -103,6 +109,12 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
       return;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
+
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
