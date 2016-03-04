@@ -14,8 +14,9 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
-import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
-import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -68,7 +69,7 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    skinLayout.initializeSkin(getApplication(), player, skinOptions);
+    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 

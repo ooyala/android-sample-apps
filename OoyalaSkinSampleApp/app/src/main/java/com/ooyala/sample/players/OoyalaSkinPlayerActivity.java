@@ -7,10 +7,16 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.sample.R;
-import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
-import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayoutController;
-import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
+<<<<<<< HEAD
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+=======
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
+>>>>>>> origin/dev
 
 import org.json.JSONObject;
 
@@ -57,7 +63,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
     //Create the SkinOptions, and setup React
     JSONObject overrides = createSkinOverrides();
     SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
-    skinLayout.initializeSkin(getApplication(), player, skinOptions);
+    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 
