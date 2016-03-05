@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.nielsen.app.sdk.AppSdk;
 import com.nielsen.app.sdk.IAppNotifier;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.nielsensdk.NielsenAnalytics;
@@ -127,16 +128,17 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
    * Listen to all notifications from the OoyalaPlayer
    */
   @Override
-  public void update(Observable arg0, Object arg1) {
+  public void update(Observable arg0, Object argN) {
     if (arg0 != player) {
       return;
     }
 
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
 
-    if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION) {
+    if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
         Log.e(TAG, msg, player.getError());
