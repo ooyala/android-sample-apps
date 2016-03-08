@@ -4,23 +4,32 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.SampleAdPlugin;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
-public class PluginPlayerActivity extends Activity {
+import java.util.Observable;
+import java.util.Observer;
+
+public class PluginPlayerActivity extends Activity implements Observer {
   public final static String getName() {
     return "Custom Plugin Sample";
   }
+  final String TAG = this.getClass().toString();
   private String EMBED = "";
   private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   private final String DOMAIN = "http://www.ooyala.com";
 
   protected OoyalaPlayer player;
   protected OoyalaPlayerLayoutController playerLayoutController;
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   /**
    * Called when the activity is first created.
@@ -35,6 +44,7 @@ public class PluginPlayerActivity extends Activity {
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+    player.addObserver(this);
 
     SampleAdPlugin plugin = new SampleAdPlugin(this, player);
     player.registerPlugin(plugin);
@@ -59,6 +69,24 @@ public class PluginPlayerActivity extends Activity {
     if (player != null) {
       player.resume();
     }
+  }
+
+  /**
+   * Listen to all notifications from the OoyalaPlayer
+   */
+  @Override
+  public void update(Observable arg0, Object argN) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
+      return;
+    }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
+
+    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
 }

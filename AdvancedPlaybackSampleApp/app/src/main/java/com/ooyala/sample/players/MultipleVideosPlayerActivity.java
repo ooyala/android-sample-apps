@@ -10,6 +10,7 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -33,6 +34,9 @@ public class MultipleVideosPlayerActivity extends Activity implements Observer {
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   /**
    * Called when the activity is first created.
@@ -104,6 +108,11 @@ public class MultipleVideosPlayerActivity extends Activity implements Observer {
       }
       return;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
