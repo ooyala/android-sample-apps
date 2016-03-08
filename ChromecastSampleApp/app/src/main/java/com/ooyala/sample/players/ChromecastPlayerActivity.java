@@ -13,6 +13,7 @@ import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
@@ -180,18 +181,19 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
    * Listen to all notifications from the OoyalaPlayer
    */
   @Override
-  public void update(Observable arg0, Object arg1) {
+  public void update(Observable arg0, Object argN) {
     if (arg0 != player) {
       return;
     }
 
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
 
-    if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION) {
+    if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME) {
       castViewManager.configureCastView(player.getCurrentItem());
-    } else if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION) {
+    } else if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
         Log.e(TAG, msg, player.getError());
@@ -201,14 +203,14 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
       }
     }
 
-    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION) {
+    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
       if (player.isInCastMode()) {
         OoyalaPlayer.State state =  player.getState();
         castViewManager.updateCastState(this, state);
       }
     }
 
-    if( arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION && embedCode2 != null ) {
+    if( arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION_NAME && embedCode2 != null ) {
       play( embedCode2 );
       embedCode2 = null;
     }

@@ -5,6 +5,8 @@ A series of JSON files that can be used to configure Ooyala's new cross-platform
 2. *skin-schema.json:* A JSON schema that defines all of the possible options for the skin.json
 3. *[language].json:* A series of files that represent the localization of all strings used in our Skin UI (i.e. en.json, zh.json)
 
+See [http://apidocs.ooyala.com/player_v4_skin_config/index.html](http://apidocs.ooyala.com/player_v4_skin_config/index.html) for user-friendly skin-schema documentation.
+
 ## Installing and Running the node Validator
 You can use the JSON Schema to validate the correctness of your skin.json configuration. To validate your configuration against the JSON schema:
 

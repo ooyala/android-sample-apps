@@ -1,0 +1,4 @@
+include ':app'
+
+//include ':ooyalaSkinSDK'
+//project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../../ios-skin/sdk/android/ooyalaSkinSDK/')

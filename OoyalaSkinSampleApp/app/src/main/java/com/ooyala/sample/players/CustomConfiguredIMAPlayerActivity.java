@@ -8,14 +8,17 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
-import com.ooyala.android.ooyalaskinsdk.OoyalaSkinLayout;
-import com.ooyala.android.ooyalaskinsdk.configuration.SkinOptions;
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how to override IMA parameters in application code
@@ -33,6 +36,9 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
   String EMBED = null;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -59,7 +65,9 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    skinLayout.initializeSkin(getApplication(), player, skinOptions);
+    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+
+    player.addObserver(this);
 
 
     /** DITA_START:<ph id="ima_custom"> **/
@@ -98,10 +106,17 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
    * Listen to all notifications from the OoyalaPlayer
    */
   @Override
-  public void update(Observable arg0, Object arg1) {
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION) {
+  public void update(Observable arg0, Object argN) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
+
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
