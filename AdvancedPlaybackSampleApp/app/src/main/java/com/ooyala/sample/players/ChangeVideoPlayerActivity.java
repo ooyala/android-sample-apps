@@ -39,7 +39,7 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
   final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -123,7 +123,7 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
     String text="Notification Received: " + arg1 + " - state: " + player.getState();
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    Playbacklog.writeToSdcardLog(text);
+    playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
