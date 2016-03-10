@@ -65,7 +65,7 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name=".players.CustomConfiguredSkinPlayerActivity"
+        <activity android:name=".players.ResizablePlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

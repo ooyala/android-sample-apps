@@ -13,7 +13,7 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OoyalaSkinListActivity;
-import com.ooyala.sample.players.CustomConfiguredSkinPlayerActivity;
+import com.ooyala.sample.players.ResizablePlayerActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 //    activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
 //    activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
     activityMap.put(OoyalaSkinListActivity.getName(), OoyalaSkinListActivity.class);
-    activityMap.put(CustomConfiguredSkinPlayerActivity.getName(), CustomConfiguredSkinPlayerActivity.class);
+    activityMap.put(ResizablePlayerActivity.getName(), ResizablePlayerActivity.class);
 
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);

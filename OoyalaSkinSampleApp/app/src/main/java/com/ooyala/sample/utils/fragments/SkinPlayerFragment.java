@@ -1,4 +1,4 @@
-package com.ooyala.sample.fragments;
+package com.ooyala.sample.utils.fragments;
 
 import android.graphics.Point;
 import android.os.Bundle;
@@ -6,13 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -23,9 +21,6 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
 
-/**
- * Created by dkorobov on 3/9/16.
- */
 public class SkinPlayerFragment extends Fragment {
   private static final String EMBED = "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww";
   public static final int WIDE = 0;

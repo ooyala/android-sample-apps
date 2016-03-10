@@ -5,7 +5,7 @@
     android:layout_gravity="center_horizontal|bottom"
     android:orientation="vertical" >
 
-    <fragment android:name="com.ooyala.sample.fragments.SkinPlayerFragment"
+    <fragment android:name="com.ooyala.sample.utils.fragments.SkinPlayerFragment"
               android:id="@+id/video_fragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />

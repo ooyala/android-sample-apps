@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,14 +7,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.fragments.SkinPlayerFragment;
+import com.ooyala.sample.utils.fragments.SkinPlayerFragment;
 
-/**
- * Created by dkorobov on 3/9/16.
- */
-public class CustomConfiguredSkinPlayerActivity extends AppCompatActivity {
+public class ResizablePlayerActivity extends AppCompatActivity {
 
-  private static String name = "Configured Skin Player";
+  private static String name = "Resizable Skin Player";
   private SkinPlayerFragment skinPlayerFragment;
 
   public static String getName() {
