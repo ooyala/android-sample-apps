@@ -23,8 +23,6 @@ import com.ooyala.sample.R;
 
 public class SkinPlayerFragment extends Fragment {
   private static final String EMBED = "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww";
-  public static final int WIDE = 0;
-  public static final int TALL = 1;
   final String TAG = this.getClass().toString();
 
   final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
