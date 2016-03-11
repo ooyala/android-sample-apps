@@ -18,6 +18,14 @@ android {
     }
 }
 
+task copyTask(type: Copy) {
+    println "Jars are copied"
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    into new File(System.getProperty("user.dir"),'./app/libs')
+}
+
+tasks.copyTask.execute()
+
 dependencies {
     compile 'com.google.android.gms:play-services:+'
     compile files('libs/OoyalaSDK.jar')
