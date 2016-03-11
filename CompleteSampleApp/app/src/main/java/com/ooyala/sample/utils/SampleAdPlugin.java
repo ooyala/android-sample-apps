@@ -129,6 +129,16 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
 
   }
 
+  @Override
+  public void onAdIconClicked(int arg) {
+
+  }
+
+  @Override
+  public void   processClickThrough() {
+
+  }
+
   private void playAd(SampleAdSpot ad) {
     _adPlayer = new SampleAdPlayer(_context, _stateNotifier, _player.get()
         .getLayout());

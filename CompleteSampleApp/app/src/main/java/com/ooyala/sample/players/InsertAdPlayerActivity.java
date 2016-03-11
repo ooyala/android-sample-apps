@@ -21,6 +21,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ads.vast.VASTAdSpot;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how you can insert Ooyala and VAST advertisements programmatically
@@ -43,6 +44,9 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
   /**
    * Called when the activity is first created.
@@ -126,6 +130,12 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
