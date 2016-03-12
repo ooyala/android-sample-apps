@@ -61,7 +61,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
 
     //Create the SkinOptions, and setup React
     JSONObject overrides = createSkinOverrides();
-    SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).setEnableReactJSServer(true).build();
+    SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
