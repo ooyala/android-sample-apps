@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.CustomConfiguredIMAPlayerActivity;
 import com.ooyala.sample.players.PreconfiguredIMAPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
@@ -44,7 +43,6 @@ public class IMAListActivity extends Activity implements OnItemClickListener {
     selectionMap.put("IMA Podded Pre-Mid-Post", new PlayerSelectionOption("ZrOTE3cDoXo2sLOWzQPxjS__M-Qk32Co", PreconfiguredIMAPlayerActivity.class) );
     selectionMap.put("IMA Skippable", new PlayerSelectionOption("FhbGRjbzq8tfaoA3dhfxc2Qs0-RURJfO", PreconfiguredIMAPlayerActivity.class) );
     selectionMap.put("IMA Pre, Mid and Post Skippable", new PlayerSelectionOption("10NjE3cDpj8nUzYiV1PnFsjC6nEvPQAE", PreconfiguredIMAPlayerActivity.class) );
-    selectionMap.put("IMA Application-Configured", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomConfiguredIMAPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
