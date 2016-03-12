@@ -38,5 +38,5 @@ dependencies {
     compile files('libs/ima-android-v3-3.b13.3.jar')
 
     compile files('libs/OoyalaSkinSDK.jar')
-    compile 'com.facebook.react:react-native:0.16.+'
+    compile 'com.facebook.react:react-native:0.20.+'
 }
