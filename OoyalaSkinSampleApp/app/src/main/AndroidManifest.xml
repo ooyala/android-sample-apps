@@ -38,13 +38,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
-            android:name=".players.CustomConfiguredFreewheelPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
-        </activity>
-         <activity android:name=".players.OptionsFreewheelPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity
             android:name=".lists.IMAListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
@@ -52,11 +45,6 @@
         <activity android:name=".players.PreconfiguredIMAPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
-        
-        <activity android:name=".players.CustomConfiguredIMAPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-
 
         <activity android:name=".players.OoyalaSkinPlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">

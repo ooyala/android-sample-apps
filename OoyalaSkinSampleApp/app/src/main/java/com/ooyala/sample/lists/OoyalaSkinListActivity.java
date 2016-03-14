@@ -54,7 +54,6 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", OoyalaSkinPlayerActivity.class));
 
     selectionMap.put("VAST 3.0 2 Podded Ad", new PlayerSelectionOption("tjN2h1MDE65xMHMqNvvU0fYVBi6sFl1M", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("VAST 3.0 Ad Overlay", new PlayerSelectionOption("NuMGp1MDE6EKUv7rAmkSQ3iuLU5N5Ik0", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad With All Of The New Events", new PlayerSelectionOption("x3MWp1MDE6yIedkirT0to1t1uy2oA8y3", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad With Icon", new PlayerSelectionOption("1qNGp1MDE6GBl7PkPlWA_FA9NJDhBp_I" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Podded Preroll with Skippable Ad", new PlayerSelectionOption("1uNGp1MDE6DJElG8YeQJ8D7tuuJo9T-t", OoyalaSkinPlayerActivity.class));
