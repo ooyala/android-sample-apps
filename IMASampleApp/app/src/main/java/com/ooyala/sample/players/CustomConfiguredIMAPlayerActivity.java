@@ -33,11 +33,10 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
 
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
-
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   /**
    * Called when the activity is first created.
@@ -55,6 +54,9 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
     playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
     /** DITA_START:<ph id="ima_custom"> **/
 
@@ -103,7 +105,7 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
     playbacklog.writeToSdcardLog(text);
 
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    Log.d(TAG, text);
   }
 
 }
