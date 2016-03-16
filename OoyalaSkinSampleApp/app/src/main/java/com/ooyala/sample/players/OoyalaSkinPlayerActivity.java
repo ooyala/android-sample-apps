@@ -54,7 +54,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).build();
+    Options options = new Options.Builder().setShowPromoImage(false).build();
     player = new OoyalaPlayer(PCODE, domain, options);
 
     //Create the SkinOptions, and setup React
@@ -141,7 +141,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
     Playbacklog.writeToSdcardLog(text);
 
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+   // Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
 }
