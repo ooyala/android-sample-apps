@@ -39,7 +39,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinPlayerActivity.class) );
+    selectionMap.put("4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinPlayerActivity.class));
     selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", OoyalaSkinPlayerActivity.class) );
     selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", OoyalaSkinPlayerActivity.class) );
     selectionMap.put( "Ooyala Encrypted HLS", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", OoyalaSkinPlayerActivity.class) );
@@ -60,6 +60,9 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("VAST 3.0 Podded Preroll with Skippable Ad", new PlayerSelectionOption("1uNGp1MDE6DJElG8YeQJ8D7tuuJo9T-t", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad", new PlayerSelectionOption("1oNGp1MDE6V512gRnkTcz2o3RnFDSxNZ" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G" , OoyalaSkinPlayerActivity.class));
+
+    selectionMap.put("VMAP PreMidPost Single", new PlayerSelectionOption("41MzA5MTE65SC6VQAS3H3d9rX-hwHQSK", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", OoyalaSkinPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
 
