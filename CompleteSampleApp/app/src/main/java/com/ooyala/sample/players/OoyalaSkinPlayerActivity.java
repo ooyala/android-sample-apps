@@ -56,7 +56,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+    Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
     player = new OoyalaPlayer(PCODE, domain, options);
 
     //Create the SkinOptions, and setup React
