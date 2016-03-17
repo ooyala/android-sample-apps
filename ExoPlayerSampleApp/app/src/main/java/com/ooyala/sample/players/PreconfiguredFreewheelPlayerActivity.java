@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
+import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
@@ -13,8 +15,11 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+
+
+import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -25,14 +30,14 @@ import java.util.Observer;
  * In order for Freewheel to work this simply, you need the following parameters set in your Third Party Module Parameters
  * - fw_android_ad_server
  * - fw_android_player_profile
- * 
+ *
  * And an Freewheel Ad Spot configured in Backlot with at least the following:
  * - Network ID
  * - Video Asset Network ID
  * - Site Section ID
- * 
+ *
  */
-public class PreconfiguredFreewheelPlayerActivity extends Activity implements Observer {
+public class PreconfiguredFreewheelPlayerActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
   public final static String getName() {
     return "Preconfigured Freewheel Player";
   }
@@ -45,7 +50,7 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+  protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
   /**
@@ -67,18 +72,18 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+    Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
     player = new OoyalaPlayer(PCODE, domain, options);
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 
     @SuppressWarnings("unused")
     OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout, player);
-    
+
     if (player.setEmbedCode(EMBED)) {
 //      player.play();
     }
@@ -86,10 +91,21 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
 
   }
 
+  /** Start DefaultHardwareBackBtnHandler **/
+  @Override
+  public void invokeDefaultOnBackPressed() {
+    super.onBackPressed();
+  }
+  /** End DefaultHardwareBackBtnHandler **/
+
+  /** Start Activity methods for Skin **/
   @Override
   protected void onPause() {
     super.onPause();
-    Log.d(TAG, "Player Activity Paused");
+    if (playerLayoutController != null) {
+      playerLayoutController.onPause();
+    }
+
     if (player != null) {
       player.suspend();
     }
@@ -98,11 +114,32 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
   @Override
   protected void onResume() {
     super.onResume();
-    Log.d(TAG, "Player Activity Resumed");
+    if (playerLayoutController != null) {
+      playerLayoutController.onResume( this, this);
+    }
+
     if (player != null) {
       player.resume();
     }
   }
+
+  @Override
+  public void onBackPressed() {
+    if (playerLayoutController != null) {
+      playerLayoutController.onBackPressed();
+    } else {
+      super.onBackPressed();
+    }
+  }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (playerLayoutController != null) {
+      playerLayoutController.onDestroy();
+    }
+  }
+  /** End Activity methods for Skin **/
+
 
   /**
    * Listen to all notifications from the OoyalaPlayer
