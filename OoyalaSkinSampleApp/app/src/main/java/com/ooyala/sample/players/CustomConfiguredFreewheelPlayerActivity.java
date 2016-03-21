@@ -1,5 +1,7 @@
 package com.ooyala.sample.players;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -7,13 +9,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.imasdk.OoyalaIMAManager;
+import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
@@ -22,21 +23,19 @@ import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
- * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
+ * This activity illustrates how to use Freewheel while manually configuring Freewheel settings
  *
- * In order for Freewheel to work this simply, you need the following parameters set in your Third Party Module Parameters
+ * Supported parameters for Freewheel Configuration:
+ * - fw_android_mrm_network_id
  * - fw_android_ad_server
  * - fw_android_player_profile
- *
- * And an Freewheel Ad Spot configured in Backlot with at least the following:
- * - Network ID
- * - Video Asset Network ID
- * - Site Section ID
- *
+ * - FRMSegment
+ * - fw_android_site_section_id
+ * - fw_android_video_asset_id
  */
-public class PreconfiguredIMAPlayerActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
+public class CustomConfiguredFreewheelPlayerActivity extends Activity implements Observer {
   public final static String getName() {
-    return "Preconfigured IMA Player";
+    return "Preconfigured Freewheel Player";
   }
   final String TAG = this.getClass().toString();
 
@@ -47,7 +46,7 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
-  protected OoyalaSkinLayoutController playerLayoutController;
+  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
   /**
@@ -61,70 +60,38 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
 
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    // Get the SkinLayout from our layout xml
+    //Initialize the player
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
+    Options options = new Options.Builder().setShowPromoImage(false).build();
     player = new OoyalaPlayer(PCODE, domain, options);
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 
-    @SuppressWarnings("unused")
-    OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
+    /** DITA_START:<ph id="freewheel_custom"> **/
+    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout, player);
+    
+    Map<String, String> freewheelParameters = new HashMap<String, String>();    
+    freewheelParameters.put("fw_android_mrm_network_id",  "380912");
+    freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
+    freewheelParameters.put("fw_android_player_profile",  "90750:ooyala_android");
+    freewheelParameters.put("FRMSegment",  "channel=TEST;subchannel=TEST;section=TEST;mode=online;player=ooyala;beta=n");
+    freewheelParameters.put("fw_android_site_section_id", "ooyala_android_internalapp");
+    freewheelParameters.put("fw_android_video_asset_id",  "NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-");
 
+    fwManager.overrideFreewheelParameters(freewheelParameters);
+    /** DITA_END:</ph> **/
+    
     if (player.setEmbedCode(EMBED)) {
 //      player.play();
     }
-    /** DITA_END:</ph> **/
-
   }
-
-  /** Start DefaultHardwareBackBtnHandler **/
-  @Override
-  public void invokeDefaultOnBackPressed() {
-    super.onBackPressed();
-  }
-  /** End DefaultHardwareBackBtnHandler **/
-
-  /** Start Activity methods for Skin **/
-  @Override
-  protected void onPause() {
-    super.onPause();
-    if (playerLayoutController != null) {
-      playerLayoutController.onPause();
-    }
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    if (playerLayoutController != null) {
-      playerLayoutController.onResume( this, this );
-    }
-  }
-
-  @Override
-  public void onBackPressed() {
-    if (playerLayoutController != null) {
-      playerLayoutController.onBackPressed();
-    } else {
-      super.onBackPressed();
-    }
-  }
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (playerLayoutController != null) {
-      playerLayoutController.onDestroy();
-    }
-  }
-  /** End Activity methods for Skin **/
 
   @Override
   protected void onStop() {

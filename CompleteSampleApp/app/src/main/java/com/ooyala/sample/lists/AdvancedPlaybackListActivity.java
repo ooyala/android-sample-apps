@@ -20,6 +20,7 @@ import com.ooyala.sample.players.InsertAdPlayerActivity;
 import com.ooyala.sample.players.MultipleVideosPlayerActivity;
 import com.ooyala.sample.players.PlayWithInitialTimePlayerActivity;
 import com.ooyala.sample.players.PluginPlayerActivity;
+import com.ooyala.sample.players.UnbundledPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 public class AdvancedPlaybackListActivity extends Activity implements OnItemClickListener {
@@ -47,6 +48,7 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap.put(PluginPlayerActivity.getName(), new PlayerSelectionOption("lrZmRiMzrr8cP77PPW0W8AsjjhMJ1BBe", PluginPlayerActivity.class));
     selectionMap.put(CustomControlsPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomControlsPlayerActivity.class) );
     selectionMap.put(CustomOverlayPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomOverlayPlayerActivity.class) );
+    selectionMap.put(UnbundledPlayerActivity.getName(), new PlayerSelectionOption("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4", UnbundledPlayerActivity.class));
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
