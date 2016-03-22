@@ -47,7 +47,7 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("VAST2 Ad Pre-roll", new PlayerSelectionOption("Zlcmp0ZDrpHlAFWFsOBsgEXFepeSXY4c", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST2 Ad Mid-roll", new PlayerSelectionOption("pncmp0ZDp7OKlwTPJlMZzrI59j8Imefa", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST2 Ad Post-roll", new PlayerSelectionOption("Zpcmp0ZDpaB-90xK8MIV9QF973r1ZdUf", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("VAST2 Ad Wrapper", new PlayerSelectionOption("pqaWp0ZDqo17Z-Dn_5YiVhjcbQYs5lhq", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST2 Ad Wrapper", new PlayerSelectionOption("5ybGV3ZTrqvbymwBC6ThtupFBptOp1rP", OoyalaSkinPlayerActivity.class));
     selectionMap.put("Ooyala Ad Pre-roll", new PlayerSelectionOption("M4cmp0ZDpYdy8kiL4UD910Rw_DWwaSnU", OoyalaSkinPlayerActivity.class));
     selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", OoyalaSkinPlayerActivity.class));
     selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", OoyalaSkinPlayerActivity.class));
