@@ -11,7 +11,31 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
-        android:background="#fff">
+        android:background="#000">
     </com.ooyala.android.skin.OoyalaSkinLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/ooyalaSkin"
+        android:text="Below Skin Layout"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/ooyalaSkin"
+        android:text="Above Skin Layout"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@id/ooyalaSkin"
+        android:text="Left of Skin Layout"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@id/ooyalaSkin"
+        android:text="Right of Skin Layout"/>
 </RelativeLayout>
