@@ -39,7 +39,7 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinPlayerActivity.class) );
+    selectionMap.put("4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinPlayerActivity.class));
     selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", OoyalaSkinPlayerActivity.class) );
     selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", OoyalaSkinPlayerActivity.class) );
     selectionMap.put( "VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", OoyalaSkinPlayerActivity.class) );
@@ -47,7 +47,7 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("VAST2 Ad Pre-roll", new PlayerSelectionOption("Zlcmp0ZDrpHlAFWFsOBsgEXFepeSXY4c", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST2 Ad Mid-roll", new PlayerSelectionOption("pncmp0ZDp7OKlwTPJlMZzrI59j8Imefa", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST2 Ad Post-roll", new PlayerSelectionOption("Zpcmp0ZDpaB-90xK8MIV9QF973r1ZdUf", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("VAST2 Ad Wrapper", new PlayerSelectionOption("pqaWp0ZDqo17Z-Dn_5YiVhjcbQYs5lhq", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST2 Ad Wrapper", new PlayerSelectionOption("5ybGV3ZTrqvbymwBC6ThtupFBptOp1rP", OoyalaSkinPlayerActivity.class));
     selectionMap.put("Ooyala Ad Pre-roll", new PlayerSelectionOption("M4cmp0ZDpYdy8kiL4UD910Rw_DWwaSnU", OoyalaSkinPlayerActivity.class));
     selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", OoyalaSkinPlayerActivity.class));
     selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", OoyalaSkinPlayerActivity.class));
@@ -59,6 +59,10 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("VAST 3.0 Podded Preroll with Skippable Ad", new PlayerSelectionOption("1uNGp1MDE6DJElG8YeQJ8D7tuuJo9T-t", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad", new PlayerSelectionOption("1oNGp1MDE6V512gRnkTcz2o3RnFDSxNZ" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G" , OoyalaSkinPlayerActivity.class));
+
+    selectionMap.put("VMAP PreMidPost Single", new PlayerSelectionOption("41MzA5MTE65SC6VQAS3H3d9rX-hwHQSK", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", OoyalaSkinPlayerActivity.class));
+
     setContentView(R.layout.list_activity_layout);
 
     //Create the adapter for the ListView

@@ -11,7 +11,11 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -33,10 +37,11 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   final String DOMAIN = "http://ooyala.com";
 
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
-
-  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   /**
    * Called when the activity is first created.
@@ -49,18 +54,25 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
 
     EMBED = getIntent().getExtras().getString("embed_code");
 
+
     //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
+
+    // Create the OoyalaPlayer, with some built-in UI disabled
+    PlayerDomain domain = new PlayerDomain(DOMAIN);
+    Options options = new Options.Builder().setShowPromoImage(false).build();
+    player = new OoyalaPlayer(PCODE, domain, options);
+
+    //Create the SkinOptions, and setup React
+    SkinOptions skinOptions = new SkinOptions.Builder().build();
+    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+
     player.addObserver(this);
 
-    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
-    playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
     /** DITA_START:<ph id="ima_custom"> **/
 
-	OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
+	OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 	
 	// This ad tag returns a midroll video
     imaManager.setAdUrlOverride("http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7521029/pb_test_mid&ciu_szs=640x480&impl=s&cmsid=949&vid=FjbGRjbzp0DV_5-NtXBVo5Rgp3Sj0R5C&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]");
@@ -68,7 +80,7 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     /** DITA_END:</ph> **/
     
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+//      player.play();
     }
   }
 
@@ -103,9 +115,9 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
     String text="Notification Received: " + arg1 + " - state: " + player.getState();
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    playbacklog.writeToSdcardLog(text);
+    Playbacklog.writeToSdcardLog(text);
 
-    Log.d(TAG, text);
+    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
 }

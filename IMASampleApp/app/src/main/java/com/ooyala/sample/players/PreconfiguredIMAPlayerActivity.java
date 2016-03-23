@@ -14,6 +14,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -41,6 +42,8 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
+  SDCardLogcatOoyalaEventsLogger playbacklog;
+
   /**
    * Called when the activity is first created.
    */
@@ -58,6 +61,9 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
     playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
     @SuppressWarnings("unused")
 	OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
@@ -96,7 +102,13 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
+    Log.d(TAG, text);
   }
 
 }
