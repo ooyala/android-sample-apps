@@ -22,7 +22,7 @@ import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
 
 public class SkinPlayerFragment extends Fragment {
-  private static final String EMBED = "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww";
+  private static final String EMBED = "JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt";
   final String TAG = this.getClass().toString();
 
   final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
