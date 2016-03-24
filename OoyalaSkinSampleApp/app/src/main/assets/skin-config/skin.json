@@ -10,19 +10,19 @@
         "language": "en",
         "languageFile": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/en.json",
         "androidResource": "skin-config/en.json",
-        "iosResource": "en"
+        "iosResource": "skin-config/en.json"
       },
       {
         "language": "es",
         "languageFile": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/es.json",
         "androidResource": "skin-config/es.json",
-        "iosResource": "es"
+        "iosResource": "skin-config/es.json"
       },
       {
         "language": "zh",
         "languageFile": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/zh.json",
         "androidResource": "skin-config/zh.json",
-        "iosResource": "zh"
+        "iosResource": "skin-config/zh.json"
       }
     ]
   },
@@ -81,7 +81,7 @@
     "panelTitle": {
       "titleFont": {
         "fontSize": 28,
-        "fontFamily": "Roboto Condensed",
+        "fontFamily": "'Roboto Condensed', sans-serif",
         "color": "white"
       }
     },
@@ -89,7 +89,7 @@
       "show": true,
       "font": {
         "fontSize": 22,
-        "fontFamily": "Roboto Condensed",
+        "fontFamily": "'Roboto Condensed', sans-serif",
         "color": "white"
       }
     },
@@ -170,7 +170,7 @@
   "buttons": {
     "desktopContent": [
       {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
+      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":105 },
       {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35},
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":145 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
@@ -184,7 +184,7 @@
     ],
     "desktopAd": [
       {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
+      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":105 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"watermark", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
@@ -211,8 +211,8 @@
   "icons": {
     "play": {"fontFamilyName": "alice", "fontString": "\u0068", "fontStyleClass": "icon icon-play"},
     "pause": {"fontFamilyName": "alice", "fontString": "\u0067", "fontStyleClass": "icon icon-pause"},
-    "volume": {"fontFamilyName": "alice", "fontString": "\u0062", "fontStyleClass": "icon icon-volume-mobile"},
-    "volumeOff": {"fontFamilyName": "alice", "fontString": "\u0070", "fontStyleClass": "icon icon-volume-mobile-mute"},
+    "volume": {"fontFamilyName": "alice", "fontString": "\u0061", "fontStyleClass": "icon icon-volume-desktop"},
+    "volumeOff": {"fontFamilyName": "alice", "fontString": "\u0070", "fontStyleClass": "icon icon-volume-desktop"},
     "expand": {"fontFamilyName": "alice", "fontString": "\u0069", "fontStyleClass": "icon icon-resize-large"},
     "compress": {"fontFamilyName": "alice", "fontString": "\u006a", "fontStyleClass": "icon icon-resize-small"},
     "ellipsis": {"fontFamilyName": "alice", "fontString": "\u0066", "fontStyleClass": "icon icon-menu"},
