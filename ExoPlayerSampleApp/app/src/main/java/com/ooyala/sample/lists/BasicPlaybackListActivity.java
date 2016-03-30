@@ -61,6 +61,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("VAST 3.0 Podded Preroll with Skippable Ad", new PlayerSelectionOption("1uNGp1MDE6DJElG8YeQJ8D7tuuJo9T-t", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad", new PlayerSelectionOption("1oNGp1MDE6V512gRnkTcz2o3RnFDSxNZ" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G" , OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST 3.0 Ad Wrapper", new PlayerSelectionOption("Fkcm9lMjE6GOcDOtPSiRnNCRhqsz-96e", OoyalaSkinPlayerActivity.class));
 
     selectionMap.put("VMAP PreMidPost Single", new PlayerSelectionOption("41MzA5MTE65SC6VQAS3H3d9rX-hwHQSK", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", OoyalaSkinPlayerActivity.class));
