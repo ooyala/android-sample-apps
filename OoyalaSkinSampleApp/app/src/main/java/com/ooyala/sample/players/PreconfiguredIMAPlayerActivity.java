@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -33,7 +34,7 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
  * - Site Section ID
  * 
  */
-public class PreconfiguredIMAPlayerActivity extends Activity implements Observer {
+public class PreconfiguredIMAPlayerActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
   public final static String getName() {
     return "Preconfigured IMA Player";
   }
@@ -46,7 +47,7 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+  protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
   /**
@@ -65,12 +66,12 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).build();
+    Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).build();
     player = new OoyalaPlayer(PCODE, domain, options);
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 
@@ -83,6 +84,47 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
     /** DITA_END:</ph> **/
 
   }
+
+  /** Start DefaultHardwareBackBtnHandler **/
+  @Override
+  public void invokeDefaultOnBackPressed() {
+    super.onBackPressed();
+  }
+  /** End DefaultHardwareBackBtnHandler **/
+
+  /** Start Activity methods for Skin **/
+  @Override
+  protected void onPause() {
+    super.onPause();
+    if (playerLayoutController != null) {
+      playerLayoutController.onPause();
+    }
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if (playerLayoutController != null) {
+      playerLayoutController.onResume( this, this );
+    }
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (playerLayoutController != null) {
+      playerLayoutController.onBackPressed();
+    } else {
+      super.onBackPressed();
+    }
+  }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (playerLayoutController != null) {
+      playerLayoutController.onDestroy();
+    }
+  }
+  /** End Activity methods for Skin **/
 
   @Override
   protected void onStop() {

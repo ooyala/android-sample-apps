@@ -3,6 +3,8 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.PlayerDomain;
@@ -26,7 +28,7 @@ import java.util.Observer;
  * through the SDK
  *
  */
-public class OoyalaSkinPlayerActivity extends Activity implements Observer {
+public class OoyalaSkinPlayerActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
@@ -54,13 +56,13 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowAdsControls(false).setShowPromoImage(false).build();
+    Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).build();
     player = new OoyalaPlayer(PCODE, domain, options);
 
     //Create the SkinOptions, and setup React
     JSONObject overrides = createSkinOverrides();
     SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
-    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 
@@ -72,6 +74,55 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
       Log.e(TAG, "Asset Failure");
     }
   }
+
+  /** Start DefaultHardwareBackBtnHandler **/
+  @Override
+  public void invokeDefaultOnBackPressed() {
+    super.onBackPressed();
+  }
+  /** End DefaultHardwareBackBtnHandler **/
+
+  /** Start Activity methods for Skin **/
+  @Override
+  protected void onPause() {
+    super.onPause();
+    if (playerLayoutController != null) {
+      playerLayoutController.onPause();
+    }
+    Log.d(TAG, "Player Activity Stopped");
+    if (player != null) {
+      player.suspend();
+    }
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if (playerLayoutController != null) {
+      playerLayoutController.onResume( this, this );
+    }
+    Log.d(TAG, "Player Activity Restarted");
+    if (player != null) {
+      player.resume();
+    }
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (playerLayoutController != null) {
+      playerLayoutController.onBackPressed();
+    } else {
+      super.onBackPressed();
+    }
+  }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (playerLayoutController != null) {
+      playerLayoutController.onDestroy();
+    }
+  }
+  /** End Activity methods for Skin **/
 
   /**
    * Create skin overrides to show up in the skin.
@@ -96,19 +147,13 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
   @Override
   protected void onStop() {
     super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
-    if (player != null) {
-      player.suspend();
-    }
+
   }
 
   @Override
   protected void onRestart() {
     super.onRestart();
-    Log.d(TAG, "Player Activity Restarted");
-    if (player != null) {
-      player.resume();
-    }
+
   }
 
   /**
@@ -141,7 +186,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer {
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
     Playbacklog.writeToSdcardLog(text);
 
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+   // Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
 }

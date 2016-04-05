@@ -1,10 +1,5 @@
 package com.ooyala.sample.players;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +9,19 @@ import android.widget.Button;
 
 import com.ooyala.android.OoyalaAdSpot;
 import com.ooyala.android.OoyalaManagedAdsPlugin;
-import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
+import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ads.vast.VASTAdSpot;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
-import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.sample.R;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This activity illustrates how you can insert Ooyala and VAST advertisements programmatically
@@ -79,7 +79,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
       public void onClick(View v) {
         OoyalaManagedAdsPlugin plugin = player.getManagedAdsPlugin();
         try {
-          VASTAdSpot vastAd = new VASTAdSpot(player.getPlayheadTime(), null, null, new URL("http://xd-team.ooyala.com.s3.amazonaws.com/ads/VastAd_Preroll.xml"));
+          VASTAdSpot vastAd = new VASTAdSpot(player.getPlayheadTime(), player.getDuration(), null, null, new URL("http://xd-team.ooyala.com.s3.amazonaws.com/ads/VastAd_Preroll.xml"));
           plugin.insertAd(vastAd);
         } catch (MalformedURLException e) {
           Log.e(TAG, "VAST Ad Tag was malformed");
