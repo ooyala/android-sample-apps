@@ -18,3 +18,6 @@ go_script/pkg
 **/libdx*.so
 **/libdx*.so.info
 **/libvo*.so
+
+**/app/libs/*.jar
+**/app/libs/*.aar

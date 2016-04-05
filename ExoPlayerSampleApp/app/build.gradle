@@ -29,6 +29,21 @@ android {
   }
 }
 
+task copyTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Google/ima-android-v3-3.b13.3.jar')
+    into new File(System.getProperty("user.dir"),'./app/libs')
+    doLast {
+        println "Jars updated."
+    }
+}
+
+tasks.copyTask.execute()
+
 dependencies {
   compile files('libs/FWAdManager.jar')
   compile files('libs/OoyalaFreewheelSDK.jar')

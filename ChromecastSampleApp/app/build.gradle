@@ -25,6 +25,17 @@ repositories {
     }
 }
 
+task copyTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.aar')
+    into new File(System.getProperty("user.dir"),'./app/libs')
+    doLast {
+        println "Jars updated."
+    }
+}
+
+tasks.copyTask.execute()
+
 dependencies {
     compile project(':CastCompanionLibrary')
     compile(name:'OoyalaCastSDK', ext:'aar')

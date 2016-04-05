@@ -18,6 +18,18 @@ android {
     }
 }
 
+task copyTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Google/ima-android-v3-3.b13.3.jar')
+    into new File(System.getProperty("user.dir"),'./app/libs')
+    doLast {
+        println "Jars updated."
+    }
+}
+
+tasks.copyTask.execute()
+
 dependencies {
     compile 'com.google.android.gms:play-services-ads:+'
     compile files('libs/OoyalaIMASDK.jar')

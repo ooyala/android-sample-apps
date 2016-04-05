@@ -17,6 +17,20 @@ android {
     }
 }
 
+task copyTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaNielsenSDK-Android/OoyalaNielsenSDK.jar')
+
+    println "Ooyala JARs were added, however, Nielsen Integration requires VisualOn and Nielsen SDKs"
+
+    into new File(System.getProperty("user.dir"),'./app/libs')
+    doLast {
+        println "Jars updated."
+    }
+}
+
+tasks.copyTask.execute()
+
 dependencies {
     compile 'com.google.android.gms:play-services-ads:6.5.87'
     compile files('libs/OoyalaNielsenSDK.jar')
