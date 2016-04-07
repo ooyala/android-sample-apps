@@ -20,6 +20,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 public class PreloadWithInitTimePlayerActivity extends Activity implements OnClickListener, Observer {
   /**
@@ -35,13 +36,14 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
   private Button setButton;
   private ToggleButton preloadButton;
   private ToggleButton showPromoImageButton;
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
 	String localeString = getResources().getConfiguration().locale.toString();
 	Log.d(TAG, "locale is " + localeString);
 	LocalizationSupport.useLocalizedStrings(LocalizationSupport
-	    .loadLocalizedStrings(localeString));
+            .loadLocalizedStrings(localeString));
 	
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.player_toggle_button_layout);
@@ -60,6 +62,9 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
 	showPromoImageButton.setTextOn("Show PromoImage On");
 	showPromoImageButton.setTextOff("Show PromoImage Off");
 	showPromoImageButton.setChecked(true);
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
   }
 
   @Override
@@ -109,7 +114,12 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
 	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
 	  return;
 	}
-	Log.d(TAG,
-	    "Notification Received: " + arg1 + " - state: " + player.getState());
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
+	Log.d(TAG, text);
   }
 }

@@ -18,6 +18,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,13 +39,14 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
   private Button setButton;
   private EditText connectionTimeout;
   private EditText readTimeout;
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
 	String localeString = getResources().getConfiguration().locale.toString();
 	Log.d(TAG, "locale is " + localeString);
 	LocalizationSupport.useLocalizedStrings(LocalizationSupport
-	    .loadLocalizedStrings(localeString));
+			.loadLocalizedStrings(localeString));
 	
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.player_double_textedit_layout);
@@ -59,6 +61,9 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
 	
 	readTimeout = (EditText) findViewById(R.id.edit2);
 	readTimeout.setHint("read timeout in milliseconds");
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
   }
 
   @Override
@@ -138,7 +143,12 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
 	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
 	  return;
 	}
-	Log.d(TAG,
-	    "Notification Received: " + arg1 + " - state: " + player.getState());
+
+	// Automation Hook: to write Notifications to a temporary file on the device/emulator
+	String text="Notification Received: " + arg1 + " - state: " + player.getState();
+	// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+	playbacklog.writeToSdcardLog(text);
+
+	Log.d(TAG, text);
 	}
 }
