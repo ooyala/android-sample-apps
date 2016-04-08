@@ -1,26 +1,26 @@
 {
   "general": {
-    "watermark": {"imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/assets/images/ooyala-watermark.png","androidResource" : "logo","iosResource" : "logo"  } },
-    "loadingImage": {"imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/loader_svg.svg" } }
+    "watermark": {"imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/assets/images/ooyala-watermark.png","androidResource" : "logo","iosResource" : "logo"  } },
+    "loadingImage": {"imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/assets/images/loader_svg.svg" } }
   },
   "localization": {
     "defaultLanguage": "en",
     "availableLanguageFile": [
       {
         "language": "en",
-        "languageFile": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/en.json",
+        "languageFile": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/en.json",
         "androidResource": "skin-config/en.json",
         "iosResource": "en"
       },
       {
         "language": "es",
-        "languageFile": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/es.json",
+        "languageFile": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/es.json",
         "androidResource": "skin-config/es.json",
         "iosResource": "es"
       },
       {
         "language": "zh",
-        "languageFile": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/zh.json",
+        "languageFile": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/zh.json",
         "androidResource": "skin-config/zh.json",
         "iosResource": "zh"
       }
@@ -28,9 +28,10 @@
   },
   "responsive": {
     "breakpoints": {
-      "sm": {"name": "ooyala-small", "maxWidth": 559, "multiplier": 0.7},
-      "md": {"name": "ooyala-medium", "minWidth": 560, "maxWidth": 1280, "multiplier": 1},
-      "lg": {"name": "ooyala-large", "minWidth": 1281, "multiplier": 1.2}
+      "xs": {"id": "xs", "name": "ooyala-xsmall", "maxWidth": 559, "multiplier": 0.7},
+      "sm": {"id": "sm", "name": "ooyala-small", "minWidth": 560, "maxWidth": 839, "multiplier": 1},
+      "md": {"id": "md", "name": "ooyala-medium", "minWidth": 840, "maxWidth": 1279, "multiplier": 1},
+      "lg": {"id": "lg", "name": "ooyala-large", "minWidth": 1280, "multiplier": 1.2}
     },
     "aspectRatio": "auto"
   },
@@ -106,7 +107,7 @@
   },
   "shareScreen": {
     "embed": {
-      "source": "<iframe width='640' height='480' frameborder='0' allowfullscreen src='//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/iframe.html?ec=<ASSET_ID>&pbid=<PLAYER_ID>&pcode=<PUBLISHER_ID>'></iframe>"
+      "source": "<iframe width='640' height='480' frameborder='0' allowfullscreen src='//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/iframe.html?ec=<ASSET_ID>&pbid=<PLAYER_ID>&pcode=<PUBLISHER_ID>'></iframe>"
     }
   },
   "moreOptionsScreen": {
@@ -151,7 +152,7 @@
     "autoHide": true,
     "height": 60,
     "watermark": {
-      "imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.1.4/skin-plugin/assets/images/ooyala.png","androidResource" : "logo","iosResource" : "logo"},
+      "imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/assets/images/ooyala.png","androidResource" : "logo","iosResource" : "logo"},
       "clickUrl": "http://www.ooyala.com/",
       "width": 500,
       "height": 81
@@ -166,6 +167,9 @@
       "bufferedColor": "rgba(127,127,127,1)",
       "playedColor": "rgba(67,137,255,1)"
     }
+  },
+  "live": {
+    "forceDvrDisabled": false
   },
   "buttons": {
     "desktopContent": [

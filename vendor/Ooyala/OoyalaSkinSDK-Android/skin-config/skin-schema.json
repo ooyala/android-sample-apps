@@ -2,9 +2,9 @@
   "description" : "This JSON schema describes the base UI configuration for the Ooyala Player, which can be customized in the <a href=\"https://github.com/ooyala/skin-config.git\">skin.json</a> file. Also see <a href=\"https://facebook.github.io/react\">https://facebook.github.io/react</a> and <a href=\"https://facebook.github.io/react-native\">https://facebook.github.io/react-native</a>.",
   "type" : "object",
   "additionalProperties" : false,
-  "required": ["localization"],
+  "required": ["general", "startScreen", "pauseScreen", "endScreen", "upNext", "moreOptionsScreen", "discoveryScreen", "closedCaptionOptions", "icons", "buttons", "controlBar", "shareScreen", "localization"],
   "properties" : {
-    "general": { // TODO: I'd like to get rid of this. There's only the watermark in here.
+    "general": {
       "description" : "Configuration of things that do not appear in only one part of the UI.",
       "type": "object",
       "properties": {
@@ -580,14 +580,23 @@
         }
       }
     },
+    "live": {
+      "description": "Configuration for UI when it playbacks live assets.",
+      "type": "object",
+      "additionalProperties" : false,
+      "required" : [ "forceDvrDisabled" ],
+      "properties" : {
+        "forceDvrDisabled" : { 
+          "descriptipon": "Force the Scrubber bar to be hidden during live streams, regardless of if DVR is available",
+          "type" : "boolean" }
+      }
+    },
     "buttons" : {
       "description" : "Defines the buttons that can appear on the controlBar and/or the moreOptions panel. Desktop and Mobile platforms can be configured individually.",
       "type" : "object",
       "additionalProperties" : false,
-      // TODO: should we really require both? For our own UX yes, but what about for 3rd parties who only care about 1 platform?
       "required" : ["desktopContent", "mobileContent"],
       "properties" : {
-        // TODO: should these have any requirements about their length?
         "desktopContent" : { "$ref" : "#/definitions/buttonArray" },
         "desktopAd" : { "$ref" : "#/definitions/buttonArray" },
         "mobileContent" : { "$ref" : "#/definitions/buttonArray" },
@@ -1221,4 +1230,3 @@
     }
   }
 }
-
