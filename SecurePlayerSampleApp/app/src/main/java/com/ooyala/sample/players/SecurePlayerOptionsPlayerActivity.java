@@ -85,6 +85,10 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     // Disable the check for the correct version of VisualOn Libraries with the Ooyala SDK
     voConfigBuilder.setDisableLibraryVersionChecks(true);
 
+    // Set a proxy for the video content to pass video network requests
+    //voConfigBuilder.setHTTPProxyHost("127.0.0.1");
+    //voConfigBuilder.setHTTPProxyPort(8888);
+    
     return voConfigBuilder.build();
   }
 
