@@ -97,7 +97,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
       @Override
       public void onClick(View v) {
         OoyalaManagedAdsPlugin plugin = player.getManagedAdsPlugin();
-        OoyalaAdSpot ooyalaAd = new OoyalaAdSpot(player.getPlayheadTime(), null, null, "Zvcmp0ZDqD6xnQVH8ZhWlxH9L9bMGDDg", player.getOoyalaAPIClient());
+        OoyalaAdSpot ooyalaAd = new OoyalaAdSpot(player.getPlayheadTime(), null, null, "Zvcmp0ZDqD6xnQVH8ZhWlxH9L9bMGDDg");
         plugin.insertAd(ooyalaAd);
       }
     });
