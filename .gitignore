@@ -21,3 +21,4 @@ go_script/pkg
 
 **/app/libs/*.jar
 **/app/libs/*.aar
+**/app/src/main/assets/index.android.jsbundle

@@ -29,6 +29,15 @@ android {
   }
 }
 
+task copyAssetsTask(type: Copy) {
+  from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+  into new File(System.getProperty("user.dir"),'./app/src/main/assets')
+  doLast {
+    println "Assets updated."
+  }
+}
+tasks.copyAssetsTask.execute()
+
 task copyTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
