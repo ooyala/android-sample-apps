@@ -67,6 +67,9 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
   private VisualOnConfiguration getVisualOnConfiguration() {
     VisualOnConfiguration.Builder voConfigBuilder = new VisualOnConfiguration.Builder();
 
+    // Mandatory - You need to get an OPID for your application. Talk to your CSM or Technical Support for more information
+    voConfigBuilder.setSessionId("session");
+
     // The target bitrate to start video playback
     voConfigBuilder.setInitialBitrate(1200000);
 
@@ -88,7 +91,7 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     // Set a proxy for the video content to pass video network requests
     //voConfigBuilder.setHTTPProxyHost("127.0.0.1");
     //voConfigBuilder.setHTTPProxyPort(8888);
-    
+
     return voConfigBuilder.build();
   }
 
