@@ -29,13 +29,22 @@ android {
   }
 }
 
+task copyAssetsTask(type: Copy) {
+  from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+  into new File(System.getProperty("user.dir"),'./app/src/main/assets')
+  doLast {
+    println "Assets updated."
+  }
+}
+tasks.copyAssetsTask.execute()
+
 task copyTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/Google/ima-android-v3-3.b13.3.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Google/ima-android-v313.jar')
     into new File(System.getProperty("user.dir"),'./app/libs')
     doLast {
         println "Jars updated."
@@ -49,7 +58,7 @@ dependencies {
   compile files('libs/OoyalaFreewheelSDK.jar')
   compile files('libs/OoyalaIMASDK.jar')
   compile files('libs/OoyalaSDK.jar')
-  compile files('libs/ima-android-v3-3.b13.3.jar')
+  compile files('libs/ima-android-v313.jar')
 
   compile files('libs/OoyalaSkinSDK.jar')
   compile 'com.google.android.gms:play-services-ads:8.4.0'

@@ -8,6 +8,7 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.configuration.VisualOnConfiguration;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.visualon.PersonalizationAsyncTask;
@@ -41,16 +42,20 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
+    // Mandatory - You need to get an OPID for your application. Talk to your CSM or Technical Support for more information
+    VisualOnConfiguration voOpts = new VisualOnConfiguration.Builder().setSessionId("session").build();
+    Options options = new Options.Builder().setVisualOnConfiguration(voOpts).build();
+
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 
     OoyalaPlayer.enableCustomHLSPlayer = true;
     OoyalaPlayer.enableCustomPlayreadyPlayer = true;
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
-
+    
     new PersonalizationAsyncTask(
         new PersonalizationCallback() {
           @Override
@@ -62,7 +67,8 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
         },
         this,
         new VisualOnConfiguration.Builder().build().getPersonalizationServerUrl(),
-        false
+        false,
+        "session" // Mandatory - You need to get an OPID for your application. Talk to your CSM or Technical Support for more information
     ).execute();
   }
 
