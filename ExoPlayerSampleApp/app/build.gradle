@@ -17,8 +17,18 @@ android {
   }
 
   packagingOptions {
-    exclude 'META-INF/LICENSE.txt'
-    exclude 'META-INF/NOTICE.txt'
+      exclude 'META-INF/LICENSE.txt'
+      exclude 'META-INF/NOTICE.txt'
+      exclude 'META-INF/maven/org.apache.commons/commons-lang3/pom.properties'
+      exclude 'META-INF/maven/org.apache.commons/commons-lang3/pom.xml'
+      exclude 'assets/PlayReady/provisioning.dat'
+      exclude 'assets/version.txt'
+      exclude 'assets/version.info'
+      exclude 'third_party/java_src/error_prone/project/annotations/Annotations.gwt.xml'
+      exclude 'third_party/java_src/error_prone/project/annotations/Google_internal.gwt.xml'
+      exclude 'third_party/java_src/error_prone/Annotations.gwt.xml'
+      exclude 'error_prone/Annotations.gwt.xml'
+      exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
   }
 
   buildTypes {
