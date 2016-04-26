@@ -17,9 +17,6 @@ import com.ooyala.android.ads.vast.VASTAdSpot;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.performance.PerformanceMonitor;
 import com.ooyala.android.performance.PerformanceMonitorBuilder;
-import com.ooyala.android.performance.matcher.PerformanceNotificationNameMatcher;
-import com.ooyala.android.performance.matcher.PerformanceNotificationNameStateMatcher;
-import com.ooyala.android.performance.startend.PerformanceEventWatchStartEnd;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
@@ -76,7 +73,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
-    performanceMonitor = buildPerformanceMonitor();
+    performanceMonitor = PerformanceMonitorBuilder.getStandardAdsMonitor(player);
 
 
     if (player.setEmbedCode(EMBED)) {
@@ -116,41 +113,6 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
       }
     });
   }
-
-  private PerformanceMonitor buildPerformanceMonitor() {
-    PerformanceMonitorBuilder builder = new PerformanceMonitorBuilder(player);
-    /* BUFFERING EVENTS */
-    builder.addEventWatch(
-            new PerformanceEventWatchStartEnd(
-                    new PerformanceNotificationNameMatcher(OoyalaPlayer.BUFFERING_STARTED_NOTIFICATION_NAME),
-                    new PerformanceNotificationNameMatcher(OoyalaPlayer.BUFFERING_COMPLETED_NOTIFICATION_NAME)
-            )
-    );
-    /* SEEK COUNT */
-    builder.addEventWatch(
-            new PerformanceEventWatchStartEnd(
-                    new PerformanceNotificationNameMatcher(OoyalaPlayer.SEEK_COMPLETED_NOTIFICATION_NAME),
-                    new PerformanceNotificationNameMatcher(OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME)
-            )
-    );
-    /* CONTENT -> AD */
-    builder.addEventWatch(
-            new PerformanceEventWatchStartEnd(
-                    new PerformanceNotificationNameStateMatcher(OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME, OoyalaPlayer.State.PLAYING),
-                    new PerformanceNotificationNameMatcher(OoyalaPlayer.AD_STARTED_NOTIFICATION_NAME)
-            )
-    );
-    /* AD -> CONTENT */
-    builder.addEventWatch(
-            new PerformanceEventWatchStartEnd(
-                    new PerformanceNotificationNameMatcher(OoyalaPlayer.AD_COMPLETED_NOTIFICATION_NAME),
-                    new PerformanceNotificationNameStateMatcher(OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME, OoyalaPlayer.State.PLAYING)
-            )
-    );
-
-    return builder.build();
-  }
-
 
   @Override
   protected void onStop() {
