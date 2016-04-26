@@ -67,14 +67,14 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    Options opts = new Options.Builder().setUseExoPlayer(true).build();
+    Options opts = new Options.Builder().build();
 
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
+//  Set up performance monitoring to watch standard events and ads events.
     performanceMonitor = PerformanceMonitorBuilder.getStandardAdsMonitor(player);
-
 
     if (player.setEmbedCode(EMBED)) {
       player.play();
@@ -121,6 +121,8 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     if (player != null) {
       player.suspend();
     }
+
+    // print collected performance statistics
     Log.d(PERFORMANCE_MONITOR_TAG, performanceMonitor.buildStatisticsSnapshot().generateReport());
     performanceMonitor.destroy();
   }
@@ -140,7 +142,10 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
   @Override
   public void update(Observable arg0, Object argN) {
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+
+    // pass player's notifications to performance monitor
     performanceMonitor.update(arg0, argN);
+
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
