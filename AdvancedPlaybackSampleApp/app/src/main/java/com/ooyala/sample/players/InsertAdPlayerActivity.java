@@ -119,28 +119,28 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
 
   private PerformanceMonitor buildPerformanceMonitor() {
     PerformanceMonitorBuilder builder = new PerformanceMonitorBuilder(player);
-    /* WATCH BUFFERING EVENTS */
+    /* BUFFERING EVENTS */
     builder.addEventWatch(
             new PerformanceEventWatchStartEnd(
                     new PerformanceNotificationNameMatcher(OoyalaPlayer.BUFFERING_STARTED_NOTIFICATION_NAME),
                     new PerformanceNotificationNameMatcher(OoyalaPlayer.BUFFERING_COMPLETED_NOTIFICATION_NAME)
             )
     );
-    /* WATCH SEEK COUNT */
+    /* SEEK COUNT */
     builder.addEventWatch(
             new PerformanceEventWatchStartEnd(
                     new PerformanceNotificationNameMatcher(OoyalaPlayer.SEEK_COMPLETED_NOTIFICATION_NAME),
                     new PerformanceNotificationNameMatcher(OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME)
             )
     );
-    /* WATCH CONTENT -> AD */
+    /* CONTENT -> AD */
     builder.addEventWatch(
             new PerformanceEventWatchStartEnd(
                     new PerformanceNotificationNameStateMatcher(OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME, OoyalaPlayer.State.PLAYING),
                     new PerformanceNotificationNameMatcher(OoyalaPlayer.AD_STARTED_NOTIFICATION_NAME)
             )
     );
-    /* AD -> WATCH CONTENT*/
+    /* AD -> CONTENT */
     builder.addEventWatch(
             new PerformanceEventWatchStartEnd(
                     new PerformanceNotificationNameMatcher(OoyalaPlayer.AD_COMPLETED_NOTIFICATION_NAME),
