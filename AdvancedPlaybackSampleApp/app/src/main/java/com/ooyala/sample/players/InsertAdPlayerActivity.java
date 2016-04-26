@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.ooyala.android.OoyalaAdSpot;
+import com.ooyala.android.ads.ooyala.OoyalaAdSpot;
 import com.ooyala.android.OoyalaManagedAdsPlugin;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ads.vast.VASTAdSpot;
+import com.ooyala.android.configuration.Options;
+import com.ooyala.android.performance.PerformanceMonitor;
+import com.ooyala.android.performance.PerformanceMonitorBuilder;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
@@ -37,6 +40,7 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     return "Insert Ad at Runtime";
   }
   final String TAG = this.getClass().toString();
+  final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
 
   String EMBED = null;
   final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
@@ -47,6 +51,8 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
+
+  private PerformanceMonitor performanceMonitor;
 
   /**
    * Called when the activity is first created.
@@ -61,9 +67,14 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    Options opts = new Options.Builder().build();
+
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
+
+//  Set up performance monitoring to watch standard events and ads events.
+    performanceMonitor = PerformanceMonitorBuilder.getStandardAdsMonitor(player);
 
     if (player.setEmbedCode(EMBED)) {
       player.play();
@@ -110,6 +121,10 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     if (player != null) {
       player.suspend();
     }
+
+    // print collected performance statistics
+    Log.d(PERFORMANCE_MONITOR_TAG, performanceMonitor.buildStatisticsSnapshot().generateReport());
+    performanceMonitor.destroy();
   }
 
   @Override
@@ -127,6 +142,10 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
   @Override
   public void update(Observable arg0, Object argN) {
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+
+    // pass player's notifications to performance monitor
+    performanceMonitor.update(arg0, argN);
+
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
