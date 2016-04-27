@@ -164,9 +164,6 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
       case AppSdk.EVENT_SHUTDOWN:
         Log.d( TAG, "EVENT_SHUTDOWN" );
         break;
-      case AppSdk.EVENT_FATAL:
-        Log.d( TAG, "EVENT_FATAL" );
-        break;
     }
   }
 

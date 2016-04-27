@@ -4,8 +4,8 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ooyala.sample"
         minSdkVersion 10
+        applicationId "com.ooyala.sample.NielsenSampleApp"
         targetSdkVersion 10
     }
 

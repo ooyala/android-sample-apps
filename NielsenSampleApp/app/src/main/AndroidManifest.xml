@@ -30,7 +30,8 @@
         <activity
             android:name="com.ooyala.sample.lists.NielsenListActivity"
             android:configChanges="orientation"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.DeviceDefault" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
