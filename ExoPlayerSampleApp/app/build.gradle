@@ -14,6 +14,9 @@ android {
       // React Native for Android is incompatible with 3rd-party 64-bit libraries.
       abiFilters "armeabi-v7a", "x86"
     }
+
+// Uncomment if you need multidex
+//    multiDexEnabled true
   }
 
   packagingOptions {
@@ -27,6 +30,10 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
   }
+// Uncomment if you need multidex
+//  dexOptions {
+//    javaMaxHeapSize "4g"
+//  }
 }
 
 task copyAssetsTask(type: Copy) {
@@ -54,14 +61,20 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
+// Uncomment if you need multidex
+//  compile 'com.android.support:multidex:1.0.1'
+
   compile files('libs/FWAdManager.jar')
   compile files('libs/OoyalaFreewheelSDK.jar')
   compile files('libs/OoyalaIMASDK.jar')
-  compile files('libs/OoyalaSDK.jar')
   compile files('libs/ima-android-v313.jar')
-
-  compile files('libs/OoyalaSkinSDK.jar')
+  compile files('libs/OoyalaSDK.jar')
   compile 'com.google.android.gms:play-services-ads:8.4.0'
-  compile 'com.facebook.react:react-native:0.16.+'
   compile 'com.google.android.exoplayer:exoplayer:r1.5.5'
+
+// For development purposes only
+//  compile project(':ooyalaCoreSDK')
+
+  compile 'com.facebook.react:react-native:0.16.+'
+  compile files('libs/OoyalaSkinSDK.jar')
 }
