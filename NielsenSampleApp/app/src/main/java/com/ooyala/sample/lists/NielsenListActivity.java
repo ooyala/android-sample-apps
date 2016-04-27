@@ -36,9 +36,6 @@ public class NielsenListActivity extends Activity implements OnItemClickListener
     //Populate the embed map
     selectionMap.put( "ID3-Demo", new PlayerSelectionOption("84aDVmcTqN3FrdLXClZgJq-GfFEDhS1a", NielsenDefaultPlayerActivity.class) );
     selectionMap.put( "ID3-TravelEast", new PlayerSelectionOption("Y5aHlyczqJaJ2Mh6BNWLXfpcmxOaKzcx", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "ID3-TravelLive", new PlayerSelectionOption("w3MXlyczp03XOkXoGecg4L8xLIyOiPnR", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "ID3-FoodEast1", new PlayerSelectionOption("12YnlyczrWcZvPbIJJTV7TmeVi3tgGPa", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "ID3-FoodEast2", new PlayerSelectionOption("B1YXlyczpFZhH6GgBSrrO6VWI6aiMKw0", NielsenDefaultPlayerActivity.class) );
     selectionMap.put( "ID3-Live", new PlayerSelectionOption("p4ZXNwdDrfdg2vz04LdpbRg94XXb7d_c", NielsenDefaultPlayerActivity.class) );
     selectionMap.put( "CMS-Demo", new PlayerSelectionOption("M3bmM3czp1j9horxoTLGaJtgLmW57u4F", NielsenDefaultPlayerActivity.class) );
     selectionMap.put( "CMS-NoAds", new PlayerSelectionOption("FzYjJzczo3_M3OjkeIta-IIFcPGSGxci", NielsenDefaultPlayerActivity.class) );

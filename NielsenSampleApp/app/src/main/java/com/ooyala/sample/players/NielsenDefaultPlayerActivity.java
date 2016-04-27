@@ -16,6 +16,7 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.nielsensdk.NielsenAnalytics;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.DebugMode;
@@ -56,15 +57,14 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_single_button_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+    Options opts = new Options.Builder().setUseExoPlayer(true).build();
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
-    // Nielsen requires VisualOn integration.  enable that here
-    OoyalaPlayer.enableCustomHLSPlayer = true;
 
     // Create NielsenAnalytics plugin
     s_nielsenAnalytics = new NielsenAnalytics( this, player, this, NIELSEN_APPID, "0.1", "NielsenTestApp", NIELSEN_SFCODE, getCustomConfig(), null );
