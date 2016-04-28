@@ -70,7 +70,7 @@ dependencies {
   compile files('libs/ima-android-v313.jar')
   compile files('libs/OoyalaSDK.jar')
   compile 'com.google.android.gms:play-services-ads:8.4.0'
-  compile 'com.google.android.exoplayer:exoplayer:r1.5.5'
+  compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
 
 // For development purposes only
 //  compile project(':ooyalaCoreSDK')
