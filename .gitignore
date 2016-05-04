@@ -3,6 +3,13 @@
 **/build
 **/.gradle
 **/workspace.xml
+**/vcs.xml
+**/gradle.xml
+**/compiler.xml
+**/encodings.xml
+**/misc.xml
+**/modules.xml
+**/.idea
 **/.idea/libraries
 
 CompleteSampleApp/src/com/ooyala/sample/lists
@@ -22,3 +29,5 @@ go_script/pkg
 **/app/libs/*.jar
 **/app/libs/*.aar
 **/app/src/main/assets/index.android.jsbundle
+.DS_Store
+runConfigurations.xml

@@ -1,0 +1,2 @@
+The PulseSampleApp is no longer provided within this package.
+You can download the PulseSampleApp from our Android Sample App Github Repository: https://github.com/ooyala/android-sample-apps
