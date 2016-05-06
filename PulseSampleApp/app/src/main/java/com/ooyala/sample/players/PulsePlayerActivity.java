@@ -61,7 +61,6 @@ public class PulsePlayerActivity extends Activity implements Observer, DefaultHa
     final VideoItem videoItem = getVideoItem();
     setTitle(getName());
 
-    ///////////////////////////////////////Skin version/////////////////////////////////////////////
     setContentView(R.layout.player_skin_simple_layout);
 
     // Get the SkinLayout from our layout xml
