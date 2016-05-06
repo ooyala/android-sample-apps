@@ -22,7 +22,16 @@ android {
         }
     }
 }
-
+task copyLibsTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    into new File(System.getProperty("user.dir"),'./app/libs')
+    doLast {
+        println "Libs updated."
+    }
+}
+tasks.copyLibsTask.execute()
 
 task copyAssetsTask1(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')

@@ -29,5 +29,9 @@ go_script/pkg
 **/app/libs/*.jar
 **/app/libs/*.aar
 **/app/src/main/assets/index.android.jsbundle
+**/app/src/main/assets/fonts/*
+**/app/src/main/assets/skin-config/*
+**/app/src/main/assets/skin.json
+**/app/src/main/assets/index.android.jsbundle
 .DS_Store
 runConfigurations.xml
