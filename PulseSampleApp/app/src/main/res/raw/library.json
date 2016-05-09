@@ -1,0 +1,64 @@
+[{
+  "tags":              [],
+  "content-title":     "No ads",
+  "content-id":        "demo-none",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":              ["standard-prerolls"],
+  "content-title":     "Preroll demo",
+  "content-id":        "demo-preroll",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":              ["standard-midrolls"],
+  "midroll-positions": [15, 30],
+  "content-title":     "Midroll demo",
+  "content-id":        "demo-midroll",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":             ["standard-postrolls"],
+  "content-title":    "Postroll demo",
+  "content-id":       "demo-postrolls",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":             ["standard-linears"],
+  "midroll-positions": [15, 30],
+  "content-title":    "Pre-/mid-/postroll demo",
+  "content-id":       "demo",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+ "tags":             ["standard-linears"],
+ "category":         "skip-always",
+ "midroll-positions": [15, 30],
+ "content-title":    "Pre-/mid-/postroll skippable",
+ "content-id":       "demo",
+ "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+ "tags":             ["standard-linears"],
+ "category":         "skip-after-first",
+ "midroll-positions": [15, 30],
+ "content-title":    "Pre-/mid-/postroll skip after first",
+ "content-id":       "demo",
+ "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":             ["standard-linears"],
+  "category":         "frequency-capped-1min",
+  "midroll-positions": [15, 30],
+  "content-title":    "Frequency capping demo",
+  "content-id":       "demo-freq-capping",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":             ["preroll-media-invalid"],
+  "content-title":    "Preroll demo - Ad media file invalid",
+  "content-id":       "demo-preroll-invalid",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":             ["preroll-media-timeout"],
+  "content-title":    "Preroll demo - Ad media file timeout",
+  "content-id":       "demo-preroll-timeout",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+},{
+  "tags":             ["preroll-media-404"],
+  "content-title":    "Preroll demo - Ad media file 404",
+  "content-id":       "demo-preroll-timeout",
+  "content-code":      "Z1cDhhMTE6qLv4OvkymS18WOBhqUQO53"
+}]

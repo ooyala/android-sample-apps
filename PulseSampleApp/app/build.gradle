@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+android {
+    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+
+    defaultConfig {
+        applicationId "com.ooyala.sample.PulseSampleApp"
+        minSdkVersion 16
+        targetSdkVersion 21
+
+        ndk {
+            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+task copyLibsTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    into new File(System.getProperty("user.dir"),'./app/libs')
+    doLast {
+        println "Libs updated."
+    }
+}
+tasks.copyLibsTask.execute()
+
+task copyAssetsTask1(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    into new File(System.getProperty("user.dir"),'./app/src/main/assets')
+    doLast {
+        println "Assets updated."
+    }
+}
+tasks.copyAssetsTask1.execute()
+
+task copyAssetsTask2(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+    into new File(System.getProperty("user.dir"),'./app/src/main/assets/skin-config')
+    doLast {
+        println "Assets updated."
+    }
+}
+tasks.copyAssetsTask2.execute()
+
+task copyAssetsTask3(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/Fonts')
+    into new File(System.getProperty("user.dir"),'./app/src/main/assets/fonts')
+    doLast {
+        println "Assets updated."
+    }
+}
+tasks.copyAssetsTask3.execute()
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.android.support:appcompat-v7:+'
+
+    compile files('libs/OoyalaSDK.jar')
+    compile files('libs/OoyalaPulseIntegration.jar')
+    compile files('libs/OoyalaSkinSDK.jar')
+    compile 'com.facebook.react:react-native:0.16.+'
+    compile (name:'PulseSDK', ext:'aar')
+}
