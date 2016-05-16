@@ -41,6 +41,9 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
+    OoyalaPlayer.enableCustomHLSPlayer = true;
+    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
+
     //get the VisualOn configuration information
     VisualOnConfiguration voConfig = getVisualOnConfiguration();
     Options options = new Options.Builder().setVisualOnConfiguration(voConfig).build();
@@ -49,9 +52,6 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-
-    OoyalaPlayer.enableCustomHLSPlayer = true;
-    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);

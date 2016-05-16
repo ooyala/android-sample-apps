@@ -60,6 +60,9 @@ public class SecurePlayerOPTPlayerActivity extends Activity implements Observer,
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
+    OoyalaPlayer.enableCustomHLSPlayer = true;
+    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
+
     // Mandatory - You need to get an OPID for your application (setSessionId)
     // and need to reference the version string for your specific SecurePlayer Libraries.
     // Talk to your CSM or Technical Support for more information
@@ -69,9 +72,6 @@ public class SecurePlayerOPTPlayerActivity extends Activity implements Observer,
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), this, options);
-
-    OoyalaPlayer.enableCustomHLSPlayer = true;
-    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);

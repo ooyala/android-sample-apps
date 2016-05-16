@@ -38,13 +38,13 @@ public class SecurePlayerEHLSPlayerActivity extends Activity implements Observer
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
-
     // To use eHLS, you need to disable CustomPlayreadyPlayer, even if SecurePlayer libraries are linked
     OoyalaPlayer.enableCustomHLSPlayer = true;
     OoyalaPlayer.enableCustomPlayreadyPlayer = false;
+
+    //Initialize the player
+    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
