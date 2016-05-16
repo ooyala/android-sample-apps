@@ -11,8 +11,8 @@ This is absolutely **not** intended to be used in production or to outline best 
 ## Building
 
 1. After cloning the project, download the Ooyala Ad Products Android SDKs [here](http://support.ooyala.com/resources/mobile-and-client-sdks).
-2. Copy the [required](app/libs/README.md) libraries into the ```app/libs`` folder of the project.
-3. Open the project file in Android Studio
+2. Copy the [required](app/libs/README.md) libraries into the `app/libs` folder of the project.
+3. Open the [project file](app/build.gradle) in Android Studio.
 5. Build and run the project.
 
 
@@ -20,16 +20,20 @@ This is absolutely **not** intended to be used in production or to outline best 
 
 A [PulseListActivity](app/src/main/java/com/ooyala/sample/lists/PulseListActivity.java) shows a list of available videos, along with some metadata. When a video is selected, it is opened in a [PulsePlayerActivity](app/src/main/java/com/ooyala/sample/players/PulsePlayerActivity.java).
 
-The PulsePlayerActivity creates an OoyalaPlayer and then associates it with an instance of the OoyalaPulseManager class from the OoyalaPulseIntegration framework. OoyalaPulseManager will allow Pulse ads to be shown for content that is configured with a Videoplaza ad set.
+The PulsePlayerActivity creates an OoyalaPlayer and then associates it with an instance of the OoyalaPulseManager class from the OoyalaPulseIntegration library. OoyalaPulseManager enables Pulse ads to be shown for content that is configured with a Videoplaza ad set in Backlot.
 
-```
+```java
 OoyalaPulseManager pulseManager = new OoyalaPulseManager(player);
 pulseManager.setListener(new OoyalaPulseManager.Listener() {
+  /*
+    Called by the plugin to let us create the Pulse session; the metadata retrieved from Backlot is provided here
+  */
+});
 ```
 
-When the OoyalaPulseManager requires an ad session it will request one from its listener, (PulsePlayerActivity in the sample app). The listener is passed request settings and content metadata that are populated from back lot, but has the opportunity to change them.
+When the OoyalaPulseManager needs an ad session it requests one from its listener (PulsePlayerActivity in the sample app). The listener is passed request settings and content metadata that are populated from Backlot, but has the opportunity to change them.
 
-```
+```java
 @Override
   public PulseSession createPulseSession(OoyalaPulseManager ooyalaPulseManager, Video video, String pulseHost, ContentMetadata contentMetadata, RequestSettings requestSettings) {
     // Replace some of the Backlot metadata with our own local data
