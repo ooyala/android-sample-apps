@@ -45,6 +45,16 @@ task copyAssetsTask(type: Copy) {
 }
 tasks.copyAssetsTask.execute()
 
+task copyFontsAssetsTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(System.getProperty("user.dir"),'./app/src/main/assets/fonts')
+    doLast {
+        println "font Assets updated."
+    }
+}
+
+tasks.copyFontsAssetsTask.execute()
+
 task copyTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
