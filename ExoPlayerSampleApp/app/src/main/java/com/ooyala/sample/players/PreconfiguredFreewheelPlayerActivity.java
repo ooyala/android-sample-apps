@@ -82,7 +82,7 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     player.addObserver(this);
 
     @SuppressWarnings("unused")
-    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout, player);
+    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
 
     if (player.setEmbedCode(EMBED)) {
 //      player.play();
