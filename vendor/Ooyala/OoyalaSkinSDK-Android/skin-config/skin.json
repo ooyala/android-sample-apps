@@ -28,10 +28,10 @@
   },
   "responsive": {
     "breakpoints": {
-      "xs": {"id": "xs", "name": "ooyala-xsmall", "maxWidth": 559, "multiplier": 0.7},
-      "sm": {"id": "sm", "name": "ooyala-small", "minWidth": 560, "maxWidth": 839, "multiplier": 1},
-      "md": {"id": "md", "name": "ooyala-medium", "minWidth": 840, "maxWidth": 1279, "multiplier": 1},
-      "lg": {"id": "lg", "name": "ooyala-large", "minWidth": 1280, "multiplier": 1.2}
+      "xs": {"id": "xs", "name": "oo-xsmall", "maxWidth": 559, "multiplier": 0.7},
+      "sm": {"id": "sm", "name": "oo-small", "minWidth": 560, "maxWidth": 839, "multiplier": 1},
+      "md": {"id": "md", "name": "oo-medium", "minWidth": 840, "maxWidth": 1279, "multiplier": 1},
+      "lg": {"id": "lg", "name": "oo-large", "minWidth": 1280, "multiplier": 1.2}
     },
     "aspectRatio": "auto"
   },
@@ -118,11 +118,11 @@
     "iconStyle": {
       "active": {
         "color": "#FFFFFF",
-        "opacity": 1
+        "opacity": 1.0
       },
       "inactive": {
         "color": "#FFFFFF",
-        "opacity": 0.6
+        "opacity": 0.95
       }
     }
   },
@@ -142,20 +142,21 @@
     "iconStyle": {
       "active": {
         "color": "#FFFFFF",
-        "opacity": 1
+        "opacity": 1.0
       },
       "inactive": {
         "color": "#FFFFFF",
-        "opacity": 0.6
+        "opacity": 0.95
       }
     },
     "autoHide": true,
     "height": 60,
-    "watermark": {
-      "imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/assets/images/ooyala.png","androidResource" : "logo","iosResource" : "logo"},
-      "clickUrl": "http://www.ooyala.com/",
-      "width": 500,
-      "height": 81
+    "logo": {
+      "imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/assets/images/ooyala-logo.svg","androidResource" : "logo","iosResource" : "logo"},
+      "clickUrl": "http://www.ooyala.com",
+      "target": "_blank",
+      "width": 111,
+      "height": 24
     },
     "adScrubberBar": {
       "backgroundColor": "rgba(175,175,175,1)",
@@ -163,8 +164,8 @@
       "playedColor": "rgba(255,63,128,1)"
     },
     "scrubberBar": {
-      "backgroundColor": "rgba(175,175,175,1)",
-      "bufferedColor": "rgba(127,127,127,1)",
+      "backgroundColor": "rgba(175,175,175,0.5)",
+      "bufferedColor": "rgba(175,175,175,0.7)",
       "playedColor": "rgba(67,137,255,1)"
     }
   },
@@ -182,7 +183,7 @@
       {"name":"discovery", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
       {"name":"closedCaption", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
       {"name":"quality", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
-      {"name":"watermark", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
+      {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 }
     ],
@@ -190,7 +191,7 @@
       {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"watermark", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
+      {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 }
     ],
@@ -213,27 +214,27 @@
     ]
   },
   "icons": {
-    "play": {"fontFamilyName": "alice", "fontString": "\u0068", "fontStyleClass": "icon icon-play"},
-    "pause": {"fontFamilyName": "alice", "fontString": "\u0067", "fontStyleClass": "icon icon-pause"},
-    "volume": {"fontFamilyName": "alice", "fontString": "\u0062", "fontStyleClass": "icon icon-volume-mobile"},
-    "volumeOff": {"fontFamilyName": "alice", "fontString": "\u0070", "fontStyleClass": "icon icon-volume-mobile-mute"},
-    "expand": {"fontFamilyName": "alice", "fontString": "\u0069", "fontStyleClass": "icon icon-resize-large"},
-    "compress": {"fontFamilyName": "alice", "fontString": "\u006a", "fontStyleClass": "icon icon-resize-small"},
-    "ellipsis": {"fontFamilyName": "alice", "fontString": "\u0066", "fontStyleClass": "icon icon-menu"},
-    "replay": {"fontFamilyName": "alice", "fontString": "\u0063", "fontStyleClass": "icon icon-upnext-replay"},
-    "share": {"fontFamilyName": "alice", "fontString": "\u006f", "fontStyleClass": "icon icon-topmenu-share"},
-    "cc": {"fontFamilyName": "alice", "fontString": "\u006B", "fontStyleClass": "icon icon-topmenu-cc"},
-    "discovery": {"fontFamilyName": "alice", "fontString": "\u006C", "fontStyleClass": "icon icon-topmenu-discovery"},
-    "quality": {"fontFamilyName": "alice", "fontString": "\u006D", "fontStyleClass": "icon icon-topmenu-quality"},
-    "setting": {"fontFamilyName": "alice", "fontString": "\u006E", "fontStyleClass": "icon icon-topmenu-settings"},
-    "dismiss": {"fontFamilyName": "alice", "fontString": "\u0065", "fontStyleClass": "icon icon-close"},
+    "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0068", "fontStyleClass": "oo-icon oo-icon-play-slick"},
+    "pause": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0067", "fontStyleClass": "oo-icon oo-icon-pause-slick"},
+    "volume": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0062", "fontStyleClass": "oo-icon oo-icon-volume-on-ooyala-defualt"},
+    "volumeOff": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0070", "fontStyleClass": "oo-icon oo-icon-volume-mute-ooyala-defualt"},
+    "expand": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0069", "fontStyleClass": "oo-icon oo-icon-system-fullscreen"},
+    "compress": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006a", "fontStyleClass": "oo-icon oo-icon-system-minimizescreen"},
+    "ellipsis": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0066", "fontStyleClass": "oo-icon oo-icon-system-menu"},
+    "replay": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0063", "fontStyleClass": "oo-icon oo-icon-system-replay"},
+    "share": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006f", "fontStyleClass": "oo-icon oo-icon-share"},
+    "cc": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006B", "fontStyleClass": "oo-icon oo-icon-cc"},
+    "discovery": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006C", "fontStyleClass": "oo-icon oo-icon-discovery-binoculars"},
+    "quality": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006D", "fontStyleClass": "oo-icon oo-icon-bitrate"},
+    "setting": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006E", "fontStyleClass": "oo-icon oo-icon-system-settings"},
+    "dismiss": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0065", "fontStyleClass": "oo-icon oo-icon-system-close"},
     "toggleOn": {"fontFamilyName": "fontawesome", "fontString": "\uf205", "fontStyleClass": ""},
     "toggleOff": {"fontFamilyName": "fontawesome", "fontString": "\uf204", "fontStyleClass": ""},
-    "left": {"fontFamilyName": "alice", "fontString": "\u0072", "fontStyleClass": "icon icon-left"},
-    "right": {"fontFamilyName": "alice", "fontString": "\u0073", "fontStyleClass": "icon icon-right"},
-    "learn": {"fontFamilyName": "alice", "fontString": "\u0074", "fontStyleClass": "icon icon-learn"},
-    "skip": {"fontFamilyName": "alice", "fontString": "\u0075", "fontStyleClass": "icon icon-skip"},
+    "left": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0072", "fontStyleClass": "oo-icon oo-icon-system-left-arrow"},
+    "right": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0073", "fontStyleClass": "oo-icon oo-icon-system-right-arrow"},
+    "learn": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0074", "fontStyleClass": "oo-icon oo-icon-system-more-information"},
+    "skip": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0075", "fontStyleClass": "oo-icon oo-icon-skip-slick"},
     "warning": {"fontFamilyName": "fontawesome", "fontString": "\uf06a", "fontStyleClass": ""},
-    "auto": {"fontFamilyName": "alice", "fontString": "\u0064", "fontStyleClass": "icon icon-auto"}
+    "auto": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0064", "fontStyleClass": "oo-icon oo-icon-system-auto"}
   }
 }
