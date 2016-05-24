@@ -60,16 +60,18 @@ public class SecurePlayerOPTPlayerActivity extends Activity implements Observer,
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
-    // Mandatory - You need to get an OPID for your application. Talk to your CSM or Technical Support for more information
-    VisualOnConfiguration voOpts = new VisualOnConfiguration.Builder().setSessionId("session").build();
+    OoyalaPlayer.enableCustomHLSPlayer = true;
+    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
+
+    // Mandatory - You need to get an OPID for your application (setSessionId)
+    // and need to reference the version string for your specific SecurePlayer Libraries.
+    // Talk to your CSM or Technical Support for more information
+    VisualOnConfiguration voOpts = new VisualOnConfiguration.Builder().setSessionId("session").setVersion("GENERAL_ANDR_VOP_PROB_RC_03_08_02_0000").build();
     Options options = new Options.Builder().setVisualOnConfiguration(voOpts).build();
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), this, options);
-
-    OoyalaPlayer.enableCustomHLSPlayer = true;
-    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);

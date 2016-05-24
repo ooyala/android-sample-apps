@@ -41,6 +41,9 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
 
+    OoyalaPlayer.enableCustomHLSPlayer = true;
+    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
+
     //get the VisualOn configuration information
     VisualOnConfiguration voConfig = getVisualOnConfiguration();
     Options options = new Options.Builder().setVisualOnConfiguration(voConfig).build();
@@ -49,9 +52,6 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-
-    OoyalaPlayer.enableCustomHLSPlayer = true;
-    OoyalaPlayer.enableCustomPlayreadyPlayer = true;
 
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
@@ -69,6 +69,9 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
 
     // Mandatory - You need to get an OPID for your application. Talk to your CSM or Technical Support for more information
     voConfigBuilder.setSessionId("session");
+
+    // Mandatory - You need to need to reference the version string for your specific SecurePlayer Libraries.
+    voConfigBuilder.setVersion("GENERAL_ANDR_VOP_PROB_RC_03_08_02_0000");
 
     // The target bitrate to start video playback
     voConfigBuilder.setInitialBitrate(1200000);

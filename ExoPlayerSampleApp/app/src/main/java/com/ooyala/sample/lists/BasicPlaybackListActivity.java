@@ -40,7 +40,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
     selectionMap.put("4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("Widevine DASH", new PlayerSelectionOption("l2NG1mMjE6wnaRDBjPqbLbnZsxYvNHLI", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Widevine DASH", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", OoyalaSkinPlayerActivity.class));
     selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", OoyalaSkinPlayerActivity.class) );
     selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", OoyalaSkinPlayerActivity.class) );
     selectionMap.put( "Ooyala Encrypted HLS", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", OoyalaSkinPlayerActivity.class) );
@@ -61,7 +61,6 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("VAST 3.0 2 Podded Ad", new PlayerSelectionOption("tjN2h1MDE65xMHMqNvvU0fYVBi6sFl1M", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad With All Of The New Events", new PlayerSelectionOption("x3MWp1MDE6yIedkirT0to1t1uy2oA8y3", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad With Icon", new PlayerSelectionOption("1qNGp1MDE6GBl7PkPlWA_FA9NJDhBp_I" , OoyalaSkinPlayerActivity.class));
-    selectionMap.put("VAST 3.0 Skippable Ad", new PlayerSelectionOption("1oNGp1MDE6V512gRnkTcz2o3RnFDSxNZ" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G" , OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad Wrapper", new PlayerSelectionOption("Fkcm9lMjE6GOcDOtPSiRnNCRhqsz-96e", OoyalaSkinPlayerActivity.class));
 
