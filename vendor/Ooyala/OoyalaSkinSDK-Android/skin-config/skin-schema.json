@@ -458,7 +458,7 @@
       "description" : "The playback control bar. Generally contains a play-pause button, scrubber control, etc. The set of items to show comes from the 'buttons' part of the schema.",
       "type" : "object",
       "additionalProperties" : false,
-      "required" : [ "height", "autoHide", "watermark" ],
+      "required" : [ "height", "autoHide", "logo" ],
       "properties" : {
         "volumeControl" : {
           "description" : "Defines color of volume control in control bar.",
@@ -537,15 +537,14 @@
             "type" : "boolean",
             "default" : true
         },
-        // TODO: how is this different than general.watermark?
-        // And it really isn't a watermark, as it doesn't alpha-overlay anything else.
-        "watermark": {
-			"description" : "An object that defines the content and position of the watermark image on the control bar.",
+        "logo": {
+			"description" : "An object that defines the content and position of the logo image on the control bar.",
           "type": "object",
           "additionalProperties" : false,
           "properties": {
             "imageResource" : { "$ref" : "#/definitions/image" },
             "clickUrl": {"type" : "string"},
+            "target": {"type" : "string"},
             "width": {"type" : "number"},
             "height": {"type" : "number"}
           }
@@ -1122,7 +1121,7 @@
     "buttonNames" : {
       "description" : "These are the only buttons currently supported by the UI SDK.",
       "additionalProperties" : false,
-      "enum" : ["playPause", "volume", "timeDuration", "flexibleSpace", "discovery", "fullscreen", "moreOptions", "watermark", "share", "closedCaption", "bitrateSelector", "quality", "live"]
+      "enum" : ["playPause", "volume", "timeDuration", "flexibleSpace", "discovery", "fullscreen", "moreOptions", "logo", "share", "closedCaption", "bitrateSelector", "quality", "live"]
     },
     "buttonArray" : {
       "description" : "Used to list the buttons for a single platform (desktop vs. mobile).",
