@@ -77968,10 +77968,10 @@ var StartScreen=require(619 /* ./panels/StartScreen */);
 var EndScreen=require(627 /* ./panels/EndScreen */);
 var ErrorScreen=require(642 /* ./panels/ErrorScreen */);
 var DiscoveryPanel=require(644 /* ./panels/discoveryPanel */);
-var MoreOptionScreen=require(650 /* ./panels/MoreOptionScreen */);
-var VideoView=require(652 /* ./panels/videoView */);
-var LanguageSelectionPanel=require(660 /* ./panels/languageSelectionPanel */);
-var AdPlaybackScreen=require(665 /* ./panels/adPlaybackScreen */);
+var MoreOptionScreen=require(651 /* ./panels/MoreOptionScreen */);
+var VideoView=require(653 /* ./panels/videoView */);
+var LanguageSelectionPanel=require(661 /* ./panels/languageSelectionPanel */);
+var AdPlaybackScreen=require(666 /* ./panels/adPlaybackScreen */);
 
 var OoyalaSkinPanelRenderer=function OoyalaSkinPanelRenderer(ooyalaSkin,ooyalaCore,eventBridge){
 Log.log("OoyalaSkinPanelRenderer Created");
@@ -80465,9 +80465,9 @@ var _reactNative=require(43 /* react-native */);
 var Utils=require(620 /* ../utils */);
 var ResponsiveList=require(645 /* ../widgets/ResponsiveList */);
 var CountdownView=require(647 /* ../widgets/countdownTimer */);
-var CountdownViewAndroid=require(666 /* ../widgets/countdownTimerAndroid */);
-var styles=Utils.getStyles(require(648 /* ./style/discoveryPanelStyles.json */));
-var panelStyles=require(649 /* ./style/panelStyles.json */);
+var CountdownViewAndroid=require(648 /* ../widgets/countdownTimerAndroid */);
+var styles=Utils.getStyles(require(649 /* ./style/discoveryPanelStyles.json */));
+var panelStyles=require(650 /* ./style/panelStyles.json */);
 
 var Constants=require(615 /* ../constants */);
 var Log=require(614 /* ../log */);var 
@@ -80962,7 +80962,7 @@ canceled:true}});
 
 module.exports=CountdownView;}
 });
-__d(666 /* OoyalaSkin/widgets/countdownTimerAndroid.js */, function(global, require, module, exports) {'use strict';
+__d(648 /* OoyalaSkin/widgets/countdownTimerAndroid.js */, function(global, require, module, exports) {'use strict';
 var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(43 /* react-native */);
 
@@ -80983,7 +80983,7 @@ data:_react2.default.PropTypes.object})};
 
 module.exports=(0,_reactNative.requireNativeComponent)('RCTCountdownView',iface);}
 });
-__d(648 /* OoyalaSkin/panels/style/discoveryPanelStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(649 /* OoyalaSkin/panels/style/discoveryPanelStyles.json */, function(global, require, module, exports) {module.exports = {
 "panelErrorPanel":{
 "alignSelf":"flex-end"},
 
@@ -81052,7 +81052,7 @@ __d(648 /* OoyalaSkin/panels/style/discoveryPanelStyles.json */, function(global
 "padding":4,
 "marginTop":20}};
 });
-__d(649 /* OoyalaSkin/panels/style/panelStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(650 /* OoyalaSkin/panels/style/panelStyles.json */, function(global, require, module, exports) {module.exports = {
 "panelTitleView":{
 "flexDirection":"row",
 "alignItems":"center"},
@@ -81115,7 +81115,7 @@ __d(649 /* OoyalaSkin/panels/style/panelStyles.json */, function(global, require
 "flex":1,
 "backgroundColor":"rgba(0, 0, 0, 0.7)"}};
 });
-__d(650 /* OoyalaSkin/panels/MoreOptionScreen.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/MoreOptionScreen.js';
+__d(651 /* OoyalaSkin/panels/MoreOptionScreen.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/MoreOptionScreen.js';
 
 var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(43 /* react-native */);
@@ -81131,7 +81131,7 @@ var _reactNative=require(43 /* react-native */);
 var Log=require(614 /* ../log */);
 var Utils=require(620 /* ../utils */);
 var Constants=require(615 /* ../constants */);
-var styles=Utils.getStyles(require(651 /* ./style/moreOptionScreenStyles.json */));
+var styles=Utils.getStyles(require(652 /* ./style/moreOptionScreenStyles.json */));
 var CollapsingBarUtils=require(635 /* ../collapsingBarUtils */);var 
 
 
@@ -81308,7 +81308,7 @@ return moreOptionScreen;}});
 
 module.exports=MoreOptionScreen;
 });
-__d(651 /* OoyalaSkin/panels/style/moreOptionScreenStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(652 /* OoyalaSkin/panels/style/moreOptionScreenStyles.json */, function(global, require, module, exports) {module.exports = {
 "fullscreenContainer":{
 "flex":1,
 "flexDirection":"column",
@@ -81351,7 +81351,7 @@ __d(651 /* OoyalaSkin/panels/style/moreOptionScreenStyles.json */, function(glob
 "iconDismiss":{
 "padding":25}};
 });
-__d(652 /* OoyalaSkin/panels/videoView.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/videoView.js';
+__d(653 /* OoyalaSkin/panels/videoView.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/videoView.js';
 
 
 
@@ -81371,18 +81371,18 @@ var _reactNative=require(43 /* react-native */);
 var Dimensions=require(122 /* Dimensions */);
 var windowSize=Dimensions.get('window');
 var BottomOverlay=require(640 /* ../bottomOverlay */);
-var AdBar=require(653 /* ../adBar */);
-var UpNext=require(655 /* ../upNext */);
+var AdBar=require(654 /* ../adBar */);
+var UpNext=require(656 /* ../upNext */);
 var RectButton=require(621 /* ../widgets/RectButton */);
 var VideoViewPlayPause=require(625 /* ../widgets/VideoViewPlayPause */);
 var Constants=require(615 /* ../constants */);
 var Log=require(614 /* ../log */);
 var Utils=require(620 /* ../utils */);
-var styles=Utils.getStyles(require(657 /* ./style/videoViewStyles.json */));
+var styles=Utils.getStyles(require(658 /* ./style/videoViewStyles.json */));
 var ResponsiveDesignManager=require(626 /* ../responsiveDesignManager */);
-var VideoWaterMark=require(658 /* ../widgets/videoWaterMark */);
+var VideoWaterMark=require(659 /* ../widgets/videoWaterMark */);
 var autohideDelay=5000;
-var panelStyles=require(649 /* ./style/panelStyles.json */);var 
+var panelStyles=require(650 /* ./style/panelStyles.json */);var 
 
 
 BUTTON_NAMES=
@@ -81699,7 +81699,7 @@ this._renderLoading()));}});
 
 module.exports=VideoView;
 });
-__d(653 /* OoyalaSkin/adBar.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/adBar.js';
+__d(654 /* OoyalaSkin/adBar.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/adBar.js';
 
 
 
@@ -81716,7 +81716,7 @@ var _reactNative=require(43 /* react-native */);
 var Log=require(614 /* ./log */);
 var Utils=require(620 /* ./utils */);
 
-var styles=Utils.getStyles(require(654 /* ./style/adBarStyles.json */));
+var styles=Utils.getStyles(require(655 /* ./style/adBarStyles.json */));
 var Constants=require(615 /* ./constants */);var 
 
 BUTTON_NAMES=
@@ -81852,7 +81852,7 @@ skipButton));}});
 
 module.exports=AdBar;
 });
-__d(654 /* OoyalaSkin/style/adBarStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(655 /* OoyalaSkin/style/adBarStyles.json */, function(global, require, module, exports) {module.exports = {
 "container":{
 "flexDirection":"row",
 "alignItems":"center",
@@ -81883,7 +81883,7 @@ __d(654 /* OoyalaSkin/style/adBarStyles.json */, function(global, require, modul
 "fontSize":16,
 "fontFamily":"Roboto"}};
 });
-__d(655 /* OoyalaSkin/upNext.js */, function(global, require, module, exports) {var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/upNext.js';var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(656 /* OoyalaSkin/upNext.js */, function(global, require, module, exports) {var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/upNext.js';var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(43 /* react-native */);
 
 
@@ -81894,9 +81894,9 @@ var _reactNative=require(43 /* react-native */);
 
 var Utils=require(620 /* ./utils */);
 
-var styles=Utils.getStyles(require(656 /* ./style/upNext.json */));
+var styles=Utils.getStyles(require(657 /* ./style/upNext.json */));
 var CountdownView=require(647 /* ./widgets/countdownTimer */);
-var CountdownViewAndroid=require(666 /* ./widgets/countdownTimerAndroid */);
+var CountdownViewAndroid=require(648 /* ./widgets/countdownTimerAndroid */);
 var ResponsiveDesignManager=require(626 /* ./responsiveDesignManager */);
 var Constants=require(615 /* ./constants */);
 
@@ -82020,7 +82020,7 @@ return null;}});
 
 module.exports=UpNext;
 });
-__d(656 /* OoyalaSkin/style/upNext.json */, function(global, require, module, exports) {module.exports = {
+__d(657 /* OoyalaSkin/style/upNext.json */, function(global, require, module, exports) {module.exports = {
 container:{
 backgroundColor:'rgba(22,22,22,0.9)',
 flexDirection:'row',
@@ -82077,7 +82077,7 @@ dismissButton:{
 fontSize:10,
 color:'white'}};
 });
-__d(657 /* OoyalaSkin/panels/style/videoViewStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(658 /* OoyalaSkin/panels/style/videoViewStyles.json */, function(global, require, module, exports) {module.exports = {
 "fullscreenContainer":{
 "flex":1,
 "justifyContent":"center",
@@ -82094,7 +82094,7 @@ __d(657 /* OoyalaSkin/panels/style/videoViewStyles.json */, function(global, req
 "alignItems":"stretch",
 "backgroundColor":"transparent"}};
 });
-__d(658 /* OoyalaSkin/widgets/videoWaterMark.js */, function(global, require, module, exports) {var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/widgets/videoWaterMark.js';var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(659 /* OoyalaSkin/widgets/videoWaterMark.js */, function(global, require, module, exports) {var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/widgets/videoWaterMark.js';var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(43 /* react-native */);
 
 
@@ -82105,7 +82105,7 @@ var _reactNative=require(43 /* react-native */);
 
 var ResponsiveDesignManager=require(626 /* ../responsiveDesignManager */);
 var Constants=require(615 /* ../constants */);
-var styles=require(620 /* ../utils */).getStyles(require(659 /* ./style/videoWaterMarkStyles.json */));var 
+var styles=require(620 /* ../utils */).getStyles(require(660 /* ./style/videoWaterMarkStyles.json */));var 
 
 BUTTON_NAMES=
 
@@ -82139,14 +82139,14 @@ return this.renderLogo();}});
 
 module.exports=logo;
 });
-__d(659 /* OoyalaSkin/widgets/style/videoWaterMarkStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(660 /* OoyalaSkin/widgets/style/videoWaterMarkStyles.json */, function(global, require, module, exports) {module.exports = {
 "watermarkContainer":{
 "flex":0,
 "flexDirection":"row",
 "justifyContent":"flex-end",
 "padding":10}};
 });
-__d(660 /* OoyalaSkin/panels/languageSelectionPanel.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/languageSelectionPanel.js';
+__d(661 /* OoyalaSkin/panels/languageSelectionPanel.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/languageSelectionPanel.js';
 
 
 
@@ -82169,12 +82169,12 @@ var Constants=require(615 /* ../constants */);var
 ICONS=
 Constants.ICONS;
 
-var ToggleSwitch=require(661 /* ../widgets/ToggleSwitch */);
+var ToggleSwitch=require(662 /* ../widgets/ToggleSwitch */);
 var Utils=require(620 /* ../utils */);
 var ResponsiveList=require(645 /* ../widgets/ResponsiveList */);
-var PreviewWidget=require(663 /* ../languageSelectionPreview */);
-var styles=require(620 /* ../utils */).getStyles(require(664 /* ./style/languageSelectionPanelStyles */));
-var panelStyles=require(649 /* ./style/panelStyles */);
+var PreviewWidget=require(664 /* ../languageSelectionPreview */);
+var styles=require(620 /* ../utils */).getStyles(require(665 /* ./style/languageSelectionPanelStyles */));
+var panelStyles=require(650 /* ./style/panelStyles */);
 
 var LanguageSelectionPanel=_react2.default.createClass({displayName:'LanguageSelectionPanel',
 propTypes:{
@@ -82314,7 +82314,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.buttonText,__sourc
 
 module.exports=LanguageSelectionPanel;
 });
-__d(661 /* OoyalaSkin/widgets/ToggleSwitch.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/widgets/ToggleSwitch.js';
+__d(662 /* OoyalaSkin/widgets/ToggleSwitch.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/widgets/ToggleSwitch.js';
 
 
 
@@ -82331,7 +82331,7 @@ var _reactNative=require(43 /* react-native */);
 
 var Constants=require(615 /* ../constants */);
 
-var styles=require(620 /* ../utils */).getStyles(require(662 /* ./style/ToggleSwitchStyles.json */));
+var styles=require(620 /* ../utils */).getStyles(require(663 /* ./style/ToggleSwitchStyles.json */));
 
 
 var ToggleSwitch=_react2.default.createClass({displayName:'ToggleSwitch',
@@ -82381,7 +82381,7 @@ _react2.default.createElement(_reactNative.Text,{style:onTextStyle,__source:{fil
 
 module.exports=ToggleSwitch;
 });
-__d(662 /* OoyalaSkin/widgets/style/ToggleSwitchStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(663 /* OoyalaSkin/widgets/style/ToggleSwitchStyles.json */, function(global, require, module, exports) {module.exports = {
 "container":{
 "height":30,
 "flexDirection":"row",
@@ -82400,7 +82400,7 @@ __d(662 /* OoyalaSkin/widgets/style/ToggleSwitchStyles.json */, function(global,
 "fontSize":12,
 "padding":6}};
 });
-__d(663 /* OoyalaSkin/languageSelectionPreview.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/languageSelectionPreview.js';
+__d(664 /* OoyalaSkin/languageSelectionPreview.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/languageSelectionPreview.js';
 
 var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(43 /* react-native */);
@@ -82410,7 +82410,7 @@ var _reactNative=require(43 /* react-native */);
 
 
 var Utils=require(620 /* ./utils */);
-var styles=Utils.getStyles(require(664 /* ./panels/style/languageSelectionPanelStyles.json */));
+var styles=Utils.getStyles(require(665 /* ./panels/style/languageSelectionPanelStyles.json */));
 
 var Constants=require(615 /* ./constants */);var 
 
@@ -82451,7 +82451,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.buttonText,__sourc
 
 module.exports=LanguageSelectionPreview;
 });
-__d(664 /* OoyalaSkin/panels/style/languageSelectionPanelStyles.json */, function(global, require, module, exports) {module.exports = {
+__d(665 /* OoyalaSkin/panels/style/languageSelectionPanelStyles.json */, function(global, require, module, exports) {module.exports = {
 "panelContainer":{
 "flex":1,
 "flexDirection":"column",
@@ -82519,7 +82519,7 @@ __d(664 /* OoyalaSkin/panels/style/languageSelectionPanelStyles.json */, functio
 "alignItems":"flex-end",
 "backgroundColor":"red"}};
 });
-__d(665 /* OoyalaSkin/panels/adPlaybackScreen.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/adPlaybackScreen.js';
+__d(666 /* OoyalaSkin/panels/adPlaybackScreen.js */, function(global, require, module, exports) {'use strict';var _jsxFileName='/Users/zchen/repos/native-skin/sdk/react/panels/adPlaybackScreen.js';
 
 
 
@@ -82537,16 +82537,16 @@ var _reactNative=require(43 /* react-native */);
 var Dimensions=require(122 /* Dimensions */);
 var windowSize=Dimensions.get('window');
 var BottomOverlay=require(640 /* ../bottomOverlay */);
-var AdBar=require(653 /* ../adBar */);
-var UpNext=require(655 /* ../upNext */);
+var AdBar=require(654 /* ../adBar */);
+var UpNext=require(656 /* ../upNext */);
 var RectButton=require(621 /* ../widgets/RectButton */);
 var VideoViewPlayPause=require(625 /* ../widgets/VideoViewPlayPause */);
 var Constants=require(615 /* ../constants */);
 var Log=require(614 /* ../log */);
 var Utils=require(620 /* ../utils */);
-var styles=Utils.getStyles(require(657 /* ./style/videoViewStyles.json */));
+var styles=Utils.getStyles(require(658 /* ./style/videoViewStyles.json */));
 var ResponsiveDesignManager=require(626 /* ../responsiveDesignManager */);
-var VideoWaterMark=require(658 /* ../widgets/videoWaterMark */);
+var VideoWaterMark=require(659 /* ../widgets/videoWaterMark */);
 var autohideDelay=5000;var 
 
 
@@ -82794,4 +82794,4 @@ module.exports=AdPlaybackScreen;
 });
 ;require(180);
 ;require(57);
-;require(0);/*utf8:3fa507f95e1b28c172e61dd5ed36ddc6ddeb1b60*/
+;require(0);/*utf8:1e244c9cc60678899e04832a357a70d86d2392e2*/
