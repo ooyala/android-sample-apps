@@ -23,6 +23,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
     OnClickListener, Observer {
@@ -33,6 +34,7 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
   private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
   private final String DOMAIN = "http://ooyala.com";
   private String EMBEDCODE = "";
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   private OptimizedOoyalaPlayerLayoutController playerLayoutController;
   private OoyalaPlayer player;
@@ -64,6 +66,9 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
     adsControlsButton.setTextOn("AdsControls On");
     adsControlsButton.setTextOff("AdsControls Off");
     adsControlsButton.setChecked(true);
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
   }
 
   @Override
@@ -123,7 +128,12 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
-    Log.d(TAG,
-        "Notification Received: " + arg1 + " - state: " + player.getState());
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
+    Log.d(TAG, text);
   }
 }

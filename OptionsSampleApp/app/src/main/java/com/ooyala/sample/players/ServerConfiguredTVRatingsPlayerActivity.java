@@ -16,6 +16,7 @@ import com.ooyala.android.configuration.FCCTVRatingConfiguration.Position;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how you enable TV Ratings Display.
@@ -36,13 +37,17 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
 
   private OptimizedOoyalaPlayerLayoutController playerLayoutController;
   private OoyalaPlayer player;
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.player_simple_frame_layout);
 	EMBEDCODE = getIntent().getExtras().getString("embed_code");
-	
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
+
 	OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 	PlayerDomain domain = new PlayerDomain(DOMAIN);
 	
@@ -83,7 +88,11 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
 	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
 	  return;
 	}
-	Log.d(TAG,
-	    "Notification Received: " + arg1 + " - state: " + player.getState());
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+	Log.d(TAG, text);
   }
 }
