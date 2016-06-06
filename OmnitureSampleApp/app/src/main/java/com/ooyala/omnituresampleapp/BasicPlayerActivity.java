@@ -34,8 +34,11 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer {
         new OoyalaPlayerLayoutController(playerLayout, player);
         player.addObserver(this);
 
-        OoyalaAdobeHeartbeatConfiguration config = new OoyalaAdobeHeartbeatConfiguration(HB_TRACKING_SERVER, HB_PUBLISHER);
-        OoyalaAdobeAnalyticsManager analyticsManager = new OoyalaAdobeAnalyticsManager(player, config);
+        OoyalaAdobeHeartbeatConfiguration config = OoyalaAdobeHeartbeatConfiguration.builder()
+                .heartbeatTrackingServer(HB_TRACKING_SERVER)
+                .heartbeatPublisher(HB_PUBLISHER)
+                .build();
+        OoyalaAdobeAnalyticsManager analyticsManager = new OoyalaAdobeAnalyticsManager(player, config, getApplicationContext());
         analyticsManager.startCapture();
 
         if (player.setEmbedCode(EMBED_CODE)) {
@@ -54,9 +57,9 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer {
 
             String notification = OoyalaNotification.getNameOrUnknown(data);
 
-            if (notification == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) return;
+            if (notification.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) return;
 
-            if (notification == OoyalaPlayer.ERROR_NOTIFICATION_NAME && null != player.getError()) {
+            if (notification.equals(OoyalaPlayer.ERROR_NOTIFICATION_NAME) && null != player.getError()) {
                 Log.e(TAG, "Player error: ", player.getError());
                 return;
             }
