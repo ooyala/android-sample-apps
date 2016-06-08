@@ -93,6 +93,7 @@ dependencies {
 //  compile project(':ooyalaCoreSDK')
 
   compile files('libs/OoyalaSkinSDK.jar')
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile group: 'com.facebook.fresco', name: 'fresco', version: '0.8.1'
