@@ -11,6 +11,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -29,6 +30,7 @@ public class PreventVideoViewSharingPlayerActivity extends Activity implements O
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   /**
    * Called when the activity is first created.
@@ -39,6 +41,9 @@ public class PreventVideoViewSharingPlayerActivity extends Activity implements O
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
     Options options = new Options.Builder().setPreventVideoViewSharing(true).build();
 
@@ -99,7 +104,12 @@ public class PreventVideoViewSharingPlayerActivity extends Activity implements O
       return;
     }
 
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
+    Log.d(TAG, text);
   }
 
 }

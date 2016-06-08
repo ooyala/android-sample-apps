@@ -16,6 +16,7 @@ import com.ooyala.android.configuration.FCCTVRatingConfiguration;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -33,6 +34,8 @@ public class TVRatingsPlayerActivity extends Activity implements OnClickListener
 
   private OptimizedOoyalaPlayerLayoutController playerLayoutController;
   private OoyalaPlayer player;
+
+  SDCardLogcatOoyalaEventsLogger playbacklog;
 
   private Button setButton;
   private ToggleButton verticalAlignToggle;
@@ -57,6 +60,9 @@ public class TVRatingsPlayerActivity extends Activity implements OnClickListener
     horizontalAlignToggle.setTextOn("Align Left");
     horizontalAlignToggle.setTextOff("Align Right");
     horizontalAlignToggle.setChecked(false);
+
+    // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
+    playbacklog = new SDCardLogcatOoyalaEventsLogger();
   }
 
   @Override
@@ -116,6 +122,12 @@ public class TVRatingsPlayerActivity extends Activity implements OnClickListener
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
+    Log.d(TAG, text);
   }
 }
