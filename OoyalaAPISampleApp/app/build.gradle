@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.ooyala.sample.OoyalaAPISampleApp"
-        minSdkVersion 9
+        minSdkVersion 16
         targetSdkVersion 21
     }
 
@@ -25,6 +25,7 @@ task copyTask(type: Copy) {
         println "Jars updated."
     }
 }
+tasks.copyTask.execute()
 
 dependencies {
     compile files('libs/OoyalaSDK.jar')
