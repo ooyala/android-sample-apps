@@ -5,24 +5,20 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
+import com.ooyala.android.util.DebugMode;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -244,65 +240,19 @@ public class ImageDownloader {
      */
     @Override
     protected Bitmap doInBackground(String... params) {
-      final AndroidHttpClient client = AndroidHttpClient.newInstance("Android");
-      url = params[0];
-      final HttpGet getRequest = new HttpGet(url);
-      String cookie = params[1];
-      if (cookie != null) {
-        getRequest.setHeader("cookie", cookie);
-      }
-
       try {
-        HttpResponse response = client.execute(getRequest);
-        final int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != HttpStatus.SC_OK) {
-          Log.w("ImageDownloader", "Error " + statusCode + " while retrieving bitmap from " + url);
-          return null;
-        }
-
-        final HttpEntity entity = response.getEntity();
-        if (entity != null) {
-          InputStream inputStream = null;
-          OutputStream outputStream = null;
-          try {
-            inputStream = entity.getContent();
-            final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
-            outputStream = new BufferedOutputStream(dataStream, IO_BUFFER_SIZE);
-            copy(inputStream, outputStream);
-            outputStream.flush();
-
-            final byte[] data = dataStream.toByteArray();
-            final Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-
-            // FIXME : Should use BitmapFactory.decodeStream(inputStream) instead.
-            // final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-            return bitmap;
-
-          } finally {
-            if (inputStream != null) {
-              inputStream.close();
-            }
-            if (outputStream != null) {
-              outputStream.close();
-            }
-            entity.consumeContent();
-          }
-        }
+        URL remoteUrl = new URL(url);
+        URLConnection connection = remoteUrl.openConnection();
+        connection.setDoInput(true);
+        connection.connect();
+        InputStream is = connection.getInputStream();
+        return BitmapFactory.decodeStream(is);
+      } catch (SocketTimeoutException e) {
+        DebugMode.logE("ImageDownloader", "Connection to " + url.toString() + " timed out:" + e.getMessage(), e);
       } catch (IOException e) {
-        getRequest.abort();
-        Log.w(LOG_TAG, "I/O error while retrieving bitmap from " + url, e);
-      } catch (IllegalStateException e) {
-        getRequest.abort();
-        Log.w(LOG_TAG, "Incorrect URL: " + url);
-      } catch (Exception e) {
-        getRequest.abort();
-        Log.w(LOG_TAG, "Error while retrieving bitmap from " + url, e);
-      } finally {
-        if (client != null) {
-          client.close();
-        }
+        DebugMode.logE("ImageDownloader", "IOException: " + e.getMessage(), e);
       }
+
       return null;
     }
 
