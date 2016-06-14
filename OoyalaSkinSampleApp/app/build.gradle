@@ -19,6 +19,7 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
+        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
     }
 
     buildTypes {
