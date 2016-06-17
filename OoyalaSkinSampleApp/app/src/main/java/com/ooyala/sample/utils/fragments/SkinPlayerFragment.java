@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -21,7 +22,7 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
 
-public class SkinPlayerFragment extends Fragment {
+public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackBtnHandler {
   private static final String EMBED = "JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt";
   final String TAG = this.getClass().toString();
 
@@ -30,6 +31,7 @@ public class SkinPlayerFragment extends Fragment {
 
   private OoyalaPlayer player;
   private OoyalaSkinLayout skinLayout;
+  OoyalaSkinLayoutController controller;
 
 
 
@@ -48,7 +50,7 @@ public class SkinPlayerFragment extends Fragment {
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
+    controller = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
 
     if (player.setEmbedCode(EMBED)) {
       //Uncomment for autoplay
@@ -88,4 +90,20 @@ public class SkinPlayerFragment extends Fragment {
     skinLayout.setLayoutParams(params);
   }
 
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (controller != null) {
+      controller.onResume( getActivity(), this );
+    }
+    Log.d(TAG, "Player Fragment Restarted");
+    if (player != null) {
+      player.resume();
+    }
+  }
+
+  @Override
+  public void invokeDefaultOnBackPressed() {
+    getActivity().onBackPressed();
+  }
 }
