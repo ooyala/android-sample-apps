@@ -91,6 +91,18 @@ public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackB
   }
 
   @Override
+  public void onPause() {
+    super.onPause();
+    if (controller != null) {
+      controller.onPause();
+    }
+    Log.d(TAG, "Player Activity Stopped");
+    if (player != null) {
+      player.suspend();
+    }
+  }
+  
+  @Override
   public void onResume() {
     super.onResume();
     if (controller != null) {
