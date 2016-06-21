@@ -83,9 +83,10 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     //Force request android.permission.SYSTEM_ALERT_WINDOW
     // that is ignored in Manifest on Marshmallow devices.
-    if(Build.VERSION_CODES.M == Build.VERSION.SDK_INT) {
-      showDevOptionsDialog();
-    }
+    // Can be used if necessary to use native-skin source code
+//    if(Build.VERSION_CODES.M == Build.VERSION.SDK_INT) {
+//      showDevOptionsDialog();
+//    }
   }
 
   private void showDevOptionsDialog() {

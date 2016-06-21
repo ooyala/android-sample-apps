@@ -32,19 +32,23 @@ android {
 
 task copyAssetsTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
     into new File(System.getProperty("user.dir"),'./app/src/main/assets')
-    doLast {
-        println "Assets updated."
-    }
+    println "Assets updated."
 }
 tasks.copyAssetsTask.execute()
+
+task copySkinConfigTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+    into new File(System.getProperty("user.dir"),'./app/src/main/assets/skin-config')
+    println "copySkinConfigTask updated."
+}
+tasks.copySkinConfigTask.execute()
 
 task copyFontsAssetsTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
     into new File(System.getProperty("user.dir"),'./app/src/main/assets/fonts')
-    doLast {
-        println "font Assets updated."
-    }
+    println "font Assets updated."
 }
 tasks.copyFontsAssetsTask.execute()
 
@@ -57,9 +61,7 @@ task copyTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Google/ima-android-v313.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Facebook/react-native-0.26.2.aar')
     into new File(System.getProperty("user.dir"),'./app/libs')
-    doLast {
-        println "Jars updated."
-    }
+    println "Jars updated."
 }
 
 tasks.copyTask.execute()
