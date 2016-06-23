@@ -1,26 +1,26 @@
 {
   "general": {
-    "watermark": {"imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/assets/images/ooyala-watermark.png","androidResource" : "logo","iosResource" : "logo"  } },
-    "loadingImage": {"imageResource": {"url": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/assets/images/loader_svg.svg" } }
+    "watermark": {"imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/ooyala-watermark.png","androidResource" : "logo","iosResource" : "logo"  } },
+    "loadingImage": {"imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/loader_svg.svg" } }
   },
   "localization": {
     "defaultLanguage": "en",
     "availableLanguageFile": [
       {
         "language": "en",
-        "languageFile": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/en.json",
+        "languageFile": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/en.json",
         "androidResource": "skin-config/en.json",
         "iosResource": "en"
       },
       {
         "language": "es",
-        "languageFile": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/es.json",
+        "languageFile": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/es.json",
         "androidResource": "skin-config/es.json",
         "iosResource": "es"
       },
       {
         "language": "zh",
-        "languageFile": "//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/zh.json",
+        "languageFile": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/zh.json",
         "androidResource": "skin-config/zh.json",
         "iosResource": "zh"
       }
@@ -107,7 +107,7 @@
   },
   "shareScreen": {
     "embed": {
-      "source": "<iframe width='640' height='480' frameborder='0' allowfullscreen src='//player.ooyala.com/static/v4/stable/4.2.7/skin-plugin/iframe.html?ec=<ASSET_ID>&pbid=<PLAYER_ID>&pcode=<PUBLISHER_ID>'></iframe>"
+      "source": "<iframe width='640' height='480' frameborder='0' allowfullscreen src='//player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=<ASSET_ID>&pbid=<PLAYER_ID>&pcode=<PUBLISHER_ID>'></iframe>"
     }
   },
   "moreOptionsScreen": {
@@ -129,7 +129,15 @@
   "closedCaptionOptions": {
     "defaultEnabled": true,
     "defaultLanguage": "en",
-    "availableLanguages": []
+    "defaultTextColor": "White",
+    "defaultWindowColor": "Transparent",
+    "defaultBackgroundColor": "Black",
+    "defaultTextOpacity": 1,
+    "defaultBackgroundOpacity": 0.6,
+    "defaultWindowOpacity": 0,
+    "defaultFontType": "Proportional Sans-Serif",
+    "defaultFontSize": "Medium",
+    "defaultTextEnhancement": "Uniform"
   },
   "upNext": {
     "showUpNext": true,
@@ -152,10 +160,10 @@
     "autoHide": true,
     "height": 60,
     "logo": {
-      "imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/assets/images/ooyala-logo.svg","androidResource" : "logo","iosResource" : "logo"},
+      "imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/ooyala-logo.svg","androidResource" : "logo","iosResource" : "logo"},
       "clickUrl": "http://www.ooyala.com",
       "target": "_blank",
-      "width": 111,
+      "width": 96,
       "height": 24
     },
     "adScrubberBar": {
@@ -166,7 +174,8 @@
     "scrubberBar": {
       "backgroundColor": "rgba(175,175,175,0.5)",
       "bufferedColor": "rgba(175,175,175,0.7)",
-      "playedColor": "rgba(67,137,255,1)"
+      "playedColor": "rgba(67,137,255,1)",
+      "thumbnailPreview": true
     }
   },
   "live": {
@@ -174,43 +183,43 @@
   },
   "buttons": {
     "desktopContent": [
-      {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
+      {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
-      {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35},
+      {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45},
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":145 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"share", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
-      {"name":"discovery", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
-      {"name":"closedCaption", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
-      {"name":"quality", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":35 },
-      {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 }
+      {"name":"share", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
+      {"name":"discovery", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
+      {"name":"closedCaption", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
+      {"name":"quality", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
+      {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 }
     ],
     "desktopAd": [
-      {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
+      {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":130 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35 }
+      {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 }
     ],
     "mobileContent": [
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":40 },
-      {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":35},
+      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+      {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45},
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":100 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"share", "location":"moreOptions" },
       {"name":"discovery", "location":"moreOptions" },
       {"name":"closedCaption", "location":"moreOptions" },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":40 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":40 }
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 }
     ],
     "mobileAd": [
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":40 },
+      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":40 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":40 }
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 }
     ]
   },
   "icons": {

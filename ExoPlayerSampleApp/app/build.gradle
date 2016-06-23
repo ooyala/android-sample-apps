@@ -36,23 +36,27 @@ android {
 //  }
 }
 
+
 task copyAssetsTask(type: Copy) {
   from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+  from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
   into new File(System.getProperty("user.dir"),'./app/src/main/assets')
-  doLast {
-    println "Assets updated."
-  }
+  println "Assets updated."
 }
 tasks.copyAssetsTask.execute()
 
-task copyFontsAssetsTask(type: Copy) {
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
-    into new File(System.getProperty("user.dir"),'./app/src/main/assets/fonts')
-    doLast {
-        println "font Assets updated."
-    }
+task copySkinConfigTask(type: Copy) {
+  from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+  into new File(System.getProperty("user.dir"),'./app/src/main/assets/skin-config')
+  println "copySkinConfigTask updated."
 }
+tasks.copySkinConfigTask.execute()
 
+task copyFontsAssetsTask(type: Copy) {
+  from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+  into new File(System.getProperty("user.dir"),'./app/src/main/assets/fonts')
+  println "font Assets updated."
+}
 tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {

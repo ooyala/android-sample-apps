@@ -18,6 +18,8 @@ import com.ooyala.sample.utils.OnAuthorizationChangedListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import static com.ooyala.android.OoyalaPlayer.State.*;
+
 
 public class AdobePassSampleAppAcitivity extends Activity implements OnAuthorizationChangedListener, Observer {
   final String TAG = this.getClass().toString();
@@ -70,6 +72,22 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
         playerLayoutController.getPlayer().play();
       }
     });
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    if (null != player && player.getState() == PLAYING) {
+      player.suspend();
+    }
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if (null != player) {
+      player.resume();
+    }
   }
 
   @Override
