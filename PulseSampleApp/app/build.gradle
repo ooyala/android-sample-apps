@@ -26,6 +26,7 @@ task copyLibsTask(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(System.getProperty("user.dir"), '../vendor/Facebook/react-native-0.26.2.aar')
     into new File(System.getProperty("user.dir"),'./app/libs')
     doLast {
         println "Libs updated."
@@ -42,6 +43,15 @@ task copyAssetsTask1(type: Copy) {
     }
 }
 tasks.copyAssetsTask1.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(System.getProperty("user.dir"),'./app/src/main/assets/fonts')
+    doLast {
+        println "font Assets updated."
+    }
+}
+tasks.copyFontsAssetsTask.execute()
 
 task copyAssetsTask2(type: Copy) {
     from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
@@ -74,6 +84,18 @@ dependencies {
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/OoyalaPulseIntegration.jar')
     compile files('libs/OoyalaSkinSDK.jar')
-    compile 'com.facebook.react:react-native:0.16.+'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile group: 'com.facebook.fresco', name: 'fresco', version: '0.8.1'
+    compile group: 'com.facebook.fresco', name: 'imagepipeline-okhttp', version: '0.8.1'
+    compile group: 'com.facebook.stetho', name: 'stetho', version: '1.2.0'
+    compile group: 'com.facebook.stetho', name: 'stetho-okhttp', version: '1.2.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.2.3'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+    compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.5.0'
+    compile group: 'com.squareup.okhttp', name: 'okhttp-ws', version: '2.5.0'
+    compile group: 'com.squareup.okio', name: 'okio', version: '1.6.0'
+    compile group: 'org.webkit', name: 'android-jsc', version: 'r174650'
+    compile(name:'react-native', version:'0.26.2', ext:'aar')
     compile (name:'PulseSDK', ext:'aar')
 }
