@@ -20,10 +20,10 @@ android {
 
 
 task copyTask(type: Copy) {
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/NPAW/youbora-plugin-base-1.0.5.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/NPAW/youbora-plugin-ooyala-2.0.0.jar')
-    into new File(System.getProperty("user.dir"),'./app/libs')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(projectDir, '../../vendor/NPAW/youbora-plugin-base-1.0.5.jar')
+    from new File(projectDir, '../../vendor/NPAW/youbora-plugin-ooyala-2.0.0.jar')
+    into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
     }

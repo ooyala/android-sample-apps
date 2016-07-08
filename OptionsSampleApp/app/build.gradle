@@ -23,12 +23,12 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/Google/ima-android-v313.jar')
-    into new File(System.getProperty("user.dir"),'./app/libs')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
+    from new File(projectDir, '../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
+    from new File(projectDir, '../../vendor/Google/ima-android-v313.jar')
+    into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
     }

@@ -19,9 +19,9 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/AdobePass/android_accessenabler-1.7.3.jar')
-    into new File(System.getProperty("user.dir"),'./app/libs')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(projectDir, '../../vendor/AdobePass/android_accessenabler-1.7.3.jar')
+    into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
     }
