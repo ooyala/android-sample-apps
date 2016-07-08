@@ -35,3 +35,4 @@ go_script/pkg
 **/app/src/main/assets/index.android.jsbundle
 .DS_Store
 runConfigurations.xml
+*.iml

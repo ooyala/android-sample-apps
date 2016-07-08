@@ -18,12 +18,12 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaNielsenSDK-Android/OoyalaNielsenSDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaNielsenSDK-Android/OoyalaNielsenSDK.jar')
 
     println "Ooyala JARs were added, however, Nielsen Integration requires VisualOn and Nielsen SDKs"
 
-    into new File(System.getProperty("user.dir"),'./app/libs')
+    into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
     }

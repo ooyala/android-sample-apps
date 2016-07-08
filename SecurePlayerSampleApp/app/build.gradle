@@ -19,11 +19,11 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(System.getProperty("user.dir"), '../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
 
     println "Ooyala JARs were copied. However, you will still need VisualOn and SecurePlayer jars and shared objects copied"
 
-    into new File(System.getProperty("user.dir"),'./app/libs')
+    into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
     }
