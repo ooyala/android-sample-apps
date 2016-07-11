@@ -30,8 +30,8 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
      * Called when the activity is first created.
      */
     private final String TAG = this.getClass().toString();
-    private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-    private final String DOMAIN = "http://ooyala.com";
+    String PCODE = null;
+    String DOMAIN = null;
     private String EMBEDCODE = "";
 
     private OptimizedOoyalaPlayerLayoutController playerLayoutController;
@@ -51,6 +51,8 @@ public class PreloadOptionsPlayerActivity extends Activity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_toggle_button_layout);
         EMBEDCODE = getIntent().getExtras().getString("embed_code");
+        PCODE = getIntent().getExtras().getString("pcode");
+        DOMAIN = getIntent().getExtras().getString("domain");
 
         setButton = (Button) findViewById(R.id.setButton);
         setButton.setText("Create Video");

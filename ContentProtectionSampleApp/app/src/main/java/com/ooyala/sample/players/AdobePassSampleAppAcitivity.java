@@ -25,8 +25,8 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "pqdHc6rN2_wYW2z-pOmDqkUmMnI1";
-  final String DOMAIN = "http://www.ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
   private AdobePassLoginController adobePassController;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
@@ -45,6 +45,8 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
     adobePassController.checkAuth();
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);

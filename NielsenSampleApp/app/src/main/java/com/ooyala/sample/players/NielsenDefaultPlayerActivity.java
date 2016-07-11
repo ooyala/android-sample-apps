@@ -39,8 +39,8 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
   final static String TAG = NielsenDefaultPlayerActivity.class.getSimpleName();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -56,7 +56,11 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
     super.onCreate(savedInstanceState);
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_single_button_layout);
+
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
+
     Options opts = new Options.Builder().setUseExoPlayer(true).build();
 
     //Initialize the player

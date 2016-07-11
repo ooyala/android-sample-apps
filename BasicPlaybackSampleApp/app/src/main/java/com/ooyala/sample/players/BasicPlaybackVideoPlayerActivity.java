@@ -25,8 +25,8 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
   int count=0;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
@@ -41,6 +41,8 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);

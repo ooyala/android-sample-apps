@@ -25,8 +25,8 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -40,6 +40,8 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     OoyalaPlayer.enableCustomHLSPlayer = true;
     OoyalaPlayer.enableCustomPlayreadyPlayer = true;

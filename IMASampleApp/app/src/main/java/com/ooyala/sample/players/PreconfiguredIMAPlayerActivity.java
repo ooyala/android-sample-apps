@@ -36,8 +36,8 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -54,6 +54,8 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
     setContentView(R.layout.player_simple_frame_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     /** DITA_START:<ph id="ima_preconfigured"> **/
     //Initialize the player
