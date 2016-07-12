@@ -19,13 +19,13 @@ import java.util.Observer;
 public class BasicPlayerActivity extends AppCompatActivity implements Observer {
     private static final String TAG = "BasicPlayerActivity";
 
-    final String PCODE = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
     final String PLAYER_DOMAIN = "http://www.ooyala.com/";
     final String HB_TRACKING_SERVER = "[INSERT YOUR TRACKING SERVER HERE]";
     final String HB_PUBLISHER = "[INSERT YOUR PROVIDER HERE]";
 
     protected OoyalaPlayer player;
     protected String embedCode;
+    protected String pcode;
     protected OoyalaAdobeAnalyticsManager analyticsManager;
 
     @Override
@@ -34,9 +34,10 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_basic_player);
 
         embedCode = getIntent().getExtras().getString("embed_code");
+        pcode = getIntent().getExtras().getString("pcode");
 
         OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.playerLayout);
-        player = new OoyalaPlayer(PCODE, new PlayerDomain(PLAYER_DOMAIN));
+        player = new OoyalaPlayer(pcode, new PlayerDomain(PLAYER_DOMAIN));
         new OoyalaPlayerLayoutController(playerLayout, player);
         player.addObserver(this);
 

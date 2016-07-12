@@ -47,6 +47,7 @@ public class AssetListActivity extends AppCompatActivity implements OnItemClickL
         Intent intent = new Intent(this, selectedClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("embed_code", selection.getEmbedCode());
+        intent.putExtra("pcode", selection.getPcode());
         intent.putExtra("selection_name", listAdapter.getItem(position));
         startActivity(intent);
     }

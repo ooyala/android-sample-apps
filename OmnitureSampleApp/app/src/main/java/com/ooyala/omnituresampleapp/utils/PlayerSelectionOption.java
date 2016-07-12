@@ -8,9 +8,16 @@ import android.app.Activity;
  */
 public class PlayerSelectionOption {
   private String embedCode;
+  private String pcode;
   private Class <? extends Activity> activity;
+
   public PlayerSelectionOption(String embedCode, Class<? extends Activity> activity) {
+    this(embedCode, null, activity);
+  }
+
+  public PlayerSelectionOption(String embedCode, String pcode, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
+    this.pcode = pcode;
     this.activity = activity;
   }
 
@@ -20,6 +27,10 @@ public class PlayerSelectionOption {
    */
   public String getEmbedCode() {
     return this.embedCode;
+  }
+
+  public String getPcode() {
+    return pcode;
   }
 
   /**
