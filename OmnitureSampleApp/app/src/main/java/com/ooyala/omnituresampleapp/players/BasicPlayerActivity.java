@@ -21,11 +21,12 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer {
 
     final String PCODE = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
     final String PLAYER_DOMAIN = "http://www.ooyala.com/";
-    final String HB_TRACKING_SERVER = "ovppartners.hb.omtrdc.net";
-    final String HB_PUBLISHER = "ooyalatester";
+    final String HB_TRACKING_SERVER = "[INSERT YOUR TRACKING SERVER HERE]";
+    final String HB_PUBLISHER = "[INSERT YOUR PROVIDER HERE]";
 
     protected OoyalaPlayer player;
     protected String embedCode;
+    protected OoyalaAdobeAnalyticsManager analyticsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer {
                 .heartbeatTrackingServer(HB_TRACKING_SERVER)
                 .heartbeatPublisher(HB_PUBLISHER)
                 .build();
-        OoyalaAdobeAnalyticsManager analyticsManager = new OoyalaAdobeAnalyticsManager(player,
+        analyticsManager = new OoyalaAdobeAnalyticsManager(player,
                 config, getApplicationContext());
         analyticsManager.startCapture();
 
@@ -68,6 +69,13 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer {
         if (null != player) {
             player.suspend();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        analyticsManager.stopCapture();
+
+        super.onDestroy();
     }
 
     // Observer methods

@@ -14,8 +14,8 @@
     "appid": "9d7b9aebdb78581efdac68deddf9ae906969b649ef6a88b9346af8c8977b80e8"
   },
   "analytics": {
-    "rsids": "ovppooyala",
-    "server": "ovppartners.sc.omtrdc.net",
+    "rsids": "[INSERT YOUR ID HERE]",
+    "server": "[INSERT YOUR SERVER HERE]",
     "ssl": false,
     "offlineEnabled": false,
     "charset": "ISO-8859-1",
@@ -29,7 +29,7 @@
     "poi": []
   },
   "marketingCloud": {
-    "org": "2A5D3BC75244638C0A490D4D@AdobeOrg"
+    "org": "[INSERT YOUR MARKETING CLOUD ACCOUNT HERE]"
   },
   "messages": [],
   "remotes": {
