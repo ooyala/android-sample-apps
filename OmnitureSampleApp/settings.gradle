@@ -1,4 +1,1 @@
-include ':app', ':ooyalaCoreSDK', ':ooyalaAdobeAnalyticsSDK'
-
-project(':ooyalaCoreSDK').projectDir = new File(settingsDir, '../../android-sdk/sdk/ooyalaCoreSDK')
-project(':ooyalaAdobeAnalyticsSDK').projectDir = new File(settingsDir, '../../android-sdk/sdk/ooyalaAdobeAnalyticsSDK')
+include ':app'
