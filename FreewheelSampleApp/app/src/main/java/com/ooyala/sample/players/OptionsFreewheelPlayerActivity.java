@@ -32,9 +32,9 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
    * Called when the activity is first created.
    */
   private final String TAG = this.getClass().toString();
-  private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  private final String DOMAIN = "http://ooyala.com";
-  private String EMBEDCODE = "NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-";
+  String PCODE = null;
+  String DOMAIN = null;
+  String EMBEDCODE = null;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
@@ -55,6 +55,8 @@ public class OptionsFreewheelPlayerActivity extends Activity implements
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_toggle_button_layout);
     EMBEDCODE = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
     
     setButton = (Button) findViewById(R.id.setButton);
     setButton.setText("Create Video");

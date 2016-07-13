@@ -43,8 +43,8 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
   final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -64,6 +64,8 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     setContentView(R.layout.player_double_button_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);

@@ -40,13 +40,13 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("CuePoints and AdsControl Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", CuePointsOptionsFreewheelPlayerActivity.class)); 
-    selectionMap.put("Preload and PromoImage Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", PreloadOptionsPlayerActivity.class)); 
-    selectionMap.put("Preload and Promo Options with Initial Time", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", PreloadWithInitTimePlayerActivity.class));
-    selectionMap.put("Timeout Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", TimeoutOptionsPlayerActivity.class));
-    selectionMap.put("Server-Side TV Ratings", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", ServerConfiguredTVRatingsPlayerActivity.class));
-    selectionMap.put("TV Ratings Configuration", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", TVRatingsPlayerActivity.class));
-    selectionMap.put("Prevent Video View Sharing Option", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", PreventVideoViewSharingPlayerActivity.class));
+    selectionMap.put("CuePoints and AdsControl Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", "V0NDYyOuL4a4eLle69su0dP_7vs1", "http://www.ooyala.com", CuePointsOptionsFreewheelPlayerActivity.class));
+    selectionMap.put("Preload and PromoImage Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", "V0NDYyOuL4a4eLle69su0dP_7vs1", "http://www.ooyala.com", PreloadOptionsPlayerActivity.class));
+    selectionMap.put("Preload and Promo Options with Initial Time", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", PreloadWithInitTimePlayerActivity.class));
+    selectionMap.put("Timeout Options", new PlayerSelectionOption("NqcGg4bzoOmMiV35ZttQDtBX1oNQBnT-", "V0NDYyOuL4a4eLle69su0dP_7vs1", "http://www.ooyala.com", TimeoutOptionsPlayerActivity.class));
+    selectionMap.put("Server-Side TV Ratings", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ServerConfiguredTVRatingsPlayerActivity.class));
+    selectionMap.put("TV Ratings Configuration", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", TVRatingsPlayerActivity.class));
+    selectionMap.put("Prevent Video View Sharing Option", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", PreventVideoViewSharingPlayerActivity.class));
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
@@ -71,6 +71,8 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     startActivity(intent);
     return;
   }

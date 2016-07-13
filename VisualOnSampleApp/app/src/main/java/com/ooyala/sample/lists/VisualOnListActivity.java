@@ -35,9 +35,9 @@ public class VisualOnListActivity extends Activity implements OnItemClickListene
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", VisualOnPlayerActivity.class) );
-    selectionMap.put( "Ooyala Sample Encrypted HLS VOD", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", VisualOnPlayerActivity.class) );
-    selectionMap.put( "VisualOn Configuration Options", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", VisualOnOptionsPlayerActivity.class) );
+    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", VisualOnPlayerActivity.class) );
+    selectionMap.put( "Ooyala Sample Encrypted HLS VOD", new PlayerSelectionOption("ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", VisualOnPlayerActivity.class) );
+    selectionMap.put( "VisualOn Configuration Options", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", VisualOnOptionsPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
@@ -64,6 +64,8 @@ public class VisualOnListActivity extends Activity implements OnItemClickListene
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     startActivity(intent);
     return;
   }
