@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.ooyala.omnituresampleapp"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+task copyLibs(type: Copy) {
+    from '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar'
+    from '../../vendor/Ooyala/OoyalaAdobeAnalyticsSDK-Android/OoyalaAdobeAnalyticsSDK.jar'
+    from '../../vendor/Adobe/AdobeMobile/AdobeMobileLibrary-4.9.0.jar'
+    from '../../vendor/Adobe/Heartbeat/VideoHeartbeat-1.5.6.jar'
+    into 'libs'
+    doLast {
+        println 'Jars updated'
+    }
+}
+tasks.copyLibs.execute()
+
+dependencies {
+    compile files('libs/OoyalaSDK.jar')
+    compile files('libs/OoyalaAdobeAnalyticsSDK.jar')
+    compile files('libs/AdobeMobileLibrary-4.9.0.jar')
+    compile files('libs/VideoHeartbeat-1.5.6.jar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+}

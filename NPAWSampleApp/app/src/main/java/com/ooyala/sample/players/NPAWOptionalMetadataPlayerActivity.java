@@ -28,8 +28,8 @@ public class NPAWOptionalMetadataPlayerActivity extends Activity implements Obse
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   final String NPAW_ACCOUNT_ID = "ooyalaqa";
   final String NPAW_USER = "qa_android_ooyala";
@@ -47,6 +47,8 @@ public class NPAWOptionalMetadataPlayerActivity extends Activity implements Obse
     setContentView(R.layout.player_simple_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
