@@ -51,7 +51,8 @@ public class BasicPlaybackVideoPlayerActivity extends Activity implements Observ
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");
