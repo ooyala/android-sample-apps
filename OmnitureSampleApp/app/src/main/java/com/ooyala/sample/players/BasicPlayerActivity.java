@@ -1,4 +1,4 @@
-package com.ooyala.omnituresampleapp.players;
+package com.ooyala.sample.players;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.adobeanalyticssdk.OoyalaAdobeAnalyticsManager;
 import com.ooyala.android.adobeanalyticssdk.OoyalaAdobeHeartbeatConfiguration;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
-import com.ooyala.omnituresampleapp.R;
+import com.ooyala.sample.R;
 
 import java.util.Observable;
 import java.util.Observer;

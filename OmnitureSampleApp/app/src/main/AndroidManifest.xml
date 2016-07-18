@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ooyala.omnituresampleapp">
+    package="com.ooyala.sample">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,14 +12,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lists.AssetListActivity">
+        <activity android:name="com.ooyala.sample.lists.AssetListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".players.BasicPlayerActivity" />
+        <activity android:name="com.ooyala.sample.players.BasicPlayerActivity" />
     </application>
 
 </manifest>

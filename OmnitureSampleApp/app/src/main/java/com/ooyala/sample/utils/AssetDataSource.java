@@ -1,6 +1,6 @@
-package com.ooyala.omnituresampleapp.utils;
+package com.ooyala.sample.utils;
 
-import com.ooyala.omnituresampleapp.players.BasicPlayerActivity;
+import com.ooyala.sample.players.BasicPlayerActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
