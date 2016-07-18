@@ -70,7 +70,8 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     /** DITA_END:</ph> **/
     
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
   }
 
