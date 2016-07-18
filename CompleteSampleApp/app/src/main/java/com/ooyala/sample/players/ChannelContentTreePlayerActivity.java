@@ -12,6 +12,7 @@ import android.widget.SimpleAdapter;
 
 import com.ooyala.android.OoyalaAPIClient;
 import com.ooyala.android.OoyalaException;
+
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.item.Channel;
 import com.ooyala.android.item.ContentItem;
@@ -34,14 +35,7 @@ import java.util.concurrent.Executors;
 public class ChannelContentTreePlayerActivity extends ListActivity {
   private static final String TAG = "ChannelContentTreePlayerActivity";
 
-  public static final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-;
-  public static final String PLAYERDOMAIN = "http://www.ooyala.com";
-
-  // OoyalaAPIClient accepts APIKey and Secret, however this should only be used for debugging only
-  // API Secrets should not be coded into applications, or even saved in Git.
-  public static OoyalaAPIClient api = new OoyalaAPIClient(null, null, PCODE, new PlayerDomain(PLAYERDOMAIN));
-
+  private String DOMAIN;
   private Channel rootItem;
   private static final ExecutorService executor = Executors.newFixedThreadPool(2);
 
@@ -63,16 +57,22 @@ public class ChannelContentTreePlayerActivity extends ListActivity {
   }
 
   private class ContentTreeTask implements Runnable {
-    private List<String> _embedCodes;
+    private List<String> embedCodes;
+    private String pcode;
+    private String domain;
 
-    ContentTreeTask(List<String> embedCodes) {
-     _embedCodes = embedCodes;
+    ContentTreeTask(List<String> embedCodes, String pcode, String domain) {
+      this.embedCodes = embedCodes;
+      this.pcode = pcode;
+      this.domain = domain;
+
     }
 
     public void run() {
       ContentItem item = null;
       try {
-        item = api.contentTree(_embedCodes);
+        OoyalaAPIClient api = new OoyalaAPIClient(null, null, pcode, new PlayerDomain(domain));
+        item = api.contentTree(embedCodes);
         if (item != null && item instanceof Channel) {
           rootItem = (Channel) item;
           runOnUiThread(new Runnable() {
@@ -98,10 +98,11 @@ public class ChannelContentTreePlayerActivity extends ListActivity {
     super.onCreate(savedInstanceState);
 
     String embedCode = getIntent().getExtras().getString("embed_code");
+    DOMAIN = getIntent().getExtras().getString("domain");
     List<String> embedCodes = new ArrayList<String>();
     embedCodes.add(embedCode);
     // try to retrieve the content tree.
-    ContentTreeTask task = new ContentTreeTask(embedCodes);
+    ContentTreeTask task = new ContentTreeTask(embedCodes, getIntent().getExtras().getString("pcode"), DOMAIN);
     executor.submit(task);
 
   }
@@ -114,16 +115,18 @@ public class ChannelContentTreePlayerActivity extends ListActivity {
 
     for (Video v : rootItem.getVideos()) {
       addItem(myData, v.getTitle(), v.getDuration(), v.getPromoImageURL(50, 50),
-          browseIntent(v.getEmbedCode(), v.getTitle()));
+          browseIntent(v.getEmbedCode(), v.getTitle(), v.getAssetPCode(), DOMAIN));
     }
     return myData;
   }
 
-  protected Intent browseIntent(String embedCode, String title) {
+  protected Intent browseIntent(String embedCode, String title, String pcode, String domain) {
     Intent result = new Intent();
     result.setClass(this, BasicPlaybackVideoPlayerActivity.class);
     result.putExtra("embed_code", embedCode);
     result.putExtra("selection_name", title);
+    result.putExtra("pcode", pcode);
+    result.putExtra("domain", domain);
     return result;
   }
 

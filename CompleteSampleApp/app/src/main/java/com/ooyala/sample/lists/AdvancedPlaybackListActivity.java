@@ -41,14 +41,14 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put(PlayWithInitialTimePlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", PlayWithInitialTimePlayerActivity.class) );
-    selectionMap.put(MultipleVideosPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", MultipleVideosPlayerActivity.class) );
-    selectionMap.put(InsertAdPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", InsertAdPlayerActivity.class) );
-    selectionMap.put(ChangeVideoPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", ChangeVideoPlayerActivity.class) );
-    selectionMap.put(PluginPlayerActivity.getName(), new PlayerSelectionOption("lrZmRiMzrr8cP77PPW0W8AsjjhMJ1BBe", PluginPlayerActivity.class));
-    selectionMap.put(CustomControlsPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomControlsPlayerActivity.class) );
-    selectionMap.put(CustomOverlayPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", CustomOverlayPlayerActivity.class) );
-    selectionMap.put(UnbundledPlayerActivity.getName(), new PlayerSelectionOption("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4", UnbundledPlayerActivity.class));
+    selectionMap.put(PlayWithInitialTimePlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", PlayWithInitialTimePlayerActivity.class) );
+    selectionMap.put(MultipleVideosPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", MultipleVideosPlayerActivity.class) );
+    selectionMap.put(InsertAdPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", InsertAdPlayerActivity.class) );
+    selectionMap.put(ChangeVideoPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChangeVideoPlayerActivity.class) );
+    selectionMap.put(PluginPlayerActivity.getName(), new PlayerSelectionOption("lrZmRiMzrr8cP77PPW0W8AsjjhMJ1BBe", "R2d3I6s06RyB712DN0_2GsQS-R-Y", "http://www.ooyala.com", PluginPlayerActivity.class));
+    selectionMap.put(CustomControlsPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", CustomControlsPlayerActivity.class) );
+    selectionMap.put(CustomOverlayPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", CustomOverlayPlayerActivity.class) );
+    selectionMap.put(UnbundledPlayerActivity.getName(), new PlayerSelectionOption("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", UnbundledPlayerActivity.class));
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
@@ -74,6 +74,8 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     startActivity(intent);
     return;
   }

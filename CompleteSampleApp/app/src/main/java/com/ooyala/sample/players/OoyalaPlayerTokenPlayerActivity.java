@@ -39,9 +39,9 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
+  String PCODE = null;
+  String DOMAIN = null;
   private final String ACCOUNT_ID = "accountID";
-  final String DOMAIN = "http://www.ooyala.com";
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
@@ -62,6 +62,8 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
