@@ -68,7 +68,8 @@ public class CustomControlsPlayerActivity extends Activity implements Observer {
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
   }
 
