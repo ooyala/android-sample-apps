@@ -31,8 +31,8 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
      * Called when the activity is first created.
      */
     private final String TAG = this.getClass().toString();
-    private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-    private final String DOMAIN = "http://ooyala.com";
+    String PCODE = null;
+    String DOMAIN = null;
     private String EMBEDCODE = "";
 
     private OptimizedOoyalaPlayerLayoutController playerLayoutController;
@@ -44,6 +44,8 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_simple_frame_layout);
         EMBEDCODE = getIntent().getExtras().getString("embed_code");
+        PCODE = getIntent().getExtras().getString("pcode");
+        DOMAIN = getIntent().getExtras().getString("domain");
 
         // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
         playbacklog = new SDCardLogcatOoyalaEventsLogger();

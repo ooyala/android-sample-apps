@@ -50,7 +50,7 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
     // Mandatory - You need to get an OPID for your application (setSessionId)
     // and need to reference the version string for your specific SecurePlayer Libraries.
     // Talk to your CSM or Technical Support for more information
-    VisualOnConfiguration voOpts = new VisualOnConfiguration.Builder().setSessionId("session").setVersion("GENERAL_ANDR_VOP_PROB_RC_03_08_02_0000").build();
+    VisualOnConfiguration voOpts = new VisualOnConfiguration.Builder().setSessionId("session").setVersion("GENERAL_ANDR_VOP_PROB_RC_03_08_02_0003").build();
     Options options = new Options.Builder().setVisualOnConfiguration(voOpts).build();
 
     //Initialize the player
@@ -73,7 +73,7 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
         new VisualOnConfiguration.Builder().build().getPersonalizationServerUrl(),
         false,
         "session", // Mandatory - You need to get an OPID for your application. Talk to your CSM or Technical Support for more information
-        "GENERAL_ANDR_VOP_PROB_RC_03_08_02_0000"
+        "GENERAL_ANDR_VOP_PROB_RC_03_08_02_0003"
     ).execute();
   }
 

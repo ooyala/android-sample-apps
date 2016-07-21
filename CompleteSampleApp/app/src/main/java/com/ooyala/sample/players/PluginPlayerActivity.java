@@ -22,8 +22,8 @@ public class PluginPlayerActivity extends Activity implements Observer {
   }
   final String TAG = this.getClass().toString();
   private String EMBED = "";
-  private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  private final String DOMAIN = "http://www.ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   protected OoyalaPlayer player;
   protected OoyalaPlayerLayoutController playerLayoutController;
@@ -40,6 +40,8 @@ public class PluginPlayerActivity extends Activity implements Observer {
     setContentView(R.layout.player_simple_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));

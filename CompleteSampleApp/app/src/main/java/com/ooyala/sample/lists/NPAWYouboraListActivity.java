@@ -35,8 +35,8 @@ public class NPAWYouboraListActivity extends Activity implements OnItemClickList
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Basic NPAW Youbura integration", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", NPAWDefaultPlayerActivity.class) );
-    selectionMap.put("Youbura with metadata overrides", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", NPAWOptionalMetadataPlayerActivity.class) );
+    selectionMap.put("Basic NPAW Youbura integration", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWDefaultPlayerActivity.class) );
+    selectionMap.put("Youbura with metadata overrides", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWOptionalMetadataPlayerActivity.class) );
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
@@ -62,6 +62,8 @@ public class NPAWYouboraListActivity extends Activity implements OnItemClickList
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     startActivity(intent);
     return;
   }

@@ -1,4 +1,4 @@
-package com.ooyala.omnituresampleapp.lists;
+package com.ooyala.sample.lists;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ooyala.omnituresampleapp.R;
-import com.ooyala.omnituresampleapp.utils.AssetDataSource;
-import com.ooyala.omnituresampleapp.utils.PlayerSelectionOption;
+import com.ooyala.sample.R;
+import com.ooyala.sample.utils.AssetDataSource;
+import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.Map;
 

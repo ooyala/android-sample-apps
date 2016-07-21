@@ -39,7 +39,7 @@ public class SecurePlayerListActivity extends Activity implements OnItemClickLis
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
     selectionMap.put( "Ooyala-Ingested Playready Smooth VOD", new PlayerSelectionOption("5jNzJuazpFtKmloYZQmgPeC_tqDKHX9r", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", SecurePlayerPlayerActivity.class) );
-    selectionMap.put( "Playready HLS VOD with Closed Captions", new PlayerSelectionOption("xrcGYydDq1wU7nSmX7AQB3Uq4Fu3BjuE", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", SecurePlayerPlayerActivity.class) );
+    selectionMap.put( "Playready HLS VOD with Closed Captions", new PlayerSelectionOption("xrcGYydDq1wU7nSmX7AQB3Uq4Fu3BjuE", "N5dGEyOrMsKgdLgNp2B0wirtpqm7", "http://www.ooyala.com", SecurePlayerPlayerActivity.class) );
     selectionMap.put( "Microsoft-Ingested Playready Smooth VOD", new PlayerSelectionOption("V2NWk2bTpI1ac0IaicMaFuMcIrmE9U-_", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", SecurePlayerPlayerActivity.class) );
     selectionMap.put( "Microsoft-Ingested Clear Smooth VOD", new PlayerSelectionOption("1nNGk2bTq5ECsz5cRlZ4ONAAk96drr6T", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", SecurePlayerPlayerActivity.class) );
     selectionMap.put( "Ooyala-Ingested Clear HLS VOD", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", SecurePlayerPlayerActivity.class) );

@@ -38,7 +38,7 @@ public class OoyalaAPIListActivity extends Activity implements OnItemClickListen
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("ContentTree for Channel", new PlayerSelectionOption(CHANNEL_CODE, ChannelContentTreePlayerActivity.class) );
+    selectionMap.put("ContentTree for Channel", new PlayerSelectionOption(CHANNEL_CODE, "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChannelContentTreePlayerActivity.class) );
 
     setContentView(R.layout.list_activity_layout);
 
@@ -65,6 +65,8 @@ public class OoyalaAPIListActivity extends Activity implements OnItemClickListen
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     startActivity(intent);
     return;
   }
