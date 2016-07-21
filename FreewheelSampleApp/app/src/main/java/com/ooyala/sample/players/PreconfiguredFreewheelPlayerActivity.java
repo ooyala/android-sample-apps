@@ -70,7 +70,8 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
     
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto Play
+      //player.play();
     }
     /** DITA_END:</ph> **/
 
