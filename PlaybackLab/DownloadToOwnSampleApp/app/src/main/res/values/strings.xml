@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ooyala ExoPlayer Sample App</string>
+    <string name="button_start">Start</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_reset">Reset</string>
+
+</resources>
