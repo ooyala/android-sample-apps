@@ -51,7 +51,8 @@ public class PluginPlayerActivity extends Activity implements Observer {
     SampleAdPlugin plugin = new SampleAdPlugin(this, player);
     player.registerPlugin(plugin);
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     } else {
       Log.d(this.getClass().getName(), "Something Went Wrong!");
     }

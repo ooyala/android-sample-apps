@@ -79,7 +79,8 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
     /** DITA_END:</ph> **/
     
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto Play
+      //player.play();
     }
   }
 
