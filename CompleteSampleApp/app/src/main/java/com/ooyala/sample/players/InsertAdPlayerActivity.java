@@ -79,7 +79,8 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
     performanceMonitor = PerformanceMonitorBuilder.getStandardAdsMonitor(player);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
 
     /** DITA_START:<ph id="insert_ad_vast"> **/
