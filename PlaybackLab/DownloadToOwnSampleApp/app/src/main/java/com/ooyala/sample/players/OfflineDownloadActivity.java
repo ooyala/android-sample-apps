@@ -27,6 +27,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 
   protected TextView progressView;
   protected Handler handler;
+  protected DashDownloader downloader;
 
   /**
    * Called when the activity is first created.
@@ -44,7 +45,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     final File folder = android.os.Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
 
     DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
-    final DashDownloader downloader = new DashDownloader(this, options, this);
+    downloader = new DashDownloader(this, options, this);
 
     Button startButton = (Button)findViewById(R.id.start_button);
     startButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +80,9 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     handler.post(new Runnable() {
       @Override
       public void run() {
-        progressView.setText("Completed!");
+        long expiration = downloader.getLicenseExpirationDate();
+        String expirationString = expiration == DashDownloader.INFINITE_DURATION ? "infinite" : String.valueOf(expiration);
+        progressView.setText("Completed! license expires in " + expirationString);
       }
     });
   }
