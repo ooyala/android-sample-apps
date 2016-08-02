@@ -80,6 +80,12 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     }
   }
 
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    playerLayoutController.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
+  }
+
   /** Start DefaultHardwareBackBtnHandler **/
   @Override
   public void invokeDefaultOnBackPressed() {
@@ -99,16 +105,6 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
       player.suspend();
     }
   }
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    return playerLayoutController.onKeyDown(keyCode,event);
-  }
-
-  @Override
-  public boolean onKeyUp(int keyCode, KeyEvent event) {
-    return playerLayoutController.onKeyUp(keyCode,event);
-  }
-
   @Override
   protected void onResume() {
     super.onResume();
