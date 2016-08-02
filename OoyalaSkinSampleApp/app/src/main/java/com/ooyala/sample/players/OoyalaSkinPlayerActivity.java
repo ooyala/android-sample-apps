@@ -3,6 +3,7 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
@@ -93,6 +94,15 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     if (player != null) {
       player.suspend();
     }
+  }
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    return playerLayoutController.onKeyDown(keyCode,event);
+  }
+
+  @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+    return playerLayoutController.onKeyUp(keyCode,event);
   }
 
   @Override
