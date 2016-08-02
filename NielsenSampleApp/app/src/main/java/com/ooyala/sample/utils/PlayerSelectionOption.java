@@ -8,10 +8,31 @@ import android.app.Activity;
  */
 public class PlayerSelectionOption {
   private String embedCode;
-  private Class<? extends Activity> activity;
-  public PlayerSelectionOption(String embedCode, Class<? extends Activity> activity) {
+  private Class <? extends Activity> activity;
+  private String pcode;
+  private String domain;
+
+  public PlayerSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
     this.activity = activity;
+    this.pcode = pcode;
+    this.domain = domain;
+  }
+
+  /**
+   * Get the pcode for this sample
+   * @return the pcode
+   */
+  public String getPcode() {
+    return pcode;
+  }
+
+  /**
+   * Get the domain for this sample
+   * @return the domain
+   */
+  public String getDomain() {
+    return domain;
   }
 
   /**
@@ -26,7 +47,7 @@ public class PlayerSelectionOption {
    * Get the activity to use for this sample
    * @return the activity to launch
    */
-  public Class<? extends Activity> getActivity() {
+  public Class <? extends Activity> getActivity() {
     return this.activity;
   }
 }

@@ -34,9 +34,9 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
+  String PCODE = null;
+  String DOMAIN = null;
   String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
@@ -54,6 +54,8 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
     setContentView(R.layout.player_double_button_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
@@ -62,7 +64,8 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
 
     /** DITA_START:<ph id="insert_ad_vast"> **/
@@ -73,7 +76,7 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
 
       @Override
       public void onClick(View v) {
-    	  player.setEmbedCode(EMBED);
+          player.setEmbedCode(EMBED);
           player.play();
       }
     });

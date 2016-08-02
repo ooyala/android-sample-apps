@@ -30,8 +30,8 @@ public class PlayWithInitialTimePlayerActivity extends Activity implements Obser
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -49,6 +49,8 @@ public class PlayWithInitialTimePlayerActivity extends Activity implements Obser
     setContentView(R.layout.player_simple_layout);
 
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);

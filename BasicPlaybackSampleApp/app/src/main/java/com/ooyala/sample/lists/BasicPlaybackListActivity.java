@@ -34,19 +34,19 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", BasicPlaybackVideoPlayerActivity.class) );
-    selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", BasicPlaybackVideoPlayerActivity.class) );
-    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", BasicPlaybackVideoPlayerActivity.class) );
-    selectionMap.put( "VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class) );
+    selectionMap.put( "VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class) );
 
-    selectionMap.put("VAST2 Ad Pre-roll", new PlayerSelectionOption("Zlcmp0ZDrpHlAFWFsOBsgEXFepeSXY4c", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("VAST2 Ad Mid-roll", new PlayerSelectionOption("pncmp0ZDp7OKlwTPJlMZzrI59j8Imefa", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("VAST2 Ad Post-roll", new PlayerSelectionOption("Zpcmp0ZDpaB-90xK8MIV9QF973r1ZdUf", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("VAST2 Ad Wrapper", new PlayerSelectionOption("5ybGV3ZTrqvbymwBC6ThtupFBptOp1rP", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("Ooyala Ad Pre-roll", new PlayerSelectionOption("M4cmp0ZDpYdy8kiL4UD910Rw_DWwaSnU", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", BasicPlaybackVideoPlayerActivity.class));
-    selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("VAST2 Ad Pre-roll", new PlayerSelectionOption("Zlcmp0ZDrpHlAFWFsOBsgEXFepeSXY4c", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("VAST2 Ad Mid-roll", new PlayerSelectionOption("pncmp0ZDp7OKlwTPJlMZzrI59j8Imefa", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("VAST2 Ad Post-roll", new PlayerSelectionOption("Zpcmp0ZDpaB-90xK8MIV9QF973r1ZdUf", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("VAST2 Ad Wrapper", new PlayerSelectionOption("5ybGV3ZTrqvbymwBC6ThtupFBptOp1rP", "IxMWwxOtIoprfDnNvx0aBd97TcIk", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Ooyala Ad Pre-roll", new PlayerSelectionOption("M4cmp0ZDpYdy8kiL4UD910Rw_DWwaSnU", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Ooyala Ad Mid-roll", new PlayerSelectionOption("xhcmp0ZDpnDB2-hXvH7TsYVQKEk_89di", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Ooyala Ad Post-roll", new PlayerSelectionOption("Rjcmp0ZDr5yFbZPEfLZKUveR_2JzZjMO", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
+    selectionMap.put("Multi Ad combination", new PlayerSelectionOption("Ftcmp0ZDoz8tALmhPcN2vMzCdg7YU9lc", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", BasicPlaybackVideoPlayerActivity.class));
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
@@ -71,6 +71,8 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
     startActivity(intent);
     return;

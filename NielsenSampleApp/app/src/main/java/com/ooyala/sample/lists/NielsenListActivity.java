@@ -34,13 +34,13 @@ public class NielsenListActivity extends Activity implements OnItemClickListener
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put( "ID3-Demo", new PlayerSelectionOption("84aDVmcTqN3FrdLXClZgJq-GfFEDhS1a", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "ID3-TravelEast", new PlayerSelectionOption("Y5aHlyczqJaJ2Mh6BNWLXfpcmxOaKzcx", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "ID3-Live", new PlayerSelectionOption("p4ZXNwdDrfdg2vz04LdpbRg94XXb7d_c", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "CMS-Demo", new PlayerSelectionOption("M3bmM3czp1j9horxoTLGaJtgLmW57u4F", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "CMS-NoAds", new PlayerSelectionOption("FzYjJzczo3_M3OjkeIta-IIFcPGSGxci", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "CMS-WithAds", new PlayerSelectionOption("x3YjJzczqREV-5RDiemsrdqki1FYu2NT", NielsenDefaultPlayerActivity.class) );
-    selectionMap.put( "CMS-Live", new PlayerSelectionOption("RuZXNwdDpcWdrXskPkw73Mosq6sw6Fux", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "ID3-Demo", new PlayerSelectionOption("84aDVmcTqN3FrdLXClZgJq-GfFEDhS1a", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "ID3-TravelEast", new PlayerSelectionOption("Y5aHlyczqJaJ2Mh6BNWLXfpcmxOaKzcx", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "ID3-Live", new PlayerSelectionOption("p4ZXNwdDrfdg2vz04LdpbRg94XXb7d_c", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "CMS-Demo", new PlayerSelectionOption("M3bmM3czp1j9horxoTLGaJtgLmW57u4F", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "CMS-NoAds", new PlayerSelectionOption("FzYjJzczo3_M3OjkeIta-IIFcPGSGxci", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "CMS-WithAds", new PlayerSelectionOption("x3YjJzczqREV-5RDiemsrdqki1FYu2NT", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
+    selectionMap.put( "CMS-Live", new PlayerSelectionOption("RuZXNwdDpcWdrXskPkw73Mosq6sw6Fux", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", NielsenDefaultPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
@@ -67,6 +67,8 @@ public class NielsenListActivity extends Activity implements OnItemClickListener
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     startActivity(intent);
     return;
   }

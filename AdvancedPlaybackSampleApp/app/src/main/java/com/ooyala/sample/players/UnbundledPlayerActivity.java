@@ -20,8 +20,9 @@ public class UnbundledPlayerActivity extends Activity {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
+
   int count=0;
 
   protected OoyalaPlayerLayoutController playerLayoutController;
@@ -38,6 +39,8 @@ public class UnbundledPlayerActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setTitle(getIntent().getExtras().getString("selection_name"));
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
     setContentView(R.layout.player_simple_layout);
 
     //Initialize the player
@@ -50,7 +53,8 @@ public class UnbundledPlayerActivity extends Activity {
     UnbundledVideo u = new UnbundledVideo( s );
     final boolean success = player.setUnbundledVideo( u );
     if (success) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");

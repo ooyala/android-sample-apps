@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
@@ -33,14 +34,15 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+  private OoyalaSkinLayout skinLayout;
 
   /**
    * Called when the activity is first created.
@@ -51,9 +53,11 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_skin_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
+    skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
