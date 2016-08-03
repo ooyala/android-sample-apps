@@ -29,6 +29,7 @@ task copyTask(type: Copy) {
     }
 }
 
+tasks.copyTask.execute()
 
 dependencies {
     compile 'com.google.android.gms:play-services-ads:+'
