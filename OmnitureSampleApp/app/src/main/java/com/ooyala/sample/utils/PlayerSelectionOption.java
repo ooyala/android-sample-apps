@@ -1,4 +1,4 @@
-package com.ooyala.omnituresampleapp.utils;
+package com.ooyala.sample.utils;
 
 import android.app.Activity;
 

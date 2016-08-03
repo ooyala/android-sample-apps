@@ -53,7 +53,8 @@ public class UnbundledPlayerActivity extends Activity {
     UnbundledVideo u = new UnbundledVideo( s );
     final boolean success = player.setUnbundledVideo( u );
     if (success) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");

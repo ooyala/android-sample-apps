@@ -64,7 +64,8 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
 
     /** DITA_START:<ph id="insert_ad_vast"> **/
@@ -75,7 +76,7 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
 
       @Override
       public void onClick(View v) {
-    	  player.setEmbedCode(EMBED);
+          player.setEmbedCode(EMBED);
           player.play();
       }
     });

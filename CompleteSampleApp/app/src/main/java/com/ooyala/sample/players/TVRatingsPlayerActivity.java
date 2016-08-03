@@ -26,8 +26,8 @@ public class TVRatingsPlayerActivity extends Activity implements OnClickListener
      * Called when the activity is first created.
      */
     private final String TAG = this.getClass().toString();
-    private final String PCODE = "R2d3I6s06RyB712DN0_2GsQS-R-Y";
-    private final String DOMAIN = "http://ooyala.com";
+    String PCODE = null;
+    String DOMAIN = null;
     private String EMBEDCODE = "";
 
     private final int TVRATING_DURATION = 5;
@@ -46,6 +46,8 @@ public class TVRatingsPlayerActivity extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_toggle_button_layout);
         EMBEDCODE = getIntent().getExtras().getString("embed_code");
+        PCODE = getIntent().getExtras().getString("pcode");
+        DOMAIN = getIntent().getExtras().getString("domain");
 
         setButton = (Button) findViewById(R.id.setButton);
         setButton.setText("Create Video");

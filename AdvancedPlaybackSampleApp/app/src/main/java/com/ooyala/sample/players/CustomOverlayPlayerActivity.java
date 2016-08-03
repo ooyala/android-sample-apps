@@ -57,11 +57,14 @@ public class CustomOverlayPlayerActivity extends Activity implements Observer {
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     //Insert the new overlay into the LayoutController
-    playerLayoutController.setInlineOverlay(new CustomOverlay(this, playerLayout));
+    CustomOverlay overlay = new CustomOverlay(this, playerLayout);
+    playerLayoutController.setInlineOverlay(overlay);
+    playerLayoutController.setFullscreenOverlay(overlay);
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
   }
 

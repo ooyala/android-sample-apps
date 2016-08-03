@@ -3,6 +3,8 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
@@ -40,6 +42,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
 
   protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+  private OoyalaSkinLayout skinLayout;
 
   /**
    * Called when the activity is first created.
@@ -55,7 +58,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     DOMAIN = getIntent().getExtras().getString("domain");
 
     // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
+    skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
@@ -76,6 +79,12 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     else {
       Log.e(TAG, "Asset Failure");
     }
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    playerLayoutController.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
   }
 
   /** Start DefaultHardwareBackBtnHandler **/

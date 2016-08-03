@@ -40,6 +40,11 @@ public class CustomOverlay extends TextView implements OoyalaPlayerControls {
 
   @Override
   public void setParentLayout(OoyalaPlayerLayout ooyalaPlayerLayout) {
+    this.layout.removeView(this);
+    this.layout = ooyalaPlayerLayout;;
+    FrameLayout.LayoutParams spinnerLP = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+            100, Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+    this.layout.addView(this, spinnerLP);
   }
 
   @Override

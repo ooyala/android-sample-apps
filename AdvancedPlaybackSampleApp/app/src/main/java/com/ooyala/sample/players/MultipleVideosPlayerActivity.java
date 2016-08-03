@@ -61,7 +61,8 @@ public class MultipleVideosPlayerActivity extends Activity implements Observer {
     list.add(EMBED);
     list.add("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");
     if (player.setEmbedCodes(list)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");
