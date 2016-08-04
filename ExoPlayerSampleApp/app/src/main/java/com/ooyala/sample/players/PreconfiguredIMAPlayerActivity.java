@@ -6,6 +6,7 @@ import java.util.Observer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
@@ -85,6 +86,12 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
     }
     /** DITA_END:</ph> **/
 
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    playerLayoutController.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
   }
 
   /** Start DefaultHardwareBackBtnHandler **/
