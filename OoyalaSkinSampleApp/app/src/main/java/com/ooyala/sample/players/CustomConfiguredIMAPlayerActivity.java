@@ -6,6 +6,7 @@ import java.util.Observer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
@@ -42,6 +43,7 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
 
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+  protected OoyalaSkinLayoutController controller;
 
   /**
    * Called when the activity is first created.
@@ -66,7 +68,7 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    OoyalaSkinLayoutController controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
 
@@ -92,6 +94,12 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     if (player != null) {
       player.suspend();
     }
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    controller.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
   }
 
   @Override
