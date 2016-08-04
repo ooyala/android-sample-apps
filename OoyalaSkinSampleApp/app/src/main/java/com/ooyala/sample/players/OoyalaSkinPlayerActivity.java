@@ -52,6 +52,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     super.onCreate(savedInstanceState);
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_skin_simple_layout);
+
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
@@ -105,6 +106,7 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
       player.suspend();
     }
   }
+
   @Override
   protected void onResume() {
     super.onResume();
