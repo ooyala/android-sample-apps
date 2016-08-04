@@ -3,6 +3,7 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
@@ -92,7 +93,11 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     /** DITA_END:</ph> **/
 
   }
-
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    playerLayoutController.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
+  }
   /** Start DefaultHardwareBackBtnHandler **/
   @Override
   public void invokeDefaultOnBackPressed() {
