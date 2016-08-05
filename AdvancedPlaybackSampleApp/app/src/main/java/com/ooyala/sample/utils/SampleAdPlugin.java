@@ -6,6 +6,7 @@ import java.util.Set;
 
 import android.content.Context;
 
+import com.ooyala.android.AdPodInfo;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.StateNotifier;
@@ -22,6 +23,10 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   private SampleAdSpot _midroll;
   private SampleAdSpot _postroll;
   private SampleAdSpot _adToPlay;
+  private AdPodInfo prerollAdPodInfo;
+  private AdPodInfo midrollAdPodInfo;
+  private AdPodInfo postrollAdPodInfo;
+  private AdPodInfo adPodInfo;
   private StateNotifier _stateNotifier;
 
   public SampleAdPlugin(Context context, OoyalaPlayer player) {
@@ -77,6 +82,10 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     _preroll = new SampleAdSpot(0, "PREROLL");
     _midroll = new SampleAdSpot(20000, "MIDROLL");
     _postroll = new SampleAdSpot(Integer.MAX_VALUE - 1000, "POSTROLL");
+    prerollAdPodInfo = new AdPodInfo("Preroll Ad", _preroll.text(), "blah", 1, 0);
+    midrollAdPodInfo = new AdPodInfo("Midroll Ad", _midroll.text(), "blah", 1, 0);
+    postrollAdPodInfo = new AdPodInfo("Postroll Ad", _postroll.text(), "blah", 1, 0);
+
     return false;
   }
 
@@ -89,6 +98,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   public boolean onContentFinished() {
     if (!_postroll.isPlayed()) {
       _adToPlay = _postroll;
+      adPodInfo = postrollAdPodInfo;
       return true;
     }
     return false;
@@ -103,6 +113,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   public boolean onInitialPlay() {
     if (!_preroll.isPlayed()) {
       _adToPlay = _preroll;
+      adPodInfo = prerollAdPodInfo;
       return true;
     }
     return false;
@@ -112,6 +123,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   public boolean onPlayheadUpdate(int playhead) {
     if (playhead >= _midroll.getTime() && !_midroll.isPlayed()) {
       _adToPlay = _midroll;
+      adPodInfo = midrollAdPodInfo;
       return true;
     }
     return false;
@@ -143,7 +155,9 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     _adPlayer = new SampleAdPlayer(_context, _stateNotifier, _player.get()
         .getLayout());
     _adPlayer.loadAd(_adToPlay);
+    _stateNotifier.notifyAdStartWithAdInfo(adPodInfo);
     _adPlayer.play();
+    _stateNotifier.notifyAdCompleted();
   }
 
   @Override
