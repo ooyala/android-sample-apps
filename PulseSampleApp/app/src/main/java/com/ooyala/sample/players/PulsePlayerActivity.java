@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.adtech.ContentMetadata;
@@ -117,6 +118,12 @@ public class PulsePlayerActivity extends Activity implements Observer, DefaultHa
     if (player.setEmbedCode(videoItem.getContentCode())) {
       player.play();
     }
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    playerSkinLayoutController.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
   }
 
   @Override
