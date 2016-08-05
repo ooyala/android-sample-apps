@@ -82,9 +82,9 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     _preroll = new SampleAdSpot(0, "PREROLL");
     _midroll = new SampleAdSpot(20000, "MIDROLL");
     _postroll = new SampleAdSpot(Integer.MAX_VALUE - 1000, "POSTROLL");
-    prerollAdPodInfo = new AdPodInfo("Preroll Ad", _preroll.text(), "blah", 1, 0);
-    midrollAdPodInfo = new AdPodInfo("Midroll Ad", _midroll.text(), "blah", 1, 0);
-    postrollAdPodInfo = new AdPodInfo("Postroll Ad", _postroll.text(), "blah", 1, 0);
+    prerollAdPodInfo = new AdPodInfo("Preroll Ad", _preroll.text(), "http://www.ooyala.com", 1, 0);
+    midrollAdPodInfo = new AdPodInfo("Midroll Ad", _midroll.text(), "http://www.ooyala.com", 1, 0);
+    postrollAdPodInfo = new AdPodInfo("Postroll Ad", _postroll.text(), "http://www.ooyala.com", 1, 0);
 
     return false;
   }
@@ -157,7 +157,6 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     _adPlayer.loadAd(_adToPlay);
     _stateNotifier.notifyAdStartWithAdInfo(adPodInfo);
     _adPlayer.play();
-    _stateNotifier.notifyAdCompleted();
   }
 
   @Override
@@ -170,6 +169,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
       _player.get().getLayout().removeView(_adPlayer);
       _adPlayer.destroy();
       _adPlayer = null;
+      _stateNotifier.notifyAdCompleted();
       _player.get().exitAdMode(this);
     }
   }
