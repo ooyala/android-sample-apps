@@ -28,6 +28,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   private AdPodInfo postrollAdPodInfo;
   private AdPodInfo adPodInfo;
   private StateNotifier _stateNotifier;
+  private HashSet<Integer> cuePoints;
 
   public SampleAdPlugin(Context context, OoyalaPlayer player) {
     _player = new WeakReference<OoyalaPlayer>(player);
@@ -85,6 +86,11 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     prerollAdPodInfo = new AdPodInfo("Preroll Ad", _preroll.text(), "http://www.ooyala.com", 1, 0);
     midrollAdPodInfo = new AdPodInfo("Midroll Ad", _midroll.text(), "http://www.ooyala.com", 1, 0);
     postrollAdPodInfo = new AdPodInfo("Postroll Ad", _postroll.text(), "http://www.ooyala.com", 1, 0);
+
+    cuePoints = new HashSet<Integer>();
+    cuePoints.add(_preroll.getTime());
+    cuePoints.add(_midroll.getTime());
+    cuePoints.add(_postroll.getTime());
 
     return false;
   }
@@ -155,6 +161,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     _adPlayer = new SampleAdPlayer(_context, _stateNotifier, _player.get()
         .getLayout());
     _adPlayer.loadAd(_adToPlay);
+    cuePoints.remove(_adToPlay.getTime());
     _stateNotifier.notifyAdStartWithAdInfo(adPodInfo);
     _adPlayer.play();
   }
@@ -176,6 +183,9 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
 
   @Override
   public Set<Integer> getCuePointsInMilliSeconds() {
+    if (cuePoints != null) {
+      return new HashSet<Integer>(cuePoints);
+    }
     return new HashSet<Integer>();
   }
 }
