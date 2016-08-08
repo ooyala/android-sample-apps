@@ -71,7 +71,8 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
 	OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
     
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-Play
+      //player.play();
     }
     /** DITA_END:</ph> **/
 
