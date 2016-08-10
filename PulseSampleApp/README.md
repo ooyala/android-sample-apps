@@ -12,7 +12,8 @@ This is absolutely **not** intended to be used in production or to outline best 
 
 1. After cloning the project, download the Ooyala Ad Products Android SDKs [here](http://support.ooyala.com/resources/mobile-and-client-sdks).
 2. Copy the [required](app/libs/README.md) libraries into the `app/libs` folder of the project.
-3. Open the [project file](app/build.gradle) in Android Studio.
+3. Ensure that the required [OoyalaSkinSDK-Android](../vendor/Ooyala/OoyalaSkinSDK-Android/) package is available in the [Ooyala](../vendor/Ooyala) folder. 
+4. Open the [project file](app/build.gradle) in Android Studio.
 5. Build and run the project.
 
 
