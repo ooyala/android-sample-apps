@@ -61,7 +61,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap.put("VAST 3.0 2 Podded Ad", new PlayerSelectionOption("tjN2h1MDE65xMHMqNvvU0fYVBi6sFl1M", "ltOGIyOq4Waxz7r-q6FsUpEfl4dg", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad With All Of The New Events", new PlayerSelectionOption("x3MWp1MDE6yIedkirT0to1t1uy2oA8y3", "ltOGIyOq4Waxz7r-q6FsUpEfl4dg", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad With Icon", new PlayerSelectionOption("1qNGp1MDE6GBl7PkPlWA_FA9NJDhBp_I", "ltOGIyOq4Waxz7r-q6FsUpEfl4dg", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("VAST 3.0 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G", "ltOGIyOq4Waxz7r-q6FsUpEfl4dg", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("VAST 3.0 Skippable Ad Long", new PlayerSelectionOption("55MjA5MTE6iZTRzrTtLoxUy78YbffT2G", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VAST 3.0 Ad Wrapper", new PlayerSelectionOption("Fkcm9lMjE6GOcDOtPSiRnNCRhqsz-96e", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com",  OoyalaSkinPlayerActivity.class));
 
     selectionMap.put("VMAP PreMidPost Single", new PlayerSelectionOption("41MzA5MTE65SC6VQAS3H3d9rX-hwHQSK", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
