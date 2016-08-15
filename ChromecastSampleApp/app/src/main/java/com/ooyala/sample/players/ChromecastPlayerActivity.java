@@ -19,6 +19,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import com.ooyala.sample.utils.CastViewManager;
 
@@ -52,6 +53,10 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
   private OoyalaPlayer player;
   private CastViewManager castViewManager;
   private final String ACCOUNT_ID = "accountID";
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
@@ -107,7 +112,8 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
 
   private void play( String ec ) {
     player.setEmbedCode(ec);
-    player.play();
+    // Uncomment for Auto-Play
+    //player.play();
   }
 
   @Override
@@ -214,6 +220,11 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
       play( embedCode2 );
       embedCode2 = null;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
