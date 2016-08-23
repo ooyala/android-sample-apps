@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.nielsen.app.sdk.AppSdk;
 import com.nielsen.app.sdk.IAppNotifier;
 import com.ooyala.android.OoyalaPlayer;
@@ -18,6 +20,9 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.nielsensdk.NielsenAnalytics;
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.OptOutActivity;
@@ -36,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * Note that Nielsen Integration requires VisualOn integration, as well
  */
-public class NielsenDefaultPlayerActivity extends Activity implements Observer, IAppNotifier {
+public class NielsenDefaultPlayerActivity extends Activity implements Observer, IAppNotifier, DefaultHardwareBackBtnHandler {
   final static String TAG = NielsenDefaultPlayerActivity.class.getSimpleName();
 
   String EMBED = null;
@@ -48,6 +53,7 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
+  protected OoyalaSkinLayoutController controller;
 
   private static NielsenAnalytics s_nielsenAnalytics;
   private final static String NIELSEN_SFCODE = "<sfcode-provided-by-Nielsen>";
@@ -65,14 +71,19 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
 
-    Options opts = new Options.Builder().setUseExoPlayer(true).build();
+     //Initialize the player
+    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
-    //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+    // Create the OoyalaPlayer, with some built-in UI disabled
+    PlayerDomain domain = new PlayerDomain(DOMAIN);
+    Options options = new Options.Builder().setShowPromoImage(false).build();
+    player = new OoyalaPlayer(PCODE, domain, options);
+
+    //Create the SkinOptions, and setup React
+    SkinOptions skinOptions = new SkinOptions.Builder().build();
+    controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+
     player.addObserver(this);
-
 
     // Create NielsenAnalytics plugin
     s_nielsenAnalytics = new NielsenAnalytics( this, player, this, NIELSEN_APPID, "0.1", "NielsenTestApp", NIELSEN_SFCODE, getCustomConfig(), null );
@@ -97,6 +108,18 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
   }
 
   @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    controller.onKeyDown(keyCode, event);
+    return super.onKeyDown(keyCode, event);
+  }
+
+  /** Start DefaultHardwareBackBtnHandler **/
+  @Override
+  public void invokeDefaultOnBackPressed() {
+    super.onBackPressed();
+  }
+  /** End DefaultHardwareBackBtnHandler **/
+  @Override
   protected void onStop() {
     super.onStop();
     Log.d(TAG, "Player Activity Stopped");
@@ -114,18 +137,39 @@ public class NielsenDefaultPlayerActivity extends Activity implements Observer, 
       player.resume();
     }
   }
+  /** Start Activity methods for Skin **/
   @Override
   protected void onPause() {
     super.onPause();
-    DebugMode.logD(TAG, "onPause");
+    if (controller != null) {
+      controller.onPause();
+    }
+    Log.d(TAG, "Player Activity Stopped");
+    if (player != null) {
+      player.suspend();
+    }
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    DebugMode.logD(TAG, "onResume");
+    if (controller != null) {
+      controller.onResume( this, this );
+    }
+    Log.d(TAG, "Player Activity Restarted");
+    if (player != null) {
+      player.resume();
+    }
   }
 
+  @Override
+  public void onBackPressed() {
+    if (controller != null) {
+      controller.onBackPressed();
+    } else {
+      super.onBackPressed();
+    }
+  }
   @Override
   protected void onStart() {
     DebugMode.logD(TAG, "onStart");
