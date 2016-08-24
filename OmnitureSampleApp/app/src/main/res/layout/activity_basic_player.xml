@@ -8,10 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#000"
     tools:context=".players.BasicPlayerActivity">
 
-    <com.ooyala.android.OoyalaPlayerLayout
+    <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/playerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </RelativeLayout>
