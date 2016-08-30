@@ -10,6 +10,10 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        ndk {
+            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
     buildTypes {
         release {
@@ -24,6 +28,8 @@ task copyLibs(type: Copy) {
     from '../../vendor/Ooyala/OoyalaAdobeAnalyticsSDK-Android/OoyalaAdobeAnalyticsSDK.jar'
     from '../../vendor/Adobe/AdobeMobile/AdobeMobileLibrary-4.9.0.jar'
     from '../../vendor/Adobe/Heartbeat/VideoHeartbeat-1.5.6.jar'
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(projectDir, '../../vendor/Facebook/react-native-0.26.2.aar')
     into 'libs'
     doLast {
         println 'Jars updated'
@@ -31,10 +37,53 @@ task copyLibs(type: Copy) {
 }
 tasks.copyLibs.execute()
 
+task copyAssetsTask(type: Copy) {
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    into new File(projectDir, './src/main/assets')
+    println "Assets updated."
+}
+tasks.copyAssetsTask.execute()
+
+task copySkinConfigTask(type: Copy) {
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+    into new File(projectDir, './src/main/assets/skin-config')
+    println "copySkinConfigTask updated."
+}
+tasks.copySkinConfigTask.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(projectDir, './src/main/assets/fonts')
+    println "font Assets updated."
+}
+tasks.copyFontsAssetsTask.execute()
+
+repositories {
+    flatDir {
+        dirs 'libs' // Make it so you can compile the react-native aar from the libs folder
+    }
+}
+
 dependencies {
     compile files('libs/OoyalaSDK.jar')
+    compile files('libs/OoyalaSkinSDK.jar')
+    compile(name:'react-native', version:'0.26.2', ext:'aar')// locally, in libs/react-native.aar
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile group: 'com.facebook.fresco', name: 'fresco', version: '0.8.1'
+    compile group: 'com.facebook.fresco', name: 'imagepipeline-okhttp', version: '0.8.1'
+    compile group: 'com.facebook.stetho', name: 'stetho', version: '1.2.0'
+    compile group: 'com.facebook.stetho', name: 'stetho-okhttp', version: '1.2.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.2.3'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+    compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.5.0'
+    compile group: 'com.squareup.okhttp', name: 'okhttp-ws', version: '2.5.0'
+    compile group: 'com.squareup.okio', name: 'okio', version: '1.6.0'
+    compile group: 'org.webkit', name: 'android-jsc', version: 'r174650'
     compile files('libs/OoyalaAdobeAnalyticsSDK.jar')
     compile files('libs/AdobeMobileLibrary-4.9.0.jar')
     compile files('libs/VideoHeartbeat-1.5.6.jar')
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile(name:'react-native', version:'0.26.2', ext:'aar')
 }
