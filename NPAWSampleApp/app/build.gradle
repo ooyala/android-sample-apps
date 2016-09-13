@@ -21,8 +21,8 @@ android {
 
 task copyTask(type: Copy) {
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/NPAW/youbora-plugin-base-1.0.5.jar')
-    from new File(projectDir, '../../vendor/NPAW/youbora-plugin-ooyala-2.0.0.jar')
+    from new File(projectDir, '../../vendor/NPAW/YouboraLib-5.3.1.jar')
+    from new File(projectDir, '../../vendor/NPAW/YouboraPluginOoyala-5.3.0.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -34,6 +34,6 @@ tasks.copyTask.execute()
 dependencies {
     compile 'com.google.android.gms:play-services-ads:+'
     compile files('libs/OoyalaSDK.jar')
-    compile files('libs/youbora-plugin-base-1.0.5.jar')
-    compile files('libs/youbora-plugin-ooyala-2.0.0.jar')
+    compile files('libs/YouboraLib-5.3.1.jar')
+    compile files('libs/YouboraPluginOoyala-5.3.0.jar')
 }

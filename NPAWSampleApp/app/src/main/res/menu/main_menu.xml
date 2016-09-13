@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/youbora_config_show"
+        android:title="Youbora config" />
+
+    <item android:id="@+id/youbora_config_reset"
+        android:title="Reset Youbora config" />
+</menu>

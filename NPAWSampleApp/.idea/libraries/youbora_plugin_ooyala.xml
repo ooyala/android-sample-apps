@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="youbora-plugin-ooyala">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/youbora-plugin-ooyala.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
