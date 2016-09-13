@@ -12,6 +12,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -31,6 +32,9 @@ public class ChromecastBarebonesPlayerActivity extends AppCompatActivity impleme
   private String pcode;
   private String domain;
   private OoyalaPlayer player;
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,8 @@ public class ChromecastBarebonesPlayerActivity extends AppCompatActivity impleme
     //Observe, set the embed code, and play
     player.addObserver(this);
     player.setEmbedCode(embedCode);
-    player.play();
+    //Uncomment for Auto-Play
+    //player.play();
   }
 
   @Override
@@ -128,6 +133,11 @@ public class ChromecastBarebonesPlayerActivity extends AppCompatActivity impleme
         Log.e(TAG, msg);
       }
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
