@@ -51,7 +51,7 @@ public class SampleVideoPlayerActivity extends Activity implements Observer {
         OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
         player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
         playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-        // Below step will make sure that player is being chose each time
+        // Below step will make sure that player is being chosen each time
         // make sure to put large integer value so that new player gets selected
         player.getMoviePlayerSelector().registerPlayerFactory(new SampleVideoPlayerFactory(999));
         player.addObserver(this);

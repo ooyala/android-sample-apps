@@ -24,7 +24,7 @@ import java.util.TimerTask;
 
 /**
  *  This is a new player which extends from StreamPlayer.
- *  Extending from StreamPlayer is necessary to get it work with Ooyala SDk.
+ *  Extending from StreamPlayer is necessary to get it work with Ooyala SDK.
  *
  */
 public class SampleVideoStreamPlayer extends StreamPlayer {
@@ -75,7 +75,7 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
         linearLayout.setBackgroundColor(Color.BLACK);
         textView = new TextView(_parent.getLayout().getContext());
         linearLayout.addView(textView);
-        // Add newly created playerView/ to parent which is Ooyala player
+        // Add newly created playerView to parent which is Ooyala player
         _parent.getLayout().addView(linearLayout);
         timerHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -83,28 +83,13 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
             }
         };
 
-        // if auto-play is enabled the state neeeds to be PLAYING
+        // if auto-play is enabled the state needs to be PLAYING
         if (_parent.getDesiredState() == OoyalaPlayer.DesiredState.DESIRED_PLAY) {
           setState(OoyalaPlayer.State.PLAYING);
         } else {
           setState(OoyalaPlayer.State.READY);
         }
 
-    }
-
-    @Override
-    public void resume() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void pause() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void destroy() {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -119,11 +104,6 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
             }, REFRESH_RATE, REFRESH_RATE);
         }
         setState(OoyalaPlayer.State.PLAYING);
-    }
-
-    @Override
-    public void stop() {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -146,22 +126,8 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
         return playhead;
     }
 
-    @Override
-    public void suspend() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void reset() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void seekToTime(int timeInMillis) {
-
-    }
-
     private void refresh() {
+        // This method simulates video playback
         playhead += REFRESH_RATE;
         String text = " Sample Video Player Plugin " + String.valueOf((DURATION - playhead) / 1000)
                 + "\n\n\n" + stream.decodedURL().toString();
