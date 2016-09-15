@@ -10,7 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by achaudhari on 9/9/16.
+ * Create factory class for new player so that
+ * it can be added into OoyalaPlayer
  */
 public class SampleVideoPlayerFactory implements PlayerFactory {
 

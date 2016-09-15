@@ -17,7 +17,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by achaudhari on 9/12/16.
+ *  This activity illustrates how you can integrate video player with
+ *  Ooyala SDK
+ *
  */
 public class SampleVideoPlayerActivity extends Activity implements Observer {
     public final static String getName() {
@@ -49,6 +51,8 @@ public class SampleVideoPlayerActivity extends Activity implements Observer {
         OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
         player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
         playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+        // Below step will make sure that player is being chose each time
+        // make sure to put large integer value so that new player gets selected
         player.getMoviePlayerSelector().registerPlayerFactory(new SampleVideoPlayerFactory(999));
         player.addObserver(this);
 

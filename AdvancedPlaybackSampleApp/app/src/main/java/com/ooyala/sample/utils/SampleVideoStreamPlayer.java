@@ -23,7 +23,9 @@ import java.util.TimerTask;
 
 
 /**
- * Created by achaudhari on 9/12/16.
+ *  This is a new player which extends from StreamPlayer.
+ *  Extending from StreamPlayer is necessary to get it work with Ooyala SDk.
+ *
  */
 public class SampleVideoStreamPlayer extends StreamPlayer {
 
@@ -32,11 +34,11 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
     private int DURATION;
     private final int REFRESH_RATE = 250;
 
-    private Timer _timer;
-    private int _playhead = 0;
-    private Handler _timerHandler;
+    private Timer timer;
+    private int playhead = 0;
+    private Handler timerHandler;
     private TextView textView;
-    private LinearLayout _linearLayout;
+    private LinearLayout linearLayout;
 
     private Stream stream;
 
@@ -65,31 +67,29 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
     }
 
     public void initPlayer () {
-        _linearLayout = new LinearLayout(_parent.getLayout().getContext());
-        _linearLayout.setLayoutParams(new FrameLayout.LayoutParams(
+        // create layout/view which will contain playerview
+        linearLayout = new LinearLayout(_parent.getLayout().getContext());
+        linearLayout.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
-        _linearLayout.setBackgroundColor(Color.BLACK);
+        linearLayout.setBackgroundColor(Color.BLACK);
         textView = new TextView(_parent.getLayout().getContext());
-        _linearLayout.addView(textView);
-        _parent.getLayout().addView(_linearLayout);
-        _timerHandler = new Handler() {
+        linearLayout.addView(textView);
+        // Add newly created playerView/ to parent which is Ooyala player
+        _parent.getLayout().addView(linearLayout);
+        timerHandler = new Handler() {
             public void handleMessage(Message msg) {
                 refresh();
             }
         };
 
+        // if auto-play is enabled the state neeeds to be PLAYING
         if (_parent.getDesiredState() == OoyalaPlayer.DesiredState.DESIRED_PLAY) {
           setState(OoyalaPlayer.State.PLAYING);
         } else {
           setState(OoyalaPlayer.State.READY);
         }
 
-    }
-
-    @Override
-    protected void startPlayheadTimer() {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -109,12 +109,12 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
 
     @Override
     public void play() {
-        if (_timer == null) {
-            _timer = new Timer();
-            _timer.scheduleAtFixedRate(new TimerTask() {
+        if (timer == null) {
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    _timerHandler.sendEmptyMessage(0);
+                    timerHandler.sendEmptyMessage(0);
                 }
             }, REFRESH_RATE, REFRESH_RATE);
         }
@@ -143,7 +143,7 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
 
     @Override
     public int currentTime() {
-        return _playhead;
+        return playhead;
     }
 
     @Override
@@ -162,13 +162,13 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
     }
 
     private void refresh() {
-        _playhead += REFRESH_RATE;
-        String text = " Sample Video Player Plugin " + String.valueOf((DURATION - _playhead) / 1000)
+        playhead += REFRESH_RATE;
+        String text = " Sample Video Player Plugin " + String.valueOf((DURATION - playhead) / 1000)
                 + "\n\n\n" + stream.decodedURL().toString();
         textView.setText(text);
-        if (_playhead >= DURATION && _timer != null) {
-            _timer.cancel();
-            _timer = null;
+        if (playhead >= DURATION && timer != null) {
+            timer.cancel();
+            timer = null;
             setState(OoyalaPlayer.State.COMPLETED);
         }
     }
