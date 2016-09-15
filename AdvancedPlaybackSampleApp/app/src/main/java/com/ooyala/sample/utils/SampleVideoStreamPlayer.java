@@ -29,7 +29,7 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
 
     private static final String TAG = SampleVideoStreamPlayer.class.getSimpleName();
 
-    private final int DURATION = 15000;
+    private int DURATION;
     private final int REFRESH_RATE = 250;
 
     private Timer _timer;
@@ -59,7 +59,7 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
             setState(OoyalaPlayer.State.ERROR);
             return;
         }
-
+        DURATION = parent.getCurrentItem().getDuration() != 0 ? parent.getCurrentItem().getDuration() : 15000 ;
         setParent(parent);
         initPlayer();
     }
@@ -78,7 +78,12 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
                 refresh();
             }
         };
-        setState(OoyalaPlayer.State.READY);
+
+        if (_parent.getDesiredState() == OoyalaPlayer.DesiredState.DESIRED_PLAY) {
+          setState(OoyalaPlayer.State.PLAYING);
+        } else {
+          setState(OoyalaPlayer.State.READY);
+        }
 
     }
 
