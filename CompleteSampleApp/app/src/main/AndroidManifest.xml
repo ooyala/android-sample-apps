@@ -137,7 +137,7 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.players.NPAWOptionalMetadataPlayerActivity"
+        <activity android:name="com.ooyala.sample.utils.youbora.YouboraConfigActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

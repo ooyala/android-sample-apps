@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class BasicPlaybackSampleAppLog {
 
-    public void writeToSdcardLog(int count,String text) {
+    public void writeToSdcardLog(int count, String text) {
 
         //Empty Logcat buffer
         if (count == 1) {

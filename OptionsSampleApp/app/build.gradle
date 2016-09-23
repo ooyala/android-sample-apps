@@ -27,7 +27,7 @@ task copyTask(type: Copy) {
     from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(projectDir, '../../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
     from new File(projectDir, '../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(projectDir, '../../vendor/Google/ima-android-v313.jar')
+    from new File(projectDir, '../../vendor/Google/ima-android-v330.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -42,5 +42,5 @@ dependencies {
     compile files('libs/OoyalaFreewheelSDK.jar')
     compile files('libs/OoyalaIMASDK.jar')
     compile files('libs/OoyalaSDK.jar')
-    compile files('libs/ima-android-v313.jar')
+    compile files('libs/ima-android-v330.jar')
 }
