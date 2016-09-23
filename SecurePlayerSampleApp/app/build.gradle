@@ -40,7 +40,6 @@ dependencies {
     compile files('libs/voOSBasePlayer.jar')
     compile files('libs/voOSDataSource.jar')
     compile files('libs/voOSEngine.jar')
-    compile files('libs/voOSHDMICheck.jar')
     compile files('libs/voOSPlayer.jar')
     compile files('libs/voOSStreamingDownloader.jar')
     compile files('libs/voOSUtils.jar')
