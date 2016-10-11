@@ -81,6 +81,14 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    //Add observer to listen to fullscreen open and close events
+    playerLayoutController.addObserver(new Observer() {
+      @Override
+      public void update(Observable observable, Object data) {
+        OoyalaSkinLayoutController skinController = (OoyalaSkinLayoutController) observable;
+        Log.d(TAG, "PreconfiguredFreewheelPlayerActivity isFullScreen : " + skinController.isFullscreen());
+      }
+    });
 
     player.addObserver(this);
 

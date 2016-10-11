@@ -23,6 +23,9 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackBtnHandler {
   private static final String EMBED = "JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt";
   final String TAG = this.getClass().toString();
@@ -52,6 +55,14 @@ public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackB
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     controller = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
+    //Add observer to listen to fullscreen open and close events
+    controller.addObserver(new Observer() {
+      @Override
+      public void update(Observable observable, Object data) {
+        OoyalaSkinLayoutController skinController = (OoyalaSkinLayoutController) observable;
+        Log.d(TAG, "SkinPlayerFragment isFullScreen : " + skinController.isFullscreen());
+      }
+    });
 
     if (player.setEmbedCode(EMBED)) {
       //Uncomment for autoplay
