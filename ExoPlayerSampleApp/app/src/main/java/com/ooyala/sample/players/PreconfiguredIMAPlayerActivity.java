@@ -76,13 +76,7 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
     //Add observer to listen to fullscreen open and close events
-    playerLayoutController.addObserver(new Observer() {
-      @Override
-      public void update(Observable observable, Object data) {
-        OoyalaSkinLayoutController skinController = (OoyalaSkinLayoutController) observable;
-        Log.d(TAG, "PreconfiguredIMAPlayerActivity isFullScreen : " + skinController.isFullscreen());
-      }
-    });
+    playerLayoutController.addObserver(this);
 
     player.addObserver(this);
 
@@ -171,6 +165,9 @@ public class PreconfiguredIMAPlayerActivity extends Activity implements Observer
       return;
     }
 
+    if (arg1 == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
+      Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification)argN).getData());
+    }
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
     String text="Notification Received: " + arg1 + " - state: " + player.getState();
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
