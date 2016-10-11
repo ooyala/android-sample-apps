@@ -81,6 +81,8 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    //Add observer to listen to fullscreen open and close events
+    playerLayoutController.addObserver(this);
 
     player.addObserver(this);
 
@@ -156,6 +158,10 @@ public class PreconfiguredFreewheelPlayerActivity extends Activity implements Ob
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
+    }
+
+    if (arg1 == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
+      Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification)argN).getData());
     }
 
     // Automation Hook: to write Notifications to a temporary file on the device/emulator

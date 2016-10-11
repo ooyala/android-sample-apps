@@ -76,6 +76,7 @@ public class PulsePlayerActivity extends Activity implements Observer, DefaultHa
     //Create the SkinOptions, and setup the LayoutController
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     playerSkinLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    playerSkinLayoutController.addObserver(this);
 
     player.addObserver(this);
 
@@ -160,6 +161,9 @@ public class PulsePlayerActivity extends Activity implements Observer, DefaultHa
       return;
     }
 
+    if (argument == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
+      Log.d(LOG_TAG, "Fullscreen Notification received : " + argument + " - fullScreen: " + ((OoyalaNotification)argN).getData());
+    }
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
     String text = "Notification Received: " + argument + " - state: " + player.getState();
 

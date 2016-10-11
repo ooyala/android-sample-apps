@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -23,7 +24,10 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
 
-public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackBtnHandler {
+import java.util.Observable;
+import java.util.Observer;
+
+public class SkinPlayerFragment extends Fragment implements Observer, DefaultHardwareBackBtnHandler {
   private static final String EMBED = "JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt";
   final String TAG = this.getClass().toString();
 
@@ -52,6 +56,8 @@ public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackB
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     controller = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
+    //Add observer to listen to fullscreen open and close events
+    controller.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
       //Uncomment for autoplay
@@ -122,5 +128,14 @@ public class SkinPlayerFragment extends Fragment implements DefaultHardwareBackB
   @Override
   public void invokeDefaultOnBackPressed() {
     getActivity().onBackPressed();
+  }
+
+  @Override
+  public void update(Observable arg0, Object argN) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+
+    if (arg1 == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
+      Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification)argN).getData());
+    }
   }
 }
