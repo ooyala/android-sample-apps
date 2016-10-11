@@ -66,6 +66,14 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     JSONObject overrides = createSkinOverrides();
     SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    //Add observer to listen to fullscreen open and close events
+    playerLayoutController.addObserver(new Observer() {
+      @Override
+      public void update(Observable observable, Object data) {
+        OoyalaSkinLayoutController skinController = (OoyalaSkinLayoutController) observable;
+        Log.d(TAG, "OoyalaSkinPlayerActivity isFullScreen : " + skinController.isFullscreen());
+      }
+    });
 
     player.addObserver(this);
 
