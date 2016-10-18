@@ -97,7 +97,11 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
 
   @Override
   public void pause() {
-
+    if (_timer != null) {
+      _timer.cancel();
+      _timer = null;
+    }
+    _stateNotifier.setState(State.PAUSED);
   }
 
   @Override
@@ -143,6 +147,9 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   @Override
   public void destroy() {
     // TODO Auto-generated method stub
+    if (getParent() != null) {
+      ((ViewGroup) getParent()).removeView(this);
+    }
   }
 
   @Override
