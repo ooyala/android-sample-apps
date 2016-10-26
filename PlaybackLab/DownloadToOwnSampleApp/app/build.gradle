@@ -106,5 +106,5 @@ dependencies {
     compile group: 'com.squareup.okhttp', name: 'okhttp-ws', version: '2.5.0'
     compile group: 'com.squareup.okio', name: 'okio', version: '1.6.0'
     compile group: 'org.webkit', name: 'android-jsc', version: 'r174650'
-    compile(name:'react-native', version:'0.26.2', ext:'aar')
+    compile(name:'react-native', version:'0.33.0', ext:'aar')
 }
