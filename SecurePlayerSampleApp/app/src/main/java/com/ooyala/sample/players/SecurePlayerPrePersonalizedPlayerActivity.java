@@ -129,7 +129,7 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
     playbacklog.writeToSdcardLog(text);
 
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    Log.d(TAG, text);
   }
 
 }
