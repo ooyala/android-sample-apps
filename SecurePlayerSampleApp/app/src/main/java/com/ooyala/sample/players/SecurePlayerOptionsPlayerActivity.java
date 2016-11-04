@@ -12,6 +12,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.configuration.VisualOnConfiguration;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -27,6 +28,9 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
   String EMBED = null;
   String PCODE = null;
   String DOMAIN = null;
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -59,7 +63,8 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for Auto-play
+      //player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");
@@ -142,6 +147,11 @@ public class SecurePlayerOptionsPlayerActivity extends Activity implements Obser
       }
       return;
     }
+
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
