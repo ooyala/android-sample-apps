@@ -32,14 +32,14 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
   private static final String TAG = OoyalaSkinOPTPlayerActivity.class.getSimpleName();
 
   String EMBED = null;
-  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
   final String DOMAIN = "http://ooyala.com";
 
-  private final String APIKEY = "Use this for testing, don't keep your secret in the application";
-  private final String SECRET = "Use this for testing, don't keep your secret in the application";
+  private final String APIKEY = "";
+  private final String SECRET = "";
 
   // An account ID, if you are using Concurrent Streams or Entitlements
-  private final String ACCOUNT_ID = "accountID";
+  private final String ACCOUNT_ID = "";
 
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
