@@ -14,6 +14,7 @@ import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.visualon.PersonalizationAsyncTask;
 import com.ooyala.android.visualon.PersonalizationCallback;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -28,6 +29,9 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
   String EMBED = null;
   String PCODE = null;
   String DOMAIN = null;
+
+  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
+  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -65,7 +69,7 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
           @Override
           public void afterPersonalization(Exception exception) {
             Log.d(TAG, "afterPersonalization: " + (exception == null ? "OK" : exception.toString()));
-            if (player.setEmbedCode(EMBED)) { player.play(); }
+            if (player.setEmbedCode(EMBED)) { /*player.play();*/ }
             else { Log.e(TAG, "Asset Failure"); }
           }
         },
@@ -120,7 +124,12 @@ public class SecurePlayerPrePersonalizedPlayerActivity extends Activity implemen
       return;
     }
 
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    // Automation Hook: to write Notifications to a temporary file on the device/emulator
+    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+    playbacklog.writeToSdcardLog(text);
+
+    Log.d(TAG, text);
   }
 
 }
