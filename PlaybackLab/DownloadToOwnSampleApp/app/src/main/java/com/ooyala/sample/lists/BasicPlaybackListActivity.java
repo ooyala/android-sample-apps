@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.OfflineDownloadActivity;
 import com.ooyala.sample.players.OfflineSkinPlayerActivity;
+import com.ooyala.sample.players.OoyalaSkinOPTPlayerActivity;
 import com.ooyala.sample.players.OoyalaSkinPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
@@ -41,9 +42,9 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", OfflineDownloadActivity.class));
-    selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", OfflineSkinPlayerActivity.class));
+    selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("pqc244NjE6RLEj-iHXaV34S3ydlnrsw6", OoyalaSkinOPTPlayerActivity.class));
+    selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("pqc244NjE6RLEj-iHXaV34S3ydlnrsw6", OfflineDownloadActivity.class));
+    selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("pqc244NjE6RLEj-iHXaV34S3ydlnrsw6", OfflineSkinPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
 
