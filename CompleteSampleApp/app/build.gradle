@@ -18,6 +18,24 @@ android {
     }
 }
 
+task copyTask(type: Copy) {
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(projectDir, '../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
+    from new File(projectDir, '../../vendor/Google/ima-android-v330.jar')
+    from new File(projectDir, '../../vendor/NPAW/YouboraLib-5.3.1.jar')
+    from new File(projectDir, '../../vendor/NPAW/YouboraPluginOoyala-5.3.0.jar')
+    from new File(projectDir, '../../vendor/AdobePass/android_accessenabler-1.7.3.jar')
+    into new File(projectDir, './libs')
+    doLast {
+        println "Jars updated."
+    }
+}
+
+tasks.copyTask.execute()
+
 repositories {
     jcenter()
     flatDir {
