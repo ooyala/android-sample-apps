@@ -25,7 +25,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
   final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
@@ -57,9 +57,9 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     final File folder = android.os.Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
 
     // Use this DashOptions to download an asset without OPT
-    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
+//    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
     // Use this DashOptions to download an asset with OPT
-//    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
+    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
     downloader = new DashDownloader(this, options, this);
 
     Button startButton = (Button)findViewById(R.id.start_button);
