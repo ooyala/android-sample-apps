@@ -8,18 +8,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ooyala.android.EmbedTokenGenerator;
+import com.ooyala.android.EmbedTokenGeneratorCallback;
+import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
 
 import java.io.File;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 
-public class OfflineDownloadActivity extends Activity implements DashDownloader.Listener {
+public class OfflineDownloadActivity extends Activity implements DashDownloader.Listener, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
   final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
@@ -28,6 +34,12 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   protected TextView progressView;
   protected Handler handler;
   protected DashDownloader downloader;
+
+  private final String APIKEY = "";
+  private final String SECRET = "";
+
+  // An account ID, if you are using Concurrent Streams or Entitlements
+  private final String ACCOUNT_ID = "";
 
   /**
    * Called when the activity is first created.
@@ -44,7 +56,10 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 
     final File folder = android.os.Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
 
-    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
+    // Use this DashOptions to download an asset without OPT
+//    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
+    // Use this DashOptions to download an asset with OPT
+    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
     downloader = new DashDownloader(this, options, this);
 
     Button startButton = (Button)findViewById(R.id.start_button);
@@ -126,4 +141,28 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
+  @Override
+  public void getTokenForEmbedCodes(List<String> embedCodes, EmbedTokenGeneratorCallback callback) {
+    String embedCodesString = "";
+    for (String ec : embedCodes) {
+      if (ec.equals("")) embedCodesString += ",";
+      embedCodesString += ec;
+    }
+
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("account_id", ACCOUNT_ID);
+
+    /* Uncommenting this will bypass all syndication rules on your asset
+       This will not work unless you have a working API Key and Secret.
+       This is one reason why you shouldn't keep the Secret in your app/source control */
+//     params.put("override_syndication_group", "override_all_synd_groups");
+
+    String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
+
+    EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
+
+    URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
+
+    callback.setEmbedToken(tokenUrl.toString());
+  }
 }
