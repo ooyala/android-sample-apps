@@ -10,9 +10,9 @@ This is absolutely **not** intended to be used in production or to outline best 
 
 ## Building
 
-1. After cloning the project, download the Ooyala Ad Products Android SDKs [here](http://support.ooyala.com/resources/mobile-and-client-sdks).
+1. After cloning the project, download the Ooyala Video Advertising Android SDKs [here](http://http://help.ooyala.com/downloads).
 2. Copy the [required](app/libs/README.md) libraries into the `app/libs` folder of the project.
-3. Ensure that the required [OoyalaSkinSDK-Android](../vendor/Ooyala/OoyalaSkinSDK-Android/) package is available in the [Ooyala](../vendor/Ooyala) folder. 
+3. Ensure that the required [OoyalaSkinSDK-Android](../vendor/Ooyala/OoyalaSkinSDK-Android/) package is available in the [Ooyala](../vendor/Ooyala) folder.
 4. Open the [project file](app/build.gradle) in Android Studio.
 5. Build and run the project.
 
@@ -65,5 +65,5 @@ This account is configured with a set of ad campaigns to help you test your Ooya
 ## Useful information
 
 - [The Ooyala Pulse SDK documentation](http://pulse-sdks.ooyala.com/android_2/latest/)
-- [Ooyala Ad Products SDK Parameter Reference](http://support.ooyala.com/developers/ad-documentation/oadtech/ad_serving/dg/integration_sdk_parameter.html)
-- [Ooyala Player v4 Pulse Integration documentation](https://apidocs.ooyala.com/android_mobilesdk/pulse_integration/html/index.html)
+- [Ooyala Ad Products SDK Parameter Reference](http://help.ooyala.com/video-advertising/oadtech/ad_serving/dg/integration_sdk_parameter.html)
+- [Ooyala Player v4 Pulse Integration documentation](http://apidocs.ooyala.com/android_mobilesdk/namespacecom_1_1ooyala_1_1android_1_1pulseintegration.html)
