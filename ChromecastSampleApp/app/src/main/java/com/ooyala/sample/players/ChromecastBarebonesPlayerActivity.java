@@ -71,6 +71,9 @@ public class ChromecastBarebonesPlayerActivity extends AppCompatActivity impleme
     if (player != null) {
       player.suspend();
     }
+
+    //onPause and onResume, call CCL code to support Cast Notifications
+    CastManager.getCastManager().onPause();
     super.onPause();
   }
   
@@ -92,10 +95,13 @@ public class ChromecastBarebonesPlayerActivity extends AppCompatActivity impleme
 
   @Override
   protected void onResume() {
-    super.onResume();
     if (player != null) {
       player.resume();
     }
+
+    //onPause and onResume, call CCL code to support Cast Notifications
+    CastManager.getCastManager().onResume();
+    super.onResume();
   }
 
   /**
