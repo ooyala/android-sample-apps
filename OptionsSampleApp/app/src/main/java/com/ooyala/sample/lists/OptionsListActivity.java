@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.CuePointsOptionsFreewheelPlayerActivity;
+import com.ooyala.sample.players.IQConfigurationPlayerActivity;
 import com.ooyala.sample.players.PreloadOptionsPlayerActivity;
 import com.ooyala.sample.players.PreloadWithInitTimePlayerActivity;
 import com.ooyala.sample.players.PreventVideoViewSharingPlayerActivity;
@@ -47,6 +48,8 @@ public class OptionsListActivity extends Activity implements OnItemClickListener
     selectionMap.put("Server-Side TV Ratings", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ServerConfiguredTVRatingsPlayerActivity.class));
     selectionMap.put("TV Ratings Configuration", new PlayerSelectionOption("c4eHZjcjqNetoCDCmzY_ApifO3qBuWpi", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", TVRatingsPlayerActivity.class));
     selectionMap.put("Prevent Video View Sharing Option", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", PreventVideoViewSharingPlayerActivity.class));
+    selectionMap.put("IQ Configuration", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", IQConfigurationPlayerActivity.class) );
+
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
