@@ -55,7 +55,8 @@ public class NPAWDefaultPlayerActivity extends Activity implements Observer {
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      //Uncomment for auto-play
+      //player.play();
     } else {
       Log.e(TAG, "Asset Failure");
     }
