@@ -236,7 +236,7 @@ public class NotificationsPlayerActivity extends Activity implements Observer {
     playbacklog.writeToSdcardLog(text);
 
     //Generic notification handler
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    Log.d(TAG, text);
   }
 
 }
