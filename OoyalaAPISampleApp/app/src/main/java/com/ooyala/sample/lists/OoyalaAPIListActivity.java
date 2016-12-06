@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 
 import com.ooyala.sample.players.ChannelContentTreePlayerActivity;
+import com.ooyala.sample.players.PlaylistListActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
@@ -39,6 +40,7 @@ public class OoyalaAPIListActivity extends Activity implements OnItemClickListen
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
     selectionMap.put("ContentTree for Channel", new PlayerSelectionOption(CHANNEL_CODE, "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChannelContentTreePlayerActivity.class) );
+    selectionMap.put("ContentTree for Playlists", new PlayerSelectionOption(CHANNEL_CODE, "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", PlaylistListActivity.class) );
 
     setContentView(R.layout.list_activity_layout);
 
