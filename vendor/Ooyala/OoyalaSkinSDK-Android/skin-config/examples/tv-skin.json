@@ -1,13 +1,6 @@
 {
   "general": {
-    "watermark": {"imageResource": {"url": "","androidResource" : "logo","iosResource" : "logo"  }, 
-                  "position": "bottomRight",
-                  "clickUrl": "",
-                  "target": "_blank",
-                  "transparency": 1,
-                  "scalingOption": "default",
-                  "scalingPercentage": 20
-    },
+    "watermark": {"imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/ooyala-watermark.png","androidResource" : "logo","iosResource" : "logo"  } },
     "loadingImage": {"imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/loader_svg.svg" } }
   },
   "localization": {
@@ -15,19 +8,19 @@
     "availableLanguageFile": [
       {
         "language": "en",
-        "languageFile": "",
+        "languageFile": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/en.json",
         "androidResource": "skin-config/en.json",
         "iosResource": "en"
       },
       {
         "language": "es",
-        "languageFile": "",
+        "languageFile": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/es.json",
         "androidResource": "skin-config/es.json",
         "iosResource": "es"
       },
       {
         "language": "zh",
-        "languageFile": "",
+        "languageFile": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/zh.json",
         "androidResource": "skin-config/zh.json",
         "iosResource": "zh"
       }
@@ -83,12 +76,12 @@
   },
   "adScreen": {
     "showAdMarquee": true,
-    "showAdCountDown": true,
     "showControlBar": false
   },
   "discoveryScreen": {
     "panelTitle": {
       "titleFont": {
+        "fontSize": 28,
         "fontFamily": "Roboto Condensed",
         "color": "white"
       }
@@ -96,11 +89,20 @@
     "contentTitle": {
       "show": true,
       "font": {
+        "fontSize": 22,
         "fontFamily": "Roboto Condensed",
         "color": "white"
       }
     },
-    "showCountDownTimerOnEndScreen": true,
+    "contentDuration": {
+      "show": true,
+      "font": {
+        "fontSize": 12,
+        "fontFamily": "Arial-BoldMT",
+        "color": "white"
+      }
+    },
+    "showCountDownTimerOnEndScreen": false,
     "countDownTime": "10"
   },
   "shareScreen": {
@@ -138,12 +140,12 @@
     "textEnhancement": "Uniform"
   },
   "upNext": {
-    "showUpNext": true,
+    "showUpNext": false,
     "timeToShow": "10"
   },
   "controlBar": {
     "volumeControl": {
-      "color": "rgba(67,137,255,1)"
+      "color": "#FFFFFF"
     },
     "iconStyle": {
       "active": {
@@ -158,7 +160,7 @@
     "autoHide": true,
     "height": 90,
     "logo": {
-      "imageResource": {"url": "","androidResource": "logo","iosResource": "logo"},
+      "imageResource": {"url": "//player.ooyala.com/static/v4/candidate/latest/skin-plugin/assets/images/ooyala-logo.svg","androidResource" : "logo","iosResource" : "logo"},
       "clickUrl": "http://www.ooyala.com",
       "target": "_blank",
       "width": 96,
@@ -207,15 +209,9 @@
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 }
     ],
     "mobileContent": [
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
       {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45},
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":100 },
-      {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"share", "location":"moreOptions" },
-      {"name":"discovery", "location":"moreOptions" },
-      {"name":"closedCaption", "location":"moreOptions" },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 }
+      {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 }
     ],
     "mobileAd": [
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
@@ -227,8 +223,8 @@
   "icons": {
     "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0068", "fontStyleClass": "oo-icon oo-icon-play-slick"},
     "pause": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0067", "fontStyleClass": "oo-icon oo-icon-pause-slick"},
-    "volume": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0062", "fontStyleClass": "oo-icon oo-icon-volume-on-ooyala-default"},
-    "volumeOff": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0070", "fontStyleClass": "oo-icon oo-icon-volume-mute-ooyala-default"},
+    "volume": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0062", "fontStyleClass": "oo-icon oo-icon-volume-on-ooyala-defualt"},
+    "volumeOff": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0070", "fontStyleClass": "oo-icon oo-icon-volume-mute-ooyala-defualt"},
     "expand": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0069", "fontStyleClass": "oo-icon oo-icon-system-fullscreen"},
     "compress": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006a", "fontStyleClass": "oo-icon oo-icon-system-minimizescreen"},
     "ellipsis": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0066", "fontStyleClass": "oo-icon oo-icon-system-menu"},

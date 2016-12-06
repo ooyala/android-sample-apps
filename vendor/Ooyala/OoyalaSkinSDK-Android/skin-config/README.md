@@ -19,6 +19,10 @@ To add the git hook in order to automatically verify the skin when committing, r
 ./add-githook-validate
 ```
 
+You can use the following command to validate all json files in the folder against the schema
+
+    find . -type f -name "*skin.json" | xargs -I REPL node validate.js skin-schema.json REPL
+
 ## Online validator
 This on-line Java based version gives more-better debug information
 when the data fails to pass validation:
