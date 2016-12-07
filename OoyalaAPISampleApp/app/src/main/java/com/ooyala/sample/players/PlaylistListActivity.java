@@ -59,7 +59,6 @@ public class PlaylistListActivity extends ListActivity {
     private class PlaylistTask implements Runnable {
     private String pcode;
     private String playlistId;
-    private String domain;
 
     PlaylistTask(String pcode, String playlistId) {
       this.playlistId = playlistId;
@@ -95,8 +94,8 @@ public class PlaylistListActivity extends ListActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     DOMAIN = getIntent().getExtras().getString("domain");
-    PCODE = "1sb2cxOr-DiMvOnEvUWmmSggx6rJ";
-    PLAYLIST_ID = "9210c00e5a834d67a058bdb84b8ce72e";
+    PCODE = "c0cTkxOqALQviQIGAHWY5hP0q9gU";
+    PLAYLIST_ID = "4fef485d588a4a818f913db2089a3a7a";
 
     // Retreieve the playlist info.  Note the hard-coded PCode and Playlist ID
     PlaylistTask task = new PlaylistTask(PCODE, PLAYLIST_ID);
