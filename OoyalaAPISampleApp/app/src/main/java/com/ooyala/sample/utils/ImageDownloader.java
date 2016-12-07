@@ -241,7 +241,7 @@ public class ImageDownloader {
     @Override
     protected Bitmap doInBackground(String... params) {
       try {
-        URL remoteUrl = new URL(url);
+        URL remoteUrl = new URL(params[0]);
         URLConnection connection = remoteUrl.openConnection();
         connection.setDoInput(true);
         connection.connect();
