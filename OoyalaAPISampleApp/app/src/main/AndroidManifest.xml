@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
         <activity android:name="com.ooyala.sample.players.ChannelContentTreePlayerActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity android:name="com.ooyala.sample.players.PlaylistListActivity" android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>
