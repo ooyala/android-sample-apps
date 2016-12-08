@@ -8,6 +8,8 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
+import com.ooyala.android.notifications.BitrateChangedNotificationInfo;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
@@ -53,8 +55,9 @@ public class NotificationsPlayerActivity extends Activity implements Observer {
     DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
+    Options opts = new Options.Builder().setUseExoPlayer(true).build();
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
@@ -227,6 +230,10 @@ public class NotificationsPlayerActivity extends Activity implements Observer {
       case OoyalaPlayer.CC_CHANGED_NOTIFICATION_NAME:
         break;
       case OoyalaPlayer.CLOSED_CAPTIONS_LANGUAGE_CHANGED_NAME:
+        break;
+      case OoyalaPlayer.BITRATE_CHANGED_NOTIFICATION_NAME:
+        BitrateChangedNotificationInfo info = (BitrateChangedNotificationInfo)((OoyalaNotification) argN).getData();
+        Log.d("Note", "Bitrate Changed. Old: " + info.getOldBitrate() + ", New: " + info.getNewBitrate());
         break;
     }
 
