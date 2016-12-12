@@ -163,7 +163,13 @@
         <activity android:name=".players.PreventVideoViewSharingPlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
-        <activity android:name="com.ooyala.sample.players.IQConfigurationPlayerActivity"
+        <activity android:name=".players.IQConfigurationPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+        <activity android:name=".players.NotificationsPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+        <activity android:name=".players.PlaylistListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
