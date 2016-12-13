@@ -41,7 +41,7 @@ public class NPAWYouboraListActivity extends Activity implements OnItemClickList
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
     selectionMap.put("4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWDefaultPlayerActivity.class));
-    selectionMap.put("MP4 Video", new PlayerSelectionOption("c4cGVibjpwhBnz14x3UUUin1Oyr8_qC5", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWDefaultPlayerActivity.class));
+    selectionMap.put("MP4 Video", new PlayerSelectionOption("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWDefaultPlayerActivity.class));
     selectionMap.put("HLS Video", new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWDefaultPlayerActivity.class));
     selectionMap.put("VOD with CCs", new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NPAWDefaultPlayerActivity.class));
 
