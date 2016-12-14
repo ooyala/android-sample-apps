@@ -118,7 +118,7 @@ public class PlaylistListActivity extends ListActivity {
         JSONObject entry = arr.getJSONObject(i);
 
         addItem(myData, entry.getString("name"),  (int)(entry.getDouble("duration") * 1000), entry.getString("image"),
-                browseIntent(entry.getString("embed_code"), entry.getString("name"), "1sb2cxOr-DiMvOnEvUWmmSggx6rJ", DOMAIN));
+                browseIntent(entry.getString("embed_code"), entry.getString("name"), PCODE, DOMAIN));
       }
     }
     catch (Exception e) {
