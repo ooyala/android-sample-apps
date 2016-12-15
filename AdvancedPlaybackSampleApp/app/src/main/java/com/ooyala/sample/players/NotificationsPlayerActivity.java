@@ -55,9 +55,10 @@ public class NotificationsPlayerActivity extends Activity implements Observer {
     DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
-    Options opts = new Options.Builder().setUseExoPlayer(true).build();
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
+
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 

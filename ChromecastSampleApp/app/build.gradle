@@ -37,6 +37,7 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile project(':CastCompanionLibrary')
     compile(name:'OoyalaCastSDK', ext:'aar')
     compile(name:'OoyalaSDK')
