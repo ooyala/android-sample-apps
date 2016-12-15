@@ -53,7 +53,6 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
     Options options = new Options.Builder().setUseExoPlayer(true).build();
-    //Need to pass `this` as the embedTokenGenerator
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
