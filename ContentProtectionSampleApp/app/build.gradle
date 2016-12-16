@@ -32,6 +32,7 @@ tasks.copyTask.execute()
 dependencies {
     compile 'com.google.code.gson:gson:2.2.2'
     compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/android_accessenabler-1.7.3.jar')
     compile files('libs/OoyalaSDK.jar')
 }

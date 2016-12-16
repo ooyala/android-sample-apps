@@ -100,7 +100,7 @@ public class PreloadWithInitTimePlayerActivity extends Activity implements OnCli
         boolean preload = this.preloadButton.isChecked();
         DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
                 + " preload: " + preload);
-        Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).build();
+        Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).setUseExoPlayer(true).build();
 
         player = new OoyalaPlayer(PCODE, domain, options);
         playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);

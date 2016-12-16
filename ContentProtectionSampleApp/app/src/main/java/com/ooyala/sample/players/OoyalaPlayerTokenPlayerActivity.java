@@ -10,6 +10,7 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;
@@ -68,8 +69,9 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
     //Need to pass `this` as the embedTokenGenerator
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), this, null);
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), this, options);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 

@@ -69,9 +69,9 @@ public class InsertAdPlayerActivity extends Activity implements Observer {
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    Options opts = new Options.Builder().build();
 
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 

@@ -104,7 +104,7 @@ public class CuePointsOptionsFreewheelPlayerActivity extends Activity implements
         DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
                 + " showCuePoints: " + showCuePoints);
         Options options = new Options.Builder().setShowAdsControls(showAdsControls)
-                .setShowCuePoints(showCuePoints).build();
+                .setShowCuePoints(showCuePoints).setUseExoPlayer(true).build();
 
         player = new OoyalaPlayer(PCODE, domain, options);
         playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);

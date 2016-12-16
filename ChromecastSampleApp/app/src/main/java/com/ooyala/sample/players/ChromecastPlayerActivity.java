@@ -17,6 +17,7 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.castsdk.CastManager;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -96,8 +97,10 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Embed
 
     // Initialize Ooyala Player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+
     PlayerDomain playerDomain = new PlayerDomain(domain);
-    player = new OoyalaPlayer(pcode, playerDomain, this, null);
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
+    player = new OoyalaPlayer(pcode, playerDomain, this, options);
     OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     //Create a CastManager, and connect to the OoyalaPlayer

@@ -38,6 +38,7 @@ tasks.copyTask.execute()
 
 dependencies {
     compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/FWAdManager.jar')
     compile files('libs/OoyalaFreewheelSDK.jar')
     compile files('libs/OoyalaIMASDK.jar')

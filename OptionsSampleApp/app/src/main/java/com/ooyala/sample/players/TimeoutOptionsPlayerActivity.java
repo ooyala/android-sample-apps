@@ -119,7 +119,7 @@ public class TimeoutOptionsPlayerActivity extends Activity implements OnClickLis
         }
 
         //Build the options with the potentially updated builder
-        Options options = builder.build();
+        Options options = builder.setUseExoPlayer(true).build();
         player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
         playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 

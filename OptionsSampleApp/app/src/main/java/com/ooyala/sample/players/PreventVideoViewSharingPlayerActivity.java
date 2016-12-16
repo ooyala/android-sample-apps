@@ -46,7 +46,7 @@ public class PreventVideoViewSharingPlayerActivity extends Activity implements O
         // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
         playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
-        Options options = new Options.Builder().setPreventVideoViewSharing(true).build();
+        Options options = new Options.Builder().setPreventVideoViewSharing(true).setUseExoPlayer(true).build();
 
         //Initialize the player
         OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
