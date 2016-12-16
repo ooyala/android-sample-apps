@@ -9,6 +9,8 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.item.Stream;
+import com.ooyala.android.item.Video;
 import com.ooyala.android.notifications.BitrateChangedNotificationInfo;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -115,6 +117,17 @@ public class NotificationsPlayerActivity extends Activity implements Observer {
       // Notification when player has all information from Ooyala APIs
       case OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME:
         Log.d("Note", "Current Item has now changed, and all metadata has been updated for it");
+        Video video = player.getCurrentItem();
+        if (video != null) {
+          Stream stream = video.getStream();
+          if (stream != null) {
+            Log.d("Note", "Content ID: " + video.getEmbedCode() + ", Stream URL: " + stream.decodedURL() + ", Stream Type: " + stream.getDeliveryType());
+          } else {
+            Log.e("Note", "No Streams found for this asset");
+          }
+        } else {
+          Log.e("Note", "Video did not load correctly");
+        }
         break;
 
       // Notification when the playback starts or completes
