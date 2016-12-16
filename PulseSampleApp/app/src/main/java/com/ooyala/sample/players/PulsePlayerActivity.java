@@ -69,7 +69,7 @@ public class PulsePlayerActivity extends Activity implements Observer, DefaultHa
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowPromoImage(false).build();
+    Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
 
     player = new OoyalaPlayer(PCODE, domain, options);
 
