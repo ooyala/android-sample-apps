@@ -36,6 +36,7 @@ tasks.copyTask.execute()
 
 dependencies {
     compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/OoyalaIMASDK.jar')
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/ima-android-v330.jar')

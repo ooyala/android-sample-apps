@@ -48,7 +48,7 @@ public class BasicPlayerActivity extends AppCompatActivity implements Observer,D
 
         // Create the OoyalaPlayer, with some built-in UI disabled
         PlayerDomain domain = new PlayerDomain(PLAYER_DOMAIN);
-        Options options = new Options.Builder().setShowPromoImage(false).build();
+        Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
         player = new OoyalaPlayer(PCODE, domain, options);
 
         //Create the SkinOptions, and setup React

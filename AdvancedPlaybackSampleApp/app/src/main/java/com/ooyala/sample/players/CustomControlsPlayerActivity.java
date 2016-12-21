@@ -60,7 +60,9 @@ public class CustomControlsPlayerActivity extends Activity implements Observer {
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
     //Set the controls to use for Inline Control style.

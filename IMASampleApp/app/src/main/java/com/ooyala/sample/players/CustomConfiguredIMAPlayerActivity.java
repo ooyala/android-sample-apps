@@ -11,6 +11,7 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAConfiguration;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
@@ -54,7 +55,9 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
+
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
+    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
     playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 

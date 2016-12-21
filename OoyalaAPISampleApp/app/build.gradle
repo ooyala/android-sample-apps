@@ -28,5 +28,6 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/OoyalaSDK.jar')
 }
