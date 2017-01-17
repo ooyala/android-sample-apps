@@ -50,7 +50,7 @@ public class IQConfigurationPlayerActivity extends Activity implements Observer 
         IqConfiguration iqConfiguration = new IqConfiguration.Builder().setPlayerID("Custom Android Player ID").build();
 
         // Put the IQConfiguration class into the Options
-        Options options = new Options.Builder().setIqConfiguration(iqConfiguration).build();
+        Options options = new Options.Builder().setIqConfiguration(iqConfiguration).setUseExoPlayer(true).build();
 
         //Initialize the player
         OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
