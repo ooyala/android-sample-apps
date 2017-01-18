@@ -188,4 +188,7 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   public OoyalaException getError() {
     return null;
   }
+
+  @Override
+  public void setVolume(float v) {}
 }
