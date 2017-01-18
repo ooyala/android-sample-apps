@@ -75,6 +75,6 @@ repositories {
  * Please read the MavenSampleApp README.md for more information about maven dependencies
  */
 dependencies {
-    compile 'com.ooyala.android:skin:v4.21.0_RC6'
-    compile 'com.ooyala.android:ima:v4.21.0_RC6'
+    compile 'com.ooyala.android:skin:v4.22.0_RC1'
+    compile 'com.ooyala.android:ima:v4.22.0_RC1'
 }
