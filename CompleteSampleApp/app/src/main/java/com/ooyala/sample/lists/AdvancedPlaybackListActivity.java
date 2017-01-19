@@ -21,6 +21,7 @@ import com.ooyala.sample.players.MultipleVideosPlayerActivity;
 import com.ooyala.sample.players.NotificationsPlayerActivity;
 import com.ooyala.sample.players.PlayWithInitialTimePlayerActivity;
 import com.ooyala.sample.players.PluginPlayerActivity;
+import com.ooyala.sample.players.ProgrammaticVolumePlayerActivity;
 import com.ooyala.sample.players.UnbundledPlayerActivity;
 import com.ooyala.sample.players.SampleVideoPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
@@ -53,6 +54,7 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap.put(CustomOverlayPlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", CustomOverlayPlayerActivity.class) );
     selectionMap.put(UnbundledPlayerActivity.getName(), new PlayerSelectionOption("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", UnbundledPlayerActivity.class));
     selectionMap.put(NotificationsPlayerActivity.getName(), new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NotificationsPlayerActivity.class) );
+    selectionMap.put(ProgrammaticVolumePlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ProgrammaticVolumePlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
