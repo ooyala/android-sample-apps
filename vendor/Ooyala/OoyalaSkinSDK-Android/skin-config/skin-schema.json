@@ -55,6 +55,14 @@
             "imageResource": { "$ref": "#/definitions/image" }
            },
           "example": "\"loadingImage\": {\"imageResource\": {\"url\": \"assets/images/loading.png\"} }"
+        },
+        "accentColor": {
+          "description": "Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
+          "type": "string",
+	      "platform support": {
+	          "iOS SDK": "v4.21.0+",
+	          "Android SDK": "v4.21.0+ Note: the toggle switch color cannot be customized"
+	      }
         }
       }
     },
@@ -328,8 +336,21 @@
           "type": "boolean",
           "default": "true"
         },
-        "showTitle": { "type": "boolean" },
-        "showDescription": { "type": "boolean" }
+        "showTitle": {
+          "description": "Show the video title on the end screen if set to true.  Hide it if set to false.",
+          "type": "boolean",
+          "default": false
+        },
+        "showDescription": {
+          "description": "Show the video description on the end screen if set to true.  Hide it if set to false.",
+          "type": "boolean",
+          "default": false
+        },
+        "infoPanelPosition": {
+          "description": "Defines the position of the information panel on the end screen.",
+          "enum": [ "topLeft", "topRight", "bottomLeft", "bottomRight" ],
+          "default": "topLeft"
+        }
       }
     },
     "adScreen": {
@@ -391,8 +412,7 @@
         },
         "countDownTime": {
           "description": "How many seconds to wait before automatically playing the recommended video",
-          "type": "string",
-          "pattern": "^[0-9]+$"
+          "type": "number"
         }
       }
     },
@@ -400,6 +420,16 @@
       "description": "The social share panel setting",
       "type": "object",
       "properties": {
+        "shareContent": {
+          "description": "Describes which tabs should be shown on social screen (social, embed)",
+          "type": "array",
+          "default": ["social", "embed"]
+        },
+        "socialContent": {
+          "description": "Describes which buttons should be shown on the social share tab of the share panel",
+          "type": "array",
+          "default": ["twitter", "facebook", "google+", "email"]
+        },
         "embed": {
           "description": "The setting for embed tabs in social share screen",
           "type": "object",
@@ -456,8 +486,7 @@
         },
         "timeToShow": {
           "description": "Optional floating-point parameter used to set the time relative to the video length to show the Up Next screen. When timeToShow is set to a value greater than 1.0, the player interprets that number as the number of seconds before the end of the video to show the Up Next screen. However, when timeToShow is less than 1.0, the player treats the decimal value as a percentage of the video length and shows the Up Next screen at that point in the video. For example, if timeToShow is set to 0.9 in a 60-second video, the Up Next screen will show at 54 seconds. If timeToShow is set to 5.0 in a 60-second video, the Up Next screen will show at 55 seconds.",
-          "type": "string",
-          "pattern": "^[0-9]+$|^[0-9]{1,2}%$",
+          "type": "number",
           "default": "If showUpNext is set to true and no value is given for timeToShow, the Up Next dialog will default to showing 10 seconds prior to the end of the video. If no value is given for showUpNext, or it is set to false, the value set in timeToShow has no effect because the Up Next screen is never shown."
         }
       }
@@ -473,7 +502,11 @@
           "type": "object",
           "color": {
             "description": "Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
-            "type": "string"
+            "type": "string",
+            "platform support": {
+              "iOS SDK": "Unsupported",
+              "Android SDK": "v4.21.0+"
+            }
           }
         },
         "iconStyle": {
@@ -572,11 +605,19 @@
             },
             "scrubberHandleColor": {
               "description": "The color of the draggable scrubber object in the scrubber bar. Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
-              "type": "string"
+              "type": "string",
+              "platform support": {
+                "iOS SDK": "v4.21.0+",
+                "Android SDK": "v4.21.0+"
+              }
             },
             "scrubberHandleBorderColor": {
               "description": "The color of the border around the scrubber handle. Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
-              "type": "string"
+              "type": "string",
+              "platform support": {
+                "iOS SDK": "v4.21.0+",
+                "Android SDK": "v4.21.0+"
+              }
             },
             "thumbnailPreview": {
               "description": "The color to the draggable scrubber object in the scrubber bar. Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
@@ -601,11 +642,19 @@
             },
             "scrubberHandleColor": {
               "description": "The color to the draggable scrubber object in the scrubber bar. Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
-              "type": "string"
+              "type": "string",
+              "platform support": {
+                "iOS SDK": "v4.21.0+",
+                "Android SDK": "v4.21.0+"
+              }
             },
             "scrubberHandleBorderColor": {
               "description": "The color of the border around the scrubber handle. Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
-              "type": "string"
+              "type": "string",
+              "platform support": {
+                "iOS SDK": "v4.21.0+",
+                "Android SDK": "v4.21.0+"
+              }
             }
           }
         }
