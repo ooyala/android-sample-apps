@@ -84,7 +84,9 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
 
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    playerLayoutController.onKeyDown(keyCode, event);
+    if (playerLayoutController != null) {
+      playerLayoutController.onKeyDown(keyCode, event);
+    }
     return super.onKeyDown(keyCode, event);
   }
 

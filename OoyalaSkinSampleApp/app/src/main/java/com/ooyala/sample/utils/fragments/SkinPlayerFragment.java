@@ -70,7 +70,10 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
   }
 
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    return controller.onKeyDown(keyCode, event);
+    if (controller != null) {
+      return controller.onKeyDown(keyCode, event);
+    }
+    return false;
   }
 
   @Override

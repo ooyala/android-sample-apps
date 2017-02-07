@@ -101,7 +101,9 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
 
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
-    controller.onKeyDown(keyCode, event);
+    if (controller != null) {
+      controller.onKeyDown(keyCode, event);
+    }
     return super.onKeyDown(keyCode, event);
   }
   @Override
