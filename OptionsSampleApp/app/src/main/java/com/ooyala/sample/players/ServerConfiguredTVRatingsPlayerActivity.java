@@ -63,7 +63,6 @@ public class ServerConfiguredTVRatingsPlayerActivity extends Activity implements
         player.addObserver(this);
 
         player.setEmbedCode(EMBEDCODE);
-        player.play();
     }
 
     @Override

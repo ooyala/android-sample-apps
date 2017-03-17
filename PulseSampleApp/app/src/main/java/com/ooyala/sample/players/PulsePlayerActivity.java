@@ -116,9 +116,7 @@ public class PulsePlayerActivity extends Activity implements Observer, DefaultHa
       }
     });
 
-    if (player.setEmbedCode(videoItem.getContentCode())) {
-      player.play();
-    }
+    player.setEmbedCode(videoItem.getContentCode());
   }
 
   @Override
