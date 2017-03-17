@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     buildToolsVersion "23.0.3"
-    compileSdkVersion 23
+    compileSdkVersion 24
 
     defaultConfig {
         applicationId "com.ooyala.sample.PulseSampleApp"
         minSdkVersion 16
-        targetSdkVersion 21
+        targetSdkVersion 24
 
         ndk {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
