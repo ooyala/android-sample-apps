@@ -42,6 +42,5 @@ dependencies {
     compile(name:'OoyalaCastSDK', ext:'aar')
     compile(name:'OoyalaSDK')
 
-//    compile project(':ooyalaCoreSDK')
-//    compile project(':ooyalaCastSDK')
+//    compile project(':cast')
 }
