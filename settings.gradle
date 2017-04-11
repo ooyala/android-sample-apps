@@ -33,10 +33,6 @@ include ':NPAWSampleApp'
 project(':NPAWSampleApp').projectDir = new File(settingsDir, './NPAWSampleApp/app')
 
 // Video Playback Integrations
-include ':SecurePlayerSampleApp'
-project(':SecurePlayerSampleApp').projectDir = new File(settingsDir, './SecurePlayerSampleApp/app')
-include ':VisualOnSampleApp'
-project(':VisualOnSampleApp').projectDir = new File(settingsDir, './VisualOnSampleApp/app')
 include ':ExoPlayerSampleApp'
 project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, './ExoPlayerSampleApp/app')
 

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.ooyala.sample.ContentProtectionSampleApp"
-        minSdkVersion 9
-        targetSdkVersion 15
+        minSdkVersion 16
+        targetSdkVersion 25
     }
 
     buildTypes {
@@ -31,7 +31,7 @@ tasks.copyTask.execute()
 
 dependencies {
     compile 'com.google.code.gson:gson:2.2.2'
-    compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/android_accessenabler-1.7.3.jar')
     compile files('libs/OoyalaSDK.jar')

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdkVersion 23
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 16
         applicationId "com.ooyala.sample.NielsenSampleApp"
-        targetSdkVersion 23
+        targetSdkVersion 25
         // Added due to https://github.com/facebook/react-native/issues/2814
         ndk {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
@@ -68,14 +68,14 @@ repositories {
     }
 }
 dependencies {
-    compile 'com.google.android.gms:play-services-ads:6.5.87'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/OoyalaNielsenSDK.jar')
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/OoyalaSkinSDK.jar')
     compile files('libs/appsdk.jar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
     compile 'com.facebook.stetho:stetho:1.2.0'

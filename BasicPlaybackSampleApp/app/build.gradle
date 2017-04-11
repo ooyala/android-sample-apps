@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.ooyala.sample.BasicPlaybackSampleApp"
-        minSdkVersion 9
-        targetSdkVersion 21
+        minSdkVersion 16
+        targetSdkVersion 25
     }
 
     buildTypes {
@@ -30,5 +30,5 @@ tasks.copyTask.execute()
 
 dependencies {
     compile files('libs/OoyalaSDK.jar')
-    compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
 }

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.ooyala.omnituresampleapp"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         ndk {
@@ -29,7 +29,7 @@ task copyLibs(type: Copy) {
     from '../../vendor/Adobe/AdobeMobile/AdobeMobileLibrary-4.9.0.jar'
     from '../../vendor/Adobe/Heartbeat/VideoHeartbeat-1.5.6.jar'
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
-    from new File(projectDir, '../../vendor/Facebook/react-native-0.26.2.aar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.33.0.aar')
     into 'libs'
     doLast {
         println 'Jars updated'
@@ -70,21 +70,23 @@ dependencies {
     compile files('libs/OoyalaSkinSDK.jar')
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile(name:'react-native', version:'0.26.2', ext:'aar')// locally, in libs/react-native.aar
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile group: 'com.facebook.fresco', name: 'fresco', version: '0.8.1'
-    compile group: 'com.facebook.fresco', name: 'imagepipeline-okhttp', version: '0.8.1'
-    compile group: 'com.facebook.stetho', name: 'stetho', version: '1.2.0'
-    compile group: 'com.facebook.stetho', name: 'stetho-okhttp', version: '1.2.0'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.2.3'
-    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
-    compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.5.0'
-    compile group: 'com.squareup.okhttp', name: 'okhttp-ws', version: '2.5.0'
-    compile group: 'com.squareup.okio', name: 'okio', version: '1.6.0'
-    compile group: 'org.webkit', name: 'android-jsc', version: 'r174650'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.facebook.fresco:fresco:0.11.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+    compile 'com.facebook.stetho:stetho:1.2.0'
+    compile 'com.facebook.soloader:soloader:0.1.0'
+    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
+    compile 'com.google.code.findbugs:jsr305:3.0.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    compile 'com.squareup.okio:okio:1.9.0'
+    compile 'org.webkit:android-jsc:r174650'
+    compile 'javax.inject:javax.inject:1'
     compile files('libs/OoyalaAdobeAnalyticsSDK.jar')
     compile files('libs/AdobeMobileLibrary-4.9.0.jar')
     compile files('libs/VideoHeartbeat-1.5.6.jar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile(name:'react-native', version:'0.26.2', ext:'aar')
+    compile(name:'react-native', version:'0.33.0', ext:'aar')
 }
