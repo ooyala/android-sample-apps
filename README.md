@@ -8,9 +8,19 @@ This is a repository of sample applications for the Ooyala SDK for Android. Here
 In order to be successful using these applications, you should have the following experience:
 
 1. Experience with Android Studio, Java, and Android development.
-2. Understanding of the use case of Ooyala and Ooyala's Mobile SDKs. 
+2. Understanding of the use case of Ooyala and Ooyala's Mobile SDKs.
 
-This repository is meant to be supplementary to our Developer documentation.  Take a look at the docs here: http://support.ooyala.com/
+This repository is meant to be supplementary to our Developer documentation.  Take a look at the docs here: http://help.ooyala.com/
+
+## Requirements
+
+Some apps include special instructions, look for a README in the app you want to try out to check if it requires something else.
+
+Apart from that, here is what you will need:
+* Android Studio v2.3.1 or above.
+  * If you use a different IDE or editor we won't be able to help you with questions specific to that environment.
+* Android SDK with Android platform version 25 (Android 7.1.1). We use it to compile the app.
+
 
 # Getting Started
 
@@ -42,7 +52,7 @@ If you have a bug within your own application, the Sample App Repository is a gr
     1. Provide the link to your fork when you create a ticket to Support
 
 This is the absolute fastest way for Support and Engineering to reproduce without question, and solve your issues as fast as possible.
-  
+
 When reproducing in sample apps, you should *Never* commit your API Secret into any repository.  If you have done so accidentally, you should either force-remove that commit from your history, or contact Technical Support to reset your API Secret.
 
 # Reporting bugs with the Sample App Repo
@@ -53,11 +63,11 @@ If you find bugs around the sample app that are not about video playback (i.e. u
 
 # Notes When Starting your own Application
 
-Be sure to use your own Provider Code in your Ooyala Player initialization.  If you fail to do so, your viewing analytics will be lost in the process. 
+Be sure to use your own Provider Code in your Ooyala Player initialization.  If you fail to do so, your viewing analytics will be lost in the process.
 
 # Caveats
 
-Not all of the Ooyala SDK's functionality is represented in this repository; We are constantly adding and updating, with the intention of demonstrating as many of our features as possible.  If you would like to see something added, speak to your Ooyala contact or Technical Support 
+Not all of the Ooyala SDK's functionality is represented in this repository; We are constantly adding and updating, with the intention of demonstrating as many of our features as possible.  If you would like to see something added, speak to your Ooyala contact or Technical Support
 
 Some of the more complicated samples may not be playable out of the box. These samples usually require customer-specific information that cannot be simulated with a demo application
 
@@ -68,4 +78,3 @@ Our Sample App Repository is designed to be automatically updated as we release 
 We do not recommend testing on any branch that is not master. These branches are not verified to be working as expected.  
 
 Thank you for reading!
-
