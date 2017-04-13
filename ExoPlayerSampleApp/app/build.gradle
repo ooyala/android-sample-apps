@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
 
   defaultConfig {
     applicationId "com.ooyala.sample.ExoPlayerSampleApp"
     minSdkVersion 16
-    targetSdkVersion 21
+    targetSdkVersion 25
 
     // Added due to https://github.com/facebook/react-native/issues/2814
     ndk {
@@ -97,21 +97,21 @@ dependencies {
 //  compile project(':ooyalaCoreSDK')
 
   compile files('libs/OoyalaSkinSDK.jar')
-  compile 'com.google.android.gms:play-services-ads:8.4.0'
-  compile 'com.android.support:appcompat-v7:23.4.0'
-  compile 'com.android.support:recyclerview-v7:23.4.0'
+  compile 'com.google.android.gms:play-services-ads:10.0.1'
+  compile 'com.android.support:appcompat-v7:25.3.1'
+  compile 'com.android.support:recyclerview-v7:25.3.1'
   compile 'com.facebook.fresco:fresco:0.11.0'
   compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.soloader:soloader:0.1.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
   compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-  compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+  compile 'com.google.code.findbugs:jsr305:3.0.0'
   compile 'com.squareup.okhttp3:okhttp:3.4.1'
   compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
   compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
   compile 'com.squareup.okio:okio:1.9.0'
-  compile group: 'org.webkit', name: 'android-jsc', version: 'r174650'
+  compile 'org.webkit:android-jsc:r174650'
   compile(name:'react-native', version:'0.33.0', ext:'aar')
   compile 'javax.inject:javax.inject:1'
 }

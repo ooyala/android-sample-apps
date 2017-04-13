@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.ooyala.sample.ChromecastSampleApp"
-        minSdkVersion 14
-        targetSdkVersion 23
+        minSdkVersion 16
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -42,6 +42,5 @@ dependencies {
     compile(name:'OoyalaCastSDK', ext:'aar')
     compile(name:'OoyalaSDK')
 
-//    compile project(':ooyalaCoreSDK')
-//    compile project(':ooyalaCastSDK')
+//    compile project(':cast')
 }

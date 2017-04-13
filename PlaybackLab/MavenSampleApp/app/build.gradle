@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.ooyala.sample.MavenSampleApp"
         minSdkVersion 16
-        targetSdkVersion 21
+        targetSdkVersion 25
         // Added due to https://github.com/facebook/react-native/issues/2814
         ndk {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
