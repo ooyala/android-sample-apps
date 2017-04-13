@@ -94,7 +94,7 @@ dependencies {
   compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
 
 // For development purposes only
-//  compile project(':ooyalaCoreSDK')
+//  compile project(':core')
 
   compile files('libs/OoyalaSkinSDK.jar')
   compile 'com.google.android.gms:play-services-ads:8.4.0'

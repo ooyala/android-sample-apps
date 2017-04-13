@@ -46,6 +46,6 @@ project(':OoyalaSkinSampleApp').projectDir = new File(settingsDir, './OoyalaSkin
 
 // Developer
 //include ':ooyalaSkinSDK'
-//project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../ios-skin/sdk/android/ooyalaSkinSDK/')
-//include ':ooyalaCoreSDK'
-//project(':ooyalaCoreSDK').projectDir=new File(settingsDir, '../android-sdk/sdk/ooyalaCoreSDK/')
+//project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
+//include ':core'
+//project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
