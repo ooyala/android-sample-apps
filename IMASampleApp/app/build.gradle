@@ -25,7 +25,7 @@ android {
 task copyTask(type: Copy) {
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(projectDir, '../../vendor/Google/ima-android-v330.jar')
+    from new File(projectDir, '../../vendor/Google/ima-android-v371.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -39,5 +39,5 @@ dependencies {
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/OoyalaIMASDK.jar')
     compile files('libs/OoyalaSDK.jar')
-    compile files('libs/ima-android-v330.jar')
+    compile files('libs/ima-android-v371.jar')
 }
