@@ -65,7 +65,7 @@ task copyTask(type: Copy) {
     from new File(projectDir, '../../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
     from new File(projectDir, '../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(projectDir, '../../vendor/Google/ima-android-v330.jar')
+    from new File(projectDir, '../../vendor/Google/ima-android-v371.jar')
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.33.0.aar')
     into new File(projectDir, './libs')
     doLast {
@@ -89,12 +89,12 @@ dependencies {
   compile files('libs/FWAdManager.jar')
   compile files('libs/OoyalaFreewheelSDK.jar')
   compile files('libs/OoyalaIMASDK.jar')
-  compile files('libs/ima-android-v330.jar')
+  compile files('libs/ima-android-v371.jar')
   compile files('libs/OoyalaSDK.jar')
   compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
 
 // For development purposes only
-//  compile project(':ooyalaCoreSDK')
+//  compile project(':core')
 
   compile files('libs/OoyalaSkinSDK.jar')
   compile 'com.google.android.gms:play-services-ads:10.0.1'
