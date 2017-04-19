@@ -54,11 +54,7 @@ public class PreventVideoViewSharingPlayerActivity extends Activity implements O
         playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
         player.addObserver(this);
 
-        if (player.setEmbedCode(EMBED)) {
-            player.play();
-        } else {
-            Log.e(TAG, "Asset Failure");
-        }
+        player.setEmbedCode(EMBED);
     }
 
     @Override

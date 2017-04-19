@@ -58,11 +58,7 @@ public class IQConfigurationPlayerActivity extends Activity implements Observer 
         playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
         player.addObserver(this);
 
-        if (player.setEmbedCode(EMBED)) {
-            player.play();
-        } else {
-            Log.e(TAG, "Asset Failure");
-        }
+        player.setEmbedCode(EMBED);
     }
 
     @Override
