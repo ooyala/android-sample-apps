@@ -32,5 +32,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:10.0.1'
 
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile files('libs/OoyalaSDK.jar')
 }
