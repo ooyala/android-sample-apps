@@ -24,12 +24,12 @@ android {
 }
 
 task copyLibs(type: Copy) {
-    from '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar'
-    from '../../vendor/Ooyala/OoyalaAdobeAnalyticsSDK-Android/OoyalaAdobeAnalyticsSDK.jar'
-    from '../../vendor/Adobe/AdobeMobile/AdobeMobileLibrary-4.9.0.jar'
-    from '../../vendor/Adobe/Heartbeat/VideoHeartbeat-1.5.6.jar'
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaAdobeAnalyticsSDK-Android/OoyalaAdobeAnalyticsSDK.jar')
+    from new File(vendorDir, 'Adobe/AdobeMobile/AdobeMobileLibrary-4.9.0.jar')
+    from new File(vendorDir, 'Adobe/Heartbeat/VideoHeartbeat-1.5.6.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into 'libs'
     doLast {
         println 'Jars updated'
@@ -38,22 +38,22 @@ task copyLibs(type: Copy) {
 tasks.copyLibs.execute()
 
 task copyAssetsTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
 tasks.copyAssetsTask.execute()
 
 task copySkinConfigTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
     into new File(projectDir, './src/main/assets/skin-config')
     println "copySkinConfigTask updated."
 }
 tasks.copySkinConfigTask.execute()
 
 task copyFontsAssetsTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
     into new File(projectDir, './src/main/assets/fonts')
     println "font Assets updated."
 }

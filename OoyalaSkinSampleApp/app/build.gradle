@@ -31,35 +31,35 @@ android {
 }
 
 task copyAssetsTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
 tasks.copyAssetsTask.execute()
 
 task copySkinConfigTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
     into new File(projectDir, './src/main/assets/skin-config')
     println "copySkinConfigTask updated."
 }
 tasks.copySkinConfigTask.execute()
 
 task copyFontsAssetsTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
     into new File(projectDir, './src/main/assets/fonts')
     println "font Assets updated."
 }
 tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
-    from new File(projectDir, '../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(projectDir, '../../vendor/Google/ima-android-v371.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
+    from new File(vendorDir, 'Google/ima-android-v371.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir,'./libs')
     println "Jars updated."
 }

@@ -19,7 +19,7 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."

@@ -23,10 +23,10 @@ android {
     }
 }
 task copyLibsTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir, './libs')
     doLast {
         println "Libs updated."
@@ -35,8 +35,8 @@ task copyLibsTask(type: Copy) {
 tasks.copyLibsTask.execute()
 
 task copyAssetsTask1(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
     into new File(projectDir, './src/main/assets')
     doLast {
         println "Assets updated."
@@ -45,7 +45,7 @@ task copyAssetsTask1(type: Copy) {
 tasks.copyAssetsTask1.execute()
 
 task copyFontsAssetsTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
     into new File(projectDir, './src/main/assets/fonts')
     doLast {
         println "font Assets updated."
@@ -54,7 +54,7 @@ task copyFontsAssetsTask(type: Copy) {
 tasks.copyFontsAssetsTask.execute()
 
 task copyAssetsTask2(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
     into new File(projectDir, './src/main/assets/skin-config')
     doLast {
         println "Assets updated."
@@ -63,7 +63,7 @@ task copyAssetsTask2(type: Copy) {
 tasks.copyAssetsTask2.execute()
 
 task copyAssetsTask3(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/Fonts')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/Fonts')
     into new File(projectDir, './src/main/assets/fonts')
     doLast {
         println "Assets updated."

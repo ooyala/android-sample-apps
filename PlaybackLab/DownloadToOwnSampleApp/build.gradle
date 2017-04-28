@@ -16,6 +16,10 @@ allprojects {
     }
 }
 
+ext {
+    vendorDir = new File(projectDir, '../../vendor')
+}
+
 //project.ext.libraryVersion = 'v4.19.0_RC3'
 //project.ext.publishedGroupId = 'com.ooyala.android'
 //project.ext.bintrayRepo = "maven"

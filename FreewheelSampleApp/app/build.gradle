@@ -19,9 +19,9 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
-    from new File(projectDir, '../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
+    from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."

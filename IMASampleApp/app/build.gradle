@@ -23,9 +23,9 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(projectDir, '../../vendor/Google/ima-android-v371.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(vendorDir, 'Google/ima-android-v371.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
