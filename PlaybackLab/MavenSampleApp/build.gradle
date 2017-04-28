@@ -13,3 +13,7 @@ allprojects {
         jcenter()
     }
 }
+
+ext {
+    vendorDir = new File(projectDir, '../../vendor')
+}

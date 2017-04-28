@@ -23,9 +23,9 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(projectDir, '../../vendor/Google/ima-android-v371.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(vendorDir, 'Google/ima-android-v371.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -36,6 +36,8 @@ tasks.copyTask.execute()
 
 dependencies {
     compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
     compile files('libs/OoyalaIMASDK.jar')
     compile files('libs/OoyalaSDK.jar')

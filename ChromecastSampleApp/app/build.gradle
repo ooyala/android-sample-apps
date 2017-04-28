@@ -26,8 +26,8 @@ repositories {
 }
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.aar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."

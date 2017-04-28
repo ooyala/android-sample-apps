@@ -19,7 +19,7 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -29,7 +29,9 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile files('libs/OoyalaSDK.jar')
     compile project(':AndroidVisionQRReader')
+
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
 }
