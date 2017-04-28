@@ -26,7 +26,7 @@ task copyLibsTask(type: Copy) {
     from new File(projectDir, '../../vendor/Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
-    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.33.0.aar')
+    from new File(projectDir, '../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir, './libs')
     doLast {
         println "Libs updated."
@@ -78,13 +78,15 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
 
     compile files('libs/OoyalaSDK.jar')
     compile files('libs/OoyalaPulseIntegration.jar')
     compile files('libs/OoyalaSkinSDK.jar')
+    compile (name:'PulseSDK', ext:'aar')
+
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
@@ -98,7 +100,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     compile 'com.squareup.okio:okio:1.9.0'
     compile 'org.webkit:android-jsc:r174650'
-    compile(name:'react-native', version:'0.33.0', ext:'aar')
+    compile(name:'react-native', version:'0.35.0', ext:'aar')
     compile 'javax.inject:javax.inject:1'
-    compile (name:'PulseSDK', ext:'aar')
+
 }
