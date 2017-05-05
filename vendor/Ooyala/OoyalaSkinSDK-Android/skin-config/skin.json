@@ -17,20 +17,26 @@
       {
         "language": "en",
         "languageFile": "",
-        "androidResource": "skin-config/en.json",
+        "androidResource": "skin-config/languageFiles/en.json",
         "iosResource": "en"
       },
       {
         "language": "es",
         "languageFile": "",
-        "androidResource": "skin-config/es.json",
+        "androidResource": "skin-config/languageFiles/es.json",
         "iosResource": "es"
       },
       {
         "language": "zh",
         "languageFile": "",
-        "androidResource": "skin-config/zh.json",
+        "androidResource": "skin-config/languageFiles/zh.json",
         "iosResource": "zh"
+      },
+      {
+        "language": "ja",
+        "languageFile": "",
+        "androidResource": "skin-config/languageFiles/ja.json",
+        "iosResource": "ja"
       }
     ]
   },
