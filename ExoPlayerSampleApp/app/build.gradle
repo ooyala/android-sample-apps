@@ -33,6 +33,7 @@ android {
 // Uncomment if you need multidex
 //  dexOptions {
 //    javaMaxHeapSize "4g"
+//    jumboMode true
 //  }
 }
 
