@@ -29,10 +29,10 @@ android {
         }
     }
 
-//    dexOptions {
+    dexOptions {
 //        javaMaxHeapSize "4g"
-//        jumboMode true
-//    }
+        jumboMode true
+    }
 }
 
 task copyAssetsTask(type: Copy) {
