@@ -22,10 +22,10 @@ android {
         }
     }
 
-//    dexOptions {
+    dexOptions {
 //        javaMaxHeapSize "4g"
-//        jumboMode true
-//    }
+        jumboMode true
+    }
 }
 task copyLibsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')

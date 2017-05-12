@@ -31,10 +31,10 @@ android {
     }
   }
 // Uncomment if you need multidex
-//  dexOptions {
+  dexOptions {
 //    javaMaxHeapSize "4g"
-//    jumboMode true
-//  }
+    jumboMode true
+  }
 }
 
 
