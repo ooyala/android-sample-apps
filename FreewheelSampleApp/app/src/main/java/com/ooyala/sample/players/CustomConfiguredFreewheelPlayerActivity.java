@@ -5,8 +5,12 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -31,6 +35,7 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
  * - fw_android_video_asset_id
  */
 public class CustomConfiguredFreewheelPlayerActivity extends Activity implements Observer {
+  private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
   public final static String getName() {
     return "Preconfigured Freewheel Player";
   }
@@ -39,6 +44,7 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
   String EMBED = null;
   String PCODE = null;
   String DOMAIN = null;
+  String text;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
@@ -52,6 +58,36 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    // Here, thisActivity is the current activity
+    if (ContextCompat.checkSelfPermission(this,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+      // Should we show an explanation?
+      if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+              Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+        // Show an explanation to the user *asynchronously* -- don't block
+        // this thread waiting for the user's response! After the user
+        // sees the explanation, try again to request the permission.
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+      } else {
+
+        // No explanation needed, we can request the permission.
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+        // app-defined int constant. The callback method gets the
+        // result of the request.
+      }
+    }
     setTitle(getName());
     setContentView(R.layout.player_simple_frame_layout);
 
@@ -69,8 +105,8 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
 
     /** DITA_START:<ph id="freewheel_custom"> **/
     OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
-    
-    Map<String, String> freewheelParameters = new HashMap<String, String>();    
+
+    Map<String, String> freewheelParameters = new HashMap<String, String>();
     freewheelParameters.put("fw_android_mrm_network_id",  "380912");
     freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
     freewheelParameters.put("fw_android_player_profile",  "90750:ooyala_android");
@@ -80,7 +116,7 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
 
     fwManager.overrideFreewheelParameters(freewheelParameters);
     /** DITA_END:</ph> **/
-    
+
     if (player.setEmbedCode(EMBED)) {
       //Uncomment for Auto Play
       //player.play();
@@ -116,11 +152,31 @@ public class CustomConfiguredFreewheelPlayerActivity extends Activity implements
     }
 
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    text="Notification Received: " + arg1 + " - state: " + player.getState();
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
     Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
+  @Override
+  public void onRequestPermissionsResult(int requestCode,
+                                         String permissions[], int[] grantResults) {
+    switch (requestCode) {
+      case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+          // permission was granted, yay! Do the
+          // contacts-related task you need to do.
+          Playbacklog.writeToSdcardLog(text);
+        }
+        return;
+      }
+
+      // other 'case' lines to check for other
+      // permissions this app might request
+    }
+  }
 }
