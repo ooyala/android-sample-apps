@@ -31,167 +31,147 @@ import com.ooyala.sample.R;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 public class OptionsFreewheelPlayerActivity extends Activity implements
-        OnClickListener, Observer {
+		OnClickListener, Observer {
 
-  private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
-  /**
-   * Called when the activity is first created.
-   */
-  private final String TAG = this.getClass().toString();
-  String PCODE = null;
-  String DOMAIN = null;
-  String EMBEDCODE = null;
+	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
+	/**
+	 * Called when the activity is first created.
+	 */
+	private final String TAG = this.getClass().toString();
+	String PCODE = null;
+	String DOMAIN = null;
+	String EMBEDCODE = null;
 
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+	// Write the sdk events text along with events count to log file in sdcard if the log file already exists
+	SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
-  private OptimizedOoyalaPlayerLayoutController playerLayoutController;
-  private OoyalaPlayer player;
-  private Button setButton;
-  private ToggleButton cuePointsButton;
-  private ToggleButton adsControlsButton;
-  private String text;
+	private OptimizedOoyalaPlayerLayoutController playerLayoutController;
+	private OoyalaPlayer player;
+	private Button setButton;
+	private ToggleButton cuePointsButton;
+	private ToggleButton adsControlsButton;
+	private String text;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    String localeString = getResources().getConfiguration().locale.toString();
-    Log.d(TAG, "locale is " + localeString);
-    LocalizationSupport.useLocalizedStrings(LocalizationSupport
-            .loadLocalizedStrings(localeString));
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		String localeString = getResources().getConfiguration().locale.toString();
+		Log.d(TAG, "locale is " + localeString);
+		LocalizationSupport.useLocalizedStrings(LocalizationSupport
+				.loadLocalizedStrings(localeString));
 
-    super.onCreate(savedInstanceState);
-    // Here, thisActivity is the current activity
-    if (ContextCompat.checkSelfPermission(this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
+		super.onCreate(savedInstanceState);
 
-      // Should we show an explanation?
-      if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-              Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+		if (ContextCompat.checkSelfPermission(this,
+				Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
 
-        // Show an explanation to the user *asynchronously* -- don't block
-        // this thread waiting for the user's response! After the user
-        // sees the explanation, try again to request the permission.
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 
-      } else {
+			}
+		}
+		setContentView(R.layout.player_toggle_button_layout);
+		EMBEDCODE = getIntent().getExtras().getString("embed_code");
+		PCODE = getIntent().getExtras().getString("pcode");
+		DOMAIN = getIntent().getExtras().getString("domain");
 
-        // No explanation needed, we can request the permission.
+		setButton = (Button) findViewById(R.id.setButton);
+		setButton.setText("Create Video");
+		setButton.setOnClickListener(this);
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+		cuePointsButton = (ToggleButton) findViewById(R.id.toggleButton1);
+		cuePointsButton.setTextOn("CuePoints On");
+		cuePointsButton.setTextOff("CuePoints Off");
+		cuePointsButton.setChecked(true);
 
-        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-        // app-defined int constant. The callback method gets the
-        // result of the request.
-      }
-    }
-    setContentView(R.layout.player_toggle_button_layout);
-    EMBEDCODE = getIntent().getExtras().getString("embed_code");
-    PCODE = getIntent().getExtras().getString("pcode");
-    DOMAIN = getIntent().getExtras().getString("domain");
+		adsControlsButton = (ToggleButton) findViewById(R.id.toggleButton2);
+		adsControlsButton.setTextOn("AdsControls On");
+		adsControlsButton.setTextOff("AdsControls Off");
+		adsControlsButton.setChecked(true);
+	}
 
-    setButton = (Button) findViewById(R.id.setButton);
-    setButton.setText("Create Video");
-    setButton.setOnClickListener(this);
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "App Stopped");
+		if (player != null) {
+			player.suspend();
+		}
+	}
 
-    cuePointsButton = (ToggleButton) findViewById(R.id.toggleButton1);
-    cuePointsButton.setTextOn("CuePoints On");
-    cuePointsButton.setTextOff("CuePoints Off");
-    cuePointsButton.setChecked(true);
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "App Restarted");
+		if (player != null) {
+			player.resume();
+		}
+	}
 
-    adsControlsButton = (ToggleButton) findViewById(R.id.toggleButton2);
-    adsControlsButton.setTextOn("AdsControls On");
-    adsControlsButton.setTextOff("AdsControls Off");
-    adsControlsButton.setChecked(true);
-  }
+	@Override
+	public void onClick(View v) {
+		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		PlayerDomain domain = new PlayerDomain(DOMAIN);
+		boolean showAdsControls = this.adsControlsButton.isChecked();
+		boolean showCuePoints = this.cuePointsButton.isChecked();
+		DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
+				+ " showCuePoints: " + showCuePoints);
+		Options options = new Options.Builder().setShowAdsControls(showAdsControls)
+				.setShowCuePoints(showCuePoints).setUseExoPlayer(true).build();
 
-  @Override
-  protected void onStop() {
-    super.onStop();
-    Log.d(TAG, "App Stopped");
-    if (player != null) {
-      player.suspend();
-    }
-  }
+		player = new OoyalaPlayer(PCODE, domain, options);
+		playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
+				playerLayout, player);
+		player.addObserver(this);
 
-  @Override
-  protected void onRestart() {
-    super.onRestart();
-    Log.d(TAG, "App Restarted");
-    if (player != null) {
-      player.resume();
-    }
-  }
+		OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,
+				playerLayoutController);
+		Map<String, String> freewheelParameters = new HashMap<String, String>();
+		freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
+		freewheelParameters
+				.put("fw_android_player_profile", "90750:ooyala_android");
+		freewheelParameters.put("fw_android_site_section_id",
+				"ooyala_android_internalapp");
+		freewheelParameters.put("fw_android_video_asset_id", EMBEDCODE);
 
-  @Override
-  public void onClick(View v) {
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    boolean showAdsControls = this.adsControlsButton.isChecked();
-    boolean showCuePoints = this.cuePointsButton.isChecked();
-    DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
-            + " showCuePoints: " + showCuePoints);
-    Options options = new Options.Builder().setShowAdsControls(showAdsControls)
-            .setShowCuePoints(showCuePoints).setUseExoPlayer(true).build();
+		freewheelManager.overrideFreewheelParameters(freewheelParameters);
+		player.setEmbedCode(EMBEDCODE);
+	}
 
-    player = new OoyalaPlayer(PCODE, domain, options);
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-            playerLayout, player);
-    player.addObserver(this);
+	@Override
+	public void update(Observable arg0, Object argN) {
+		final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+		if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
+			return;
+		}
 
-    OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,
-            playerLayoutController);
-    Map<String, String> freewheelParameters = new HashMap<String, String>();
-    freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
-    freewheelParameters
-            .put("fw_android_player_profile", "90750:ooyala_android");
-    freewheelParameters.put("fw_android_site_section_id",
-            "ooyala_android_internalapp");
-    freewheelParameters.put("fw_android_video_asset_id", EMBEDCODE);
+		// Automation Hook: to write Notifications to a temporary file on the device/emulator
+		text="Notification Received: " + arg1 + " - state: " + player.getState();
+		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+		Playbacklog.writeToSdcardLog(text);
 
-    freewheelManager.overrideFreewheelParameters(freewheelParameters);
-    player.setEmbedCode(EMBEDCODE);
-  }
+		Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+	}
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-  @Override
-  public void update(Observable arg0, Object argN) {
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-      return;
-    }
-
-    // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    text="Notification Received: " + arg1 + " - state: " + player.getState();
-    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    Playbacklog.writeToSdcardLog(text);
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode,
-                                         String permissions[], int[] grantResults) {
-    switch (requestCode) {
-      case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-        // If request is cancelled, the result arrays are empty.
-        if (grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-          // permission was granted, yay! Do the
-          // contacts-related task you need to do.
-          Playbacklog.writeToSdcardLog(text);
-        }
-        return;
-      }
-
-      // other 'case' lines to check for other
-      // permissions this app might request
-    }
-  }
+					// permission was granted, yay! Do the
+					// contacts-related task you need to do.
+					Playbacklog.writeToSdcardLog(text);
+				}
+				return;
+			}
+		}
+	}
 }
 

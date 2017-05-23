@@ -36,142 +36,122 @@ import java.util.Observer;
  *
  */
 public class PreconfiguredFreewheelPlayerActivity extends Activity implements Observer {
-  private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
-  private String text;
+	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
+	private String text;
 
-  public final static String getName() {
-    return "Preconfigured Freewheel Player";
-  }
-  final String TAG = this.getClass().toString();
+	public final static String getName() {
+		return "Preconfigured Freewheel Player";
+	}
+	final String TAG = this.getClass().toString();
 
-  String EMBED = null;
-  String PCODE = null;
-  String DOMAIN = null;
+	String EMBED = null;
+	String PCODE = null;
+	String DOMAIN = null;
 
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+	// Write the sdk events text along with events count to log file in sdcard if the log file already exists
+	SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-  protected OoyalaPlayer player;
+	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+	protected OoyalaPlayer player;
 
-  /**
-   * Called when the activity is first created.
-   */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    // Here, thisActivity is the current activity
-    if (ContextCompat.checkSelfPermission(this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-      // Should we show an explanation?
-      if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-              Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+		if (ContextCompat.checkSelfPermission(this,
+				Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
 
-        // Show an explanation to the user *asynchronously* -- don't block
-        // this thread waiting for the user's response! After the user
-        // sees the explanation, try again to request the permission.
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
-      } else {
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+			}
+		}
+		setTitle(getName());
+		setContentView(R.layout.player_simple_frame_layout);
 
-        // No explanation needed, we can request the permission.
+		EMBED = getIntent().getExtras().getString("embed_code");
+		PCODE = getIntent().getExtras().getString("pcode");
+		DOMAIN = getIntent().getExtras().getString("domain");
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+		/** DITA_START:<ph id="freewheel_preconfigured"> **/
+		//Initialize the player
+		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-        // app-defined int constant. The callback method gets the
-        // result of the request.
-      }
-    }
-    setTitle(getName());
-    setContentView(R.layout.player_simple_frame_layout);
+		Options options = new Options.Builder().setUseExoPlayer(true).build();
+		player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+		playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		player.addObserver(this);
 
-    EMBED = getIntent().getExtras().getString("embed_code");
-    PCODE = getIntent().getExtras().getString("pcode");
-    DOMAIN = getIntent().getExtras().getString("domain");
+		@SuppressWarnings("unused")
+		OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
 
-    /** DITA_START:<ph id="freewheel_preconfigured"> **/
-    //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		if (player.setEmbedCode(EMBED)) {
+			//Uncomment for Auto Play
+			//player.play();
+		}
+		/** DITA_END:</ph> **/
 
-    Options options = new Options.Builder().setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-    playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
-    player.addObserver(this);
+	}
 
-    @SuppressWarnings("unused")
-    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "Player Activity Paused");
+		if (player != null) {
+			player.suspend();
+		}
+	}
 
-    if (player.setEmbedCode(EMBED)) {
-      //Uncomment for Auto Play
-      //player.play();
-    }
-    /** DITA_END:</ph> **/
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "Player Activity Resumed");
+		if (player != null) {
+			player.resume();
+		}
+	}
 
-  }
+	/**
+	 * Listen to all notifications from the OoyalaPlayer
+	 */
+	@Override
+	public void update(Observable arg0, Object argN) {
+		final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+		if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
+			return;
+		}
 
-  @Override
-  protected void onPause() {
-    super.onPause();
-    Log.d(TAG, "Player Activity Paused");
-    if (player != null) {
-      player.suspend();
-    }
-  }
+		// Automation Hook: to write Notifications to a temporary file on the device/emulator
+		text="Notification Received: " + arg1 + " - state: " + player.getState();
+		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+		Playbacklog.writeToSdcardLog(text);
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    Log.d(TAG, "Player Activity Resumed");
-    if (player != null) {
-      player.resume();
-    }
-  }
+		Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+	}
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-  /**
-   * Listen to all notifications from the OoyalaPlayer
-   */
-  @Override
-  public void update(Observable arg0, Object argN) {
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-      return;
-    }
-
-    // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    text="Notification Received: " + arg1 + " - state: " + player.getState();
-    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    Playbacklog.writeToSdcardLog(text);
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode,
-                                         String permissions[], int[] grantResults) {
-    switch (requestCode) {
-      case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-        // If request is cancelled, the result arrays are empty.
-        if (grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-          // permission was granted, yay! Do the
-          // contacts-related task you need to do.
-          Playbacklog.writeToSdcardLog(text);
-        }
-        return;
-      }
-
-      // other 'case' lines to check for other
-      // permissions this app might request
-    }
-  }
+					// permission was granted, yay! Do the
+					// contacts-related task you need to do.
+					Playbacklog.writeToSdcardLog(text);
+				}
+				return;
+			}
+		}
+	}
 
 }
