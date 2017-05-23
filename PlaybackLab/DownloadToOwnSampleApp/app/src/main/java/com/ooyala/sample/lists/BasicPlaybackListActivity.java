@@ -42,9 +42,9 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("tyb2g2NjE64BuIcLQyS0wEccq4fr5Y03", OoyalaSkinOPTPlayerActivity.class));
-    selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("tyb2g2NjE64BuIcLQyS0wEccq4fr5Y03", OfflineDownloadActivity.class));
-    selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("tyb2g2NjE64BuIcLQyS0wEccq4fr5Y03", OfflineSkinPlayerActivity.class));
+    selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("BjN213NzE6H-9WPurASHfKFOtEak5x6b", OoyalaSkinOPTPlayerActivity.class));
+    selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("BjN213NzE6H-9WPurASHfKFOtEak5x6b", OfflineDownloadActivity.class));
+    selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("BjN213NzE6H-9WPurASHfKFOtEak5x6b", OfflineSkinPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
 

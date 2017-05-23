@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
@@ -21,8 +25,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 public class OfflineDownloadActivity extends Activity implements DashDownloader.Listener, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
+
+  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
   String EMBED = null;
   final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
@@ -66,7 +75,11 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     startButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        downloader.startDownload();
+        if (ContextCompat.checkSelfPermission(OfflineDownloadActivity.this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+          ActivityCompat.requestPermissions(OfflineDownloadActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+        } else {
+          downloader.startDownload();
+        }
       }
     });
 
@@ -139,6 +152,18 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 
       }
     });
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+      if (grantResults.length > 0
+              && grantResults[0] == PERMISSION_GRANTED) {
+        downloader.startDownload();
+      } else {
+        Toast.makeText(this, "You don't have permissions to download in this app", Toast.LENGTH_SHORT).show();
+      }
+    }
   }
 
   @Override
