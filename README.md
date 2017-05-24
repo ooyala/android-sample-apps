@@ -21,6 +21,8 @@ Apart from that, here is what you will need:
   * If you use a different IDE or editor we won't be able to help you with questions specific to that environment.
 * Android SDK with Android platform version 25 (Android 7.1.1). We use it to compile the app.
 
+# Caveats
+* We are not certificate for Fire TV and Android TV yet, you may be able to run the apps in those devices but the apps and the player may behave differently.
 
 # Getting Started
 

@@ -10,7 +10,7 @@ This is absolutely **not** intended to be used in production or to outline best 
 
 ## Building
 
-1. After cloning the project, download the Ooyala Video Advertising Android SDKs [here](http://http://help.ooyala.com/downloads).
+1. After cloning the project, download the Ooyala Video Advertising Android SDKs [here](http://help.ooyala.com/downloads).
 2. Copy the [required](app/libs/README.md) libraries into the `app/libs` folder of the project.
 3. Ensure that the required [OoyalaSkinSDK-Android](../vendor/Ooyala/OoyalaSkinSDK-Android/) package is available in the [Ooyala](../vendor/Ooyala) folder.
 4. Open the [project file](app/build.gradle) in Android Studio.
