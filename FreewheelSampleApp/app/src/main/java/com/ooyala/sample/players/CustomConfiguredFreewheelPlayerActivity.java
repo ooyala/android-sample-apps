@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
@@ -38,7 +39,8 @@ public class CustomConfiguredFreewheelPlayerActivity extends AbstractHookActivit
 	@Override
 	void completePlayerSetup(final boolean asked) {
 		if (asked) {
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain));
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			player.addObserver(this);
 
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
