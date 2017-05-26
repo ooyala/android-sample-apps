@@ -1,24 +1,14 @@
 package com.ooyala.sample.players;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.imasdk.OoyalaIMAConfiguration;
-import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how to override IMA parameters in application code
@@ -43,7 +33,8 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 	@Override
 	void completePlayerSetup(final boolean asked) {
 		if (asked) {
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain));
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			player.addObserver(this);
 
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
