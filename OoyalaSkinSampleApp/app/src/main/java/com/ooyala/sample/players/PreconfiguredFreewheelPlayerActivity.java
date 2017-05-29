@@ -27,151 +27,125 @@ import java.util.Observer;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
- *
+ * <p>
  * In order for Freewheel to work this simply, you need the following parameters set in your Third Party Module Parameters
  * - fw_android_ad_server
  * - fw_android_player_profile
- * 
+ * <p>
  * And an Freewheel Ad Spot configured in Backlot with at least the following:
  * - Network ID
  * - Video Asset Network ID
  * - Site Section ID
- * 
  */
-public class PreconfiguredFreewheelPlayerActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
-  public final static String getName() {
-    return "Preconfigured Freewheel Player";
-  }
-  final String TAG = this.getClass().toString();
+public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
+	public final static String getName() {
+		return "Preconfigured Freewheel Player";
+	}
 
-  String EMBED = null;
-  String PCODE = null;
-  String DOMAIN = null;
 
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+	protected OoyalaSkinLayoutController playerLayoutController;
 
-  protected OoyalaSkinLayoutController playerLayoutController;
-  protected OoyalaPlayer player;
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_frame_layout);
+		completePlayerSetup(asked);
+	}
 
-  /**
-   * Called when the activity is first created.
-   */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setTitle(getName());
-    setContentView(R.layout.player_simple_frame_layout);
+	@Override
+	void completePlayerSetup(boolean asked) {
 
-    EMBED = getIntent().getExtras().getString("embed_code");
-    PCODE = getIntent().getExtras().getString("pcode");
-    DOMAIN = getIntent().getExtras().getString("domain");
+		/** DITA_START:<ph id="freewheel_preconfigured"> **/
+		//Initialize the player
 
-    /** DITA_START:<ph id="freewheel_preconfigured"> **/
-    //Initialize the player
+		// Get the SkinLayout from our layout xml
+		OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
 
-    // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
+		// Create the OoyalaPlayer, with some built-in UI disabled
+		PlayerDomain domain1 = new PlayerDomain(domain);
+		Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+		player = new OoyalaPlayer(pcode, domain1, options);
 
-    // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(PCODE, domain, options);
+		//Create the SkinOptions, and setup React
+		SkinOptions skinOptions = new SkinOptions.Builder().build();
+		playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+		//Add observer to listen to fullscreen open and close events
+		playerLayoutController.addObserver(this);
 
-    //Create the SkinOptions, and setup React
-    SkinOptions skinOptions = new SkinOptions.Builder().build();
-    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
-    //Add observer to listen to fullscreen open and close events
-    playerLayoutController.addObserver(this);
+		player.addObserver(this);
 
-    player.addObserver(this);
+		@SuppressWarnings("unused")
+		OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
 
-    @SuppressWarnings("unused")
-    OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
-    
-    if (player.setEmbedCode(EMBED)) {
+		if (player.setEmbedCode(embedCode)) {
 //      player.play();
-    }
-    /** DITA_END:</ph> **/
+		}
+		/** DITA_END:</ph> **/
 
-  }
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (playerLayoutController != null) {
-      playerLayoutController.onKeyDown(keyCode, event);
-    }
-    return super.onKeyDown(keyCode, event);
-  }
-  /** Start DefaultHardwareBackBtnHandler **/
-  @Override
-  public void invokeDefaultOnBackPressed() {
-    super.onBackPressed();
-  }
-  /** End DefaultHardwareBackBtnHandler **/
+	}
 
-  /** Start Activity methods for Skin **/
-  @Override
-  protected void onPause() {
-    super.onPause();
-    if (playerLayoutController != null) {
-      playerLayoutController.onPause();
-    }
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (playerLayoutController != null) {
+			playerLayoutController.onKeyDown(keyCode, event);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
-    if (player != null) {
-      player.suspend();
-    }
-  }
+	/**
+	 * Start DefaultHardwareBackBtnHandler
+	 **/
+	@Override
+	public void invokeDefaultOnBackPressed() {
+		super.onBackPressed();
+	}
+	/** End DefaultHardwareBackBtnHandler **/
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    if (playerLayoutController != null) {
-      playerLayoutController.onResume( this, this);
-    }
+	/**
+	 * Start Activity methods for Skin
+	 **/
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (playerLayoutController != null) {
+			playerLayoutController.onPause();
+		}
 
-    if (player != null) {
-      player.resume();
-    }
-  }
+		if (player != null) {
+			player.suspend();
+		}
+	}
 
-  @Override
-  public void onBackPressed() {
-    if (playerLayoutController != null) {
-      playerLayoutController.onBackPressed();
-    } else {
-      super.onBackPressed();
-    }
-  }
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (playerLayoutController != null) {
-      playerLayoutController.onDestroy();
-    }
-  }
-  /** End Activity methods for Skin **/
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (playerLayoutController != null) {
+			playerLayoutController.onResume(this, this);
+		}
 
+		if (player != null) {
+			player.resume();
+		}
+	}
 
-  /**
-   * Listen to all notifications from the OoyalaPlayer
-   */
-  @Override
-  public void update(Observable arg0, Object argN) {
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-      return;
-    }
+	@Override
+	public void onBackPressed() {
+		if (playerLayoutController != null) {
+			playerLayoutController.onBackPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
 
-    if (arg1 == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
-      Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification)argN).getData());
-    }
-
-    // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    String text="Notification Received: " + arg1 + " - state: " + player.getState();
-    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    Playbacklog.writeToSdcardLog(text);
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-  }
-
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (playerLayoutController != null) {
+			playerLayoutController.onDestroy();
+		}
+	}
 }
+

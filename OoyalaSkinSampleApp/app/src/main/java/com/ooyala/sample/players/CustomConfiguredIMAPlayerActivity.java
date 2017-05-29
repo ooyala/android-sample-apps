@@ -28,43 +28,34 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
  * imaManager.setAdUrlOverride(String)
  * imaManager.setAdTagParameters(Map<String, String>)
  */
-public class CustomConfiguredIMAPlayerActivity extends Activity implements Observer {
+public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
   public final static String getName() {
     return "Custom Configured IMA Player";
   }
-  final String TAG = this.getClass().toString();
-
-  String EMBED = null;
-  String PCODE = null;
-  String DOMAIN = null;
-
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
   protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-  protected OoyalaPlayer player;
   protected OoyalaSkinLayoutController controller;
+
 
   /**
    * Called when the activity is first created.
    */
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setTitle(getName());
-    setContentView(R.layout.player_simple_frame_layout);
+  public void onCreate(Bundle savedInstanceState){
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.player_simple_frame_layout);
+     completePlayerSetup(asked);
+    }
 
-    EMBED = getIntent().getExtras().getString("embed_code");
-    PCODE = getIntent().getExtras().getString("pcode");
-    DOMAIN = getIntent().getExtras().getString("domain");
-
+  @Override
+  void completePlayerSetup(boolean asked) {
     //Initialize the player
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
+    PlayerDomain domain1 = new PlayerDomain(domain);
     Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(PCODE, domain, options);
+    player = new OoyalaPlayer(pcode, domain1, options);
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
@@ -84,19 +75,11 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     // imaManager.setAdTagParameters(null);
     /** DITA_END:</ph> **/
     
-    if (player.setEmbedCode(EMBED)) {
+    if (player.setEmbedCode(embedCode)) {
 //      player.play();
     }
   }
 
-  @Override
-  protected void onStop() {
-    super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
-    if (player != null) {
-      player.suspend();
-    }
-  }
 
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -105,36 +88,7 @@ public class CustomConfiguredIMAPlayerActivity extends Activity implements Obser
     }
     return super.onKeyDown(keyCode, event);
   }
-
-  @Override
-  protected void onRestart() {
-    super.onRestart();
-    Log.d(TAG, "Player Activity Restarted");
-    if (player != null) {
-      player.resume();
-    }
+  public void invokeDefaultOnBackPressed() {
+    super.onBackPressed();
   }
-
-  /**
-   * Listen to all notifications from the OoyalaPlayer
-   */
-  @Override
-  public void update(Observable arg0, Object argN) {
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-      return;
-    }
-
-    if (arg1 == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
-      Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification)argN).getData());
-    }
-
-    // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    String text="Notification Received: " + arg1 + " - state: " + player.getState();
-    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    Playbacklog.writeToSdcardLog(text);
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-  }
-
 }
