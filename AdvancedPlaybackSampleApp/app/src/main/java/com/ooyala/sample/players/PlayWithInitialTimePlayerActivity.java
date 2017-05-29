@@ -48,5 +48,6 @@ public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
 	}
 }

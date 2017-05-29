@@ -107,9 +107,13 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	public void update(Observable o, Object arg) {
 		final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
 		if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
+			if(TAG.toString().equalsIgnoreCase("class com.ooyala.sample.players.ProgrammaticVolumePlayerActivity"))
+			{
+				player.setVolume(player.getVolume() + .025f);
+				return;
+			}
 			return;
 		}
-
 		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
 		Log.d(TAG, text);
 
