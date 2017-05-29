@@ -1,13 +1,10 @@
 package com.ooyala.sample.players;
 
-import android.app.Activity;
+;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.sample.R;
@@ -17,11 +14,7 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
-
 import org.json.JSONObject;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * This activity illustrates how you can play basic playback video using the Skin SDK
@@ -51,7 +44,7 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity  {
 		playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 		//Add observer to listen to fullscreen open and close events
 		playerLayoutController.addObserver(this);
-
+		setPlayerLayoutController(playerLayoutController);
 		player.addObserver(this);
 
 		if (player.setEmbedCode(embedCode)) {
@@ -76,10 +69,6 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity  {
 
 
 
-
-	/** Start DefaultHardwareBackBtnHandler **/
-
-
 	/**
 	 * Create skin overrides to show up in the skin.
 	 * Default commented. Uncomment to show changes to the start screen.
@@ -98,61 +87,6 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity  {
 //      Log.e(TAG, "Exception Thrown", e);
 //    }
 		return overrides;
-	}
-
-	/** Start DefaultHardwareBackBtnHandler **/
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		playerLayoutController.onKeyDown(keyCode, event);
-		return super.onKeyDown(keyCode, event);
-	}
-
-	@Override
-	public void invokeDefaultOnBackPressed() {
-		super.onBackPressed();
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (playerLayoutController != null) {
-			playerLayoutController.onBackPressed();
-		} else {
-			super.onBackPressed();
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (playerLayoutController != null) {
-			playerLayoutController.onPause();
-		}
-		Log.d(TAG, "Player Activity Stopped");
-		if (player != null) {
-			player.suspend();
-		}
-	}
-
-
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (playerLayoutController != null) {
-			playerLayoutController.onResume( this, this);
-		}
-		Log.d(TAG, "Player Activity Restarted");
-		if (player != null) {
-			player.resume();
-		}
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (playerLayoutController != null) {
-			playerLayoutController.onDestroy();
-		}
 	}
 
 }

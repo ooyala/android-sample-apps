@@ -1,29 +1,16 @@
 package com.ooyala.sample.players;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import android.os.Bundle;
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
-import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
-
-import org.json.JSONObject;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -48,9 +35,6 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
 	@Override
 	void completePlayerSetup(boolean asked) {
-		/** DITA_START:<ph id="freewheel_preconfigured"> **/
-		//Initialize the player
-
 		// Get the SkinLayout from our layout xml
 		OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
@@ -64,7 +48,7 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 		playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 		//Add observer to listen to fullscreen open and close events
 		playerLayoutController.addObserver(this);
-
+		super.setPlayerLayoutController(playerLayoutController);
 		player.addObserver(this);
 
 		@SuppressWarnings("unused")
@@ -73,8 +57,6 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 		if (player.setEmbedCode(embedCode)) {
 //      player.play();
 		}
-		/** DITA_END:</ph> **/
-
 	}
 
 
@@ -86,62 +68,6 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_simple_frame_layout);
 		completePlayerSetup(asked);
-	}
-
-
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		playerLayoutController.onKeyDown(keyCode, event);
-		return super.onKeyDown(keyCode, event);
-	}
-
-	/** Start DefaultHardwareBackBtnHandler **/
-	@Override
-	public void invokeDefaultOnBackPressed() {
-		super.onBackPressed();
-	}
-	/** End DefaultHardwareBackBtnHandler **/
-
-	/** Start Activity methods for Skin **/
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (playerLayoutController != null) {
-			playerLayoutController.onPause();
-		}
-
-		if (player != null) {
-			player.suspend();
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (playerLayoutController != null) {
-			playerLayoutController.onResume( this, this);
-		}
-
-		if (player != null) {
-			player.resume();
-		}
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (playerLayoutController != null) {
-			playerLayoutController.onBackPressed();
-		} else {
-			super.onBackPressed();
-		}
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (playerLayoutController != null) {
-			playerLayoutController.onDestroy();
-		}
 	}
 
 }

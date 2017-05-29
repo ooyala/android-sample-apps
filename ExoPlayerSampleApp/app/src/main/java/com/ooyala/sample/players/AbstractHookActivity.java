@@ -60,6 +60,10 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		domain = getIntent().getExtras().getString("domain");
 	}
 
+	protected void setPlayerLayoutController(OoyalaSkinLayoutController playerLayoutController) {
+		this.playerLayoutController = playerLayoutController;
+	}
+
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
@@ -86,6 +90,52 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		Log.d(TAG, "Player Activity Restarted");
 		if (player != null) {
 			player.resume();
+		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		playerLayoutController.onKeyDown(keyCode, event);
+		return super.onKeyDown(keyCode, event);
+	}
+
+	/** Start DefaultHardwareBackBtnHandler **/
+	@Override
+	public void invokeDefaultOnBackPressed() {
+		super.onBackPressed();
+	}
+	/** End DefaultHardwareBackBtnHandler **/
+
+	/** Start Activity methods for Skin **/
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (playerLayoutController != null) {
+			playerLayoutController.onPause();
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (playerLayoutController != null) {
+			playerLayoutController.onResume( this, this );
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (playerLayoutController != null) {
+			playerLayoutController.onBackPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (playerLayoutController != null) {
+			playerLayoutController.onDestroy();
 		}
 	}
 
@@ -119,5 +169,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 		Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
 	}
+
 
 }

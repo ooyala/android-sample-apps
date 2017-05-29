@@ -2,8 +2,8 @@ package com.ooyala.sample.players;
 
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 
+import android.view.KeyEvent;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -49,75 +49,24 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
     //Add observer to listen to fullscreen open and close events
     playerLayoutController.addObserver(this);
-
+    setPlayerLayoutController(playerLayoutController);
     player.addObserver(this);
 
     @SuppressWarnings("unused")
     OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 
     if (player.setEmbedCode(embedCode)) {
-//      player.play();
+      //player.play();
     }
-    /** DITA_END:</ph> **/
+
 
   }
 
-  /**
-   * Called when the activity is first created.
-   */
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_simple_frame_layout);
     completePlayerSetup(asked);
   }
-
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    playerLayoutController.onKeyDown(keyCode, event);
-    return super.onKeyDown(keyCode, event);
-  }
-
-  /** Start DefaultHardwareBackBtnHandler **/
-  @Override
-  public void invokeDefaultOnBackPressed() {
-    super.onBackPressed();
-  }
-  /** End DefaultHardwareBackBtnHandler **/
-
-  /** Start Activity methods for Skin **/
-  @Override
-  protected void onPause() {
-    super.onPause();
-    if (playerLayoutController != null) {
-      playerLayoutController.onPause();
-    }
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    if (playerLayoutController != null) {
-      playerLayoutController.onResume( this, this );
-    }
-  }
-
-  @Override
-  public void onBackPressed() {
-    if (playerLayoutController != null) {
-      playerLayoutController.onBackPressed();
-    } else {
-      super.onBackPressed();
-    }
-  }
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (playerLayoutController != null) {
-      playerLayoutController.onDestroy();
-    }
-  }
-  /** End Activity methods for Skin **/
-
 }
