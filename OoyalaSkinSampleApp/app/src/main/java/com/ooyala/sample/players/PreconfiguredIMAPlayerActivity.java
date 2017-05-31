@@ -57,7 +57,7 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
 		playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 		//Add observer to listen to fullscreen open and close events
 		playerLayoutController.addObserver(this);
-
+		setPlayerLayoutController(playerLayoutController);
 		player.addObserver(this);
 
 		@SuppressWarnings("unused")
@@ -89,45 +89,7 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
-	/** Start DefaultHardwareBackBtnHandler **/
-	@Override
-	public void invokeDefaultOnBackPressed() {
-		super.onBackPressed();
-	}
-	/** End DefaultHardwareBackBtnHandler **/
 
-	/** Start Activity methods for Skin **/
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (playerLayoutController != null) {
-			playerLayoutController.onPause();
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (playerLayoutController != null) {
-			playerLayoutController.onResume( this, this );
-		}
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (playerLayoutController != null) {
-			playerLayoutController.onBackPressed();
-		} else {
-			super.onBackPressed();
-		}
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (playerLayoutController != null) {
-			playerLayoutController.onDestroy();
-		}
-	}
 }
 
 

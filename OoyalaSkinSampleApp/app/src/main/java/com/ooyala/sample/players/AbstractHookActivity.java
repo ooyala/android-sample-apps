@@ -120,4 +120,49 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
 	}
 
+	/** Start DefaultHardwareBackBtnHandler **/
+	@Override
+	public void invokeDefaultOnBackPressed() {
+		super.onBackPressed();
+	}
+	/** End DefaultHardwareBackBtnHandler **/
+
+	/** Start Activity methods for Skin **/
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (playerLayoutController != null) {
+			playerLayoutController.onPause();
+		}
+	}
+
+	protected void setPlayerLayoutController(OoyalaSkinLayoutController playerLayoutController) {
+		this.playerLayoutController = playerLayoutController;
+	}
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (playerLayoutController != null) {
+			playerLayoutController.onResume( this, this );
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (playerLayoutController != null) {
+			playerLayoutController.onBackPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (playerLayoutController != null) {
+			playerLayoutController.onDestroy();
+		}
+	}
+
 }

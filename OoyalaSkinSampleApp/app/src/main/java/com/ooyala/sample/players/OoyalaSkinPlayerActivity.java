@@ -61,62 +61,6 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 		}
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (playerLayoutController != null) {
-			playerLayoutController.onKeyDown(keyCode, event);
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
-	/** Start DefaultHardwareBackBtnHandler **/
-	@Override
-	public void invokeDefaultOnBackPressed() {
-		super.onBackPressed();
-	}
-	/** End DefaultHardwareBackBtnHandler **/
-
-	/** Start Activity methods for Skin **/
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (playerLayoutController != null) {
-			playerLayoutController.onPause();
-		}
-		Log.d(TAG, "Player Activity Stopped");
-		if (player != null) {
-			player.suspend();
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (playerLayoutController != null) {
-			playerLayoutController.onResume( this, this );
-		}
-		Log.d(TAG, "Player Activity Restarted");
-		if (player != null) {
-			player.resume();
-		}
-	}
-
-	@Override
-	public void onBackPressed() {
-		if (playerLayoutController != null) {
-			playerLayoutController.onBackPressed();
-		} else {
-			super.onBackPressed();
-		}
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (playerLayoutController != null) {
-			playerLayoutController.onDestroy();
-		}
-	}
-	/** End Activity methods for Skin **/
 
 	/**
 	 * Create skin overrides to show up in the skin.

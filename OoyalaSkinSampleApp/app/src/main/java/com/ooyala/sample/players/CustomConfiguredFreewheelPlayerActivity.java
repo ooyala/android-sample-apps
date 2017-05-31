@@ -91,18 +91,4 @@ public class CustomConfiguredFreewheelPlayerActivity extends AbstractHookActivit
 		}
 	}
 
-
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (controller != null) {
-			controller.onKeyDown(keyCode, event);
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
-	@Override
-	public void invokeDefaultOnBackPressed() {
-
-	}
 }

@@ -41,16 +41,16 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
    * Called when the activity is first created.
    */
   @Override
-  public void onCreate(Bundle savedInstanceState){
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.player_simple_frame_layout);
-     completePlayerSetup(asked);
-    }
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.player_simple_frame_layout);
+    completePlayerSetup(asked);
+  }
 
   @Override
   void completePlayerSetup(boolean asked) {
     //Initialize the player
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
+    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain1 = new PlayerDomain(domain);
@@ -68,27 +68,16 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 
     /** DITA_START:<ph id="ima_custom"> **/
 
-	OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
-	
-	// This ad tag returns a midroll video
+    OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
+
+    // This ad tag returns a midroll video
     imaManager.setAdUrlOverride("http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7521029/pb_test_mid&ciu_szs=640x480&impl=s&cmsid=949&vid=FjbGRjbzp0DV_5-NtXBVo5Rgp3Sj0R5C&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]");
     // imaManager.setAdTagParameters(null);
     /** DITA_END:</ph> **/
-    
+
     if (player.setEmbedCode(embedCode)) {
 //      player.play();
     }
   }
 
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (controller != null) {
-      controller.onKeyDown(keyCode, event);
-    }
-    return super.onKeyDown(keyCode, event);
-  }
-  public void invokeDefaultOnBackPressed() {
-    super.onBackPressed();
-  }
 }
