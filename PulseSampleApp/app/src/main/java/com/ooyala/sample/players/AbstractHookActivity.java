@@ -1,8 +1,5 @@
 package com.ooyala.sample.players;
 
-/**
- * Created by FTT on 30/05/17.
- */
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +14,7 @@ import android.view.KeyEvent;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.utils.VideoItem;
@@ -36,13 +34,13 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	String TAG = this.getClass().toString();
 	final int CLICK_THROUGH_REQUEST = 11234;
 	protected OoyalaSkinLayoutController playerSkinLayoutController;
-	final String LOG_TAG = this.getClass().toString();
+
 
 	SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
 	String embedCode;
-	String pcode;
-	String domain;
+	final String PCODE = "tlM2k6i2-WrXX1DE_b8zfhui_eQN";
+	final String DOMAIN = "http://ooyala.com";
 
 	OoyalaPlayer player;
 
@@ -62,14 +60,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			writePermission= true;
 			asked = true;
 		}
-
 		embedCode = getIntent().getExtras().getString("embed_code");
-		pcode = getIntent().getExtras().getString("pcode");
-		domain = getIntent().getExtras().getString("domain");
-	}
-
-	protected void setPlayerLayoutController(OoyalaSkinLayoutController playerSkinLayoutController) {
-		this.playerSkinLayoutController = playerSkinLayoutController;
 	}
 
 	@Override
@@ -87,7 +78,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "Player Activity Stopped");
-		if (player != null) {
+		if (null != player) {
 			player.suspend();
 		}
 	}
@@ -96,7 +87,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(TAG, "Player Activity Restarted");
-		if (player != null) {
+		if (null != player) {
 			player.resume();
 		}
 	}
@@ -121,8 +112,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		if (playerSkinLayoutController != null) {
 			playerSkinLayoutController.onPause();
 		}
-		Log.d(LOG_TAG, "Player Activity Paused");
-		if (player != null) {
+		Log.d(TAG, "Player Activity Paused");
+		if (null != player) {
 			player.suspend();
 		}
 	}
@@ -133,8 +124,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		if (playerSkinLayoutController != null) {
 			playerSkinLayoutController.onResume( this, this );
 		}
-		Log.d(LOG_TAG, "Player Activity Resumed");
-		if (player != null) {
+		Log.d(TAG, "Player Activity Resumed");
+		if (null != player) {
 			player.resume();
 		}
 	}
@@ -150,7 +141,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (playerSkinLayoutController != null) {
+		if (null != playerSkinLayoutController)  {
 			playerSkinLayoutController.onDestroy();
 		}
 	}
@@ -165,7 +156,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 		if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
 			final String msg = "Error Event Received";
-			if (player != null && player.getError() != null) {
+			if (null != player && player.getError() != null) {
 				Log.e(TAG, msg, player.getError());
 			}
 			else {
@@ -179,11 +170,11 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		}
 
 		// Automation Hook: to write Notifications to a temporary file on the device/emulator
-		String text="Notification Received: " + arg1 + " - state: " + player.getState();
+		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
 		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
 		log.writeToSdcardLog(text);
 
-		Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+		Log.d(TAG, text);
 	}
 
 	@Override

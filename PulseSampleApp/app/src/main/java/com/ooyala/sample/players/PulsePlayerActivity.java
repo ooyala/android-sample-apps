@@ -34,12 +34,6 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 		return "Pulse Player";
 	}
 
-	// Your publisher code goes here
-	final String PCODE  = "tlM2k6i2-WrXX1DE_b8zfhui_eQN";
-	final String DOMAIN = "http://ooyala.com";
-
-	private OoyalaSkinLayoutController playerSkinLayoutController;
-
 
 	/**
 	 * Called when the activity is first created.
@@ -67,7 +61,6 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 		SkinOptions skinOptions = new SkinOptions.Builder().build();
 		playerSkinLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 		playerSkinLayoutController.addObserver(this);
-		setPlayerLayoutController(playerSkinLayoutController);
 		player.addObserver(this);
 
 
