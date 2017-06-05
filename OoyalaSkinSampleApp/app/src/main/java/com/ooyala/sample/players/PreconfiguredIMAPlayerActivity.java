@@ -1,26 +1,16 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
-import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -36,59 +26,48 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
  *
  */
 public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
-		return "Preconfigured IMA Player";
-	}
+  public final static String getName() {
+	return "Preconfigured IMA Player";
+  }
 
-	protected OoyalaSkinLayoutController playerLayoutController;
 
-	@Override
-	void completePlayerSetup(boolean asked) {
-		// Get the SkinLayout from our layout xml
-		OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
-		// Create the OoyalaPlayer, with some built-in UI disabled
-		PlayerDomain domain1 = new PlayerDomain(domain);
-		Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, domain1, options);
+  @Override
+  void completePlayerSetup(boolean asked) {
+	// Get the SkinLayout from our layout xml
+	OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
-		//Create the SkinOptions, and setup React
-		SkinOptions skinOptions = new SkinOptions.Builder().build();
-		playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
-		//Add observer to listen to fullscreen open and close events
-		playerLayoutController.addObserver(this);
-		setPlayerLayoutController(playerLayoutController);
-		player.addObserver(this);
+	// Create the OoyalaPlayer, with some built-in UI disabled
+	PlayerDomain domain1 = new PlayerDomain(domain);
+	Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+	player = new OoyalaPlayer(pcode, domain1, options);
 
-		@SuppressWarnings("unused")
-		OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
+	//Create the SkinOptions, and setup React
+	SkinOptions skinOptions = new SkinOptions.Builder().build();
+	playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+	//Add observer to listen to fullscreen open and close events
+	playerLayoutController.addObserver(this);
 
-		if (player.setEmbedCode(embedCode)) {
+	player.addObserver(this);
+
+	@SuppressWarnings("unused")
+	OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
+
+	if (player.setEmbedCode(embedCode)) {
 //      player.play();
-		}
-		/** DITA_END:</ph> **/
-
 	}
-	/**
-	 * Called when the activity is first created.
-	 */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_simple_frame_layout);
-		completePlayerSetup(asked);
-	}
+	/** DITA_END:</ph> **/
 
-
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (playerLayoutController != null) {
-			playerLayoutController.onKeyDown(keyCode, event);
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
+  }
+  /**
+   * Called when the activity is first created.
+   */
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.player_simple_frame_layout);
+	completePlayerSetup(asked);
+  }
 
 }
 

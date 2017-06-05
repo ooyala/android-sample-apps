@@ -33,10 +33,6 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
     return "Custom Configured IMA Player";
   }
 
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-  protected OoyalaSkinLayoutController controller;
-
-
   /**
    * Called when the activity is first created.
    */
@@ -50,7 +46,7 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
   @Override
   void completePlayerSetup(boolean asked) {
     //Initialize the player
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
+    skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain1 = new PlayerDomain(domain);
