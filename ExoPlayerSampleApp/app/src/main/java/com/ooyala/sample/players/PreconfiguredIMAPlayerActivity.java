@@ -3,7 +3,6 @@ package com.ooyala.sample.players;
 
 import android.os.Bundle;
 
-import android.view.KeyEvent;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -32,24 +31,21 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
   }
 
 
-  protected OoyalaSkinLayoutController playerLayoutController;
-
   @Override
   void completePlayerSetup(boolean asked) {
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain1 = new PlayerDomain(domain);
+    PlayerDomain domain = new PlayerDomain(DOMAIN);
     Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).setShowNativeLearnMoreButton(false).build();
-    player = new OoyalaPlayer(pcode, domain1, options);
+    player = new OoyalaPlayer(pcode, domain, options);
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
     //Add observer to listen to fullscreen open and close events
     playerLayoutController.addObserver(this);
-    setPlayerLayoutController(playerLayoutController);
     player.addObserver(this);
 
     @SuppressWarnings("unused")
@@ -58,8 +54,6 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
     if (player.setEmbedCode(embedCode)) {
       //player.play();
     }
-
-
   }
 
 
