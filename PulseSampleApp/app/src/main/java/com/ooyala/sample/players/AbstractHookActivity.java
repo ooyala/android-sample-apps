@@ -151,7 +151,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 	if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
 	  final String msg = "Error Event Received";
-	  if (null != player && player.getError() != null) {
+	  if (null != player && null != player.getError()) {
 		Log.e(TAG, msg, player.getError());
 	  }
 	  else {
