@@ -26,7 +26,7 @@ import com.ooyala.sample.R;
  */
 public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
 
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+
 
   /**
    * Called when the activity is first created.
