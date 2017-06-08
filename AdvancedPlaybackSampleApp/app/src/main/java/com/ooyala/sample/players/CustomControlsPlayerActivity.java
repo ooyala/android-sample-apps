@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -29,24 +28,22 @@ public class CustomControlsPlayerActivity extends AbstractHookActivity {
     return "Custom Controls";
   }
 
-  protected OoyalaPlayerLayoutController playerLayoutController;
-
-
   @Override
   void completePlayerSetup(boolean asked) {
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    if (asked) {
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
-    Options options = new Options.Builder().setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      //Set the controls to use for Inline Control style.
+      playerLayoutController.setInlineControls(new CustomPlayerControls(player, playerLayout));
+      player.addObserver(this);
 
-    //Set the controls to use for Inline Control style.
-    playerLayoutController.setInlineControls(new CustomPlayerControls(player,playerLayout));
-    player.addObserver(this);
-
-    if (player.setEmbedCode(embedCode)) {
-      //Uncomment for Auto-Play
-      //player.play();
+      if (player.setEmbedCode(embedCode)) {
+        //Uncomment for Auto-Play
+        //player.play();
+      }
     }
   }
 

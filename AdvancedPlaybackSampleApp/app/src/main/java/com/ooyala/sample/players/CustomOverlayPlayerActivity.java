@@ -22,30 +22,27 @@ public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 		return "Custom Overlay";
 	}
 
-	protected OoyalaPlayerLayoutController playerLayoutController;
-
-
 	@Override
 	void completePlayerSetup(boolean asked) {
-		//Initialize the player
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		if (asked) {
+			//Initialize the player
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
-		Options options = new Options.Builder().setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			//Insert the new overlay into the LayoutController
+			CustomOverlay overlay = new CustomOverlay(this, playerLayout);
+			playerLayoutController.setInlineOverlay(overlay);
+			playerLayoutController.setFullscreenOverlay(overlay);
+			player.addObserver(this);
 
-		//Insert the new overlay into the LayoutController
-		CustomOverlay overlay = new CustomOverlay(this, playerLayout);
-		playerLayoutController.setInlineOverlay(overlay);
-		playerLayoutController.setFullscreenOverlay(overlay);
-		player.addObserver(this);
-
-		if (player.setEmbedCode(embedCode)) {
-			//Uncomment for Auto-Play
-			//player.play();
+			if (player.setEmbedCode(embedCode)) {
+				//Uncomment for Auto-Play
+				//player.play();
+			}
 		}
 	}
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

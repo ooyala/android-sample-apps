@@ -1,6 +1,7 @@
 package com.ooyala.sample.players;
 
 import android.os.Bundle;
+
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -21,22 +22,21 @@ public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
 		return "Play With InitialTime";
 	}
 
-	protected OoyalaPlayerLayoutController playerLayoutController;
-
-
 	@Override
 	void completePlayerSetup(boolean asked) {
-		//Initialize the player
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		if (asked) {
+			//Initialize the player
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-		Options options = new Options.Builder().setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-		player.addObserver(this);
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			player.addObserver(this);
 
-		if (player.setEmbedCode(embedCode)) {
-			//Play from the 20 second mark;
-			player.play(20000);
+			if (player.setEmbedCode(embedCode)) {
+				//Play from the 20 second mark;
+				player.play(20000);
+			}
 		}
 	}
 

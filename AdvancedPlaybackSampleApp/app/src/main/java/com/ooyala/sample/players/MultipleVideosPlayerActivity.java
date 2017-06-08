@@ -23,27 +23,27 @@ public class MultipleVideosPlayerActivity extends AbstractHookActivity {
 		return "Multiple Video Playback";
 	}
 
-	protected OoyalaPlayerLayoutController playerLayoutController;
-
 	@Override
 	void completePlayerSetup(boolean asked) {
-		//Initialize the player
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		if (asked) {
+			//Initialize the player
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-		Options options = new Options.Builder().setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-		player.addObserver(this);
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			player.addObserver(this);
 
 
-		ArrayList<String> list = new ArrayList<>();
-		list.add(embedCode);
-		list.add("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");
-		if (player.setEmbedCodes(list)) {
-			//Uncomment for Auto-Play
-			//player.play();
-		} else {
-			Log.e(TAG, "Asset Failure");
+			ArrayList<String> list = new ArrayList<>();
+			list.add(embedCode);
+			list.add("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");
+			if (player.setEmbedCodes(list)) {
+				//Uncomment for Auto-Play
+				//player.play();
+			} else {
+				Log.e(TAG, "Asset Failure");
+			}
 		}
 	}
 

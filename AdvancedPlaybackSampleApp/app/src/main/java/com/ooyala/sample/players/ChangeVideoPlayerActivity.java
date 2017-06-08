@@ -30,7 +30,6 @@ public class ChangeVideoPlayerActivity extends AbstractHookActivity {
   }
 
   String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
-  protected OoyalaPlayerLayoutController playerLayoutController;
 
   /**
    * Called when the activity is first created.

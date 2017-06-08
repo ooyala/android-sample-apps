@@ -25,25 +25,23 @@ public class SampleVideoPlayerActivity extends AbstractHookActivity {
 
 	@Override
 	void completePlayerSetup(boolean asked) {
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		if (asked) {
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-		Options options = new Options.Builder().setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-		// Below step will make sure that player is being chosen each time
-		// make sure to put large integer value so that new player gets selected
-		player.getMoviePlayerSelector().registerPlayerFactory(new SampleVideoPlayerFactory(999));
-		player.addObserver(this);
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			// Below step will make sure that player is being chosen each time
+			// make sure to put large integer value so that new player gets selected
+			player.getMoviePlayerSelector().registerPlayerFactory(new SampleVideoPlayerFactory(999));
+			player.addObserver(this);
 
-
-		if (player.setEmbedCode(embedCode)) {
-			//Uncomment for Auto-Play
-			//player.play();
-		} else {
-			Log.d(this.getClass().getName(), "Something Went Wrong!");
+			if (player.setEmbedCode(embedCode)) {
+			} else {
+				Log.d(this.getClass().getName(), "Something Went Wrong!");
+			}
 		}
 	}
-
 
 	/**
 	 * Called when the activity is first created.
@@ -53,6 +51,5 @@ public class SampleVideoPlayerActivity extends AbstractHookActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_simple_layout);
 		completePlayerSetup(asked);
-
 	}
 }

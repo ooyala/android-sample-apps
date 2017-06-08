@@ -1,7 +1,7 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
+
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -24,26 +24,24 @@ public class ProgrammaticVolumePlayerActivity extends AbstractHookActivity {
 		return "Programmatic Volume";
 	}
 
-	protected OoyalaPlayerLayoutController playerLayoutController;
-
-
 	@Override
 	void completePlayerSetup(boolean asked) {
-		//Initialize the player
-		Options opts = new Options.Builder().setUseExoPlayer(true).build();
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), opts);
-		playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-		player.addObserver(this);
+		if (asked) {
+			//Initialize the player
+			Options opts = new Options.Builder().setUseExoPlayer(true).build();
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), opts);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			player.addObserver(this);
 
-		// You can set the volume anytime after the OoyalaPlayer is instantiated
-		player.setVolume(0.0f);
+			// You can set the volume anytime after the OoyalaPlayer is instantiated
+			player.setVolume(0.0f);
 
-		if (player.setEmbedCode(embedCode)) {
-			player.play();
+			if (player.setEmbedCode(embedCode)) {
+				player.play();
+			}
 		}
 	}
-
 
 	/**
 	 * Called when the activity is first created.

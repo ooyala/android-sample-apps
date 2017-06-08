@@ -13,12 +13,7 @@ import com.ooyala.android.item.UnbundledVideo;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
-
 public class UnbundledPlayerActivity extends AbstractHookActivity {
-
-  int count=0;
-
-  protected OoyalaPlayerLayoutController playerLayoutController;
 
   public static String getName() {
     return "Unbundled";
@@ -26,23 +21,23 @@ public class UnbundledPlayerActivity extends AbstractHookActivity {
 
   @Override
   void completePlayerSetup(boolean asked) {
-    //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    if (asked) {
+      //Initialize the player
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
-    Options options = new Options.Builder().setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-
-    final String url = getIntent().getExtras().getString("embed_code");
-    Stream s = new Stream( url, Stream.DELIVERY_TYPE_MP4 );
-    UnbundledVideo u = new UnbundledVideo( s );
-    final boolean success = player.setUnbundledVideo( u );
-    if (success) {
-      //Uncomment for Auto-Play
-      //player.play();
-    }
-    else {
-      Log.e(TAG, "Asset Failure");
+      final String url = getIntent().getExtras().getString("embed_code");
+      Stream s = new Stream(url, Stream.DELIVERY_TYPE_MP4);
+      UnbundledVideo u = new UnbundledVideo(s);
+      final boolean success = player.setUnbundledVideo(u);
+      if (success) {
+        //Uncomment for Auto-Play
+        //player.play();
+      } else {
+        Log.e(TAG, "Asset Failure");
+      }
     }
   }
 

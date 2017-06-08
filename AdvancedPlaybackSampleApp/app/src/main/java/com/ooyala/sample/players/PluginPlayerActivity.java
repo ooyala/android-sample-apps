@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,27 +17,25 @@ public class PluginPlayerActivity extends AbstractHookActivity {
 		return "Custom Plugin Sample";
 	}
 
-	protected OoyalaPlayerLayoutController playerLayoutController;
-
 	@Override
 	void completePlayerSetup(boolean asked) {
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		if (asked) {
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			Options options = new Options.Builder().setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			player.addObserver(this);
 
-		Options options = new Options.Builder().setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-		player.addObserver(this);
-
-		SampleAdPlugin plugin = new SampleAdPlugin(this, player);
-		player.registerPlugin(plugin);
-		if (player.setEmbedCode(embedCode)) {
-			//Uncomment for Auto-Play
-			//player.play();
-		} else {
-			Log.d(this.getClass().getName(), "Something Went Wrong!");
+			SampleAdPlugin plugin = new SampleAdPlugin(this, player);
+			player.registerPlugin(plugin);
+			if (player.setEmbedCode(embedCode)) {
+				//Uncomment for Auto-Play
+				//player.play();
+			} else {
+				Log.d(this.getClass().getName(), "Something Went Wrong!");
+			}
 		}
 	}
-
 
 	/**
 	 * Called when the activity is first created.

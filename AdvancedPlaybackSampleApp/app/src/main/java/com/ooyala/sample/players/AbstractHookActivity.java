@@ -12,6 +12,7 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.performance.PerformanceMonitor;
 import com.ooyala.android.ui.OoyalaPlayerControls;
+import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
@@ -30,6 +31,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	String TAG = this.getClass().toString();
 	final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
 
+	protected OoyalaPlayerLayoutController playerLayoutController;
 	//private PerformanceMonitor performanceMonitor;
 
 	SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
@@ -93,7 +95,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "Player Activity Stopped");
-		if (player != null) {
+		if (null != player) {
 			player.suspend();
 		}
 		if(TAG.toString().equalsIgnoreCase("class com.ooyala.sample.players.InsertAdPlayerActivity"))

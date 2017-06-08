@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,7 +16,6 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
 
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * This activity illustrates how you can play a video with an initial time set
@@ -33,21 +31,21 @@ public class NotificationsPlayerActivity extends AbstractHookActivity {
   }
   SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
-  protected OoyalaPlayerLayoutController playerLayoutController;
-
   @Override
   void completePlayerSetup(boolean asked) {
-	  //Initialize the player
-	  OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    if (asked) {
+      //Initialize the player
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-	  Options options = new Options.Builder().setUseExoPlayer(true).build();
-	  player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-	  playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-	  player.addObserver(this);
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      player.addObserver(this);
 
-	  if (player.setEmbedCode(embedCode)) {
-		  //player.play();
-	  }
+      if (player.setEmbedCode(embedCode)) {
+        //player.play();
+      }
+    }
   }
 
   /**
@@ -56,15 +54,15 @@ public class NotificationsPlayerActivity extends AbstractHookActivity {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
-	  super.onCreate(savedInstanceState);
-	  setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.player_simple_layout);
+    completePlayerSetup(asked);
   }
 
 /** Handle all notifications from the OoyalaPlayer
-  *  Filter on "Note" in logcat logs to see key points in the notification workflow
-  *  Filter on "Notification Received:" in logcat logs to see all notifications in the notification workflow
-  */
+ *  Filter on "Note" in logcat logs to see key points in the notification workflow
+ *  Filter on "Notification Received:" in logcat logs to see all notifications in the notification workflow
+ */
   /** NOTE: there could also be UI-related notifications from your OoyalaPlayerLayoutController or SkinViewController that are not represented here **/
 
   @Override
