@@ -36,9 +36,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
   protected OoyalaSkinLayoutController playerSkinLayoutController;
   private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
-  final String PCODE = "tlM2k6i2-WrXX1DE_b8zfhui_eQN";
-  final String DOMAIN = "http://ooyala.com";
-
   OoyalaPlayer player;
 
   boolean writePermission = false;
@@ -143,7 +140,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
   @Override
   public void update(Observable arg0, Object argN) {
-
 	final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
 	if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
 	  return;
@@ -179,21 +175,4 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	  onResume();
 	}
   }
-
-  /**
-   * Create a VideoItem from the bundled information send to this activity.
-   * @return The created {@link VideoItem}.
-   */
-  public VideoItem getVideoItem() {
-	VideoItem videoItem = new VideoItem();
-	videoItem.setTags(getIntent().getExtras().getStringArray("contentMetadataTags"));
-	videoItem.setMidrollPositions(getIntent().getExtras().getFloatArray("midrollPositions"));
-	videoItem.setContentTitle(getIntent().getExtras().getString("contentTitle"));
-	videoItem.setContentId(getIntent().getExtras().getString("contentId"));
-	videoItem.setCategory(getIntent().getExtras().getString("category"));
-	videoItem.setContentCode(getIntent().getExtras().getString("embedCode"));
-
-	return videoItem;
-  }
-
 }
