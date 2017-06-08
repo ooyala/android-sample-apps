@@ -133,7 +133,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (playerLayoutController != null) {
+		if (null != playerLayoutController) {
 			playerLayoutController.onPause();
 		}
 	}
@@ -141,14 +141,14 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (playerLayoutController != null) {
+		if (null != playerLayoutController) {
 			playerLayoutController.onResume( this, this );
 		}
 	}
 
 	@Override
 	public void onBackPressed() {
-		if (playerLayoutController != null) {
+		if (null != playerLayoutController) {
 			playerLayoutController.onBackPressed();
 		} else {
 			super.onBackPressed();
@@ -158,7 +158,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (playerLayoutController != null) {
+		if (null != playerLayoutController) {
 			playerLayoutController.onDestroy();
 		}
 	}
