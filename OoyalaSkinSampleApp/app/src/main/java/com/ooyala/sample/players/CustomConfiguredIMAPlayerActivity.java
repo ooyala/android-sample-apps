@@ -1,25 +1,16 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
-import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+
 
 /**
  * This activity illustrates how to override IMA parameters in application code
@@ -47,7 +38,6 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
   void completePlayerSetup(boolean asked) {
     //Initialize the player
     skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
-
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain1 = new PlayerDomain(domain);
     Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
@@ -60,7 +50,6 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
     controller.addObserver(this);
 
     player.addObserver(this);
-
 
     /** DITA_START:<ph id="ima_custom"> **/
 
