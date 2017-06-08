@@ -27,42 +27,43 @@ import com.ooyala.sample.R;
  *
  */
 public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
-  public final static String getName() {
-	return "Preconfigured Freewheel Player";
-  }
-
-  @Override
-  void completePlayerSetup(boolean asked) {
-	// Get the SkinLayout from our layout xml
-	OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
-
-	// Create the OoyalaPlayer, with some built-in UI disabled
-	PlayerDomain domain = new PlayerDomain(DOMAIN);
-	Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).setShowNativeLearnMoreButton(false).build();
-	player = new OoyalaPlayer(pcode, domain, options);
-
-	//Create the SkinOptions, and setup React
-	SkinOptions skinOptions = new SkinOptions.Builder().build();
-	playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
-	//Add observer to listen to fullscreen open and close events
-	playerLayoutController.addObserver(this);
-	player.addObserver(this);
-
-	@SuppressWarnings("unused")
-	OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
-
-	if (player.setEmbedCode(embedCode)) {
+	public final static String getName() {
+		return "Preconfigured Freewheel Player";
 	}
-  }
 
+	@Override
+	void completePlayerSetup(boolean asked) {
+		if (asked) {
+			// Get the SkinLayout from our layout xml
+			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
 
-  /**
-   * Called when the activity is first created.
-   */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.player_simple_frame_layout);
-	completePlayerSetup(asked);
-  }
+			// Create the OoyalaPlayer, with some built-in UI disabled
+			PlayerDomain domain = new PlayerDomain(DOMAIN);
+			Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).setShowNativeLearnMoreButton(false).build();
+			player = new OoyalaPlayer(pcode, domain, options);
+
+			//Create the SkinOptions, and setup React
+			SkinOptions skinOptions = new SkinOptions.Builder().build();
+			playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+			//Add observer to listen to fullscreen open and close events
+			playerLayoutController.addObserver(this);
+			player.addObserver(this);
+
+			@SuppressWarnings("unused")
+			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
+
+			if (player.setEmbedCode(embedCode)) {
+			}
+		}
+	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_frame_layout);
+		completePlayerSetup(asked);
+	}
 }

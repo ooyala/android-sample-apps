@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,34 +21,33 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class OoyalaSkinOPTPlayerActivity extends AbstractHookActivity
-        implements  EmbedTokenGenerator {
-
+public class OoyalaSkinOPTPlayerActivity extends AbstractHookActivity implements EmbedTokenGenerator {
 
   @Override
   void completePlayerSetup(boolean asked) {
-    // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
+    if(asked) {
+      // Get the SkinLayout from our layout xml
+      OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 
-    // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(pcode, domain, this, options);
+      // Create the OoyalaPlayer, with some built-in UI disabled
+      PlayerDomain domain = new PlayerDomain(DOMAIN);
+      Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, domain, this, options);
 
-    //Create the SkinOptions, and setup React
-    JSONObject overrides = createSkinOverrides();
-    SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
-    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
-    //Add observer to listen to fullscreen open and close events
-    playerLayoutController.addObserver(this);
+      //Create the SkinOptions, and setup React
+      JSONObject overrides = createSkinOverrides();
+      SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
+      playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+      //Add observer to listen to fullscreen open and close events
+      playerLayoutController.addObserver(this);
 
-    player.addObserver(this);
-    if (player.setEmbedCode(embedCode)) {
-      //Uncomment for autoplay
-      //player.play();
-    }
-    else {
-      Log.e(TAG, "Asset Failure");
+      player.addObserver(this);
+      if (player.setEmbedCode(embedCode)) {
+        //Uncomment for autoplay
+        //player.play();
+      } else {
+        Log.e(TAG, "Asset Failure");
+      }
     }
   }
 
@@ -88,16 +86,12 @@ public class OoyalaSkinOPTPlayerActivity extends AbstractHookActivity
     return overrides;
   }
 
-
-
-
-
-
   /*
    * Get the Ooyala Player Token to play the embed code.
    * This should contact your servers to generate the OPT server-side.
    * For debugging, you can use Ooyala's EmbeddedSecureURLGenerator to create local embed tokens
    */
+
   @Override
   public void getTokenForEmbedCodes(List<String> embedCodes,
                                     EmbedTokenGeneratorCallback callback) {

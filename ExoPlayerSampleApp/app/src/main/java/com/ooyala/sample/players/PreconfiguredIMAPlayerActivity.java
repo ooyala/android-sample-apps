@@ -30,29 +30,30 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
     return "Preconfigured IMA Player";
   }
 
-
   @Override
   void completePlayerSetup(boolean asked) {
-    // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
+    if (asked) {
+      // Get the SkinLayout from our layout xml
+      OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
 
-    // Create the OoyalaPlayer, with some built-in UI disabled
-    PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).setShowNativeLearnMoreButton(false).build();
-    player = new OoyalaPlayer(pcode, domain, options);
+      // Create the OoyalaPlayer, with some built-in UI disabled
+      PlayerDomain domain = new PlayerDomain(DOMAIN);
+      Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).setShowNativeLearnMoreButton(false).build();
+      player = new OoyalaPlayer(pcode, domain, options);
 
-    //Create the SkinOptions, and setup React
-    SkinOptions skinOptions = new SkinOptions.Builder().build();
-    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
-    //Add observer to listen to fullscreen open and close events
-    playerLayoutController.addObserver(this);
-    player.addObserver(this);
+      //Create the SkinOptions, and setup React
+      SkinOptions skinOptions = new SkinOptions.Builder().build();
+      playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+      //Add observer to listen to fullscreen open and close events
+      playerLayoutController.addObserver(this);
+      player.addObserver(this);
 
-    @SuppressWarnings("unused")
-    OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
+      @SuppressWarnings("unused")
+      OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 
-    if (player.setEmbedCode(embedCode)) {
-      //player.play();
+      if (player.setEmbedCode(embedCode)) {
+        //player.play();
+      }
     }
   }
 

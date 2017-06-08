@@ -22,50 +22,49 @@ import org.json.JSONObject;
  */
 public class OoyalaSkinPlayerActivity extends AbstractHookActivity  {
 
-  @Override
-  void completePlayerSetup(boolean asked) {
-	// Get the SkinLayout from our layout xml
-	OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
-	PlayerDomain domain = new PlayerDomain(DOMAIN);
-	// Create the OoyalaPlayer, with some built-in UI disabled
-	Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
-	player = new OoyalaPlayer(pcode, domain, options);
+	@Override
+	void completePlayerSetup(boolean asked) {
+		if(asked) {
+			// Get the SkinLayout from our layout xml
+			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
+			PlayerDomain domain = new PlayerDomain(DOMAIN);
+			// Create the OoyalaPlayer, with some built-in UI disabled
+			Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
+			player = new OoyalaPlayer(pcode, domain, options);
 
-	//Create the SkinOptions, and setup React
-	JSONObject overrides = createSkinOverrides();
-	SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
-	playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
-	//Add observer to listen to fullscreen open and close events
-	playerLayoutController.addObserver(this);
-	player.addObserver(this);
+			//Create the SkinOptions, and setup React
+			JSONObject overrides = createSkinOverrides();
+			SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
+			playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+			//Add observer to listen to fullscreen open and close events
+			playerLayoutController.addObserver(this);
+			player.addObserver(this);
 
-	if (player.setEmbedCode(embedCode)) {
+			if (player.setEmbedCode(embedCode)) {
 
+			} else {
+				Log.e(TAG, "Asset Failure");
+			}
+		}
 	}
-	else {
-	  Log.e(TAG, "Asset Failure");
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_skin_simple_layout);
+		completePlayerSetup(asked);
 	}
-  }
 
-  /**
-   * Called when the activity is first created.
-   */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.player_skin_simple_layout);
-	completePlayerSetup(asked);
-  }
-
-
-
-  /**
-   * Create skin overrides to show up in the skin.
-   * Default commented. Uncomment to show changes to the start screen.
-   * @return the overrides to apply to the skin.json in the assets folder
-   */
-  private JSONObject createSkinOverrides() {
-	JSONObject overrides = new JSONObject();
+	/**
+	 * Create skin overrides to show up in the skin.
+	 * Default commented. Uncomment to show changes to the start screen.
+	 * @return the overrides to apply to the skin.json in the assets folder
+	 */
+	private JSONObject createSkinOverrides() {
+		JSONObject overrides = new JSONObject();
 //    JSONObject startScreenOverrides = new JSONObject();
 //    JSONObject playIconStyleOverrides = new JSONObject();
 //    try {
@@ -76,6 +75,6 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity  {
 //    } catch (Exception e) {
 //      Log.e(TAG, "Exception Thrown", e);
 //    }
-	return overrides;
-  }
+		return overrides;
+	}
 }
