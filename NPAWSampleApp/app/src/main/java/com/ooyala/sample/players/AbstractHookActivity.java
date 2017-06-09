@@ -21,10 +21,6 @@ import java.util.Observer;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-/**
- * Created by FTT on 06/06/17.
- */
-
 public abstract class AbstractHookActivity extends Activity implements Observer {
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 	final String TAG = this.getClass().toString();
@@ -53,7 +49,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 		} else {
-			writePermission= true;
+			writePermission = true;
 			asked = true;
 		}
 
@@ -90,20 +86,32 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
-		if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
+	public void update(Observable arg0, Object argN) {
+		if (arg0 != player) {
 			return;
 		}
 
-		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-		Log.d(TAG, text);
-
-		if (writePermission) {
-			Log.d(TAG, "Writing log to SD card");
-			// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-			log.writeToSdcardLog(text);
+		final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+		if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
+			return;
 		}
+
+		if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
+			final String msg = "Error Event Received";
+			if (player != null && player.getError() != null) {
+				Log.e(TAG, msg, player.getError());
+			} else {
+				Log.e(TAG, msg);
+			}
+			return;
+		}
+
+		// Automation Hook: to write Notifications to a temporary file on the device/emulator
+		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+		log.writeToSdcardLog(text);
+
+		Log.d(TAG, text);
 	}
 }
 

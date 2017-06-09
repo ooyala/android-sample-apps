@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,7 +15,6 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.utils.youbora.YouboraConfigManager;
 
 import java.util.Map;
-
 
 /**
  * This activity illustrates Ooyala's Integration with NPAW Youbora Quality of Service tools
