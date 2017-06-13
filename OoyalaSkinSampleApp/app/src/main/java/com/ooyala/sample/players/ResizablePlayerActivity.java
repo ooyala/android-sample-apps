@@ -28,7 +28,6 @@ public class ResizablePlayerActivity extends AppCompatActivity implements Defaul
     skinPlayerFragment = (SkinPlayerFragment) getSupportFragmentManager().findFragmentById(R.id.video_fragment);
   }
 
-
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
     skinPlayerFragment.onKeyDown(keyCode, event);

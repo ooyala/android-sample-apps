@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -37,9 +36,9 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
 			skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaPlayer);
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
-			PlayerDomain domain1 = new PlayerDomain(domain);
+			PlayerDomain playerDomain = new PlayerDomain(domain);
 			Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, domain1, options);
+			player = new OoyalaPlayer(pcode, playerDomain, options);
 
 			//Create the SkinOptions, and setup React
 			SkinOptions skinOptions = new SkinOptions.Builder().build();
