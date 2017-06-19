@@ -66,10 +66,3 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
 		completePlayerSetup(asked);
 	}
 }
-
-
-
-
-
-
-

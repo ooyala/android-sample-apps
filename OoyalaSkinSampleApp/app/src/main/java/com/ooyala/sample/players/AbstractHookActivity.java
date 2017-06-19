@@ -38,8 +38,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String domain;
 
 	OoyalaPlayer player;
-	//protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-	protected OoyalaSkinLayoutController controller;
 	protected OoyalaSkinLayout skinLayout;
 
 

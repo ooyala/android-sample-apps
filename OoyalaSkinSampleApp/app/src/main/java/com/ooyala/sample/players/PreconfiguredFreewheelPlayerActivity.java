@@ -64,4 +64,3 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 		}
 	}
 }
-

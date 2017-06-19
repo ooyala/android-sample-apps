@@ -45,9 +45,9 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 
     //Create the SkinOptions, and setup React
     SkinOptions skinOptions = new SkinOptions.Builder().build();
-    controller = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+    playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
     //Add observer to listen to fullscreen open and close events
-    controller.addObserver(this);
+    playerLayoutController.addObserver(this);
 
     player.addObserver(this);
 
@@ -64,5 +64,4 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 //      player.play();
     }
   }
-
 }
