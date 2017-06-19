@@ -22,6 +22,8 @@ import java.util.Map;
  */
 public class NPAWDefaultPlayerActivity extends AbstractHookActivity {
 
+  protected PluginOoyala pluginOoyala;
+
   @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
@@ -54,6 +56,19 @@ public class NPAWDefaultPlayerActivity extends AbstractHookActivity {
     }
   }
 
+  @Override
+  protected void onStop() {
+    super.onStop();
+    Log.d(TAG, "Player Activity Stopped");
+    if (player != null) {
+      player.suspend();
+    }
+    if (isFinishing()) {
+      pluginOoyala.stopMonitoring();
+    } else {
+      pluginOoyala.pauseMonitoring();
+    }
+  }
 
   /**
    * Called when the activity is first created.

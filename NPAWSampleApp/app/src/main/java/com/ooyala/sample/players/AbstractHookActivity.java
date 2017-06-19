@@ -32,7 +32,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	protected String domain;
 	protected OoyalaPlayerLayoutController playerLayoutController;
 	protected OoyalaPlayerLayout playerLayout;
-	protected PluginOoyala pluginOoyala;
+
 
 	OoyalaPlayer player;
 
@@ -110,8 +110,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
 		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
 		log.writeToSdcardLog(text);
-
 		Log.d(TAG, text);
 	}
 }
+
+
 
