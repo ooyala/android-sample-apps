@@ -108,9 +108,11 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 
 		// Automation Hook: to write Notifications to a temporary file on the device/emulator
 		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-		log.writeToSdcardLog(text);
 		Log.d(TAG, text);
+		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+		if (writePermission) {
+			log.writeToSdcardLog(text);
+		}
 	}
 }
 
