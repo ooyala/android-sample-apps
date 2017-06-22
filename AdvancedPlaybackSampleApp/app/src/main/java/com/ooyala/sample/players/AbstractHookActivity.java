@@ -36,9 +36,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 
 	SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
-	String embedCode;
-	String pcode;
-	String domain;
+	protected String embedCode;
+	protected String pcode;
+	protected String domain;
 
 	OoyalaPlayer player;
 
@@ -98,7 +98,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 		if (null != player) {
 			player.suspend();
 		}
-		if(TAG.toString().equalsIgnoreCase("class com.ooyala.sample.players.InsertAdPlayerActivity"))
+		if(TAG.equalsIgnoreCase("class com.ooyala.sample.players.InsertAdPlayerActivity"))
 		{
 			Log.d(PERFORMANCE_MONITOR_TAG, performanceMonitor.buildStatisticsSnapshot().generateReport());
 			performanceMonitor.destroy();
@@ -109,7 +109,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	public void update(Observable o, Object arg) {
 		final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
 		if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
-			if(TAG.toString().equalsIgnoreCase("class com.ooyala.sample.players.ProgrammaticVolumePlayerActivity"))
+			if(TAG.equalsIgnoreCase("class com.ooyala.sample.players.ProgrammaticVolumePlayerActivity"))
 			{
 				player.setVolume(player.getVolume() + .025f);
 				return;
