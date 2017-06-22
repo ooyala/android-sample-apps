@@ -75,10 +75,10 @@ public class PreloadWithInitTimePlayerActivity extends AbstractHookActivity impl
 		Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).setUseExoPlayer(true).build();
 
 		player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-		playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 		player.addObserver(this);
 
-		player.setEmbedCode(EMBEDCODE);
+		player.setEmbedCode(EMBED_CODE);
 		player.seek(20000);
 	}
 }

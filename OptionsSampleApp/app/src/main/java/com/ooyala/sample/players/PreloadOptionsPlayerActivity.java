@@ -71,20 +71,20 @@ public class PreloadOptionsPlayerActivity extends AbstractHookActivity implement
 		Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).setUseExoPlayer(true).build();
 
 		player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-		playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 		player.addObserver(this);
 
 		OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,
-			playerLayoutController);
+				optimizedOoyalaPlayerLayoutController);
 		Map<String, String> freewheelParameters = new HashMap<String, String>();
 		freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
 		freewheelParameters
 			.put("fw_android_player_profile", "90750:ooyala_android");
 		freewheelParameters.put("fw_android_site_section_id",
 			"ooyala_android_internalapp");
-		freewheelParameters.put("fw_android_video_asset_id", EMBEDCODE);
+		freewheelParameters.put("fw_android_video_asset_id", EMBED_CODE);
 
 		freewheelManager.overrideFreewheelParameters(freewheelParameters);
-		player.setEmbedCode(EMBEDCODE);
+		player.setEmbedCode(EMBED_CODE);
 	}
 }

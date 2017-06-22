@@ -73,9 +73,9 @@ public class TVRatingsPlayerActivity extends AbstractHookActivity implements OnC
         Options options = new Options.Builder().setTVRatingConfiguration(fccConfig).setUseExoPlayer(true).build();
 
         player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-        playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
+        optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(
             playerLayout, player);
         player.addObserver(this);
-        player.setEmbedCode(EMBEDCODE);
+        player.setEmbedCode(EMBED_CODE);
     }
 }

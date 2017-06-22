@@ -28,9 +28,9 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 
 	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 	private String text;
-	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-	protected OoyalaPlayerLayoutController ooyalaplayerLayoutController;
-	protected String EMBEDCODE;
+	protected OptimizedOoyalaPlayerLayoutController optimizedOoyalaPlayerLayoutController;
+	protected OoyalaPlayerLayoutController playerLayoutController;
+	protected String EMBED_CODE;
 	protected String PCODE;
 	protected String DOMAIN;
 
@@ -53,7 +53,7 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 			asked = true;
 		}
 
-		EMBEDCODE = getIntent().getExtras().getString("embed_code");
+		EMBED_CODE = getIntent().getExtras().getString("embed_code");
 		PCODE = getIntent().getExtras().getString("pcode");
 		DOMAIN = getIntent().getExtras().getString("domain");
 	}
@@ -89,8 +89,8 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "App Stopped");
-		if (null != playerLayoutController && null != playerLayoutController.getPlayer()) {
-			playerLayoutController.getPlayer().suspend();
+		if (null != optimizedOoyalaPlayerLayoutController && null != optimizedOoyalaPlayerLayoutController.getPlayer()) {
+			optimizedOoyalaPlayerLayoutController.getPlayer().suspend();
 		}
 	}
 
@@ -98,8 +98,8 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(TAG, "App Restarted");
-		if (null != playerLayoutController && null != playerLayoutController.getPlayer()) {
-			playerLayoutController.getPlayer().resume();
+		if (null != optimizedOoyalaPlayerLayoutController && null != optimizedOoyalaPlayerLayoutController.getPlayer()) {
+			optimizedOoyalaPlayerLayoutController.getPlayer().resume();
 		}
 	}
 

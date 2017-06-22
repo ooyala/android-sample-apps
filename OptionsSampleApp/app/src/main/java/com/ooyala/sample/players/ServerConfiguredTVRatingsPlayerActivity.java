@@ -43,9 +43,9 @@ public class ServerConfiguredTVRatingsPlayerActivity extends AbstractHookActivit
 			Options options = new Options.Builder().setTVRatingConfiguration(tvRatingConfiguration).setUseExoPlayer(true).build();
 
 			player = new OoyalaPlayer(PCODE, domain, options);
-			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+			optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
-			player.setEmbedCode(EMBEDCODE);
+			player.setEmbedCode(EMBED_CODE);
 		}
 	}
 }

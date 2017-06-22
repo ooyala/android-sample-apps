@@ -23,9 +23,9 @@ public class PreventVideoViewSharingPlayerActivity extends AbstractHookActivity 
 			//Initialize the player
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-			ooyalaplayerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
-			player.setEmbedCode(EMBEDCODE);
+			player.setEmbedCode(EMBED_CODE);
 		}
 	}
 	@Override
