@@ -1,9 +1,6 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +8,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 /**
  * This activity illustrates how you can insert Ooyala and VAST advertisements programmatically
@@ -28,22 +23,13 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
  *
  *
  */
-public class ChangeVideoPlayerActivity extends Activity implements Observer {
+public class ChangeVideoPlayerActivity extends AbstractHookActivity {
+
   public final static String getName() {
     return "Change Video Programatically";
   }
-  final String TAG = this.getClass().toString();
 
-  String EMBED = null;
-  String PCODE = null;
-  String DOMAIN = null;
   String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
-
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
-
-  protected OoyalaPlayerLayoutController playerLayoutController;
-  protected OoyalaPlayer player;
 
   /**
    * Called when the activity is first created.
@@ -51,87 +37,52 @@ public class ChangeVideoPlayerActivity extends Activity implements Observer {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTitle(getName());
     setContentView(R.layout.player_double_button_layout);
+    completePlayerSetup(asked);
+  }
 
-    EMBED = getIntent().getExtras().getString("embed_code");
-    PCODE = getIntent().getExtras().getString("pcode");
-    DOMAIN = getIntent().getExtras().getString("domain");
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-    //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      player.addObserver(this);
 
-    Options options = new Options.Builder().setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-    player.addObserver(this);
+      if (player.setEmbedCode(embedCode)) {
+        //Uncomment for Auto Play
+        //player.play();
+      }
+      else {
+        Log.e(TAG, "Asset Failure");
+      }
+      /** DITA_START:<ph id="insert_ad_vast"> **/
+      //Setup the left button, which will immediately insert a VAST advertisement
+      Button leftButton = (Button) findViewById(R.id.doubleLeftButton);
+      leftButton.setText("Play Video 1");
+      leftButton.setOnClickListener(new OnClickListener() {
 
-    if (player.setEmbedCode(EMBED)) {
-      //Uncomment for Auto-Play
-      //player.play();
-    }
-
-    /** DITA_START:<ph id="insert_ad_vast"> **/
-    //Setup the left button, which will immediately insert a VAST advertisement
-    Button leftButton = (Button) findViewById(R.id.doubleLeftButton);
-    leftButton.setText("Play Video 1");
-    leftButton.setOnClickListener( new OnClickListener() {
-
-      @Override
-      public void onClick(View v) {
-          player.setEmbedCode(EMBED);
+        @Override
+        public void onClick(View v) {
+          player.setEmbedCode(embedCode);
           player.play();
-      }
-    });
-    /** DITA_END:</ph> **/
+        }
+      });
+      /** DITA_END:</ph> **/
 
-    //Setup the right button, which will immediately insert an Ooyala advertisement
-    Button rightButton = (Button) findViewById(R.id.doubleRightButton);
-    rightButton.setText("Play Video 2");
-    rightButton.setOnClickListener( new OnClickListener() {
+      //Setup the right button, which will immediately insert an Ooyala advertisement
+      Button rightButton = (Button) findViewById(R.id.doubleRightButton);
+      rightButton.setText("Play Video 2");
+      rightButton.setOnClickListener(new OnClickListener() {
 
-      @Override
-      public void onClick(View v) {
-        player.setEmbedCode(EMBED_TWO);
-        player.play();
-      }
-    });
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
-    if (player != null) {
-      player.suspend();
+        @Override
+        public void onClick(View v) {
+          player.setEmbedCode(EMBED_TWO);
+          player.play();
+        }
+      });
     }
   }
-
-  @Override
-  protected void onRestart() {
-    super.onRestart();
-    Log.d(TAG, "Player Activity Restarted");
-    if (player != null) {
-      player.resume();
-    }
-  }
-
-  /**
-   * Listen to all notifications from the OoyalaPlayer
-   */
-  @Override
-  public void update(Observable arg0, Object argN) {
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-    if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-      return;
-    }
-
-    // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    String text="Notification Received: " + arg1 + " - state: " + player.getState();
-    // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    playbacklog.writeToSdcardLog(text);
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-  }
-
 }
