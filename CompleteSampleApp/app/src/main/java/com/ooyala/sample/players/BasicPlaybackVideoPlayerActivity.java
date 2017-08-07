@@ -18,6 +18,7 @@ import com.ooyala.sample.R;
  */
 public class BasicPlaybackVideoPlayerActivity extends AbstractHookActivity {
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,3 +45,5 @@ public class BasicPlaybackVideoPlayerActivity extends AbstractHookActivity {
 		}
 	}
 }
+
+

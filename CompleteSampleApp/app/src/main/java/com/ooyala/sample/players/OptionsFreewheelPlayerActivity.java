@@ -89,4 +89,3 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 	}
 }
 
-

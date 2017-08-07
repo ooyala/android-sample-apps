@@ -9,6 +9,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.sample.players.AbstractHookActivity;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers

@@ -11,8 +11,8 @@ import android.util.Log;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.performance.PerformanceMonitor;
+import com.ooyala.android.ui.OoyalaPlayerControls;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
@@ -20,28 +20,30 @@ import java.util.Observer;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static com.ooyala.sample.players.InsertAdPlayerActivity.performanceMonitor;
 
-
-abstract public class AbstractHookActivity extends Activity implements Observer {
+/**
+ * This class asks permission for WRITE_EXTERNAL_STORAGE. We need it for automation hooks
+ * as we need to write into the SD card and automation will parse this file.
+ */
+public abstract class AbstractHookActivity extends Activity implements Observer {
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+	String TAG = this.getClass().toString();
+	final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
 
-
-	private String TAG = this.getClass().toString();
-
-	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
-	protected OptimizedOoyalaPlayerLayoutController ooyalaPlayerLayoutController;
 	protected OoyalaPlayerLayoutController playerLayoutController;
-	protected PerformanceMonitor performanceMonitor;
+	//private PerformanceMonitor performanceMonitor;
+
+	SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
+
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
 
-	protected OoyalaPlayer player;
+	OoyalaPlayer player;
 
 	boolean writePermission = false;
 	boolean asked = false;
-
-	final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
 
 	// complete player setup after we asked for permission to write into external storage
 	abstract void completePlayerSetup(final boolean asked);
@@ -53,7 +55,7 @@ abstract public class AbstractHookActivity extends Activity implements Observer 
 		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 		} else {
-			writePermission = true;
+			writePermission= true;
 			asked = true;
 		}
 
@@ -74,6 +76,22 @@ abstract public class AbstractHookActivity extends Activity implements Observer 
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		if (null != player) {
+			player.suspend();
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (null != player) {
+			player.resume();
+		}
+	}
+
+	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "Player Activity Stopped");
@@ -88,23 +106,11 @@ abstract public class AbstractHookActivity extends Activity implements Observer 
 	}
 
 	@Override
-	protected void onRestart() {
-		super.onRestart();
-		Log.d(TAG, "App Restarted");
-		if (player != null && player != null) {
-			player.resume();
-		}
-	}
-
-	@Override
 	public void update(Observable o, Object arg) {
 		final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
-		// pass player's notifications to performance monitor
-		if(TAG.equalsIgnoreCase("com.ooyala.sample.players.InsertAdPlayerActivity")) {
-			performanceMonitor.update(o, arg);
-		}
 		if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
-			if (TAG.equalsIgnoreCase("class com.ooyala.sample.players.ProgrammaticVolumePlayerActivity")) {
+			if(TAG.equalsIgnoreCase("class com.ooyala.sample.players.ProgrammaticVolumePlayerActivity"))
+			{
 				player.setVolume(player.getVolume() + .025f);
 				return;
 			}
