@@ -30,7 +30,7 @@ public class IQConfigurationPlayerActivity extends AbstractHookActivity {
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
-			player.setEmbedCode(EMBEDCODE);
+			player.setEmbedCode(EMBED_CODE);
 		}
 	}
 

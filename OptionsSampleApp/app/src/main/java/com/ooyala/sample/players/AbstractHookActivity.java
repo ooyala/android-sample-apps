@@ -92,6 +92,9 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 		if (null != optimizedOoyalaPlayerLayoutController && null != optimizedOoyalaPlayerLayoutController.getPlayer()) {
 			optimizedOoyalaPlayerLayoutController.getPlayer().suspend();
 		}
+		else if (null != playerLayoutController && null != playerLayoutController.getPlayer()){
+			playerLayoutController.getPlayer().suspend();
+		}
 	}
 
 	@Override
@@ -100,6 +103,9 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 		Log.d(TAG, "App Restarted");
 		if (null != optimizedOoyalaPlayerLayoutController && null != optimizedOoyalaPlayerLayoutController.getPlayer()) {
 			optimizedOoyalaPlayerLayoutController.getPlayer().resume();
+		}
+		else if (null != playerLayoutController && null != playerLayoutController.getPlayer()){
+			playerLayoutController.getPlayer().resume();
 		}
 	}
 
