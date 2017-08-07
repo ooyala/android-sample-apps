@@ -40,6 +40,10 @@ project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, './ExoPlayerSa
 include ':OoyalaSkinSampleApp'
 project(':OoyalaSkinSampleApp').projectDir = new File(settingsDir, './OoyalaSkinSampleApp/app')
 
+// Playback Lab
+include ':FullScreenSampleApp'
+project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullScreenSampleApp/app')
+
 // Developer
 //include ':ooyalaSkinSDK'
 //project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')

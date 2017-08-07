@@ -14,10 +14,19 @@
         android:layout_weight="1"
         android:text="This is a long description to test this out, wara wara" />
 
-    <com.ooyala.android.skin.OoyalaSkinLayout
-        android:id="@+id/ooyalaSkinLayout"
+    <!--OoyalaSkinLayout has to be placed into a container for a correct transformation between
+    a full screen mode to a window mode-->
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:background="#000" />
+        android:layout_weight="3">
+
+        <com.ooyala.android.skin.OoyalaSkinLayout
+            android:id="@+id/ooyalaSkinLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000" />
+
+    </FrameLayout>
+
 </LinearLayout>
