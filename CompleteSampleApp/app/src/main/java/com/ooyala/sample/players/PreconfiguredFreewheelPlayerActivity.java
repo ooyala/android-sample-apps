@@ -9,8 +9,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-
-import java.util.Observer;
+import com.ooyala.sample.players.AbstractHookActivity;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -27,30 +26,38 @@ import java.util.Observer;
  */
 public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
-	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+	public final static String getName() {
+		return "Preconfigured Freewheel Player";
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setTitle(getName());
 		setContentView(R.layout.player_simple_frame_layout);
 		completePlayerSetup(asked);
 	}
 
 	@Override
-	void completePlayerSetup(final boolean asked) {
+	void completePlayerSetup(boolean asked) {
 		if (asked) {
+			/** DITA_START:<ph id="freewheel_preconfigured"> **/
+			//Initialize the player
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
-
 			@SuppressWarnings("unused")
-			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
+			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, ooyalaPlayerLayoutController);
 
-			player.setEmbedCode(embedCode);
+			if (player.setEmbedCode(embedCode)) {
+				//Uncomment for Auto Play
+				//player.play();
+			}
+			/** DITA_END:</ph> **/
 		}
 	}
 }

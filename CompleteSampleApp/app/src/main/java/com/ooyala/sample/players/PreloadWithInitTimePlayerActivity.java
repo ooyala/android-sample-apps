@@ -1,9 +1,5 @@
 package com.ooyala.sample.players;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,114 +10,70 @@ import android.widget.ToggleButton;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
-public class PreloadWithInitTimePlayerActivity extends Activity implements OnClickListener, Observer {
-    /**
-     * Called when the activity is first created.
-     */
-    private final String TAG = this.getClass().toString();
-    String PCODE = null;
-    String DOMAIN = null;
-    private String EMBEDCODE = "";
+public class PreloadWithInitTimePlayerActivity extends AbstractHookActivity implements OnClickListener {
 
-    private OptimizedOoyalaPlayerLayoutController playerLayoutController;
-    private OoyalaPlayer player;
-    private Button setButton;
-    private ToggleButton preloadButton;
-    private ToggleButton showPromoImageButton;
-    SDCardLogcatOoyalaEventsLogger playbacklog;
+	private final String TAG = this.getClass().toString();
+	private Button setButton;
+	private ToggleButton preloadButton;
+	private ToggleButton showPromoImageButton;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        String localeString = getResources().getConfiguration().locale.toString();
-        Log.d(TAG, "locale is " + localeString);
-        LocalizationSupport.useLocalizedStrings(LocalizationSupport
-                .loadLocalizedStrings(localeString));
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		String localeString = getResources().getConfiguration().locale.toString();
+		Log.d(TAG, "locale is " + localeString);
+		LocalizationSupport.useLocalizedStrings(LocalizationSupport
+				.loadLocalizedStrings(localeString));
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.player_toggle_button_layout);
-        EMBEDCODE = getIntent().getExtras().getString("embed_code");
-        PCODE = getIntent().getExtras().getString("pcode");
-        DOMAIN = getIntent().getExtras().getString("domain");
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_toggle_button_layout);
+		completePlayerSetup(asked);
+	}
 
-        setButton = (Button) findViewById(R.id.setButton);
-        setButton.setText("Create Video");
-        setButton.setOnClickListener(this);
+	@Override
+	void completePlayerSetup(boolean asked) {
+		if (asked) {
+			setButton = (Button) findViewById(R.id.setButton);
+			setButton.setText("Create Video");
+			setButton.setOnClickListener(this);
 
-        preloadButton = (ToggleButton) findViewById(R.id.toggleButton1);
-        preloadButton.setTextOn("Preload On");
-        preloadButton.setTextOff("Preload Off");
-        preloadButton.setChecked(true);
+			preloadButton = (ToggleButton) findViewById(R.id.toggleButton1);
+			preloadButton.setTextOn("Preload On");
+			preloadButton.setTextOff("Preload Off");
+			preloadButton.setChecked(true);
 
-        showPromoImageButton = (ToggleButton) findViewById(R.id.toggleButton2);
-        showPromoImageButton.setTextOn("Show PromoImage On");
-        showPromoImageButton.setTextOff("Show PromoImage Off");
-        showPromoImageButton.setChecked(true);
+			showPromoImageButton = (ToggleButton) findViewById(R.id.toggleButton2);
+			showPromoImageButton.setTextOn("Show PromoImage On");
+			showPromoImageButton.setTextOff("Show PromoImage Off");
+			showPromoImageButton.setChecked(true);
+		}
+	}
 
-        // Initialize playBackLog : Write the sdk events text along with events count to log file in sdcard if the log file already exists
-        playbacklog = new SDCardLogcatOoyalaEventsLogger();
-    }
+	@Override
+	public void onClick(View v) {
+		if (null != player) {
+			player.suspend();
+			player.removeVideoView();
+		}
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "App Stopped");
-        if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
-            playerLayoutController.getPlayer().suspend();
-        }
-    }
+		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "App Restarted");
-        if (playerLayoutController != null && playerLayoutController.getPlayer() != null) {
-            playerLayoutController.getPlayer().resume();
-        }
-    }
+		boolean showPromoImage = this.showPromoImageButton.isChecked();
+		boolean preload = this.preloadButton.isChecked();
+		DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
+				+ " preload: " + preload);
+		Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).setUseExoPlayer(true).build();
 
-    @Override
-    public void onClick(View v) {
-        if (player != null) {
-            player.suspend();
-            player.removeVideoView();
-        }
+		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+		ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		player.addObserver(this);
 
-        OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-        PlayerDomain domain = new PlayerDomain(DOMAIN);
-        boolean showPromoImage = this.showPromoImageButton.isChecked();
-        boolean preload = this.preloadButton.isChecked();
-        DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
-                + " preload: " + preload);
-        Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).setUseExoPlayer(true).build();
-
-        player = new OoyalaPlayer(PCODE, domain, options);
-        playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
-        player.addObserver(this);
-
-        player.setEmbedCode(EMBEDCODE);
-        player.play(20000);
-    }
-
-    @Override
-    public void update(Observable arg0, Object argN) {
-        final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-        if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-            return;
-        }
-
-        // Automation Hook: to write Notifications to a temporary file on the device/emulator
-        String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-        // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-        playbacklog.writeToSdcardLog(text);
-
-        Log.d(TAG, text);
-    }
+		player.setEmbedCode(embedCode);
+		player.play(20000);
+	}
 }
