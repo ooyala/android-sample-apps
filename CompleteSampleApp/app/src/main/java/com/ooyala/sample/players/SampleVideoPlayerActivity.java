@@ -21,12 +21,7 @@ public class SampleVideoPlayerActivity extends AbstractHookActivity {
 		return "Custom Video Player Sample";
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
-	}
+	protected OoyalaPlayerLayoutController playerLayoutController;
 
 	@Override
 	void completePlayerSetup(boolean asked) {
@@ -42,11 +37,19 @@ public class SampleVideoPlayerActivity extends AbstractHookActivity {
 			player.addObserver(this);
 
 			if (player.setEmbedCode(embedCode)) {
-				//Uncomment for Auto-Play
-				//player.play();
 			} else {
 				Log.d(this.getClass().getName(), "Something Went Wrong!");
 			}
 		}
+	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
 	}
 }

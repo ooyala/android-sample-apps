@@ -1,5 +1,8 @@
 package com.ooyala.sample.players;
 
+import java.util.Observer;
+
+
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -19,7 +22,7 @@ import com.ooyala.sample.R;
  * tvratingsurl (optional)
  * tvsubratings (optional)
  */
-public class ServerConfiguredTVRatingsPlayerActivity extends AbstractHookActivity {
+public class ServerConfiguredTVRatingsPlayerActivity extends AbstractHookActivity implements Observer {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,18 +33,19 @@ public class ServerConfiguredTVRatingsPlayerActivity extends AbstractHookActivit
 
 	@Override
 	void completePlayerSetup(boolean asked) {
-		if(asked){
+		if (asked) {
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			PlayerDomain domain = new PlayerDomain(DOMAIN);
 
 			// Configure FCC TV Ratings
 			FCCTVRatingConfiguration.Builder builder = new FCCTVRatingConfiguration.Builder();
 			FCCTVRatingConfiguration tvRatingConfiguration = builder.setPosition(Position.TopLeft).setDurationSeconds(5).build();
 			Options options = new Options.Builder().setTVRatingConfiguration(tvRatingConfiguration).setUseExoPlayer(true).build();
 
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-			ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+			player = new OoyalaPlayer(PCODE, domain, options);
+			optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
-			player.setEmbedCode(embedCode);
+			player.setEmbedCode(EMBED_CODE);
 		}
 	}
 }

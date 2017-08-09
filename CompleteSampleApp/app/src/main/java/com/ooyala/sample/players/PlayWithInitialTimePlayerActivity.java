@@ -18,17 +18,8 @@ import com.ooyala.sample.R;
  *
  */
 public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
-
 	public final static String getName() {
 		return "Play With InitialTime";
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getName());
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
 	}
 
 	@Override
@@ -36,6 +27,7 @@ public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
 		if (asked) {
 			//Initialize the player
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
@@ -46,5 +38,16 @@ public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
 				player.play(20000);
 			}
 		}
+	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
 	}
 }

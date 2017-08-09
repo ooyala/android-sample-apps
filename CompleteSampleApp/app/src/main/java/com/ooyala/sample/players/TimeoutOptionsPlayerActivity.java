@@ -22,7 +22,6 @@ import java.util.Map;
 
 public class TimeoutOptionsPlayerActivity extends AbstractHookActivity implements OnClickListener {
 
-	private final String TAG = this.getClass().toString();
 	private Button setButton;
 	private EditText connectionTimeout;
 	private EditText readTimeout;
@@ -57,7 +56,7 @@ public class TimeoutOptionsPlayerActivity extends AbstractHookActivity implement
 	@Override
 	public void onClick(View v) {
 		// remove the previous player to only play the current player
-		if (player != null) {
+		if (null != player) {
 			player.suspend();
 			player.removeVideoView();
 		}
@@ -88,21 +87,22 @@ public class TimeoutOptionsPlayerActivity extends AbstractHookActivity implement
 
 		//Build the options with the potentially updated builder
 		Options options = builder.setUseExoPlayer(true).build();
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+		optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+
 		player.addObserver(this);
 
 		OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,
-				ooyalaPlayerLayoutController);
+				optimizedOoyalaPlayerLayoutController);
 		Map<String, String> freewheelParameters = new HashMap<String, String>();
 		freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
 		freewheelParameters
 				.put("fw_android_player_profile", "90750:ooyala_android");
 		freewheelParameters.put("fw_android_site_section_id",
 				"ooyala_android_internalapp");
-		freewheelParameters.put("fw_android_video_asset_id", embedCode);
+		freewheelParameters.put("fw_android_video_asset_id", EMBED_CODE);
 
 		freewheelManager.overrideFreewheelParameters(freewheelParameters);
-		player.setEmbedCode(embedCode);
+		player.setEmbedCode(EMBED_CODE);
 	}
 }

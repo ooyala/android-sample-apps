@@ -1,8 +1,5 @@
 package com.ooyala.sample.players;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +7,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -18,12 +14,16 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OptionsFreewheelPlayerActivity extends AbstractHookActivity implements
 		OnClickListener {
 
-	private final String TAG = this.getClass().toString();
+	private OptimizedOoyalaPlayerLayoutController playerLayoutController;
 	private Button setButton;
 	private ToggleButton cuePointsButton;
 	private ToggleButton adsControlsButton;
@@ -36,32 +36,29 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 				.loadLocalizedStrings(localeString));
 
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.player_toggle_button_layout);
-		completePlayerSetup(asked);
+
+		setButton = (Button) findViewById(R.id.setButton);
+		setButton.setText("Create Video");
+		setButton.setOnClickListener(this);
+
+		cuePointsButton = (ToggleButton) findViewById(R.id.toggleButton1);
+		cuePointsButton.setTextOn("CuePoints On");
+		cuePointsButton.setTextOff("CuePoints Off");
+		cuePointsButton.setChecked(true);
+
+		adsControlsButton = (ToggleButton) findViewById(R.id.toggleButton2);
+		adsControlsButton.setTextOn("AdsControls On");
+		adsControlsButton.setTextOff("AdsControls Off");
+		adsControlsButton.setChecked(true);
 	}
 
-	@Override
-	void completePlayerSetup(boolean asked) {
-		if (asked) {
-			setButton = (Button) findViewById(R.id.setButton);
-			setButton.setText("Create Video");
-			setButton.setOnClickListener(this);
-
-			cuePointsButton = (ToggleButton) findViewById(R.id.toggleButton1);
-			cuePointsButton.setTextOn("CuePoints On");
-			cuePointsButton.setTextOff("CuePoints Off");
-			cuePointsButton.setChecked(true);
-
-			adsControlsButton = (ToggleButton) findViewById(R.id.toggleButton2);
-			adsControlsButton.setTextOn("AdsControls On");
-			adsControlsButton.setTextOff("AdsControls Off");
-			adsControlsButton.setChecked(true);
-		}
-	}
 
 	@Override
 	public void onClick(View v) {
 		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		PlayerDomain playerDomain = new PlayerDomain(domain);
 		boolean showAdsControls = this.adsControlsButton.isChecked();
 		boolean showCuePoints = this.cuePointsButton.isChecked();
 		DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
@@ -69,13 +66,13 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 		Options options = new Options.Builder().setShowAdsControls(showAdsControls)
 				.setShowCuePoints(showCuePoints).setUseExoPlayer(true).build();
 
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(
+		player = new OoyalaPlayer(pcode, playerDomain, options);
+		playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
 				playerLayout, player);
 		player.addObserver(this);
 
 		OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,
-				ooyalaPlayerLayoutController);
+				playerLayoutController);
 		Map<String, String> freewheelParameters = new HashMap<String, String>();
 		freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
 		freewheelParameters
@@ -86,6 +83,12 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 
 		freewheelManager.overrideFreewheelParameters(freewheelParameters);
 		player.setEmbedCode(embedCode);
+	}
+
+	@Override
+	void completePlayerSetup(final boolean asked) {
+		// No need to do anything here for this activity
+		// The player makes its setup when a button is clicked
 	}
 }
 

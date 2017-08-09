@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ToggleButton;
+
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
@@ -19,12 +20,9 @@ import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
+
 public class CuePointsOptionsFreewheelPlayerActivity extends AbstractHookActivity implements
 		OnClickListener {
-	/**
-	 * Called when the activity is first created.
-	 */
-	private final String TAG = this.getClass().toString();
 
 	private Button setButton;
 	private ToggleButton cuePointsButton;
@@ -68,7 +66,6 @@ public class CuePointsOptionsFreewheelPlayerActivity extends AbstractHookActivit
 			player.removeVideoView();
 		}
 		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
 		boolean showAdsControls = this.adsControlsButton.isChecked();
 		boolean showCuePoints = this.cuePointsButton.isChecked();
 		DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
@@ -76,22 +73,21 @@ public class CuePointsOptionsFreewheelPlayerActivity extends AbstractHookActivit
 		Options options = new Options.Builder().setShowAdsControls(showAdsControls)
 				.setShowCuePoints(showCuePoints).setUseExoPlayer(true).build();
 
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+		optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 		player.addObserver(this);
 
 		OoyalaFreewheelManager freewheelManager = new OoyalaFreewheelManager(this,
-				ooyalaPlayerLayoutController);
+				optimizedOoyalaPlayerLayoutController);
 		Map<String, String> freewheelParameters = new HashMap<String, String>();
 		freewheelParameters.put("fw_android_ad_server", "http://g1.v.fwmrm.net/");
 		freewheelParameters
 				.put("fw_android_player_profile", "90750:ooyala_android");
 		freewheelParameters.put("fw_android_site_section_id",
 				"ooyala_android_internalapp");
-		freewheelParameters.put("fw_android_video_asset_id", embedCode);
+		freewheelParameters.put("fw_android_video_asset_id", EMBED_CODE);
 
 		freewheelManager.overrideFreewheelParameters(freewheelParameters);
-		player.setEmbedCode(embedCode);
+		player.setEmbedCode(EMBED_CODE);
 	}
 }
-

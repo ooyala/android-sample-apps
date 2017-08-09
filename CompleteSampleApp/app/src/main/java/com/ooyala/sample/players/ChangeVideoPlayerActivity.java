@@ -1,7 +1,8 @@
 package com.ooyala.sample.players;
 
-import android.os.Bundle;
 
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,61 +24,65 @@ import com.ooyala.sample.R;
  *
  */
 public class ChangeVideoPlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
-		return "Change Video Programatically";
-	}
 
-	private String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
+  public final static String getName() {
+    return "Change Video Programatically";
+  }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getName());
-		setContentView(R.layout.player_double_button_layout);
-		completePlayerSetup(asked);
-	}
+  String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
 
-	@Override
-	void completePlayerSetup(boolean asked) {
-		if (asked) {
-			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+  /**
+   * Called when the activity is first created.
+   */
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.player_double_button_layout);
+    completePlayerSetup(asked);
+  }
 
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-			player.addObserver(this);
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
-			if (player.setEmbedCode(embedCode)) {
-				//Uncomment for Auto-Play
-				//player.play();
-			}
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      player.addObserver(this);
 
-			/** DITA_START:<ph id="insert_ad_vast"> **/
-			//Setup the left button, which will immediately insert a VAST advertisement
-			Button leftButton = (Button) findViewById(R.id.doubleLeftButton);
-			leftButton.setText("Play Video 1");
-			leftButton.setOnClickListener(new OnClickListener() {
+      if (player.setEmbedCode(embedCode)) {
+        //Uncomment for Auto Play
+        //player.play();
+      }
+      else {
+        Log.e(TAG, "Asset Failure");
+      }
+      /** DITA_START:<ph id="insert_ad_vast"> **/
+      //Setup the left button, which will immediately insert a VAST advertisement
+      Button leftButton = (Button) findViewById(R.id.doubleLeftButton);
+      leftButton.setText("Play Video 1");
+      leftButton.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					player.setEmbedCode(embedCode);
-					player.play();
-				}
-			});
-			/** DITA_END:</ph> **/
+        @Override
+        public void onClick(View v) {
+          player.setEmbedCode(embedCode);
+          player.play();
+        }
+      });
+      /** DITA_END:</ph> **/
 
-			//Setup the right button, which will immediately insert an Ooyala advertisement
-			Button rightButton = (Button) findViewById(R.id.doubleRightButton);
-			rightButton.setText("Play Video 2");
-			rightButton.setOnClickListener(new OnClickListener() {
+      //Setup the right button, which will immediately insert an Ooyala advertisement
+      Button rightButton = (Button) findViewById(R.id.doubleRightButton);
+      rightButton.setText("Play Video 2");
+      rightButton.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					player.setEmbedCode(EMBED_TWO);
-					player.play();
-				}
-			});
-		}
-	}
+        @Override
+        public void onClick(View v) {
+          player.setEmbedCode(EMBED_TWO);
+          player.play();
+        }
+      });
+    }
+  }
 }

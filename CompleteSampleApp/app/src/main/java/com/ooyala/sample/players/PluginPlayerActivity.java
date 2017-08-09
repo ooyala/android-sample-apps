@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-
 import android.os.Bundle;
 import android.util.Log;
 
@@ -12,17 +11,10 @@ import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.SampleAdPlugin;
 
-public class PluginPlayerActivity extends AbstractHookActivity {
 
+public class PluginPlayerActivity extends AbstractHookActivity {
 	public final static String getName() {
 		return "Custom Plugin Sample";
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
 	}
 
 	@Override
@@ -43,5 +35,15 @@ public class PluginPlayerActivity extends AbstractHookActivity {
 				Log.d(this.getClass().getName(), "Something Went Wrong!");
 			}
 		}
+	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
 	}
 }

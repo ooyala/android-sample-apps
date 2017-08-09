@@ -9,7 +9,8 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.freewheelsdk.OoyalaFreewheelManager;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.AbstractHookActivity;
+
+import java.util.Observer;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -26,38 +27,30 @@ import com.ooyala.sample.players.AbstractHookActivity;
  */
 public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
-	public final static String getName() {
-		return "Preconfigured Freewheel Player";
-	}
+	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(getName());
+
 		setContentView(R.layout.player_simple_frame_layout);
 		completePlayerSetup(asked);
 	}
 
 	@Override
-	void completePlayerSetup(boolean asked) {
+	void completePlayerSetup(final boolean asked) {
 		if (asked) {
-			/** DITA_START:<ph id="freewheel_preconfigured"> **/
-			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-			ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
-			@SuppressWarnings("unused")
-			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, ooyalaPlayerLayoutController);
+			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
-			if (player.setEmbedCode(embedCode)) {
-				//Uncomment for Auto Play
-				//player.play();
-			}
-			/** DITA_END:</ph> **/
+			@SuppressWarnings("unused")
+			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, playerLayoutController);
+
+			player.setEmbedCode(embedCode);
 		}
 	}
 }

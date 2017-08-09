@@ -1,5 +1,6 @@
 package com.ooyala.sample.players;
 
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -9,7 +10,6 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-
 import java.util.ArrayList;
 
 /**
@@ -21,18 +21,6 @@ import java.util.ArrayList;
 public class MultipleVideosPlayerActivity extends AbstractHookActivity {
 	public final static String getName() {
 		return "Multiple Video Playback";
-	}
-	final String TAG = this.getClass().toString();
-
-	/**
-	 * Called when the activity is first created.
-	 */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getIntent().getExtras().getString("selection_name"));
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
 	}
 
 	@Override
@@ -58,4 +46,16 @@ public class MultipleVideosPlayerActivity extends AbstractHookActivity {
 			}
 		}
 	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
+
+	}
 }
+

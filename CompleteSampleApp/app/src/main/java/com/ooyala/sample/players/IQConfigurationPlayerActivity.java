@@ -16,16 +16,8 @@ import com.ooyala.sample.R;
 public class IQConfigurationPlayerActivity extends AbstractHookActivity {
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getIntent().getExtras().getString("selection_name"));
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
-	}
-
-	@Override
 	void completePlayerSetup(boolean asked) {
-		if (asked) {
+		if(asked) {
 			// Create an IQConfiguration class
 			IqConfiguration iqConfiguration = new IqConfiguration.Builder().setPlayerID("Custom Android Player ID").build();
 
@@ -34,11 +26,22 @@ public class IQConfigurationPlayerActivity extends AbstractHookActivity {
 
 			//Initialize the player
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
-			player.setEmbedCode(embedCode);
+
+			player.setEmbedCode(EMBED_CODE);
 		}
 	}
-}
 
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setTitle(getIntent().getExtras().getString("selection_name"));
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
+	}
+}

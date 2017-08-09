@@ -9,6 +9,7 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
+
 /**
  * This activity illustrates how you can change the volume of the OoyalaPlayer programmatically.
  * Here you can see the volume being set onCreate, and changed every tick of TIME_CHANGED
@@ -19,17 +20,8 @@ import com.ooyala.sample.R;
  *
  */
 public class ProgrammaticVolumePlayerActivity extends AbstractHookActivity {
-
 	public final static String getName() {
 		return "Programmatic Volume";
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getName());
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
 	}
 
 	@Override
@@ -46,8 +38,18 @@ public class ProgrammaticVolumePlayerActivity extends AbstractHookActivity {
 			player.setVolume(0.0f);
 
 			if (player.setEmbedCode(embedCode)) {
-				//player.play();
+				player.play();
 			}
 		}
+	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
 	}
 }

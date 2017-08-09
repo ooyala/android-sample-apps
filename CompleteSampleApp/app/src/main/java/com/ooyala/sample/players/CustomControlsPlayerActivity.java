@@ -24,37 +24,33 @@ import com.ooyala.sample.utils.CustomPlayerControls;
  *  the default controls can be overridden.
  */
 public class CustomControlsPlayerActivity extends AbstractHookActivity {
+  public final static String getName() {
+    return "Custom Controls";
+  }
 
-	public final static String getName() {
-		return "Custom Controls";
-	}
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getName());
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
-	}
+      //Set the controls to use for Inline Control style.
+      playerLayoutController.setInlineControls(new CustomPlayerControls(player, playerLayout));
+      player.addObserver(this);
 
-	@Override
-	void completePlayerSetup(boolean asked) {
-		if (asked) {
-			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      if (player.setEmbedCode(embedCode)) {
+        //Uncomment for Auto-Play
+        //player.play();
+      }
+    }
+  }
 
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-
-			//Set the controls to use for Inline Control style.
-			playerLayoutController.setInlineControls(new CustomPlayerControls(player, playerLayout));
-			player.addObserver(this);
-
-			if (player.setEmbedCode(embedCode)) {
-				//Uncomment for Auto-Play
-				//player.play();
-			}
-		}
-	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.player_simple_layout);
+    completePlayerSetup(asked);
+  }
 }

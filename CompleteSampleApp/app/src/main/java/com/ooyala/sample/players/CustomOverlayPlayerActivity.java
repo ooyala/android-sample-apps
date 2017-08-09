@@ -1,5 +1,6 @@
 package com.ooyala.sample.players;
 
+
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -16,25 +17,16 @@ import com.ooyala.sample.utils.CustomOverlay;
  * The class CustomOverlay is inserted into the player using setInlineOverlay
  */
 public class CustomOverlayPlayerActivity extends AbstractHookActivity {
+
 	public final static String getName() {
 		return "Custom Overlay";
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getName());
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
-	}
-
-	@Override
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
-
 			//Initialize the player
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
@@ -50,5 +42,12 @@ public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 				//player.play();
 			}
 		}
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
 	}
 }

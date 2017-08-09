@@ -1,6 +1,11 @@
 package com.ooyala.sample.players;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,28 +15,29 @@ import android.widget.ToggleButton;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.LocalizationSupport;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 public class PreloadWithInitTimePlayerActivity extends AbstractHookActivity implements OnClickListener {
 
-	private final String TAG = this.getClass().toString();
 	private Button setButton;
 	private ToggleButton preloadButton;
 	private ToggleButton showPromoImageButton;
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_toggle_button_layout);
 		String localeString = getResources().getConfiguration().locale.toString();
 		Log.d(TAG, "locale is " + localeString);
 		LocalizationSupport.useLocalizedStrings(LocalizationSupport
 				.loadLocalizedStrings(localeString));
-
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_toggle_button_layout);
 		completePlayerSetup(asked);
 	}
 
@@ -62,18 +68,17 @@ public class PreloadWithInitTimePlayerActivity extends AbstractHookActivity impl
 		}
 
 		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
 		boolean showPromoImage = this.showPromoImageButton.isChecked();
 		boolean preload = this.preloadButton.isChecked();
 		DebugMode.logD(TAG, "showPromoImage: " + showPromoImage
 				+ " preload: " + preload);
 		Options options = new Options.Builder().setPreloadContent(preload).setShowPromoImage(showPromoImage).setUseExoPlayer(true).build();
 
-		player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-		ooyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+		player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
+		optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 		player.addObserver(this);
 
-		player.setEmbedCode(embedCode);
-		player.play(20000);
+		player.setEmbedCode(EMBED_CODE);
+		player.seek(20000);
 	}
 }

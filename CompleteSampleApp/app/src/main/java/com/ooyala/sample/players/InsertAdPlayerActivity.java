@@ -13,6 +13,7 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ads.vast.VASTAdSpot;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.performance.PerformanceMonitor;
 import com.ooyala.android.performance.PerformanceMonitorBuilder;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
@@ -30,19 +31,12 @@ import java.net.URL;
  *
  */
 public class InsertAdPlayerActivity extends AbstractHookActivity {
-
 	public final static String getName() {
 		return "Insert Ad at Runtime";
 	}
-	final String TAG = this.getClass().toString();
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(getName());
-		setContentView(R.layout.player_double_button_layout);
-		completePlayerSetup(asked);
-	}
+	public static PerformanceMonitor performanceMonitor;
+
 	@Override
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
@@ -95,5 +89,15 @@ public class InsertAdPlayerActivity extends AbstractHookActivity {
 				}
 			});
 		}
+	}
+
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_double_button_layout);
+		completePlayerSetup(asked);
 	}
 }
