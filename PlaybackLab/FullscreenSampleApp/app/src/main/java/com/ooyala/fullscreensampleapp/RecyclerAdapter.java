@@ -24,13 +24,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
 
     private Application app;
     private List<String> embedCodes;
-    private RecyclerViewFullScreenManager fullScreenHelper;
+    private RecyclerViewFullScreenManager recyclerFullScreenHelper;
 
     public RecyclerAdapter(List<String> embedCodes, FrameLayout expandedLayout, Application app) {
         this.embedCodes= embedCodes;
         this.app = app;
 
-        fullScreenHelper = new RecyclerViewFullScreenManager(expandedLayout);
+        recyclerFullScreenHelper = new RecyclerViewFullScreenManager(expandedLayout);
     }
 
     @Override
@@ -65,9 +65,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
                 public void onSystemUiVisibilityChange(int visibility) {
                     boolean isFullScreenMode = playerLayout.isFullscreen();
                     if (isFullScreenMode) {
-                        fullScreenHelper.expandPlayerLayout(playerLayout);
+                        recyclerFullScreenHelper.expandPlayerLayout(playerLayout);
                     } else {
-                        fullScreenHelper.collapsePlayerLayout();
+                        recyclerFullScreenHelper.collapsePlayerLayout();
                     }
                 }
             });
