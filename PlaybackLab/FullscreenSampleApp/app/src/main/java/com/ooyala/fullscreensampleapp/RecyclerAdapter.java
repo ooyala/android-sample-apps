@@ -13,6 +13,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
+import com.ooyala.android.skin.util.RecyclerViewFullScreenManager;
 
 import java.util.List;
 
@@ -23,13 +24,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
 
     private Application app;
     private List<String> embedCodes;
-    private FullScreenHelper fullScreenHelper;
+    private RecyclerViewFullScreenManager fullScreenHelper;
 
     public RecyclerAdapter(List<String> embedCodes, FrameLayout expandedLayout, Application app) {
         this.embedCodes= embedCodes;
         this.app = app;
 
-        fullScreenHelper = new FullScreenHelper(expandedLayout);
+        fullScreenHelper = new RecyclerViewFullScreenManager(expandedLayout);
     }
 
     @Override
