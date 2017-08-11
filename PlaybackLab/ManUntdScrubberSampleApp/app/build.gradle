@@ -25,12 +25,46 @@ android {
     }
 }
 
+task copyTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/ads-imasdk-3.3.0.jar')
+
+    println "Ooyala JARs were added"
+
+    into new File(projectDir, './libs')
+    doLast {
+        println "Jars updated."
+    }
+}
+
+tasks.copyTask.execute()
+
+
+task copyAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    into new File(projectDir, './src/main/assets')
+    println "Assets updated."
+}
+tasks.copyAssetsTask.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(projectDir, './src/main/assets/fonts')
+    println "font Assets updated."
+}
+tasks.copyFontsAssetsTask.execute()
+
 repositories {
     jcenter()
     flatDir {
         dirs 'libs'
     }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
