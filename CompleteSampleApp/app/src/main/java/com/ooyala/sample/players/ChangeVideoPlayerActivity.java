@@ -45,13 +45,13 @@ public class ChangeVideoPlayerActivity extends AbstractHookActivity {
   void completePlayerSetup(boolean asked) {
     if (asked) {
       Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
       OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
       player.addObserver(this);
 
-      if (player.setEmbedCode(embedCode)) {
+      if (player.setEmbedCode(EMBED_CODE)) {
         //Uncomment for Auto Play
         //player.play();
       }
@@ -66,7 +66,7 @@ public class ChangeVideoPlayerActivity extends AbstractHookActivity {
 
         @Override
         public void onClick(View v) {
-          player.setEmbedCode(embedCode);
+          player.setEmbedCode(EMBED_CODE);
           player.play();
         }
       });

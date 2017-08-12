@@ -22,13 +22,13 @@ public class PluginPlayerActivity extends AbstractHookActivity {
 		if (asked) {
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
 			SampleAdPlugin plugin = new SampleAdPlugin(this, player);
 			player.registerPlugin(plugin);
-			if (player.setEmbedCode(embedCode)) {
+			if (player.setEmbedCode(EMBED_CODE)) {
 				//Uncomment for Auto-Play
 				//player.play();
 			} else {

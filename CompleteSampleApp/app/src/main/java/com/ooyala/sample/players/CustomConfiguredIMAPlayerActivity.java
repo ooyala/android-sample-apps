@@ -30,18 +30,18 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(final boolean asked) {
 		if (asked) {
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			player.addObserver(this);
 
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
+			optimizedOoyalaPlayerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
 			/** DITA_START:<ph id="ima_custom"> **/
 			//OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
 
 			/** DITA_END:</ph> **/
 
-			player.setEmbedCode(embedCode);
+			player.setEmbedCode(EMBED_CODE);
 		}
 	}
 }

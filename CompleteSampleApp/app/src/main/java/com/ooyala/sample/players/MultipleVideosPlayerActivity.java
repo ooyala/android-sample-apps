@@ -30,13 +30,13 @@ public class MultipleVideosPlayerActivity extends AbstractHookActivity {
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
 
 			ArrayList<String> list = new ArrayList<>();
-			list.add(embedCode);
+			list.add(EMBED_CODE);
 			list.add("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");
 			if (player.setEmbedCodes(list)) {
 				//Uncomment for Auto-Play

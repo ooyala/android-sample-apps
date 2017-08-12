@@ -28,14 +28,14 @@ public class NPAWDefaultPlayerActivity extends AbstractHookActivity {
   void completePlayerSetup(boolean asked) {
     if (asked) {
       //Initialize the player
-      playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
       Options playerOptions = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), playerOptions);
+      player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), playerOptions);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
       player.addObserver(this);
 
-      if (player.setEmbedCode(embedCode)) {
+      if (player.setEmbedCode(EMBED_CODE)) {
         //Uncomment for auto-play
         //player.play();
       } else {
