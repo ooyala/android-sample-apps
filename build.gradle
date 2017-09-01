@@ -6,15 +6,33 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.novoda:bintray-release:0.3.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+project.ext.libraryVersion = 'v4.27.0_RC3'
+project.ext.publishedGroupId = 'com.ooyala.android'
+project.ext.bintrayRepo = "maven"
+
+project.ext.developerId = 'ooyala-pba'
+project.ext.developerName = 'Ooyala'
+project.ext.developerEmail = 'ooyala-pba@googlegroups.com'
+
+project.ext.bintrayUser = System.getenv('BINTRAY_USER')
+project.ext.bintrayApiKey = System.getenv('BINTRAY_API_KEY')
+
+project.ext.androidSDKPath = file("${projectDir}/../").absolutePath
+
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 
