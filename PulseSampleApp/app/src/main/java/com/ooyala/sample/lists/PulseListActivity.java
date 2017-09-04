@@ -9,8 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ooyala.adtech.LogItem;
-import com.ooyala.adtech.LogListener;
 import com.ooyala.pulse.Pulse;
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.PulsePlayerActivity;
@@ -35,9 +33,9 @@ public class PulseListActivity extends Activity implements AdapterView.OnItemCli
         String videoJSonString = loadJSONFile(getResources().getIdentifier("raw/library", "raw", getPackageName()));
 
         // Set a listener to receive low-level log messages about errors, warnings and the like.
-        Pulse.setLogListener(new LogListener() {
+        Pulse.setLogListener(new com.ooyala.pulse.LogListener() {
             @Override
-            public void onLog(LogItem logItem) {
+            public void onLog(com.ooyala.pulse.LogItem logItem) {
                 Log.i("PulseManager", logItem.toString());
             }
         });

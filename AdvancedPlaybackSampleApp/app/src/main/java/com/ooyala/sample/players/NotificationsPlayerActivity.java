@@ -1,6 +1,5 @@
 package com.ooyala.sample.players;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,7 +16,6 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
 
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * This activity illustrates how you can play a video with an initial time set
@@ -27,73 +25,46 @@ import java.util.Observer;
  *
  *
  */
-public class NotificationsPlayerActivity extends Activity implements Observer {
+public class NotificationsPlayerActivity extends AbstractHookActivity {
   public final static String getName() {
     return "Notifications Demonstration";
   }
-  final String TAG = this.getClass().toString();
-
-  String EMBED = null;
-  String PCODE = null;
-  String DOMAIN = null;
-
-  protected OoyalaPlayerLayoutController playerLayoutController;
-  protected OoyalaPlayer player;
-
-  // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
+
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      //Initialize the player
+      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+
+      Options options = new Options.Builder().setUseExoPlayer(true).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      player.addObserver(this);
+
+      if (player.setEmbedCode(embedCode)) {
+        //player.play();
+      }
+    }
+  }
 
   /**
    * Called when the activity is first created.
    */
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTitle(getName());
     setContentView(R.layout.player_simple_layout);
-
-    EMBED = getIntent().getExtras().getString("embed_code");
-    PCODE = getIntent().getExtras().getString("pcode");
-    DOMAIN = getIntent().getExtras().getString("domain");
-
-    //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
-    Options options = new Options.Builder().setUseExoPlayer(true).build();
-    player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
-    playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-    player.addObserver(this);
-
-    if (player.setEmbedCode(EMBED)) {
-      player.play();
-    }
-
+    completePlayerSetup(asked);
   }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
-    if (player != null) {
-      player.suspend();
-    }
-  }
-
-  @Override
-  protected void onRestart() {
-    super.onRestart();
-    Log.d(TAG, "Player Activity Restarted");
-    if (player != null) {
-      player.resume();
-    }
-  }
-
 
 /** Handle all notifications from the OoyalaPlayer
-  *  Filter on "Note" in logcat logs to see key points in the notification workflow
-  *  Filter on "Notification Received:" in logcat logs to see all notifications in the notification workflow
-  */
+ *  Filter on "Note" in logcat logs to see key points in the notification workflow
+ *  Filter on "Notification Received:" in logcat logs to see all notifications in the notification workflow
+ */
   /** NOTE: there could also be UI-related notifications from your OoyalaPlayerLayoutController or SkinViewController that are not represented here **/
+
   @Override
   public void update(Observable arg0, Object argN) {
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);

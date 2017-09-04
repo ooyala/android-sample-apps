@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.ooyala.adtech.ContentMetadata;
-import com.ooyala.adtech.RequestSettings;
+import com.ooyala.pulse.ContentMetadata;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -17,6 +16,7 @@ import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.pulse.Pulse;
 import com.ooyala.pulse.PulseSession;
 import com.ooyala.pulse.PulseVideoAd;
+import com.ooyala.pulse.RequestSettings;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.VideoItem;
 
@@ -102,7 +102,6 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 					pulseVideoAd.adClickThroughTriggered();
 				}
 			});
-
 			player.setEmbedCode(videoItem.getContentCode());
 		}
 	}

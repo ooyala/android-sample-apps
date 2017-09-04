@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 
 		SkinOptions options = new SkinOptions.Builder().build();
 		OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, options);
-		Log.d("Player log", "Play vr video: " + player.isVrVideo());
+		Log.d("Player log", "Play vr video: " + player.isVRVideo());
 
 	}
 

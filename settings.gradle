@@ -40,8 +40,13 @@ project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, './ExoPlayerSa
 include ':OoyalaSkinSampleApp'
 project(':OoyalaSkinSampleApp').projectDir = new File(settingsDir, './OoyalaSkinSampleApp/app')
 
-include ':FullscreenSampleApp'
-project(':FullscreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullscreenSampleApp/app')
+// Playback Lab
+include ':FullScreenSampleApp'
+project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullScreenSampleApp/app')
+
+//ManUntd Scrubber
+include ':ManUScrubberSampleApp'
+project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
 
 include ':VRSampleApp'
 project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
