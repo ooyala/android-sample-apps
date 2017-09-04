@@ -11,6 +11,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        multiDexEnabled true
+
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -37,12 +39,12 @@ android {
 }
 tasks.copyAssetsTask.execute()*/
 
-task copySkinConfigTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
-    into new File(projectDir, './src/main/assets/skin-config')
-    println "copySkinConfigTask updated."
-}
-tasks.copySkinConfigTask.execute()
+//task copySkinConfigTask(type: Copy) {
+//    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
+//    into new File(projectDir, './src/main/assets/skin-config')
+//    println "copySkinConfigTask updated."
+//}
+//tasks.copySkinConfigTask.execute()
 
 task copyFontsAssetsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
