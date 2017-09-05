@@ -1,11 +1,9 @@
 package com.ooyala.fullscreensampleapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
-
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,7 @@ public class PlayersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
+        FrameLayout expandedLayout = (FrameLayout) findViewById(R.id.empty_view);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         List<String> embedCodes = new ArrayList<>();
@@ -26,7 +25,9 @@ public class PlayersActivity extends AppCompatActivity {
         embedCodes.add("42cnNsMjE62UDH0JlCssXEPhxlhj1YBN");
         embedCodes.add("E5NWlqMzE6nxrKShm0gR4DzpM49Wl0l9");
         embedCodes.add("JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt");
-        recyclerAdapter = new RecyclerAdapter(embedCodes, getApplication());
+        recyclerAdapter = new RecyclerAdapter(embedCodes, expandedLayout, getApplication());
+
         recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setHasFixedSize(true);
     }
 }

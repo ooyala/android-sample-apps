@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -12,6 +13,7 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
+import com.ooyala.android.skin.util.RecyclerViewFullScreenManager;
 
 import java.util.List;
 
@@ -22,10 +24,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
 
     private Application app;
     private List<String> embedCodes;
+    private RecyclerViewFullScreenManager recyclerFullScreenHelper;
 
-    public RecyclerAdapter(List<String> embedCodes, Application app) {
+    public RecyclerAdapter(List<String> embedCodes, FrameLayout expandedLayout, Application app) {
         this.embedCodes= embedCodes;
         this.app = app;
+
+        recyclerFullScreenHelper = new RecyclerViewFullScreenManager(expandedLayout);
     }
 
     @Override
@@ -45,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         return embedCodes.size();
     }
 
-    public static class PlayerHolder extends RecyclerView.ViewHolder {
+    public class PlayerHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private OoyalaSkinLayout playerLayout;
         private OoyalaSkinLayoutController playerController;
@@ -55,6 +60,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
 
             textView = (TextView) itemView.findViewById(R.id.textView);
             playerLayout = (OoyalaSkinLayout) itemView.findViewById(R.id.ooyalaSkinLayout);
+            playerLayout.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+                @Override
+                public void onSystemUiVisibilityChange(int visibility) {
+                    boolean isFullScreenMode = playerLayout.isFullscreen();
+                    if (isFullScreenMode) {
+                        recyclerFullScreenHelper.expandPlayerLayout(playerLayout);
+                    } else {
+                        recyclerFullScreenHelper.collapsePlayerLayout();
+                    }
+                }
+            });
         }
 
         public void bindPlayer(String embedCode, Application app) {
