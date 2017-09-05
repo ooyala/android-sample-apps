@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	private final String SECRET = "";
 
 	private final String PCODE = "4d772c1ee9044294b7e2c5feb1a07d27";
-	private final String EMBEDCODE = "VsZjV0ODE6tHMq4EfZ0CxF8az0oiUbQh";
+	private final String EMBEDCODE = "ZhYW1kYzE68Ii4Qf0zwiQdsEkrnwjY6b";
 
 	private final String ACCOUNT_ID = "pbk-373@ooyala.com";
 	private final String PLAYERDOMAIN = "http://www.ooyala.com";
