@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	private final String SECRET = "";
 
 	private final String PCODE = "4d772c1ee9044294b7e2c5feb1a07d27";
-	private final String EMBEDCODE = "ZhYW1kYzE68Ii4Qf0zwiQdsEkrnwjY6b";
+	private final String EMBEDCODE = "cyY2E1YzE69lqpla_GFSgBXDOzrgJ9GG";
 
 	private final String ACCOUNT_ID = "pbk-373@ooyala.com";
 	private final String PLAYERDOMAIN = "http://www.ooyala.com";
@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	private OoyalaSkinLayout skinLayout;
 	private OoyalaPlayer player;
 
-	private Button button;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +46,6 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 		setContentView(R.layout.activity_main);
 
 		skinLayout = (OoyalaSkinLayout) findViewById(R.id.player_skin_layout);
-		button = (Button) findViewById(R.id.button);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				player.setEmbedCode(EMBEDCODE);
-			}
-		});
-
 		PlayerDomain domain = null;
 		try {
 			domain = new PlayerDomain(PLAYERDOMAIN);
@@ -75,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 		OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, options);
 		playerController.addObserver(this);
 		player.addObserver(this);
+
+		player.setEmbedCode(EMBEDCODE);
 	}
 
 	@Override
