@@ -31,13 +31,15 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	private final String SECRET = "";
 
 	private final String PCODE = "4d772c1ee9044294b7e2c5feb1a07d27";
-	private final String EMBEDCODE = "cyY2E1YzE69lqpla_GFSgBXDOzrgJ9GG";
+	private final String EMBEDCODE = "ZhYW1kYzE68Ii4Qf0zwiQdsEkrnwjY6b";
 
 	private final String ACCOUNT_ID = "pbk-373@ooyala.com";
 	private final String PLAYERDOMAIN = "http://www.ooyala.com";
 
 	private OoyalaSkinLayout skinLayout;
 	private OoyalaPlayer player;
+
+	private Button button;
 
 
 	@Override
@@ -63,11 +65,19 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 				.build());
 
 		SkinOptions options = new SkinOptions.Builder().build();
-		OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, options);
+		final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, options);
 		playerController.addObserver(this);
 		player.addObserver(this);
-
 		player.setEmbedCode(EMBEDCODE);
+
+		button = (Button) findViewById(R.id.button);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				player.switchVRMode();
+			}
+		});
+
 	}
 
 	@Override
