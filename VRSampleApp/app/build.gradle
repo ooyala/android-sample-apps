@@ -5,11 +5,13 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.ooyala.sample.vrsampleapp"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
 
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -25,17 +27,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-
 }
 
-/*task copyAssetsTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+task copyAssetsTask(type: Copy) {
+    //from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
-tasks.copyAssetsTask.execute()*/
+tasks.copyAssetsTask.execute()
 
 task copySkinConfigTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
@@ -61,7 +61,7 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+//    compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile(name:'react-native', version:'0.35.0', ext:'aar')
 

@@ -52,10 +52,10 @@ include ':VRSampleApp'
 project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
 
 include ':skin'
-project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/android/skin')
+project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin')
 
 include(':core')
-project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/')
+project(':core').projectDir = new File(settingsDir, '../ooyala/android-sdk/sdk/core/')
 
 // Developer
 //include ':ooyalaSkinSDK'
