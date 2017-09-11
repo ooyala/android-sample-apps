@@ -2,8 +2,6 @@ package com.ooyala.sample.vrsampleapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
@@ -39,9 +37,6 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	private OoyalaSkinLayout skinLayout;
 	private OoyalaPlayer player;
 
-	private Button button;
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,15 +64,6 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 		playerController.addObserver(this);
 		player.addObserver(this);
 		player.setEmbedCode(EMBEDCODE);
-
-		button = (Button) findViewById(R.id.button);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				player.switchVRMode();
-			}
-		});
-
 	}
 
 	@Override
