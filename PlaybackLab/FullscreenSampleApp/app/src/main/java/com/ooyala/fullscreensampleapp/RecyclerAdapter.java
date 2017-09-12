@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
@@ -51,14 +50,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
     }
 
     public class PlayerHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
         private OoyalaSkinLayout playerLayout;
         private OoyalaSkinLayoutController playerController;
 
         public PlayerHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.textView);
             playerLayout = (OoyalaSkinLayout) itemView.findViewById(R.id.ooyalaSkinLayout);
             playerLayout.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
                 @Override
@@ -74,7 +71,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         }
 
         public void bindPlayer(String embedCode, Application app) {
-            textView.setText("Sample text");
 
             OoyalaPlayer player = new OoyalaPlayer("c0cTkxOqALQviQIGAHWY5hP0q9gU", new PlayerDomain("http://www.ooyala.com/"));
 
