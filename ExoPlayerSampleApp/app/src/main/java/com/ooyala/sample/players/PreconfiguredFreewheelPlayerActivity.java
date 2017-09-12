@@ -35,7 +35,7 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			// Get the SkinLayout from our layout xml
-			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaPlayer);
+			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain domain = new PlayerDomain(DOMAIN);
@@ -63,7 +63,7 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_simple_frame_layout);
+		setContentView(R.layout.player_skin_simple_layout);
 		completePlayerSetup(asked);
 	}
 }
