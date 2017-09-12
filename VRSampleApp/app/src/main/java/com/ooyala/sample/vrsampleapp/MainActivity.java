@@ -1,7 +1,11 @@
 package com.ooyala.sample.vrsampleapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
@@ -14,10 +18,13 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.DebugMode;
+import com.ooyala.sample.vrsampleapp.lists.AdListActivity;
+import com.ooyala.sample.vrsampleapp.utils.PlayerSelectionOption;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -37,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	private OoyalaSkinLayout skinLayout;
 	private OoyalaPlayer player;
 
+	private static Map<String, PlayerSelectionOption> selectionMap;
+	ArrayAdapter<String> selectionAdapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 		try {
 			domain = new PlayerDomain(PLAYERDOMAIN);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block«
+			// TODO Auto-generated catch block
 			DebugMode.logE(TAG, "Caught!", e);
 		}
 
@@ -87,7 +97,24 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_show_ad: {
+				Intent intent = new Intent(this, AdListActivity.class);
+				startActivity(intent);
+				break;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
 	}
 }

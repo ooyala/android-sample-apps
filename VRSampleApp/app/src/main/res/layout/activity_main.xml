@@ -8,8 +8,8 @@
 
     <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/player_skin_layout"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/skin_layout_size"
+        android:layout_height="@dimen/skin_layout_size"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
