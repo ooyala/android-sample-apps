@@ -3,13 +3,13 @@ package com.ooyala.sample.vrsampleapp;
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.FCCTVRatingConfiguration;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.imasdk.OoyalaIMAManager;
-import com.ooyala.android.ui.AbstractOoyalaPlayerLayoutController;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.skin.OoyalaSkinLayoutController;
+import com.ooyala.android.skin.configuration.SkinOptions;
 
 /**
  * Created by Alina_Voronkova on 12/09/17.
@@ -17,6 +17,7 @@ import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 
 public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
 
+  private OoyalaSkinLayout skinLayout;
   /**
    * Called when the activity is first created.
    */
@@ -42,11 +43,10 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
       player.addObserver(this);
 
-      playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
-          (OoyalaPlayerLayout) findViewById(R.id.ooyala_player),
-          player,
-          AbstractOoyalaPlayerLayoutController.DefaultControlStyle.AUTO
-      );
+      skinLayout = (OoyalaSkinLayout) findViewById(R.id.ad_player_skin_layout);
+      SkinOptions skinOptions = new SkinOptions.Builder().build();
+      final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+      playerController.addObserver(this);
 
       @SuppressWarnings("unused")
       OoyalaIMAManager imaManager = new OoyalaIMAManager(player);

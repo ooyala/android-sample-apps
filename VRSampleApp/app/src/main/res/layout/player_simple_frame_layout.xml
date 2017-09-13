@@ -6,10 +6,9 @@
     android:layout_gravity="center_horizontal|bottom"
     android:orientation="vertical" >
 
-    <com.ooyala.android.OoyalaPlayerLayout
-        android:id="@+id/ooyala_player"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal|top" />
+    <com.ooyala.android.skin.OoyalaSkinLayout
+        android:id="@+id/ad_player_skin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
