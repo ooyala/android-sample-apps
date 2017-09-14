@@ -53,6 +53,8 @@ tasks.copyFontsAssetsTask.execute()
 
 
 task copyTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(vendorDir, 'Google/ima-android-v371.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaSkinVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/react-native-0.35.0.aar')
@@ -74,7 +76,6 @@ dependencies {
     compile 'com.google.vr:sdk-base:1.80.0'
     compile 'com.google.vr:sdk-audio:1.80.0'
     testCompile 'junit:junit:4.12'
-
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
     compile 'com.facebook.stetho:stetho:1.2.0'
@@ -90,6 +91,10 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
 
     compile(name:'react-native', version:'0.35.0', ext:'aar')
+
+    // IMA ads
+    compile files('libs/OoyalaIMASDK.jar')
+    compile files('libs/ima-android-v371.jar')
 }
 
 repositories {

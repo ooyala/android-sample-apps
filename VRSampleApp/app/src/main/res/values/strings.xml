@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VRSampleApp</string>
+    <string name="show_ad">Show AD</string>
 </resources>
