@@ -60,7 +60,7 @@ dependencies {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
     })
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
