@@ -1,4 +1,4 @@
-package com.ooyala.sample.vrsampleapp;
+package com.ooyala.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +18,9 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.DebugMode;
-import com.ooyala.sample.vrsampleapp.lists.AdListActivity;
-import com.ooyala.sample.vrsampleapp.utils.PlayerSelectionOption;
+import com.ooyala.sample.R;
+import com.ooyala.sample.lists.AdListActivity;
+import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements EmbedTokenGenerat
 				.setBypassPCodeMatching(true)
 				.setUseExoPlayer(true)
 				.build());
+
+		player.setActionAtEnd(OoyalaPlayer.ActionAtEnd.STOP);
 
 		SkinOptions options = new SkinOptions.Builder().build();
 		final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, options);

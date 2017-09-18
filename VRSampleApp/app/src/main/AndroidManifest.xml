@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ooyala.sample.vrsampleapp">
+          package="com.ooyala.sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
         <activity
-            android:name="com.ooyala.sample.vrsampleapp.MainActivity"
+            android:name="com.ooyala.sample.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.ooyala.sample.vrsampleapp.lists.AdListActivity"
+        <activity android:name=".lists.AdListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name="com.ooyala.sample.vrsampleapp.PreconfiguredAdPlayerActivity"
+        <activity android:name="com.ooyala.sample.PreconfiguredAdPlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

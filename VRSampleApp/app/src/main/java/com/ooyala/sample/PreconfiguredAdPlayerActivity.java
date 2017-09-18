@@ -1,4 +1,4 @@
-package com.ooyala.sample.vrsampleapp;
+package com.ooyala.sample;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
+import com.ooyala.sample.R;
 
 /**
  * Created by Alina_Voronkova on 12/09/17.
