@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="This is a long description to test this out, wara wara" />
+    android:layout_height="500dp">
 
     <!--OoyalaSkinLayout has to be placed into a container for a correct transformation between
     a full screen mode to a window mode-->
     <FrameLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3">
+        >
 
         <com.ooyala.android.skin.OoyalaSkinLayout
             android:id="@+id/ooyalaSkinLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000" />
+            android:background="#fff" />
 
     </FrameLayout>
 
