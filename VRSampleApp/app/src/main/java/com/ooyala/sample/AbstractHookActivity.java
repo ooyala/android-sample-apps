@@ -1,4 +1,4 @@
-package com.ooyala.sample.vrsampleapp;
+package com.ooyala.sample;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.ooyala.sample.vrsampleapp.lists;
+package com.ooyala.sample.lists;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ooyala.sample.vrsampleapp.PreconfiguredAdPlayerActivity;
-import com.ooyala.sample.vrsampleapp.R;
-import com.ooyala.sample.vrsampleapp.utils.PlayerSelectionOption;
+import com.ooyala.sample.PreconfiguredAdPlayerActivity;
+import com.ooyala.sample.R;
+import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
