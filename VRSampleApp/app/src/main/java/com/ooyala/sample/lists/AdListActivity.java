@@ -95,6 +95,6 @@ public class AdListActivity extends Activity implements OnItemClickListener {
     selectionMap.put("VAST Pre-Mid-Post", new PlayerSelectionOption("g4YmNsYzE6zLuWf3eCAtcOdi0--i081X", "570d91bf920b42cbae587bb1447e6fd8", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
     selectionMap.put("VAST Podded Pre-Mid-Post", new PlayerSelectionOption("ZpZGxoYzE6oThg4Hapb2gwUC-HBDJy8T", "570d91bf920b42cbae587bb1447e6fd8", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
 
-    selectionMap.put("Video without AD", new PlayerSelectionOption("RxaTluYzE6oR3sfktwEjhYA86IrFwQai", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
+    selectionMap.put("Video without AD", new PlayerSelectionOption("ZwdTE5YzE69c3U3cXy2CCzfnCkzMMqUP", "bb4c1914044a40c2af381c5ac4c98618", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
   }
 }
