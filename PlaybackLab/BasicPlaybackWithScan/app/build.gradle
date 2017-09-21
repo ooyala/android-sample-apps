@@ -32,6 +32,6 @@ dependencies {
     compile files('libs/OoyalaSDK.jar')
     compile project(':AndroidVisionQRReader')
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
 }
