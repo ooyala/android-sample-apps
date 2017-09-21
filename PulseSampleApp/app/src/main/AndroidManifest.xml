@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat"
-        android:networkSecurityConfig="@xml/networkCertificateConfig"
+        android:networkSecurityConfig="@xml/network_certificate_config"
         >
 
         <activity android:name="com.ooyala.sample.lists.PulseListActivity"
