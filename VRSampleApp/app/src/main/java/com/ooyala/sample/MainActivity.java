@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.ooyala.android.EmbedTokenGenerator;
-import com.ooyala.android.EmbedTokenGeneratorCallback;
-import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.FCCTVRatingConfiguration;
@@ -15,44 +12,39 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
-import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.lists.AdListActivity;
 
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-
-public class MainActivity extends AbstractHookActivity implements EmbedTokenGenerator {
+public class MainActivity extends AbstractHookActivity {
 	private static final String TAG = "VRSampleApp";
 
-	private final String APIKEY = "";
-	private final String SECRET = "";
-	private final String ACCOUNT_ID = "pbk-373@ooyala.com";
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+    completePlayerSetup(asked);
+  }
 
 	@Override
 	void completePlayerSetup(boolean asked) {
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.player_skin_layout);
-		PlayerDomain playerDomain = null;
-		try {
-			playerDomain = new PlayerDomain(domain);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			DebugMode.logE(TAG, "Caught!", e);
-		}
+    if (asked) {
+      final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
+      final Options options = new Options.Builder()
+          .setTVRatingConfiguration(tvRatingConfiguration)
+          .setBypassPCodeMatching(true)
+          .setUseExoPlayer(true)
+          .build();
 
-		final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      player.addObserver(this);
 
-		player = new OoyalaPlayer(pcode, playerDomain, this, new Options.Builder()
-				.setTVRatingConfiguration( tvRatingConfiguration )
-				.setBypassPCodeMatching(true)
-				.setUseExoPlayer(true)
-				.build());
+      OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.player_skin_layout);
+      SkinOptions skinOptions = new SkinOptions.Builder().build();
+      final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+      playerController.addObserver(this);
 
-		SkinOptions options = new SkinOptions.Builder().build();
-		final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, options);
-		playerController.addObserver(this);
-		player.addObserver(this);
-		player.setEmbedCode(embedCode);
+      player.setEmbedCode(embedCode);
+    }
 	}
 
   @Override
@@ -61,33 +53,6 @@ public class MainActivity extends AbstractHookActivity implements EmbedTokenGene
     pcode = "4d772c1ee9044294b7e2c5feb1a07d27";
     domain = "http://www.ooyala.com";
   }
-
-  @Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.activity_main);
-		completePlayerSetup(asked);
-	}
-
-	@Override
-	public void getTokenForEmbedCodes(List<String> embedCodes,
-									  EmbedTokenGeneratorCallback callback) {
-		String embedCodesString = "";
-		for (String ec : embedCodes) {
-			if(ec.equals("")) embedCodesString += ",";
-			embedCodesString += ec;
-		}
-
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("account_id", ACCOUNT_ID);
-
-		String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
-		EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
-
-		URL tokenUrl  = urlGen.secureURL("http://player.ooyala.com", uri, params);
-		callback.setEmbedToken(tokenUrl.toString());
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

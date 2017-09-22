@@ -17,8 +17,6 @@ import com.ooyala.android.skin.configuration.SkinOptions;
  */
 
 public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
-
-  private OoyalaSkinLayout skinLayout;
   /**
    * Called when the activity is first created.
    */
@@ -44,7 +42,7 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
       player.addObserver(this);
 
-      skinLayout = (OoyalaSkinLayout) findViewById(R.id.ad_player_skin_layout);
+      OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ad_player_skin_layout);
       SkinOptions skinOptions = new SkinOptions.Builder().build();
       final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
       playerController.addObserver(this);
