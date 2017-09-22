@@ -1,5 +1,6 @@
 package com.ooyala.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -10,7 +11,6 @@ import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
-import com.ooyala.sample.R;
 
 /**
  * Created by Alina_Voronkova on 12/09/17.
@@ -53,6 +53,16 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
 
       player.setEmbedCode(embedCode);
+    }
+  }
+
+  @Override
+  void initPlayerData() {
+    Intent intent = getIntent();
+    if (intent != null && intent.getExtras() != null) {
+      embedCode = intent.getExtras().getString("embed_code");
+      pcode = intent.getExtras().getString("pcode");
+      domain = intent.getExtras().getString("domain");
     }
   }
 }
