@@ -1,16 +1,15 @@
 package com.ooyala.sample;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
@@ -23,27 +22,30 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * This class asks permission for WRITE_EXTERNAL_STORAGE. We need it for automation hooks
  * as we need to write into the SD card and automation will parse this file.
  */
-public abstract class AbstractHookActivity extends Activity implements Observer {
+public abstract class AbstractHookActivity extends AppCompatActivity implements Observer {
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-  String TAG = this.getClass().toString();
+  private static final String TAG = AbstractHookActivity.class.getSimpleName();
 
   private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+
+  OoyalaPlayer player;
+  boolean writePermission = false;
+  boolean asked = false;
+
   protected String embedCode;
   protected String pcode;
   protected String domain;
 
-  OoyalaPlayer player;
-
-  boolean writePermission = false;
-  boolean asked = false;
-
   // complete player setup after we asked for permission to write into external storage
   abstract void completePlayerSetup(final boolean asked);
+
+  abstract void initPlayerData();
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    initPlayerData();
 
     if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
@@ -51,10 +53,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
       writePermission= true;
       asked = true;
     }
-
-    embedCode = getIntent().getExtras().getString("embed_code");
-    pcode = getIntent().getExtras().getString("pcode");
-    domain = getIntent().getExtras().getString("domain");
   }
 
   @Override

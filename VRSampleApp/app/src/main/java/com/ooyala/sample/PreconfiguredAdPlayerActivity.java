@@ -1,5 +1,6 @@
 package com.ooyala.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -10,15 +11,12 @@ import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
-import com.ooyala.sample.R;
 
 /**
  * Created by Alina_Voronkova on 12/09/17.
  */
 
 public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
-
-  private OoyalaSkinLayout skinLayout;
   /**
    * Called when the activity is first created.
    */
@@ -44,7 +42,7 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
       player.addObserver(this);
 
-      skinLayout = (OoyalaSkinLayout) findViewById(R.id.ad_player_skin_layout);
+      OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ad_player_skin_layout);
       SkinOptions skinOptions = new SkinOptions.Builder().build();
       final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
       playerController.addObserver(this);
@@ -53,6 +51,16 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
 
       player.setEmbedCode(embedCode);
+    }
+  }
+
+  @Override
+  void initPlayerData() {
+    Intent intent = getIntent();
+    if (intent != null && intent.getExtras() != null) {
+      embedCode = intent.getExtras().getString("embed_code");
+      pcode = intent.getExtras().getString("pcode");
+      domain = intent.getExtras().getString("domain");
     }
   }
 }
