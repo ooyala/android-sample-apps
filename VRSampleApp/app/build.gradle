@@ -64,6 +64,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaSkinVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaVRSDK/exoplayer-1.5.7.jar')
     into new File(projectDir, './libs')
     println "Jars updated."
 }
@@ -73,6 +74,7 @@ tasks.copyTask.execute()
 dependencies {
     compile files('libs/OoyalaVRSDK.jar')
     compile files('libs/OoyalaSkinVRSDK.jar')
+    compile files('libs/exoplayer-1.5.7.jar')
 
     compile 'com.google.android.exoplayer:exoplayer:r2.5.1'
     compile 'com.android.support:support-v4:25.4.0'
