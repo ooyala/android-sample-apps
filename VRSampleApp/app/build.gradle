@@ -95,6 +95,7 @@ dependencies {
     compile 'com.squareup.okio:okio:1.9.0'
     compile 'org.webkit:android-jsc:r174650'
     compile 'javax.inject:javax.inject:1'
+    compile 'com.android.support:multidex:1.0.1'
 
     compile(name:'react-native', version:'0.35.0', ext:'aar')
 
