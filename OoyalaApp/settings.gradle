@@ -1,5 +1,3 @@
-gradle.ext.ooyalaSDKRoot = new File(settingsDir, '') // Add your local Ooyala SDK path to test with it
-
 include ':app'
 
 apply from: 'ooyala_core_settings.gradle'

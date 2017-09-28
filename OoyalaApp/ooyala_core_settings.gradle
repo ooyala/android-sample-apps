@@ -1,3 +1,7 @@
+// Create a file called ooyala_sdk_settings.gradle that will set gradle.ext.ooyalaSDKRoot
+// e.g. gradle.ext.ooyalaSDKRoot = new File(settingsDir, 'android-sdk')
+apply from: 'ooyala_sdk_settings.gradle'
+
 def rootDir = gradle.ext.ooyalaSDKRoot
 
 include ':ooyala-core'
