@@ -1,0 +1,5 @@
+def rootDir = gradle.ext.ooyalaSDKRoot
+
+include ':ooyala-core'
+
+project(':ooyala-core').projectDir = new File(rootDir, 'sdk/core')
