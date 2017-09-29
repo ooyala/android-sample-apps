@@ -49,8 +49,8 @@ public class MainActivity extends AbstractHookActivity {
 
   @Override
   void initPlayerData() {
-    embedCode = "cxdHJ0YzE6aXWklgmaaNeuz66Hxh9hUK";
-    pcode = "4d772c1ee9044294b7e2c5feb1a07d27";
+    embedCode = "8wNzd1YzE6qJp2DK3leDRD_JV62YQRH4";
+    pcode = "306a125bff14fb3b78203bb4cb95d01";
     domain = "http://www.ooyala.com";
   }
 
