@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.KeyEvent;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
@@ -16,6 +17,7 @@ import com.ooyala.sample.lists.AdListActivity;
 
 public class MainActivity extends AbstractHookActivity {
 	private static final String TAG = "VRSampleApp";
+    private OoyalaSkinLayoutController playerController;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AbstractHookActivity {
 
       OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.player_skin_layout);
       SkinOptions skinOptions = new SkinOptions.Builder().build();
-      final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+      playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
       playerController.addObserver(this);
 
       player.setEmbedCode(embedCode);
@@ -71,4 +73,14 @@ public class MainActivity extends AbstractHookActivity {
 		}
 		return false;
 	}
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return playerController.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        return playerController.onKeyUp(keyCode, event);
+    }
 }
