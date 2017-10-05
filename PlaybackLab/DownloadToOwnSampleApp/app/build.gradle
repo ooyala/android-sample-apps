@@ -87,7 +87,7 @@ dependencies {
 //  compile files('libs/OoyalaIMASDK.jar')
 //  compile files('libs/ima-android-v371.jar')
   compile files('libs/OoyalaSDK.jar')
-  compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+  compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
 
 // For development purposes only
 //  compile project(':core')
