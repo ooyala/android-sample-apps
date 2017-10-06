@@ -64,9 +64,6 @@ public class AdListActivity extends Activity implements OnItemClickListener {
     selectionMap = new LinkedHashMap<>();
 
     // Debug video
-//    selectionMap.put("DEBUG FLAT VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class));
-//    selectionMap.put("DEBUG FLAT IMA Podded Pre-Mid-Post", new PlayerSelectionOption("ZrOTE3cDoXo2sLOWzQPxjS__M-Qk32Co", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
-
     selectionMap.put("TEST IMA FLAT Pre-Mid-Post", new PlayerSelectionOption("w4azd4YzE6jbItvcx3P4YOF4SAxlXrVD", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
     selectionMap.put("TEST IMA 360 Pre-Mid-Post", new PlayerSelectionOption("tmYXh3YzE6CbulYLlO_F8Cy9kX2uRx5g", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
     selectionMap.put("TEST VAST FLAT Pre-Mid-Post", new PlayerSelectionOption("tjajh4YzE6c0HwEH_KdBT_Wr5_1O_RmY", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
