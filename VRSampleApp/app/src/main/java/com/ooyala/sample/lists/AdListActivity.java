@@ -66,6 +66,8 @@ public class AdListActivity extends Activity implements OnItemClickListener {
     // Debug video
     selectionMap.put("DEBUG VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class));
     selectionMap.put("DEBUG IMA Podded Pre-Mid-Post", new PlayerSelectionOption("ZrOTE3cDoXo2sLOWzQPxjS__M-Qk32Co", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
+    selectionMap.put("DEBUG IMA FLAT Pre-Mid-Post", new PlayerSelectionOption("w4azd4YzE6jbItvcx3P4YOF4SAxlXrVD", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
+    selectionMap.put("DEBUG IMA 360 Pre-Mid-Post", new PlayerSelectionOption("tmYXh3YzE6CbulYLlO_F8Cy9kX2uRx5g", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
 
     // Flat video
     selectionMap.put("FLAT IMA Ad-Rules Midroll", new PlayerSelectionOption("VlaG9lcTqeUU18adfd1DVeQ8YekP3H4l", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );

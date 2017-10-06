@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.ooyala.sample.vrsampleapp"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -72,8 +72,11 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile files('libs/OoyalaVRSDK.jar')
-    compile files('libs/OoyalaSkinVRSDK.jar')
+//    compile files('libs/OoyalaVRSDK.jar')
+//    compile files('libs/OoyalaSkinVRSDK.jar')
+
+    compile project(':skin')
+    compile project(':core')
 
     compile 'com.google.android.exoplayer:exoplayer:r2.5.1'
     compile 'com.android.support:support-v4:25.4.0'
