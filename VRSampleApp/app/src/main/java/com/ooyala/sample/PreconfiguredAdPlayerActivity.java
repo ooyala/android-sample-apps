@@ -37,6 +37,8 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
           .setTVRatingConfiguration(tvRatingConfiguration)
           .setBypassPCodeMatching(true)
           .setUseExoPlayer(true)
+          .setShowNativeLearnMoreButton(false)
+          .setShowPromoImage(false)
           .build();
 
       player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
