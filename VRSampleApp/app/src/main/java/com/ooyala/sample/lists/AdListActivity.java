@@ -64,6 +64,8 @@ public class AdListActivity extends Activity implements OnItemClickListener {
     selectionMap = new LinkedHashMap<>();
 
     // Debug video
+    // The tag TEST means that video has been uploaded through the test account
+    selectionMap.put("TEST Correct asset", new PlayerSelectionOption("g0d3BpNTE6GTTPK7o4ZyIcGqc878DqJ6", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
     selectionMap.put("TEST IMA FLAT Pre-Mid-Post", new PlayerSelectionOption("w4azd4YzE6jbItvcx3P4YOF4SAxlXrVD", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
     selectionMap.put("TEST IMA 360 Pre-Mid-Post", new PlayerSelectionOption("tmYXh3YzE6CbulYLlO_F8Cy9kX2uRx5g", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
     selectionMap.put("TEST VAST FLAT Pre-Mid-Post", new PlayerSelectionOption("tjajh4YzE6c0HwEH_KdBT_Wr5_1O_RmY", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", PreconfiguredAdPlayerActivity.class) );
