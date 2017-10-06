@@ -2,9 +2,12 @@ package com.ooyala.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.FCCTVRatingConfiguration;
@@ -14,15 +17,21 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.lists.AdListActivity;
 
+import java.util.Observable;
+
 public class MainActivity extends AbstractHookActivity {
 	private static final String TAG = "VRSampleApp";
+  Toolbar toolbar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_main);
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
     completePlayerSetup(asked);
+    toolbar.bringToFront();
   }
 
 	@Override
@@ -71,4 +80,22 @@ public class MainActivity extends AbstractHookActivity {
 		}
 		return false;
 	}
+
+  @Override
+  public void update(Observable o, Object arg) {
+    super.update(o, arg);
+    changeToolbarVisibilityInFullscreenMode(arg);
+  }
+
+  private void changeToolbarVisibilityInFullscreenMode(Object arg) {
+    String notificationName = OoyalaNotification.getNameOrUnknown(arg);
+    if (notificationName.equals(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME)) {
+      if (((OoyalaNotification) arg).getData().equals(Boolean.TRUE)) {
+        toolbar.setVisibility(View.GONE);
+      } else {
+        toolbar.setVisibility(View.VISIBLE);
+        toolbar.bringToFront();
+      }
+    }
+  }
 }
