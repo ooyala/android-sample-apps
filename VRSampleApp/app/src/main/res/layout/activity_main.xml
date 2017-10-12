@@ -11,6 +11,8 @@
         android:layout_width="@dimen/skin_layout_size"
         android:layout_height="@dimen/skin_layout_size"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" >
+        <requestFocus/>
+    </com.ooyala.android.skin.OoyalaSkinLayout>
 
 </RelativeLayout>
