@@ -20,7 +20,7 @@ import com.ooyala.sample.lists.AdListActivity;
 import java.util.Observable;
 
 public class MainActivity extends AbstractHookActivity {
-	private static final String TAG = "VRSampleApp";
+  private static final String TAG = "VRSampleApp";
   Toolbar toolbar;
 
   @Override
@@ -29,13 +29,15 @@ public class MainActivity extends AbstractHookActivity {
 
     setContentView(R.layout.activity_main);
     toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
     completePlayerSetup(asked);
-    toolbar.bringToFront();
+    if (toolbar != null) {
+      setSupportActionBar(toolbar);
+      toolbar.bringToFront();
+    }
   }
 
-	@Override
-	void completePlayerSetup(boolean asked) {
+  @Override
+  void completePlayerSetup(boolean asked) {
     if (asked) {
       final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
       final Options options = new Options.Builder()
@@ -54,7 +56,7 @@ public class MainActivity extends AbstractHookActivity {
 
       player.setEmbedCode(embedCode);
     }
-	}
+  }
 
   @Override
   void initPlayerData() {
@@ -63,23 +65,23 @@ public class MainActivity extends AbstractHookActivity {
     domain = "http://www.ooyala.com";
   }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
-	}
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu, menu);
+    return true;
+  }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.menu_show_ad: {
-				Intent intent = new Intent(this, AdListActivity.class);
-				startActivity(intent);
-				break;
-			}
-		}
-		return false;
-	}
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_show_ad: {
+        Intent intent = new Intent(this, AdListActivity.class);
+        startActivity(intent);
+        break;
+      }
+    }
+    return false;
+  }
 
   @Override
   public void update(Observable o, Object arg) {
@@ -89,7 +91,7 @@ public class MainActivity extends AbstractHookActivity {
 
   private void changeToolbarVisibilityInFullscreenMode(Object arg) {
     String notificationName = OoyalaNotification.getNameOrUnknown(arg);
-    if (notificationName.equals(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME)) {
+    if (notificationName.equals(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) && toolbar != null) {
       if (((OoyalaNotification) arg).getData().equals(Boolean.TRUE)) {
         toolbar.setVisibility(View.GONE);
       } else {
