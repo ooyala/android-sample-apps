@@ -6,8 +6,6 @@
     android:layout_gravity="center_horizontal|bottom"
     android:orientation="vertical" >
 
-    <include layout="@layout/toolbar_default"/>
-
     <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/ad_player_skin_layout"
         android:layout_width="match_parent"

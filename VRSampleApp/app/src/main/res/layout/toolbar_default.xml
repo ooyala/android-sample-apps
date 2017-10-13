@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-                                   style="@style/ToolBarStyle"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="wrap_content"
-                                   android:background="?attr/colorPrimary"
-                                   android:minHeight="?attr/actionBarSize"
-                                   android:id="@+id/toolbar">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="19sp"
-        android:text="@string/app_name"
-        android:textColor="@android:color/white"/>
-</android.support.v7.widget.Toolbar>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    style="@style/ToolBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:title="@string/app_name"/>
