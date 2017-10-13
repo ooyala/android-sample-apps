@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.ooyala.sample.vrsampleapp.com.ooyala.sample.MainActivity">
 
+    <include layout="@layout/toolbar_default"/>
+
     <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/player_skin_layout"
         android:layout_width="@dimen/skin_layout_size"
