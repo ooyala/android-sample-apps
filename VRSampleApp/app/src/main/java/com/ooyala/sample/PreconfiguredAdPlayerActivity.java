@@ -7,7 +7,6 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.FCCTVRatingConfiguration;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
@@ -49,11 +48,14 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
       playerController.addObserver(this);
 
-      @SuppressWarnings("unused")
-      OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
+      createAdditionalAdverbManager();
 
       player.setEmbedCode(embedCode);
     }
+  }
+
+  public void createAdditionalAdverbManager() {
+    //Should be override if you want to use additional adverb manager, e.g. OoyalaIMAManager
   }
 
   @Override
