@@ -11,12 +11,14 @@ public class PlayerSelectionOption {
   private Class <? extends Activity> activity;
   private String pcode;
   private String domain;
+  private boolean hasIMA;
 
-  public PlayerSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
+  public PlayerSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity, boolean hasIMA) {
     this.embedCode = embedCode;
     this.activity = activity;
     this.pcode = pcode;
     this.domain = domain;
+    this.hasIMA = hasIMA;
   }
 
   /**
@@ -41,6 +43,14 @@ public class PlayerSelectionOption {
    */
   public String getEmbedCode() {
     return this.embedCode;
+  }
+
+  /**
+   * Get information about Ima adverb
+   * @return the embed code
+   */
+  public boolean hasIMA() {
+    return hasIMA;
   }
 
   /**
