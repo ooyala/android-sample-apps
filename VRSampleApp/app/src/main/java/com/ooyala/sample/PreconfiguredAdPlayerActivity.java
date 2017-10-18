@@ -49,8 +49,10 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
       playerController.addObserver(this);
 
-      @SuppressWarnings("unused")
-      OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
+      if (hasIMA) {
+        @SuppressWarnings("unused")
+        OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
+      }
 
       player.setEmbedCode(embedCode);
     }
@@ -63,6 +65,7 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
       embedCode = intent.getExtras().getString("embed_code");
       pcode = intent.getExtras().getString("pcode");
       domain = intent.getExtras().getString("domain");
+      hasIMA = intent.getExtras().getBoolean("hasIMA");
     }
   }
 }

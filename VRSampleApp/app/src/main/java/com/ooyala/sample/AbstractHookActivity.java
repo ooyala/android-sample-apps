@@ -35,6 +35,7 @@ public abstract class AbstractHookActivity extends AppCompatActivity implements 
   protected String embedCode;
   protected String pcode;
   protected String domain;
+  protected boolean hasIMA;
 
   // complete player setup after we asked for permission to write into external storage
   abstract void completePlayerSetup(final boolean asked);
