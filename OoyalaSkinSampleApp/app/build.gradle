@@ -8,6 +8,7 @@ android {
         applicationId "com.ooyala.sample.SkinCompleteSampleApp"
         minSdkVersion 16
         targetSdkVersion 25
+        multiDexEnabled true
 
         // Added due to https://github.com/facebook/react-native/issues/2814
         ndk {
@@ -86,10 +87,12 @@ dependencies {
     compile files('libs/ima-android-v371.jar')
     compile files('libs/OoyalaSkinSDK.jar')
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    // TODO: Delete 'com.bartoszlipinski:exoplayer1:r1.5.9' after full migration to Exoplayer2
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.2'
+    compile 'com.bartoszlipinski:exoplayer1:r1.5.9'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
     compile 'com.facebook.stetho:stetho:1.2.0'
@@ -104,4 +107,5 @@ dependencies {
     compile 'org.webkit:android-jsc:r174650'
     compile(name:'react-native', version:'0.35.0', ext:'aar')
     compile 'javax.inject:javax.inject:1'
+    compile 'com.android.support:multidex:1.0.1'
 }
