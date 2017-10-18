@@ -20,9 +20,11 @@ import com.ooyala.sample.lists.AdListActivity;
 
 import java.util.Observable;
 
+import static com.ooyala.android.util.TvHelper.isTargetDeviceTV;
+
 public class MainActivity extends AbstractHookActivity {
 	private static final String TAG = "VRSampleApp";
-    private OoyalaSkinLayoutController playerController;
+  private OoyalaSkinLayoutController playerController;
   Toolbar toolbar;
 
   @Override
@@ -35,6 +37,9 @@ public class MainActivity extends AbstractHookActivity {
     if (toolbar != null) {
       setSupportActionBar(toolbar);
       toolbar.bringToFront();
+    }
+    if (isTargetDeviceTV(this)) {
+      toolbar.setVisibility(View.GONE);
     }
   }
 
@@ -62,8 +67,8 @@ public class MainActivity extends AbstractHookActivity {
 
   @Override
   void initPlayerData() {
-    embedCode = "Q0Z3d3YzE6R-MpJACU0TU83n8_ZPy7pA";
-    pcode = "3e961eabae664aad9e3c788b638da096";
+    embedCode = "15Ym5tYzE6HVEfJkUZy2a4-cEW-NxGdC";
+    pcode = "4d772c1ee9044294b7e2c5feb1a07d27";
     domain = "http://www.ooyala.com";
   }
 
@@ -103,13 +108,13 @@ public class MainActivity extends AbstractHookActivity {
     }
   }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return playerController.onKeyDown(keyCode, event);
-    }
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    return playerController.onKeyDown(keyCode, event);
+  }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        return playerController.onKeyUp(keyCode, event);
-    }
+  @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+    return playerController.onKeyUp(keyCode, event);
+  }
 }
