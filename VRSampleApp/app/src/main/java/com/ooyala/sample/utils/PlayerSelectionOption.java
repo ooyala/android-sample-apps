@@ -47,7 +47,7 @@ public class PlayerSelectionOption {
 
   /**
    * Get information about Ima adverb
-   * @return the embed code
+   * @return true if it contains Ima adverb
    */
   public boolean hasIMA() {
     return hasIMA;
