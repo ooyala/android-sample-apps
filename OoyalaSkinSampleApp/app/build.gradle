@@ -88,7 +88,7 @@ dependencies {
     compile files('libs/OoyalaSkinSDK.jar')
 
     // TODO: Delete 'com.bartoszlipinski:exoplayer1:r1.5.9' after full migration to Exoplayer2
-    compile 'com.google.android.exoplayer:exoplayer:r2.5.2'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
     compile 'com.bartoszlipinski:exoplayer1:r1.5.9'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.android.support:appcompat-v7:25.4.0'
