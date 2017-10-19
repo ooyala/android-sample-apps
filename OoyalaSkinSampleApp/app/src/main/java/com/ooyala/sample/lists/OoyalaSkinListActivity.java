@@ -40,7 +40,6 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("HLS VOD", new PlayerSelectionOption("A0NW1vYTE6hCIME00w2On3_iHKOCE6Z7", "x2aDkyOt2q3WtOCp-krSyDffASzL", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("eHLS VOD", new PlayerSelectionOption("hneHVnMzE6sEsCT9DE1v_yWi0o-9aCTw", "x2aDkyOt2q3WtOCp-krSyDffASzL", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("DASH VOD", new PlayerSelectionOption("g3aDUzODE6EWDhHR_FDxuCSPRTBCE1Gq", "hjZ2gyOn8Y0z7pvLjDdvaibqJ-dR", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
-    selectionMap.put("DRM DASH", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("MP4", new PlayerSelectionOption("w4azd4YzE6jbItvcx3P4YOF4SAxlXrVD", "378512f55dd44fc287d0fa609353c268", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
 
     selectionMap.put("4:3 Aspect Ratio", new PlayerSelectionOption("FwaXZjcjrkydIftLal2cq9ymQMuvjvD8", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));

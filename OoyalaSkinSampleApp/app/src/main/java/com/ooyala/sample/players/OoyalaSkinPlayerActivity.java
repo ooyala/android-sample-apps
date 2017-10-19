@@ -35,7 +35,7 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setBypassPCodeMatching(true).build();
+			Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(pcode, playerDomain, options);
 			//Create the SkinOptions, and setup React
 			JSONObject overrides = createSkinOverrides();
