@@ -17,6 +17,7 @@ import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
+import com.ooyala.android.offline.Exo2DashDownloader;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
 
@@ -28,13 +29,13 @@ import java.util.List;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class OfflineDownloadActivity extends Activity implements DashDownloader.Listener, EmbedTokenGenerator {
+public class OfflineDownloadActivity extends Activity implements Exo2DashDownloader.Listener, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
 
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
-  String EMBED = null;
-  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
+  String EMBED = "Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm";
+  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
   final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
@@ -42,7 +43,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 
   protected TextView progressView;
   protected Handler handler;
-  protected DashDownloader downloader;
+  protected Exo2DashDownloader downloader;
 
   private final String APIKEY = "";
   private final String SECRET = "";
@@ -69,7 +70,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 //    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
     // Use this DashOptions to download an asset with OPT
     DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
-    downloader = new DashDownloader(this, options, this);
+    downloader = new Exo2DashDownloader(this, options, this);
 
     Button startButton = (Button)findViewById(R.id.start_button);
     startButton.setOnClickListener(new View.OnClickListener() {

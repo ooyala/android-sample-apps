@@ -29,8 +29,8 @@ import java.util.Observer;
 public class OoyalaSkinPlayerActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
   final String TAG = this.getClass().toString();
 
-  String EMBED = null;
-  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
+  String EMBED = "Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm";
+  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
   final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists

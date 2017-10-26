@@ -48,6 +48,10 @@ project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLa
 include ':ManUScrubberSampleApp'
 project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
 
+//DownloadToOwnSampleApp
+include ':DownloadToOwnSampleApp'
+project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
+
 // Developer
 //include ':ooyalaSkinSDK'
 //project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
