@@ -8,6 +8,7 @@ android {
         applicationId "com.ooyala.sample.PulseSampleApp"
         minSdkVersion 16
         targetSdkVersion 25
+        multiDexEnabled true
 
         ndk {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
@@ -32,6 +33,7 @@ task copyLibsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Pulse/pulse-release.aar')
     into new File(projectDir, './libs')
     doLast {
         println "Libs updated."
@@ -83,13 +85,19 @@ repositories {
 }
 
 dependencies {
+    // Developer dependencies
+    compile project(':core')
+    compile project(':skin')
 
-    compile files('libs/OoyalaSDK.jar')
+//    compile files('libs/OoyalaSDK.jar
+//    compile files('libs/OoyalaSkinSDK.jar')
     compile files('libs/OoyalaPulseIntegration.jar')
-    compile files('libs/OoyalaSkinSDK.jar')
-    compile (name:'PulseSDK', ext:'aar')
+    compile (name:'pulse-release', ext:'aar')
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -107,5 +115,4 @@ dependencies {
     compile 'org.webkit:android-jsc:r174650'
     compile(name:'react-native', version:'0.35.0', ext:'aar')
     compile 'javax.inject:javax.inject:1'
-
 }
