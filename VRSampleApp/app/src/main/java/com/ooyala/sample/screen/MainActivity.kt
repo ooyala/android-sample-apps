@@ -55,23 +55,4 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
   private fun onBackStackChanged() {
     supportActionBar?.setDisplayHomeAsUpEnabled(supportFragmentManager.backStackEntryCount > 0)
   }
-
-
-  /*override fun completePlayerSetup(asked: Boolean) {
-    if (asked) {
-      val tvRatingConfiguration = FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build()
-      val options = Options.Builder()
-              .setTVRatingConfiguration(tvRatingConfiguration)
-              .setBypassPCodeMatching(true)
-              .setUseExoPlayer(true)
-              .build()
-      player = OoyalaPlayer(pcode, PlayerDomain(domain), options)
-      player.addObserver(this)
-
-      val skinOptions = SkinOptions.Builder().build()
-      val skinLayoutController = OoyalaSkinLayoutController(application, player_skin_layout, player, skinOptions)
-      skinLayoutController.addObserver(this)
-      player.embedCode = this.embedCode
-    }
-  }*/
 }
