@@ -84,9 +84,6 @@ repositories {
 }
 
 dependencies {
-// Uncomment if you need multidex
-  compile 'com.android.support:multidex:1.0.1'
-
 // For development purposes only
     compile project(':core')
     compile project(':ooyalaSkinSDK')
@@ -117,4 +114,5 @@ dependencies {
     compile 'org.webkit:android-jsc:r174650'
     compile(name:'react-native', version:'0.35.0', ext:'aar')
     compile 'javax.inject:javax.inject:1'
+    compile 'com.android.support:multidex:1.0.1'
 }

@@ -65,9 +65,6 @@ repositories {
 
 
 dependencies {
-// Uncomment if you need multidex
-    compile 'com.android.support:multidex:1.0.1'
-
 // For development purposes only
     compile project(':core')
     compile project(':ooyalaSkinSDK')
@@ -94,6 +91,7 @@ dependencies {
     compile 'com.squareup.okio:okio:1.9.0'
     compile 'org.webkit:android-jsc:r174650'
     compile 'javax.inject:javax.inject:1'
+    compile 'com.android.support:multidex:1.0.1'
     //TestFairy
     compile 'testfairy:testfairy-android-sdk:1.+@aar'
 
