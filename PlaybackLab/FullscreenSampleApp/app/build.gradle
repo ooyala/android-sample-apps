@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -51,8 +52,12 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile files('libs/OoyalaSDK.jar')
-    compile files('libs/OoyalaSkinSDK.jar')
+// For development purposes only
+    compile project(':core')
+    compile project(':ooyalaSkinSDK')
+
+//    compile files('libs/OoyalaSDK.jar')
+//    compile files('libs/OoyalaSkinSDK.jar')
     compile(name:'react-native', version:'0.35.0', ext:'aar')
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -60,10 +65,12 @@ dependencies {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
     })
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
 
     // Skin dependencies

@@ -30,8 +30,11 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    // Developer dependencies
+// For development purposes only
     compile project(':core')
+
+//    compile files('libs/OoyalaSDK.jar')
+    compile files('libs/android_accessenabler-1.7.3.jar')
 
     compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
     compile 'com.google.code.gson:gson:2.2.2'
@@ -39,6 +42,4 @@ dependencies {
     compile 'com.android.support:support-v4:25.4.0'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile files('libs/android_accessenabler-1.7.3.jar')
-//    compile files('libs/OoyalaSDK.jar')
 }

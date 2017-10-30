@@ -16,7 +16,7 @@ android {
     }
 
 // Uncomment if you need multidex
-//    multiDexEnabled true
+    multiDexEnabled true
   }
 
   packagingOptions {
@@ -85,34 +85,36 @@ repositories {
 
 dependencies {
 // Uncomment if you need multidex
-//  compile 'com.android.support:multidex:1.0.1'
-
-  compile files('libs/FWAdManager.jar')
-  compile files('libs/OoyalaFreewheelSDK.jar')
-  compile files('libs/OoyalaIMASDK.jar')
-  compile files('libs/ima-android-v371.jar')
-  compile files('libs/OoyalaSDK.jar')
-  compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
+  compile 'com.android.support:multidex:1.0.1'
 
 // For development purposes only
-//  compile project(':core')
+    compile project(':core')
+    compile project(':ooyalaSkinSDK')
 
-  compile files('libs/OoyalaSkinSDK.jar')
-  compile 'com.google.android.gms:play-services-ads:10.0.1'
-  compile 'com.android.support:appcompat-v7:25.3.1'
-  compile 'com.android.support:recyclerview-v7:25.3.1'
-  compile 'com.facebook.fresco:fresco:0.11.0'
-  compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
-  compile 'com.facebook.stetho:stetho:1.2.0'
-  compile 'com.facebook.soloader:soloader:0.1.0'
-  compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-  compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-  compile 'com.google.code.findbugs:jsr305:3.0.0'
-  compile 'com.squareup.okhttp3:okhttp:3.4.1'
-  compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
-  compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
-  compile 'com.squareup.okio:okio:1.9.0'
-  compile 'org.webkit:android-jsc:r174650'
-  compile(name:'react-native', version:'0.35.0', ext:'aar')
-  compile 'javax.inject:javax.inject:1'
+//    compile files('libs/OoyalaSDK.jar')
+//    compile files('libs/OoyalaSkinSDK.jar')
+    compile files('libs/FWAdManager.jar')
+    compile files('libs/OoyalaFreewheelSDK.jar')
+    compile files('libs/OoyalaIMASDK.jar')
+    compile files('libs/ima-android-v371.jar')
+
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
+    compile 'com.facebook.fresco:fresco:0.11.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+    compile 'com.facebook.stetho:stetho:1.2.0'
+    compile 'com.facebook.soloader:soloader:0.1.0'
+    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
+    compile 'com.google.code.findbugs:jsr305:3.0.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    compile 'com.squareup.okio:okio:1.9.0'
+    compile 'org.webkit:android-jsc:r174650'
+    compile(name:'react-native', version:'0.35.0', ext:'aar')
+    compile 'javax.inject:javax.inject:1'
 }

@@ -80,9 +80,9 @@ repositories {
 }
 
 dependencies {
-    // Developer dependencies
+// For development purposes only
     compile project(':core')
-    compile project(':skin')
+    compile project(':ooyalaSkinSDK')
 
     compile files('libs/ima-android-v371.jar')
     compile files('libs/FWAdManager.jar')

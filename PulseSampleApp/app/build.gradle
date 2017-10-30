@@ -85,9 +85,9 @@ repositories {
 }
 
 dependencies {
-    // Developer dependencies
+// For development purposes only
     compile project(':core')
-    compile project(':skin')
+    compile project(':ooyalaSkinSDK')
 
 //    compile files('libs/OoyalaSDK.jar
 //    compile files('libs/OoyalaSkinSDK.jar')
