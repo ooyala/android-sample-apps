@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ooyala.sample.MavenSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         // Added due to https://github.com/facebook/react-native/issues/2814
         ndk {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
@@ -75,6 +75,6 @@ repositories {
  * Please read the MavenSampleApp README.md for more information about maven dependencies
  */
 dependencies {
-    compile 'com.ooyala.android:skin:v4.22.0_RC1'
-    compile 'com.ooyala.android:ima:v4.22.0_RC1'
+    implementation 'com.ooyala.android:skin:v4.22.0_RC1'
+    implementation 'com.ooyala.android:ima:v4.22.0_RC1'
 }

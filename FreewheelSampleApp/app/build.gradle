@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    buildToolsVersion "25.0.2"
-    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
+    compileSdkVersion 26
 
     defaultConfig {
         applicationId "com.ooyala.sample.FreewheelSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -31,11 +31,11 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile files('libs/FWAdManager.jar')
-    compile files('libs/OoyalaFreewheelSDK.jar')
-    compile files('libs/OoyalaSDK.jar')
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation files('libs/FWAdManager.jar')
+    implementation files('libs/OoyalaFreewheelSDK.jar')
+    implementation files('libs/OoyalaSDK.jar')
 }
