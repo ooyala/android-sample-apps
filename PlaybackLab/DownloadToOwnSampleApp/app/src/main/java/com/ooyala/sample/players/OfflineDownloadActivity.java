@@ -17,7 +17,6 @@ import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
-import com.ooyala.android.offline.Exo2DashDownloader;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
 
@@ -29,7 +28,7 @@ import java.util.List;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class OfflineDownloadActivity extends Activity implements Exo2DashDownloader.Listener, EmbedTokenGenerator {
+public class OfflineDownloadActivity extends Activity implements DashDownloader.Listener, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
 
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
@@ -43,7 +42,7 @@ public class OfflineDownloadActivity extends Activity implements Exo2DashDownloa
 
   protected TextView progressView;
   protected Handler handler;
-  protected Exo2DashDownloader downloader;
+  protected DashDownloader downloader;
 
   private final String APIKEY = "";
   private final String SECRET = "";
@@ -70,7 +69,7 @@ public class OfflineDownloadActivity extends Activity implements Exo2DashDownloa
 //    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
     // Use this DashOptions to download an asset with OPT
     DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
-    downloader = new Exo2DashDownloader(this, options, this);
+    downloader = new DashDownloader(this, options, this);
 
     Button startButton = (Button)findViewById(R.id.start_button);
     startButton.setOnClickListener(new View.OnClickListener() {
