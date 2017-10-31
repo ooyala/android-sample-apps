@@ -17,9 +17,9 @@ This repository is meant to be supplementary to our Developer documentation.  Ta
 Some apps include special instructions, look for a README in the app you want to try out to check if it requires something else.
 
 Apart from that, here is what you will need:
-* Android Studio v2.3.1 or above.
+* Android Studio 3.0 or above.
   * If you use a different IDE or editor we won't be able to help you with questions specific to that environment.
-* Android SDK with Android platform version 25 (Android 7.1.1). We use it to compile the app.
+* Android SDK with Android platform version 26 (Android 8.0). We use it to compile the app.
 
 # Caveats
 * We are not certificate for Fire TV and Android TV yet, you may be able to run the apps in those devices but the apps and the player may behave differently.

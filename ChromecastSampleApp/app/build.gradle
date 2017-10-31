@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ooyala.sample.ChromecastSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -39,13 +39,13 @@ tasks.copyTask.execute()
 dependencies {
 // For development purposes only
 //    compile project(':cast')
-    compile project(':core')
-    compile project(':CastCompanionLibrary')
+//    compile project(':core')
 
-//    compile(name:'OoyalaSDK')
-    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
-    compile 'com.android.support:support-v4:25.4.0'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile(name:'OoyalaCastSDK', ext:'aar')
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation project(':CastCompanionLibrary')
+    implementation(name:'OoyalaCastSDK', ext:'aar')
+    implementation(name:'OoyalaSDK')
+
+//    implementation project(':cast')
+
 }
