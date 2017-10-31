@@ -43,8 +43,8 @@ dependencies {
 
     implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
     implementation project(':CastCompanionLibrary')
-    implementation(name:'OoyalaCastSDK', ext:'aar')
-    implementation(name:'OoyalaSDK')
+    implementation files('libs/OoyalaCastSDK.jar')
+    implementation files('libs/OoyalaSDK.jar')
 
 //    implementation project(':cast')
 

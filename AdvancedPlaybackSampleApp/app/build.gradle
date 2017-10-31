@@ -30,7 +30,7 @@ tasks.copyTask.execute()
 
 dependencies {
 // For development purposes only
-//    compile project(':core')
+//  implementation project(':core')
 
 
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
