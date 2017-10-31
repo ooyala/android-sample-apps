@@ -10,6 +10,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -64,6 +65,7 @@ repositories {
 
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.google.android.gms:play-services-ads:8.4.0'
     testImplementation 'junit:junit:4.12'
@@ -80,12 +82,13 @@ dependencies {
     implementation(name:'react-native', version:'0.35.0', ext:'aar')
 
 
-    implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
     implementation 'com.facebook.fresco:fresco:0.11.0'
     implementation 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
     implementation 'com.squareup.okio:okio:1.9.0'
     implementation 'org.webkit:android-jsc:r174650'
     implementation 'javax.inject:javax.inject:1'
+
     //TestFairy
     implementation 'testfairy:testfairy-android-sdk:1.+@aar'
 }

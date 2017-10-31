@@ -7,6 +7,7 @@ android {
     defaultConfig {
         applicationId "com.ooyala.sample.SkinCompleteSampleApp"
         minSdkVersion 16
+        multiDexEnabled true
         targetSdkVersion 26
 
         // Added due to https://github.com/facebook/react-native/issues/2814
@@ -86,7 +87,7 @@ dependencies {
     implementation files('libs/ima-android-v371.jar')
     implementation files('libs/OoyalaSkinSDK.jar')
 
-    implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
@@ -104,4 +105,5 @@ dependencies {
     implementation 'org.webkit:android-jsc:r174650'
     implementation(name:'react-native', version:'0.35.0', ext:'aar')
     implementation 'javax.inject:javax.inject:1'
+
 }

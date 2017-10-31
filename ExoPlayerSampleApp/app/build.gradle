@@ -16,7 +16,7 @@ android {
     }
 
 // Uncomment if you need multidex
-//    multiDexEnabled true
+    multiDexEnabled true
   }
 
   packagingOptions {
@@ -84,6 +84,7 @@ repositories {
 }
 
 dependencies {
+
 // Uncomment if you need multidex
 //  implementation 'com.android.support:multidex:1.0.1'
 
@@ -92,7 +93,7 @@ dependencies {
   implementation files('libs/OoyalaIMASDK.jar')
   implementation files('libs/ima-android-v371.jar')
   implementation files('libs/OoyalaSDK.jar')
-  implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+  implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
 
 // For development purposes only
 //  implementation project(':core')
@@ -115,4 +116,5 @@ dependencies {
   implementation 'org.webkit:android-jsc:r174650'
   implementation(name:'react-native', version:'0.35.0', ext:'aar')
   implementation 'javax.inject:javax.inject:1'
+
 }

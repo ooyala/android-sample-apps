@@ -22,9 +22,9 @@ project(':FreewheelSampleApp').projectDir = new File(settingsDir, './FreewheelSa
 include ':IMASampleApp'
 project(':IMASampleApp').projectDir = new File(settingsDir, './IMASampleApp/app')
 
-//Pulse requires a download of the Pulse SDK - Commented here because it will cause the other apps to not compile
-//include ':PulseSampleApp'
-//project(':PulseSampleApp').projectDir = new File(settingsDir, './PulseSampleApp/app')
+//Pulse ads
+include ':PulseSampleApp'
+project(':PulseSampleApp').projectDir = new File(settingsDir, './PulseSampleApp/app')
 
 // Analytics Integrations
 //include ':NielsenSampleApp'

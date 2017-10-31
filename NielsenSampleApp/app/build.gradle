@@ -68,8 +68,9 @@ repositories {
     }
 }
 dependencies {
+
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
-    implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
     implementation files('libs/OoyalaNielsenSDK.jar')
     implementation files('libs/OoyalaSDK.jar')
     implementation files('libs/OoyalaSkinSDK.jar')
@@ -90,4 +91,5 @@ dependencies {
     implementation 'org.webkit:android-jsc:r174650'
     implementation(name:'react-native', version:'0.33.0', ext:'aar')
     implementation 'javax.inject:javax.inject:1'
+
 }
