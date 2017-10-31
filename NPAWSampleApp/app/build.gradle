@@ -32,10 +32,16 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile files('libs/OoyalaSDK.jar')
+// For development purposes only
+    compile project(':core')
+
+//    compile files('libs/OoyalaSDK.jar')
     compile files('libs/YouboraLib-5.3.1.jar')
     compile files('libs/YouboraPluginOoyala-5.3.0.jar')
+
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
 }

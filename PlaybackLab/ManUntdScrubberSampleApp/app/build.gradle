@@ -10,6 +10,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -26,8 +27,8 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+//    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+//    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
 
@@ -64,11 +65,16 @@ repositories {
 
 
 dependencies {
+// For development purposes only
+    compile project(':core')
+    compile project(':ooyalaSkinSDK')
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.facebook.stetho:stetho:1.2.0'
     compile 'com.facebook.soloader:soloader:0.1.0'
     compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
@@ -79,13 +85,13 @@ dependencies {
     compile 'com.google.code.findbugs:jsr305:3.0.0'
     compile(name:'react-native', version:'0.35.0', ext:'aar')
 
-
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
     compile 'com.facebook.fresco:fresco:0.11.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
     compile 'com.squareup.okio:okio:1.9.0'
     compile 'org.webkit:android-jsc:r174650'
     compile 'javax.inject:javax.inject:1'
+    compile 'com.android.support:multidex:1.0.1'
     //TestFairy
     compile 'testfairy:testfairy-android-sdk:1.+@aar'
 

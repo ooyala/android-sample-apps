@@ -80,16 +80,21 @@ repositories {
 }
 
 dependencies {
+// For development purposes only
+    compile project(':core')
+    compile project(':ooyalaSkinSDK')
+
+    compile files('libs/ima-android-v371.jar')
     compile files('libs/FWAdManager.jar')
     compile files('libs/OoyalaFreewheelSDK.jar')
     compile files('libs/OoyalaIMASDK.jar')
-    compile files('libs/OoyalaSDK.jar')
-    compile files('libs/ima-android-v371.jar')
-    compile files('libs/OoyalaSkinSDK.jar')
+//    compile files('libs/OoyalaSDK.jar')
+//    compile files('libs/OoyalaSkinSDK.jar')
 
-    // TODO: Delete 'com.bartoszlipinski:exoplayer1:r1.5.9' after full migration to Exoplayer2
     compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
-    compile 'com.bartoszlipinski:exoplayer1:r1.5.9'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:recyclerview-v7:25.4.0'
