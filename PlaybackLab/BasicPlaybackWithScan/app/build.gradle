@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ooyala.sample.BasicPlaybackSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -29,9 +29,9 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile files('libs/OoyalaSDK.jar')
-    compile project(':AndroidVisionQRReader')
+    implementation files('libs/OoyalaSDK.jar')
+    implementation project(':AndroidVisionQRReader')
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
 }

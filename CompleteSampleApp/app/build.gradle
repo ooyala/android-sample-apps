@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ooyala.sample.CompleteSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -44,18 +44,18 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile files('libs/FWAdManager.jar')
-    compile files('libs/OoyalaFreewheelSDK.jar')
-    compile files('libs/OoyalaIMASDK.jar')
-    compile files('libs/OoyalaSDK.jar')
-    compile files('libs/OoyalaSkinSDK.jar')
-    compile files('libs/ima-android-v371.jar')
-    compile files('libs/android_accessenabler-1.7.3.jar')
-    compile files('libs/YouboraLib-5.3.1.jar')
-    compile files('libs/YouboraPluginOoyala-5.3.0.jar')
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation files('libs/FWAdManager.jar')
+    implementation files('libs/OoyalaFreewheelSDK.jar')
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/ima-android-v371.jar')
+    implementation files('libs/android_accessenabler-1.7.3.jar')
+    implementation files('libs/YouboraLib-5.3.1.jar')
+    implementation files('libs/YouboraPluginOoyala-5.3.0.jar')
 }

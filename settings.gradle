@@ -27,8 +27,8 @@ project(':IMASampleApp').projectDir = new File(settingsDir, './IMASampleApp/app'
 //project(':PulseSampleApp').projectDir = new File(settingsDir, './PulseSampleApp/app')
 
 // Analytics Integrations
-include ':NielsenSampleApp'
-project(':NielsenSampleApp').projectDir = new File(settingsDir, './NielsenSampleApp/app')
+//include ':NielsenSampleApp'
+//project(':NielsenSampleApp').projectDir = new File(settingsDir, './NielsenSampleApp/app')
 include ':NPAWSampleApp'
 project(':NPAWSampleApp').projectDir = new File(settingsDir, './NPAWSampleApp/app')
 
