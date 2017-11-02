@@ -60,6 +60,7 @@ void main (void)
     // Scale texture space to (-1,1) in both axes
     vec2 p = -1.0 + 2.0 * v_TextureCoord;
     p.y *= -1.0;
+    p *= 2.5;
 
     // Setup uv rect, i.e. a rect (x, y, width, height) that defines a (sub)section of the texture
     vec4 uv_rect = vec4(0.0, 0.0, 1.0, 1.0); // mono: complete texture
