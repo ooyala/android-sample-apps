@@ -112,7 +112,7 @@ class VideoFragment() : Fragment(), Observer {
 
     if (hasIma) {
       @SuppressWarnings("unused")
-      val imaManager = OoyalaIMAManager(player)
+      val imaManager = OoyalaIMAManager(player, playerSkinLayout)
     }
     player?.embedCode = embedCode
   }

@@ -42,8 +42,6 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
   private fun showRecyclerFragment() {
     val fragmentTransaction = supportFragmentManager.beginTransaction()
     fragmentTransaction.replace(R.id.container, VideoRecyclerFragment(), VideoRecyclerFragment.TAG).commit()
-    toolbar.title = getString(R.string.app_name)
-
   }
 
   private fun setupToolbar() {
@@ -53,6 +51,10 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
   }
 
   private fun onBackStackChanged() {
-    supportActionBar?.setDisplayHomeAsUpEnabled(supportFragmentManager.backStackEntryCount > 0)
+    val isBackStackNonEmpty = supportFragmentManager.backStackEntryCount > 0
+    supportActionBar?.setDisplayHomeAsUpEnabled(isBackStackNonEmpty)
+    if (!isBackStackNonEmpty) {
+      toolbar.title = getString(R.string.app_name)
+    }
   }
 }

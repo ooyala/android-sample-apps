@@ -1,5 +1,5 @@
 // OoyalaPlayer Class APIs
-include ':BasicPlaybackSampleApp'
+include ':BasicPlaybackSampleApp', ':VRSampleAppKotlin'
 project(':BasicPlaybackSampleApp').projectDir = new File(settingsDir, './BasicPlaybackSampleApp/app')
 include ':AdvancedPlaybackSampleApp'
 project(':AdvancedPlaybackSampleApp').projectDir = new File(settingsDir, './AdvancedPlaybackSampleApp/app')
@@ -50,6 +50,9 @@ project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './Playback
 
 include ':VRSampleApp'
 project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
+
+include ':VRSampleAppKotlin'
+project (':VRSampleAppKotlin').projectDir = new File(settingsDir, './VRSampleAppKotlin/app')
 
 /*include ':skin'
 project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/android/skin')
