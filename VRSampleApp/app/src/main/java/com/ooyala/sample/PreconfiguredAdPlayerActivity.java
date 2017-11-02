@@ -51,7 +51,7 @@ public class PreconfiguredAdPlayerActivity extends AbstractHookActivity {
 
       if (hasIMA) {
         @SuppressWarnings("unused")
-        OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
+        OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
       }
 
       player.setEmbedCode(embedCode);
