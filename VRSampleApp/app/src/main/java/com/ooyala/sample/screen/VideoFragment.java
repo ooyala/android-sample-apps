@@ -124,11 +124,12 @@ public class VideoFragment extends Fragment implements Observer {
   private void changeToolbarVisibilityInFullscreenMode(Object arg) {
     String notificationName = OoyalaNotification.getNameOrUnknown(arg);
     if (notificationName.equals(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME)) {
-      if (getActivity() != null && ((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
+      AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+      if (appCompatActivity != null && appCompatActivity.getSupportActionBar() != null) {
         if (((OoyalaNotification) arg).getData().equals(Boolean.TRUE)) {
-          ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+          appCompatActivity.getSupportActionBar().hide();
         } else {
-          ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+          appCompatActivity.getSupportActionBar().show();
         }
       }
     }
