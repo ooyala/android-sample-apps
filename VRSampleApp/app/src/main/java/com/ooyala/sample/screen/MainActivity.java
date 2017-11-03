@@ -16,70 +16,70 @@ import com.ooyala.sample.utils.VideoData;
 
 public class MainActivity extends AppCompatActivity implements ItemClickedInterface {
 
-    private Toolbar mToolbar;
+  private Toolbar toolbar;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main_activity);
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        setupToolbar();
-        showRecyclerFragment();
+    setupToolbar();
+    showRecyclerFragment();
 
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                if (getSupportActionBar() != null) {
-                    boolean showHomeAsUp = getSupportFragmentManager().getBackStackEntryCount() > 0;
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
-                    if (!showHomeAsUp) {
-                        mToolbar.setTitle(R.string.app_name);
-                    }
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
-        if (supportFragmentManager.getBackStackEntryCount() >= 1) {
-            supportFragmentManager.popBackStack();
-        } else {
-            super.onBackPressed();
+    getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+      @Override
+      public void onBackStackChanged() {
+        if (getSupportActionBar() != null) {
+          boolean showHomeAsUp = getSupportFragmentManager().getBackStackEntryCount() > 0;
+          getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
+          if (!showHomeAsUp) {
+            toolbar.setTitle(R.string.app_name);
+          }
         }
+      }
+    });
+  }
+
+  @Override
+  public void onBackPressed() {
+    FragmentManager supportFragmentManager = getSupportFragmentManager();
+    if (supportFragmentManager.getBackStackEntryCount() >= 1) {
+      supportFragmentManager.popBackStack();
+    } else {
+      super.onBackPressed();
     }
+  }
 
-    @Override
-    public void onItemClicked(VideoData data) {
-        showVideoFragment(data);
-    }
+  @Override
+  public void onItemClicked(VideoData data) {
+    showVideoFragment(data);
+  }
 
-    public void showVideoFragment(VideoData data) {
-        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, VideoFragment.createVideoFragment(data), VideoFragment.TAG).addToBackStack(null).commit();
-        mToolbar.setTitle(data.getTitle());
-    }
+  public void showVideoFragment(VideoData data) {
+    final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+    fragmentTransaction.replace(R.id.container, VideoFragment.createVideoFragment(data), VideoFragment.TAG).addToBackStack(null).commit();
+    toolbar.setTitle(data.getTitle());
+  }
 
-    private void showRecyclerFragment() {
-        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, new VideoRecyclerFragment(), VideoRecyclerFragment.TAG).commit();
-    }
+  private void showRecyclerFragment() {
+    final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+    fragmentTransaction.replace(R.id.container, new VideoRecyclerFragment(), VideoRecyclerFragment.TAG).commit();
+  }
 
-    private void setupToolbar() {
-        setSupportActionBar(mToolbar);
-        ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setTitle(R.string.app_name);
-            mToolbar.bringToFront();
-            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.this.onBackPressed();
-                }
-            });
-
+  private void setupToolbar() {
+    setSupportActionBar(toolbar);
+    ActionBar supportActionBar = getSupportActionBar();
+    if (supportActionBar != null) {
+      supportActionBar.setTitle(R.string.app_name);
+      toolbar.bringToFront();
+      toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          MainActivity.this.onBackPressed();
         }
+      });
+
     }
+  }
 }

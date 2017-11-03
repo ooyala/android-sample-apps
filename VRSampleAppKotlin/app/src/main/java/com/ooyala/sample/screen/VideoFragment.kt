@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -89,6 +90,18 @@ class VideoFragment() : Fragment(), Observer {
       if (writeStoragePermissionGranted) {
         Log.d(TAG, "Writing log to SD card")
         logger.writeToSdcardLog(text)
+      }
+    }
+      changeToolbarVisibilityInFullscreenMode(arg)
+  }
+
+  private fun changeToolbarVisibilityInFullscreenMode(arg: Any?) {
+    val notificationName = OoyalaNotification.getNameOrUnknown(arg)
+    if (notificationName == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
+      if ((arg as OoyalaNotification).data == java.lang.Boolean.TRUE) {
+        (getActivity() as AppCompatActivity).supportActionBar!!.hide()
+      } else {
+        (getActivity() as AppCompatActivity).supportActionBar!!.show()
       }
     }
   }
