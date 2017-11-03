@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,6 +116,20 @@ public class VideoFragment extends Fragment implements Observer {
             if (writeStoragePermissionGranted) {
                 Log.d(TAG, "Writing log to SD card");
                 logger.writeToSdcardLog(text);
+            }
+        }
+        changeToolbarVisibilityInFullscreenMode(arg);
+    }
+
+    private void changeToolbarVisibilityInFullscreenMode(Object arg) {
+        String notificationName = OoyalaNotification.getNameOrUnknown(arg);
+        if (notificationName.equals(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME)) {
+            if(getActivity() != null && ((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
+                if (((OoyalaNotification) arg).getData().equals(Boolean.TRUE)) {
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+                } else {
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+                }
             }
         }
     }
