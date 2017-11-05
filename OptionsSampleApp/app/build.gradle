@@ -8,6 +8,7 @@ android {
         applicationId "com.ooyala.sample.OptionsSampleApp"
         minSdkVersion 16
         targetSdkVersion 26
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -19,6 +20,10 @@ android {
 
     packagingOptions {
         exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
+    }
+
+    dexOptions {
+        jumboMode true
     }
 }
 
