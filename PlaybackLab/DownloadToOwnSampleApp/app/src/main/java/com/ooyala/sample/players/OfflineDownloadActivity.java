@@ -33,8 +33,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
-  String EMBED = "Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm";
-  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+  String EMBED = "null";
+  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
   final String DOMAIN = "http://ooyala.com";
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists

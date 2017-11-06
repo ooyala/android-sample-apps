@@ -31,8 +31,8 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
 
   private static final String TAG = OoyalaSkinOPTPlayerActivity.class.getSimpleName();
 
-  String EMBED = "Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm";
-  final String PCODE  = "FoeG863GnBL4IhhlFC1Q2jqbkH9m";
+  String EMBED = "null";
+  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
   final String DOMAIN = "http://ooyala.com";
 
   private final String APIKEY = "";
