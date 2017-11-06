@@ -87,7 +87,7 @@ dependencies {
 //  implementation files('libs/OoyalaIMASDK.jar')
 //  implementation files('libs/ima-android-v371.jar')
   implementation files('libs/OoyalaSDK.jar')
-  implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
+  implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
 
 // For development purposes only
 //  implementation project(':core')
