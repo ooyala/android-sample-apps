@@ -33,7 +33,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
 
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
-  String EMBED = "null";
+  String EMBED = null;
   final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
   final String DOMAIN = "http://ooyala.com";
 
