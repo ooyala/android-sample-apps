@@ -16,24 +16,22 @@ import com.ooyala.sample.utils.AdList;
 
 public class VideoRecyclerFragment extends Fragment {
 
-    public static final String TAG = VideoRecyclerFragment.class.getCanonicalName();
+  public static final String TAG = VideoRecyclerFragment.class.getCanonicalName();
 
-    private RecyclerView mRecyclerView;
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View inflated = inflater.inflate(R.layout.video_recycler_fragment, container, false);
+    RecyclerView recyclerView = (RecyclerView) inflated.findViewById(R.id.videoRecyclerView);
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflated = inflater.inflate(R.layout.video_recycler_fragment, container, false);
-        mRecyclerView = (RecyclerView) inflated.findViewById(R.id.videoRecyclerView);
+    ItemClickedInterface itemClickedInterface = null;
 
-        ItemClickedInterface itemClickedInterface = null;
-
-        if (getActivity() instanceof ItemClickedInterface) {
-            itemClickedInterface = (ItemClickedInterface) getActivity();
-        }
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(new VideoRecyclerAdapter(AdList.videoList, itemClickedInterface));
-        return inflated;
+    if (getActivity() instanceof ItemClickedInterface) {
+      itemClickedInterface = (ItemClickedInterface) getActivity();
     }
+
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    recyclerView.setAdapter(new VideoRecyclerAdapter(AdList.videoList, itemClickedInterface));
+    return inflated;
+  }
 }
