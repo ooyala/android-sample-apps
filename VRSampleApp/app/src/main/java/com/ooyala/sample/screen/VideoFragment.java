@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.stetho.common.android.FragmentCompat;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
@@ -33,7 +34,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 public class VideoFragment extends Fragment implements Observer {
 
     public static final String TAG = VideoFragment.class.getCanonicalName();
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 65535;
 
     private final SDCardLogcatOoyalaEventsLogger logger = new SDCardLogcatOoyalaEventsLogger();
     private boolean writeStoragePermissionGranted = false;
@@ -74,7 +75,7 @@ public class VideoFragment extends Fragment implements Observer {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
         } else {
             initPlayer();
         }
