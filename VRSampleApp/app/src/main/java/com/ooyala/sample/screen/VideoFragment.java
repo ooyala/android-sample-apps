@@ -3,7 +3,6 @@ package com.ooyala.sample.screen;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -75,7 +74,7 @@ public class VideoFragment extends Fragment implements Observer {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     if (ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(getActivity(), new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+      requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
     } else {
       initPlayer();
     }
@@ -138,12 +137,12 @@ public class VideoFragment extends Fragment implements Observer {
   private void initPlayer() {
     final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
     final Options options = new Options.Builder()
-        .setTVRatingConfiguration(tvRatingConfiguration)
-        .setBypassPCodeMatching(true)
-        .setUseExoPlayer(true)
-        .setShowNativeLearnMoreButton(false)
-        .setShowPromoImage(false)
-        .build();
+            .setTVRatingConfiguration(tvRatingConfiguration)
+            .setBypassPCodeMatching(true)
+            .setUseExoPlayer(true)
+            .setShowNativeLearnMoreButton(false)
+            .setShowPromoImage(false)
+            .build();
 
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
     player.addObserver(this);
