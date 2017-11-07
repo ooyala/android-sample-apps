@@ -34,7 +34,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 public class VideoFragment extends Fragment implements Observer {
 
     public static final String TAG = VideoFragment.class.getCanonicalName();
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 65535;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     private final SDCardLogcatOoyalaEventsLogger logger = new SDCardLogcatOoyalaEventsLogger();
     private boolean writeStoragePermissionGranted = false;
