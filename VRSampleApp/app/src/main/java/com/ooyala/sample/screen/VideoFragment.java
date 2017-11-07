@@ -70,15 +70,15 @@ public class VideoFragment extends Fragment implements Observer {
     return inflated;
   }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-        } else {
-            initPlayer();
-        }
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    if (ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+      requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+    } else {
+      initPlayer();
     }
+  }
 
   @Override
   public void onResume() {
@@ -137,12 +137,12 @@ public class VideoFragment extends Fragment implements Observer {
   private void initPlayer() {
     final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
     final Options options = new Options.Builder()
-        .setTVRatingConfiguration(tvRatingConfiguration)
-        .setBypassPCodeMatching(true)
-        .setUseExoPlayer(true)
-        .setShowNativeLearnMoreButton(false)
-        .setShowPromoImage(false)
-        .build();
+            .setTVRatingConfiguration(tvRatingConfiguration)
+            .setBypassPCodeMatching(true)
+            .setUseExoPlayer(true)
+            .setShowNativeLearnMoreButton(false)
+            .setShowPromoImage(false)
+            .build();
 
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
     player.addObserver(this);
