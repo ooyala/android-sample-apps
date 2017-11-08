@@ -33,7 +33,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
   @Override
   public void onBindViewHolder(VideoItemViewHolder holder, int position) {
     holder.bind(datas.get(position), clickedInterface);
-  }
+}
 
   @Override
   public int getItemCount() {

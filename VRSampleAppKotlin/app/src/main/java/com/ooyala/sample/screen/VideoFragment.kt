@@ -18,6 +18,7 @@ import com.ooyala.android.PlayerDomain
 import com.ooyala.android.configuration.FCCTVRatingConfiguration
 import com.ooyala.android.configuration.Options
 import com.ooyala.android.imasdk.OoyalaIMAManager
+import com.ooyala.android.skin.OoyalaSkinLayout
 import com.ooyala.android.skin.OoyalaSkinLayoutController
 import com.ooyala.android.skin.configuration.SkinOptions
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger
@@ -27,7 +28,7 @@ import kotlinx.android.synthetic.main.video_fragment.*
 import java.util.*
 
 
-class VideoFragment() : Fragment(), Observer {
+open class VideoFragment() : Fragment(), Observer {
 
   companion object {
     val TAG = VideoFragment::class.java.canonicalName
@@ -40,14 +41,12 @@ class VideoFragment() : Fragment(), Observer {
   private lateinit var embedCode: String
   private lateinit var pCode: String
   private lateinit var domain: String
-  private var hasIma: Boolean = false
-  private var player: OoyalaPlayer? = null
+  protected var player: OoyalaPlayer? = null
 
   constructor(data: VideoData) : this() {
     this.embedCode = data.embedCode!!
     this.domain = data.domain!!
     this.pCode = data.pCode!!
-    this.hasIma = data.hasIma!!
   }
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -57,7 +56,7 @@ class VideoFragment() : Fragment(), Observer {
     super.onActivityCreated(savedInstanceState)
 
     if (ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(activity, arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+      requestPermissions(arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
     } else {
       initPlayer()
     }
@@ -95,6 +94,9 @@ class VideoFragment() : Fragment(), Observer {
       changeToolbarVisibilityInFullscreenMode(arg)
   }
 
+  open fun initAdManager() {
+  }
+
   private fun changeToolbarVisibilityInFullscreenMode(arg: Any?) {
     val notificationName = OoyalaNotification.getNameOrUnknown(arg)
     if (notificationName == OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME) {
@@ -123,10 +125,8 @@ class VideoFragment() : Fragment(), Observer {
     val playerController = OoyalaSkinLayoutController(activity.application, playerSkinLayout, player, skinOptions)
     playerController.addObserver(this)
 
-    if (hasIma) {
-      @SuppressWarnings("unused")
-      val imaManager = OoyalaIMAManager(player, playerSkinLayout)
-    }
+    initAdManager()
+
     player?.embedCode = embedCode
   }
 }

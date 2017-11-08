@@ -1,36 +1,40 @@
 package com.ooyala.sample.utils;
 
-public class VideoData {
+import com.ooyala.sample.parser.AdType;
+
+import java.io.Serializable;
+
+public class VideoData implements Serializable {
 
   private VideoItemType itemType;
   private String title;
-  private boolean hasIma;
+  private AdType adType;
   private String embedCode;
   private String pCode;
   private String domain;
 
-  public VideoData(VideoItemType itemType, String title, boolean hasIma, String embedCode) {
+  public VideoData(VideoItemType itemType, String title, AdType AdType, String embedCode) {
     this.itemType = itemType;
     this.title = title;
-    this.hasIma = hasIma;
+    this.adType = AdType;
     this.embedCode = embedCode;
     this.pCode = "BzY2syOq6kIK6PTXN7mmrGVSJEFj";
     this.domain = "http://www.ooyala.com";
   }
 
-  public VideoData(VideoItemType itemType, String title, boolean hasIma, String embedCode, String pCode) {
+  public VideoData(VideoItemType itemType, String title, AdType AdType, String embedCode, String pCode) {
     this.itemType = itemType;
     this.title = title;
-    this.hasIma = hasIma;
+    this.adType = AdType;
     this.embedCode = embedCode;
-    this.pCode = pCode;
+    this.pCode = pCode == null ? "BzY2syOq6kIK6PTXN7mmrGVSJEFj" : pCode;
     this.domain = "http://www.ooyala.com";
   }
 
-  public VideoData(VideoItemType itemType, String title, boolean hasIma, String embedCode, String pCode, String domain) {
+  public VideoData(VideoItemType itemType, String title, AdType AdType, String embedCode, String pCode, String domain) {
     this.itemType = itemType;
     this.title = title;
-    this.hasIma = hasIma;
+    this.adType = AdType;
     this.embedCode = embedCode;
     this.pCode = pCode;
     this.domain = domain;
@@ -44,8 +48,8 @@ public class VideoData {
     return title;
   }
 
-  public boolean isHasIma() {
-    return hasIma;
+  public AdType getAdType() {
+    return adType;
   }
 
   public String getEmbedCode() {

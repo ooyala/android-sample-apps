@@ -13,6 +13,9 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.adapters.VideoRecyclerAdapter;
 import com.ooyala.sample.interfaces.ItemClickedInterface;
 import com.ooyala.sample.utils.AdList;
+import com.ooyala.sample.utils.VideoData;
+
+import java.util.List;
 
 public class VideoRecyclerFragment extends Fragment {
 
@@ -31,7 +34,8 @@ public class VideoRecyclerFragment extends Fragment {
     }
 
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    recyclerView.setAdapter(new VideoRecyclerAdapter(AdList.videoList, itemClickedInterface));
+    List<VideoData> videoList = AdList.getInstance().getVideoList(getContext());
+    recyclerView.setAdapter(new VideoRecyclerAdapter(videoList, itemClickedInterface));
     return inflated;
   }
 }
