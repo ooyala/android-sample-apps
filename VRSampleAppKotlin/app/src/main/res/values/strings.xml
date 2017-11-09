@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VRSampleAppKotlin</string>
+    <string name="show_ad">Show AD</string>
+</resources>
