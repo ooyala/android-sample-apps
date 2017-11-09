@@ -41,19 +41,15 @@ public class VideoFragment extends Fragment implements Observer {
   private String embedCode;
   private String pCode;
   private String domain;
-  private boolean hasIma;
 
-  private OoyalaPlayer player;
+  protected OoyalaPlayer player;
 
-  public static VideoFragment createVideoFragment(VideoData data) {
-    VideoFragment fragment = new VideoFragment();
+  public void setArguments(VideoData data) {
     final Bundle args = new Bundle();
     args.putString("embedCode", data.getEmbedCode());
     args.putString("pCode", data.getpCode());
     args.putString("domain", data.getDomain());
-    args.putBoolean("hasIma", data.isHasIma());
-    fragment.setArguments(args);
-    return fragment;
+    this.setArguments(args);
   }
 
   @Nullable
@@ -65,7 +61,6 @@ public class VideoFragment extends Fragment implements Observer {
       this.embedCode = arguments.getString("embedCode");
       this.pCode = arguments.getString("pCode");
       this.domain = arguments.getString("domain");
-      this.hasIma = arguments.getBoolean("hasIma");
     }
     return inflated;
   }
@@ -120,6 +115,10 @@ public class VideoFragment extends Fragment implements Observer {
     changeToolbarVisibilityInFullscreenMode(arg);
   }
 
+  public void applyADSManager(OoyalaSkinLayout skinLayout) {
+
+  }
+
   private void changeToolbarVisibilityInFullscreenMode(Object arg) {
     String notificationName = OoyalaNotification.getNameOrUnknown(arg);
     if (notificationName.equals(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME)) {
@@ -151,9 +150,8 @@ public class VideoFragment extends Fragment implements Observer {
     final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
     playerController.addObserver(this);
 
-    if (hasIma) {
-      @SuppressWarnings("unused") final OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
-    }
+    applyADSManager(skinLayout);
+
     player.setEmbedCode(embedCode);
   }
 }

@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.ooyala.sample.R
 import com.ooyala.sample.VideoFragment
+import com.ooyala.sample.fragmentfactory.FragmentFactory
 import com.ooyala.sample.interfaces.ItemClickedInterface
 import com.ooyala.sample.utils.VideoItemType
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity(), ItemClickedInterface {
+
+  private val fragmentFactory = FragmentFactory()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,14 +32,16 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
 
   override fun onItemClicked(data: VideoData) {
     if (data.type == VideoItemType.VIDEO) {
-      openVideoFragment(data)
+      val currentFragment = fragmentFactory.getFragmentByType(data)
+      openVideoFragment(currentFragment)
+      toolbar.title = data.title
     }
   }
 
-  private fun openVideoFragment(data: VideoData) {
+  private fun openVideoFragment(fragment: VideoFragment) {
     val fragmentTransaction = supportFragmentManager.beginTransaction()
-    fragmentTransaction.replace(R.id.container, VideoFragment(data), VideoFragment.TAG).addToBackStack(null).commit()
-    toolbar.title = data.title
+    fragmentTransaction.replace(R.id.container, fragment, VideoFragment.TAG).addToBackStack(null).commit()
+
   }
 
   private fun showRecyclerFragment() {

@@ -10,19 +10,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.ooyala.sample.R;
+import com.ooyala.sample.fragmentfactory.FragmentFactory;
 import com.ooyala.sample.interfaces.ItemClickedInterface;
 import com.ooyala.sample.utils.VideoData;
+
 
 
 public class MainActivity extends AppCompatActivity implements ItemClickedInterface {
 
   private Toolbar toolbar;
+  private FragmentFactory fragmentFactory;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
     toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+    fragmentFactory = new FragmentFactory();
 
     setupToolbar();
     showRecyclerFragment();
@@ -53,13 +58,15 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
 
   @Override
   public void onItemClicked(VideoData data) {
-    showVideoFragment(data);
+    VideoFragment fragment = fragmentFactory.getFragmentByAdType(data.getAdType());
+    fragment.setArguments(data);
+    showVideoFragment(fragment);
+    toolbar.setTitle(data.getTitle());
   }
 
-  public void showVideoFragment(VideoData data) {
+  public void showVideoFragment(VideoFragment fragment) {
     final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-    fragmentTransaction.replace(R.id.container, VideoFragment.createVideoFragment(data), VideoFragment.TAG).addToBackStack(null).commit();
-    toolbar.setTitle(data.getTitle());
+    fragmentTransaction.replace(R.id.container, fragment, VideoFragment.TAG).addToBackStack(null).commit();
   }
 
   private void showRecyclerFragment() {
