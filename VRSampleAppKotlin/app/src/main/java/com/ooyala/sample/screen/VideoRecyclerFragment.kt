@@ -26,7 +26,7 @@ class VideoRecyclerFragment : Fragment() {
     super.onActivityCreated(savedInstanceState)
 
     videoRecyclerView.layoutManager = LinearLayoutManager(context)
-    videoRecyclerView.adapter = VideoRecyclerAdapter(AdList.videoList, {
+    videoRecyclerView.adapter = VideoRecyclerAdapter(AdList.instance.getVideoList(context), {
       handleItemChose(data = it)
     })
   }
