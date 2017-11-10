@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
     } else {
       for (fragment in supportFragmentManager.fragments) {
         if (fragment is TvControllerInterface) {
-          (fragment as TvControllerInterface).onKeyDown(keyCode, event)
+          fragment.onKeyDown(keyCode, event)
         }
       }
       return super.onKeyDown(keyCode, event)
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
     if (keyCode != KEYCODE_BACK) {
       for (fragment in supportFragmentManager.fragments) {
         if (fragment is TvControllerInterface) {
-          (fragment as TvControllerInterface).onKeyUp(keyCode, event)
+          fragment.onKeyUp(keyCode, event)
         }
       }
       return super.onKeyUp(keyCode, event)
