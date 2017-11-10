@@ -1,11 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent"
+    a:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/videoRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        a:id="@+id/videoRecyclerView"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"/>
 
 </RelativeLayout>

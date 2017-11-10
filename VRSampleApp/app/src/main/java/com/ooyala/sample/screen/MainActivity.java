@@ -2,6 +2,7 @@ package com.ooyala.sample.screen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -13,10 +14,11 @@ import android.view.View;
 import com.ooyala.sample.R;
 import com.ooyala.sample.fragmentfactory.FragmentFactory;
 import com.ooyala.sample.interfaces.ItemClickedInterface;
+import com.ooyala.sample.interfaces.TvControllerInterface;
 import com.ooyala.sample.utils.VideoData;
 
+import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.ooyala.android.util.TvHelper.isTargetDeviceTV;
-
 
 
 public class MainActivity extends AppCompatActivity implements ItemClickedInterface {
@@ -47,7 +49,12 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
         }
       }
     });
-    if(isTargetDeviceTV(this)){
+
+    hideToolbarForTv();
+  }
+
+  private void hideToolbarForTv() {
+    if (isTargetDeviceTV(this)) {
       getSupportActionBar().hide();
     }
   }
@@ -93,5 +100,31 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
         }
       });
     }
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if (keyCode == KEYCODE_BACK) {
+      this.onBackPressed();
+    } else {
+      for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+        if (fragment instanceof TvControllerInterface) {
+          ((TvControllerInterface) fragment).onKeyDown(keyCode, event);
+        }
+      }
+    }
+    return super.onKeyDown(keyCode, event);
+  }
+
+  @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+    if (keyCode != KEYCODE_BACK) {
+      for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+        if (fragment instanceof TvControllerInterface) {
+          ((TvControllerInterface) fragment).onKeyUp(keyCode, event);
+        }
+      }
+    }
+    return super.onKeyUp(keyCode, event);
   }
 }
