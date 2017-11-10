@@ -3,32 +3,36 @@ package com.ooyala.sample
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.facebook.react.common.ApplicationHolder.getApplication
 import com.ooyala.android.OoyalaNotification
 import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
 import com.ooyala.android.configuration.FCCTVRatingConfiguration
 import com.ooyala.android.configuration.Options
-import com.ooyala.android.imasdk.OoyalaIMAManager
-import com.ooyala.android.skin.OoyalaSkinLayout
 import com.ooyala.android.skin.OoyalaSkinLayoutController
 import com.ooyala.android.skin.configuration.SkinOptions
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger
-import com.ooyala.sample.R
+import com.ooyala.sample.interfaces.TvControllerInterface
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.video_fragment.*
 import java.util.*
 
 
-open class VideoFragment() : Fragment(), Observer {
+open class VideoFragment() : Fragment(), Observer, TvControllerInterface {
+  override fun onKeyUp(keyCode: Int, event: KeyEvent) {
+    playerController.onKeyUp(keyCode, event)
+  }
+
+  override fun onKeyDown(keyCode: Int, event: KeyEvent) {
+    playerController.onKeyDown(keyCode, event)
+  }
 
   companion object {
     val TAG = VideoFragment::class.java.canonicalName
@@ -42,6 +46,7 @@ open class VideoFragment() : Fragment(), Observer {
   private lateinit var pCode: String
   private lateinit var domain: String
   protected var player: OoyalaPlayer? = null
+  private lateinit var playerController: OoyalaSkinLayoutController;
 
   constructor(data: VideoData) : this() {
     this.embedCode = data.embedCode!!
@@ -122,7 +127,7 @@ open class VideoFragment() : Fragment(), Observer {
     player?.addObserver(this)
 
     val skinOptions = SkinOptions.Builder().build()
-    val playerController = OoyalaSkinLayoutController(activity.application, playerSkinLayout, player, skinOptions)
+    playerController = OoyalaSkinLayoutController(activity.application, playerSkinLayout, player, skinOptions)
     playerController.addObserver(this)
 
     initAdManager()

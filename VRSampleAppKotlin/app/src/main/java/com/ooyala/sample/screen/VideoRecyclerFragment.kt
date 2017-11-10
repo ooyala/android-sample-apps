@@ -3,24 +3,27 @@ package com.ooyala.sample.screen
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.view.KeyEvent
+import android.view.KeyEvent.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ooyala.sample.R
 import com.ooyala.sample.interfaces.ItemClickedInterface
 import com.ooyala.sample.adapters.VideoRecyclerAdapter
+import com.ooyala.sample.interfaces.TvControllerInterface
 import com.ooyala.sample.utils.AdList
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.video_recycler_fragment.*
 
-class VideoRecyclerFragment : Fragment() {
+class VideoRecyclerFragment : Fragment(), TvControllerInterface {
 
   companion object {
     val TAG = VideoRecyclerFragment::class.java.canonicalName
   }
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-          inflater?.inflate(R.layout.video_recycler_fragment, container, false)
+      inflater?.inflate(R.layout.video_recycler_fragment, container, false)
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -33,9 +36,20 @@ class VideoRecyclerFragment : Fragment() {
 
   private fun handleItemChose(data: VideoData) {
     val currentActivity = activity
-    if (currentActivity is ItemClickedInterface){
+    if (currentActivity is ItemClickedInterface) {
       currentActivity.onItemClicked(data)
     }
   }
 
+  override fun onKeyUp(keyCode: Int, event: KeyEvent) {
+    when (keyCode) {
+      KEYCODE_DPAD_UP -> (videoRecyclerView.adapter as VideoRecyclerAdapter).selectPrevious()
+      KEYCODE_DPAD_DOWN -> (videoRecyclerView.adapter as VideoRecyclerAdapter).selectNext()
+      KEYCODE_DPAD_CENTER -> (videoRecyclerView.adapter as VideoRecyclerAdapter).chooseCurrent()
+    }
+  }
+
+  override fun onKeyDown(keyCode: Int, event: KeyEvent) {
+
+  }
 }

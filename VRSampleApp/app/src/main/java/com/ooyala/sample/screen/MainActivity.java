@@ -106,14 +106,15 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
   public boolean onKeyDown(int keyCode, KeyEvent event) {
     if (keyCode == KEYCODE_BACK) {
       this.onBackPressed();
+      return true;
     } else {
       for (Fragment fragment : getSupportFragmentManager().getFragments()) {
         if (fragment instanceof TvControllerInterface) {
           ((TvControllerInterface) fragment).onKeyDown(keyCode, event);
         }
       }
+      return super.onKeyDown(keyCode, event);
     }
-    return super.onKeyDown(keyCode, event);
   }
 
   @Override
@@ -124,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
           ((TvControllerInterface) fragment).onKeyUp(keyCode, event);
         }
       }
+      return super.onKeyUp(keyCode, event);
     }
-    return super.onKeyUp(keyCode, event);
+    return true;
   }
 }

@@ -26,7 +26,11 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 public class VideoRecyclerFragment extends Fragment implements TvControllerInterface {
 
   public static final String TAG = VideoRecyclerFragment.class.getCanonicalName();
-
+  public static class Contacts {
+    public static final String NAME = "Name";
+    public static final String BIRTH = "Birth";
+    public static final String IMAGE = "Image";
+  }
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
