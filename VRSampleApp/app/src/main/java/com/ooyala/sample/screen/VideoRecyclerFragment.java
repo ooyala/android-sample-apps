@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,24 +12,15 @@ import android.view.ViewGroup;
 import com.ooyala.sample.R;
 import com.ooyala.sample.adapters.VideoRecyclerAdapter;
 import com.ooyala.sample.interfaces.ItemClickedInterface;
-import com.ooyala.sample.interfaces.TvControllerInterface;
 import com.ooyala.sample.utils.AdList;
 import com.ooyala.sample.utils.VideoData;
 
 import java.util.List;
 
-import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
-import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
-import static android.view.KeyEvent.KEYCODE_DPAD_UP;
-
-public class VideoRecyclerFragment extends Fragment implements TvControllerInterface {
+public class VideoRecyclerFragment extends Fragment {
 
   public static final String TAG = VideoRecyclerFragment.class.getCanonicalName();
-  public static class Contacts {
-    public static final String NAME = "Name";
-    public static final String BIRTH = "Birth";
-    public static final String IMAGE = "Image";
-  }
+
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,24 +42,4 @@ public class VideoRecyclerFragment extends Fragment implements TvControllerInter
   }
 
   VideoRecyclerAdapter adapter;
-
-  @Override
-  public void onKeyUp(int keyCode, KeyEvent event) {
-    switch (keyCode) {
-      case KEYCODE_DPAD_UP:
-        adapter.selectPrevious();
-        break;
-      case KEYCODE_DPAD_DOWN:
-        adapter.selectNext();
-        break;
-      case KEYCODE_DPAD_CENTER:
-        adapter.chooseCurrent();
-        break;
-    }
-  }
-
-  @Override
-  public void onKeyDown(int keyCode, KeyEvent event) {
-
-  }
 }

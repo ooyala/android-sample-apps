@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
 
   private fun hideToolbarForTv() {
     if (isTargetDeviceTV(this)) {
-      supportActionBar!!.hide()
+      supportActionBar?.hide()
     }
   }
 

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
   }
 
   private void hideToolbarForTv() {
-    if (isTargetDeviceTV(this)) {
+    if (isTargetDeviceTV(this) && getSupportActionBar() != null) {
       getSupportActionBar().hide();
     }
   }

@@ -16,7 +16,7 @@ import com.ooyala.sample.utils.AdList
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.video_recycler_fragment.*
 
-class VideoRecyclerFragment : Fragment(), TvControllerInterface {
+class VideoRecyclerFragment : Fragment() {
 
   companion object {
     val TAG = VideoRecyclerFragment::class.java.canonicalName
@@ -39,17 +39,5 @@ class VideoRecyclerFragment : Fragment(), TvControllerInterface {
     if (currentActivity is ItemClickedInterface) {
       currentActivity.onItemClicked(data)
     }
-  }
-
-  override fun onKeyUp(keyCode: Int, event: KeyEvent) {
-    when (keyCode) {
-      KEYCODE_DPAD_UP -> (videoRecyclerView.adapter as VideoRecyclerAdapter).selectPrevious()
-      KEYCODE_DPAD_DOWN -> (videoRecyclerView.adapter as VideoRecyclerAdapter).selectNext()
-      KEYCODE_DPAD_CENTER -> (videoRecyclerView.adapter as VideoRecyclerAdapter).chooseCurrent()
-    }
-  }
-
-  override fun onKeyDown(keyCode: Int, event: KeyEvent) {
-
   }
 }

@@ -2,6 +2,7 @@ package com.ooyala.sample.adapters;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,37 +19,10 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
 
   private List<VideoData> datas;
   private ItemClickedInterface clickedInterface;
-  private int selectedPosition = 0;
-  private boolean isChosen = false;
 
   public VideoRecyclerAdapter(List<VideoData> datas, ItemClickedInterface clickedInterface) {
     this.datas = datas;
     this.clickedInterface = clickedInterface;
-  }
-
-  public void selectNext() {
-    if (selectedPosition < datas.size() - 1) {
-      selectedPosition++;
-      notifyItemChanged(selectedPosition);
-
-      int previousPosition = selectedPosition - 1;
-      notifyItemChanged(previousPosition);
-    }
-  }
-
-  public void selectPrevious() {
-    if (selectedPosition > 1) {
-      selectedPosition--;
-      notifyItemChanged(selectedPosition);
-
-      int previousPosition = selectedPosition + 1;
-      notifyItemChanged(previousPosition);
-    }
-  }
-
-  public void chooseCurrent() {
-    isChosen = true;
-    notifyDataSetChanged();
   }
 
   @Override
@@ -59,7 +33,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
 
   @Override
   public void onBindViewHolder(VideoItemViewHolder holder, int position) {
-    holder.bind(datas.get(position), clickedInterface, position);
+    holder.bind(datas.get(position), clickedInterface);
   }
 
   @Override
@@ -76,9 +50,26 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
       super(itemView);
       sectionTextView = (TextView) itemView.findViewById(R.id.sectionTitleTextView);
       videoTitleTextView = (TextView) itemView.findViewById(R.id.videoTitleTextView);
+      itemView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          videoTitleTextView.performClick();
+        }
+      });
+
+      itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+         if(hasFocus){
+           videoTitleTextView.setTextColor(Color.RED);
+         } else {
+           videoTitleTextView.setTextColor(Color.WHITE);
+         }
+        }
+      });
     }
 
-    private void bind(final VideoData data, final ItemClickedInterface clickInterface, int position) {
+    private void bind(final VideoData data, final ItemClickedInterface clickInterface) {
       if (data.getItemType() == VideoItemType.SECTION) {
         videoTitleTextView.setVisibility(View.GONE);
         sectionTextView.setVisibility(View.VISIBLE);
@@ -93,22 +84,6 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
             clickInterface.onItemClicked(data);
           }
         });
-      }
-
-      keyPressProcessing(data, position);
-    }
-
-    private void keyPressProcessing(VideoData data, int position) {
-      if (position == selectedPosition && data.getItemType() != VideoItemType.SECTION) {
-        if (isChosen) {
-          videoTitleTextView.performClick();
-          return;
-        }
-        videoTitleTextView.setTextColor(Color.RED);
-        sectionTextView.setTextColor(Color.RED);
-      } else {
-        videoTitleTextView.setTextColor(Color.WHITE);
-        sectionTextView.setTextColor(Color.WHITE);
       }
     }
   }
