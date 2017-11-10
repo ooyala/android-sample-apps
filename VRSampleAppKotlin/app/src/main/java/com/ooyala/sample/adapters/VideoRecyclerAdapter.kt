@@ -29,8 +29,7 @@ class VideoRecyclerAdapter(private val dataList: List<VideoData>, private val li
 
     init {
       itemView.setOnClickListener { itemView.videoTitleTextView.performClick() }
-
-      itemView.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+      itemView.setOnFocusChangeListener { v, hasFocus ->
         if (hasFocus) {
           itemView.videoTitleTextView.videoTitleTextView.setTextColor(Color.RED)
         } else {
