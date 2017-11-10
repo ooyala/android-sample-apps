@@ -1,6 +1,8 @@
 package com.ooyala.sample.adapters;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,41 +28,57 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
   @Override
   public VideoItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_item, parent, false);
-    VideoItemViewHolder videoItemViewHolder = new VideoItemViewHolder(itemView);
-    return videoItemViewHolder;
+    return new VideoItemViewHolder(itemView);
   }
 
   @Override
   public void onBindViewHolder(VideoItemViewHolder holder, int position) {
     holder.bind(datas.get(position), clickedInterface);
-}
+  }
 
   @Override
   public int getItemCount() {
     return datas.size();
   }
 
-  static class VideoItemViewHolder extends RecyclerView.ViewHolder {
+  class VideoItemViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView mSectionTextView;
-    private TextView mVideoTitleTextView;
+    private TextView sectionTextView;
+    private TextView videoTitleTextView;
 
-    VideoItemViewHolder(View itemView) {
+    VideoItemViewHolder(final View itemView) {
       super(itemView);
-      mSectionTextView = (TextView) itemView.findViewById(R.id.sectionTitleTextView);
-      mVideoTitleTextView = (TextView) itemView.findViewById(R.id.videoTitleTextView);
+      sectionTextView = (TextView) itemView.findViewById(R.id.sectionTitleTextView);
+      videoTitleTextView = (TextView) itemView.findViewById(R.id.videoTitleTextView);
+      itemView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          videoTitleTextView.performClick();
+        }
+      });
+
+      itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+         if(hasFocus){
+           videoTitleTextView.setTextColor(Color.RED);
+         } else {
+           videoTitleTextView.setTextColor(Color.WHITE);
+         }
+        }
+      });
     }
 
     private void bind(final VideoData data, final ItemClickedInterface clickInterface) {
       if (data.getItemType() == VideoItemType.SECTION) {
-        mVideoTitleTextView.setVisibility(View.GONE);
-        mSectionTextView.setVisibility(View.VISIBLE);
-        mSectionTextView.setText(data.getTitle());
+        videoTitleTextView.setVisibility(View.GONE);
+        sectionTextView.setVisibility(View.VISIBLE);
+        sectionTextView.setText(data.getTitle());
       } else {
-        mSectionTextView.setVisibility(View.GONE);
-        mVideoTitleTextView.setVisibility(View.VISIBLE);
-        mVideoTitleTextView.setText(data.getTitle());
-        mVideoTitleTextView.setOnClickListener(new View.OnClickListener() {
+        sectionTextView.setVisibility(View.GONE);
+        videoTitleTextView.setVisibility(View.VISIBLE);
+        videoTitleTextView.setText(data.getTitle());
+        videoTitleTextView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
             clickInterface.onItemClicked(data);

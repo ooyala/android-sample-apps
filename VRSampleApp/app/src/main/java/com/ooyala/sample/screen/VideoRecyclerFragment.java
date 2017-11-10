@@ -33,9 +33,13 @@ public class VideoRecyclerFragment extends Fragment {
       itemClickedInterface = (ItemClickedInterface) getActivity();
     }
 
-    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    LinearLayoutManager layout = new LinearLayoutManager(getContext());
+    recyclerView.setLayoutManager(layout);
     List<VideoData> videoList = AdList.getInstance().getVideoList(getContext());
-    recyclerView.setAdapter(new VideoRecyclerAdapter(videoList, itemClickedInterface));
+    adapter = new VideoRecyclerAdapter(videoList, itemClickedInterface);
+    recyclerView.setAdapter(adapter);
     return inflated;
   }
+
+  VideoRecyclerAdapter adapter;
 }

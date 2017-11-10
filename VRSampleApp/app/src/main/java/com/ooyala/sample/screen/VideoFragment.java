@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,12 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.FCCTVRatingConfiguration;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
+import com.ooyala.sample.interfaces.TvControllerInterface;
 import com.ooyala.sample.utils.VideoData;
 
 import java.util.Observable;
@@ -30,10 +31,12 @@ import java.util.Observer;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class VideoFragment extends Fragment implements Observer {
+public class VideoFragment extends Fragment implements Observer, TvControllerInterface {
 
   public static final String TAG = VideoFragment.class.getCanonicalName();
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+
+  private OoyalaSkinLayoutController playerController;
 
   private final SDCardLogcatOoyalaEventsLogger logger = new SDCardLogcatOoyalaEventsLogger();
   private boolean writeStoragePermissionGranted = false;
@@ -136,22 +139,32 @@ public class VideoFragment extends Fragment implements Observer {
   private void initPlayer() {
     final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
     final Options options = new Options.Builder()
-            .setTVRatingConfiguration(tvRatingConfiguration)
-            .setBypassPCodeMatching(true)
-            .setUseExoPlayer(true)
-            .setShowNativeLearnMoreButton(false)
-            .setShowPromoImage(false)
-            .build();
+        .setTVRatingConfiguration(tvRatingConfiguration)
+        .setBypassPCodeMatching(true)
+        .setUseExoPlayer(true)
+        .setShowNativeLearnMoreButton(false)
+        .setShowPromoImage(false)
+        .build();
 
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
     player.addObserver(this);
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) getView().findViewById(R.id.playerSkinLayout);
     final SkinOptions skinOptions = new SkinOptions.Builder().build();
-    final OoyalaSkinLayoutController playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
+    playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
     playerController.addObserver(this);
 
     applyADSManager(skinLayout);
 
     player.setEmbedCode(embedCode);
+  }
+
+  @Override
+  public void onKeyUp(int keyCode, KeyEvent event) {
+    playerController.onKeyUp(keyCode, event);
+  }
+
+  @Override
+  public void onKeyDown(int keyCode, KeyEvent event) {
+    playerController.onKeyDown(keyCode, event);
   }
 }

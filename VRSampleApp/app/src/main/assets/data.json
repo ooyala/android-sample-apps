@@ -173,5 +173,20 @@
         "ad-type" : "NO-ADS"
       }
     ]
+  },
+  {
+    "title" : "10.11.17",
+    "videos" : [
+      {
+        "title" : "[With Discovery] Video",
+        "embed-code" : "AzaHdiZDE6da7-t9PHrqisLtwGPLtXWk",
+        "ad-type" : "NO-ADS"
+      },
+      {
+        "title" : "[Without Discovery] Video",
+        "embed-code" : "8xaHdiZDE6X5tp0-b3KI3Gf4JYHpMqPU",
+        "ad-type" : "NO-ADS"
+      }
+    ]
   }
 ]

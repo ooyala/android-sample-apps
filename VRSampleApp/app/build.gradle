@@ -75,7 +75,6 @@ dependencies {
     compile files('libs/OoyalaVRSDK.jar')
     compile files('libs/OoyalaSkinVRSDK.jar')
 
-
     compile(name: 'react-native', version: '0.35.0', ext: 'aar')
 
     // IMA ads

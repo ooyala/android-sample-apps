@@ -1,12 +1,15 @@
 package com.ooyala.sample.adapters
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.TextView
 import com.ooyala.sample.R
+import com.ooyala.sample.R.id.videoTitleTextView
 import com.ooyala.sample.utils.VideoData
 import com.ooyala.sample.utils.VideoItemType
 import kotlinx.android.synthetic.main.view_holder_item.view.*
@@ -17,11 +20,23 @@ class VideoRecyclerAdapter(private val dataList: List<VideoData>, private val li
   override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bindItem(dataList[position], listener)
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ItemViewHolder =
-          ItemViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.view_holder_item, parent, false))
+      ItemViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.view_holder_item, parent, false))
+
 
   override fun getItemCount(): Int = dataList.size
 
   class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    init {
+      itemView.setOnClickListener { itemView.videoTitleTextView.performClick() }
+      itemView.setOnFocusChangeListener { v, hasFocus ->
+        if (hasFocus) {
+          itemView.videoTitleTextView.videoTitleTextView.setTextColor(Color.RED)
+        } else {
+          itemView.videoTitleTextView.videoTitleTextView.setTextColor(Color.WHITE)
+        }
+      }
+    }
 
     fun bindItem(data: VideoData, listener: (VideoData) -> Unit) {
       itemView.videoTitleTextView.visibility = GONE
