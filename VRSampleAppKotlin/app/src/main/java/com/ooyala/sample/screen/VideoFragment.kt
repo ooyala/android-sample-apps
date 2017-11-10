@@ -84,7 +84,7 @@ open class VideoFragment() : Fragment(), Observer {
   override fun update(o: Observable?, arg: Any?) {
     val notification = OoyalaNotification.getNameOrUnknown(arg)
     if (notification != OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
-      val text = "Notification Received: $arg - state:  + ${player?.state}"
+      val text = "Notification Received: $notification - state:  + ${player?.state}"
       Log.d(TAG, text)
       if (writeStoragePermissionGranted) {
         Log.d(TAG, "Writing log to SD card")

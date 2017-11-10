@@ -108,7 +108,7 @@ public class VideoFragment extends Fragment implements Observer, TvControllerInt
   public void update(Observable o, Object arg) {
     final String notification = OoyalaNotification.getNameOrUnknown(arg);
     if (!notification.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
-      final String text = "Notification Received: " + arg + " state:  " + player.getState();
+      final String text = "Notification Received: " + notification + " state:  " + player.getState();
       Log.d(TAG, text);
       if (writeStoragePermissionGranted) {
         Log.d(TAG, "Writing log to SD card");
