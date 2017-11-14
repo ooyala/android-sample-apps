@@ -2,7 +2,7 @@ package com.ooyala.sample.interfaces
 
 import com.ooyala.sample.utils.VideoData
 
-interface ItemClickedInterface {
+interface VideoChooseInterface {
 
-  fun onItemClicked(data: VideoData)
+  fun onVideoChoose(data: VideoData)
 }

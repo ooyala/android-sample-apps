@@ -2,6 +2,7 @@ package com.ooyala.sample.screen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,11 +10,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.fragmentfactory.FragmentFactory;
-import com.ooyala.sample.interfaces.ItemClickedInterface;
+import com.ooyala.sample.interfaces.VideoChooseInterface;
 import com.ooyala.sample.interfaces.TvControllerInterface;
 import com.ooyala.sample.utils.VideoData;
 
@@ -21,7 +24,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.ooyala.android.util.TvHelper.isTargetDeviceTV;
 
 
-public class MainActivity extends AppCompatActivity implements ItemClickedInterface {
+public class MainActivity extends AppCompatActivity implements VideoChooseInterface {
 
   private Toolbar toolbar;
   private FragmentFactory fragmentFactory;
@@ -70,11 +73,12 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
   }
 
   @Override
-  public void onItemClicked(VideoData data) {
-    VideoFragment fragment = fragmentFactory.getFragmentByAdType(data.getAdType());
+  public void onVideoChoose(VideoData data) {
+    VideoFragment fragment = FragmentFactory.getFragmentByAdType(data.getAdType());
     fragment.setArguments(data);
     showVideoFragment(fragment);
     toolbar.setTitle(data.getTitle());
+    toolbar.hideOverflowMenu();
   }
 
   public void showVideoFragment(VideoFragment fragment) {
@@ -100,6 +104,21 @@ public class MainActivity extends AppCompatActivity implements ItemClickedInterf
         }
       });
     }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if(item.getItemId() == R.id.menu_add_video){
+      DialogFragment dialogFragment = new EmbedCodeDialogFragment();
+      dialogFragment.show(getSupportFragmentManager(), EmbedCodeDialogFragment.class.getSimpleName());
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override

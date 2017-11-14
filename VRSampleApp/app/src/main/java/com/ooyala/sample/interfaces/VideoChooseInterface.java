@@ -2,7 +2,7 @@ package com.ooyala.sample.interfaces;
 
 import com.ooyala.sample.utils.VideoData;
 
-public interface ItemClickedInterface {
+public interface VideoChooseInterface {
 
-  void onItemClicked(VideoData data);
+  void onVideoChoose(VideoData data);
 }

@@ -6,7 +6,7 @@ import com.ooyala.sample.screen.VideoFragment;
 
 public class FragmentFactory {
 
-  public VideoFragment getFragmentByAdType(AdType type) {
+  public static VideoFragment getFragmentByAdType(AdType type) {
     switch (type) {
       case NOADS:
       case OOYALA:

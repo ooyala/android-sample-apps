@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.adapters.VideoRecyclerAdapter;
-import com.ooyala.sample.interfaces.ItemClickedInterface;
+import com.ooyala.sample.interfaces.VideoChooseInterface;
 import com.ooyala.sample.utils.AdList;
 import com.ooyala.sample.utils.VideoData;
 
@@ -27,16 +27,16 @@ public class VideoRecyclerFragment extends Fragment {
     View inflated = inflater.inflate(R.layout.video_recycler_fragment, container, false);
     RecyclerView recyclerView = (RecyclerView) inflated.findViewById(R.id.videoRecyclerView);
 
-    ItemClickedInterface itemClickedInterface = null;
+    VideoChooseInterface videoChooseInterface = null;
 
-    if (getActivity() instanceof ItemClickedInterface) {
-      itemClickedInterface = (ItemClickedInterface) getActivity();
+    if (getActivity() instanceof VideoChooseInterface) {
+      videoChooseInterface = (VideoChooseInterface) getActivity();
     }
 
     LinearLayoutManager layout = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(layout);
     List<VideoData> videoList = AdList.getInstance().getVideoList(getContext());
-    adapter = new VideoRecyclerAdapter(videoList, itemClickedInterface);
+    adapter = new VideoRecyclerAdapter(videoList, videoChooseInterface);
     recyclerView.setAdapter(adapter);
     return inflated;
   }
