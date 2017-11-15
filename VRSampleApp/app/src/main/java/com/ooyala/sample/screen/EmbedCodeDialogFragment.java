@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.interfaces.VideoChooseInterface;
@@ -52,8 +53,9 @@ public class EmbedCodeDialogFragment extends DialogFragment {
         String pCode = pCodeEditText.getText().toString();
 
         if (embedCode.isEmpty()) {
-          embedCode = "dyeW82ZDE6cFE2fW4sWqaOSmRHVWj8yp";
-          adType = AdType.IMA;
+          Toast.makeText(getContext(), "Embed code can't be empty!", Toast.LENGTH_LONG).show();
+          dismiss();
+          return;
         }
         if (pCode.isEmpty()) {
           pCode = "BzY2syOq6kIK6PTXN7mmrGVSJEFj";

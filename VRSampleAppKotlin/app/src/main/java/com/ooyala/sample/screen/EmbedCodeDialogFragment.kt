@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import com.ooyala.sample.R
 import com.ooyala.sample.interfaces.VideoChooseInterface
 import com.ooyala.sample.parser.AdType
@@ -15,9 +16,6 @@ import com.ooyala.sample.utils.VideoData
 import com.ooyala.sample.utils.VideoItemType
 
 class EmbedCodeDialogFragment : DialogFragment() {
-  override fun setArguments(args: Bundle) {
-    super.setArguments(args)
-  }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.embed_code_dialog_fragment, container)
@@ -43,8 +41,9 @@ class EmbedCodeDialogFragment : DialogFragment() {
       var pCode: String? = pCodeEditText.text.toString()
 
       if (embedCode.isEmpty()) {
-        embedCode = "dyeW82ZDE6cFE2fW4sWqaOSmRHVWj8yp"
-        adType = AdType.IMA
+        Toast.makeText(context, "Embed code can't be empty!", Toast.LENGTH_LONG).show()
+        dismiss()
+        return@setOnClickListener
       }
       if (pCode!!.isEmpty()) {
         pCode = "BzY2syOq6kIK6PTXN7mmrGVSJEFj"
