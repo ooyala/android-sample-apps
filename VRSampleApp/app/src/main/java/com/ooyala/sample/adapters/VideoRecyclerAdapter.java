@@ -2,14 +2,13 @@ package com.ooyala.sample.adapters;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ooyala.sample.R;
-import com.ooyala.sample.interfaces.ItemClickedInterface;
+import com.ooyala.sample.interfaces.VideoChooseInterface;
 import com.ooyala.sample.utils.VideoData;
 import com.ooyala.sample.utils.VideoItemType;
 
@@ -18,9 +17,9 @@ import java.util.List;
 public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdapter.VideoItemViewHolder> {
 
   private List<VideoData> datas;
-  private ItemClickedInterface clickedInterface;
+  private VideoChooseInterface clickedInterface;
 
-  public VideoRecyclerAdapter(List<VideoData> datas, ItemClickedInterface clickedInterface) {
+  public VideoRecyclerAdapter(List<VideoData> datas, VideoChooseInterface clickedInterface) {
     this.datas = datas;
     this.clickedInterface = clickedInterface;
   }
@@ -69,7 +68,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
       });
     }
 
-    private void bind(final VideoData data, final ItemClickedInterface clickInterface) {
+    private void bind(final VideoData data, final VideoChooseInterface clickInterface) {
       if (data.getItemType() == VideoItemType.SECTION) {
         videoTitleTextView.setVisibility(View.GONE);
         sectionTextView.setVisibility(View.VISIBLE);
@@ -81,7 +80,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<VideoRecyclerAdap
         videoTitleTextView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            clickInterface.onItemClicked(data);
+            clickInterface.onVideoChoose(data);
           }
         });
       }

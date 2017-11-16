@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
+import android.view.Menu
+import android.view.MenuItem
 import com.ooyala.android.util.TvHelper.isTargetDeviceTV
 import com.ooyala.sample.R
 import com.ooyala.sample.VideoFragment
 import com.ooyala.sample.fragmentfactory.FragmentFactory
-import com.ooyala.sample.interfaces.ItemClickedInterface
+import com.ooyala.sample.interfaces.VideoChooseInterface
 import com.ooyala.sample.interfaces.TvControllerInterface
 import com.ooyala.sample.utils.VideoItemType
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.main_activity.*
 
-class MainActivity : AppCompatActivity(), ItemClickedInterface {
+class MainActivity : AppCompatActivity(), VideoChooseInterface {
 
   private val fragmentFactory = FragmentFactory()
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
     }
   }
 
-  override fun onItemClicked(data: VideoData) {
+  override fun onVideoChoose(data: VideoData) {
     if (data.type == VideoItemType.VIDEO) {
       val currentFragment = fragmentFactory.getFragmentByType(data)
       openVideoFragment(currentFragment)
@@ -99,5 +101,19 @@ class MainActivity : AppCompatActivity(), ItemClickedInterface {
     } else {
       return true
     }
+  }
+
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.menu, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    if (item.itemId == R.id.menu_add_video) {
+      val dialogFragment = EmbedCodeDialogFragment()
+      dialogFragment.show(supportFragmentManager, EmbedCodeDialogFragment::class.java!!.getSimpleName())
+    }
+    return super.onOptionsItemSelected(item)
   }
 }

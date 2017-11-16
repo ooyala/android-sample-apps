@@ -1,34 +1,44 @@
 [{
-    "title"  : "No ADS",
-    "videos" : [
-      {
-        "title" : "No ADS 2D",
-        "embed-code" : "VzZHd2YzE612sYDbk2UyuurOXrLgsVx9",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "No ADS V360",
-        "embed-code" : "ZwdTE5YzE69c3U3cXy2CCzfnCkzMMqUP",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "No ADS V360 long description",
-        "embed-code" : "syazl0YzE6sGVc6vA5sPUZK6RWp5aplu",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "No ADS V360 watermark",
-        "embed-code" : "tvaTluYzE6gfZg5nhqlqxPV7YbEukBCj",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "No ADS V360 high quality",
-        "embed-code" : "N5N2c2ZDE6DCsvCvSrgPHE5zerJ0oJYe",
-        "provider-code" : "15OGsyOs7wTVvirAtV0F611vIpKH",
-        "ad-type" : "NO-ADS"
-      }
-    ]
-  },
+  "title"  : "No ADS",
+  "videos" : [
+    {
+      "title" : "No ADS 2D",
+      "embed-code" : "VzZHd2YzE612sYDbk2UyuurOXrLgsVx9",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "No ADS V360",
+      "embed-code" : "ZwdTE5YzE69c3U3cXy2CCzfnCkzMMqUP",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "No ADS V360 long description",
+      "embed-code" : "syazl0YzE6sGVc6vA5sPUZK6RWp5aplu",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "No ADS V360 watermark",
+      "embed-code" : "tvaTluYzE6gfZg5nhqlqxPV7YbEukBCj",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "Video with subtitles_V360",
+      "embed-code" : "luNDFiZDE6FQr9tY7Vb0KLi6uvIIAmDm",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "No ADS V360 high quality",
+      "embed-code" : "N5N2c2ZDE6DCsvCvSrgPHE5zerJ0oJYe",
+      "provider-code" : "15OGsyOs7wTVvirAtV0F611vIpKH",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "Resolution 1920_V360",
+      "embed-code" : "9kcGNkZDE6ytN9v0jKYdFALpCAbkwN-K",
+      "ad-type" : "NO-ADS"
+    }
+  ]
+},
   {
     "title" : "IMA ADS Video 360",
     "videos" : [
@@ -64,7 +74,7 @@
     "videos" : [
       {
         "title" : "[Ooyala ADS 360] Pre-roll",
-        "embed-code" : "NibG1rYzE6B7m54kL380ZXwEsUUy4bIe",
+        "embed-code" : "JmbDJkZDE6uudNZj0nt-_HhmgF_bIOJn",
         "ad-type" : "OOYALA"
       }
     ]
@@ -73,8 +83,8 @@
     "title" : "VAST ADS Video 360",
     "videos" : [
       {
-        "title" : "[VAST ADS 360] Pre-roll",
-        "embed-code" : "o5bm1rYzE6Iv00WKa3Wd67QUuulRGtTb",
+        "title" : "[VAST ADS 360] Post-roll",
+        "embed-code" : "JibDJkZDE6A5XmIEQtoKrQc4JorJmUbu",
         "ad-type" : "VAST"
       },
       {
@@ -83,18 +93,18 @@
         "ad-type" : "VAST"
       },
       {
-        "title" : "[VAST ADS 360] Post roll",
-        "embed-code" : "h4dGFtYzE6pjfgMHC5ioFOiaq5BywAL6",
-        "ad-type" : "VAST"
-      },
-      {
-        "title" : "[VAST ADS 360] Pre-Mid-Post",
-        "embed-code" : "g4YmNsYzE6zLuWf3eCAtcOdi0--i081X",
-        "ad-type" : "VAST"
-      },
-      {
-        "title" : "[VAST ADS 360] Podded 2Pre-2Mid-2Post",
+        "title" : "[VAST ADS 360] Podded Pre-Mid-Post",
         "embed-code" : "ZpZGxoYzE6oThg4Hapb2gwUC-HBDJy8T",
+        "ad-type" : "VAST"
+      },
+      {
+        "title" : "[VAST ADS 360] Pre-roll_V360",
+        "embed-code" : "JkbDJkZDE6lRMdD0e-419rUKELDp_lVF",
+        "ad-type" : "VAST"
+      },
+      {
+        "title" : "[VAST ADS 360] Pre-Mid-Post_V360",
+        "embed-code" : "FmYzNkZDE64_vKCjXkAIfIrFtvjMdGVk",
         "ad-type" : "VAST"
       }
     ]
@@ -184,7 +194,37 @@
       },
       {
         "title" : "[Without Discovery] Video",
-        "embed-code" : "8xaHdiZDE6X5tp0-b3KI3Gf4JYHpMqPU",
+        "embed-code" : "FmYzNkZDE64_vKCjXkAIfIrFtvjMdGVk",
+        "ad-type" : "NO-ADS"
+      }
+    ]
+  },
+  {
+    "title" : "PLAYLISTS",
+    "videos" : [
+      {
+        "title" : "Mixed playlist_V360",
+        "embed-code" : "kxeGJyYzE6HaJZkeKaWrzSTT7jQMQo5v",
+        "ad-type" : "NO-ADS"
+      },
+      {
+        "title" : "Playlist with IMA ads_V360",
+        "embed-code" : "FmYzNkZDE64_vKCjXkAIfIrFtvjMdGVk",
+        "ad-type" : "IMA"
+      },
+      {
+        "title" : "Playlist_2d",
+        "embed-code" : "AxdzJwYzE6tIulw_awnFWW4SRI-wJIb4",
+        "ad-type" : "NO-ADS"
+      },
+      {
+        "title" : "Several playlists_V360",
+        "embed-code" : "kxeGJyYzE6HaJZkeKaWrzSTT7jQMQo5v",
+        "ad-type" : "NO-ADS"
+      },
+      {
+        "title" : "Horizontal playlists_V360",
+        "embed-code" : "ZwdTE5YzE69c3U3cXy2CCzfnCkzMMqUP",
         "ad-type" : "NO-ADS"
       }
     ]
