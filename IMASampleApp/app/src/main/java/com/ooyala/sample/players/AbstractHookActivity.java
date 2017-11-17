@@ -100,13 +100,15 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	  return;
 	}
 
-	String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-	Log.d(TAG, text);
+	if (null != player) {
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+    Log.d(TAG, text);
 
-	if (writePermission) {
-	  Log.d(TAG, "Writing log to SD card");
-	  // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-	  log.writeToSdcardLog(text);
-	}
+    if (writePermission) {
+      Log.d(TAG, "Writing log to SD card");
+      // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+      log.writeToSdcardLog(text);
+    }
+  }
   }
 }
