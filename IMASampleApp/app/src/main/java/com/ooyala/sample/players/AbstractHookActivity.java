@@ -85,6 +85,15 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
   }
 
   @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (null != player) {
+      player.release();
+      player = null;
+    }
+  }
+
+  @Override
   public void update(Observable o, Object arg) {
 	final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
 	if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
