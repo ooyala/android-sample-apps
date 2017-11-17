@@ -95,11 +95,9 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     resetButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (downloader.deleteAll()) {
-          progressView.setText("deletion completed");
-        } else {
-          progressView.setText("deletion failed");
-        }
+        downloader.abort();
+        boolean isDeleted = downloader.deleteAll();
+        onDeletion(isDeleted);
       }
     });
   }
@@ -148,7 +146,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     handler.post(new Runnable() {
       @Override
       public void run() {
-        progressView.setText(success ? " deletion completed" : "deletion failed");
+        progressView.setText(success ? " Deletion completed" : "Deletion failed");
 
       }
     });

@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ooyala.sample.SkinCompleteSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        multiDexEnabled true
+        targetSdkVersion 26
 
         // Added due to https://github.com/facebook/react-native/issues/2814
         ndk {
@@ -63,7 +64,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(vendorDir, 'Google/ima-android-v371.jar')
+    from new File(vendorDir, 'Google/ima-android-v374.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir,'./libs')
     println "Jars updated."
@@ -79,29 +80,30 @@ repositories {
 }
 
 dependencies {
-    compile files('libs/FWAdManager.jar')
-    compile files('libs/OoyalaFreewheelSDK.jar')
-    compile files('libs/OoyalaIMASDK.jar')
-    compile files('libs/OoyalaSDK.jar')
-    compile files('libs/ima-android-v371.jar')
-    compile files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/FWAdManager.jar')
+    implementation files('libs/OoyalaFreewheelSDK.jar')
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/ima-android-v374.jar')
+    implementation files('libs/OoyalaSkinSDK.jar')
 
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile 'com.facebook.fresco:fresco:0.11.0'
-    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
-    compile 'com.facebook.stetho:stetho:1.2.0'
-    compile 'com.facebook.soloader:soloader:0.1.0'
-    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-    compile 'com.google.code.findbugs:jsr305:3.0.0'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
-    compile 'com.squareup.okio:okio:1.9.0'
-    compile 'org.webkit:android-jsc:r174650'
-    compile(name:'react-native', version:'0.35.0', ext:'aar')
-    compile 'javax.inject:javax.inject:1'
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.facebook.fresco:fresco:0.11.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+    implementation 'com.facebook.stetho:stetho:1.2.0'
+    implementation 'com.facebook.soloader:soloader:0.1.0'
+    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    implementation 'com.squareup.okio:okio:1.9.0'
+    implementation 'org.webkit:android-jsc:r174650'
+    implementation(name:'react-native', version:'0.35.0', ext:'aar')
+    implementation 'javax.inject:javax.inject:1'
+
 }

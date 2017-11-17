@@ -1,5 +1,5 @@
 // OoyalaPlayer Class APIs
-include ':BasicPlaybackSampleApp', ':VRSampleAppKotlin'
+include ':BasicPlaybackSampleApp'
 project(':BasicPlaybackSampleApp').projectDir = new File(settingsDir, './BasicPlaybackSampleApp/app')
 include ':AdvancedPlaybackSampleApp'
 project(':AdvancedPlaybackSampleApp').projectDir = new File(settingsDir, './AdvancedPlaybackSampleApp/app')
@@ -27,8 +27,8 @@ project(':IMASampleApp').projectDir = new File(settingsDir, './IMASampleApp/app'
 //project(':PulseSampleApp').projectDir = new File(settingsDir, './PulseSampleApp/app')
 
 // Analytics Integrations
-include ':NielsenSampleApp'
-project(':NielsenSampleApp').projectDir = new File(settingsDir, './NielsenSampleApp/app')
+//include ':NielsenSampleApp'
+//project(':NielsenSampleApp').projectDir = new File(settingsDir, './NielsenSampleApp/app')
 include ':NPAWSampleApp'
 project(':NPAWSampleApp').projectDir = new File(settingsDir, './NPAWSampleApp/app')
 
@@ -59,6 +59,9 @@ project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/
 
 include(':core')
 project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/')*/
+//DownloadToOwnSampleApp
+include ':DownloadToOwnSampleApp'
+project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
 
 // Developer
 //include ':ooyalaSkinSDK'

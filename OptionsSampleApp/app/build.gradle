@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ooyala.sample.OptionsSampleApp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -20,6 +20,7 @@ android {
     packagingOptions {
         exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
     }
+
 }
 
 task copyTask(type: Copy) {
@@ -27,7 +28,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(vendorDir, 'Google/ima-android-v371.jar')
+    from new File(vendorDir, 'Google/ima-android-v374.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -37,13 +38,15 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile files('libs/FWAdManager.jar')
-    compile files('libs/OoyalaFreewheelSDK.jar')
-    compile files('libs/OoyalaIMASDK.jar')
-    compile files('libs/OoyalaSDK.jar')
-    compile files('libs/ima-android-v371.jar')
 
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.9'
+    implementation files('libs/FWAdManager.jar')
+    implementation files('libs/OoyalaFreewheelSDK.jar')
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/ima-android-v374.jar')
+
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+
 }

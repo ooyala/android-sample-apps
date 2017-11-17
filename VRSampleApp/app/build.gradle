@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.ooyala.sample.vrsampleapp"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -60,7 +60,7 @@ tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(vendorDir, 'Google/ima-android-v371.jar')
+    from new File(vendorDir, 'Google/ima-android-v374.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaSkinVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/react-native-0.35.0.aar')
@@ -72,38 +72,38 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    compile files('libs/OoyalaVRSDK.jar')
-    compile files('libs/OoyalaSkinVRSDK.jar')
+    implementation files('libs/OoyalaVRSDK.jar')
+    implementation files('libs/OoyalaSkinVRSDK.jar')
 
-    compile(name: 'react-native', version: '0.35.0', ext: 'aar')
+    implementation(name: 'react-native', version: '0.35.0', ext: 'aar')
 
     // IMA ads
-    compile files('libs/OoyalaIMASDK.jar')
-    compile files('libs/ima-android-v371.jar')
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/ima-android-v374.jar')
 
-    compile files('libs/exoplayer-1.5.9.jar')
-    compile 'com.google.android.exoplayer:exoplayer:r2.5.1'
-    compile 'com.android.support:support-v4:25.4.0'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.google.vr:sdk-base:1.80.0'
-    compile 'com.google.vr:sdk-audio:1.80.0'
-    compile 'com.facebook.fresco:fresco:0.11.0'
-    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
-    compile 'com.facebook.stetho:stetho:1.2.0'
-    compile 'com.facebook.soloader:soloader:0.1.0'
-    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-    compile 'com.google.code.findbugs:jsr305:3.0.0'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
-    compile 'com.squareup.okio:okio:1.9.0'
-    compile 'org.webkit:android-jsc:r174650'
-    compile 'javax.inject:javax.inject:1'
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.google.code.gson:gson:2.8.2'
+    implementation files('libs/exoplayer-1.5.9.jar')
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.vr:sdk-base:1.80.0'
+    implementation 'com.google.vr:sdk-audio:1.80.0'
+    implementation 'com.facebook.fresco:fresco:0.11.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+    implementation 'com.facebook.stetho:stetho:1.2.0'
+    implementation 'com.facebook.soloader:soloader:0.1.0'
+    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    implementation 'com.squareup.okio:okio:1.9.0'
+    implementation 'org.webkit:android-jsc:r174650'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.android.support:multidex:1.0.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
     testCompile 'junit:junit:4.12'
 }
 
