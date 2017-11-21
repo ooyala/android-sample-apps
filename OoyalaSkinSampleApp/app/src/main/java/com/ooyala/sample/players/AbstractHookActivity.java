@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 
@@ -159,5 +160,13 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		if (null != playerLayoutController) {
 			playerLayoutController.onDestroy();
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (playerLayoutController != null) {
+			playerLayoutController.onKeyDown(keyCode, event);
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
