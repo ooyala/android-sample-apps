@@ -64,7 +64,6 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/OoyalaSkinVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/react-native-0.35.0.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaVRSDK/exoplayer-1.5.9.jar')
     into new File(projectDir, './libs')
     println "Jars updated."
 }
@@ -75,13 +74,10 @@ dependencies {
     implementation files('libs/OoyalaVRSDK.jar')
     implementation files('libs/OoyalaSkinVRSDK.jar')
 
-    implementation(name: 'react-native', version: '0.35.0', ext: 'aar')
-
     // IMA ads
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/ima-android-v374.jar')
 
-    implementation files('libs/exoplayer-1.5.9.jar')
     implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
