@@ -8,7 +8,7 @@
     },
     {
       "title" : "No ADS V360",
-      "embed-code" : "ZwdTE5YzE69c3U3cXy2CCzfnCkzMMqUP",
+      "embed-code" : "FwOG5mZDE66kvaxH6EyZpj0iJ2AxBj_v",
       "ad-type" : "NO-ADS"
     },
     {
@@ -23,11 +23,11 @@
     },
     {
       "title" : "Video with subtitles_V360",
-      "embed-code" : "luNDFiZDE6FQr9tY7Vb0KLi6uvIIAmDm",
+      "embed-code" : "VmZG5lZDE6t92mWnTtHdbLd-BPD7q_kz",
       "ad-type" : "NO-ADS"
     },
     {
-      "title" : "No ADS V360 high quality",
+      "title" : "Resolution 1080_V360",
       "embed-code" : "N5N2c2ZDE6DCsvCvSrgPHE5zerJ0oJYe",
       "provider-code" : "15OGsyOs7wTVvirAtV0F611vIpKH",
       "ad-type" : "NO-ADS"
@@ -74,7 +74,7 @@
     "videos" : [
       {
         "title" : "[Ooyala ADS 360] Pre-roll",
-        "embed-code" : "JmbDJkZDE6uudNZj0nt-_HhmgF_bIOJn",
+        "embed-code" : "k5YW1lZDE66qkVK2I-Em409mREbGmw3f",
         "ad-type" : "OOYALA"
       }
     ]
@@ -84,7 +84,7 @@
     "videos" : [
       {
         "title" : "[VAST ADS 360] Post-roll",
-        "embed-code" : "JibDJkZDE6A5XmIEQtoKrQc4JorJmUbu",
+        "embed-code" : "xrcm1lZDE6QPmUtx4q6vKE5Z8VsvcJ73",
         "ad-type" : "VAST"
       },
       {
@@ -99,12 +99,12 @@
       },
       {
         "title" : "[VAST ADS 360] Pre-roll_V360",
-        "embed-code" : "JkbDJkZDE6lRMdD0e-419rUKELDp_lVF",
+        "embed-code" : "pjb25lZDE6f9jZidxXeR79PpN9ORKQId",
         "ad-type" : "VAST"
       },
       {
         "title" : "[VAST ADS 360] Pre-Mid-Post_V360",
-        "embed-code" : "FmYzNkZDE64_vKCjXkAIfIrFtvjMdGVk",
+        "embed-code" : "5uc21lZDE6uxI-13aXuCJm2RumePzyCe",
         "ad-type" : "VAST"
       }
     ]
@@ -166,36 +166,6 @@
         "title" : "[VAST ADS 2D] Podded 2Pre-2Mid-2Post skippable",
         "embed-code" : "lzNHA2ZDE6_oDV04VtY7sg4Pr7jGErfG",
         "ad-type" : "VAST"
-      }
-    ]
-  },
-  {
-    "title" : "Discovery",
-    "videos" : [
-      {
-        "title" : "[Discovery] Video 360",
-        "embed-code" : "hwZnUxZDE6CyfgVaLAOw4HlCzVUZGPnB",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "[Discovery] Video 2D",
-        "embed-code" : "N2eG42ZDE6Zq5lNIARlre7Lp0wzglOvA",
-        "ad-type" : "NO-ADS"
-      }
-    ]
-  },
-  {
-    "title" : "10.11.17",
-    "videos" : [
-      {
-        "title" : "[With Discovery] Video",
-        "embed-code" : "AzaHdiZDE6da7-t9PHrqisLtwGPLtXWk",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "[Without Discovery] Video",
-        "embed-code" : "FmYzNkZDE64_vKCjXkAIfIrFtvjMdGVk",
-        "ad-type" : "NO-ADS"
       }
     ]
   },
