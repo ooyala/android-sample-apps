@@ -40,6 +40,7 @@ android {
 task copyAssetsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/index.android.jsbundle')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK/skin-config/skin.json')
+    from new File(vendorDir, 'Ooyala/OoyalaVRSDK/data.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
