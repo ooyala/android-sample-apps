@@ -150,7 +150,7 @@
     "textEnhancement": "Uniform"
   },
   "upNext": {
-    "showUpNext": true,
+    "showUpNext": false,
     "timeToShow": 10
   },
   "controlBar": {
@@ -224,7 +224,6 @@
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":100 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"share", "location":"moreOptions" },
-      {"name":"discovery", "location":"moreOptions" },
       {"name":"closedCaption", "location":"moreOptions" },
       {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
