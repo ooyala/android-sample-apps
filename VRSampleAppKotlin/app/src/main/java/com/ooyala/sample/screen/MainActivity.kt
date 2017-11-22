@@ -2,10 +2,8 @@ package com.ooyala.sample.screen
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.KeyEvent
+import android.view.*
 import android.view.KeyEvent.KEYCODE_BACK
-import android.view.Menu
-import android.view.MenuItem
 import com.ooyala.android.util.TvHelper.isTargetDeviceTV
 import com.ooyala.sample.R
 import com.ooyala.sample.VideoFragment
@@ -45,9 +43,11 @@ class MainActivity : AppCompatActivity(), VideoChooseInterface {
 
   override fun onVideoChoose(data: VideoData) {
     if (data.type == VideoItemType.VIDEO) {
-      val currentFragment = fragmentFactory.getFragmentByType(data)
-      openVideoFragment(currentFragment)
-      toolbar.title = data.title
+      val fragment = fragmentFactory.getFragmentByType(data.adType)
+      fragment.setArguments(data)
+      openVideoFragment(fragment)
+      toolbar.title = data.title;
+      toolbar.hideOverflowMenu()
     }
   }
 
