@@ -81,7 +81,7 @@
     "screenToShowOnPause": "default"
   },
   "endScreen": {
-    "screenToShowOnEnd": "discovery",
+    "screenToShowOnEnd": "replay",
     "showReplayButton": true,
     "replayIconStyle": {
       "color": "white",
