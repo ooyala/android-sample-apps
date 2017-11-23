@@ -3,23 +3,19 @@ package com.ooyala.sample.screen;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.fragmentfactory.FragmentFactory;
-import com.ooyala.sample.interfaces.OnButtonPressedInterface;
 import com.ooyala.sample.interfaces.VideoChooseInterface;
 import com.ooyala.sample.utils.VideoData;
 
-import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.ooyala.android.util.TvHelper.isTargetDeviceTV;
 
 
@@ -62,20 +58,11 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
   public void onBackPressed() {
     setupToolbar();
     FragmentManager supportFragmentManager = getSupportFragmentManager();
-    passBackPressedEvent(supportFragmentManager);
 
     if (supportFragmentManager.getBackStackEntryCount() >= 1) {
       supportFragmentManager.popBackStack();
     } else {
       super.onBackPressed();
-    }
-  }
-
-  private void passBackPressedEvent(FragmentManager supportFragmentManager) {
-    for (Fragment fragment : supportFragmentManager.getFragments()) {
-      if (fragment instanceof OnButtonPressedInterface) {
-        ((OnButtonPressedInterface) fragment).onBackPressed();
-      }
     }
   }
 
@@ -126,33 +113,5 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
       dialogFragment.show(getSupportFragmentManager(), EmbedCodeDialogFragment.class.getSimpleName());
     }
     return super.onOptionsItemSelected(item);
-  }
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (keyCode == KEYCODE_BACK) {
-      this.onBackPressed();
-      return true;
-    } else {
-      for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-        if (fragment instanceof OnButtonPressedInterface) {
-          ((OnButtonPressedInterface) fragment).onKeyDown(keyCode, event);
-        }
-      }
-      return super.onKeyDown(keyCode, event);
-    }
-  }
-
-  @Override
-  public boolean onKeyUp(int keyCode, KeyEvent event) {
-    if (keyCode != KEYCODE_BACK) {
-      for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-        if (fragment instanceof OnButtonPressedInterface) {
-          ((OnButtonPressedInterface) fragment).onKeyUp(keyCode, event);
-        }
-      }
-      return super.onKeyUp(keyCode, event);
-    }
-    return true;
   }
 }

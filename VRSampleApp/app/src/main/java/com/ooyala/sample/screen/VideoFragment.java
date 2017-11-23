@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,11 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.FCCTVRatingConfiguration;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.player.vrexoplayer.glvideoview.effects.VrMode;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
-import com.ooyala.sample.interfaces.OnButtonPressedInterface;
 import com.ooyala.sample.utils.VideoData;
 
 import java.util.Observable;
@@ -32,7 +29,7 @@ import java.util.Observer;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class VideoFragment extends Fragment implements Observer, OnButtonPressedInterface {
+public class VideoFragment extends Fragment implements Observer {
 
   public static final String TAG = VideoFragment.class.getCanonicalName();
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
@@ -157,20 +154,5 @@ public class VideoFragment extends Fragment implements Observer, OnButtonPressed
     applyADSManager(skinLayout);
 
     player.setEmbedCode(embedCode);
-  }
-
-  @Override
-  public void onKeyUp(int keyCode, KeyEvent event) {
-    playerController.onKeyUp(keyCode, event);
-  }
-
-  @Override
-  public void onKeyDown(int keyCode, KeyEvent event) {
-    playerController.onKeyDown(keyCode, event);
-  }
-
-  @Override
-  public void onBackPressed() {
-    playerController.switchVRMode(VrMode.NONE);
   }
 }
