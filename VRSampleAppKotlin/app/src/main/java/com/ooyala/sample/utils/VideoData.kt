@@ -3,7 +3,7 @@ package com.ooyala.sample.utils
 import com.ooyala.sample.parser.AdType
 import java.io.Serializable
 
-open class VideoData(
+data class VideoData(
         val type: VideoItemType,
         val title: String,
         val adType: AdType,
