@@ -5,7 +5,7 @@ import com.ooyala.sample.VideoFragment
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.video_fragment.*
 
-class IMAVideoFragment(videoData: VideoData) : VideoFragment(videoData) {
+class IMAVideoFragment : VideoFragment() {
 
 
   override fun initAdManager() {
