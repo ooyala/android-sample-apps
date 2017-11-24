@@ -41,14 +41,24 @@ open class VideoFragment() : Fragment(), Observer {
   protected var player: OoyalaPlayer? = null
   private lateinit var playerController: OoyalaSkinLayoutController;
 
-  constructor(data: VideoData) : this() {
-    this.embedCode = data.embedCode!!
-    this.domain = data.domain!!
-    this.pCode = data.pCode!!
+  fun setArguments(data: VideoData) {
+    val args = Bundle()
+    args.putString("embedCode", data.embedCode)
+    args.putString("pCode", data.pCode)
+    args.putString("domain", data.domain)
+    this.arguments = args
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-          inflater?.inflate(R.layout.video_fragment, container, false)
+  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val inflated = inflater?.inflate(R.layout.video_fragment, container, false)
+    val arguments = getArguments()
+    if (arguments != null) {
+      this.embedCode = arguments.getString("embedCode")
+      this.pCode = arguments.getString("pCode")
+      this.domain = arguments.getString("domain")
+    }
+    return inflated
+  }
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)

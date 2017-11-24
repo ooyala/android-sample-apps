@@ -43,9 +43,11 @@ class MainActivity : AppCompatActivity(), VideoChooseInterface {
 
   override fun onVideoChoose(data: VideoData) {
     if (data.type == VideoItemType.VIDEO) {
-      val currentFragment = fragmentFactory.getFragmentByType(data)
-      openVideoFragment(currentFragment)
-      toolbar.title = data.title
+      val fragment = fragmentFactory.getFragmentByType(data.adType)
+      fragment.setArguments(data)
+      openVideoFragment(fragment)
+      toolbar.title = data.title;
+      toolbar.hideOverflowMenu()
     }
   }
 
