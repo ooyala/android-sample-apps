@@ -16,23 +16,16 @@ import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
 import com.ooyala.android.configuration.FCCTVRatingConfiguration
 import com.ooyala.android.configuration.Options
+import com.ooyala.android.player.vrexoplayer.glvideoview.effects.VrMode
 import com.ooyala.android.skin.OoyalaSkinLayoutController
 import com.ooyala.android.skin.configuration.SkinOptions
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger
-import com.ooyala.sample.interfaces.TvControllerInterface
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.video_fragment.*
 import java.util.*
 
 
-open class VideoFragment() : Fragment(), Observer, TvControllerInterface {
-  override fun onKeyUp(keyCode: Int, event: KeyEvent) {
-    playerController.onKeyUp(keyCode, event)
-  }
-
-  override fun onKeyDown(keyCode: Int, event: KeyEvent) {
-    playerController.onKeyDown(keyCode, event)
-  }
+open class VideoFragment() : Fragment(), Observer {
 
   companion object {
     val TAG = VideoFragment::class.java.canonicalName

@@ -3,13 +3,10 @@ package com.ooyala.sample.screen;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,25 +14,20 @@ import android.view.View;
 import com.ooyala.sample.R;
 import com.ooyala.sample.fragmentfactory.FragmentFactory;
 import com.ooyala.sample.interfaces.VideoChooseInterface;
-import com.ooyala.sample.interfaces.TvControllerInterface;
 import com.ooyala.sample.utils.VideoData;
 
-import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.ooyala.android.util.TvHelper.isTargetDeviceTV;
 
 
 public class MainActivity extends AppCompatActivity implements VideoChooseInterface {
 
   private Toolbar toolbar;
-  private FragmentFactory fragmentFactory;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-    fragmentFactory = new FragmentFactory();
+    toolbar = findViewById(R.id.toolbar);
 
     setupToolbar();
     showRecyclerFragment();
@@ -64,7 +56,9 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
 
   @Override
   public void onBackPressed() {
+    setupToolbar();
     FragmentManager supportFragmentManager = getSupportFragmentManager();
+
     if (supportFragmentManager.getBackStackEntryCount() >= 1) {
       supportFragmentManager.popBackStack();
     } else {
@@ -93,17 +87,17 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
 
   private void setupToolbar() {
     setSupportActionBar(toolbar);
-    ActionBar supportActionBar = getSupportActionBar();
-    if (supportActionBar != null) {
-      supportActionBar.setTitle(R.string.app_name);
-      toolbar.bringToFront();
-      toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          MainActivity.this.onBackPressed();
-        }
-      });
-    }
+    getSupportActionBar().setTitle(R.string.app_name);
+    getSupportActionBar().show();
+    toolbar.bringToFront();
+    toolbar.showOverflowMenu();
+
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        MainActivity.this.onBackPressed();
+      }
+    });
   }
 
   @Override
@@ -119,33 +113,5 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
       dialogFragment.show(getSupportFragmentManager(), EmbedCodeDialogFragment.class.getSimpleName());
     }
     return super.onOptionsItemSelected(item);
-  }
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (keyCode == KEYCODE_BACK) {
-      this.onBackPressed();
-      return true;
-    } else {
-      for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-        if (fragment instanceof TvControllerInterface) {
-          ((TvControllerInterface) fragment).onKeyDown(keyCode, event);
-        }
-      }
-      return super.onKeyDown(keyCode, event);
-    }
-  }
-
-  @Override
-  public boolean onKeyUp(int keyCode, KeyEvent event) {
-    if (keyCode != KEYCODE_BACK) {
-      for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-        if (fragment instanceof TvControllerInterface) {
-          ((TvControllerInterface) fragment).onKeyUp(keyCode, event);
-        }
-      }
-      return super.onKeyUp(keyCode, event);
-    }
-    return true;
   }
 }

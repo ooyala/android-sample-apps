@@ -2,8 +2,6 @@ package com.ooyala.sample.screen
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_BACK
 import android.view.Menu
 import android.view.MenuItem
 import com.ooyala.android.util.TvHelper.isTargetDeviceTV
@@ -11,7 +9,6 @@ import com.ooyala.sample.R
 import com.ooyala.sample.VideoFragment
 import com.ooyala.sample.fragmentfactory.FragmentFactory
 import com.ooyala.sample.interfaces.VideoChooseInterface
-import com.ooyala.sample.interfaces.TvControllerInterface
 import com.ooyala.sample.utils.VideoItemType
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.main_activity.*
@@ -36,6 +33,7 @@ class MainActivity : AppCompatActivity(), VideoChooseInterface {
   }
 
   override fun onBackPressed() {
+    setupToolbar()
     if (supportFragmentManager.backStackEntryCount >= 1) {
       supportFragmentManager.popBackStack()
     } else {
@@ -66,7 +64,10 @@ class MainActivity : AppCompatActivity(), VideoChooseInterface {
 
   private fun setupToolbar() {
     setSupportActionBar(toolbar)
-    toolbar?.bringToFront()
+    supportActionBar!!.setTitle(R.string.app_name)
+    supportActionBar!!.show()
+    toolbar.bringToFront()
+    toolbar.showOverflowMenu()
     toolbar.setNavigationOnClickListener { onBackPressed() }
   }
 
@@ -77,34 +78,6 @@ class MainActivity : AppCompatActivity(), VideoChooseInterface {
       toolbar.title = getString(R.string.app_name)
     }
   }
-
-  override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-    if (keyCode == KEYCODE_BACK) {
-      this.onBackPressed()
-      return true
-    } else {
-      for (fragment in supportFragmentManager.fragments) {
-        if (fragment is TvControllerInterface) {
-          fragment.onKeyDown(keyCode, event)
-        }
-      }
-      return super.onKeyDown(keyCode, event)
-    }
-  }
-
-  override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-    if (keyCode != KEYCODE_BACK) {
-      for (fragment in supportFragmentManager.fragments) {
-        if (fragment is TvControllerInterface) {
-          fragment.onKeyUp(keyCode, event)
-        }
-      }
-      return super.onKeyUp(keyCode, event)
-    } else {
-      return true
-    }
-  }
-
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu, menu)
