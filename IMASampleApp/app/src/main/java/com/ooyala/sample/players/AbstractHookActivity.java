@@ -85,19 +85,30 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
   }
 
   @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (null != player) {
+      player.release();
+      player = null;
+    }
+  }
+
+  @Override
   public void update(Observable o, Object arg) {
 	final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
 	if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
 	  return;
 	}
 
-	String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-	Log.d(TAG, text);
+	if (null != player) {
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+    Log.d(TAG, text);
 
-	if (writePermission) {
-	  Log.d(TAG, "Writing log to SD card");
-	  // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-	  log.writeToSdcardLog(text);
-	}
+    if (writePermission) {
+      Log.d(TAG, "Writing log to SD card");
+      // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+      log.writeToSdcardLog(text);
+    }
+  }
   }
 }
