@@ -73,6 +73,7 @@ public class VideoFragment extends Fragment implements Observer {
       requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
     } else {
       initPlayer();
+      writeStoragePermissionGranted = true;
     }
   }
 
