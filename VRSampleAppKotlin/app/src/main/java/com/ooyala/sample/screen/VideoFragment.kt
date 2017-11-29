@@ -66,6 +66,7 @@ open class VideoFragment() : Fragment(), Observer {
     if (ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
       requestPermissions(arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
     } else {
+      writeStoragePermissionGranted = true
       initPlayer()
     }
   }
