@@ -84,7 +84,7 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
     if (player != null) {
       player.resume();
     }
-    if (null != playerController) {
+    if (playerController != null) {
       playerController.onResume(getActivity(), this);
     }
   }
@@ -92,7 +92,7 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
   @Override
   public void onDestroy() {
     super.onDestroy();
-    if (null != playerController) {
+    if (playerController != null) {
       playerController.onDestroy();
     }
   }
@@ -103,7 +103,7 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
     if (player != null) {
       player.suspend();
     }
-    if (null != playerController) {
+    if (playerController != null) {
       playerController.onPause();
     }
   }

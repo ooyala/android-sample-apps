@@ -74,26 +74,20 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
 
   override fun onDestroy() {
     super.onDestroy()
-    if(playerController != playerController) {
-      playerController.onDestroy()
-    }
+    playerController.onDestroy()
   }
 
 
   override fun onResume() {
     super.onResume()
     player?.resume()
-    if(playerController != playerController) {
-      playerController.onResume(activity, this)
-    }
+    playerController.onResume(activity, this)
   }
 
   override fun onPause() {
     super.onPause()
     player?.suspend()
-    if(playerController != playerController) {
-      playerController.onPause()
-    }
+    playerController.onPause()
   }
 
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
