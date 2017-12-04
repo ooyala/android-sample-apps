@@ -7,16 +7,15 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.vrsdk.player.VRPlayerFactory
 import com.ooyala.android.OoyalaNotification
 import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
 import com.ooyala.android.configuration.FCCTVRatingConfiguration
 import com.ooyala.android.configuration.Options
-import com.ooyala.android.player.vrexoplayer.glvideoview.effects.VrMode
 import com.ooyala.android.skin.OoyalaSkinLayoutController
 import com.ooyala.android.skin.configuration.SkinOptions
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger
@@ -128,6 +127,7 @@ open class VideoFragment() : Fragment(), Observer {
             .build()
 
     player = OoyalaPlayer(pCode, PlayerDomain(domain), options)
+    player?.registerFactory(VRPlayerFactory())
     player?.addObserver(this)
 
     val skinOptions = SkinOptions.Builder().build()
