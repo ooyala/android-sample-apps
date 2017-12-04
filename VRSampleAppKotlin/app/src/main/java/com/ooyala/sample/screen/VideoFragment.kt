@@ -11,6 +11,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import com.ooyala.android.OoyalaNotification
 import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.video_fragment.*
 import java.util.*
 
 
-open class VideoFragment() : Fragment(), Observer {
+open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler {
 
   companion object {
     val TAG = VideoFragment::class.java.canonicalName
@@ -71,14 +72,28 @@ open class VideoFragment() : Fragment(), Observer {
     }
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    if(playerController != playerController) {
+      playerController.onDestroy()
+    }
+  }
+
+
   override fun onResume() {
     super.onResume()
     player?.resume()
+    if(playerController != playerController) {
+      playerController.onResume(activity, this)
+    }
   }
 
   override fun onPause() {
     super.onPause()
     player?.suspend()
+    if(playerController != playerController) {
+      playerController.onPause()
+    }
   }
 
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -137,5 +152,9 @@ open class VideoFragment() : Fragment(), Observer {
     initAdManager()
 
     player?.embedCode = embedCode
+  }
+
+  override fun invokeDefaultOnBackPressed() {
+    activity.onBackPressed()
   }
 }
