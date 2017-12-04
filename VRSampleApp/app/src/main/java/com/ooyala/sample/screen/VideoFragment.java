@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vrsdk.player.VRPlayerFactory;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
@@ -146,9 +147,12 @@ public class VideoFragment extends Fragment implements Observer {
         .build();
 
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
+    player.registerFactory(new VRPlayerFactory());
     player.addObserver(this);
+
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) getView().findViewById(R.id.playerSkinLayout);
     final SkinOptions skinOptions = new SkinOptions.Builder().build();
+
     playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
     playerController.addObserver(this);
 
