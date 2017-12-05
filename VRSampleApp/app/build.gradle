@@ -38,7 +38,7 @@ android {
 task copyAssetsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/data.json')
+    from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/data.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
@@ -82,7 +82,6 @@ dependencies {
     implementation files('libs/OoyalaVRSDK.jar')
     implementation files('libs/OoyalaSkinSDK.jar')
 
-    implementation(name: 'react-native', version: '0.35.0', ext: 'aar')
 
     // IMA ads
     implementation files('libs/OoyalaIMASDK.jar')
@@ -110,6 +109,7 @@ dependencies {
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.android.support:multidex:1.0.1'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation (group:'com.facebook', name:'react-native', version:'0.35.0', ext:'aar')
     testCompile 'junit:junit:4.12'
 }
 
