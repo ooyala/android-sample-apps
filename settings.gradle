@@ -68,3 +68,6 @@ project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './Playbac
 //project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
 //include ':core'
 //project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
+//include(':vrsdk')
+//project(':vrsdk').projectDir = new File(settingsDir, '../android-sdk/sdk/vrsdk/')
+
