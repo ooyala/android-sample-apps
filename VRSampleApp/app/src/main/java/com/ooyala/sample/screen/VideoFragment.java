@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.example.vrsdk.player.VRPlayerFactory;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
@@ -30,7 +31,7 @@ import java.util.Observer;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class VideoFragment extends Fragment implements Observer {
+public class VideoFragment extends Fragment implements Observer, DefaultHardwareBackBtnHandler {
 
   public static final String TAG = VideoFragment.class.getCanonicalName();
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
@@ -84,6 +85,17 @@ public class VideoFragment extends Fragment implements Observer {
     if (player != null) {
       player.resume();
     }
+    if (playerController != null) {
+      playerController.onResume(getActivity(), this);
+    }
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    if (playerController != null) {
+      playerController.onDestroy();
+    }
   }
 
   @Override
@@ -91,6 +103,9 @@ public class VideoFragment extends Fragment implements Observer {
     super.onPause();
     if (player != null) {
       player.suspend();
+    }
+    if (playerController != null) {
+      playerController.onPause();
     }
   }
 
@@ -159,5 +174,10 @@ public class VideoFragment extends Fragment implements Observer {
     applyADSManager(skinLayout);
 
     player.setEmbedCode(embedCode);
+  }
+
+  @Override
+  public void invokeDefaultOnBackPressed() {
+    getActivity().onBackPressed();
   }
 }
