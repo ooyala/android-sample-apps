@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-import com.ooyala.android.vrsdk.player.VRPlayerFactory;
+import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
@@ -22,6 +22,7 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.android.vrsdk.player.VRPlayerFactory;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.VideoData;
 
@@ -160,6 +161,8 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
         .setShowNativeLearnMoreButton(false)
         .setShowPromoImage(false)
         .build();
+
+    OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
 
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
     player.registerFactory(new VRPlayerFactory());
