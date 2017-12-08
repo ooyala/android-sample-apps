@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-import com.example.vrsdk.player.VRPlayerFactory;
+import com.ooyala.android.vrsdk.player.VRPlayerFactory;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
