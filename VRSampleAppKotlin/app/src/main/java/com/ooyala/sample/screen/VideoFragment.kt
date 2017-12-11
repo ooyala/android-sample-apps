@@ -40,7 +40,7 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
   private lateinit var pCode: String
   private lateinit var domain: String
   protected var player: OoyalaPlayer? = null
-  private lateinit var playerController: OoyalaSkinLayoutController;
+  private var playerController: OoyalaSkinLayoutController? = null
 
   fun setArguments(data: VideoData) {
     val args = Bundle()
@@ -144,7 +144,7 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
 
     val skinOptions = SkinOptions.Builder().build()
     playerController = OoyalaSkinLayoutController(activity.application, playerSkinLayout, player, skinOptions)
-    playerController.addObserver(this)
+    playerController?.addObserver(this)
 
     initAdManager()
 
