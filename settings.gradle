@@ -48,6 +48,17 @@ project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLa
 include ':ManUScrubberSampleApp'
 project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
 
+include ':VRSampleApp'
+project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
+
+include ':VRSampleAppKotlin'
+project (':VRSampleAppKotlin').projectDir = new File(settingsDir, './VRSampleAppKotlin/app')
+
+/*include ':skin'
+project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/android/skin')
+
+include(':core')
+project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/')*/
 //DownloadToOwnSampleApp
 include ':DownloadToOwnSampleApp'
 project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
@@ -57,3 +68,6 @@ project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './Playbac
 //project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
 //include ':core'
 //project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
+//include(':vrsdk')
+//project(':vrsdk').projectDir = new File(settingsDir, '../android-sdk/sdk/vrsdk/')
+

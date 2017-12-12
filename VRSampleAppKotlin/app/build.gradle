@@ -1,0 +1,123 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.ooyala.sample.vrsampleapp"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+
+        packagingOptions {
+            exclude "lib/arm64-v8a/libgnustl_shared.so"
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+task copyAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/data.json')
+    into new File(projectDir, './src/main/assets')
+    println "Assets updated."
+}
+tasks.copyAssetsTask.execute()
+
+task copySkinConfigTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
+    into new File(projectDir, './src/main/assets/skin-config')
+    println "copySkinConfigTask updated."
+}
+tasks.copySkinConfigTask.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(projectDir, './src/main/assets/fonts')
+    println "font Assets updated."
+}
+tasks.copyFontsAssetsTask.execute()
+
+
+task copyTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
+    from new File(vendorDir, 'Google/ima-android-v374.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/OoyalaVRSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    into new File(projectDir, './libs')
+    println "Jars updated."
+}
+
+tasks.copyTask.execute()
+
+dependencies {
+    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaVRSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.jar')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // IMA ads
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/ima-android-v374.jar')
+
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.vr:sdk-base:1.80.0'
+    implementation 'com.google.vr:sdk-audio:1.80.0'
+    implementation 'com.facebook.fresco:fresco:0.11.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+    implementation 'com.facebook.stetho:stetho:1.2.0'
+    implementation 'com.facebook.soloader:soloader:0.1.0'
+    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    implementation 'com.squareup.okio:okio:1.9.0'
+    implementation 'org.webkit:android-jsc:r174650'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:+'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation (group:'com.facebook', name:'react-native', version:'0.35.0', ext:'aar')
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url "https://maven.google.com"
+    }
+}
