@@ -136,8 +136,6 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
             .setShowPromoImage(false)
             .build()
 
-    OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING)
-
     player = OoyalaPlayer(pCode, PlayerDomain(domain), options)
     player?.registerFactory(VRPlayerFactory())
     player?.addObserver(this)
