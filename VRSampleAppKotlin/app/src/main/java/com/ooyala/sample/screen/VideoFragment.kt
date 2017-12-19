@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
-import com.ooyala.android.Environment
 import com.ooyala.android.OoyalaNotification
 import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
@@ -135,8 +134,6 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
             .setShowNativeLearnMoreButton(false)
             .setShowPromoImage(false)
             .build()
-
-    OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING)
 
     player = OoyalaPlayer(pCode, PlayerDomain(domain), options)
     player?.registerFactory(VRPlayerFactory())
