@@ -162,8 +162,6 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
         .setShowPromoImage(false)
         .build();
 
-    OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
-
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
     player.registerFactory(new VRPlayerFactory());
     player.addObserver(this);
