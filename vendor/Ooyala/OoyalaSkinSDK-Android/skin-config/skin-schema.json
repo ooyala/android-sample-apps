@@ -56,6 +56,12 @@
            },
           "example": "\"loadingImage\": {\"imageResource\": {\"url\": \"assets/images/loading.png\"} }"
         },
+        "bufferingSpinnerDelay": {
+          "description": "The time in milliseconds that the player should wait before displaying the buffering spinner when playback stalls. Set to 0 in order to show the spinner immediately.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60000
+        },
         "accentColor": {
           "description": "Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
           "type": "string",
@@ -73,18 +79,18 @@
         "defaultLanguage": {
           "description": "The default language of the localizable strings on the player.",
           "type": "string", "pattern": "^[a-z]{2}$",
-          "valid values": "\"en\", \"es\", \"zh\"",
+          "valid values": "\"en\", \"es\", \"zh\", \"ja\"",
           "default": "en"
         },
         "availableLanguageFile": {
           "description": "An array of languages. Defines the string values used in the player. Languages listed in the array require a separate json file included in the bundle, named '<language>.json' e.g. 'en.json'.",
           "type": "array",
           "items": {"type": "object", "pattern": "^[a-z]{2}$"},
-          "default": "{\"language\": \"en\", \"languageFile\": \"config/en.json\"}, {\"language\": \"es\", \"languageFile\": \"config/es.json\"}, {\"language\": \"zh\", \"languageFile\": \"config/zh.json\"}",
+          "default": "{\"language\": \"en\", \"languageFile\": \"config/en.json\"}, {\"language\": \"es\", \"languageFile\": \"config/es.json\"}, {\"language\": \"zh\", \"languageFile\": \"config/zh.json\"}, {\"language\": \"ja\", \"languageFile\": \"config/ja.json\"}",
           "language": {
-            "description": "Defines the language. For this release, valid languages are English (en), Spanish (es), and Simplified Chinese (zh).",
+            "description": "Defines the language. For this release, valid languages are English (en), Spanish (es), Simplified Chinese (zh) and Japanese (ja).",
             "type": "string",
-            "valid values": "\"en\" | \"es\" | \"zh\""
+            "valid values": "\"en\" | \"es\" | \"zh\" | \"ja\""
           },
           "languageFile": {
             "description": "Path to the localized language file.",
@@ -101,6 +107,21 @@
         }
       },
       "required": ["defaultLanguage"]
+    },
+    "languageDirections": {
+      "ar": "rtl",
+      "dv": "rtl",
+      "he": "rtl",
+      "fa": "rtl",
+      "ks": "rtl",
+      "ku": "rtl",
+      "pa": "rtl",
+      "ps": "rtl",
+      "sd": "rtl",
+      "tk": "rtl",
+      "ug": "rtl",
+      "ur": "rtl",
+      "yi": "rtl"
     },
     "responsive": {
       "description": "Defines values needed for Responsive Design Rules",
@@ -657,6 +678,29 @@
               }
             }
           }
+        },
+        "tooltips":{
+          "description": "Configuration for the control bar items tooltips.",
+          "type": "object",
+          "properties":{
+            "enabled": {
+              "description": "Show the control bar items tooltips if set to true.  Hide the control bar items tooltips if set to false. Default is false.",
+              "type": "boolean",
+              "default": "false"
+            }
+          }
+        },
+        "qualitySelection":{
+          "description":"Configuration for the control bar quality selection panel/popover",
+          "type":"object",
+          "properties":{
+            "format":{
+              "description":"Determine the format of the quality options. Available formats: bitrate only, resolution only, and resolution + bitrate.",
+              "type":"string",
+              "enum": ["bitrate", "resolution", "resolution bitrate"],
+              "default":"bitrate"
+            }
+          }
         }
       }
     },
@@ -1182,7 +1226,7 @@
     "buttonNames": {
       "description": "These are the only buttons currently supported by the UI SDK.",
       "additionalProperties": false,
-      "enum": ["playPause", "volume", "timeDuration", "flexibleSpace", "discovery", "fullscreen", "moreOptions", "logo", "share", "closedCaption", "bitrateSelector", "quality", "live"]
+      "enum": ["playPause", "volume", "timeDuration", "flexibleSpace", "discovery", "fullscreen", "stereoscopic",  "moreOptions", "arrowsBlack", "logo", "share", "closedCaption", "bitrateSelector", "quality", "live"]
     },
     "buttonArray": {
       "description": "Used to list the buttons for a single platform (desktop vs. mobile).",
