@@ -1,0 +1,119 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion 23
+  buildToolsVersion '23.0.2'
+
+  defaultConfig {
+    applicationId "com.ooyala.sample.DownloadsSerialization"
+    minSdkVersion 16
+    targetSdkVersion 21
+
+    // Added due to https://github.com/facebook/react-native/issues/2814
+    ndk {
+      // React Native for Android is incompatible with 3rd-party 64-bit libraries.
+      //abiFilters "armeabi-v7a", "x86"
+    }
+
+// Uncomment if you need multidex
+//    multiDexEnabled true
+  }
+
+  packagingOptions {
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+    }
+  }
+// Uncomment if you need multidex
+//  dexOptions {
+//    javaMaxHeapSize "4g"
+//  }
+}
+
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+task copyAssetsTask(type: Copy) {
+  from new File(projectDir, '../../../vendor/Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+  from new File(projectDir, '../../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+  into new File(projectDir, './src/main/assets')
+  println "Assets updated."
+}
+tasks.copyAssetsTask.execute()
+
+task copySkinConfigTask(type: Copy) {
+  from new File(projectDir, '../../../vendor/Ooyala/OoyalaSkinSDK-Android/skin-config')
+  into new File(projectDir, './src/main/assets/skin-config')
+  println "copySkinConfigTask updated."
+}
+tasks.copySkinConfigTask.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+  from new File(projectDir, '../../../vendor/Ooyala/OoyalaSkinSDK-Android/fonts')
+  into new File(projectDir, './src/main/assets/fonts')
+  println "font Assets updated."
+}
+tasks.copyFontsAssetsTask.execute()
+
+task copyTask(type: Copy) {
+  //from new File(projectDir, '../../../vendor/Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+  from new File(projectDir, '../../../vendor/Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
+  from new File(projectDir, '../../../vendor/Google/ima-android-v330.jar')
+  from new File(projectDir, '../../../vendor/Ooyala/OoyalaSkinSDK-Android/react-native-0.33.0.aar')
+  into new File(projectDir,'./libs')
+  println "Jars updated."
+}
+tasks.copyTask.execute()
+
+dependencies {
+// Uncomment if you need multidex
+//  compile 'com.android.support:multidex:1.0.1'
+
+//  compile files('libs/FWAdManager.jar')
+//  compile files('libs/ima-android-v330.jar')
+  //compile files('libs/OoyalaSDK.jar')
+  compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+
+// For development purposes only
+  compile project(':core')
+//  compile project(':ooyalaSkinSDK')
+
+    //compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.facebook.fresco:fresco:0.11.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
+    compile 'com.facebook.stetho:stetho:1.2.0'
+    compile 'com.facebook.soloader:soloader:0.1.0'
+    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
+    compile 'com.google.code.findbugs:jsr305:3.0.0'
+    //compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    //compile 'com.squareup.okio:okio:1.9.0'
+    compile 'org.webkit:android-jsc:r174650'
+    compile 'javax.inject:javax.inject:1'
+    compile(name:'react-native', version:'0.33.0', ext:'aar')
+}
+
+configurations.all {
+  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    def requested = details.requested
+    if (requested.group == 'com.android.support') {
+      if (!requested.name.startsWith("multidex")) {
+        details.useVersion '24.2.0'
+      }
+    }
+  }
+}
