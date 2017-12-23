@@ -37,6 +37,9 @@
   "VIDEO NOT AVAILABLE YET": "EL VIDEO TODAVÍA NO ESTÁ DISPONIBLE",
   "This video will be available soon": "El video estará disponible próximamente",
   "VIDEO NO LONGER AVAILABLE": "EL VIDEO YA NO ESTÁ DISPONIBLE",
+  "VIDEO COMING SOON!": "VIDEO PRÓXIMAMENTE",
+  "This video is not available yet": "El video todavía no está disponible.",
+  "You may need to refresh the page to access the video after it becomes available" : "Es posible que tengas que actualizar la página para acceder al video una vez que esté disponible.",
   "This video is no longer available": "El video ya no está disponible",
   "SAS DEVICE ERROR": "SE PRODUJO UN ERROR EN EL DISPOSITIVO DE SAS",
   "This video is not authorized for playback on this device": "La reproducción de este video no está autorizada en este dispositivo",
@@ -112,5 +115,14 @@
   "Uniform": "Uniforme",
   "Depressed": "En relieve",
   "Raised": "Elevado",
-  "Shadow": "Sombra"
+  "Shadow": "Sombra",
+  "Play": "Reproducir",
+  "Replay": "Volver a reproducir",
+  "Pause": "Pausa",
+  "Mute": "Silenciar",
+  "Unmute": "Activar audio",
+  "Closed Captions": "Subtitulos",
+  "Full Screen": "Pantalla completa",
+  "Exit Full Screen": "Salir pantalla completa",
+  "More Options": "Más Opciones"
 }

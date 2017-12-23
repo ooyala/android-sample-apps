@@ -43,6 +43,9 @@
   "This video is not authorized for your domain": "This video is not authorized for your domain",
   "VIDEO NOT AVAILABLE YET": "VIDEO NOT AVAILABLE YET",
   "This video will be available soon": "This video will be available soon",
+  "VIDEO COMING SOON!": "VIDEO COMING SOON!",
+  "This video is not available yet": "This video is not available yet",
+  "You may need to refresh the page to access the video after it becomes available" : "You may need to refresh the page to access the video after it becomes available",
   "VIDEO NO LONGER AVAILABLE": "VIDEO NO LONGER AVAILABLE",
   "This video is no longer available": "This video is no longer available",
   "SAS DEVICE ERROR": "SAS DEVICE ERROR",
@@ -121,5 +124,14 @@
   "Uniform": "Uniform",
   "Depressed": "Depressed",
   "Raised": "Raised",
-  "Shadow": "Shadow"
+  "Shadow": "Shadow",
+  "Play": "Play",
+  "Replay": "Replay",
+  "Pause": "Pause",
+  "Mute": "Mute",
+  "Unmute": "Unmute",
+  "Closed Captions":"Closed Captions",
+  "Full Screen": "Full Screen",
+  "Exit Full Screen": "Exit Full Screen",
+  "More Options": "More Options"
 }

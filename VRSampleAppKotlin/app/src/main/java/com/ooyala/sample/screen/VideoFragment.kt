@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
-import com.ooyala.android.Environment
 import com.ooyala.android.OoyalaNotification
 import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
