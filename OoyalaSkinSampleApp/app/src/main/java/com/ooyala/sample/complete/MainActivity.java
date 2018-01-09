@@ -13,6 +13,7 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OoyalaSkinListActivity;
+import com.ooyala.sample.players.AssetActivity;
 import com.ooyala.sample.players.ResizablePlayerActivity;
 
 import java.util.LinkedHashMap;
