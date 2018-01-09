@@ -47,6 +47,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 //    activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
 //    activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
     activityMap.put(OoyalaSkinListActivity.getName(), OoyalaSkinListActivity.class);
+    activityMap.put(AssetActivity.getName(), AssetActivity.class);
     activityMap.put(ResizablePlayerActivity.getName(), ResizablePlayerActivity.class);
 
     for(String key : activityMap.keySet()) {

@@ -58,9 +58,12 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			writePermission= true;
 			asked = true;
 		}
-		embedCode = getIntent().getExtras().getString("embed_code");
-		pcode = getIntent().getExtras().getString("pcode");
-		domain = getIntent().getExtras().getString("domain");
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			embedCode = extras.getString("embed_code");
+			pcode = extras.getString("pcode");
+			domain = extras.getString("domain");
+		}
 	}
 
 	@Override

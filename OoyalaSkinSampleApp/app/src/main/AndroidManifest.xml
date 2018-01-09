@@ -59,6 +59,9 @@
         <activity android:name=".players.ResizablePlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
+        <activity android:name=".players.AssetActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
