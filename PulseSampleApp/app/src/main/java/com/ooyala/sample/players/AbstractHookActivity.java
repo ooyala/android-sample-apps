@@ -84,12 +84,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
   }
 
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-	playerSkinLayoutController.onKeyDown(keyCode, event);
-	return super.onKeyDown(keyCode, event);
-  }
-
   /** Start DefaultHardwareBackBtnHandler **/
   @Override
   public void invokeDefaultOnBackPressed() {
