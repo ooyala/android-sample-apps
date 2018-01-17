@@ -17,8 +17,6 @@
     ]
   },
   "highAvailability": {
-    "enabled": false,
-    "ignoreMaxTimeout": false
-  },
-  "id": "h00jkj"
+    "enabled": false
+  }
 }
