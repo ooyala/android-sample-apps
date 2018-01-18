@@ -1,0 +1,239 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'com.jfrog.bintray'
+
+apply plugin: 'com.github.dcendents.android-maven'
+
+// projectDir is 'android-complete/android-sdk/sdk/core/', but 'android-complete/android-sdk/' is
+// the directory needed
+def destFolderName = 'OoyalaSDK-Android'
+def coreZipPath = androidSDKPath + '/' + destFolderName
+
+def sdkName = 'core'
+ext {
+    bintrayRepo = project.bintrayRepo
+    bintrayName = sdkName
+
+    publishedGroupId = project.publishedGroupId
+    libraryName = sdkName
+    artifact = sdkName
+
+    libraryDescription = 'Ooyala Core SDK'
+
+    libraryVersion = project.libraryVersion
+}
+group = publishedGroupId
+version = libraryVersion
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                groupId publishedGroupId
+                artifactId artifact
+
+                // Add your description here
+                name libraryName
+                description libraryDescription
+                developers {
+                    developer {
+                        id project.developerId
+                        name project.developerName
+                        email project.developerEmail
+                    }
+                }
+            }
+        }
+    }
+}
+
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+artifacts {
+//    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+
+bintray {
+    user = project.bintrayUser
+    key = project.bintrayApiKey
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/maven/org.apache.commons/commons-lang3/pom.properties'
+        exclude 'META-INF/maven/org.apache.commons/commons-lang3/pom.xml'
+        exclude 'assets/PlayReady/provisioning.dat'
+        exclude 'assets/version.txt'
+        exclude 'assets/version.info'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+task generateCompleteDocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += files(android.getBootClasspath(),
+            "${android.sdkDirectory}/tools/support/annotations.jar",
+            "src/main/java")
+    destinationDir = file("${androidSDKPath}/sdk/Documentation/complete")
+    title = "Ooyala Android SDK API Documentation"
+    options {
+        links "http://docs.oracle.com/javase/7/docs/api/"
+        linksOffline "http://d.android.com/reference", "file:${android.sdkDirectory}/docs/reference"
+        windowTitle "Ooyala Android SDK API Documentation"
+        setUse(true)
+        header "<b>Ooyala Android SDK</b>"
+        bottom "<font size=\"-1\">Copyright 2016 Ooyala, Inc. All Rights Reserved.</font>"
+        setMemberLevel(JavadocMemberLevel.PUBLIC)
+    }
+
+    include("com/ooyala/android/*",
+            "com/ooyala/android/player/*",
+            "com/ooyala/android/ads/vast/*",
+            "com/ooyala/android/apis/*",
+            "com/ooyala/android/configuration/*",
+            "com/ooyala/android/captions/*",
+            "com/ooyala/android/item/*",
+            "com/ooyala/android/plugin/*",
+            "com/ooyala/android/ui/*",
+            "com/ooyala/android/util/*",
+            "com/ooyala/android/visualon/*")
+}
+
+dependencies {
+    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.android.support:support-v4:23.4.0'
+    implementation 'com.android.support:appcompat-v7:23.4.0'
+    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation files('libs/DxDrmDlc.jar')
+    implementation files('libs/assets.jar')
+    implementation files('libs/voOSBasePlayer.jar')
+    implementation files('libs/voOSDataSource.jar')
+    implementation files('libs/voOSEngine.jar')
+    implementation files('libs/voOSPlayer.jar')
+    implementation files('libs/voOSStreamingDownloader.jar')
+    implementation files('libs/voOSUtils.jar')
+}
+
+task createCoreZipFolder {
+    // Needs to be wrapped in an action like doLast otherwise code will be executed
+    // automatically regardless of dependencies
+    doLast {
+        createZipDir(destFolderName)
+    }
+}
+
+task copyCoreSDKJar(type: Copy) {
+    from "${androidSDKPath}/sdk/core/build/intermediates/bundles/release/classes.jar"
+    into coreZipPath
+    rename('classes.jar', 'OoyalaSDK.jar')
+
+    doLast {
+        println "Copying OoyalaSDK.jar"
+    }
+}
+copyCoreSDKJar.dependsOn build
+copyCoreSDKJar.dependsOn createCoreZipFolder
+
+task copyAPIDocs(type: Copy) {
+    from  "${androidSDKPath}/sdk/Documentation/complete"
+    into "${coreZipPath}/APIDocs"
+
+    doLast {
+        println "Copying APIDocs"
+    }
+}
+copyAPIDocs.dependsOn createCoreZipFolder
+copyAPIDocs.dependsOn generateCompleteDocs
+
+task copyReadMe(type: Copy, dependsOn: 'createCoreZipFolder') {
+    from "${androidSDKPath}/README.txt"
+    into coreZipPath
+
+    doLast {
+        println "Copying README.txt"
+    }
+}
+
+task buildSDKVersionFile(dependsOn: 'createCoreZipFolder') {
+    // Needs to be wrapped in an action like doLast otherwise code will be executed
+    // automatically regardless of dependencies
+    doLast {
+        buildVersionFile(coreZipPath, null)
+    }
+}
+
+task generateSDKZip(type: Zip) {
+    from coreZipPath
+    destinationDir = file(androidSDKPath)
+    into destFolderName
+    archiveName = 'OoyalaSDK-Android.zip'
+
+    doLast {
+        println "Zipping SDK Folder"
+    }
+}
+
+task deleteZipPath(type: Delete) {
+    delete coreZipPath
+}
+generateSDKZip.dependsOn createCoreZipFolder
+generateSDKZip.dependsOn copyCoreSDKJar
+generateSDKZip.dependsOn copyAPIDocs
+generateSDKZip.dependsOn copyReadMe
+generateSDKZip.dependsOn buildSDKVersionFile
+

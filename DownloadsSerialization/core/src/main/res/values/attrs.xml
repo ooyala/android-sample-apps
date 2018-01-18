@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="OoyalaPlayer">
+    <attr name="pcode" format="string"/>
+    <attr name="apiKey" format="string"/>
+    <attr name="secret" format="string"/>
+    <attr name="domain" format="string"/>
+  </declare-styleable>
+</resources>
