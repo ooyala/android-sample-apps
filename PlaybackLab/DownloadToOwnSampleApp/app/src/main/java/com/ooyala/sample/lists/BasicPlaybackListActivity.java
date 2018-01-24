@@ -41,9 +41,9 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
 
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
-    selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", OoyalaSkinOPTPlayerActivity.class));
-    selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", OfflineDownloadActivity.class));
-    selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", OfflineSkinPlayerActivity.class));
+    selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("BoMXF2ZDE662DJkQBw5RxUsfiurpRJre","BjcWYyOu1KK2DiKOkF41Z2k0X57l", "http://ooyala.com", OoyalaSkinOPTPlayerActivity.class));
+    selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm","BjcWYyOu1KK2DiKOkF41Z2k0X57l", "http://ooyala.com", OfflineDownloadActivity.class));
+    selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm","BjcWYyOu1KK2DiKOkF41Z2k0X57l", "http://ooyala.com", OfflineSkinPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
 
@@ -81,6 +81,8 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("pcode", selection.getPcode());
+    intent.putExtra("domain", selection.getDomain());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
     startActivity(intent);
     return;
