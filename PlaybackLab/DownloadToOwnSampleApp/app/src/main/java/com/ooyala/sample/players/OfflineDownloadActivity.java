@@ -108,7 +108,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
-  public void onCompletion() {
+  @Override
+  public void onCompletion(String embedCode) {
     handler.post(new Runnable() {
       @Override
       public void run() {
@@ -119,7 +120,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
-  public void onAbort() {
+  @Override
+  public void onAbort(String embedCode) {
     handler.post(new Runnable() {
       @Override
       public void run() {
@@ -128,7 +130,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
-  public void onError(final Exception ex) {
+  @Override
+  public void onError(String embedCode, final Exception ex) {
     if (progressCompleted <= 99 && retry_count < MAX_RETRY_COUNT) {
       retry_count++;
       DebugMode.logD(TAG, "Retrying to download : " + retry_count);
