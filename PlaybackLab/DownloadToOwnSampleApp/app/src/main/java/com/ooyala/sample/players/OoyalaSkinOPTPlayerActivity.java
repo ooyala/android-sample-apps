@@ -32,8 +32,8 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
   private static final String TAG = OoyalaSkinOPTPlayerActivity.class.getSimpleName();
 
   String EMBED = null;
-  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE  = null;
+  String DOMAIN = null;
 
   private final String APIKEY = "";
   private final String SECRET = "";
@@ -55,6 +55,8 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_skin_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
 
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
