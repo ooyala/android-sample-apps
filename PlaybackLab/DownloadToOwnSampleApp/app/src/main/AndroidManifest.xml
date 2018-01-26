@@ -31,6 +31,10 @@
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
+        <activity android:name=".lists.DownloadSerializationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
         <activity android:name=".players.OoyalaSkinPlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>

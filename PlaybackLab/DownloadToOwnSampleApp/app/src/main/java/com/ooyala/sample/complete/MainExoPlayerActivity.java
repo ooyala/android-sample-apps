@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
+import com.ooyala.sample.lists.DownloadSerializationActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class MainExoPlayerActivity extends Activity implements OnItemClickListen
 //    activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
 //    activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
+    activityMap.put(DownloadSerializationActivity.getName(), DownloadSerializationActivity.class);
 
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);
