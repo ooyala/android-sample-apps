@@ -29,14 +29,14 @@ public class SampleVideoPlayerActivity extends AbstractHookActivity {
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			// Below step will make sure that player is being chosen each time
 			// make sure to put large integer value so that new player gets selected
 			player.getMoviePlayerSelector().registerPlayerFactory(new SampleVideoPlayerFactory(999));
 			player.addObserver(this);
 
-			if (player.setEmbedCode(embedCode)) {
+			if (player.setEmbedCode(EMBED_CODE)) {
 			} else {
 				Log.d(this.getClass().getName(), "Something Went Wrong!");
 			}

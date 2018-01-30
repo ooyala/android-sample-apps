@@ -30,14 +30,14 @@ public class ProgrammaticVolumePlayerActivity extends AbstractHookActivity {
 			//Initialize the player
 			Options opts = new Options.Builder().setUseExoPlayer(true).build();
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), opts);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), opts);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
 			// You can set the volume anytime after the OoyalaPlayer is instantiated
 			player.setVolume(0.0f);
 
-			if (player.setEmbedCode(embedCode)) {
+			if (player.setEmbedCode(EMBED_CODE)) {
 				player.play();
 			}
 		}
