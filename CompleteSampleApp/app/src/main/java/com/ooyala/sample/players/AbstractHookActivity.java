@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -35,6 +36,7 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 	protected String DOMAIN;
 
 	protected OoyalaPlayer player;
+	protected OoyalaPlayerLayout playerLayout;
 
 	boolean writePermission = false;
 	protected boolean asked = false;

@@ -28,7 +28,7 @@ public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 			//Initialize the player
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
 			//Insert the new overlay into the LayoutController
@@ -37,7 +37,7 @@ public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 			playerLayoutController.setFullscreenOverlay(overlay);
 			player.addObserver(this);
 
-			if (player.setEmbedCode(embedCode)) {
+			if (player.setEmbedCode(EMBED_CODE)) {
 				//Uncomment for Auto-Play
 				//player.play();
 			}

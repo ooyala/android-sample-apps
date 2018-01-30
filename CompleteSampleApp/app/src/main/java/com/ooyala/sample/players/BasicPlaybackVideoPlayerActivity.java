@@ -36,11 +36,11 @@ public class BasicPlaybackVideoPlayerActivity extends AbstractHookActivity {
       playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
       Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
       player.addObserver(this);
 
-      if (player.setEmbedCode(embedCode)) {
+      if (player.setEmbedCode(EMBED_CODE)) {
         //Uncomment for Auto-play
         //player.play();
       } else {
