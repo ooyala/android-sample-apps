@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/castBackgroundImage"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="40dp"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:alpha="0.5"
+        android:scaleType="fitCenter"></ImageView>
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="#FFFFFF"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:id="@+id/videoDescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_alignLeft="@+id/videoTitle"
+        android:layout_alignRight="@+id/videoTitle"
+        android:layout_below="@+id/videoTitle"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#FFFFFF"
+        android:lines="4"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/castStateTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:layout_alignLeft="@+id/videoTitle"
+        android:layout_alignRight="@+id/videoTitle"
+        android:layout_below="@+id/videoDescription"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condense"
+        android:gravity="center_horizontal"/>
+
+</RelativeLayout>
