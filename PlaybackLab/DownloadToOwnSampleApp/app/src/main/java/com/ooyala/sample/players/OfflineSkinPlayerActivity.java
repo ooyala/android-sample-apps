@@ -61,7 +61,7 @@ public class OfflineSkinPlayerActivity extends Activity implements Observer, Def
 
     player.addObserver(this);
     File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), EMBED);
-    OfflineVideo ov = OfflineVideo.getVideo(folder);
+    OfflineVideo ov = OfflineVideo.getVideo(getApplicationContext(), folder);
 
     if (player.setUnbundledVideo(ov)) {
       //Uncomment for autoplay
