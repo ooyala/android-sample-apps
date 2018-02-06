@@ -30,8 +30,8 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
   final String TAG = this.getClass().toString();
 
   String EMBED = null;
-  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE  = null;
+  String DOMAIN = null;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
@@ -48,7 +48,8 @@ public class OoyalaSkinPlayerActivity extends Activity implements Observer, Defa
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_skin_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
-
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
 

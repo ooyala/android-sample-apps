@@ -17,6 +17,7 @@ import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
 
@@ -34,8 +35,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
   String EMBED = null;
-  final String PCODE  = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
-  final String DOMAIN = "http://ooyala.com";
+  String PCODE = null;
+  String DOMAIN = null;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
@@ -43,6 +44,9 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   protected TextView progressView;
   protected Handler handler;
   protected DashDownloader downloader;
+  protected int progressCompleted;
+  private final int MAX_RETRY_COUNT = 3;
+  private int retry_count;
 
   private final String APIKEY = "";
   private final String SECRET = "";
@@ -59,6 +63,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.offline_downloader);
     EMBED = getIntent().getExtras().getString("embed_code");
+    PCODE = getIntent().getExtras().getString("pcode");
+    DOMAIN = getIntent().getExtras().getString("domain");
     progressView = (TextView)findViewById(R.id.progress_text);
     progressView.setText("progress: 0");
     handler = new Handler(getMainLooper());
@@ -102,7 +108,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
-  public void onCompletion() {
+  @Override
+  public void onCompletion(String embedCode) {
     handler.post(new Runnable() {
       @Override
       public void run() {
@@ -113,7 +120,8 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
-  public void onAbort() {
+  @Override
+  public void onAbort(String embedCode) {
     handler.post(new Runnable() {
       @Override
       public void run() {
@@ -122,16 +130,31 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     });
   }
 
-  public void onError(final Exception ex) {
-    handler.post(new Runnable() {
-      @Override
-      public void run() {
-        progressView.setText("Error:" + ex.getLocalizedMessage());
-      }
-    });
+  @Override
+  public void onError(String embedCode, final Exception ex) {
+    if (progressCompleted <= 99 && retry_count < MAX_RETRY_COUNT) {
+      retry_count++;
+      DebugMode.logD(TAG, "Retrying to download : " + retry_count);
+
+      handler.post(new Runnable() {
+        @Override
+        public void run() {
+          progressView.setText(progressCompleted + " Retrying to download ..");
+          downloader.startDownload();
+        }
+      });
+    } else {
+      handler.post(new Runnable() {
+        @Override
+        public void run() {
+          progressView.setText("Error:" + ex.getLocalizedMessage());
+        }
+      });
+    }
   }
 
   public void onPercentage(int percentCompleted) {
+    progressCompleted = percentCompleted;
     final String progress = "progress:" + percentCompleted;
 
     handler.post(new Runnable() {
