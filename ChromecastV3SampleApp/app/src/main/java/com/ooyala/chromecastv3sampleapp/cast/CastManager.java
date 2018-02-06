@@ -25,6 +25,7 @@ public class CastManager implements CastManagerInterface, CastSessionListener.Co
   private WeakReference<OoyalaPlayer> ooyalaPlayer;
   private boolean isConnected = false;
   private boolean isInCastMode = false;
+  private String deviceName = "";
 
   private static CastManager castManager;
 
@@ -40,6 +41,26 @@ public class CastManager implements CastManagerInterface, CastSessionListener.Co
     setupCast(context);
     CastSessionListener castSessionListener = new CastSessionListener(this);
     castContext.getSessionManager().addSessionManagerListener(castSessionListener, CastSession.class);
+  }
+
+  private void setupCast(Context context) {
+    castContext = CastContext.getSharedInstance(context);
+  }
+
+  void initCast(CastModeOptions options, String token) {
+    castPlayer.loadMedia(options, ooyalaPlayer.get(), token);
+  }
+
+  private void cleanupAfterReceiverDisconnect() {
+    DebugMode.logD(TAG, "Exit Cast Mode");
+    isInCastMode = false;
+    hideCastView();
+    castView = null;
+    if (ooyalaPlayer != null) {
+      ooyalaPlayer.get().exitCastMode(castPlayer.getPlayheadTime(),
+          castPlayer.isPlaying(),
+          castPlayer.getEmbedCode());
+    }
   }
 
   //region Working with CastView
@@ -121,37 +142,21 @@ public class CastManager implements CastManagerInterface, CastSessionListener.Co
 
   //endregion
 
-  private void setupCast(Context context) {
-    castContext = CastContext.getSharedInstance(context);
-  }
-
-  void initCast(CastModeOptions options, String token) {
-    castPlayer.loadMedia(options, ooyalaPlayer.get(), token);
-  }
-
-  private void cleanupAfterReceiverDisconnect() {
-    DebugMode.logD(TAG, "Exit Cast Mode");
-    isInCastMode = false;
-    hideCastView();
-    castView = null;
-    if (ooyalaPlayer != null) {
-      ooyalaPlayer.get().exitCastMode(castPlayer.getPlayheadTime(),
-          castPlayer.isPlaying(),
-          castPlayer.getEmbedCode());
-    }
-  }
-
-
   //region Implementation of CastSessionListener.ConnectStatusListener :
 
   @Override
   public void onApplicationConnected(CastSession castSession) {
     castPlayer = new CastPlayer(castSession);
+    deviceName = castSession.getCastDevice().getFriendlyName();
 
     isConnected = true;
     if (ooyalaPlayer != null && ooyalaPlayer.get().getCurrentItem() != null) {
       ooyalaPlayer.get().switchToCastModeV3(ooyalaPlayer.get().getEmbedCode());
     }
+  }
+
+   String getDeviceName(){
+    return deviceName;
   }
 
   @Override

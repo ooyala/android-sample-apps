@@ -1,6 +1,5 @@
 package com.ooyala.chromecastv3sampleapp;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +29,7 @@ import java.util.Observer;
 public class ChromecastPlayerActivity extends AppCompatActivity implements Observer, EmbedTokenGenerator {
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
 
-  /**
+  /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
@@ -156,7 +155,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       embedCodesString += ec;
     }
 
-    HashMap<String, String> params = new HashMap<String, String>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("account_id", ACCOUNT_ID);
 
     String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;

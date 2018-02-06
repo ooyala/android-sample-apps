@@ -35,5 +35,4 @@ public class CastManagerInitCastPlayerAsyncTask extends AsyncTask<Void, Integer,
       manager.initCast(this.options, token);
     }
   }
-
 }

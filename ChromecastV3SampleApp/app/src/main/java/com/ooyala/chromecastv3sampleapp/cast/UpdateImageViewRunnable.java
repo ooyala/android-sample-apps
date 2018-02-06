@@ -19,10 +19,10 @@ import java.net.URLConnection;
 public class UpdateImageViewRunnable implements Runnable {
   private static String TAG = UpdateImageViewRunnable.class.getSimpleName();
 
-  ImageView view;
-  String url;
+  private ImageView view;
+  private String url;
 
-  public UpdateImageViewRunnable(ImageView view, String url) {
+  UpdateImageViewRunnable(ImageView view, String url) {
     this.view = view;
     this.url = url;
   }

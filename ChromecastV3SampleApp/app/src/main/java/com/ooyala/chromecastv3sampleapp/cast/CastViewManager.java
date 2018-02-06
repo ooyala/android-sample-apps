@@ -25,8 +25,7 @@ public class CastViewManager {
     final ImageView castBackgroundImage = castView.findViewById(R.id.castBackgroundImage);
 
     // Update the ImageView on a separate thread
-
-    new Thread(new UpdateImageViewRunnable(castBackgroundImage, video.getPromoImageURL(100, 100))).start();
+    new Thread(new UpdateImageViewRunnable(castBackgroundImage, video.getPromoImageURL(0, 0))).start();
 
     TextView videoTitle = castView.findViewById(R.id.videoTitle);
     videoTitle.setText(video.getTitle());
@@ -36,12 +35,11 @@ public class CastViewManager {
   }
 
   public void updateCastState(Context c, OoyalaPlayer.State state) {
-    //TODO: change to get cast device
-    String castDeviceName = "Cast device name";
+    String castDeviceName = CastManager.getCastManager().getDeviceName();
     if (state == OoyalaPlayer.State.LOADING) {
-      stateTextView.setText("loading...");
+      stateTextView.setText(c.getString(R.string.loading));
     } else if (state == OoyalaPlayer.State.PLAYING || state == OoyalaPlayer.State.PAUSED) {
-      String statusString = String.format("Casting to ", castDeviceName);
+      String statusString = String.format(c.getString(R.string.castingTo), castDeviceName);
       stateTextView.setText(statusString);
     } else {
       stateTextView.setText("");

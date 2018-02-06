@@ -3,8 +3,6 @@ package com.ooyala.chromecastv3sampleapp.cast;
 
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
-import com.ooyala.android.Environment;
-import com.ooyala.android.OoyalaPlayer;
 
 class CastSessionListener implements SessionManagerListener<CastSession> {
   private ConnectStatusListener connectStatusListener;
@@ -13,9 +11,8 @@ class CastSessionListener implements SessionManagerListener<CastSession> {
     this.connectStatusListener = connectStatusListener;
   }
 
-  /**
-   * Implementation of SessionManagerListener<CastSession>
-   */
+  //region Implementation of SessionManagerListener<CastSession>
+
   @Override
   public void onSessionEnded(CastSession session, int error) {
     connectStatusListener.onApplicationDisconnect(session);
@@ -56,6 +53,7 @@ class CastSessionListener implements SessionManagerListener<CastSession> {
   @Override
   public void onSessionSuspended(CastSession session, int reason) {
   }
+  //endregion
 
   interface ConnectStatusListener {
     void onApplicationConnected(CastSession castSession);

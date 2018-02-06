@@ -2,45 +2,43 @@ package com.ooyala.chromecastv3sampleapp.cast;
 
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
-import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
+import com.google.android.gms.cast.RemoteMediaPlayer;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.images.WebImage;
 import com.ooyala.android.CastModeOptions;
 import com.ooyala.android.OoyalaException;
-import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.item.Video;
 import com.ooyala.android.player.PlayerInterface;
 import com.ooyala.android.player.PlayerType;
-import com.ooyala.android.util.DebugMode;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Observable;
-
+import static com.ooyala.android.OoyalaPlayer.State.LOADING;
 import static com.ooyala.android.OoyalaPlayer.State.PLAYING;
 
-class CastPlayer extends Observable implements PlayerInterface {
+class CastPlayer implements PlayerInterface {
   private RemoteMediaClient remoteMediaClient;
   private long playhead = 0;
+  private boolean isPlaying = false;
   private String embedCode = "";
+  private OoyalaPlayer.State state = OoyalaPlayer.State.INIT;
 
   CastPlayer(CastSession castSession) {
     if (castSession == null) {
       return;
     }
     remoteMediaClient = castSession.getRemoteMediaClient();
-    castSession.addCastListener(new Cast.Listener(){
-
-    });
   }
 
-  void loadMedia(CastModeOptions options, OoyalaPlayer ooyalaPlayer, String embedToken) {
+  void loadMedia(final CastModeOptions options, OoyalaPlayer ooyalaPlayer, String embedToken) {
     JSONObject playerParams = new JSONObject();
     String itemTitle = null;
     String itemPromoImageUrl = null;
@@ -86,6 +84,13 @@ class CastPlayer extends Observable implements PlayerInterface {
       return;
     }
 
+    MediaMetadata metadata = getMediaMetadata(itemTitle, itemPromoImageUrl);
+    MediaInfo mediaInfo = getMediaInfo(playerParams, metadata);
+    startLoading(options, mediaInfo);
+  }
+
+  @NonNull
+  private MediaMetadata getMediaMetadata(String itemTitle, String itemPromoImageUrl) {
     MediaMetadata metadata = new MediaMetadata();
     if (itemTitle != null) {
       metadata.putString(MediaMetadata.KEY_TITLE, itemTitle);
@@ -97,16 +102,28 @@ class CastPlayer extends Observable implements PlayerInterface {
         metadata.addImage(image);
       }
     }
+    return metadata;
+  }
 
-    MediaInfo mediaInfo = new MediaInfo.Builder(embedCode)
+  private MediaInfo getMediaInfo(JSONObject playerParams, MediaMetadata metadata) {
+    return new MediaInfo.Builder(embedCode)
         .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
         .setContentType("video/mp4")
         .setCustomData(playerParams)
         .setMetadata(metadata)
         .build();
+  }
 
-    remoteMediaClient.load(mediaInfo, true, 5000);
-    setCurrentTime(5000);
+  private void startLoading(final CastModeOptions options, MediaInfo mediaInfo) {
+    setState(LOADING);
+    remoteMediaClient.load(mediaInfo).setResultCallback(new ResultCallback<RemoteMediaClient.MediaChannelResult>() {
+      @Override
+      public void onResult(@NonNull RemoteMediaClient.MediaChannelResult mediaChannelResult) {
+        //Seek after load video
+        remoteMediaClient.seek(options.getPlayheadTimeInMillis());
+        setState(PLAYING);
+      }
+    });
 
     remoteMediaClient.addProgressListener(new RemoteMediaClient.ProgressListener() {
       @Override
@@ -115,53 +132,10 @@ class CastPlayer extends Observable implements PlayerInterface {
         isPlaying = remoteMediaClient.isPlaying();
       }
     }, 1); // Check current playhead every 1 second
-
-    remoteMediaClient.addListener(new RemoteMediaClient.Listener() {
-      @Override
-      public void onStatusUpdated() {
-
-      }
-
-      @Override
-      public void onMetadataUpdated() {
-
-      }
-
-      @Override
-      public void onQueueStatusUpdated() {
-
-      }
-
-      @Override
-      public void onPreloadStatusUpdated() {
-
-      }
-
-      @Override
-      public void onSendingRemoteMediaRequest() {
-
-      }
-
-      @Override
-      public void onAdBreakStatusUpdated() {
-
-      }
-    });
   }
 
-  /**
-   * Change the playhead to the given time.
-   *
-   * @param curTime position to seek to, in milliseconds.
-   */
-  private void setCurrentTime(int curTime) {
-    playhead = curTime;
-    onPlayHeadChanged();
-  }
-
-  private void onPlayHeadChanged() {
-    setChanged();
-    notifyObservers(new OoyalaNotification(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME));
+  public void setState(OoyalaPlayer.State state) {
+    this.state = state;
   }
 
   int getPlayheadTime() {
@@ -171,8 +145,6 @@ class CastPlayer extends Observable implements PlayerInterface {
   String getEmbedCode() {
     return embedCode;
   }
-
-  private boolean isPlaying = false;
 
   boolean isPlaying() {
     return isPlaying;
@@ -219,25 +191,23 @@ class CastPlayer extends Observable implements PlayerInterface {
 
   @Override
   public void seekToTime(int timeInMillis) {
-    remoteMediaClient.seek(timeInMillis);
+    remoteMediaClient.seek(timeInMillis, RemoteMediaPlayer.RESUME_STATE_PLAY);
   }
 
   @Override
   public OoyalaPlayer.State getState() {
     //INIT, LOADING, READY, PLAYING, PAUSED, COMPLETED, SUSPENDED, ERROR
-    //TODO
-    return PLAYING;
+    return state;
   }
 
   @Override
   public int livePlayheadPercentage() {
-    //TODO
     return 0;
   }
 
   @Override
   public void seekToPercentLive(int percent) {
-//TODO
+
   }
 
   @Override

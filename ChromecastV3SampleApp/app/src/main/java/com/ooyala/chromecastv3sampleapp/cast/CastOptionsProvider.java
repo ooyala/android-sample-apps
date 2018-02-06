@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class CastOptionsProvider implements OptionsProvider {
     private final String APP_ID = "4172C76F";
-//    private final String APP_ID = "4F8B3483";
 
     @Override
     public CastOptions getCastOptions(Context context) {
