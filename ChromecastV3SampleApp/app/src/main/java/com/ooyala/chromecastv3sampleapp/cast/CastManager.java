@@ -52,7 +52,6 @@ public class CastManager implements CastManagerInterface, CastSessionListener.Co
   }
 
   private void cleanupAfterReceiverDisconnect() {
-    DebugMode.logD(TAG, "Exit Cast Mode");
     isInCastMode = false;
     hideCastView();
     castView = null;
@@ -151,7 +150,7 @@ public class CastManager implements CastManagerInterface, CastSessionListener.Co
 
     isConnected = true;
     if (ooyalaPlayer != null && ooyalaPlayer.get().getCurrentItem() != null) {
-      ooyalaPlayer.get().switchToCastModeV3(ooyalaPlayer.get().getEmbedCode());
+      ooyalaPlayer.get().switchToCastMode(ooyalaPlayer.get().getEmbedCode());
     }
   }
 

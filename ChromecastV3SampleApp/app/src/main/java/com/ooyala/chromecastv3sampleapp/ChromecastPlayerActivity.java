@@ -33,9 +33,9 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private final String APIKEY = "fill me in";
-  private final String SECRET = "fill me in";
-  private final String ACCOUNT_ID = "accountID";
+  private final String APIKEY = "c0cTkxOqALQviQIGAHWY5hP0q9gU.VNCrn";
+  private final String SECRET = "X3c78B4MrZfhFuwb5749IDsg4gVMfooJll1jfjoS";
+  private final String ACCOUNT_ID = "54814";
 
   CastManager castManager;
   CastViewManager castViewManager;
