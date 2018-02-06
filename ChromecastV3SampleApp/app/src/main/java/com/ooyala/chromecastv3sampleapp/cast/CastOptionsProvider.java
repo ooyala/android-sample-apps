@@ -17,9 +17,8 @@ import java.util.List;
  * Don't delete this class. It is used to provide google cast options by manifest.
  */
 public class CastOptionsProvider implements OptionsProvider {
-    private final String NAMESPACE = "urn:x-cast:ooyala";
     private final String APP_ID = "4172C76F";
-    private final String APP_ID_SAMPLE = "4F8B3483";
+//    private final String APP_ID = "4F8B3483";
 
     @Override
     public CastOptions getCastOptions(Context context) {

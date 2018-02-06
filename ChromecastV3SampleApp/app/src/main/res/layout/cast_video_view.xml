@@ -10,7 +10,7 @@
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:alpha="0.5"
-        android:scaleType="fitCenter"></ImageView>
+        android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/videoTitle"

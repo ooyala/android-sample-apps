@@ -1,4 +1,4 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.chromecastv3sampleapp.cast;
 
 
 import android.app.Activity;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.item.Video;
-import com.ooyala.chromecastv3sampleapp.cast.CastManager;
+import com.ooyala.chromecastv3sampleapp.R;
 
 public class CastViewManager {
   private View castView;
@@ -22,7 +22,7 @@ public class CastViewManager {
   }
 
   public void configureCastView(Video video) {
-    final ImageView castBackgroundImage = (ImageView) castView.findViewById(R.id.castBackgroundImage);
+    final ImageView castBackgroundImage = castView.findViewById(R.id.castBackgroundImage);
 
     // Update the ImageView on a separate thread
 

@@ -1,4 +1,4 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.chromecastv3sampleapp.cast;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
