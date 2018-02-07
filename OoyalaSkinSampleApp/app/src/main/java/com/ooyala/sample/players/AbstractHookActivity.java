@@ -164,12 +164,4 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			playerLayoutController.onDestroy();
 		}
 	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (playerLayoutController != null) {
-			playerLayoutController.onKeyDown(keyCode, event);
-		}
-		return super.onKeyDown(keyCode, event);
-	}
 }

@@ -44,14 +44,14 @@ public class InsertAdPlayerActivity extends AbstractHookActivity {
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
 			//  Set up performance monitoring to watch standard events and ads events.
 			performanceMonitor = PerformanceMonitorBuilder.getStandardAdsMonitor(player);
 
-			if (player.setEmbedCode(embedCode)) {
+			if (player.setEmbedCode(EMBED_CODE)) {
 				//Uncomment for Auto-Play
 				//player.play();
 			}

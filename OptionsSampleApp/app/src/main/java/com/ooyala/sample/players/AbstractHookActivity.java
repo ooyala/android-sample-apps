@@ -86,30 +86,6 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 	}
 
 	@Override
-	protected void onStop() {
-		super.onStop();
-		Log.d(TAG, "App Stopped");
-		if (null != optimizedOoyalaPlayerLayoutController && null != optimizedOoyalaPlayerLayoutController.getPlayer()) {
-			optimizedOoyalaPlayerLayoutController.getPlayer().suspend();
-		}
-		else if (null != playerLayoutController && null != playerLayoutController.getPlayer()){
-			playerLayoutController.getPlayer().suspend();
-		}
-	}
-
-	@Override
-	protected void onRestart() {
-		super.onRestart();
-		Log.d(TAG, "App Restarted");
-		if (null != optimizedOoyalaPlayerLayoutController && null != optimizedOoyalaPlayerLayoutController.getPlayer()) {
-			optimizedOoyalaPlayerLayoutController.getPlayer().resume();
-		}
-		else if (null != playerLayoutController && null != playerLayoutController.getPlayer()){
-			playerLayoutController.getPlayer().resume();
-		}
-	}
-
-	@Override
 	public void update(Observable arg0, Object argN) {
 		if (arg0 != player) {
 			return;

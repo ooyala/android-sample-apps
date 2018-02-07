@@ -58,7 +58,7 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 	@Override
 	public void onClick(View v) {
 		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-		PlayerDomain playerDomain = new PlayerDomain(domain);
+		PlayerDomain playerDomain = new PlayerDomain(DOMAIN);
 		boolean showAdsControls = this.adsControlsButton.isChecked();
 		boolean showCuePoints = this.cuePointsButton.isChecked();
 		DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
@@ -66,7 +66,7 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 		Options options = new Options.Builder().setShowAdsControls(showAdsControls)
 				.setShowCuePoints(showCuePoints).setUseExoPlayer(true).build();
 
-		player = new OoyalaPlayer(pcode, playerDomain, options);
+		player = new OoyalaPlayer(PCODE, playerDomain, options);
 		playerLayoutController = new OptimizedOoyalaPlayerLayoutController(
 				playerLayout, player);
 		player.addObserver(this);
@@ -79,10 +79,10 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 				.put("fw_android_player_profile", "90750:ooyala_android");
 		freewheelParameters.put("fw_android_site_section_id",
 				"ooyala_android_internalapp");
-		freewheelParameters.put("fw_android_video_asset_id", embedCode);
+		freewheelParameters.put("fw_android_video_asset_id", EMBED_CODE);
 
 		freewheelManager.overrideFreewheelParameters(freewheelParameters);
-		player.setEmbedCode(embedCode);
+		player.setEmbedCode(EMBED_CODE);
 	}
 
 	@Override
