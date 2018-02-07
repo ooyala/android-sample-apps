@@ -8,10 +8,10 @@ public class ChromecastPlayerSelectionOption {
   public String embedCode2;
   public String pcode;
   public String domain;
-  public Class <? extends Activity> activity;
+  public Class<? extends Activity> activity;
 
   public ChromecastPlayerSelectionOption(String title, String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
-    this( title, embedCode, null, pcode, domain, activity);
+    this(title, embedCode, null, pcode, domain, activity);
   }
 
   public ChromecastPlayerSelectionOption(String title, String embedCode, String embedCode2, String pcode, String domain, Class<? extends Activity> activity) {

@@ -15,6 +15,5 @@ public class SampleApplication extends Application {
     boolean isDebuggable = (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
     CastManager.initialize(this);
     castManager = CastManager.getCastManager();
-
   }
 }

@@ -29,7 +29,7 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
 
     //Create the adapter for the ListView data
     ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
-    for(ChromecastPlayerSelectionOption video : videoList) {
+    for (ChromecastPlayerSelectionOption video : videoList) {
       selectionAdapter.add(video.title);
     }
     selectionAdapter.notifyDataSetChanged();
@@ -64,10 +64,10 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
   }
 
   /**
-    Generate the list of all videos for the list
+   * Generate the list of all videos for the list
    */
   private ChromecastPlayerSelectionOption[] getVideoList() {
-    return new ChromecastPlayerSelectionOption[] {
+    return new ChromecastPlayerSelectionOption[]{
       new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
       new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
       new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),

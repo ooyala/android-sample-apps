@@ -26,9 +26,10 @@ public class UpdateImageViewRunnable implements Runnable {
     this.view = view;
     this.url = url;
   }
+
   @Override
   public void run() {
-    final Bitmap bitmap =  getImageBitmap(url);
+    final Bitmap bitmap = getImageBitmap(url);
 
     Handler handler = new Handler(Looper.getMainLooper());
     handler.post(new Runnable() {

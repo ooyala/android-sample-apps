@@ -46,7 +46,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   private String domain;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
+  SDCardLogcatOoyalaEventsLogger Playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
   private OoyalaPlayer player;
 
@@ -81,7 +81,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     play(embedCode);
   }
 
-  private void play( String ec ) {
+  private void play(String ec) {
     player.setEmbedCode(ec);
     // Uncomment for Auto-Play
     player.play();
@@ -121,26 +121,25 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
         Log.e(TAG, msg, player.getError());
-      }
-      else {
+      } else {
         Log.e(TAG, msg);
       }
     }
 
     if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
       if (player.isInCastMode()) {
-        OoyalaPlayer.State state =  player.getState();
+        OoyalaPlayer.State state = player.getState();
         castViewManager.updateCastState(this, state);
       }
     }
 
-    if( arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION_NAME && embedCode2 != null ) {
-      play( embedCode2 );
+    if (arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION_NAME && embedCode2 != null) {
+      play(embedCode2);
       embedCode2 = null;
     }
 
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
-    String text="Notification Received: " + arg1 + " - state: " + player.getState();
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
     Playbacklog.writeToSdcardLog(text);
 
@@ -151,7 +150,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   public void getTokenForEmbedCodes(List<String> embedCodes, EmbedTokenGeneratorCallback callback) {
     String embedCodesString = "";
     for (String ec : embedCodes) {
-      if(ec.equals("")) embedCodesString += ",";
+      if (ec.equals("")) embedCodesString += ",";
       embedCodesString += ec;
     }
 
@@ -162,7 +161,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
 
     EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
 
-    URL tokenUrl  = urlGen.secureURL("http://player.ooyala.com", uri, params);
+    URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
 
     callback.setEmbedToken(tokenUrl.toString());
   }
