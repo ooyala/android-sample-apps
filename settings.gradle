@@ -1,14 +1,14 @@
 // OoyalaPlayer Class APIs
-//include ':BasicPlaybackSampleApp'
-//project(':BasicPlaybackSampleApp').projectDir = new File(settingsDir, './BasicPlaybackSampleApp/app')
-//include ':AdvancedPlaybackSampleApp'
-//project(':AdvancedPlaybackSampleApp').projectDir = new File(settingsDir, './AdvancedPlaybackSampleApp/app')
-//include ':OoyalaAPISampleApp'
-//project(':OoyalaAPISampleApp').projectDir = new File(settingsDir, './OoyalaAPISampleApp/app')
-//include ':OptionsSampleApp'
-//project(':OptionsSampleApp').projectDir = new File(settingsDir, './OptionsSampleApp/app')
-//include ':ContentProtectionSampleApp'
-//project(':ContentProtectionSampleApp').projectDir = new File(settingsDir, './ContentProtectionSampleApp/app')
+include ':BasicPlaybackSampleApp'
+project(':BasicPlaybackSampleApp').projectDir = new File(settingsDir, './BasicPlaybackSampleApp/app')
+include ':AdvancedPlaybackSampleApp'
+project(':AdvancedPlaybackSampleApp').projectDir = new File(settingsDir, './AdvancedPlaybackSampleApp/app')
+include ':OoyalaAPISampleApp'
+project(':OoyalaAPISampleApp').projectDir = new File(settingsDir, './OoyalaAPISampleApp/app')
+include ':OptionsSampleApp'
+project(':OptionsSampleApp').projectDir = new File(settingsDir, './OptionsSampleApp/app')
+include ':ContentProtectionSampleApp'
+project(':ContentProtectionSampleApp').projectDir = new File(settingsDir, './ContentProtectionSampleApp/app')
 
 // Chromecast
 include ':CastCompanionLibrary'
@@ -19,42 +19,42 @@ include ':ChromecastV3SampleApp'
 project(':ChromecastV3SampleApp').projectDir = new File(settingsDir, './ChromecastV3SampleApp/app')
 
 // Ad Integrations
-//include ':FreewheelSampleApp'
-//project(':FreewheelSampleApp').projectDir = new File(settingsDir, './FreewheelSampleApp/app')
-//include ':IMASampleApp'
-//project(':IMASampleApp').projectDir = new File(settingsDir, './IMASampleApp/app')
+include ':FreewheelSampleApp'
+project(':FreewheelSampleApp').projectDir = new File(settingsDir, './FreewheelSampleApp/app')
+include ':IMASampleApp'
+project(':IMASampleApp').projectDir = new File(settingsDir, './IMASampleApp/app')
+
+//Pulse requires a download of the Pulse SDK - Commented here because it will cause the other apps to not compile
+//include ':PulseSampleApp'
+//project(':PulseSampleApp').projectDir = new File(settingsDir, './PulseSampleApp/app')
+
+// Analytics Integrations
+//include ':NielsenSampleApp'
+//project(':NielsenSampleApp').projectDir = new File(settingsDir, './NielsenSampleApp/app')
+include ':NPAWSampleApp'
+project(':NPAWSampleApp').projectDir = new File(settingsDir, './NPAWSampleApp/app')
+
+// Video Playback Integrations
+include ':ExoPlayerSampleApp'
+project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, './ExoPlayerSampleApp/app')
+
+// Skin UI Integration
+include ':OoyalaSkinSampleApp'
+project(':OoyalaSkinSampleApp').projectDir = new File(settingsDir, './OoyalaSkinSampleApp/app')
 //
-////Pulse requires a download of the Pulse SDK - Commented here because it will cause the other apps to not compile
-////include ':PulseSampleApp'
-////project(':PulseSampleApp').projectDir = new File(settingsDir, './PulseSampleApp/app')
-//
-//// Analytics Integrations
-////include ':NielsenSampleApp'
-////project(':NielsenSampleApp').projectDir = new File(settingsDir, './NielsenSampleApp/app')
-//include ':NPAWSampleApp'
-//project(':NPAWSampleApp').projectDir = new File(settingsDir, './NPAWSampleApp/app')
-//
-//// Video Playback Integrations
-//include ':ExoPlayerSampleApp'
-//project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, './ExoPlayerSampleApp/app')
-//
-//// Skin UI Integration
-//include ':OoyalaSkinSampleApp'
-//project(':OoyalaSkinSampleApp').projectDir = new File(settingsDir, './OoyalaSkinSampleApp/app')
-////
-//// Playback Lab
-//include ':FullScreenSampleApp'
-//project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullScreenSampleApp/app')
-//
-////ManUntd Scrubber
-//include ':ManUScrubberSampleApp'
-//project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
-//
-//include ':VRSampleApp'
-//project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
-//
-//include ':VRSampleAppKotlin'
-//project (':VRSampleAppKotlin').projectDir = new File(settingsDir, './VRSampleAppKotlin/app')
+// Playback Lab
+include ':FullScreenSampleApp'
+project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullScreenSampleApp/app')
+
+//ManUntd Scrubber
+include ':ManUScrubberSampleApp'
+project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
+
+include ':VRSampleApp'
+project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
+
+include ':VRSampleAppKotlin'
+project (':VRSampleAppKotlin').projectDir = new File(settingsDir, './VRSampleAppKotlin/app')
 
 /*include ':skin'
 project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/android/skin')
@@ -62,16 +62,14 @@ project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/
 include(':core')
 project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/')*/
 //DownloadToOwnSampleApp
-//include ':DownloadToOwnSampleApp'
-//project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
+include ':DownloadToOwnSampleApp'
+project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
 
 // Developer
 //include ':ooyalaSkinSDK'
 //project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
-include ':core'
-project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
-include ':cast'
-project(':cast').projectDir=new File(settingsDir, '../android-sdk/sdk/cast/')
+//include ':core'
+//project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
 //include(':vrsdk')
 //project(':vrsdk').projectDir = new File(settingsDir, '../android-sdk/sdk/vrsdk/')
 
