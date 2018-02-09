@@ -23,7 +23,7 @@
          <activity android:name=".ChromecastPlayerActivity"/>
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="com.ooyala.chromecastv3sampleapp.cast.CastOptionsProvider" />
+            android:value="com.ooyala.chromecastv3sampleapp.CastOptionsProvider" />
 
     </application>
 

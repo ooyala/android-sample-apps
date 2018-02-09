@@ -1,6 +1,5 @@
 package com.ooyala.chromecastv3sampleapp;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.android.gms.cast.framework.CastButtonFactory;
+import com.google.android.gms.cast.framework.media.widget.MiniControllerFragment;
 
 public class ChromecastListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
   private static final String TAG = "ChromecastListActivity";
@@ -27,6 +27,7 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
     setupActionBar();
     videoList = getVideoList();
 
+    MiniControllerFragment miniControllerFragment = (MiniControllerFragment) getSupportFragmentManager().findFragmentById(R.id.cast_mini_controller);
     //Create the adapter for the ListView data
     ArrayAdapter<String> selectionAdapter = new ArrayAdapter<String>(this, R.layout.list_activity_list_item);
     for (ChromecastPlayerSelectionOption video : videoList) {
@@ -37,6 +38,7 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
     ListView listView = findViewById(R.id.listView);
     listView.setAdapter(selectionAdapter);
     listView.setOnItemClickListener(this);
+
   }
 
   @Override
