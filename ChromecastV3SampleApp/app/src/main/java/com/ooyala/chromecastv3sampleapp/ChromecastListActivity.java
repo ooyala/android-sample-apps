@@ -45,7 +45,7 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     final Intent intent = new Intent(this, videoList[position].activity);
     intent.putExtra("embedcode", videoList[position].embedCode);
-    intent.putExtra("embedcode2", videoList[position].embedCode2);
+    intent.putExtra("embedcode2", videoList[position].secondEmbedCode);
     intent.putExtra("pcode", videoList[position].pcode);
     intent.putExtra("domain", videoList[position].domain);
     startActivity(intent);
