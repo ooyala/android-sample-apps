@@ -64,7 +64,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   private void parseBundle(Bundle extras) {
     if (extras != null) {
       embedCode = extras.getString("embedcode");
-      secondEmbedCode = extras.getString("embedcode2");
+      secondEmbedCode = extras.getString("secondEmbedCode");
       pcode = extras.getString("pcode");
       domain = extras.getString("domain");
     }
