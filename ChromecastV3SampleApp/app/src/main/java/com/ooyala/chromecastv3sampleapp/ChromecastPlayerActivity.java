@@ -40,7 +40,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   CastViewManager castViewManager;
 
   private String embedCode;
-  private String embedCode2;
   private String pcode;
   private String domain;
 
@@ -64,7 +63,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   private void parseBundle(Bundle extras) {
     if (extras != null) {
       embedCode = extras.getString("embedcode");
-      embedCode2 = extras.getString("embedcode2");
       pcode = extras.getString("pcode");
       domain = extras.getString("domain");
     }
@@ -131,11 +129,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
         OoyalaPlayer.State state = player.getState();
         castViewManager.updateCastState(this, state);
       }
-    }
-
-    if (arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION_NAME && embedCode2 != null) {
-      play(embedCode2);
-      embedCode2 = null;
     }
 
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
