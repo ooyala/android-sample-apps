@@ -81,7 +81,7 @@ public class OfflineDownloadActivity extends Activity {
 
     if (uris != null) {
       try {
-        offlineIntent = new Intent(this, OfflinePlayerActivity.class);
+        offlineIntent = new Intent(this, PlayerActivity.class);
         offlineIntent.setData(uris[0]);
 
         tempFolder = Util.createTempDirectory(this, "ExoPlayerTest");

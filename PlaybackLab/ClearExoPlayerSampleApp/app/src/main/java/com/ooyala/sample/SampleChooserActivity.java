@@ -272,9 +272,6 @@ public class SampleChooserActivity extends Activity {
         if (downloaderSample) {
           return new DownloaderSample(sampleName, preferExtensionDecoders, drmInfo, uri, extension,
             adTagUri);
-        } else if (offlineSample) {
-          return new OfflineSample(sampleName, preferExtensionDecoders, drmInfo, uri, extension,
-            adTagUri);
         } else {
           return new UriSample(sampleName, preferExtensionDecoders, drmInfo, uri, extension,
             adTagUri);
@@ -437,23 +434,6 @@ public class SampleChooserActivity extends Activity {
     @Override
     public Intent buildIntent(Context context) {
       Intent intent = new Intent(context, OfflineDownloadActivity.class);
-      setExtraData(intent);
-      updateDrmInfo(intent);
-      return intent;
-    }
-
-  }
-
-  private static final class OfflineSample extends UriSample {
-
-    public OfflineSample(String name, boolean preferExtensionDecoders, DrmInfo drmInfo, String uri,
-                         String extension, String adTagUri) {
-      super(name, preferExtensionDecoders, drmInfo, uri, extension, adTagUri);
-    }
-
-    @Override
-    public Intent buildIntent(Context context) {
-      Intent intent = new Intent(context, OfflinePlayerActivity.class);
       setExtraData(intent);
       updateDrmInfo(intent);
       return intent;

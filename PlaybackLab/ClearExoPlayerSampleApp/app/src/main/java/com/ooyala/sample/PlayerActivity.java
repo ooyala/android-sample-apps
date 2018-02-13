@@ -72,9 +72,15 @@ import com.google.android.exoplayer2.ui.DebugTextViewHelper;
 import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.HttpDataSource;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
+import com.google.android.exoplayer2.upstream.cache.NoOpCacheEvictor;
+import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.util.Util;
 import com.ooyala.sample.ClearExoPlayerSampleApp.R;
 
+import java.io.File;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -107,7 +113,11 @@ public class PlayerActivity extends Activity implements OnClickListener,
   private DebugTextViewHelper debugViewHelper;
   private boolean inErrorState;
   private TrackGroupArray lastSeenTrackGroupArray;
+  private String drmLicenseUrl;
+  private byte[] offlineLicenseKeySetId;
+  private String offlineFolder;
 
+  private boolean offlineMode = false;
   private boolean shouldAutoPlay;
   private int resumeWindow;
   private long resumePosition;
@@ -125,7 +135,7 @@ public class PlayerActivity extends Activity implements OnClickListener,
     super.onCreate(savedInstanceState);
     shouldAutoPlay = true;
     clearResumePosition();
-    mediaDataSourceFactory = ((DemoApplication) getApplication()).buildDataSourceFactory(true);
+
     mainHandler = new Handler();
     if (CookieHandler.getDefault() != DEFAULT_COOKIE_MANAGER) {
       CookieHandler.setDefault(DEFAULT_COOKIE_MANAGER);
@@ -244,12 +254,20 @@ public class PlayerActivity extends Activity implements OnClickListener,
       lastSeenTrackGroupArray = null;
       eventLogger = new EventLogger(trackSelector);
 
+      if (intent.hasExtra(Constants.OFFLINE_MODE)) {
+        offlineMode = intent.getBooleanExtra(Constants.OFFLINE_MODE, false);
+        offlineLicenseKeySetId = intent.getByteArrayExtra(Constants.OFFLINE_LICENCE_KEY_SET_ID);
+        offlineFolder = intent.getStringExtra(Constants.OFFLINE_FOLDER);
+      }
+
       DrmSessionManager<FrameworkMediaCrypto> drmSessionManager = null;
       if (intent.hasExtra(Constants.DRM_SCHEME_EXTRA) || intent.hasExtra(Constants.DRM_SCHEME_UUID_EXTRA)) {
-        String drmLicenseUrl = intent.getStringExtra(Constants.DRM_LICENSE_URL);
+
+        drmLicenseUrl = intent.getStringExtra(Constants.DRM_LICENSE_URL);
         String[] keyRequestPropertiesArray = intent.getStringArrayExtra(Constants.DRM_KEY_REQUEST_PROPERTIES);
         boolean multiSession = intent.getBooleanExtra(Constants.DRM_MULTI_SESSION, false);
         int errorStringId = R.string.error_drm_unknown;
+
         if (Util.SDK_INT < 18) {
           errorStringId = R.string.error_drm_not_supported;
         } else {
@@ -315,6 +333,10 @@ public class PlayerActivity extends Activity implements OnClickListener,
       // The player will be reinitialized if the permission is granted.
       return;
     }
+
+    DemoApplication app = (DemoApplication) getApplication();
+    mediaDataSourceFactory = offlineMode ? app.buildDefaultDataSourceFactory() : app.buildDataSourceFactory(true);
+
     MediaSource[] mediaSources = new MediaSource[uris.length];
     for (int i = 0; i < uris.length; i++) {
       mediaSources[i] = buildMediaSource(uris[i], extensions[i], mainHandler, eventLogger);
@@ -350,18 +372,32 @@ public class PlayerActivity extends Activity implements OnClickListener,
     String overrideExtension,
     @Nullable Handler handler,
     @Nullable MediaSourceEventListener listener) {
+    DemoApplication app = ((DemoApplication) getApplication());
+
     @ContentType int type = TextUtils.isEmpty(overrideExtension) ? Util.inferContentType(uri)
       : Util.inferContentType("." + overrideExtension);
     switch (type) {
       case C.TYPE_DASH:
-        return new DashMediaSource.Factory(
-          new DefaultDashChunkSource.Factory(mediaDataSourceFactory),
-          ((DemoApplication) getApplication()).buildDataSourceFactory(false))
-          .createMediaSource(uri, handler, listener);
+        if (offlineMode) {
+          DataSource.Factory dsFactory = new CacheDataSourceFactory(
+            new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
+            mediaDataSourceFactory, CacheDataSource.FLAG_BLOCK_ON_CACHE);
+
+          // createMediaSource(dashManifest, handler, listener) doesn't work with downloaded
+          // dashManifest
+          return new DashMediaSource.Factory(
+            new DefaultDashChunkSource.Factory(mediaDataSourceFactory), dsFactory)
+            .createMediaSource(uri, handler, listener);
+        } else {
+          return new DashMediaSource.Factory(
+            new DefaultDashChunkSource.Factory(mediaDataSourceFactory),
+            app.buildDataSourceFactory(false))
+            .createMediaSource(uri, handler, listener);
+        }
       case C.TYPE_SS:
         return new SsMediaSource.Factory(
           new DefaultSsChunkSource.Factory(mediaDataSourceFactory),
-          ((DemoApplication) getApplication()).buildDataSourceFactory(false))
+          app.buildDataSourceFactory(false))
           .createMediaSource(uri, handler, listener);
       case C.TYPE_HLS:
         return new HlsMediaSource.Factory(mediaDataSourceFactory)
@@ -378,16 +414,27 @@ public class PlayerActivity extends Activity implements OnClickListener,
   private DrmSessionManager<FrameworkMediaCrypto> buildDrmSessionManagerV18(UUID uuid,
                                                                             String licenseUrl, String[] keyRequestPropertiesArray, boolean multiSession)
     throws UnsupportedDrmException {
-    HttpMediaDrmCallback drmCallback = new HttpMediaDrmCallback(licenseUrl,
-      ((DemoApplication) getApplication()).buildHttpDataSourceFactory(false));
+
+    HttpDataSource.Factory httpDataSourceFactory = ((DemoApplication) getApplication())
+      .buildHttpDataSourceFactory(false);
+    HttpMediaDrmCallback drmCallback = new HttpMediaDrmCallback(licenseUrl, httpDataSourceFactory);
+
     if (keyRequestPropertiesArray != null) {
       for (int i = 0; i < keyRequestPropertiesArray.length - 1; i += 2) {
         drmCallback.setKeyRequestProperty(keyRequestPropertiesArray[i],
           keyRequestPropertiesArray[i + 1]);
       }
     }
-    return new DefaultDrmSessionManager<>(uuid, FrameworkMediaDrm.newInstance(uuid), drmCallback,
-      null, mainHandler, eventLogger, multiSession);
+
+    DefaultDrmSessionManager drmSessionManager = new DefaultDrmSessionManager<>(uuid,
+      FrameworkMediaDrm.newInstance(uuid), drmCallback, null, mainHandler, eventLogger, multiSession);
+
+    // Set offline playback mode
+    if (offlineMode) {
+      drmSessionManager.setMode(DefaultDrmSessionManager.MODE_PLAYBACK, offlineLicenseKeySetId);
+    }
+
+    return drmSessionManager;
   }
 
   private void releasePlayer() {
