@@ -60,7 +60,6 @@ import com.google.android.exoplayer2.source.ads.AdsLoader;
 import com.google.android.exoplayer2.source.ads.AdsMediaSource;
 import com.google.android.exoplayer2.source.dash.DashMediaSource;
 import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
-import com.google.android.exoplayer2.source.dash.manifest.DashManifest;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.source.smoothstreaming.DefaultSsChunkSource;
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
@@ -115,7 +114,6 @@ public class OfflinePlayerActivity extends Activity implements OnClickListener,
   private boolean inErrorState;
   private TrackGroupArray lastSeenTrackGroupArray;
   private String drmLicenseUrl;
-  private DashManifest dashManifest;
   private byte[] offlineLicenseKeySetId;
   private String offlineFolder;
 
@@ -260,7 +258,6 @@ public class OfflinePlayerActivity extends Activity implements OnClickListener,
         offlineMode = intent.getBooleanExtra(Constants.OFFLINE_MODE, false);
         offlineLicenseKeySetId = intent.getByteArrayExtra(Constants.OFFLINE_LICENCE_KEY_SET_ID);
         offlineFolder = intent.getStringExtra(Constants.OFFLINE_FOLDER);
-        dashManifest = ((DemoApplication) getApplication()).dashManifest;
       }
 
       DrmSessionManager<FrameworkMediaCrypto> drmSessionManager = null;
