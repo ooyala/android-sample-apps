@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion 26
+  buildToolsVersion '26.0.2'
+
+  defaultConfig {
+    applicationId "com.ooyala.sample.ClearExoPlayerSampleApp"
+    minSdkVersion 16
+    targetSdkVersion 26
+  }
+
+  packagingOptions {
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+  }
+
+  buildTypes {
+    release {
+      shrinkResources true
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt')
+    }
+    debug {
+      jniDebuggable = true
+    }
+  }
+
+  lintOptions {
+    // The demo app does not have translations.
+    disable 'MissingTranslation'
+  }
+
+  flavorDimensions "extensions"
+
+  productFlavors {
+    noExtensions {
+      dimension "extensions"
+    }
+    withExtensions {
+      dimension "extensions"
+    }
+  }
+
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+  implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+  implementation 'com.android.support:appcompat-v7:26.1.0'
+  implementation 'com.android.support:recyclerview-v7:26.1.0'
+}
