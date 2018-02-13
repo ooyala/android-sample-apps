@@ -260,6 +260,7 @@ public class OfflinePlayerActivity extends Activity implements OnClickListener,
         offlineMode = intent.getBooleanExtra(Constants.OFFLINE_MODE, false);
         offlineLicenseKeySetId = intent.getByteArrayExtra(Constants.OFFLINE_LICENCE_KEY_SET_ID);
         offlineFolder = intent.getStringExtra(Constants.OFFLINE_FOLDER);
+        dashManifest = ((DemoApplication) getApplication()).dashManifest;
       }
 
       DrmSessionManager<FrameworkMediaCrypto> drmSessionManager = null;
@@ -381,41 +382,11 @@ public class OfflinePlayerActivity extends Activity implements OnClickListener,
     switch (type) {
       case C.TYPE_DASH:
         if (offlineMode) {
-          /*class CacheDataSourceFactory implements DataSource.Factory {
-
-            private SimpleCache cache;
-            private DataSource upstreamSource;
-
-            CacheDataSourceFactory(String folder, DataSource upstreamSource) {
-              cache = new SimpleCache(new File(folder), new NoOpCacheEvictor());
-              this.upstreamSource = upstreamSource;
-            }
-
-            @Override
-            public DataSource createDataSource() {
-              return new CacheDataSource(cache, upstreamSource, CacheDataSource.FLAG_BLOCK_ON_CACHE);
-            }
-          }*/
-
-          /*return new DashMediaSource.Factory(
-            new DefaultDashChunkSource.Factory(mediaDataSourceFactory),
-            new CacheDataSourceFactory(new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
-              app.buildDataSourceFactory(false), CacheDataSource.FLAG_BLOCK_ON_CACHE))
-            .createMediaSource(((DemoApplication) getApplication()).dashManifest, handler, listener);*/
-//          return new DashMediaSource.Factory(
-//            new DefaultDashChunkSource.Factory(mediaDataSourceFactory),
-//            new CacheDataSourceFactory(new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
-//              app.buildDataSourceFactory(false), CacheDataSource.FLAG_BLOCK_ON_CACHE))
-//            .createMediaSource(uri, handler, listener);
-
-          /*return new DashMediaSource.Factory(
-            new DefaultDashChunkSource.Factory(mediaDataSourceFactory),
-            new CacheDataSourceFactory(new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
-              mediaDataSourceFactory, CacheDataSource.FLAG_BLOCK_ON_CACHE))
-            .createMediaSource(uri, handler, listener);*/
-
-          DataSource.Factory dsFactory = new CacheDataSourceFactory(new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
+          DataSource.Factory dsFactory = new CacheDataSourceFactory(
+            new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
             mediaDataSourceFactory, CacheDataSource.FLAG_BLOCK_ON_CACHE);
+          // createMediaSource(dashManifest, handler, listener) doesn't work with downloaded
+          // dashManifest
           return new DashMediaSource.Factory(
             new DefaultDashChunkSource.Factory(mediaDataSourceFactory), dsFactory)
             .createMediaSource(uri, handler, listener);
