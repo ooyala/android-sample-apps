@@ -19,7 +19,9 @@
         <activity
             android:name=".complete.MainExoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,20 +30,30 @@
         </activity>
 
         <activity android:name=".lists.BasicPlaybackListActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
         <activity android:name=".players.OoyalaSkinPlayerActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".players.OoyalaSkinOPTPlayerActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".players.OfflineDownloadActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".players.OfflineSkinPlayerActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <meta-data
             android:name="com.google.android.gms.version"
