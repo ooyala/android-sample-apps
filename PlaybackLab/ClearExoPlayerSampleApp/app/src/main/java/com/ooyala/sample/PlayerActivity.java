@@ -382,11 +382,8 @@ public class PlayerActivity extends Activity implements OnClickListener,
           DataSource.Factory dsFactory = new CacheDataSourceFactory(
             new SimpleCache(new File(offlineFolder), new NoOpCacheEvictor()),
             mediaDataSourceFactory, CacheDataSource.FLAG_BLOCK_ON_CACHE);
-
-          // createMediaSource(dashManifest, handler, listener) doesn't work with downloaded
-          // dashManifest
           return new DashMediaSource.Factory(
-            new DefaultDashChunkSource.Factory(mediaDataSourceFactory), dsFactory)
+            new DefaultDashChunkSource.Factory(dsFactory), dsFactory)
             .createMediaSource(uri, handler, listener);
         } else {
           return new DashMediaSource.Factory(

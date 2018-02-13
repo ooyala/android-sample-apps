@@ -20,7 +20,6 @@ import com.google.android.exoplayer2.offline.Downloader;
 import com.google.android.exoplayer2.offline.DownloaderConstructorHelper;
 import com.google.android.exoplayer2.source.dash.DashUtil;
 import com.google.android.exoplayer2.source.dash.manifest.DashManifest;
-import com.google.android.exoplayer2.source.dash.manifest.RepresentationKey;
 import com.google.android.exoplayer2.source.dash.offline.DashDownloader;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
@@ -90,7 +89,6 @@ public class OfflineDownloadActivity extends Activity {
         DemoApplication app = (DemoApplication) getApplication();
         helper = new DownloaderConstructorHelper(cache, app.buildDataSourceFactory(true));
         dashDownloader = new DashDownloader(uris[0], helper);
-        dashDownloader.selectRepresentations(new RepresentationKey[]{new RepresentationKey(0, 0, 0)});
       } catch (IOException e) {
         e.printStackTrace();
       }
