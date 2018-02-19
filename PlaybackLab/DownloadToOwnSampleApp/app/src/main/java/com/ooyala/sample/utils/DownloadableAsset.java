@@ -1,11 +1,18 @@
 package com.ooyala.sample.utils;
 
+import com.ooyala.sample.lists.DownloadSerializationActivity;
+
 public class DownloadableAsset {
 
     private int status;
     private String name;
     private String embedCode;
     private String pCode;
+
+    public DownloadableAsset(String embedCode, int status){
+        this.status = status;
+        this.embedCode = embedCode;
+    }
 
     public DownloadableAsset(String name, String embedCode, String pCode){
         this.status = 0;

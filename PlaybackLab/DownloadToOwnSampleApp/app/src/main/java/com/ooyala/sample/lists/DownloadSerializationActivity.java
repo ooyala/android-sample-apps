@@ -1,9 +1,12 @@
 package com.ooyala.sample.lists;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,8 @@ import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
+import com.ooyala.sample.players.OfflineDownloadActivity;
+import com.ooyala.sample.players.OfflineSkinPlayerActivity;
 import com.ooyala.sample.utils.DownloadableAsset;
 
 import java.io.File;
@@ -27,12 +32,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 public class DownloadSerializationActivity extends Activity implements DashDownloader.Listener, EmbedTokenGenerator {
 
     public final static String getName() {
         return "Download Serialization";
     }
     final String TAG = this.getClass().toString();
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     String PCODE = "";
     final String DOMAIN = "http://ooyala.com";
@@ -41,16 +50,17 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
     protected  final int DOWNLOADS_ALLOWED = 3;
 
     //Defining assets states
+    protected final int NOT_DOWNLOADED = 0;
     protected final int DOWNLOADING = 1;
     protected final int WAITING = 2;
     protected final int COMPLETED = 3;
     protected final int ERROR = 4;
     protected final int ABORT = 5;
 
+
     // Write the sdk events text along with events count to log file in sdcard if the log file already exists
     SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
-    protected TextView progressView;
     protected Handler handler;
     protected DashDownloader downloader;
     protected LinearLayout linearLayoutVertical;
@@ -73,9 +83,8 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.download_activity);
-        this.setTitle("Downloads serialization");
 
-        assets = new ArrayList<DownloadableAsset>();
+        assets = new ArrayList<>();
         assets.add(new DownloadableAsset("Widevine DASH", "BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7","FoeG863GnBL4IhhlFC1Q2jqbkH9m"));
         assets.add(new DownloadableAsset("Playready + DASH", "tpYTlnMzE6m4S-a1Yonj5ydnVwQXBGyI", "FoeG863GnBL4IhhlFC1Q2jqbkH9m"));
         assets.add(new DownloadableAsset("OTS Test", "04c3IyYzE6WLNzHuPDcBrMgUsDP7nTYq", "35d4ec4fa05645289a127682acc29325"));
@@ -94,22 +103,35 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
 
         handler = new Handler(getMainLooper());
 
-        downloadQueue = new ArrayList<DownloadableAsset>();
-        onHoldQueue = new ArrayList<DownloadableAsset>();
+        downloadQueue = new ArrayList<>();
+        onHoldQueue = new ArrayList<>();
 
         // Use this DashOptions to download an asset without OPT
 //    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
-        // Use this DashOptions to download an asset with OPT
 
-        linearLayoutVertical = (LinearLayout)findViewById(R.id.linearLayoutVertical);
+
+        linearLayoutVertical = findViewById(R.id.linearLayoutVertical);
 
         //Adding items to linearLayout
         for (final DownloadableAsset a :assets) {
             LinearLayout linearLayout = new LinearLayout(this);
 
-            //Textview to display asset name
+            //Displaying asset name
             TextView itemText = new TextView(this);
             itemText.setText(a.getName());
+            itemText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Launch an offline player with selected embed code
+                    Intent intent = new Intent(DownloadSerializationActivity.this, OfflineSkinPlayerActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.putExtra("embed_code", a.getEmbedCode());
+                    intent.putExtra("pcode", a.getpCode());
+                    intent.putExtra("domain", DOMAIN);
+                    intent.putExtra("selection_name", a.getName());
+                    startActivity(intent);
+                }
+            });
             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(700, ViewGroup.LayoutParams.WRAP_CONTENT,0.9F);
             linearLayout.addView(itemText, 0, textParams);
 
@@ -122,52 +144,68 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DashOptions options = new DashOptions.Builder(a.getpCode(), a.getEmbedCode(), DOMAIN, folder).setEmbedTokenGenerator(DownloadSerializationActivity.this).build();
-                    downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
+                    if (ContextCompat.checkSelfPermission(DownloadSerializationActivity.this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(DownloadSerializationActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                    } else {
+                        // Use this DashOptions to download an asset with OPT
+                        DashOptions options = new DashOptions.Builder(a.getpCode(), a.getEmbedCode(), DOMAIN, folder).setEmbedTokenGenerator(DownloadSerializationActivity.this).build();
+                        downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
 
-                    if (downloadQueue.size() < DOWNLOADS_ALLOWED) {
-                        downloadQueue.add(a);
-                        downloader.startDownload();
-                        updateDownloadButton(a.getEmbedCode(), DOWNLOADING);
-                        progressView.setText("\n Downloading " + a.getName() + progressView.getText());
-                        Log.d("Log", "Start downloading : " + a.getEmbedCode());
-                        Log.d("Log", "Download queue size:" + downloadQueue.size());
-                        Log.d("Log","On hold queue size: " + onHoldQueue.size());
-                    }else{
-                        onHoldQueue.add(a);
-                        updateDownloadButton(a.getEmbedCode(), WAITING);
-                        progressView.setText("\n" + "Waiting to be downloaded " + a.getName() + progressView.getText());
-                        Log.d("Log", "Waiting to download : " + a.getEmbedCode());
-                        Log.d("Log","On hold queue size: " + onHoldQueue.size());
+                        if (downloadQueue.size() < DOWNLOADS_ALLOWED) {
+                            downloadQueue.add(a);
+                            downloader.startDownload();
+                            a.setStatus(DOWNLOADING);
+                            Log.d("Log", "Start downloading : " + a.getEmbedCode());
+                            Log.d("Log", "Download queue size:" + downloadQueue.size());
+                            Log.d("Log", "On hold queue size: " + onHoldQueue.size());
+                        } else {
+                            onHoldQueue.add(a);
+                            a.setStatus(WAITING);
+                            Log.d("Log", "Waiting to download : " + a.getEmbedCode());
+                            Log.d("Log", "On hold queue size: " + onHoldQueue.size());
+                        }
+                        updateDownloadButton(a);
                     }
                 }
             });
 
             linearLayoutVertical.addView(linearLayout);
+            //Updating button state if asset is already downloaded in device
+            updateDownloadButton(a);
         }
-
-        //This allows to see download progress displayed on screen via logs.
-        progressView = (TextView)findViewById(R.id.progressText);
-        progressView.setText("Assets downloaded: 0");
-        progressView.setPadding(20,50,10,10);
 
         //This deletes all assets already downloaded
         Button deleteButton = (Button)findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                deleteDownloadedAssets();
                 if (downloader != null && downloader.deleteAll()) {
                     //we reset download and waiting queue
                     downloadQueue = new ArrayList<>();
                     onHoldQueue = new ArrayList<>();
-                    progressView.setText("Deletion completed");
-                    resetDownloadButton();
+                    Log.d("Log","Deletion completed");
+                    deleteDownloadedAssets();
                     Log.d("Log", "Both queues size is 0 ");
                 } else {
-                    progressView.setText("Deletion failed");
+                    Log.d("Log","Downloader was never started");
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        for (final DownloadableAsset a :assets) {
+            File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), a.getEmbedCode());
+            if (folder.exists() && folder.length() > 0){
+                a.setStatus(COMPLETED);
+                //Updating button state if asset is already downloaded in device
+                updateDownloadButton(a);
+            }
+        }
     }
 
     /**
@@ -182,8 +220,9 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                 downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
                 downloader.startDownload();
                 downloadQueue.add(a);
-                updateDownloadButton(a.getEmbedCode(), WAITING);
-                progressView.setText("\n Downloading " + a.getName() + progressView.getText());
+                a.setStatus(WAITING);
+                updateDownloadButton(a);
+                Log.d("Log","\n Downloading " + a.getName());
                 iterator.remove();
                 Log.d("Log", "Start downloading : " + a.getEmbedCode());
                 Log.d("Log", "Download queue size:" + downloadQueue.size());
@@ -194,21 +233,23 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
 
     /**
      * This updates the UI buttons with the asset status
-     * @param embedCode asset embedCode
-     * @param status download status
+     * @param asset downloadable asset
      */
-    public void updateDownloadButton(String embedCode, int status){
+    public void updateDownloadButton(DownloadableAsset asset){
         for (int i=0; i<linearLayoutVertical.getChildCount(); i++){
             if (linearLayoutVertical.getChildAt(i) instanceof LinearLayout){
                 LinearLayout l = (LinearLayout)linearLayoutVertical.getChildAt(i);
                 Button b = (Button) l.getChildAt(1);
-                if (b.getId() == embedCode.hashCode()){
-                    if (status == COMPLETED){
+                if (b.getId() == asset.getEmbedCode().hashCode()){
+                    int status = asset.getStatus();
+                    if (status == COMPLETED ){
                         b.setBackgroundResource(android.R.drawable.checkbox_on_background);
                     }if (status == WAITING || status == DOWNLOADING){
                         b.setBackgroundResource(android.R.drawable.ic_popup_sync);
                     }else if (status == ERROR || status == ABORT){
                         b.setBackgroundResource(android.R.drawable.stat_notify_error);
+                    }else if (status == NOT_DOWNLOADED){
+                        b.setBackgroundResource(android.R.drawable.stat_sys_download);
                     }
                 }
             }
@@ -216,15 +257,21 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
     }
 
     /**
-     * This resets all assets button to initial state, since downloads were deleted
+     * This deletes all downloaded assets
      */
-    public void resetDownloadButton(){
-        for (int i=0; i<linearLayoutVertical.getChildCount(); i++){
-            if (linearLayoutVertical.getChildAt(i) instanceof LinearLayout){
-                LinearLayout l = (LinearLayout)linearLayoutVertical.getChildAt(i);
-                Button b = (Button) l.getChildAt(1);
-                b.setBackgroundResource(android.R.drawable.stat_sys_download);
+    public void deleteDownloadedAssets(){
+        boolean result = false;
+        for (final DownloadableAsset a :assets) {
+            File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), a.getEmbedCode());
+            if (folder.exists() && folder.isDirectory()){
+                for (File f :folder.listFiles()) {
+                    result = f.delete();
+                    Log.d("Log", "Deletion of" + a.getName() + ": " + result);
+                }
+                folder.delete();
             }
+            a.setStatus(NOT_DOWNLOADED);
+            updateDownloadButton(a);
         }
     }
 
@@ -236,8 +283,8 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
             public void run() {
                 long expiration = downloader.getLicenseExpirationDate();
                 //String expirationString = expiration == DashDownloader.INFINITE_DURATION ? "infinite" : String.valueOf(expiration);
-                progressView.setText("\n" + getAssetNameByEmbedCode(embedCode) + " download completed!" + "\n" + progressView.getText());
-                updateDownloadButton(embedCode, COMPLETED);
+                Log.d("Log", getAssetNameByEmbedCode(embedCode) + " download completed!");
+                updateDownloadButton(new DownloadableAsset(embedCode, COMPLETED));
                 removeAssetByEmbedCode(embedCode,downloadQueue);
                 getNextAssetToDownload();
             }
@@ -248,9 +295,9 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         handler.post(new Runnable() {
             @Override
             public void run() {
-                progressView.setText("\n Download aborted " + embedCode + "\n" + progressView.getText());
+                Log.d("Log", "Download aborted " + embedCode);
                 removeAssetByEmbedCode(embedCode,downloadQueue);
-                updateDownloadButton(embedCode, ABORT);
+                updateDownloadButton(new DownloadableAsset(embedCode, ABORT));
                 getNextAssetToDownload();
             }
         });
@@ -260,9 +307,9 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         handler.post(new Runnable() {
             @Override
             public void run() {
-                progressView.setText("\n Error on " + embedCode + ": "+ ex.getLocalizedMessage() + "\n" + progressView.getText());
+                Log.d("Log","\n Error on " + embedCode + ": "+ ex.getLocalizedMessage());
                 removeAssetByEmbedCode(embedCode,downloadQueue);
-                updateDownloadButton(embedCode, ERROR);
+                updateDownloadButton(new DownloadableAsset(embedCode, ERROR));
                 getNextAssetToDownload();
             }
         });
@@ -283,7 +330,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         handler.post(new Runnable() {
             @Override
             public void run() {
-                progressView.setText(success ? " Deletion completed" : "Deletion failed");
+                Log.d("Log", success ? " Deletion completed" : "Deletion failed");
             }
         });
     }
