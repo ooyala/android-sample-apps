@@ -2,9 +2,7 @@
 <resources>
 
     <string name="app_name">Ooyala Skin Sample App</string>
-    <string name="add_video">Add video</string>
     <string name="open">Open</string>
-    <string name="ima">IMA</string>
     <string name="pcode">pcode:</string>
     <string name="embed">embed:</string>
     <string name="select_player">selectPlayer:</string>
