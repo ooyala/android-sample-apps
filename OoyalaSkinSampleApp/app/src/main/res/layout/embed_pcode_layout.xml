@@ -68,6 +68,12 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/auto_play_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_play" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

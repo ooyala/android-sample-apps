@@ -67,6 +67,8 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity
 			imaManager.setContainerUpdatedListener(this);
 
 			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
 			}
 		}
 	}

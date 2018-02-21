@@ -46,6 +46,8 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			player.addObserver(this);
 
 			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
 			} else {
 				Log.e(TAG, "Asset Failure");
 			}

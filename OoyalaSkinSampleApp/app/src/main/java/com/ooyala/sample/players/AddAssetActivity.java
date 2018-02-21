@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class AddAssetActivity extends Activity {
   private String embedCode;
   private String pCode;
   private String playerActivity;
+  private CheckBox autoPlayCheckBox;
+  private boolean autoPlay;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class AddAssetActivity extends Activity {
     addItemsOnSpinner();
     embedCodeEditText = (EditText) findViewById(R.id.embed_edit_text);
     pCodeEditText = (EditText) findViewById(R.id.pcode_edit_text);
+    autoPlayCheckBox = (CheckBox) findViewById(R.id.auto_play_check_box);
     initButtonListeners();
   }
 
@@ -53,6 +57,7 @@ public class AddAssetActivity extends Activity {
         embedCode = embedCodeEditText.getText().toString();
         pCode = pCodeEditText.getText().toString();
         playerActivity =  String.valueOf(spinner.getSelectedItem());
+        autoPlay = autoPlayCheckBox.isChecked() ? true : false;
         if (embedCode.isEmpty()) {
           Toast.makeText(AddAssetActivity.this, "Embed code can't be empty!", Toast.LENGTH_LONG).show();
           return;
@@ -90,6 +95,7 @@ public class AddAssetActivity extends Activity {
     intent.putExtra("embed_code", embedCode);
     intent.putExtra("pcode", pCode);
     intent.putExtra("domain", "http://www.ooyala.com");
+    intent.putExtra("autoPlay", autoPlay);
     startActivity(intent);
   }
 }

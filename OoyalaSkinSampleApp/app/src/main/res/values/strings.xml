@@ -6,5 +6,6 @@
     <string name="pcode">pcode:</string>
     <string name="embed">embed:</string>
     <string name="select_player">selectPlayer:</string>
+    <string name="auto_play">AutoPlay</string>
 
 </resources>

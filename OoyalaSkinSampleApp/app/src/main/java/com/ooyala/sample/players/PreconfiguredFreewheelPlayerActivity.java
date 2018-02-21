@@ -60,6 +60,8 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
 
 			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
 			}
 		}
 	}
