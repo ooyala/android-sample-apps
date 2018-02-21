@@ -18,8 +18,6 @@
         <activity
             android:name="com.ooyala.sample.lists.FreewheelListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:label="@string/app_name" >
                         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,20 +26,14 @@
         </activity>
         
         <activity android:name="com.ooyala.sample.players.PreconfiguredFreewheelPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         
         <activity android:name="com.ooyala.sample.players.CustomConfiguredFreewheelPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         
         <activity android:name="com.ooyala.sample.players.OptionsFreewheelPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         

@@ -23,8 +23,6 @@
 
         <activity
             android:name=".screen.MainActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
 
             <intent-filter>

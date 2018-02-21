@@ -22,9 +22,7 @@
         <activity
             android:name="com.ooyala.sample.complete.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,60 +32,40 @@
 
         <activity
             android:name=".lists.FreewheelListActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
 
         <activity
             android:name=".players.PreconfiguredFreewheelPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name=".lists.IMAListActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
-
+        
         <activity android:name=".players.PreconfiguredIMAPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
         <activity android:name=".players.OoyalaSkinPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+                  android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
         <activity android:name=".lists.OoyalaSkinListActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+                  android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
         <activity android:name=".players.ResizablePlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+                  android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".players.AssetActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+                  android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".players.GeoBlockingActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity android:name=".lists.GeoBlockingListActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 

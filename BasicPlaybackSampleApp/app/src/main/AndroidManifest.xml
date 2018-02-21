@@ -17,8 +17,6 @@
         <activity
             android:name="com.ooyala.sample.lists.BasicPlaybackListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:label="@string/app_name" >
                         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +26,6 @@
         
 
         <activity android:name="com.ooyala.sample.players.BasicPlaybackVideoPlayerActivity"
-            android:resizeableActivity="true"
-            android:supportsPictureInPicture="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <meta-data android:name="com.google.android.gms.version"
