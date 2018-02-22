@@ -15,6 +15,8 @@ include ':CastCompanionLibrary'
 project(':CastCompanionLibrary').projectDir = new File(settingsDir, './vendor/GoogleCast/CastCompanionLibrary')
 include ':ChromecastSampleApp'
 project(':ChromecastSampleApp').projectDir = new File(settingsDir, './ChromecastSampleApp/app')
+include ':ChromecastV3SampleApp'
+project(':ChromecastV3SampleApp').projectDir = new File(settingsDir, './ChromecastV3SampleApp/app')
 
 // Ad Integrations
 include ':FreewheelSampleApp'
@@ -39,7 +41,7 @@ project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, './ExoPlayerSa
 // Skin UI Integration
 include ':OoyalaSkinSampleApp'
 project(':OoyalaSkinSampleApp').projectDir = new File(settingsDir, './OoyalaSkinSampleApp/app')
-
+//
 // Playback Lab
 include ':FullScreenSampleApp'
 project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullScreenSampleApp/app')
