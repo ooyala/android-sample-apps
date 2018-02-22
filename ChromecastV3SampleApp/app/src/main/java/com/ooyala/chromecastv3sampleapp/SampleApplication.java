@@ -7,13 +7,13 @@ import com.ooyala.android.castsdkv3.CastManager;
 
 public class SampleApplication extends Application {
   CastManager castManager;
+  private final String NAMESPACE = "urn:x-cast:ooyala";
 
   @Override
   public void onCreate() {
     super.onCreate();
     try {
-      boolean isDebuggable = (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
-      CastManager.initialize(this);
+      CastManager.initialize(this, NAMESPACE);
       castManager = CastManager.getCastManager();
     } catch (CastManager.CastManagerInitializationException e) {
       e.printStackTrace();
