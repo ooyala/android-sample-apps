@@ -66,10 +66,10 @@ task copyFontsAssetsTask(type: Copy) {
 tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {
-  from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+  from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
   from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
   from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
-  from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+  from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
   from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
   from new File(vendorDir, 'Google/ima-android-v374.jar')
   from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
@@ -86,14 +86,14 @@ dependencies {
 //  implementation files('libs/OoyalaFreewheelSDK.jar')
 //  implementation files('libs/OoyalaIMASDK.jar')
 //  implementation files('libs/ima-android-v374.jar')
-  implementation files('libs/OoyalaSDK.jar')
+  implementation files('libs/OoyalaSDK.aar')
   implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
 
 // For development purposes only
 //  implementation project(':core')
 //  implementation project(':ooyalaSkinSDK')
 
-    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.aar')
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
