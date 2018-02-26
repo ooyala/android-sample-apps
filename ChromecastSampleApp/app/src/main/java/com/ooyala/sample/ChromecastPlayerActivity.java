@@ -1,4 +1,4 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +56,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     setupActionBar();
     parseBundle(getIntent().getExtras());
     castManager = CastManager.getCastManager();
-    castManager.setMiniControllerView(findViewById(R.id.cast_mini_controller));
     initOoyala();
     castViewManager = new CastViewManager(this, castManager);
   }

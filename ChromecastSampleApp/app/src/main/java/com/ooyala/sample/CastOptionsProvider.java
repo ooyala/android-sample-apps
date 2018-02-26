@@ -1,5 +1,5 @@
 
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.google.android.gms.cast.framework.OptionsProvider;
 import com.google.android.gms.cast.framework.SessionProvider;
 import com.google.android.gms.cast.framework.media.CastMediaOptions;
 import com.google.android.gms.cast.framework.media.NotificationOptions;
-import com.ooyala.chromecastv3sampleapp.R;
+import com.ooyala.sample.R;
 
 import java.util.List;
 

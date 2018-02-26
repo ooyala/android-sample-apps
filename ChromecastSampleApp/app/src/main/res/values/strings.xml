@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChromecastV3SampleApp</string>
+    <string name="app_name">ChromecastSampleApp</string>
     <string name="app_id">4F8B3483</string>
     <!--Ooyala cast id-->
     <string name="ooyala_app_id">4172C76F</string>

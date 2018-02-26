@@ -1,4 +1,4 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.castsdkv3.CastManager;
 import com.ooyala.android.castsdkv3.UpdateImageViewRunnable;
 import com.ooyala.android.item.Video;
+import com.ooyala.sample.R;
 
 class CastViewManager {
   private View castView;

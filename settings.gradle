@@ -11,8 +11,8 @@ include ':ContentProtectionSampleApp'
 project(':ContentProtectionSampleApp').projectDir = new File(settingsDir, './ContentProtectionSampleApp/app')
 
 // Chromecast
-include ':ChromecastV3SampleApp'
-project(':ChromecastV3SampleApp').projectDir = new File(settingsDir, './ChromecastV3SampleApp/app')
+include ':ChromecastSampleApp'
+project(':ChromecastSampleApp').projectDir = new File(settingsDir, './ChromecastSampleApp/app')
 
 // Ad Integrations
 include ':FreewheelSampleApp'

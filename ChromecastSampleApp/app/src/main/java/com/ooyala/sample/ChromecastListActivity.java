@@ -1,4 +1,4 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
 import android.content.Intent;
 import android.os.Bundle;

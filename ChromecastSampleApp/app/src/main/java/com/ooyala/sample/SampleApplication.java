@@ -1,4 +1,4 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
