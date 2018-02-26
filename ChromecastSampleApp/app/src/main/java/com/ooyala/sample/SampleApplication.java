@@ -1,9 +1,8 @@
 package com.ooyala.sample;
 
 import android.app.Application;
-import android.content.pm.ApplicationInfo;
 
-import com.ooyala.android.castsdkv3.CastManager;
+import com.ooyala.android.castsdk.CastManager;
 
 public class SampleApplication extends Application {
   CastManager castManager;

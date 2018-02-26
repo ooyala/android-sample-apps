@@ -46,5 +46,5 @@ dependencies {
 
 //    For Development purpose only:
 //    implementation project(':core')
-//    implementation project(':castv3')
+//    implementation project(':cast')
 }
