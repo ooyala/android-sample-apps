@@ -1,5 +1,5 @@
 // OoyalaPlayer Class APIs
-include ':BasicPlaybackSampleApp'
+include ':BasicPlaybackSampleApp', ':HeartbeatSampleApp'
 project(':BasicPlaybackSampleApp').projectDir = new File(settingsDir, './BasicPlaybackSampleApp/app')
 include ':AdvancedPlaybackSampleApp'
 project(':AdvancedPlaybackSampleApp').projectDir = new File(settingsDir, './AdvancedPlaybackSampleApp/app')
