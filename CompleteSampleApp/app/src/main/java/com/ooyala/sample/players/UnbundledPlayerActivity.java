@@ -25,7 +25,7 @@ public class UnbundledPlayerActivity extends AbstractHookActivity {
       //Initialize the player
       OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
       Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
       final String url = getIntent().getExtras().getString("embed_code");

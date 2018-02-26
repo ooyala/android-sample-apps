@@ -65,8 +65,8 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Google/ima-android-v374.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/OoyalaVRSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir, './libs')
     println "Jars updated."
@@ -75,9 +75,9 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaVRSDK.jar')
-    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.aar')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 

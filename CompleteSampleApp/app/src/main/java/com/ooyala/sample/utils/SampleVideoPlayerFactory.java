@@ -47,4 +47,9 @@ public class SampleVideoPlayerFactory implements PlayerFactory {
     public Set<String> getSupportedFormats() {
         return supportedFormats;
     }
+
+    @Override
+    public boolean hasVRContentSupport() {
+        return false;
+    }
 }
