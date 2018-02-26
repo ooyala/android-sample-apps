@@ -1,5 +1,5 @@
 // OoyalaPlayer Class APIs
-include ':BasicPlaybackSampleApp', ':HeartbeatSampleApp'
+include ':BasicPlaybackSampleApp'
 project(':BasicPlaybackSampleApp').projectDir = new File(settingsDir, './BasicPlaybackSampleApp/app')
 include ':AdvancedPlaybackSampleApp'
 project(':AdvancedPlaybackSampleApp').projectDir = new File(settingsDir, './AdvancedPlaybackSampleApp/app')
@@ -64,6 +64,9 @@ project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/
 //DownloadToOwnSampleApp
 include ':DownloadToOwnSampleApp'
 project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
+
+//HeartbeatSampleApp
+include ':HeartbeatSampleApp'
 
 // Developer
 //include ':ooyalaSkinSDK'
