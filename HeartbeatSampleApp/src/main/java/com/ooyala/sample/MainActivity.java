@@ -62,6 +62,12 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     @Override
+    protected void onPause() {
+        disconnect();
+        super.onPause();
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt(PLAY_TIME, videoView.getCurrentPosition());
         super.onSaveInstanceState(savedInstanceState);
@@ -88,17 +94,11 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
     @Override
     public void onVideoPause() {
-        disconnect();
+
     }
 
     @Override
     public void onSeekTo(int msec) {
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        disconnect();
 
     }
 
@@ -132,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
             @Override
             public byte[] getBody() throws AuthFailureError {
                 HashMap<String, Integer> params = new HashMap<>();
-                params.put("playheadpos", videoView.getCurrentPosition());
+                int positionSeconds = videoView.getCurrentPosition() / 1000;
+                params.put("playheadpos", positionSeconds);
                 params.put("pingfrequency", FREQUENCY_S);
                 return new JSONObject(params).toString().getBytes();
             }
