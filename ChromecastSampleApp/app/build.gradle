@@ -26,7 +26,7 @@ repositories {
 }
 
 task copyTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.jar')
     into new File(projectDir, './libs')
     doLast {
@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:mediarouter-v7:26.1.0'
     implementation 'com.google.android.gms:play-services-cast-framework:10.0.1'
-    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaCastSDK.jar')
 
 //    For Development purpose only:

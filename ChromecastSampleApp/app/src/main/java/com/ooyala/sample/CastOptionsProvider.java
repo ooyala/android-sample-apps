@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * Don't delete this class. It is used to provide google cast options by manifest.
+ * It is used to provide google cast options by manifest.
  */
 public class CastOptionsProvider implements OptionsProvider {
   private final String APP_ID = "4172C76F";
