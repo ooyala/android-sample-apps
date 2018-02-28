@@ -2,7 +2,7 @@ package com.ooyala.sample;
 
 import android.app.Application;
 
-import com.ooyala.android.castsdk.CastManager;
+import com.ooyala.cast.CastManager;
 
 public class SampleApplication extends Application {
   CastManager castManager;

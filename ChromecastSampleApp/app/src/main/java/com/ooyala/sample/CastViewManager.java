@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.castsdk.CastManager;
-import com.ooyala.android.castsdk.UpdateImageViewRunnable;
+import com.ooyala.cast.CastManager;
+import com.ooyala.cast.UpdateImageViewRunnable;
 import com.ooyala.android.item.Video;
 
 class CastViewManager {
