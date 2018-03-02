@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener,
         MediaPlayer.OnPreparedListener, SimpleVideoView.EventListener {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     private Handler mHandler = null;
     private HandlerThread mHandlerThread = null;
     private SimpleVideoView videoView;
+    private boolean isHandlerRunning = false;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -76,10 +78,8 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        postDataToHeartbeat();
-        startRecurringHandler();
-    }
 
+    }
 
     @Override
     public void onCompletion(MediaPlayer mp) {
@@ -89,12 +89,12 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
     @Override
     public void onVideoPlay() {
-
+        connect();
     }
 
     @Override
     public void onVideoPause() {
-
+        disconnect();
     }
 
     @Override
@@ -102,18 +102,34 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
     }
 
-    private void disconnect() {
-        if(mHandler != null) {
-            mHandler.removeCallbacks(runnable);
+    private void connect() {
+        if(!isHandlerRunning) {
+            postDataToHeartbeat();
         }
+        startRecurringHandler();
+    }
+
+    private void disconnect() {
+        if(mHandler == null) {
+            return;
+        }
+        mHandler.removeCallbacks(runnable);
+        mHandler = null;
+        mHandlerThread = null;
+        isHandlerRunning = false;
     }
 
     public void startRecurringHandler(){
+        if(isHandlerRunning) {
+            return;
+        }
         mHandlerThread = new HandlerThread("HeartbeatHandler");
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper());
         mHandler.postDelayed(runnable, FREQUENCY_MS);
+        isHandlerRunning = true;
     }
+
 
     public void postDataToHeartbeat() {
         String embedCode = "ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd";
@@ -131,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         }) {
             @Override
             public byte[] getBody() throws AuthFailureError {
-                HashMap<String, Integer> params = new HashMap<>();
+                Map<String, Integer> params = new HashMap<>();
                 int positionSeconds = videoView.getCurrentPosition() / 1000;
                 params.put("playheadpos", positionSeconds);
                 params.put("pingfrequency", FREQUENCY_S);
