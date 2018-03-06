@@ -38,7 +38,7 @@ android {
 task copyAssetsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
-    from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/data.json')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/data.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
@@ -57,7 +57,6 @@ task copyFontsAssetsTask(type: Copy) {
     println "font Assets updated."
 }
 tasks.copyFontsAssetsTask.execute()
-
 
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
