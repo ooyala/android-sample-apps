@@ -23,8 +23,8 @@ android {
 }
 
 task copyTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaNielsenSDK-Android/OoyalaNielsenSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.33.0.aar')
 
@@ -72,8 +72,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
     implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
     implementation files('libs/OoyalaNielsenSDK.jar')
-    implementation files('libs/OoyalaSDK.jar')
-    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/OoyalaSDK.aar')
+    implementation files('libs/OoyalaSkinSDK.aar')
     implementation files('libs/appsdk.jar')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'

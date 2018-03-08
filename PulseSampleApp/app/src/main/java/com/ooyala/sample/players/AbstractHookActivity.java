@@ -66,24 +66,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
   }
 
-  @Override
-  protected void onStop() {
-	super.onStop();
-	Log.d(TAG, "Player Activity Stopped");
-	if (null != player) {
-	  player.suspend();
-	}
-  }
-
-  @Override
-  protected void onRestart() {
-	super.onRestart();
-	Log.d(TAG, "Player Activity Restarted");
-	if (null != player) {
-	  player.resume();
-	}
-  }
-
   /** Start DefaultHardwareBackBtnHandler **/
   @Override
   public void invokeDefaultOnBackPressed() {

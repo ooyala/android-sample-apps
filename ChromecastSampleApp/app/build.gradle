@@ -26,7 +26,7 @@ repositories {
 }
 
 task copyTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.aar')
     into new File(projectDir, './libs')
     doLast {
@@ -48,7 +48,7 @@ dependencies {
 
     implementation project(':CastCompanionLibrary')
     implementation(name: 'OoyalaCastSDK', ext: 'aar')
-    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaSDK.aar')
 
 //    implementation project(':cast')
 }

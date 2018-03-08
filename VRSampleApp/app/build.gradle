@@ -38,7 +38,6 @@ android {
 task copyAssetsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
-    from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/data.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
@@ -63,8 +62,8 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Google/ima-android-v374.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/OoyalaVRSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir, './libs')
     println "Jars updated."
@@ -78,9 +77,9 @@ dependencies {
 //    implementation project(':skin')
 //    implementation project(':ima')
 
-    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaVRSDK.jar')
-    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.aar')
 
 
     // IMA ads

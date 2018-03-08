@@ -197,4 +197,5 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   public PlayerType getPlayerType() {
     return PlayerType.FLAT_PLAYER;
   }
+
 }
