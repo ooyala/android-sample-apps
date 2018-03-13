@@ -188,4 +188,9 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     }
     return new HashSet<Integer>();
   }
+
+  @Override
+  public boolean allADSPlayed() {
+    return false;
+  }
 }
