@@ -68,10 +68,12 @@ public class MultiAudioActivity extends AbstractHookActivity {
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
       audioTracks = player.getAvailableAudioTracks();
-
-      for (AudioTrack track : audioTracks) {
-        if (track.getLanguage().equals("eng")) {
-          player.setAudioTrack(track);
+      if (audioTracks != null) {
+        for (AudioTrack track : audioTracks) {
+          if (track.getLanguage().equals("eng")) {
+            player.setAudioTrack(track);
+            break;
+          }
         }
       }
       AudioTrack defaultAudioTrack = player.getDefaultAudioTrack();
