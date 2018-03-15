@@ -71,7 +71,7 @@ public class MultiAudioActivity extends AbstractHookActivity {
       if (audioTracks != null) {
         for (AudioTrack track : audioTracks) {
           if (track.getLanguage().equals("eng")) {
-            player.setAudioTrack(track);
+//            player.setAudioTrack(track);
             break;
           }
         }
