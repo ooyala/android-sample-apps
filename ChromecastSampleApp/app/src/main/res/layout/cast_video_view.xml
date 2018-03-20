@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
+
     <ImageView
         android:id="@+id/castBackgroundImage"
         android:layout_marginTop="45dp"
@@ -10,8 +10,8 @@
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:alpha="0.5"
-        android:scaleType="fitCenter"></ImageView>
-    
+        android:scaleType="fitCenter"/>
+
     <TextView
         android:id="@+id/videoTitle"
         android:layout_width="fill_parent"
@@ -23,7 +23,7 @@
         android:textColor="#FFFFFF"
         android:gravity="center_horizontal"
         android:layout_marginTop="60dp" />
-    
+
     <TextView
         android:id="@+id/videoDescription"
         android:layout_width="fill_parent"
