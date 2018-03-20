@@ -69,12 +69,13 @@ public class MultiAudioActivity extends AbstractHookActivity {
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
       audioTracks = player.getAvailableAudioTracks();
       if (audioTracks != null) {
-        for (AudioTrack track : audioTracks) {
-          if (track.getLanguage().equals("eng")) {
-//            player.setAudioTrack(track);
-            break;
-          }
-        }
+				for (AudioTrack track : audioTracks) {
+					Log.d("MultiAudio activity", "MultiAudio track language is: " + track.getLanguage());
+					if (track.getLanguage().equals("eng")) {
+	//            player.setAudioTrack(track);
+					break;
+					}
+				}
       }
       AudioTrack defaultAudioTrack = player.getDefaultAudioTrack();
       String defaultAudioLanguage = player.getDefaultAudioLanguage();
