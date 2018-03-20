@@ -42,7 +42,7 @@ public class MultiAudioListActivity extends Activity implements OnItemClickListe
     selectionMap.put("Undefined/Undefined asset1", new PlayerSelectionOption("xmaTRwZTE6lCuPd3H82AteBFUvNHtrHu", pcode, domain, MultiAudioActivity.class));
     selectionMap.put("Undefined/Undefined asset2", new PlayerSelectionOption("Y1cTRwZTE6Mc47fc_8n161HVYQYu5l0d", pcode, domain, MultiAudioActivity.class));
     selectionMap.put("No config Eng main+commentary/Ger main+commentary", new PlayerSelectionOption("txcjRwZTE6aMSqloxZZ3hZhTqz5hEaY9", pcode, domain, MultiAudioActivity.class));
-    selectionMap.put("No config Eng main+commentary/Ger main+commentary", new PlayerSelectionOption("EweDRwZTE6ipjPDynkEotrpTvvYgDvr7", pcode, domain, MultiAudioActivity.class));
+    selectionMap.put("Config Eng main+commentary/Ger main+commentary", new PlayerSelectionOption("EweDRwZTE6ipjPDynkEotrpTvvYgDvr7", pcode, domain, MultiAudioActivity.class));
     selectionMap.put("Mixed language code/Undefined", new PlayerSelectionOption("o3eTRwZTE6TBJnp6gPJia25dtOcrugUk", pcode, domain, MultiAudioActivity.class));
     
     setContentView(R.layout.list_activity_layout);
