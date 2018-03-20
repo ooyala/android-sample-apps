@@ -92,7 +92,7 @@ dependencies {
     implementation files('libs/OoyalaSkinSDK.aar')
     implementation (name:'PulseSDK', ext:'aar')
 
-    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'

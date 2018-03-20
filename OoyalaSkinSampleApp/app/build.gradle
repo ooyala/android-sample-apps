@@ -87,7 +87,7 @@ dependencies {
     implementation files('libs/ima-android-v374.jar')
     implementation files('libs/OoyalaSkinSDK.aar')
 
-    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'

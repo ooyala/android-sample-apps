@@ -70,7 +70,7 @@ repositories {
 dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:10.0.1'
-    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation files('libs/OoyalaNielsenSDK.jar')
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')

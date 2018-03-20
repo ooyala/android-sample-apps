@@ -1,7 +1,13 @@
 <resources>
-  <string name="hello">Hello World, ChromecastSampleAppActivity!</string>
-  <string name="app_name">Ooyala Chromecast Sample App</string>
-  <string name="media_route_menu_title">Play on..</string>
-  <string name="loading">Loading</string>
-  <string name="castingTo">Casting to %s</string>
+    <string name="app_name">ChromecastSampleApp</string>
+    <string name="app_id">4F8B3483</string>
+    <!--Ooyala cast id-->
+    <string name="ooyala_app_id">4172C76F</string>
+    <string name="loading">Loading</string>
+    <string name="castingTo">Casting to %s</string>
+    <array name="cast_mini_controller_control_buttons">
+        <item>@id/cast_button_type_rewind_30_seconds</item>
+        <item>@id/cast_button_type_play_pause_toggle</item>
+        <item>@id/cast_button_type_forward_30_seconds</item>
+    </array>
 </resources>

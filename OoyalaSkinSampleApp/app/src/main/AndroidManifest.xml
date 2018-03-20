@@ -70,6 +70,16 @@
         </activity>
 
         <activity
+            android:name=".lists.ScreenshotListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity
+            android:name=".players.ScreenshotActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity
             android:name=".lists.MultiAudioListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
