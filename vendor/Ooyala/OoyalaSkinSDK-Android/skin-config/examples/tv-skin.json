@@ -103,7 +103,7 @@
       }
     },
     "showCountDownTimerOnEndScreen": false,
-    "countDownTime": "10"
+    "countDownTime": 10
   },
   "shareScreen": {
     "embed": {
@@ -141,7 +141,7 @@
   },
   "upNext": {
     "showUpNext": false,
-    "timeToShow": "10"
+    "timeToShow": 10
   },
   "controlBar": {
     "volumeControl": {
