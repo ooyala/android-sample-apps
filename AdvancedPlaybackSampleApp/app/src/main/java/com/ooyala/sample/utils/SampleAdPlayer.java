@@ -203,4 +203,9 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   public void createBitmapScreenshot(PlayerBitmapListener playerBitmapListener) {
     // TODO
   }
+
+  @Override
+  public boolean isMultiAudioAvailable() {
+    return false;
+  }
 }
