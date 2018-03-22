@@ -13,6 +13,7 @@ android {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
             abiFilters "armeabi-v7a", "x86"
         }
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -87,6 +88,7 @@ dependencies {
 //    implementation project(':core')
   //  implementation project(':ooyalaSkinSDK')
 
+    implementation 'com.android.support:multidex:1.0.1'
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaPulseIntegration.jar')
     implementation files('libs/OoyalaSkinSDK.aar')
