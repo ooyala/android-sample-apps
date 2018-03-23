@@ -32,7 +32,7 @@ public class VideoJSONParser {
   private String getMainJSON(AssetManager manager) {
     String json = null;
     try {
-      InputStream is = manager.open("data.json");
+      InputStream is = manager.open("com/ooyala/sample/parser/data.json");
       int size = is.available();
       byte[] buffer = new byte[size];
       is.read(buffer);

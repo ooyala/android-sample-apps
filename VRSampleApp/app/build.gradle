@@ -57,7 +57,6 @@ task copyFontsAssetsTask(type: Copy) {
 }
 tasks.copyFontsAssetsTask.execute()
 
-
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Google/ima-android-v374.jar')
