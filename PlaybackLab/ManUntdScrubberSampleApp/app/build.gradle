@@ -79,7 +79,7 @@ dependencies {
     implementation ('com.squareup.okhttp3:okhttp-ws:3.4.1'){transitive = true}
     implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
     implementation 'com.google.code.findbugs:jsr305:3.0.0'
-    implementation(name:'react-native', version:'0.35.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version:'0.35.0', ext:'aar')
 
 
     implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
