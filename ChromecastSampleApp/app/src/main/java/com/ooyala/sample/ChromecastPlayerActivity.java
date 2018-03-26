@@ -55,13 +55,13 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_activity);
     setupActionBar();
-    parseSharedPrefences();
+    parseSharedPreferences();
     castManager = CastManager.getCastManager();
     initOoyala();
     castViewManager = new CastViewManager(this, castManager);
   }
 
-  private void parseSharedPrefences() {
+  private void parseSharedPreferences() {
     SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
     if (lastChoosenParams != null) {
       embedCode = lastChoosenParams.getString("embedcode", "");
