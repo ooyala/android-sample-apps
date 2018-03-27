@@ -1,6 +1,7 @@
 package com.ooyala.sample;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -44,10 +45,14 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     final Intent intent = new Intent(this, videoList[position].activity);
-    intent.putExtra("embedcode", videoList[position].embedCode);
-    intent.putExtra("secondEmbedCode", videoList[position].secondEmbedCode);
-    intent.putExtra("pcode", videoList[position].pcode);
-    intent.putExtra("domain", videoList[position].domain);
+    SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
+    lastChoosenParams
+        .edit()
+        .putString("embedcode", videoList[position].embedCode)
+        .putString("secondEmbedCode", videoList[position].secondEmbedCode)
+        .putString("pcode", videoList[position].pcode)
+        .putString("domain", videoList[position].domain)
+        .apply();
     startActivity(intent);
   }
 

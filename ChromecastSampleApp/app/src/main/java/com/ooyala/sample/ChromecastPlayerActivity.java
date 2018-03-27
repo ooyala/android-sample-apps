@@ -1,5 +1,6 @@
 package com.ooyala.sample;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +15,10 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.cast.CastManager;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.cast.CastManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -54,18 +55,19 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_activity);
     setupActionBar();
-    parseBundle(getIntent().getExtras());
+    parseSharedPreferences();
     castManager = CastManager.getCastManager();
     initOoyala();
     castViewManager = new CastViewManager(this, castManager);
   }
 
-  private void parseBundle(Bundle extras) {
-    if (extras != null) {
-      embedCode = extras.getString("embedcode");
-      secondEmbedCode = extras.getString("secondEmbedCode");
-      pcode = extras.getString("pcode");
-      domain = extras.getString("domain");
+  private void parseSharedPreferences() {
+    SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
+    if (lastChoosenParams != null) {
+      embedCode = lastChoosenParams.getString("embedcode", "");
+      secondEmbedCode = lastChoosenParams.getString("secondEmbedCode", "");
+      pcode = lastChoosenParams.getString("pcode", "");
+      domain = lastChoosenParams.getString("domain", "");
     }
   }
 
