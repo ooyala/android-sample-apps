@@ -166,5 +166,11 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
 
     callback.setEmbedToken(tokenUrl.toString());
   }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    castManager.deregisterFromOoyalaPlayer();
+  }
 }
 
