@@ -61,6 +61,14 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     castViewManager = new CastViewManager(this, castManager);
   }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
+    if (castManager != null && player != null) {
+      castManager.registerWithOoyalaPlayer(player);
+    }
+  }
+
   private void parseSharedPreferences() {
     SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
     if (lastChoosenParams != null) {
@@ -168,9 +176,11 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   }
 
   @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    castManager.deregisterFromOoyalaPlayer();
+  protected void onStop() {
+    super.onStop();
+    if (castManager != null) {
+      castManager.deregisterFromOoyalaPlayer();
+    }
   }
 }
 
