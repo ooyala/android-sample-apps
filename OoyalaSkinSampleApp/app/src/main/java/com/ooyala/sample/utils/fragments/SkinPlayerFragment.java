@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,13 +66,6 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
       Log.e(TAG, "Asset Failure");
     }
     return view;
-  }
-
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (controller != null) {
-      return controller.onKeyDown(keyCode, event);
-    }
-    return false;
   }
 
   @Override
