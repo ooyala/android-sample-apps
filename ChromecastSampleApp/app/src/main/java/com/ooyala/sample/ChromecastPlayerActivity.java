@@ -73,7 +73,8 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
     if (lastChoosenParams != null) {
       embedCode = lastChoosenParams.getString("embedcode", "");
-      secondEmbedCode = lastChoosenParams.getString("secondEmbedCode", "");
+      //If second embed code is null - put first embed code as second embed code to let use repeating after playing
+      secondEmbedCode = lastChoosenParams.getString("secondEmbedCode", embedCode);
       pcode = lastChoosenParams.getString("pcode", "");
       domain = lastChoosenParams.getString("domain", "");
     }
