@@ -182,5 +182,22 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       castManager.deregisterFromOoyalaPlayer();
     }
   }
+
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (player != null) {
+      player.resume();
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    if (player != null) {
+      player.suspend();
+    }
+  }
 }
 
