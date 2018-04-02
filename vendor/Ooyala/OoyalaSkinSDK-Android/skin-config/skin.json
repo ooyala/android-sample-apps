@@ -222,7 +222,7 @@
     "vrIcon": false
   },
   "audio": {
-    "audioLanguage": ""
+    "audioLanguage": "en"
   },
   "animationDurations": {
     "vrNotification": 5,
