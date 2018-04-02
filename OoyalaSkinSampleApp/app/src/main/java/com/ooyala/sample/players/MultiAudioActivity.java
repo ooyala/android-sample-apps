@@ -1,6 +1,7 @@
 package com.ooyala.sample.players;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
@@ -55,8 +56,8 @@ public class MultiAudioActivity extends AbstractHookActivity {
 				Log.e(TAG, "Asset Failure");
 			}
 
-			player.setDefaultAudioLanguage("eng");
-			player.setAudioTrack("Track name");
+			// Show how to set audio settings i.e. default audio language
+      //setAudioSettings();
 		}
 	}
 
@@ -65,27 +66,42 @@ public class MultiAudioActivity extends AbstractHookActivity {
     super.update(arg0, argN);
 	  final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
 
-    // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start
+    // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
-      audioTracks = player.getAvailableAudioTracks();
-      if (audioTracks != null) {
-				for (AudioTrack track : audioTracks) {
-					Log.d("MultiAudio activity", "MultiAudio track language is: " + track.getLanguage());
-					if (track.getLanguage().equals("eng")) {
-	//            player.setAudioTrack(track);
-					break;
-					}
-				}
-      }
-      AudioTrack defaultAudioTrack = player.getDefaultAudioTrack();
-      String defaultAudioLanguage = player.getDefaultAudioLanguage();
+      // This method shows how to retrieve the list of available audio tracks and
+      // set audio with English language.
+      //setAudioTrack();
+
+      // This method demonstrate how to obtain default audio settings.
+      //getDefaultAudioSettings();
     }
 
-    // AUDIO_TRACK_SELECTED_NOTIFICATION_NAME is called when an audio track was selected
+    // AUDIO_TRACK_SELECTED_NOTIFICATION_NAME is called when an audio track was selected.
     if (arg1 == OoyalaPlayer.AUDIO_TRACK_SELECTED_NOTIFICATION_NAME) {
       currentAudioTrack = player.getCurrentAudioTrack();
     }
   }
 
+  private void setAudioSettings() {
+    player.setDefaultAudioLanguage("eng");
+  }
 
+  private void setAudioTrack(){
+    audioTracks = player.getAvailableAudioTracks();
+    if (audioTracks != null) {
+      String language = "eng";
+      for (AudioTrack track : audioTracks) {
+        Log.d("MultiAudio activity", "MultiAudio track language is: " + track.getLanguage());
+        if (TextUtils.equals(track.getLanguage(), language)) {
+          player.setAudioTrack(track);
+          break;
+        }
+      }
+    }
+  }
+
+  private void getDefaultAudioSettings() {
+    AudioTrack defaultAudioTrack = player.getDefaultAudioTrack();
+    String defaultAudioLanguage = player.getDefaultAudioLanguage();
+  }
 }
