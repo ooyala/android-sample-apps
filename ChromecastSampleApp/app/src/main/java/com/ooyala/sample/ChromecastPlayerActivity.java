@@ -1,5 +1,6 @@
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +15,10 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
-import com.ooyala.android.castsdkv3.CastManager;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.cast.CastManager;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -54,19 +55,28 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_activity);
     setupActionBar();
-    parseBundle(getIntent().getExtras());
+    parseSharedPreferences();
     castManager = CastManager.getCastManager();
-    castManager.setMiniControllerView(findViewById(R.id.cast_mini_controller));
     initOoyala();
     castViewManager = new CastViewManager(this, castManager);
   }
 
-  private void parseBundle(Bundle extras) {
-    if (extras != null) {
-      embedCode = extras.getString("embedcode");
-      secondEmbedCode = extras.getString("secondEmbedCode");
-      pcode = extras.getString("pcode");
-      domain = extras.getString("domain");
+  @Override
+  protected void onStart() {
+    super.onStart();
+    if (castManager != null && player != null) {
+      castManager.registerWithOoyalaPlayer(player);
+    }
+  }
+
+  private void parseSharedPreferences() {
+    SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
+    if (lastChoosenParams != null) {
+      embedCode = lastChoosenParams.getString("embedcode", "");
+      //If second embed code is null - put first embed code as second embed code to let use repeating after playing
+      secondEmbedCode = lastChoosenParams.getString("secondEmbedCode", embedCode);
+      pcode = lastChoosenParams.getString("pcode", "");
+      domain = lastChoosenParams.getString("domain", "");
     }
   }
 
@@ -164,6 +174,31 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
 
     callback.setEmbedToken(tokenUrl.toString());
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    if (castManager != null) {
+      castManager.deregisterFromOoyalaPlayer();
+    }
+  }
+
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (player != null) {
+      player.resume();
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    if (player != null) {
+      player.suspend();
+    }
   }
 }
 

@@ -2,7 +2,6 @@ package com.ooyala.sample.players;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,12 +25,6 @@ public class ResizablePlayerActivity extends AppCompatActivity implements Defaul
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     setContentView(R.layout.configurable_player_skin_layout);
     skinPlayerFragment = (SkinPlayerFragment) getSupportFragmentManager().findFragmentById(R.id.video_fragment);
-  }
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    skinPlayerFragment.onKeyDown(keyCode, event);
-    return super.onKeyDown(keyCode, event);
   }
 
   @Override

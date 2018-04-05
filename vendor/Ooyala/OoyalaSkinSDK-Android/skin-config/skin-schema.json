@@ -716,6 +716,47 @@
         }
       }
     },
+    "isVrAnimationEnabled": {
+      "description": "Show vrNotification or vrIcon if vrNotification or vrNotification are marked as true",
+      "type": "object",
+      "properties": {
+        "vrNotification": {
+          "description": "Vr notification should be shown",
+          "type": "boolean",
+          "default": "If no value is provided for vrNotification, vrNotification will default to true."
+        },
+        "vrIcon": {
+          "description": "Vr icon should be shown",
+          "type": "boolean",
+          "default": "If no value is provided for vrIcon, vrIcon will default to false."
+        }
+      }
+    },
+    "audio": {
+      "description": "Configuration for audio",
+      "type": "object",
+      "properties": {
+        "audioLanguage": {
+          "description": "Set the default audio language. This is a string of the form \"en\" for English, \"fr\" for French, etc.",
+          "type": "string",
+          "default": "en"
+        }
+      }
+    },
+    "animationDurations": {
+      "description": "Sets duration for VR animation",
+      "type": "object",
+      "vrNotification": {
+        "description": "Duration for VR Notification",
+        "type": "number",
+        "default": 5
+      },
+      "vrIcon": {
+        "description": "Duration for vrIcon",
+        "type": "number",
+        "default": 4
+      }
+    },
     "buttons": {
       "description": "Defines the buttons that can appear on the controlBar and/or the moreOptions panel. Desktop and Mobile platforms can be configured individually.",
       "type": "object",
@@ -732,7 +773,7 @@
       "description": "The set of all required icons, for rendering all the various buttons' states.",
       "type": "object",
       "patternProperties": { "": { "$ref": "#/definitions/icon" } },
-      "required": ["play", "pause", "volume", "volumeOff", "expand", "compress", "ellipsis", "replay", "share", "cc", "discovery", "quality", "setting", "dismiss", "toggleOff", "toggleOn", "left", "right"],
+      "required": ["play", "pause", "volume", "volumeOff", "expand", "compress", "ellipsis", "replay", "share", "cc", "discovery", "quality", "setting", "dismiss", "toggleOff", "toggleOn", "left", "right", "audioAndCC", "selected"],
       "example": ["\"icons\": {",
         "\"play\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0068\", \"fontStyleClass\": \"icon icon-play\"},",
         "\"pause\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0067\", \"fontStyleClass\": \"icon icon-pause\"},",
@@ -754,6 +795,8 @@
         "\"right\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0073\", \"fontStyleClass\": \"icon icon-right\"},",
         "\"learn\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0074\", \"fontStyleClass\": \"icon icon-learn\"},",
         "\"skip\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0075\", \"fontStyleClass\": \"icon icon-skip\"}",
+        "\"audioAndCC\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u005F\", \"fontStyleClass\": \"icon icon-audio-and-cc\"}",    
+        "\"selected\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0040\", \"fontStyleClass\": \"icon icon-selected\"}",            
         "}"],
       "play": {
         "description": "Set the styling for the play icon on mobile devices.",
@@ -1174,6 +1217,46 @@
           "type": "string",
           "default": "icon icon-auto"
         }
+      },
+      "audioAndCC": {
+        "description": "Set the styling for the audio and cc icon",
+        "type": "object",
+        "required": ["fontFamilyName", "fontString", "fontStyleClass"],
+        "fontFamilyName": {
+          "description": "The name of the font family to use.",
+          "type": "string",
+          "default": "alice"
+        },
+        "fontString": {
+          "description": "The string used for displaying the icon. (Usually a single Unicode code point.)",
+          "type": "string",
+          "default": "\\u005F"
+        },
+        "fontStyleClass": {
+          "description": "The CSS class string for displaying the icon, which only applies to HTML5 player",
+          "type": "string",
+          "default": "icon icon-audio-and-cc"
+        }
+      },
+      "selected": {
+        "description": "Set the styling for the selected row in list (checkmark) icon",
+        "type": "object",
+        "required": ["fontFamilyName", "fontString", "fontStyleClass"],
+        "fontFamilyName": {
+          "description": "The name of the font family to use.",
+          "type": "string",
+          "default": "alice"
+        },
+        "fontString": {
+          "description": "The string used for displaying the icon. (Usually a single Unicode code point.)",
+          "type": "string",
+          "default": "\\u0040"
+        },
+        "fontStyleClass": {
+          "description": "The CSS class string for displaying the icon, which only applies to HTML5 player",
+          "type": "string",
+          "default": "icon icon-selected"
+        }
       }
     }
   },
@@ -1206,7 +1289,7 @@
       "required": ["name", "location", "whenDoesNotFit", "minWidth"],
       "properties": {
         "name": { "$ref": "#/definitions/buttonNames" },
-        "location": { "enum": ["controlBar"] },
+        "location": { "enum": ["controlBar", "mainView"] },
         "whenDoesNotFit": {
           "description": "Sets how the button should be dealt with when it doesn't fit in the control bar. Keep: keep the button visible in the control bar. Drop: hide it from the UI. MoveToMoreOptions: show it in the more options / overflow UI.",
           "enum": ["keep", "drop", "moveToMoreOptions"]
@@ -1226,7 +1309,7 @@
     "buttonNames": {
       "description": "These are the only buttons currently supported by the UI SDK.",
       "additionalProperties": false,
-      "enum": ["playPause", "volume", "timeDuration", "flexibleSpace", "discovery", "fullscreen", "stereoscopic",  "moreOptions", "arrowsBlack", "logo", "share", "closedCaption", "bitrateSelector", "quality", "live"]
+      "enum": ["playPause", "volume", "live", "timeDuration", "flexibleSpace", "share", "discovery", "closedCaption", "quality", "logo", "stereoscopic", "fullscreen", "moreOptions", "arrowsBlack", "audioAndCC", "bitrateSelector"]
     },
     "buttonArray": {
       "description": "Used to list the buttons for a single platform (desktop vs. mobile).",
@@ -1323,6 +1406,12 @@
       "additionalProperties": false,
       "properties": {
         "fontFamily": {"type": "string"},
+        "fontSize": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "number"}
+          ]
+        },
         "color": {
           "description": "Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
           "type": "string"

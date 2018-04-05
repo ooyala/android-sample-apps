@@ -1,5 +1,5 @@
 
-package com.ooyala.chromecastv3sampleapp;
+package com.ooyala.sample;
 
 import android.content.Context;
 
@@ -8,13 +8,12 @@ import com.google.android.gms.cast.framework.OptionsProvider;
 import com.google.android.gms.cast.framework.SessionProvider;
 import com.google.android.gms.cast.framework.media.CastMediaOptions;
 import com.google.android.gms.cast.framework.media.NotificationOptions;
-import com.ooyala.chromecastv3sampleapp.R;
 
 import java.util.List;
 
 
 /**
- * Don't delete this class. It is used to provide google cast options by manifest.
+ * It is used to provide google cast options by manifest.
  */
 public class CastOptionsProvider implements OptionsProvider {
   private final String APP_ID = "4172C76F";
@@ -27,6 +26,7 @@ public class CastOptionsProvider implements OptionsProvider {
         .build();
     CastMediaOptions mediaOptions = new CastMediaOptions.Builder()
         .setNotificationOptions(notificationOptions)
+        .setExpandedControllerActivityClassName(ChromecastPlayerActivity.class.getName())
         .build();
 
     return new CastOptions.Builder()
