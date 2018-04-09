@@ -8,6 +8,7 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.player.exoplayer.multiaudio.AudioTrack;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.sample.R;
@@ -51,6 +52,8 @@ public class MultiAudioActivity extends AbstractHookActivity {
 			//Add observer to listen to fullscreen open and close events
 			playerLayoutController.addObserver(this);
 			player.addObserver(this);
+
+      OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 
 			if (!player.setEmbedCode(embedCode)) {
 				Log.e(TAG, "Asset Failure");
