@@ -18,7 +18,7 @@ class VideoJSONParser (
   }
 
   private fun getJSON(assetManager: AssetManager): String {
-    val inputStream = assetManager.open("com/ooyala/sample/parser/data.json")
+    val inputStream = assetManager.open("data.json")
     val size = inputStream.available()
     val buffer = ByteArray(size)
     inputStream.read(buffer)
