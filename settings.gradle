@@ -61,6 +61,9 @@ project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/
 include ':DownloadToOwnSampleApp'
 project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
 
+//HeartbeatSampleApp
+include ':HeartbeatSampleApp'
+
 // Developer
 //include ':ooyalaSkinSDK'
 //project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
