@@ -18,56 +18,55 @@ import java.util.Set;
 
 /**
  * This activity illustrates how you can use multi audio methods
- *
  */
 public class MultiAudioActivity extends AbstractHookActivity {
 
   private AudioTrack currentAudioTrack;
   private Set<AudioTrack> audioTracks;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_skin_simple_layout);
-		completePlayerSetup(asked);
-	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.player_skin_simple_layout);
+    completePlayerSetup(asked);
+  }
 
-	@Override
-	void completePlayerSetup(boolean asked) {
-		if (asked) {
-			// Get the SkinLayout from our layout xml
-			skinLayout = findViewById(R.id.ooyalaSkin);
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      // Get the SkinLayout from our layout xml
+      skinLayout = findViewById(R.id.ooyalaSkin);
 
-			// Create the OoyalaPlayer, with some built-in UI disabled
-			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = new Options.Builder()
-				.setShowNativeLearnMoreButton(false)
-				.setShowPromoImage(false)
-				.setUseExoPlayer(true)
-				.build();
+      // Create the OoyalaPlayer, with some built-in UI disabled
+      PlayerDomain playerDomain = new PlayerDomain(domain);
+      Options options = new Options.Builder()
+          .setShowNativeLearnMoreButton(false)
+          .setShowPromoImage(false)
+          .setUseExoPlayer(true)
+          .build();
 
-			player = new OoyalaPlayer(pcode, playerDomain, options);
-			playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player);
+      player = new OoyalaPlayer(pcode, playerDomain, options);
+      playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player);
 
-			//Add observer to listen to fullscreen open and close events
-			playerLayoutController.addObserver(this);
-			player.addObserver(this);
+      //Add observer to listen to fullscreen open and close events
+      playerLayoutController.addObserver(this);
+      player.addObserver(this);
 
       OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 
-			if (!player.setEmbedCode(embedCode)) {
-				Log.e(TAG, "Asset Failure");
-			}
+      if (!player.setEmbedCode(embedCode)) {
+        Log.e(TAG, "Asset Failure");
+      }
 
-			// Show how to set audio settings i.e. default audio language
+      // Show how to set audio settings i.e. default audio language
       //setAudioSettings();
-		}
-	}
+    }
+  }
 
   @Override
   public void update(Observable arg0, Object argN) {
     super.update(arg0, argN);
-	  final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
 
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
@@ -89,7 +88,7 @@ public class MultiAudioActivity extends AbstractHookActivity {
     player.setDefaultAudioLanguage("eng");
   }
 
-  private void setAudioTrack(){
+  private void setAudioTrack() {
     audioTracks = player.getAvailableAudioTracks();
     if (audioTracks != null) {
       String language = "eng";
