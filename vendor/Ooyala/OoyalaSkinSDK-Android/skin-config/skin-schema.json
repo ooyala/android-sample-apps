@@ -79,18 +79,18 @@
         "defaultLanguage": {
           "description": "The default language of the localizable strings on the player.",
           "type": "string", "pattern": "^[a-z]{2}$",
-          "valid values": "\"en\", \"es\", \"zh\", \"ja\"",
+          "valid values": "\"en\", \"es\", \"zh\", \"ja\", \"ko\"",
           "default": "en"
         },
         "availableLanguageFile": {
           "description": "An array of languages. Defines the string values used in the player. Languages listed in the array require a separate json file included in the bundle, named '<language>.json' e.g. 'en.json'.",
           "type": "array",
           "items": {"type": "object", "pattern": "^[a-z]{2}$"},
-          "default": "{\"language\": \"en\", \"languageFile\": \"config/en.json\"}, {\"language\": \"es\", \"languageFile\": \"config/es.json\"}, {\"language\": \"zh\", \"languageFile\": \"config/zh.json\"}, {\"language\": \"ja\", \"languageFile\": \"config/ja.json\"}",
+          "default": "{\"language\": \"en\", \"languageFile\": \"config/en.json\"}, {\"language\": \"es\", \"languageFile\": \"config/es.json\"}, {\"language\": \"zh\", \"languageFile\": \"config/zh.json\"}, {\"language\": \"ja\", \"languageFile\": \"config/ja.json\"}, {\"language\": \"ko\", \"languageFile\": \"config/ko.json\"}",
           "language": {
-            "description": "Defines the language. For this release, valid languages are English (en), Spanish (es), Simplified Chinese (zh) and Japanese (ja).",
+            "description": "Defines the language. For this release, valid languages are English (en), Spanish (es), Simplified Chinese (zh), Japanese (ja) and Korean (ko).",
             "type": "string",
-            "valid values": "\"en\" | \"es\" | \"zh\" | \"ja\""
+            "valid values": "\"en\" | \"es\" | \"zh\" | \"ja\" | \"ko\""
           },
           "languageFile": {
             "description": "Path to the localized language file.",
@@ -795,7 +795,7 @@
         "\"right\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0073\", \"fontStyleClass\": \"icon icon-right\"},",
         "\"learn\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0074\", \"fontStyleClass\": \"icon icon-learn\"},",
         "\"skip\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0075\", \"fontStyleClass\": \"icon icon-skip\"}",
-        "\"audioAndCC\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u005F\", \"fontStyleClass\": \"icon icon-audio-and-cc\"}",    
+        "\"audioAndCC\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u005F\", \"fontStyleClass\": \"icon icon-audio-and-cc\"}",
         "\"selected\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0040\", \"fontStyleClass\": \"icon icon-selected\"}",            
         "}"],
       "play": {
