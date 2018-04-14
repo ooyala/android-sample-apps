@@ -61,6 +61,10 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   }
 
   @Override
+  public void suspend(boolean shouldRemoveView) {
+  }
+
+  @Override
   public PlayerInterface getPlayerInterface() {
     return _adPlayer;
   }
