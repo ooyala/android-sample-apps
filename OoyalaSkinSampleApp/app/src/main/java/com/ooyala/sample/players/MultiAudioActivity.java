@@ -32,19 +32,7 @@ public class MultiAudioActivity extends AbstractHookActivity {
     setContentView(R.layout.player_skin_multiaudio_layout);
     completePlayerSetup(asked);
 
-    // Set an audio track.
-    // Notice: when you set an audio track it doesn't set as a default audio track
-    Button setTrackButton = findViewById(R.id.setTrackButton);
-    setTrackButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (player != null && currentAudioTrack != null) {
-          // This method shows how to retrieve the list of available audio tracks and
-          // set audio with English language.
-          setAudioTrack();
-        }
-      }
-    });
+    initButtonListener();
   }
 
   @Override
@@ -96,17 +84,36 @@ public class MultiAudioActivity extends AbstractHookActivity {
     }
   }
 
+  private void initButtonListener() {
+    // Set an audio track.
+    // Notice: when you set an audio track it doesn't set as a default audio track
+    Button setTrackButton = findViewById(R.id.setTrackButton);
+    setTrackButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // This method shows how to retrieve the list of available audio tracks and
+        // set audio with English language.
+        setAudioTrack();
+      }
+    });
+  }
+
   private void setAudioSettings() {
     player.setDefaultAudioLanguage("eng");
   }
 
   private void setAudioTrack() {
+    if (player == null) {
+      Log.e(TAG, "Player is null");
+      return;
+    }
     audioTracks = player.getAvailableAudioTracks();
     if (audioTracks != null) {
       String language = "eng";
       for (AudioTrack track : audioTracks) {
-        Log.d("MultiAudio activity", "MultiAudio track language is: " + track.getLanguage());
-        if (TextUtils.equals(track.getLanguage(), language) && !track.equals(currentAudioTrack)) {
+        Log.d(TAG, "MultiAudio track language is: " + track.getLanguage());
+        if (TextUtils.equals(track.getLanguage(), language)
+          && currentAudioTrack != null && !track.equals(currentAudioTrack)) {
           player.setAudioTrack(track);
           break;
         }
