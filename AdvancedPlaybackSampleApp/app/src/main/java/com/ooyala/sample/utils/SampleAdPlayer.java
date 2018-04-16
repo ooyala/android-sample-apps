@@ -177,6 +177,11 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
     // TODO Auto-generated method stub
   }
 
+  @Override
+  public void suspend(boolean onlyRemoveView) {
+    // TODO Auto-generated method stub
+  }
+
   public void loadAd(SampleAdSpot ad) {
     if (ad != null) {
       _adText = ad.text();
