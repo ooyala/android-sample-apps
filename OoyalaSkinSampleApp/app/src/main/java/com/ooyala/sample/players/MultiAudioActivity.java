@@ -20,6 +20,7 @@ import java.util.Set;
  * This activity illustrates how you can use multi audio methods
  */
 public class MultiAudioActivity extends AbstractHookActivity {
+  private static final String TAG = MultiAudioActivity.class.getSimpleName();
 
   private AudioTrack currentAudioTrack;
   private Set<AudioTrack> audioTracks;
@@ -70,6 +71,9 @@ public class MultiAudioActivity extends AbstractHookActivity {
 
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
+      boolean isMultiAudioEnabled = (Boolean)((OoyalaNotification) argN).getData();
+      Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
+
       // This method shows how to retrieve the list of available audio tracks and
       // set audio with English language.
       //setAudioTrack();
