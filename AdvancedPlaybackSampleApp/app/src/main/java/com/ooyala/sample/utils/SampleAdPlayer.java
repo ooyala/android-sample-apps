@@ -178,7 +178,7 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   }
 
   @Override
-  public void suspend(boolean shouldRemoveView) {
+  public void suspend(boolean onlyRemoveView) {
     // TODO Auto-generated method stub
   }
 
