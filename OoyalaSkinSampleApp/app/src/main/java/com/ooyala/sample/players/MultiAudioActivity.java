@@ -72,11 +72,14 @@ public class MultiAudioActivity extends AbstractHookActivity {
   public void update(Observable arg0, Object argN) {
     super.update(arg0, argN);
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    final Object data = ((OoyalaNotification) argN).getData();
 
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
-      boolean isMultiAudioEnabled = (Boolean)((OoyalaNotification) argN).getData();
-      Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
+      if (data != null && data instanceof Boolean) {
+        boolean isMultiAudioEnabled = (Boolean) data;
+        Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
+      }
 
       // This method demonstrate how to obtain default audio settings.
       //getDefaultAudioSettings();
