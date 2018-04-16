@@ -3,6 +3,8 @@ package com.ooyala.sample.players;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
@@ -28,8 +30,10 @@ public class MultiAudioActivity extends AbstractHookActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.player_skin_simple_layout);
+    setContentView(R.layout.player_skin_multiaudio_layout);
     completePlayerSetup(asked);
+
+    initButtonListener();
   }
 
   @Override
@@ -68,15 +72,14 @@ public class MultiAudioActivity extends AbstractHookActivity {
   public void update(Observable arg0, Object argN) {
     super.update(arg0, argN);
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    final Object data = ((OoyalaNotification) argN).getData();
 
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
     if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
-      boolean isMultiAudioEnabled = (Boolean)((OoyalaNotification) argN).getData();
-      Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
-
-      // This method shows how to retrieve the list of available audio tracks and
-      // set audio with English language.
-      //setAudioTrack();
+      if (data != null && data instanceof Boolean) {
+        boolean isMultiAudioEnabled = (Boolean) data;
+        Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
+      }
 
       // This method demonstrate how to obtain default audio settings.
       //getDefaultAudioSettings();
@@ -88,17 +91,36 @@ public class MultiAudioActivity extends AbstractHookActivity {
     }
   }
 
+  private void initButtonListener() {
+    // Set an audio track.
+    // Notice: when you set an audio track it doesn't set as a default audio track
+    Button setTrackButton = findViewById(R.id.setTrackButton);
+    setTrackButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // This method shows how to retrieve the list of available audio tracks and
+        // set audio with English language.
+        setAudioTrack();
+      }
+    });
+  }
+
   private void setAudioSettings() {
     player.setDefaultAudioLanguage("eng");
   }
 
   private void setAudioTrack() {
+    if (player == null) {
+      Log.e(TAG, "Player is null");
+      return;
+    }
     audioTracks = player.getAvailableAudioTracks();
     if (audioTracks != null) {
       String language = "eng";
       for (AudioTrack track : audioTracks) {
-        Log.d("MultiAudio activity", "MultiAudio track language is: " + track.getLanguage());
-        if (TextUtils.equals(track.getLanguage(), language)) {
+        Log.d(TAG, "MultiAudio track language is: " + track.getLanguage());
+        if (TextUtils.equals(track.getLanguage(), language)
+          && currentAudioTrack != null && !track.equals(currentAudioTrack)) {
           player.setAudioTrack(track);
           break;
         }
