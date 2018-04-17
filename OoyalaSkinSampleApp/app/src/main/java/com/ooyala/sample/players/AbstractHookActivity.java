@@ -163,18 +163,18 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		}
 	}
 
-	private String getLog(Object argN) {
-		final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-		final Object data = ((OoyalaNotification) argN).getData();
-		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+  private String getLog(Object argN) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    final Object data = ((OoyalaNotification) argN).getData();
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
 
-		if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
-			if (data != null && data instanceof Boolean) {
-				boolean isMultiAudioEnabled = (Boolean) data;
-				String multiAudioState = isMultiAudioEnabled ? " is enabled" : " is disabled";
-				text = "Notification Received: " + arg1 + multiAudioState + " - state: " + player.getState();
-			}
-		}
-		return text;
-	}
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
+      if (data != null && data instanceof Boolean) {
+        boolean isMultiAudioEnabled = (Boolean) data;
+        String multiAudioState = isMultiAudioEnabled ? " is enabled" : " is disabled";
+        text = "Notification Received: " + arg1 + multiAudioState + " - state: " + player.getState();
+      }
+    }
+    return text;
+  }
 }
