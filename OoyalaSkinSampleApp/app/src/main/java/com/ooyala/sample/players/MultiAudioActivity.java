@@ -75,7 +75,7 @@ public class MultiAudioActivity extends AbstractHookActivity {
     final Object data = ((OoyalaNotification) argN).getData();
 
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
-    if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
       if (data != null && data instanceof Boolean) {
         boolean isMultiAudioEnabled = (Boolean) data;
         Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
@@ -86,7 +86,7 @@ public class MultiAudioActivity extends AbstractHookActivity {
     }
 
     // AUDIO_TRACK_SELECTED_NOTIFICATION_NAME is called when an audio track was selected.
-    if (arg1 == OoyalaPlayer.AUDIO_TRACK_SELECTED_NOTIFICATION_NAME) {
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.AUDIO_TRACK_SELECTED_NOTIFICATION_NAME)) {
       currentAudioTrack = player.getCurrentAudioTrack();
     }
   }
