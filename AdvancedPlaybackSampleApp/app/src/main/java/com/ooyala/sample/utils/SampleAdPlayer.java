@@ -20,6 +20,7 @@ import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.StateNotifier;
 import com.ooyala.android.player.PlayerInterface;
 import com.ooyala.android.player.PlayerType;
+import com.ooyala.android.player.exoplayer.PlayerBitmapListener;
 import com.ooyala.android.plugin.LifeCycleInterface;
 
 public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
@@ -196,5 +197,15 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   @Override
   public PlayerType getPlayerType() {
     return PlayerType.FLAT_PLAYER;
+  }
+
+  @Override
+  public void createBitmapScreenshot(PlayerBitmapListener playerBitmapListener) {
+    // TODO
+  }
+
+  @Override
+  public boolean isMultiAudioAvailable() {
+    return false;
   }
 }

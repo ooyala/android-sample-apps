@@ -13,6 +13,7 @@ android {
             // React Native for Android is incompatible with 3rd-party 64-bit libraries.
             abiFilters "armeabi-v7a", "x86"
         }
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -29,8 +30,8 @@ android {
 }
 task copyLibsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir, './libs')
     doLast {
@@ -87,13 +88,14 @@ dependencies {
 //    implementation project(':core')
   //  implementation project(':ooyalaSkinSDK')
 
-    implementation files('libs/OoyalaSDK.jar')
+    implementation 'com.android.support:multidex:1.0.1'
+    implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaPulseIntegration.jar')
-    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.aar')
     implementation (name:'PulseSDK', ext:'aar')
 
-    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
-    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation 'com.google.android.gms:play-services-ads:12.0.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.facebook.fresco:fresco:0.11.0'

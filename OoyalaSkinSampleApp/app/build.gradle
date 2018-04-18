@@ -59,10 +59,10 @@ task copyFontsAssetsTask(type: Copy) {
 tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {
-    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
     from new File(vendorDir, 'Google/ima-android-v374.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
@@ -83,12 +83,12 @@ dependencies {
     implementation files('libs/FWAdManager.jar')
     implementation files('libs/OoyalaFreewheelSDK.jar')
     implementation files('libs/OoyalaIMASDK.jar')
-    implementation files('libs/OoyalaSDK.jar')
+    implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/ima-android-v374.jar')
-    implementation files('libs/OoyalaSkinSDK.jar')
+    implementation files('libs/OoyalaSkinSDK.aar')
 
-    implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
-    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation 'com.google.android.gms:play-services-ads:12.0.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.facebook.fresco:fresco:0.11.0'
@@ -103,7 +103,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     implementation 'com.squareup.okio:okio:1.9.0'
     implementation 'org.webkit:android-jsc:r174650'
-    implementation(name:'react-native', version:'0.35.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version:'0.35.0', ext:'aar')
     implementation 'javax.inject:javax.inject:1'
 
 }
