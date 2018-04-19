@@ -227,6 +227,9 @@
     "vrNotification": true,
     "vrIcon": false
   },
+  "audio": {
+    "audioLanguage": "none"
+  },
   "animationDurations": {
     "vrNotification": 5,
     "vrIcon": 4
