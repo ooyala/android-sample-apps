@@ -12,29 +12,64 @@
       "ad-type" : "NO-ADS"
     },
     {
-      "title" : "No ADS V360 long description",
+      "title" : "No ADS long description V360",
       "embed-code" : "syazl0YzE6sGVc6vA5sPUZK6RWp5aplu",
       "ad-type" : "NO-ADS"
     },
     {
-      "title" : "No ADS V360 watermark",
-      "embed-code" : "tvaTluYzE6gfZg5nhqlqxPV7YbEukBCj",
-      "ad-type" : "NO-ADS"
-    },
-    {
-      "title" : "Video with subtitles_V360",
+      "title" : "Video with subtitles V360",
       "embed-code" : "VmZG5lZDE6t92mWnTtHdbLd-BPD7q_kz",
       "ad-type" : "NO-ADS"
     },
     {
-      "title" : "Resolution 1080_V360",
+      "title" : "Resolution 1080 V360",
       "embed-code" : "N5N2c2ZDE6DCsvCvSrgPHE5zerJ0oJYe",
       "provider-code" : "15OGsyOs7wTVvirAtV0F611vIpKH",
       "ad-type" : "NO-ADS"
     },
     {
-      "title" : "Resolution 1920_V360",
+      "title" : "Resolution 1920 V360",
       "embed-code" : "9kcGNkZDE6ytN9v0jKYdFALpCAbkwN-K",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "DASH Elemental V360",
+      "embed-code" : "05cGczZjE69PwMdlo4lUSPvZ60RNZBB_",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "DASH Azure V360",
+      "embed-code" : "psaTc1ZjE6_Ztm_fP2aWx0hxsZwtVmUE",
+      "provider-code" : "hjZ2gyOn8Y0z7pvLjDdvaibqJ-dR",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "HLS Elemental V360",
+      "embed-code" : "dia2YzZjE6YGGpsF5FFAUEylMZQzk9j_",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "HLS Azure V360 10000 1920x960",
+      "embed-code" : "9vdjc1ZjE68_8K5BGBzMrH9WM6y3SeF8",
+      "provider-code" : "hjZ2gyOn8Y0z7pvLjDdvaibqJ-dR",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "HLS Azure V360 5000 3840x1920",
+      "embed-code" : "A5Mzg1ZjE6glRoiTvs_fj7NiDo9NFAUz",
+      "provider-code" : "hjZ2gyOn8Y0z7pvLjDdvaibqJ-dR",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "HLS Azure V360 5000 1920x960",
+      "embed-code" : "JhODg1ZjE6eutTqAgPiH5HDItIbQzk5k",
+      "provider-code" : "hjZ2gyOn8Y0z7pvLjDdvaibqJ-dR",
+      "ad-type" : "NO-ADS"
+    },
+    {
+      "title" : "HLS Azure V360 10000 1280x640",
+      "embed-code" : "pxYzg1ZjE66kOeO934AJlXllh2YLfhcg",
+      "provider-code" : "hjZ2gyOn8Y0z7pvLjDdvaibqJ-dR",
       "ad-type" : "NO-ADS"
     }
   ]
@@ -48,13 +83,13 @@
         "ad-type" : "IMA"
       },
       {
-        "title" : "[IMA ADS 360] Mid-roll skippable",
-        "embed-code" : "Q0dWFtYzE6RFRGuFP0WzuPE5dvBzJ8_R",
+        "title" : "[IMA ADS 360] Mid-roll",
+        "embed-code" : "BsaWgzZjE6o52GggxGkiY-XXF1vuVQdk",
         "ad-type" : "IMA"
       },
       {
         "title" : "[IMA ADS 360] Post-roll",
-        "embed-code" : "N4bmNtYzE63wuc3QizkmmkA0HDZou83_",
+        "embed-code" : "duaWgzZjE6Yy6GHCScptpsw2LgOGnKtz",
         "ad-type" : "IMA"
       },
       {
@@ -83,28 +118,28 @@
     "title" : "VAST ADS Video 360",
     "videos" : [
       {
+        "title" : "[VAST ADS 360] Pre-roll",
+        "embed-code" : "pjb25lZDE6f9jZidxXeR79PpN9ORKQId",
+        "ad-type" : "VAST"
+      },
+      {
+        "title" : "[VAST ADS 360] Mid-roll",
+        "embed-code" : "F3bW1rYzE6gd0C5kJ8ETeB-0yeawf2Cd",
+        "ad-type" : "VAST"
+      },
+      {
         "title" : "[VAST ADS 360] Post-roll",
         "embed-code" : "xrcm1lZDE6QPmUtx4q6vKE5Z8VsvcJ73",
         "ad-type" : "VAST"
       },
       {
-        "title" : "[VAST ADS 360] Mid-roll skippable",
-        "embed-code" : "F3bW1rYzE6gd0C5kJ8ETeB-0yeawf2Cd",
+        "title" : "[VAST ADS 360] Pre-Mid-Post",
+        "embed-code" : "5uc21lZDE6uxI-13aXuCJm2RumePzyCe",
         "ad-type" : "VAST"
       },
       {
         "title" : "[VAST ADS 360] Podded Pre-Mid-Post",
         "embed-code" : "ZpZGxoYzE6oThg4Hapb2gwUC-HBDJy8T",
-        "ad-type" : "VAST"
-      },
-      {
-        "title" : "[VAST ADS 360] Pre-roll_V360",
-        "embed-code" : "pjb25lZDE6f9jZidxXeR79PpN9ORKQId",
-        "ad-type" : "VAST"
-      },
-      {
-        "title" : "[VAST ADS 360] Pre-Mid-Post_V360",
-        "embed-code" : "5uc21lZDE6uxI-13aXuCJm2RumePzyCe",
         "ad-type" : "VAST"
       }
     ]
@@ -118,18 +153,23 @@
         "ad-type" : "IMA"
       },
       {
-        "title" : "[IMA ADS 2D] Mid-roll skippable",
+        "title" : "[IMA ADS 2D] Mid-roll",
         "embed-code" : "dyeW82ZDE6cFE2fW4sWqaOSmRHVWj8yp",
         "ad-type" : "IMA"
       },
       {
-        "title" : "[IMA ADS 2D] Post-roll skippable",
+        "title" : "[IMA ADS 2D] Post-roll",
         "embed-code" : "tod282ZDE6wCNaEqZYcSaYPHVNX4_mSX",
         "ad-type" : "IMA"
       },
       {
-        "title" : "[IMA ADS 2D] Pre-Mid-Post skippable",
+        "title" : "[IMA ADS 2D] Pre-Mid-Post",
         "embed-code" : "tsd282ZDE6ntnpHkMcWP4MnuBQXR2PAw",
+        "ad-type" : "IMA"
+      },
+      {
+        "title" : "[IMA ADS 2D] Podded 3Pre-3Mid-3Post",
+        "embed-code" : "R2YmkzZjE6MiwI74gFk6rKI7Z44Chy_5",
         "ad-type" : "IMA"
       }
     ]
@@ -148,54 +188,29 @@
     "title" : "VAST ADS Video 2D",
     "videos" : [
       {
-        "title" : "[VAST ADS 2D] Pre-roll skippable",
+        "title" : "[VAST ADS 2D] Pre-roll",
         "embed-code" : "ltNHA2ZDE6utNFZtF3-nH9-3otMkG_Eq",
         "ad-type" : "VAST"
       },
       {
-        "title" : "[VAST ADS 2D] Mid-roll skippable",
+        "title" : "[VAST ADS 2D] Mid-roll",
         "embed-code" : "wwNnA2ZDE6SIhAkXssgiR6svHXAGBq-P",
         "ad-type" : "VAST"
       },
       {
-        "title" : "[VAST ADS 2D] Post-roll skippable",
+        "title" : "[VAST ADS 2D] Post-roll",
         "embed-code" : "lxNHA2ZDE6uRDirY6LZsJRRGh2aBC6ZR",
         "ad-type" : "VAST"
       },
       {
-        "title" : "[VAST ADS 2D] Podded 2Pre-2Mid-2Post skippable",
+        "title" : "[VAST ADS 360] Pre-Mid-Post",
+        "embed-code" : "s4Y2kzZjE6g1NSFVhkeh0Lmohxnw_ouJ",
+        "ad-type" : "VAST"
+      },
+      {
+        "title" : "[VAST ADS 2D] Podded 2Pre-2Mid-2Post",
         "embed-code" : "lzNHA2ZDE6_oDV04VtY7sg4Pr7jGErfG",
         "ad-type" : "VAST"
-      }
-    ]
-  },
-  {
-    "title" : "PLAYLISTS",
-    "videos" : [
-      {
-        "title" : "Mixed playlist_V360",
-        "embed-code" : "kxeGJyYzE6HaJZkeKaWrzSTT7jQMQo5v",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "Playlist with IMA ads_V360",
-        "embed-code" : "FmYzNkZDE64_vKCjXkAIfIrFtvjMdGVk",
-        "ad-type" : "IMA"
-      },
-      {
-        "title" : "Playlist_2d",
-        "embed-code" : "AxdzJwYzE6tIulw_awnFWW4SRI-wJIb4",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "Several playlists_V360",
-        "embed-code" : "kxeGJyYzE6HaJZkeKaWrzSTT7jQMQo5v",
-        "ad-type" : "NO-ADS"
-      },
-      {
-        "title" : "Horizontal playlists_V360",
-        "embed-code" : "ZwdTE5YzE69c3U3cXy2CCzfnCkzMMqUP",
-        "ad-type" : "NO-ADS"
       }
     ]
   }
