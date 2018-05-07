@@ -2,6 +2,7 @@ package com.ooyala.sample
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -96,6 +97,11 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
       }
       initPlayer()
     }
+  }
+
+  override fun onConfigurationChanged(newConfig: Configuration?) {
+    super.onConfigurationChanged(newConfig)
+    player?.configurationChanged(newConfig)
   }
 
   override fun update(o: Observable?, arg: Any?) {
