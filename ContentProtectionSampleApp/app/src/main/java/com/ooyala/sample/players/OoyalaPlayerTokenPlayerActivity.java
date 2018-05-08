@@ -44,14 +44,15 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
   String EMBED = null;
   String PCODE = null;
   String DOMAIN = null;
-  private final String ACCOUNT_ID = "accountID";
+  Boolean AUTOPLAY = false;
+  private String ACCOUNT_ID = "";
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private final String APIKEY = "Use this for testing, don't keep your secret in the application";
-  private final String SECRET = "Use this for testing, don't keep your secret in the application";
+  private String APIKEY = "BjcWYyOu1KK2DiKOkF41Z2k0X57l.0I-V4";
+  private String SECRET = "1ysC3V-g8m9V3QoGJwRa_fXcfi_G2ZV778m17pux";
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -67,6 +68,10 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
+    APIKEY =getIntent().getExtras().getString("apikey");
+    SECRET = getIntent().getExtras().getString("secret");
+    ACCOUNT_ID = getIntent().getExtras().getString("accountid");
+    AUTOPLAY = getIntent().getExtras().getBoolean("autoPlay");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
@@ -78,6 +83,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
+      if(AUTOPLAY)
       player.play();
     }
     else {

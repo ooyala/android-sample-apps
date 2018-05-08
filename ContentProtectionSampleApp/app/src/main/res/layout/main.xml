@@ -29,4 +29,29 @@
         android:layout_gravity="bottom|left"
         android:onClick="onLoginClick" />
 
+    <EditText
+        android:id="@+id/editapi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+    <EditText
+        android:id="@+id/editsecret"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+    <EditText
+        android:id="@+id/editaccountid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+
 </FrameLayout>
