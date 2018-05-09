@@ -57,7 +57,7 @@ package com.ooyala.sample.players;
           }
 
           private void initButtonListeners() {
-            Button setAssetButton = findViewById(R.id.open_button);
+            Button setAssetButton = findViewById(R.id.play_button);
             setAssetButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {

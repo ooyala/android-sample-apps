@@ -2,6 +2,8 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
@@ -16,6 +18,9 @@ import com.ooyala.android.player.exoplayer.upstream.OoyalaDrmHttpDataSource;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -40,7 +45,7 @@ import java.util.Observer;
  */
 public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observer, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
-
+  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
   String EMBED = null;
   String PCODE = null;
   String DOMAIN = null;
@@ -56,13 +61,19 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
-
+  boolean writePermission = false;
+  SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
   /**
    * Called when the activity is first created.
    */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+    } else {
+      writePermission= true;
+    }
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
@@ -84,7 +95,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
 
     if (player.setEmbedCode(EMBED)) {
       if(AUTOPLAY)
-      player.play();
+        player.play();
     }
     else {
       Log.e(TAG, "Asset Failure");
@@ -134,8 +145,13 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
       }
       return;
     }
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+    Log.d(TAG, text);
+    if (writePermission) {
+      Log.d(TAG, "Writing log to SD card");
+      // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+      log.writeToSdcardLog(text);
+    }
   }
 
   /*
