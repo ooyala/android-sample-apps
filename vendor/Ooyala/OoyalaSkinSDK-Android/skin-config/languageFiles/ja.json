@@ -59,8 +59,10 @@
   "Device ID is too long": "デバイス ID が長すぎます",
   "INVALID PLAYER TOKEN": "無効な Player トークン",
   "Invalid Ooyala Player token": "無効な Ooyaka Player トークン。",
-  "DEVICE LIMIT REACHED": "デバイス制限に達しました",
-  "Device limit has been reached": "デバイス制限に達しました",
+  "AUTHORIZATION ERROR": "AUTHORIZATION ERROR",
+  "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22": "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22",
+  "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29": "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29",
+  "Please remove one of your authorized devices to enable this device.": "Please remove one of your authorized devices to enable this device.",  
   "LICENSE ERROR": "ライセンスエラー",
   "General error acquiring license": "ライセンス取得での一般的なエラー",
   "DRM SERVER ERROR": "DRMサーバーエラー",
@@ -133,8 +135,8 @@
   "Full Screen": "全画面",
   "Exit Full Screen": "全画面表示を終了",
   "More Options": "その他のオプション",
-  "Audio": "Audio",
-  "Subtitles": "Subtitles",
-  "Undefined language": "Undefined language",
-  "No linguistic content": "No linguistic content"
+  "Audio": "オーディオ",
+  "Subtitles": "サブタイトル",
+  "Undefined language": "未定義の言語",
+  "No linguistic content": "言語コンテンツなし"
 }

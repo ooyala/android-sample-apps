@@ -59,8 +59,10 @@
   "Device ID is too long": "设备 ID 太长",
   "INVALID PLAYER TOKEN": "播放器标记无效",
   "Invalid Ooyala Player token": "Ooyala 播放器标记无效",
-  "DEVICE LIMIT REACHED": "达到设备限制",
-  "Device limit has been reached": "已达到设备限制",
+  "AUTHORIZATION ERROR": "AUTHORIZATION ERROR",
+  "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22": "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22",
+  "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29": "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29",
+  "Please remove one of your authorized devices to enable this device.": "Please remove one of your authorized devices to enable this device.",  
   "LICENSE ERROR": "许可证错误",
   "General error acquiring license": "获得许可证一般错误",
   "DRM SERVER ERROR": "DRM 服务器错误",
@@ -133,8 +135,8 @@
   "Full Screen": "全屏",
   "Exit Full Screen": "退出全屏",
   "More Options": "更多选项",
-  "Audio": "Audio",
-  "Subtitles": "Subtitles",
-  "Undefined language": "Undefined language",
-  "No linguistic content": "No linguistic content"
+  "Audio": "音频",
+  "Subtitles": "字幕",
+  "Undefined language": "未定义的语言",
+  "No linguistic content": "无语言内容"
 }
