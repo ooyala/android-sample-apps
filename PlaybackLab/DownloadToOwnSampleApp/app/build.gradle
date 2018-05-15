@@ -71,7 +71,7 @@ task copyTask(type: Copy) {
   from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
   from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
   from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-  from new File(vendorDir, 'Google/ima-android-v374.jar')
+  from new File(vendorDir, 'Google/ima-android-v385.jar')
   from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
   into new File(projectDir,'./libs')
   println "Jars updated."
@@ -85,7 +85,7 @@ dependencies {
 //  implementation files('libs/FWAdManager.jar')
 //  implementation files('libs/OoyalaFreewheelSDK.jar')
 //  implementation files('libs/OoyalaIMASDK.jar')
-//  implementation files('libs/ima-android-v374.jar')
+//  implementation files('libs/ima-android-v385.jar')
   implementation files('libs/OoyalaSDK.aar')
   implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
 
