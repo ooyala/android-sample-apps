@@ -113,7 +113,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:hint="c0cTkxOqALQviQIGAHWY5hP0q9gU"
                 android:inputType="text" />
 
         </LinearLayout>
