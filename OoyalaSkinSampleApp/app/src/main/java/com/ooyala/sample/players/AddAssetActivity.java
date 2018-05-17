@@ -31,12 +31,14 @@ public class AddAssetActivity extends Activity {
   }
   private EditText embedCodeEditText;
   private EditText pCodeEditText;
-  private Spinner spinner;
+  private Spinner playerSpinner;
+  private Spinner formatSpinner;
   private String embedCode;
   private String pCode;
   private String playerActivity;
   private CheckBox autoPlayCheckBox;
   private boolean autoPlay;
+  private String selectedFormat;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,8 @@ public class AddAssetActivity extends Activity {
       public void onClick(View v) {
         embedCode = embedCodeEditText.getText().toString();
         pCode = pCodeEditText.getText().toString();
-        playerActivity =  String.valueOf(spinner.getSelectedItem());
+        playerActivity =  String.valueOf(playerSpinner.getSelectedItem());
+        selectedFormat = String.valueOf(formatSpinner.getSelectedItem());
         autoPlay = autoPlayCheckBox.isChecked() ? true : false;
         if (embedCode.isEmpty()) {
           Toast.makeText(AddAssetActivity.this, "Embed code can't be empty!", Toast.LENGTH_LONG).show();
@@ -71,7 +74,7 @@ public class AddAssetActivity extends Activity {
   }
 
   private void addItemsOnSpinner() {
-    spinner = (Spinner) findViewById(R.id.select_player);
+    playerSpinner = (Spinner) findViewById(R.id.select_player);
     List<String> list = new ArrayList<String>();
     list.add("OoyalaDefault");
     list.add("GoogleIMA");
@@ -79,7 +82,21 @@ public class AddAssetActivity extends Activity {
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, list);
     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(dataAdapter);
+    playerSpinner.setAdapter(dataAdapter);
+
+    formatSpinner = (Spinner) findViewById(R.id.selectFormat);
+    list = new ArrayList<String>();
+    list.add("default");
+    list.add("dash");
+    list.add("akamai_hd2_vod_hls");
+    list.add("mp4");
+    list.add("m3u8");
+    list.add("hls");
+    list.add("akamai_hd2_hls");
+    dataAdapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, list);
+    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    formatSpinner.setAdapter(dataAdapter);
   }
 
   private void startPlayerActivity() {
@@ -96,6 +113,7 @@ public class AddAssetActivity extends Activity {
     intent.putExtra("pcode", pCode);
     intent.putExtra("domain", "http://www.ooyala.com");
     intent.putExtra("autoPlay", autoPlay);
+    intent.putExtra("selectedFormat", selectedFormat);
     startActivity(intent);
   }
 }

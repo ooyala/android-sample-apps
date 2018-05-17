@@ -35,6 +35,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String selectedFormat;
 
 	OoyalaPlayer player;
 	protected OoyalaSkinLayout skinLayout;
@@ -63,6 +64,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			pcode = extras.getString("pcode");
 			domain = extras.getString("domain");
 			autoPlay = extras.getBoolean("autoPlay",false);
+			selectedFormat = extras.getString("selectedFormat","default");
 		}
 	}
 
