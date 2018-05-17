@@ -38,6 +38,12 @@
         "languageFile": "",
         "androidResource": "skin-config/languageFiles/ja.json",
         "iosResource": "ja"
+      },
+      {
+        "language": "ko",
+        "languageFile": "",
+        "androidResource": "skin-config/languageFiles/ko.json",
+        "iosResource": "ko"
       }
     ]
   },
@@ -221,6 +227,9 @@
     "vrNotification": true,
     "vrIcon": false
   },
+  "audio": {
+    "audioLanguage": "none"
+  },
   "animationDurations": {
     "vrNotification": 5,
     "vrIcon": 4
@@ -238,6 +247,7 @@
       {"name":"quality", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
       {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
       {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"arrowsBlack", "location": "mainView", "whenDoesNotFit":"keep", "minWidth":45 }
@@ -253,12 +263,13 @@
     "mobileContent": [
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
       {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45},
-      {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":100 },
+      {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":100 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"share", "location":"moreOptions" },
       {"name":"discovery", "location":"moreOptions" },
       {"name":"closedCaption", "location":"moreOptions" },
       {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+      {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 }
     ],
@@ -270,7 +281,7 @@
     ]
   },
   "icons": {
-    "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0068", "fontStyleClass": "oo-icon oo-icon-play-slick"},
+    "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003e", "fontStyleClass": "oo-icon oo-icon-play-slick"},
     "pause": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0067", "fontStyleClass": "oo-icon oo-icon-pause-slick"},
     "volume": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0062", "fontStyleClass": "oo-icon oo-icon-volume-on-ooyala-default"},
     "volumeOff": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0070", "fontStyleClass": "oo-icon oo-icon-volume-mute-ooyala-default"},
@@ -299,6 +310,8 @@
     "circleArrowsWhite": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u005D", "fontStyleClass": "oo-icon"},
     "stereoOn": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0057", "fontStyleClass": "oo-icon oo-icon-system-auto"},
     "stereoOff": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0057", "fontStyleClass": "oo-icon oo-icon-system-auto"},
-    "vrIcon": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0059", "fontStyleClass": "oo-icon"}
+    "vrIcon": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0059", "fontStyleClass": "oo-icon"},
+    "audioAndCC": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u005F", "fontStyleClass": "oo-icon oo-icon-audio-and-cc"},
+    "selected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0040", "fontStyleClass": "oo-icon oo-icon-selected"}
   }
 }

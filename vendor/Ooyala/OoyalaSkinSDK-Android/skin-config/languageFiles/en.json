@@ -19,7 +19,6 @@
   "Discover": "Discover",
   "Up next": "Up next",
   "Video Quality": "Video Quality",
-  "Invest In Social Change": "Invest In Social Change",
   "Share": "Share",
   "Start at": "Start at",
   "Embed": "Embed",
@@ -133,5 +132,9 @@
   "Closed Captions":"Closed Captions",
   "Full Screen": "Full Screen",
   "Exit Full Screen": "Exit Full Screen",
-  "More Options": "More Options"
+  "More Options": "More Options",
+  "Audio": "Audio",
+  "Subtitles": "Subtitles",
+  "Undefined language": "Undefined language",
+  "No linguistic content": "No linguistic content"
 }

@@ -87,14 +87,14 @@ dependencies {
 //  implementation files('libs/OoyalaIMASDK.jar')
 //  implementation files('libs/ima-android-v374.jar')
   implementation files('libs/OoyalaSDK.aar')
-  implementation 'com.google.android.exoplayer:exoplayer:r2.5.3'
+  implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
 
 // For development purposes only
 //  implementation project(':core')
 //  implementation project(':ooyalaSkinSDK')
 
     implementation files('libs/OoyalaSkinSDK.aar')
-    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.gms:play-services-ads:12.0.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.facebook.fresco:fresco:0.11.0'
@@ -110,5 +110,5 @@ dependencies {
     implementation 'com.squareup.okio:okio:1.9.0'
     implementation 'org.webkit:android-jsc:r174650'
     implementation 'javax.inject:javax.inject:1'
-    implementation(name:'react-native', version:'0.35.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version:'0.35.0', ext:'aar')
 }

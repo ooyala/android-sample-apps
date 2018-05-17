@@ -72,6 +72,26 @@
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
+        <activity
+            android:name=".lists.ScreenshotListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity
+            android:name=".players.ScreenshotActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity
+            android:name=".lists.MultiAudioListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <activity
+            android:name=".players.MultiAudioActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

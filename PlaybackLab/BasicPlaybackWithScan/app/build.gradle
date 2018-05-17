@@ -33,5 +33,5 @@ dependencies {
     implementation project(':AndroidVisionQRReader')
 
     implementation 'com.google.android.exoplayer:exoplayer:r1.5.9'
-    implementation 'com.google.android.gms:play-services-ads:10.0.1'
+    implementation 'com.google.android.gms:play-services-ads:12.0.0'
 }

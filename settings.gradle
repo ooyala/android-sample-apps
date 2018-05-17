@@ -11,12 +11,8 @@ include ':ContentProtectionSampleApp'
 project(':ContentProtectionSampleApp').projectDir = new File(settingsDir, './ContentProtectionSampleApp/app')
 
 // Chromecast
-include ':CastCompanionLibrary'
-project(':CastCompanionLibrary').projectDir = new File(settingsDir, './vendor/GoogleCast/CastCompanionLibrary')
 include ':ChromecastSampleApp'
 project(':ChromecastSampleApp').projectDir = new File(settingsDir, './ChromecastSampleApp/app')
-include ':ChromecastV3SampleApp'
-project(':ChromecastV3SampleApp').projectDir = new File(settingsDir, './ChromecastV3SampleApp/app')
 
 // Ad Integrations
 include ':FreewheelSampleApp'
@@ -64,6 +60,9 @@ project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/
 //DownloadToOwnSampleApp
 include ':DownloadToOwnSampleApp'
 project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
+
+//HeartbeatSampleApp
+include ':HeartbeatSampleApp'
 
 // Developer
 //include ':ooyalaSkinSDK'
