@@ -56,8 +56,8 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private String APIKEY = "BjcWYyOu1KK2DiKOkF41Z2k0X57l.0I-V4";
-  private String SECRET = "1ysC3V-g8m9V3QoGJwRa_fXcfi_G2ZV778m17pux";
+  private String APIKEY = "";
+  private String SECRET = "";
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
@@ -94,8 +94,9 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      if(AUTOPLAY)
+      if(AUTOPLAY) {
         player.play();
+      }
     }
     else {
       Log.e(TAG, "Asset Failure");
