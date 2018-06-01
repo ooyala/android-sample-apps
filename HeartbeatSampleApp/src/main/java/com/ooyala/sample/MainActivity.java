@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putLong(PLAY_TIME, player.getCurrentPosition());
         savedInstanceState.putBoolean(WAS_PLAYING, wasPlaying);
         savedInstanceState.putLong(LAST_HEARTBEAT, lastHeartbeatEpoch);
+        // Pause playback when locking the device
+        if (player != null) {
+            player.setPlayWhenReady(false);
+        }
         super.onSaveInstanceState(savedInstanceState);
     }
 
