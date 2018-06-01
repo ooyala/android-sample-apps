@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private final int FREQUENCY_MS = 10000;
     private final int FREQUENCY_S = FREQUENCY_MS / 1000;
     private final String PLAY_TIME = "PLAY_TIME";
-    private static final String WAS_PLAYING = "WAS_PLAYING";
+    private final String WAS_PLAYING = "WAS_PLAYING";
+    private final String LAST_HEARTBEAT = "LAST_HEARTBEAT";
 
     private long playTime = 0;
     private boolean wasPlaying = false;
@@ -50,9 +51,12 @@ public class MainActivity extends AppCompatActivity {
     private SimpleExoPlayer player;
     private SimpleExoPlayerView playerView;
     private boolean isHandlerRunning = false;
+    private long lastHeartbeatEpoch = 0;
+
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            lastHeartbeatEpoch = System.currentTimeMillis();
             mHandler.postDelayed(this, FREQUENCY_MS);
             postDataToHeartbeat();
         }
@@ -69,14 +73,16 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             playTime = savedInstanceState.getLong(PLAY_TIME);
             wasPlaying = savedInstanceState.getBoolean(WAS_PLAYING);
+            lastHeartbeatEpoch = savedInstanceState.getLong(LAST_HEARTBEAT);
         }
+        startVideoView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        connect();
         fullScreenOnLandscape();
-        startVideoView();
     }
 
     @Override
@@ -89,12 +95,13 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putLong(PLAY_TIME, player.getCurrentPosition());
         savedInstanceState.putBoolean(WAS_PLAYING, wasPlaying);
+        savedInstanceState.putLong(LAST_HEARTBEAT, lastHeartbeatEpoch);
         super.onSaveInstanceState(savedInstanceState);
     }
 
     private void connect() {
-        if (!isHandlerRunning) {
-            postDataToHeartbeat();
+        if (player == null || !player.getPlayWhenReady() || player.getPlaybackState() != Player.STATE_READY) {
+            return;
         }
         startRecurringHandler();
     }
@@ -109,17 +116,17 @@ public class MainActivity extends AppCompatActivity {
         isHandlerRunning = false;
     }
 
-    public void startRecurringHandler(){
+    public void startRecurringHandler() {
         if (isHandlerRunning) {
             return;
         }
         mHandlerThread = new HandlerThread("HeartbeatHandler");
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper());
-        mHandler.postDelayed(runnable, FREQUENCY_MS);
+        long nextHeartbeat = FREQUENCY_MS - (System.currentTimeMillis() - lastHeartbeatEpoch);
+        mHandler.postDelayed(runnable, nextHeartbeat);
         isHandlerRunning = true;
     }
-
 
     public void postDataToHeartbeat() {
         if (player == null) {
@@ -176,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startVideoView() {
-
         String baseUrl = "http://ssai.ooyala.com/vhls/ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd/RpOWUyOq86gFq-STNqpgzhzIcXHV/eyJvIjoiaHR0cDovL3BsYXllci5vb3lhbGEuY29tL3BsYXllci9hbGwvbHRaM2w1WWpFNmxVQXZCZGZsdmNEUS16dGk4cThVcmQubTN1OD90YXJnZXRCaXRyYXRlPTEyMDAmc2VjdXJlX2lvc190b2tlbj1hMWRCYWtoSVFreHNMMFJqT0ZsUFlVZ3hNRFZLTVdSNWEwbDBaSFE0VW5SVFEzWnZVM041UVdsNGRXcFFVRFpXV0VOVVUycFVUazFQTHpWb0NuVnZWM2RoVUVGR2NIUTJjbGhTVmtOYVJIaFRXRkYxUkVaM1BUMEsiLCJlIjoiMTQ5OTQ0Mjg5MiIsInMiOiJHQk9wZFhGNGNzZzhfTzJ3MVlyU2VFejVlQzhQY0h5c054LU5FRDk3cmxzPSJ9/manifest.m3u8?ssai_guid=";
         String SSAI_GUID = "HeartbeatSampleTest";
         Uri uri = Uri.parse(baseUrl + SSAI_GUID);
