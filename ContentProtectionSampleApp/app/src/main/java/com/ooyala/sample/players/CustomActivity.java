@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CustomActivity extends Activity {
     public static String getName() {
-        return "Custom Activity";
+        return "Asset Options";
     }
     private EditText embedCodeEditText;
     private EditText pCodeEditText;
@@ -37,12 +37,12 @@ public class CustomActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.embed_pcode_layout);
-      embedCodeEditText = (EditText) findViewById(R.id.embed_edit_text);
-      pCodeEditText = (EditText) findViewById(R.id.pcode_edit_text);
-      apiKeyEditText = (EditText) findViewById(R.id.apikey_edit_text);
-      secretEditText = (EditText) findViewById(R.id.secret_edit_text);
-      accountIdEditText = (EditText) findViewById(R.id.accountid_edit_text);
-      autoPlayCheckBox = (CheckBox) findViewById(R.id.auto_play_check_box);
+      embedCodeEditText = findViewById(R.id.embed_edit_text);
+      pCodeEditText = findViewById(R.id.pcode_edit_text);
+      apiKeyEditText = findViewById(R.id.apikey_edit_text);
+      secretEditText =  findViewById(R.id.secret_edit_text);
+      accountIdEditText =  findViewById(R.id.accountid_edit_text);
+      autoPlayCheckBox =  findViewById(R.id.auto_play_check_box);
       initButtonListeners();
     }
 

@@ -36,7 +36,7 @@ public class ContentProtectionListActivity extends Activity implements OnItemCli
     selectionMap = new LinkedHashMap<String, PlayerSelectionOption>();
     //Populate the embed map
 //    selectionMap.put("Adobe Pass Integration", new PlayerSelectionOption("VybW5lODrJ0uM9FBo7XTT6TNjTJfr_7G", "B3MDExOuTldXc1CiXbzAauYN7Iui", "http://www.ooyala.com", AdobePassSampleAppAcitivity.class) );
-   // selectionMap.put("Ooyala Player Token", new PlayerSelectionOption("0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", OoyalaPlayerTokenPlayerActivity.class) );
+    selectionMap.put("Ooyala Player Token", new PlayerSelectionOption("0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", OoyalaPlayerTokenPlayerActivity.class) );
     setContentView(R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
