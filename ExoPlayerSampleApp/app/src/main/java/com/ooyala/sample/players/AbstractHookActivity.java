@@ -36,8 +36,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	String embedCode;
 	String pcode;
 	String DOMAIN;
-	protected final String APIKEY = "Use this for testing, don't keep your secret in the application";
-	protected final String SECRET = "Use this for testing, don't keep your secret in the application";
+	protected final String APIKEY = "R0MGkyOujhjn2MT1bhFzzFWVhNzk.dYQDf";
+	protected final String SECRET = "cMlO_TNcJPmcVJ2yUSOS4l-DGAnPVAhsbjLYVFlB";
 
 	// An account ID, if you are using Concurrent Streams or Entitlements
 	protected final String ACCOUNT_ID = "Account_ID";
