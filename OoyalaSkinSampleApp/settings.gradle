@@ -1,4 +1,0 @@
-include ':app'
-
-//include ':skin'
-//project(':skin').projectDir=new File(settingsDir, '../../native-skin/sdk/android/skin/')
