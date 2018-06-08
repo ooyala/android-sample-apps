@@ -16,16 +16,21 @@
         android:theme="@style/Theme.AppCompat">
         <service android:name="com.adobe.adobepass.accessenabler.api.AccessEnablerService"
          android:label="AccessEnabler service"/>
-        
+
+
         <activity
             android:label="@string/app_name"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:name=".lists.ContentProtectionListActivity" >
+            android:name="com.ooyala.sample.complete.MainActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".lists.ContentProtectionListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -34,6 +39,10 @@
         <activity
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:name=".players.OoyalaPlayerTokenPlayerActivity" >
+        </activity>
+        <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".players.CustomActivity" >
         </activity>
     </application>
 
