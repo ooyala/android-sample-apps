@@ -68,6 +68,9 @@
         <activity android:name=".lists.GeoBlockingListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
+        <activity android:name=".players.AddAssetActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
 
         <activity
             android:name=".lists.ScreenshotListActivity"
