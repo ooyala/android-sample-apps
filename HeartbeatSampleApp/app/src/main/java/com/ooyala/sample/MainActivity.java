@@ -234,7 +234,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else {
-                // Asset is paused
+                // Asset was paused, last heartbeat is irrelevant
+                lastHeartbeatEpoch = 0;
                 wasPlaying = false;
                 disconnect();
             }

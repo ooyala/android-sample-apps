@@ -63,6 +63,7 @@ project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './Playbac
 
 //HeartbeatSampleApp
 include ':HeartbeatSampleApp'
+project(':HeartbeatSampleApp').projectDir = new File(settingsDir, './HeartbeatSampleApp/app')
 
 // Developer
 //include ':ooyalaSkinSDK'
