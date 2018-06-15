@@ -45,7 +45,7 @@ tasks.copyFontsAssetsTask.execute()
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.55.4.aar')
     into new File(projectDir,'./libs')
     println "Jars updated."
 }
@@ -55,7 +55,7 @@ dependencies {
 
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')
-    implementation(group:'com.facebook', name:'react-native', version:'0.35.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -69,19 +69,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Skin dependencies
-    implementation 'com.facebook.fresco:fresco:0.11.0'
-    implementation 'com.facebook.fresco:imagepipeline-okhttp3:0.11.0'
-    implementation 'com.facebook.stetho:stetho:1.2.0'
+    implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:1.3.0'
     implementation 'com.facebook.soloader:soloader:0.1.0'
-    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
     implementation 'com.google.code.findbugs:jsr305:3.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
-    implementation 'com.squareup.okhttp3:okhttp-ws:3.4.1'
-    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
-    implementation 'com.squareup.okio:okio:1.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.6.0'
+    implementation 'com.squareup.okio:okio:1.13.0'
     implementation 'org.webkit:android-jsc:r174650'
-    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.facebook.stetho:stetho:1.2.0'
+    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
 }
 
 repositories {

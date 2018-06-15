@@ -57,6 +57,7 @@ project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/
 
 include(':core')
 project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/')*/
+
 //DownloadToOwnSampleApp
 include ':DownloadToOwnSampleApp'
 project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
