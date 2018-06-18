@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, ContentProtectionSampleApp!</string>
     <string name="app_name">ContentProtectionSampleApp</string>
+        <string name="pcode">pcode:</string>
+        <string name="embed">embed:</string>
+        <string name="auto_play">AutoPlay</string>
 
 </resources>
