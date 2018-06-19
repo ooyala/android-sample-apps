@@ -21,6 +21,7 @@ public class CastOptionsProvider implements OptionsProvider {
   @Override
   public CastOptions getCastOptions(Context context) {
     NotificationOptions notificationOptions = new NotificationOptions.Builder()
+        .setTargetActivityClassName(ChromecastPlayerActivity.class.getName())
         .setPlayDrawableResId(R.drawable.ic_media_play_light)
         .setPauseDrawableResId(R.drawable.ic_media_pause_light)
         .build();
