@@ -19,6 +19,8 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.cast.CastManager;
+import com.ooyala.cast.CastPlayer;
+import com.ooyala.cast.mediainfo.VideoData;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -119,13 +121,14 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       return;
     }
 
+    OoyalaNotification notification = (OoyalaNotification) argN;
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
 
     if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME) {
-      castViewManager.configureCastView(player.getCurrentItem());
+      updateCustView(notification);
     } else if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
@@ -155,6 +158,19 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
+  private void updateCustView(OoyalaNotification notification) {
+    VideoData data = (VideoData) notification.getData();
+    if (data != null) {
+      castViewManager.configureCastView(data.getTitle(), data.getDescription(), data.getUrl());
+    } else {
+      castViewManager.configureCastView(
+          player.getCurrentItem().getTitle(),
+          player.getCurrentItem().getDescription(),
+          player.getCurrentItem().getPromoImageURL(0, 0)
+      );
+    }
+  }
+
   @Override
   public void getTokenForEmbedCodes(List<String> embedCodes, EmbedTokenGeneratorCallback callback) {
     String embedCodesString = "";
@@ -182,7 +198,6 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       castManager.deregisterFromOoyalaPlayer();
     }
   }
-
 
   @Override
   public void onResume() {

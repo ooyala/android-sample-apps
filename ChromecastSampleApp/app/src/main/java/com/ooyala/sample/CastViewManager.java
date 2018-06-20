@@ -21,17 +21,17 @@ class CastViewManager {
     stateTextView = castView.findViewById(R.id.castStateTextView);
   }
 
-  void configureCastView(Video video) {
+  void configureCastView(String title, String description, String imageUrl) {
     final ImageView castBackgroundImage = castView.findViewById(R.id.castBackgroundImage);
 
     // Update the ImageView on a separate thread
-    new Thread(new UpdateImageViewRunnable(castBackgroundImage, video.getPromoImageURL(0, 0))).start();
+    new Thread(new UpdateImageViewRunnable(castBackgroundImage, imageUrl)).start();
 
     TextView videoTitle = castView.findViewById(R.id.videoTitle);
-    videoTitle.setText(video.getTitle());
+    videoTitle.setText(title);
 
     TextView videoDescription = castView.findViewById(R.id.videoDescription);
-    videoDescription.setText(video.getDescription());
+    videoDescription.setText(description);
   }
 
   void updateCastState(Context c, OoyalaPlayer.State state) {
