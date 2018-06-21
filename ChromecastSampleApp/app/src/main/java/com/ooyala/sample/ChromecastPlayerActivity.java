@@ -121,7 +121,11 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       return;
     }
 
-    OoyalaNotification notification = (OoyalaNotification) argN;
+    OoyalaNotification notification = null;
+    if (argN instanceof OoyalaNotification ){
+      notification = (OoyalaNotification) argN;
+    }
+
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
@@ -159,10 +163,10 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   }
 
   private void updateCustView(OoyalaNotification notification) {
-    VideoData data = (VideoData) notification.getData();
-    if (data != null) {
+    if (notification != null && notification.getData() != null && notification.getData() instanceof VideoData) {
+      VideoData data = (VideoData) notification.getData();
       castViewManager.configureCastView(data.getTitle(), data.getDescription(), data.getUrl());
-    } else {
+    } else if (player != null && player.getCurrentItem() != null) {
       castViewManager.configureCastView(
           player.getCurrentItem().getTitle(),
           player.getCurrentItem().getDescription(),
