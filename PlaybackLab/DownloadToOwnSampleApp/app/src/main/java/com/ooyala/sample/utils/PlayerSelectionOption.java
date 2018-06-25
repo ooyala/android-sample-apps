@@ -11,13 +11,51 @@ public class PlayerSelectionOption {
   private Class <? extends Activity> activity;
   private String pcode;
   private String domain;
+  //added by rmanchi
+  private String apiKey;
+  private String secretKey;
+  private String accountId;
 
-  public PlayerSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
+  public PlayerSelectionOption(String embedCode, String pcode, String apiKey, String secretKey, String accountId, String domain, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
     this.activity = activity;
     this.pcode = pcode;
     this.domain = domain;
+
+    //added by rmanchi
+    this.apiKey = apiKey;
+    this.secretKey = secretKey;
+    this.accountId = accountId;
+
   }
+
+  //added by rmanchi
+  /**
+   * Get the pcode for this sample
+   * @return the apikey
+   */
+  public String getApiKey() {
+    return apiKey;
+  }
+
+  //added by rmanchi
+  /**
+   * Get the pcode for this sample
+   * @return the secretKey
+   */
+  public String getSecretKey() {
+    return secretKey;
+  }
+
+  //added by rmanchi
+  /**
+   * Get the pcode for this sample
+   * @return the accountId
+   */
+  public String getAccountId() {
+    return accountId;
+  }
+
 
   /**
    * Get the pcode for this sample

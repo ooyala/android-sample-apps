@@ -27,6 +27,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".complete.AddAssetActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+        </activity>
+
         <activity android:name=".lists.BasicPlaybackListActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>

@@ -47,6 +47,9 @@ public class MainExoPlayerActivity extends Activity implements OnItemClickListen
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
     activityMap.put(DownloadSerializationActivity.getName(), DownloadSerializationActivity.class);
 
+    //Added by rmanchi
+    activityMap.put(AddAssetActivity.getName(), AddAssetActivity.class);
+
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);
     }
