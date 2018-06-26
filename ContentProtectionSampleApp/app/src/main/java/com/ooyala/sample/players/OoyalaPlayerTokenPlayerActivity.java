@@ -6,11 +6,13 @@ import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
+import com.ooyala.android.OoyalaException;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.player.exoplayer.upstream.OoyalaDrmHttpDataSource;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;
@@ -116,9 +118,10 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     }
 
     if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
-      final String msg = "Error Event Received";
-      if (player != null && player.getError() != null) {
-        Log.e(TAG, msg, player.getError());
+      String msg = "Error Event Received";
+      OoyalaException exception = player.getError();
+      if (player != null && exception != null) {
+        Log.e(TAG, msg + ": " + exception.getMessage(), exception);
       }
       else {
         Log.e(TAG, msg);

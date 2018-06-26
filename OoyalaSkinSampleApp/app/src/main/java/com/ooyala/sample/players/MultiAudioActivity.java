@@ -3,6 +3,8 @@ package com.ooyala.sample.players;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
@@ -13,22 +15,25 @@ import com.ooyala.android.player.exoplayer.multiaudio.AudioTrack;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.sample.R;
 
+import java.util.List;
 import java.util.Observable;
-import java.util.Set;
 
 /**
  * This activity illustrates how you can use multi audio methods
  */
 public class MultiAudioActivity extends AbstractHookActivity {
+  private static final String TAG = MultiAudioActivity.class.getSimpleName();
 
   private AudioTrack currentAudioTrack;
-  private Set<AudioTrack> audioTracks;
+  private List<AudioTrack> audioTracks;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.player_skin_simple_layout);
+    setContentView(R.layout.player_skin_multiaudio_layout);
     completePlayerSetup(asked);
+
+    initButtonListener();
   }
 
   @Override
@@ -67,21 +72,37 @@ public class MultiAudioActivity extends AbstractHookActivity {
   public void update(Observable arg0, Object argN) {
     super.update(arg0, argN);
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    final Object data = ((OoyalaNotification) argN).getData();
 
     // MULTI_AUDIO_ENABLED_NOTIFICATION_NAME is called once on a video start.
-    if (arg1 == OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME) {
-      // This method shows how to retrieve the list of available audio tracks and
-      // set audio with English language.
-      //setAudioTrack();
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
+      if (data != null && data instanceof Boolean) {
+        boolean isMultiAudioEnabled = (Boolean) data;
+        Log.d(TAG, isMultiAudioEnabled ? "MultiAudio is enabled" : "MultiAudio is disabled");
+      }
 
       // This method demonstrate how to obtain default audio settings.
       //getDefaultAudioSettings();
     }
 
     // AUDIO_TRACK_SELECTED_NOTIFICATION_NAME is called when an audio track was selected.
-    if (arg1 == OoyalaPlayer.AUDIO_TRACK_SELECTED_NOTIFICATION_NAME) {
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.AUDIO_TRACK_SELECTED_NOTIFICATION_NAME)) {
       currentAudioTrack = player.getCurrentAudioTrack();
     }
+  }
+
+  private void initButtonListener() {
+    // Set an audio track.
+    // Notice: when you set an audio track it doesn't set as a default audio track
+    Button setTrackButton = findViewById(R.id.setTrackButton);
+    setTrackButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // This method shows how to retrieve the list of available audio tracks and
+        // set audio with English language.
+        setAudioTrack();
+      }
+    });
   }
 
   private void setAudioSettings() {
@@ -89,12 +110,17 @@ public class MultiAudioActivity extends AbstractHookActivity {
   }
 
   private void setAudioTrack() {
+    if (player == null) {
+      Log.e(TAG, "Player is null");
+      return;
+    }
     audioTracks = player.getAvailableAudioTracks();
     if (audioTracks != null) {
       String language = "eng";
       for (AudioTrack track : audioTracks) {
-        Log.d("MultiAudio activity", "MultiAudio track language is: " + track.getLanguage());
-        if (TextUtils.equals(track.getLanguage(), language)) {
+        Log.d(TAG, "MultiAudio track language is: " + track.getLanguage());
+        if (TextUtils.equals(track.getLanguage(), language)
+          && currentAudioTrack != null && !track.equals(currentAudioTrack)) {
           player.setAudioTrack(track);
           break;
         }

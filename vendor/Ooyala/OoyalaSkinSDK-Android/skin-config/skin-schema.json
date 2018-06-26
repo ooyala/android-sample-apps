@@ -775,7 +775,7 @@
       "patternProperties": { "": { "$ref": "#/definitions/icon" } },
       "required": ["play", "pause", "volume", "volumeOff", "expand", "compress", "ellipsis", "replay", "share", "cc", "discovery", "quality", "setting", "dismiss", "toggleOff", "toggleOn", "left", "right", "audioAndCC", "selected"],
       "example": ["\"icons\": {",
-        "\"play\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0068\", \"fontStyleClass\": \"icon icon-play\"},",
+        "\"play\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u003e\", \"fontStyleClass\": \"icon icon-play\"},",
         "\"pause\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0067\", \"fontStyleClass\": \"icon icon-pause\"},",
         "\"volume\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0061\", \"fontStyleClass\": \"icon icon-volume-desktop\"},",
         "\"volumeOff\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0070\", \"fontStyleClass\": \"icon icon-volume-desktop\"},",
