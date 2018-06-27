@@ -116,6 +116,7 @@ dependencies {
     implementation 'com.facebook.stetho:stetho:1.2.0'
     implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
     implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
+    implementation 'javax.inject:javax.inject:1'
 
     // Jackson dependency
     implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
