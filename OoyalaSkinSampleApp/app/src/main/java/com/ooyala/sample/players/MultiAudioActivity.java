@@ -15,8 +15,8 @@ import com.ooyala.android.player.exoplayer.multiaudio.AudioTrack;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.sample.R;
 
+import java.util.List;
 import java.util.Observable;
-import java.util.Set;
 
 /**
  * This activity illustrates how you can use multi audio methods
@@ -25,7 +25,7 @@ public class MultiAudioActivity extends AbstractHookActivity {
   private static final String TAG = MultiAudioActivity.class.getSimpleName();
 
   private AudioTrack currentAudioTrack;
-  private Set<AudioTrack> audioTracks;
+  private List<AudioTrack> audioTracks;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

@@ -35,6 +35,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String selectedFormat;
 
 	OoyalaPlayer player;
 	protected OoyalaSkinLayout skinLayout;
@@ -42,6 +43,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 	boolean writePermission = false;
 	boolean asked = false;
+	boolean autoPlay = false;
 
 	// complete player setup after we asked for permission to write into external storage
 	abstract void completePlayerSetup(final boolean asked);
@@ -61,6 +63,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			embedCode = extras.getString("embed_code");
 			pcode = extras.getString("pcode");
 			domain = extras.getString("domain");
+			autoPlay = extras.getBoolean("autoPlay",false);
+			selectedFormat = extras.getString("selectedFormat","default");
 		}
 	}
 

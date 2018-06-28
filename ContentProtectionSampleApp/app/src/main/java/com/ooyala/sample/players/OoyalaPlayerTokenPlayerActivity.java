@@ -2,6 +2,8 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
@@ -16,6 +18,9 @@ import com.ooyala.android.player.exoplayer.upstream.OoyalaDrmHttpDataSource;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -40,33 +45,44 @@ import java.util.Observer;
  */
 public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observer, EmbedTokenGenerator {
   final String TAG = this.getClass().toString();
-
+  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
   String EMBED = null;
   String PCODE = null;
   String DOMAIN = null;
-  private final String ACCOUNT_ID = "accountID";
+  Boolean AUTOPLAY = false;
+  private String ACCOUNT_ID = "";
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private final String APIKEY = "Use this for testing, don't keep your secret in the application";
-  private final String SECRET = "Use this for testing, don't keep your secret in the application";
+  private String APIKEY = "";
+  private String SECRET = "";
 
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
-
+  boolean writePermission = false;
+  SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
   /**
    * Called when the activity is first created.
    */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+    } else {
+      writePermission= true;
+    }
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
+    APIKEY =getIntent().getExtras().getString("apikey");
+    SECRET = getIntent().getExtras().getString("secret");
+    ACCOUNT_ID = getIntent().getExtras().getString("accountid");
+    AUTOPLAY = getIntent().getExtras().getBoolean("autoPlay");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
@@ -78,7 +94,9 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      player.play();
+      if(AUTOPLAY) {
+        player.play();
+      }
     }
     else {
       Log.e(TAG, "Asset Failure");
@@ -128,8 +146,13 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
       }
       return;
     }
-
-    Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+    Log.d(TAG, text);
+    if (writePermission) {
+      Log.d(TAG, "Writing log to SD card");
+      // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+      log.writeToSdcardLog(text);
+    }
   }
 
   /*

@@ -6,14 +6,9 @@
     android:background="@color/gray900"
     tools:context="com.ooyala.sample.MainActivity">
 
-    <com.ooyala.sample.SimpleVideoView
-        android:id="@+id/videoView"
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/player_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:fitsSystemWindows="true"/>
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>

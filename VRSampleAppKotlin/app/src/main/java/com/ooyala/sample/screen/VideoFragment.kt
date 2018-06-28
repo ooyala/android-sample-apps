@@ -2,6 +2,7 @@ package com.ooyala.sample
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -49,7 +50,7 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
     this.arguments = args
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val inflated = inflater?.inflate(R.layout.video_fragment, container, false)
     val arguments = getArguments()
     if (arguments != null) {
@@ -63,7 +64,7 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
-    if (ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+    if (context?.let { ContextCompat.checkSelfPermission(it, WRITE_EXTERNAL_STORAGE) } != PERMISSION_GRANTED) {
       requestPermissions(arrayOf(WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
     } else {
       writeStoragePermissionGranted = true
@@ -96,6 +97,11 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
       }
       initPlayer()
     }
+  }
+
+  override fun onConfigurationChanged(newConfig: Configuration?) {
+    super.onConfigurationChanged(newConfig)
+    player?.configurationChanged(newConfig)
   }
 
   override fun update(o: Observable?, arg: Any?) {
@@ -140,7 +146,7 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
     player?.addObserver(this)
 
     val skinOptions = SkinOptions.Builder().build()
-    playerController = OoyalaSkinLayoutController(activity.application, playerSkinLayout, player, skinOptions)
+    playerController = OoyalaSkinLayoutController(activity!!.application, playerSkinLayout, player, skinOptions)
     playerController?.addObserver(this)
 
     initAdManager()
@@ -149,6 +155,6 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
   }
 
   override fun invokeDefaultOnBackPressed() {
-    activity.onBackPressed()
+    activity!!.onBackPressed()
   }
 }

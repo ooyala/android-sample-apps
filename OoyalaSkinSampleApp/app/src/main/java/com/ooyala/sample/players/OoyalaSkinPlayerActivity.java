@@ -10,6 +10,7 @@ import com.ooyala.sample.R;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
+import com.ooyala.sample.utils.CustomPlayerInfo;
 
 import org.json.JSONObject;
 
@@ -35,7 +36,11 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+			Options options = null;
+			if(selectedFormat.equalsIgnoreCase("default"))
+				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+			else
+				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
 			player = new OoyalaPlayer(pcode, playerDomain, options);
 			//Create the SkinOptions, and setup React
 			JSONObject overrides = createSkinOverrides();
@@ -46,6 +51,8 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			player.addObserver(this);
 
 			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
 			} else {
 				Log.e(TAG, "Asset Failure");
 			}

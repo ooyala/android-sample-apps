@@ -19,16 +19,18 @@ class VideoRecyclerFragment : Fragment() {
     val TAG = VideoRecyclerFragment::class.java.canonicalName
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
       inflater?.inflate(R.layout.video_recycler_fragment, container, false)
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
     videoRecyclerView.layoutManager = LinearLayoutManager(context)
-    videoRecyclerView.adapter = VideoRecyclerAdapter(AdList.instance.getVideoList(context), {
-      handleItemChose(data = it)
-    })
+    videoRecyclerView.adapter = context?.let { AdList.instance.getVideoList(it) }?.let {
+      VideoRecyclerAdapter(it, {
+        handleItemChose(data = it)
+      })
+    }
   }
 
   private fun handleItemChose(data: VideoData) {
