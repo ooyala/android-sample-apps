@@ -7,10 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.KeyEvent;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.skin.OoyalaSkinLayout;
@@ -37,6 +35,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String selectedFormat;
 
 	OoyalaPlayer player;
 	protected OoyalaSkinLayout skinLayout;
@@ -44,6 +43,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 	boolean writePermission = false;
 	boolean asked = false;
+	boolean autoPlay = false;
 
 	// complete player setup after we asked for permission to write into external storage
 	abstract void completePlayerSetup(final boolean asked);
@@ -63,6 +63,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			embedCode = extras.getString("embed_code");
 			pcode = extras.getString("pcode");
 			domain = extras.getString("domain");
+			autoPlay = extras.getBoolean("autoPlay",false);
+			selectedFormat = extras.getString("selectedFormat","default");
 		}
 	}
 
@@ -118,7 +120,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		}
 
 		// Automation Hook: to write Notifications to a temporary file on the device/emulator
-		String text="Notification Received: " + arg1 + " - state: " + player.getState();
+		String text = getLog(argN);
 		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
 		log.writeToSdcardLog(text);
 		Log.d(TAG, text);
@@ -164,4 +166,19 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			playerLayoutController.onDestroy();
 		}
 	}
+
+  private String getLog(Object argN) {
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+    final Object data = ((OoyalaNotification) argN).getData();
+    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
+      if (data != null && data instanceof Boolean) {
+        boolean isMultiAudioEnabled = (Boolean) data;
+        String multiAudioState = isMultiAudioEnabled ? " is enabled" : " is disabled";
+        text = "Notification Received: " + arg1 + multiAudioState + " - state: " + player.getState();
+      }
+    }
+    return text;
+  }
 }

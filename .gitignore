@@ -36,5 +36,3 @@ go_script/pkg
 .DS_Store
 runConfigurations.xml
 *.iml
-VRSampleApp/app/src/main/assets/data.json
-VRSampleAppKotlin/app/src/main/assets/data.json

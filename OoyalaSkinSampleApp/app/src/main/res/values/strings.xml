@@ -2,5 +2,13 @@
 <resources>
 
     <string name="app_name">Ooyala Skin Sample App</string>
+    <string name="open">Open</string>
+    <string name="pcode">pcode:</string>
+    <string name="embed">embed:</string>
+    <string name="select_player">selectPlayer:</string>
+    <string name="auto_play">AutoPlay</string>
+    <string name="take_screenshot">Take a screenshot</string>
+    <string name="set_audio_track">Set an audio track</string>
+    <string name="selectFormat">selectFormat:</string>
 
 </resources>

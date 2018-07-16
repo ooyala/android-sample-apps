@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.content.Context;
+import android.content.res.Configuration;
 
 import com.ooyala.android.AdPodInfo;
 import com.ooyala.android.OoyalaPlayer;
@@ -58,6 +59,15 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
 
   @Override
   public void suspend() {
+  }
+
+  @Override
+  public void suspend(boolean onlyRemoveView) {
+  }
+
+  @Override
+  public void configurationChanged(Configuration configuration) {
+
   }
 
   @Override
@@ -187,5 +197,10 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
       return new HashSet<Integer>(cuePoints);
     }
     return new HashSet<Integer>();
+  }
+
+  @Override
+  public boolean allADSPlayed() {
+    return false;
   }
 }
