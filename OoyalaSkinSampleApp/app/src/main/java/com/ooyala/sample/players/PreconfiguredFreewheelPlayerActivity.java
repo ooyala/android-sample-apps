@@ -10,6 +10,7 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
+import com.ooyala.sample.utils.CustomPlayerInfo;
 
 /**
  * This activity illustrates how to use Freewheel when all configuration is stored in Ooyala Servers
@@ -46,7 +47,11 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+			Options options = null;
+			if(selectedFormat.equalsIgnoreCase("default"))
+				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+			else
+				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
 			player = new OoyalaPlayer(pcode, playerDomain, options);
 
 			//Create the SkinOptions, and setup React
@@ -60,6 +65,8 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
 
 			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
 			}
 		}
 	}
