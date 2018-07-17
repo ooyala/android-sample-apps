@@ -39,6 +39,9 @@ public class AddAssetActivity extends Activity {
   private CheckBox autoPlayCheckBox;
   private boolean autoPlay;
   private String selectedFormat;
+  private Spinner hevcSpinner;
+  private CheckBox envStgCheckBox;
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class AddAssetActivity extends Activity {
     embedCodeEditText = (EditText) findViewById(R.id.embed_edit_text);
     pCodeEditText = (EditText) findViewById(R.id.pcode_edit_text);
     autoPlayCheckBox = (CheckBox) findViewById(R.id.auto_play_check_box);
+    envStgCheckBox = (CheckBox) findViewById(R.id.set_env_stg);
     initButtonListeners();
   }
 
@@ -97,6 +101,16 @@ public class AddAssetActivity extends Activity {
             android.R.layout.simple_spinner_item, list);
     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     formatSpinner.setAdapter(dataAdapter);
+
+    hevcSpinner = (Spinner) findViewById(R.id.hevc_mode);
+    list = new ArrayList<String>();
+    list.add("NoHEVCParam");
+    list.add("HEVCPreferred");
+    list.add("HEVCNotPreferred");
+    dataAdapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, list);
+    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    hevcSpinner.setAdapter(dataAdapter);
   }
 
   private void startPlayerActivity() {
@@ -114,6 +128,8 @@ public class AddAssetActivity extends Activity {
     intent.putExtra("domain", "http://www.ooyala.com");
     intent.putExtra("autoPlay", autoPlay);
     intent.putExtra("selectedFormat", selectedFormat);
+    intent.putExtra("hevc_mode", String.valueOf(hevcSpinner.getSelectedItem()));
+    intent.putExtra("is_staging", envStgCheckBox.isChecked() ? true : false);
     startActivity(intent);
   }
 }

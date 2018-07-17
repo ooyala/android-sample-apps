@@ -36,6 +36,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String pcode;
 	protected String domain;
 	protected String selectedFormat;
+	protected String hevcMode;
+	protected boolean isStaging;
 
 	OoyalaPlayer player;
 	protected OoyalaSkinLayout skinLayout;
@@ -65,6 +67,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			domain = extras.getString("domain");
 			autoPlay = extras.getBoolean("autoPlay",false);
 			selectedFormat = extras.getString("selectedFormat","default");
+			hevcMode = extras.getString("hevc_mode","NoHEVCParam");
+			isStaging = extras.getBoolean("is_staging",false);
 		}
 	}
 

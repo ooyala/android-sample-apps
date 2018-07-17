@@ -1,7 +1,9 @@
 package com.ooyala.sample.players;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -47,13 +49,19 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = null;
-			if(selectedFormat.equalsIgnoreCase("default"))
-				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-			else
-				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
+			Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
+			if(!selectedFormat.equalsIgnoreCase("default"))
+				optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
+			if(hevcMode.equalsIgnoreCase("HEVCPreferred"))
+				optionBuilder.enableHevc(true);
+			else if(hevcMode.equalsIgnoreCase("HEVCNotPreferred"))
+				optionBuilder.enableHevc(false);
+			Options options =  optionBuilder.build();
 			player = new OoyalaPlayer(pcode, playerDomain, options);
-
+			if(isStaging) {
+				Log.i(TAG, "Environment Set to Staging:");
+				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
+			}
 			//Create the SkinOptions, and setup React
 			SkinOptions skinOptions = new SkinOptions.Builder().build();
 			playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
