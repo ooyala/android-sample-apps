@@ -4,6 +4,7 @@ package com.ooyala.sample.players;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -13,7 +14,11 @@ import com.ooyala.android.item.UnbundledVideo;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 
+import java.util.Observable;
+
 public class UnbundledPlayerActivity extends AbstractHookActivity {
+
+  private Stream stream;
 
   public static String getName() {
     return "Unbundled";
@@ -26,11 +31,12 @@ public class UnbundledPlayerActivity extends AbstractHookActivity {
       OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
       Options options = new Options.Builder().setUseExoPlayer(true).build();
       player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      player.addObserver(this);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
       final String url = getIntent().getExtras().getString("embed_code");
-      Stream s = new Stream(url, Stream.DELIVERY_TYPE_MP4);
-      UnbundledVideo u = new UnbundledVideo(s);
+      stream = new Stream(url, Stream.DELIVERY_TYPE_MP4);
+      UnbundledVideo u = new UnbundledVideo(stream);
       final boolean success = player.setUnbundledVideo(u);
       if (success) {
         //Uncomment for Auto-Play
@@ -49,5 +55,24 @@ public class UnbundledPlayerActivity extends AbstractHookActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.player_simple_layout);
     completePlayerSetup(asked);
+  }
+
+  @Override
+  public void update(Observable arg0, Object argN) {
+    super.update(arg0, argN);
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+
+    // STREAM_PARAMS_UPDATED_NOTIFICATION_NAME is called when the available or selected tracks change.
+    if (arg1.equalsIgnoreCase(OoyalaPlayer.STREAM_PARAMS_UPDATED_NOTIFICATION_NAME)) {
+      int videoBitrate = stream.getVideoBitrate();
+      int audioBitrate = stream.getAudioBitrate();
+      int combinedBitrate = stream.getCombinedBitrate();
+      int width = stream.getWidth();
+      int height = stream.getHeight();
+      String streamParams = String.format("Stream params: video bitrate: %d, audio bitrate: %d, " +
+        "combined bitrate: %d, width: %d, height: %d", videoBitrate, audioBitrate, combinedBitrate,
+        width, height);
+      Log.d(TAG, streamParams);
+    }
   }
 }
