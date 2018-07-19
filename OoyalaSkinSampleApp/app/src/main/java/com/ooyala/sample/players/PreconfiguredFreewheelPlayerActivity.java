@@ -49,15 +49,7 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
-			if(!selectedFormat.equalsIgnoreCase("default"))
-				optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
-			if(hevcMode.equalsIgnoreCase("HEVCPreferred"))
-				optionBuilder.enableHevc(true);
-			else if(hevcMode.equalsIgnoreCase("HEVCNotPreferred"))
-				optionBuilder.enableHevc(false);
-			Options options =  optionBuilder.build();
-			player = new OoyalaPlayer(pcode, playerDomain, options);
+			player = new OoyalaPlayer(pcode, playerDomain, getOptions());
 			if(isStaging) {
 				Log.i(TAG, "Environment Set to Staging:");
 				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
@@ -73,8 +65,9 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 			OoyalaFreewheelManager fwManager = new OoyalaFreewheelManager(this, skinLayout.getAdView(), player);
 
 			if (player.setEmbedCode(embedCode)) {
-				if(autoPlay)
+				if(autoPlay) {
 					player.play();
+				}
 			}
 		}
 	}

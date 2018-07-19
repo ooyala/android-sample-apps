@@ -11,9 +11,11 @@ import android.util.Log;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.sample.utils.CustomPlayerInfo;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -67,7 +69,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			domain = extras.getString("domain");
 			autoPlay = extras.getBoolean("autoPlay",false);
 			selectedFormat = extras.getString("selectedFormat","default");
-			hevcMode = extras.getString("hevc_mode","NoHEVCParam");
+			hevcMode = extras.getString("hevc_mode","NoPreference");
 			isStaging = extras.getBoolean("is_staging",false);
 		}
 	}
@@ -184,5 +186,20 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
       }
     }
     return text;
+  }
+
+  protected Options getOptions(){
+	  Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
+	  if(!selectedFormat.equalsIgnoreCase("default")) {
+		  optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
+	  }
+	  if(hevcMode.equalsIgnoreCase("HEVCPreferred")) {
+		  optionBuilder.enableHevc(true);
+	  }
+	  else if(hevcMode.equalsIgnoreCase("HEVCNotPreferred")) {
+		  optionBuilder.enableHevc(false);
+	  }
+	  Options options =  optionBuilder.build();
+	  return options;
   }
 }

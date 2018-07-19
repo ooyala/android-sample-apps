@@ -37,7 +37,6 @@ public class AddAssetActivity extends Activity {
   private String pCode;
   private String playerActivity;
   private CheckBox autoPlayCheckBox;
-  private boolean autoPlay;
   private String selectedFormat;
   private Spinner hevcSpinner;
   private CheckBox envStgCheckBox;
@@ -64,7 +63,6 @@ public class AddAssetActivity extends Activity {
         pCode = pCodeEditText.getText().toString();
         playerActivity =  String.valueOf(playerSpinner.getSelectedItem());
         selectedFormat = String.valueOf(formatSpinner.getSelectedItem());
-        autoPlay = autoPlayCheckBox.isChecked() ? true : false;
         if (embedCode.isEmpty()) {
           Toast.makeText(AddAssetActivity.this, "Embed code can't be empty!", Toast.LENGTH_LONG).show();
           return;
@@ -104,7 +102,7 @@ public class AddAssetActivity extends Activity {
 
     hevcSpinner = (Spinner) findViewById(R.id.hevc_mode);
     list = new ArrayList<String>();
-    list.add("NoHEVCParam");
+    list.add("NoPreference");
     list.add("HEVCPreferred");
     list.add("HEVCNotPreferred");
     dataAdapter = new ArrayAdapter<String>(this,
@@ -126,7 +124,7 @@ public class AddAssetActivity extends Activity {
     intent.putExtra("embed_code", embedCode);
     intent.putExtra("pcode", pCode);
     intent.putExtra("domain", "http://www.ooyala.com");
-    intent.putExtra("autoPlay", autoPlay);
+    intent.putExtra("autoPlay", autoPlayCheckBox.isChecked() ? true : false);
     intent.putExtra("selectedFormat", selectedFormat);
     intent.putExtra("hevc_mode", String.valueOf(hevcSpinner.getSelectedItem()));
     intent.putExtra("is_staging", envStgCheckBox.isChecked() ? true : false);
