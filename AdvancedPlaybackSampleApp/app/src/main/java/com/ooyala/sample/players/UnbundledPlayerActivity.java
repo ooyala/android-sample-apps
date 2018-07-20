@@ -69,9 +69,10 @@ public class UnbundledPlayerActivity extends AbstractHookActivity {
       int combinedBitrate = stream.getCombinedBitrate();
       int width = stream.getWidth();
       int height = stream.getHeight();
+      String url = stream.getUrl();
       String streamParams = String.format("Stream params: video bitrate: %d, audio bitrate: %d, " +
-        "combined bitrate: %d, width: %d, height: %d", videoBitrate, audioBitrate, combinedBitrate,
-        width, height);
+        "combined bitrate: %d, width: %d, height: %d, URL: %s", videoBitrate, audioBitrate,
+        combinedBitrate, width, height, url);
       Log.d(TAG, streamParams);
     }
   }
