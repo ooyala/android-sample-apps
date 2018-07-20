@@ -16,7 +16,7 @@ android {
     }
 
 // Uncomment if you need multidex
-//    multiDexEnabled true
+    multiDexEnabled true
   }
 
   packagingOptions {
@@ -31,9 +31,9 @@ android {
     }
   }
 // Uncomment if you need multidex
-//  dexOptions {
-//    javaMaxHeapSize "4g"
-//  }
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
 }
 
 repositories {
@@ -80,7 +80,7 @@ tasks.copyTask.execute()
 
 dependencies {
 // Uncomment if you need multidex
-//  implementation 'com.android.support:multidex:1.0.1'
+  implementation 'com.android.support:multidex:1.0.1'
 
 //  implementation files('libs/FWAdManager.jar')
 //  implementation files('libs/OoyalaFreewheelSDK.jar')
