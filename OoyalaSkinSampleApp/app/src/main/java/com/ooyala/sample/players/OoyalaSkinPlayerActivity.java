@@ -41,6 +41,8 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			if(isStaging) {
 				Log.i(TAG, "Environment Set to Staging:");
 				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
+			} else {
+				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.PRODUCTION, Environment.PROTOCOL_HTTPS);
 			}
 			//Create the SkinOptions, and setup React
 			JSONObject overrides = createSkinOverrides();
