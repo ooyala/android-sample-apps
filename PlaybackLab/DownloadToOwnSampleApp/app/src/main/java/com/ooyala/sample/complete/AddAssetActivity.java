@@ -7,12 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
 
 public class AddAssetActivity extends AppCompatActivity {
-
 
     public final static String getName() {
         return "Custom BasicPlayback";
@@ -29,7 +27,6 @@ public class AddAssetActivity extends AppCompatActivity {
     private String secretKey;
     private String accountId;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +38,6 @@ public class AddAssetActivity extends AppCompatActivity {
         apiKeyEditText = (EditText) findViewById(R.id.APIKey_edit_text);
         secretKeyEditText = (EditText) findViewById(R.id.SecretKey_edit_text);
         accountIdEditText = (EditText) findViewById(R.id.AccountId_edit_text);
-
-
 
         initButtonListeners();
     }
@@ -64,7 +59,8 @@ public class AddAssetActivity extends AppCompatActivity {
                     return;
                 }
                 if (pCode.isEmpty()) {
-                    pCode = "BjcWYyOu1KK2DiKOkF41Z2k0X57l";
+                    Toast.makeText(AddAssetActivity.this, "Pcode can't be empty!", Toast.LENGTH_LONG).show();
+                    return;
                 }
                 startPlayerActivity();
 

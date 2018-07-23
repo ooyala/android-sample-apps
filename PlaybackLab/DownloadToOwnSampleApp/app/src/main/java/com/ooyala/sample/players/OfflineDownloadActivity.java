@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
@@ -20,7 +19,6 @@ import com.ooyala.android.offline.DashOptions;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
-
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -48,11 +46,11 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   private final int MAX_RETRY_COUNT = 3;
   private int retry_count;
 
-  private final String APIKEY = "";
-  private final String SECRET = "";
+  private String APIKEY = "";
+  private String SECRET = "";
 
   // An account ID, if you are using Concurrent Streams or Entitlements
-  private final String ACCOUNT_ID = "";
+  private String ACCOUNT_ID = "";
 
   /**
    * Called when the activity is first created.
@@ -65,6 +63,10 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
+    APIKEY = getIntent().getExtras().getString("api_key");
+    SECRET = getIntent().getExtras().getString("secret_key");
+    ACCOUNT_ID = getIntent().getExtras().getString("account_id");
+
     progressView = (TextView)findViewById(R.id.progress_text);
     progressView.setText("progress: 0");
     handler = new Handler(getMainLooper());

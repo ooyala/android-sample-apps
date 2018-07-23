@@ -76,6 +76,9 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
   private ChromecastPlayerSelectionOption[] getVideoList() {
     return new ChromecastPlayerSelectionOption[]{
       new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
+            new ChromecastPlayerSelectionOption("HLS ffmpeg Asset", "M1YnhyZTE6X6-QO5AmLg1f623BYEDioW", "k0a2gyOt0QGNJLSuzKfdY4R-hw2b", "http://www.ooyala.com", ChromecastPlayerActivity.class),
+            new ChromecastPlayerSelectionOption("eHLS ffmpeg Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
+            new ChromecastPlayerSelectionOption("eHLS Elemental Asset", "pvZjB3ZDE6UjXtoS3j_OvxOb9lEUMxru", "x2aDkyOt2q3WtOCp-krSyDffASzL", "http://www.ooyala.com", ChromecastPlayerActivity.class),
       new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
       new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
       new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),

@@ -8,11 +8,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.DownloadSerializationActivity;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -46,8 +44,6 @@ public class MainExoPlayerActivity extends Activity implements OnItemClickListen
 //    activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
     activityMap.put(DownloadSerializationActivity.getName(), DownloadSerializationActivity.class);
-
-    //Added by rmanchi
     activityMap.put(AddAssetActivity.getName(), AddAssetActivity.class);
 
     for(String key : activityMap.keySet()) {
@@ -66,7 +62,8 @@ public class MainExoPlayerActivity extends Activity implements OnItemClickListen
 
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    startActivity(intent);
+    //startActivity(intent);
+    startActivityForResult(intent, 0);
     return;
   }
 }

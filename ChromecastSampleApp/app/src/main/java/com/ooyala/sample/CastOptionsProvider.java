@@ -16,7 +16,7 @@ import java.util.List;
  * It is used to provide google cast options by manifest.
  */
 public class CastOptionsProvider implements OptionsProvider {
-  private final String APP_ID = "4172C76F";
+  private final String APP_ID = "D4C7BD4A";
 
   @Override
   public CastOptions getCastOptions(Context context) {

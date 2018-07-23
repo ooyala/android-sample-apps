@@ -3,7 +3,6 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
@@ -17,16 +16,12 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
-
 import org.json.JSONObject;
-
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-//added below two imports by rmanchi
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import android.support.v4.app.ActivityCompat;
@@ -36,7 +31,6 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
   implements Observer, DefaultHardwareBackBtnHandler, EmbedTokenGenerator {
 
   private static final String TAG = OoyalaSkinOPTPlayerActivity.class.getSimpleName();
-  //added below two stmts by rmanchi
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
   boolean writePermission = false;
 
@@ -44,12 +38,10 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
   String PCODE  = null;
   String DOMAIN = null;
 
-  //Changed by rmanchi - Removed final keyword for apikey, secret & account_id
-  private  String APIKEY = "";
-  private  String SECRET = "";
+  String APIKEY = "";
+  String SECRET = "";
 
-  // An account ID, if you are using Concurrent Streams or Entitlements
-  private  String ACCOUNT_ID = "";
+  private String ACCOUNT_ID = "";
 
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
@@ -62,7 +54,6 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    //added by rmanchi
     if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
     } else {
@@ -74,11 +65,9 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
-    //added by rmanchi
     APIKEY = getIntent().getExtras().getString("api_key");
     SECRET = getIntent().getExtras().getString("secret_key");
     ACCOUNT_ID = getIntent().getExtras().getString("account_id");
-
 
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
@@ -215,14 +204,11 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
-
-    //added by rmanchi
     if (writePermission) {
       Log.d(TAG, "Writing log to SD card");
       // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
       Playbacklog.writeToSdcardLog(text);
     }
-
   }
 
 

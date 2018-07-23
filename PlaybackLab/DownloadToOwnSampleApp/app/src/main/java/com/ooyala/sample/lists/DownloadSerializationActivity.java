@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
@@ -24,7 +23,6 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.players.OfflineDownloadActivity;
 import com.ooyala.sample.players.OfflineSkinPlayerActivity;
 import com.ooyala.sample.utils.DownloadableAsset;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;

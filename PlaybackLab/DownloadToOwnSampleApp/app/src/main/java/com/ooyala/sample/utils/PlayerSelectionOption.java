@@ -11,7 +11,6 @@ public class PlayerSelectionOption {
   private Class <? extends Activity> activity;
   private String pcode;
   private String domain;
-  //added by rmanchi
   private String apiKey;
   private String secretKey;
   private String accountId;
@@ -21,15 +20,12 @@ public class PlayerSelectionOption {
     this.activity = activity;
     this.pcode = pcode;
     this.domain = domain;
-
-    //added by rmanchi
     this.apiKey = apiKey;
     this.secretKey = secretKey;
     this.accountId = accountId;
 
   }
 
-  //added by rmanchi
   /**
    * Get the pcode for this sample
    * @return the apikey
@@ -38,7 +34,6 @@ public class PlayerSelectionOption {
     return apiKey;
   }
 
-  //added by rmanchi
   /**
    * Get the pcode for this sample
    * @return the secretKey
@@ -47,7 +42,6 @@ public class PlayerSelectionOption {
     return secretKey;
   }
 
-  //added by rmanchi
   /**
    * Get the pcode for this sample
    * @return the accountId
@@ -55,7 +49,6 @@ public class PlayerSelectionOption {
   public String getAccountId() {
     return accountId;
   }
-
 
   /**
    * Get the pcode for this sample
