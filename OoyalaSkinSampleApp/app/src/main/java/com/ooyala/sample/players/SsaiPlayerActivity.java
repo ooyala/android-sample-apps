@@ -66,16 +66,13 @@ public class SsaiPlayerActivity extends AbstractHookActivity {
      */
     private JSONObject createSkinOverrides() {
         JSONObject overrides = new JSONObject();
-//    JSONObject startScreenOverrides = new JSONObject();
-//    JSONObject playIconStyleOverrides = new JSONObject();
-//    try {
-//      playIconStyleOverrides.put("color", "red");
-//      startScreenOverrides.put("playButtonPosition", "bottomLeft");
-//      startScreenOverrides.put("playIconStyle", playIconStyleOverrides);
-//      overrides.put("startScreen", startScreenOverrides);
-//    } catch (Exception e) {
-//      Log.e(TAG, "Exception Thrown", e);
-//    }
+        JSONObject adScreenOverrides = new JSONObject();
+        try {
+            adScreenOverrides.put("showControlBar", true);
+            overrides.put("adScreen", adScreenOverrides);
+        } catch (Exception e) {
+            Log.e(TAG, "Exception Thrown", e);
+        }
         return overrides;
     }
 
