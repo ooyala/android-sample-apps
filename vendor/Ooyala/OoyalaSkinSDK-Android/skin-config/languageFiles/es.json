@@ -137,6 +137,8 @@
   "More Options": "Más Opciones",
   "Audio": "Audio",
   "Subtitles": "Subtítulos",
-  "Undefined language": "Lenguaje indefinido",
-  "No linguistic content": "Contenido no lingüístico"
+  "Undefined language": "Idioma no definido",
+  "No linguistic content": "Sin contenido lingüístico",
+  "Speed": "Velocidad",
+  "Normal": "Normal"
 }

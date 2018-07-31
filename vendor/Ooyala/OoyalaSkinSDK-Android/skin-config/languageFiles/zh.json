@@ -62,7 +62,7 @@
   "AUTHORIZATION ERROR": "授权错误",
   "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22": "无法将此设备注册到该帐号，因为已达到授权设备的最大数量。错误代码 22",
   "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29": "无法访问此内容，因为授权设备数量已达到最大值。错误代码 29",
-  "Please remove one of your authorized devices to enable this device.": "请删除其中一个已授权设备以启用此设备。",  
+  "Please remove one of your authorized devices to enable this device.": "请删除其中一个已授权设备以启用此设备。",
   "LICENSE ERROR": "许可证错误",
   "General error acquiring license": "获得许可证一般错误",
   "DRM SERVER ERROR": "DRM 服务器错误",
@@ -137,6 +137,8 @@
   "More Options": "更多选项",
   "Audio": "音频",
   "Subtitles": "字幕",
-  "Undefined language": "未定义的语言",
-  "No linguistic content": "无语言内容"
+  "Undefined language": "未定义语言",
+  "No linguistic content": "没有语言内容",
+  "Speed": "Speed",
+  "Normal": "Normal"
 }

@@ -62,7 +62,7 @@
   "AUTHORIZATION ERROR": "認証エラー",
   "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22": "このデバイスをアカウントに登録できません。認証されたデバイスの数が上限に達しています。エラーコード22",
   "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29": "このコンテンツにアクセスできません。認証されたデバイスの数が上限に達しています。エラーコード29",
-  "Please remove one of your authorized devices to enable this device.": "このデバイスを有効にするには、認証されたデバイスのうち1つを削除してください。",  
+  "Please remove one of your authorized devices to enable this device.": "このデバイスを有効にするには、認証されたデバイスのうち1つを削除してください。",
   "LICENSE ERROR": "ライセンスエラー",
   "General error acquiring license": "ライセンス取得での一般的なエラー",
   "DRM SERVER ERROR": "DRMサーバーエラー",
@@ -138,5 +138,7 @@
   "Audio": "オーディオ",
   "Subtitles": "サブタイトル",
   "Undefined language": "未定義の言語",
-  "No linguistic content": "言語コンテンツなし"
+  "No linguistic content": "言語コンテンツなし",
+  "Speed": "Speed",
+  "Normal": "Normal"
 }

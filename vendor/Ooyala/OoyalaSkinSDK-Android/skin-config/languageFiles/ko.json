@@ -62,7 +62,7 @@
   "AUTHORIZATION ERROR": "권한 부여 오류",
   "Unable to register this device to this account, as the maximum number of authorized devices has already been reached. Error Code 22": "권한이 부여된 장치 최대 수에 이미 도달하여 이 장치를 이 계정에 등록할 수 없습니다. 오류 코드 22",
   "Unable to access this content, as the maximum number of devices has already been authorized. Error Code 29": "이미 최대 수의 장치에 권한이 부여되서 이 콘텐츠에 액세스할 수 없습니다.",
-  "Please remove one of your authorized devices to enable this device.": "이 장치를 활성화하려면 권한이 부여된 장치 하나를 제거하세요.",  
+  "Please remove one of your authorized devices to enable this device.": "이 장치를 활성화하려면 권한이 부여된 장치 하나를 제거하세요.",
   "LICENSE ERROR": "라이센스 오류",
   "General error acquiring license": "라이센스 획득 관련 일반 오류입니다",
   "DRM SERVER ERROR": "DRM 서버 오류",
@@ -138,5 +138,7 @@
   "Audio": "오디오",
   "Subtitles": "자막",
   "Undefined language": "정의되지 않은 언어",
-  "No linguistic content": "언어 콘텐츠 없음"
+  "No linguistic content": "언어 콘텐츠 없음",
+  "Speed": "Speed",
+  "Normal": "Normal"
 }
