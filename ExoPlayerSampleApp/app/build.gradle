@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 26
-  buildToolsVersion '26.0.2'
+  compileSdkVersion 27
+  buildToolsVersion '27.0.3'
 
   defaultConfig {
     applicationId "com.ooyala.sample.ExoPlayerSampleApp"
     minSdkVersion 16
-    targetSdkVersion 26
+    targetSdkVersion 27
 
     // Added due to https://github.com/facebook/react-native/issues/2814
     ndk {
@@ -100,8 +100,8 @@ dependencies {
 
     implementation files('libs/OoyalaSkinSDK.aar')
     implementation 'com.google.android.gms:play-services-ads:12.0.0'
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 
     // React-Native dependencies
     implementation 'javax.inject:javax.inject:1'
