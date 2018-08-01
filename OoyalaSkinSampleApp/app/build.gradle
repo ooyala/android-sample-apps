@@ -66,6 +66,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
     from new File(vendorDir, 'Google/ima-android-v385.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.55.4.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSSAISDK-Android/OoyalaSSAISDK.aar')
     into new File(projectDir,'./libs')
     println "Jars updated."
 }
@@ -85,7 +86,7 @@ dependencies {
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')
-
+    implementation files('libs/OoyalaSSAISDK.aar')
 
 //    implementation project(':core')
 //    implementation project(':skin')
@@ -112,5 +113,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.volley:volley:1.1.0'
 
 }
