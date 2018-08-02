@@ -1,8 +1,5 @@
 package com.ooyala.sample.lists;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,9 +19,14 @@ import com.ooyala.sample.players.NotificationsPlayerActivity;
 import com.ooyala.sample.players.PlayWithInitialTimePlayerActivity;
 import com.ooyala.sample.players.PluginPlayerActivity;
 import com.ooyala.sample.players.ProgrammaticVolumePlayerActivity;
-import com.ooyala.sample.players.UnbundledPlayerActivity;
+import com.ooyala.sample.players.ReinitPlayerActivity;
+import com.ooyala.sample.players.ReinitSkinPlayerActivity;
 import com.ooyala.sample.players.SampleVideoPlayerActivity;
+import com.ooyala.sample.players.UnbundledPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class AdvancedPlaybackListActivity extends Activity implements OnItemClickListener {
   public final static String getName() {
@@ -55,7 +57,8 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap.put(UnbundledPlayerActivity.getName(), new PlayerSelectionOption("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", UnbundledPlayerActivity.class));
     selectionMap.put(NotificationsPlayerActivity.getName(), new PlayerSelectionOption("92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", NotificationsPlayerActivity.class) );
     selectionMap.put(ProgrammaticVolumePlayerActivity.getName(), new PlayerSelectionOption("Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ProgrammaticVolumePlayerActivity.class) );
-
+    selectionMap.put(ReinitPlayerActivity.getName(), new PlayerSelectionOption("E4bDRwZTE6rMB8oYrzOsuHSPz0XM0dAV", "BzY2syOq6kIK6PTXN7mmrGVSJEFj", "http://www.ooyala.com", ReinitPlayerActivity.class) );
+    selectionMap.put(ReinitSkinPlayerActivity.getName(), new PlayerSelectionOption("E4bDRwZTE6rMB8oYrzOsuHSPz0XM0dAV", "BzY2syOq6kIK6PTXN7mmrGVSJEFj", "http://www.ooyala.com", ReinitSkinPlayerActivity.class) );
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
