@@ -159,14 +159,6 @@ public abstract class AbstractSkinHookActivity extends Activity implements Obser
 		}
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (null != playerLayoutController) {
-			playerLayoutController.onDestroy();
-		}
-	}
-
   private String getLog(Object argN) {
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     final Object data = ((OoyalaNotification) argN).getData();

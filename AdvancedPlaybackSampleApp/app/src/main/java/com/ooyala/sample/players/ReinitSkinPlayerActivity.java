@@ -57,9 +57,13 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
       player = null;
     }
     if (skinLayout != null) {
-      //TODO: release skin layout here
+      skinLayout.release();
     }
-    playerLayoutController = null;
+    if (null != playerLayoutController) {
+      playerLayoutController.deleteObserver(this);
+      playerLayoutController.onDestroy();
+      playerLayoutController = null;
+    }
   }
 
   private void reinitPlayer(String embedCode) {
@@ -75,9 +79,6 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
   @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
-      // Get the SkinLayout from our layout xml
-      skinLayout = findViewById(R.id.ooyalaSkin);
-
       // Create the OoyalaPlayer, with some built-in UI disabled
       PlayerDomain playerDomain = new PlayerDomain(domain);
       Options options = new Options.Builder()
@@ -87,9 +88,10 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
         .build();
 
       player = new OoyalaPlayer(pcode, playerDomain, options);
-      // TODO: init skin layout here
+      skinLayout.createSubViews();
       playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player);
-
+      // Default hardware back button handler was destroyed in ReactInstanceManager so we need to set it up again.
+      playerLayoutController.onResume(this, this);
       //Add observer to listen to fullscreen open and close events
       playerLayoutController.addObserver(this);
       player.addObserver(this);
