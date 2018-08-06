@@ -77,12 +77,13 @@ repositories {
 
 dependencies {
 // For development purposes only
-    implementation project(':core')
-    implementation project(':skin')
+//    implementation project(':core')
+//    implementation project(':skin')
 
-//    implementation files('libs/OoyalaSDK.aar')
-//    implementation files('libs/OoyalaSkinSDK.aar')
+    implementation files('libs/OoyalaSDK.aar')
+    implementation files('libs/OoyalaSkinSDK.aar')
 
+    implementation 'com.google.android.gms:play-services-ads:12.0.0'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
