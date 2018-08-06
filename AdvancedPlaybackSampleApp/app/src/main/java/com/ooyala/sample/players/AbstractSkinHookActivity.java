@@ -26,24 +26,24 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * as we need to write into the SD card and automation will parse this file.
  */
 public abstract class AbstractSkinHookActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
-  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
   String TAG = this.getClass().toString();
+
+  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+
   protected OoyalaSkinLayoutController playerLayoutController;
-
-  SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
-
   protected String embedCode;
   protected String pcode;
   protected String domain;
   protected String selectedFormat;
 
-  OoyalaPlayer player;
+  protected OoyalaPlayer player;
   protected OoyalaSkinLayout skinLayout;
 
+  protected boolean writePermission = false;
+  protected boolean asked = false;
+  protected boolean autoPlay = false;
 
-  boolean writePermission = false;
-  boolean asked = false;
-  boolean autoPlay = false;
+  private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
   // complete player setup after we asked for permission to write into external storage
   abstract void completePlayerSetup(final boolean asked);

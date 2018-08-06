@@ -33,6 +33,38 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
     initButtonListeners();
   }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    destroyPlayer();
+  }
+
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      // Create the OoyalaPlayer, with some built-in UI disabled
+      PlayerDomain playerDomain = new PlayerDomain(domain);
+      Options options = new Options.Builder()
+        .setShowNativeLearnMoreButton(false)
+        .setShowPromoImage(false)
+        .setUseExoPlayer(true)
+        .build();
+
+      player = new OoyalaPlayer(pcode, playerDomain, options);
+      skinLayout.createSubViews();
+      playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player);
+      // Default hardware back button handler was destroyed in ReactInstanceManager so we need to set it up again.
+      playerLayoutController.onResume(this, this);
+      //Add observer to listen to fullscreen open and close events
+      playerLayoutController.addObserver(this);
+      player.addObserver(this);
+
+      if (!player.setEmbedCode(embedCode)) {
+        Log.e(TAG, "Asset Failure");
+      }
+    }
+  }
+
   private void initButtonListeners() {
     Button setFirstAssetButton = findViewById(R.id.set_first_asset);
     setFirstAssetButton.setOnClickListener(new View.OnClickListener() {
@@ -74,37 +106,5 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
 
   private void setAssetInfo(String embedCode) {
     this.embedCode = embedCode;
-  }
-
-  @Override
-  void completePlayerSetup(boolean asked) {
-    if (asked) {
-      // Create the OoyalaPlayer, with some built-in UI disabled
-      PlayerDomain playerDomain = new PlayerDomain(domain);
-      Options options = new Options.Builder()
-        .setShowNativeLearnMoreButton(false)
-        .setShowPromoImage(false)
-        .setUseExoPlayer(true)
-        .build();
-
-      player = new OoyalaPlayer(pcode, playerDomain, options);
-      skinLayout.createSubViews();
-      playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player);
-      // Default hardware back button handler was destroyed in ReactInstanceManager so we need to set it up again.
-      playerLayoutController.onResume(this, this);
-      //Add observer to listen to fullscreen open and close events
-      playerLayoutController.addObserver(this);
-      player.addObserver(this);
-
-      if (!player.setEmbedCode(embedCode)) {
-        Log.e(TAG, "Asset Failure");
-      }
-    }
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    destroyPlayer();
   }
 }

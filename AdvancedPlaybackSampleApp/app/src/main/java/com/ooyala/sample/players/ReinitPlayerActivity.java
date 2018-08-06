@@ -18,11 +18,11 @@ import com.ooyala.sample.R;
  */
 public class ReinitPlayerActivity extends AbstractHookActivity {
 
+  private OoyalaPlayerLayout playerLayout;
+
   public static String getName() {
     return "Reinit player activity";
   }
-
-  private OoyalaPlayerLayout playerLayout;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,38 @@ public class ReinitPlayerActivity extends AbstractHookActivity {
 
     completePlayerSetup(asked);
     initButtonListeners();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    destroyPlayer();
+  }
+
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+
+      // Create the OoyalaPlayer, with some built-in UI disabled
+      PlayerDomain playerDomain = new PlayerDomain(domain);
+      Options options = new Options.Builder()
+        .setShowNativeLearnMoreButton(false)
+        .setShowPromoImage(false)
+        .setUseExoPlayer(true)
+        .build();
+
+      player = new OoyalaPlayer(pcode, playerDomain, options);
+      // Use setupPlayerFrame() method only after release() method has been called
+      playerLayout.setupPlayerFrame();
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+
+      //Add observer to listen to fullscreen open and close events
+      player.addObserver(this);
+
+      if (!player.setEmbedCode(embedCode)) {
+        Log.e(TAG, "Asset Failure");
+      }
+    }
   }
 
   private void initButtonListeners() {
@@ -73,37 +105,5 @@ public class ReinitPlayerActivity extends AbstractHookActivity {
 
   private void setAssetInfo(String embedCode) {
     this.embedCode = embedCode;
-  }
-
-  @Override
-  void completePlayerSetup(boolean asked) {
-    if (asked) {
-
-      // Create the OoyalaPlayer, with some built-in UI disabled
-      PlayerDomain playerDomain = new PlayerDomain(domain);
-      Options options = new Options.Builder()
-        .setShowNativeLearnMoreButton(false)
-        .setShowPromoImage(false)
-        .setUseExoPlayer(true)
-        .build();
-
-      player = new OoyalaPlayer(pcode, playerDomain, options);
-      // Use setupPlayerFrame() method only after release() method has been called
-      playerLayout.setupPlayerFrame();
-      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-
-      //Add observer to listen to fullscreen open and close events
-      player.addObserver(this);
-
-      if (!player.setEmbedCode(embedCode)) {
-        Log.e(TAG, "Asset Failure");
-      }
-    }
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    destroyPlayer();
   }
 }
