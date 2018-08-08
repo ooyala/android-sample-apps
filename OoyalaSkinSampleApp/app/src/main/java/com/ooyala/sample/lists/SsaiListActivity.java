@@ -114,6 +114,12 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
     startActivity(intent);
   }
 
+  /**
+   * Get a JSON from the resources directory as a JSONObject
+   *
+   * @param resource File to fetch
+   * @return the resource as JSONObject
+   */
   private JSONObject getResourceAsJsonObject(String resource)  {
     ClassLoader classLoader = this.getClass().getClassLoader();
     InputStream is = classLoader.getResourceAsStream(resource);
