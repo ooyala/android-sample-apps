@@ -14,6 +14,11 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.players.SsaiPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -63,10 +68,14 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
     String playerParamsLiveTeam = "{\"videoplaza-ads-manager\":{\"metadata\":{\"all_ads\":[{\"position\":\"7\"}],\"playerLevelCuePoints\":\"30,10,20\",\"playerLevelShares\":\"nab\",\"playerLevelTags\":\"me,mw,fe,fw\",\"vpDomain\":\"live-team\"}}}";
     String playerParamsVideoPlaza = "{\"videoplaza-ads-manager\":{\"metadata\":{\"all_ads\":[{\"position\":\"7\"}],\"playerLevelCuePoints\":\"10,20,30\",\"playerLevelShares\":\"ssai-playback\",\"playerLevelTags\":\"ssai\",\"vpDomain\":\"live-team.videoplaza.tv\"}}}";
 
+    JSONObject dataFromJson = getResourceAsJsonObject("ssaiPlayerParams.json");
+    String paramsFromJson = dataFromJson == null ? "" : dataFromJson.toString();
+
     selectionMap = new LinkedHashMap<>();
     selectionMap.put("Without Player Params", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class));
     selectionMap.put("Player Params live-team", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class, playerParamsLiveTeam));
     selectionMap.put("Player Params videoplaza", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class, playerParamsVideoPlaza));
+    selectionMap.put("Player Params from JSON", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class, paramsFromJson));
     selectionMap.put("SSAI Live", new SsaiSelectionOption("lkb2cyZjE6wp94YSGIEjm6Em1yH0P3zT", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
@@ -103,5 +112,22 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
     intent.putExtra("domain", selection.getDomain());
     intent.putExtra("player_params", selection.getPlayerParams());
     startActivity(intent);
+  }
+
+  private JSONObject getResourceAsJsonObject(String resource)  {
+    ClassLoader classLoader = this.getClass().getClassLoader();
+    InputStream is = classLoader.getResourceAsStream(resource);
+    try {
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new JSONObject(new String(buffer, "UTF-8"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
