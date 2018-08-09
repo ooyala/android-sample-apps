@@ -57,11 +57,11 @@ public class MultiAudioActivity extends AbstractHookActivity {
       playerLayoutController.addObserver(this);
       player.addObserver(this);
 
-      OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
-
       if (!player.setEmbedCode(embedCode)) {
         Log.e(TAG, "Asset Failure");
       }
+
+      OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 
       // Show how to set audio settings i.e. default audio language
       //setAudioSettings();

@@ -180,9 +180,9 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
     playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
     playerController.addObserver(this);
 
-    applyADSManager(skinLayout);
-
     player.setEmbedCode(embedCode);
+
+    applyADSManager(skinLayout);
   }
 
   @Override
