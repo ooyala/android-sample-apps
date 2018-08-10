@@ -62,9 +62,6 @@ public class MavenPlayerActivity extends Activity implements Observer {
 
     player.addObserver(this);
 
-    @SuppressWarnings("unused")
-    OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
-
     if (player.setEmbedCode(EMBED)) {
       //Uncomment for Auto-Play
       //player.play();
@@ -72,6 +69,9 @@ public class MavenPlayerActivity extends Activity implements Observer {
     else {
       Log.e(TAG, "Asset Failure");
     }
+
+    @SuppressWarnings("unused")
+    OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
   }
 
   @Override
