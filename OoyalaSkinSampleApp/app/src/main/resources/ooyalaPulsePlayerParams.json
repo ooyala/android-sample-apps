@@ -2,9 +2,9 @@
   "videoplaza-ads-manager": {
     "metadata": {
       "all_ads": [{
-        "position": "7"
+        "position": "2"
       }],
-      "playerLevelCuePoints": "10, 20, 30",
+      "playerLevelCuePoints": "10,20",
       "playerLevelShares": "ssai-playback",
       "playerLevelTags": "ssai",
       "vpDomain": "live-team"
