@@ -12,13 +12,11 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.SsaiPlayerActivity;
-import com.ooyala.sample.utils.PlayerSelectionOption;
+import com.ooyala.sample.utils.SsaiSelectionOption;
+import com.ooyala.sample.utils.Utils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,31 +32,6 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
   ArrayAdapter<String> selectionAdapter;
 
   /**
-   * This is used to store information of a Ssai sample activity for use in a Map or List
-   *
-   */
-  class SsaiSelectionOption extends PlayerSelectionOption {
-    private String playerParams;
-
-    public SsaiSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
-      this(embedCode, pcode, domain, activity, "");
-    }
-
-    public SsaiSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity, String playerParams) {
-      super(embedCode, pcode, domain, activity);
-      this.playerParams = playerParams;
-    }
-
-    public String getPlayerParams() {
-      return playerParams;
-    }
-
-    public void setPlayerParams(String playerParams) {
-      this.playerParams = playerParams;
-    }
-  }
-
-  /**
    * Called when the activity is first created.
    */
   @Override
@@ -68,13 +41,14 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
     String playerParamsLiveTeam = "{\"videoplaza-ads-manager\":{\"metadata\":{\"all_ads\":[{\"position\":\"7\"}],\"playerLevelCuePoints\":\"30,10,20\",\"playerLevelShares\":\"nab\",\"playerLevelTags\":\"me,mw,fe,fw\",\"vpDomain\":\"live-team\"}}}";
     String playerParamsVideoPlaza = "{\"videoplaza-ads-manager\":{\"metadata\":{\"all_ads\":[{\"position\":\"7\"}],\"playerLevelCuePoints\":\"10,20,30\",\"playerLevelShares\":\"ssai-playback\",\"playerLevelTags\":\"ssai\",\"vpDomain\":\"live-team.videoplaza.tv\"}}}";
 
-    JSONObject dataFromJson = getResourceAsJsonObject("ssaiPlayerParams.json");
+    ClassLoader classLoader = this.getClass().getClassLoader();
+    JSONObject dataFromJson = Utils.getResourceAsJsonObject(classLoader, "ssaiPlayerParams.json");
     String paramsFromJson = dataFromJson == null ? "" : dataFromJson.toString();
 
-    JSONObject dfpFromJson = getResourceAsJsonObject("dfpPlayerParams.json");
+    JSONObject dfpFromJson = Utils.getResourceAsJsonObject(classLoader, "dfpPlayerParams.json");
     String dfpParamsFromJson = dfpFromJson == null ? "" : dfpFromJson.toString();
 
-    JSONObject pulseFromJson = getResourceAsJsonObject("ooyalaPulsePlayerParams.json");
+    JSONObject pulseFromJson = Utils.getResourceAsJsonObject(classLoader, "ooyalaPulsePlayerParams.json");
     String pulseParamsFromJson = pulseFromJson == null ? "" : pulseFromJson.toString();
 
     selectionMap = new LinkedHashMap<>();
@@ -120,28 +94,5 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
     intent.putExtra("domain", selection.getDomain());
     intent.putExtra("player_params", selection.getPlayerParams());
     startActivity(intent);
-  }
-
-  /**
-   * Get a JSON from the resources directory as a JSONObject
-   *
-   * @param resource File to fetch
-   * @return the resource as JSONObject
-   */
-  private JSONObject getResourceAsJsonObject(String resource)  {
-    ClassLoader classLoader = this.getClass().getClassLoader();
-    InputStream is = classLoader.getResourceAsStream(resource);
-    try {
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new JSONObject(new String(buffer, "UTF-8"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (JSONException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 }
