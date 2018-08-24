@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Utils {
+
+  private Utils() {
+    // A private constructor
+  }
+
   /**
    * Get a JSON from the resources directory as a JSONObject
    *
