@@ -3,6 +3,7 @@ package com.ooyala.sample.utils;
 import com.ooyala.android.PlayerInfo;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class CustomPlayerInfo implements PlayerInfo {
@@ -54,7 +55,12 @@ public class CustomPlayerInfo implements PlayerInfo {
       return null;
     }
 
-    // we want to tell the server that we want to get elements as if we were using iOS
+  @Override
+  public Map<String, String> getAdditionalParams() {
+    return null;
+  }
+
+  // we want to tell the server that we want to get elements as if we were using iOS
     // we would get different streams because of it
     @Override
     public String getDevice() {
