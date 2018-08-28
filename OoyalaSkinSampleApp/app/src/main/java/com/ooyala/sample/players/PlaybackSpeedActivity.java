@@ -14,7 +14,6 @@ import com.ooyala.android.imasdk.OoyalaIMAManager;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.ssai.OoyalaSsaiManager;
-import com.ooyala.android.vrsdk.player.VRPlayerFactory;
 import com.ooyala.sample.R;
 
 import org.json.JSONObject;
@@ -29,7 +28,7 @@ import org.json.JSONObject;
 public class PlaybackSpeedActivity extends AbstractHookActivity {
   private static final String TAG = PlaybackSpeedActivity.class.getSimpleName();
 
-  private static final float INITIAL_PLAYBACK_SPEED = 5.0f;
+  private static final float INITIAL_PLAYBACK_SPEED = 2.0f;
   private static final float PLAYBACK_SPEED = 0.5f;
   private static final String SSAI_PLAYER_ID = "SSAI Android Player ID";
   private static final String AD_SCREEN_SKIN_OVERRIDES = "showControlBar";
@@ -61,7 +60,6 @@ public class PlaybackSpeedActivity extends AbstractHookActivity {
       // Create the OoyalaPlayer, with some built-in UI disabled
       PlayerDomain playerDomain = new PlayerDomain(domain);
       player = new OoyalaPlayer(pcode, playerDomain, options);
-      player.registerFactory(new VRPlayerFactory());
       player.addObserver(this);
 
       //Initialize player layout controller and add observer to listen to fullscreen open and close events
@@ -102,7 +100,7 @@ public class PlaybackSpeedActivity extends AbstractHookActivity {
       @Override
       public void onClick(View view) {
         if (player != null) {
-          player.setPlaybackSpeed(PLAYBACK_SPEED);
+          // Set the desired playback speed here
         }
       }
     });

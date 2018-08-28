@@ -41,12 +41,7 @@ public class PlaybackSpeedListActivity extends Activity implements OnItemClickLi
     setTitle(getName());
 
     selectionMap = new LinkedHashMap<>();
-    // VR assets
     String pcode = "BzY2syOq6kIK6PTXN7mmrGVSJEFj";
-    selectionMap.put("[No ADS] V360", new SsaiSelectionOption("FwOG5mZDE66kvaxH6EyZpj0iJ2AxBj_v", pcode, DOMAIN, PlaybackSpeedActivity.class));
-    selectionMap.put("[IMA ADS 360] Pre-Mid-Post skippable", new SsaiSelectionOption("Z4Y2UyZDE6bi5ZhPJE860W8GcE3z6WkE", pcode, DOMAIN, PlaybackSpeedActivity.class));
-    selectionMap.put("[Ooyala ADS 360] Pre-roll", new SsaiSelectionOption("k5YW1lZDE66qkVK2I-Em409mREbGmw3f", pcode, DOMAIN, PlaybackSpeedActivity.class));
-    selectionMap.put("[VAST ADS 360] Pre-Mid-Post", new SsaiSelectionOption("5uc21lZDE6uxI-13aXuCJm2RumePzyCe", pcode, DOMAIN, PlaybackSpeedActivity.class));
 
     // 2D assets
     selectionMap.put("[No ADS] 2D", new SsaiSelectionOption("VzZHd2YzE612sYDbk2UyuurOXrLgsVx9", pcode, DOMAIN, PlaybackSpeedActivity.class));
@@ -58,6 +53,9 @@ public class PlaybackSpeedListActivity extends Activity implements OnItemClickLi
     pcode = "ZsdGgyOnugo44o442aALkge_dVVK";
     selectionMap.put("[SSAI ADS] VOD - Ooyala Pulse", new SsaiSelectionOption("l5bm11ZjE6VFJyNE2iE6EKpCBVSRroAF", pcode, DOMAIN, PlaybackSpeedActivity.class, getPulseParams()));
     selectionMap.put("[SSAI ADS] VOD - DFP", new SsaiSelectionOption("13bm11ZjE6Wl7CQ2iKPH_Z1VpspHGOud", pcode, DOMAIN, PlaybackSpeedActivity.class, getDfpParams()));
+
+    pcode = "ViM2wyOicnaFHWsz2iQQj25bnQ32";
+    selectionMap.put("[LIVE] ELEMENTAL_CC_HLS", new SsaiSelectionOption("g1anZxZDE6hyE_zQEqtMAGINv7-oSHH8", pcode, DOMAIN, PlaybackSpeedActivity.class));
 
     //Create the adapter for the ListView
     selectionAdapter = new ArrayAdapter<>(this, R.layout.list_activity_list_item);
