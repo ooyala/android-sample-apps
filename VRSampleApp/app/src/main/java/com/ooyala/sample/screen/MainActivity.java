@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
 
   @Override
   public void onVideoChoose(VideoData data) {
-    VideoFragment fragment = FragmentFactory.getFragmentByAdType(data.getAdType());
+    VideoFragment fragment = FragmentFactory.getFragmentByType(data.getFeatureType(), data.getAdType());
     fragment.setArguments(data);
     showVideoFragment(fragment);
     toolbar.setTitle(data.getTitle());

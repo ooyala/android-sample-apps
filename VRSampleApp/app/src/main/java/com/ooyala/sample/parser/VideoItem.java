@@ -2,6 +2,7 @@ package com.ooyala.sample.parser;
 
 
 import com.google.gson.annotations.SerializedName;
+import com.ooyala.sample.utils.VideoFeatureType;
 
 public class VideoItem {
 
@@ -17,6 +18,9 @@ public class VideoItem {
   @SerializedName("ad-type")
   private AdType type;
 
+  @SerializedName("feature-type")
+  private VideoFeatureType featureType = VideoFeatureType.REGULAR;
+
   public String getTitle() {
     return title;
   }
@@ -31,5 +35,9 @@ public class VideoItem {
 
   public AdType getType() {
     return type;
+  }
+
+  public VideoFeatureType getFeatureType() {
+    return featureType;
   }
 }

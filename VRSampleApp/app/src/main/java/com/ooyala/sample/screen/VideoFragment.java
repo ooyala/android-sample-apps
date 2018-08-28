@@ -24,6 +24,7 @@ import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.android.vrsdk.player.VRPlayerFactory;
 import com.ooyala.sample.R;
+import com.ooyala.sample.interfaces.VideoFragmentInterface;
 import com.ooyala.sample.utils.VideoData;
 
 import java.util.Observable;
@@ -32,21 +33,20 @@ import java.util.Observer;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class VideoFragment extends Fragment implements Observer, DefaultHardwareBackBtnHandler {
+public class VideoFragment extends Fragment implements Observer, DefaultHardwareBackBtnHandler, VideoFragmentInterface {
 
   public static final String TAG = VideoFragment.class.getCanonicalName();
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
+  protected OoyalaPlayer player;
   private OoyalaSkinLayoutController playerController;
 
-  private final SDCardLogcatOoyalaEventsLogger logger = new SDCardLogcatOoyalaEventsLogger();
+  private SDCardLogcatOoyalaEventsLogger logger = new SDCardLogcatOoyalaEventsLogger();
   private boolean writeStoragePermissionGranted = false;
 
   private String embedCode;
   private String pCode;
   private String domain;
-
-  protected OoyalaPlayer player;
 
   public void setArguments(VideoData data) {
     final Bundle args = new Bundle();
@@ -142,8 +142,33 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
     }
   }
 
+  @Override
   public void applyADSManager(OoyalaSkinLayout skinLayout) {
 
+  }
+
+  @Override
+  public Options createOptions(FCCTVRatingConfiguration tvRatingConfiguration) {
+    final Options options = new Options.Builder()
+      .setTVRatingConfiguration(tvRatingConfiguration)
+      .setBypassPCodeMatching(true)
+      .setUseExoPlayer(true)
+      .setShowNativeLearnMoreButton(false)
+      .setShowPromoImage(false)
+      .build();
+    return options;
+  }
+
+  private Options createPlayerOptions() {
+    final FCCTVRatingConfiguration tvRatingConfiguration = createFCCTVRatingConfiguration();
+    Options options = createOptions(tvRatingConfiguration);
+    return options;
+  }
+
+  private FCCTVRatingConfiguration createFCCTVRatingConfiguration() {
+    return new FCCTVRatingConfiguration.Builder()
+      .setDurationSeconds(5)
+      .build();
   }
 
   private void changeToolbarVisibilityInFullscreenMode(Object arg) {
@@ -161,14 +186,7 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
   }
 
   private void initPlayer() {
-    final FCCTVRatingConfiguration tvRatingConfiguration = new FCCTVRatingConfiguration.Builder().setDurationSeconds(5).build();
-    final Options options = new Options.Builder()
-        .setTVRatingConfiguration(tvRatingConfiguration)
-        .setBypassPCodeMatching(true)
-        .setUseExoPlayer(true)
-        .setShowNativeLearnMoreButton(false)
-        .setShowPromoImage(false)
-        .build();
+    final Options options = createPlayerOptions();
 
     player = new OoyalaPlayer(pCode, new PlayerDomain(domain), options);
     player.registerFactory(new VRPlayerFactory());

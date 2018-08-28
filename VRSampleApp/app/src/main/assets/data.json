@@ -213,5 +213,34 @@
         "ad-type" : "VAST"
       }
     ]
+  },
+  {
+    "title" : "PLAYBACK RATE FEATURE",
+    "videos" : [
+      {
+        "title" : "Resolution 1920 V360",
+        "embed-code" : "9kcGNkZDE6ytN9v0jKYdFALpCAbkwN-K",
+        "ad-type" : "NO-ADS",
+        "feature-type" : "PLAYBACK-RATE"
+      },
+      {
+        "title" : "[IMA ADS 360] Pre-Mid-Post skippable",
+        "embed-code" : "Z4Y2UyZDE6bi5ZhPJE860W8GcE3z6WkE",
+        "ad-type" : "IMA",
+        "feature-type" : "PLAYBACK-RATE"
+      },
+      {
+        "title" : "[VAST ADS 360] Pre-Mid-Post",
+        "embed-code" : "s4Y2kzZjE6g1NSFVhkeh0Lmohxnw_ouJ",
+        "ad-type" : "VAST",
+        "feature-type" : "PLAYBACK-RATE"
+      },
+      {
+        "title" : "[Ooyala ADS 360] Pre-roll",
+        "embed-code" : "k5YW1lZDE66qkVK2I-Em409mREbGmw3f",
+        "ad-type" : "OOYALA",
+        "feature-type" : "PLAYBACK-RATE"
+      }
+    ]
   }
 ]

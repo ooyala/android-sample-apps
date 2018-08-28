@@ -55,7 +55,8 @@ public class VideoJSONParser {
     for (SectionItem item : items) {
       datas.add(new VideoData(VideoItemType.SECTION, item.getTitle(), null, null));
       for (VideoItem videoItem : item.getVideoItemList()) {
-        datas.add(new VideoData(VideoItemType.VIDEO, videoItem.getTitle(), videoItem.getType(), videoItem.getEmbedCode(), videoItem.getpCode()));
+        datas.add(new VideoData(VideoItemType.VIDEO, videoItem.getFeatureType(),
+          videoItem.getTitle(), videoItem.getType(), videoItem.getEmbedCode(), videoItem.getpCode()));
       }
     }
     return datas;

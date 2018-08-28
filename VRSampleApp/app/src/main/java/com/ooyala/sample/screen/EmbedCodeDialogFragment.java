@@ -14,6 +14,7 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.interfaces.VideoChooseInterface;
 import com.ooyala.sample.parser.AdType;
 import com.ooyala.sample.utils.VideoData;
+import com.ooyala.sample.utils.VideoFeatureType;
 import com.ooyala.sample.utils.VideoItemType;
 
 public class EmbedCodeDialogFragment extends DialogFragment {
@@ -61,7 +62,7 @@ public class EmbedCodeDialogFragment extends DialogFragment {
           pCode = "BzY2syOq6kIK6PTXN7mmrGVSJEFj";
         }
 
-        VideoData data = new VideoData(VideoItemType.VIDEO, "Custom video", adType, embedCode, pCode);
+        VideoData data = new VideoData(VideoItemType.VIDEO, VideoFeatureType.REGULAR, "Custom video", adType, embedCode, pCode);
         FragmentActivity activity = getActivity();
         if (activity instanceof VideoChooseInterface) {
           ((VideoChooseInterface) activity).onVideoChoose(data);
