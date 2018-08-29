@@ -83,7 +83,7 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   }
 
   @Override
-  public void seekToPercentLive(float v) {
+  public void seekToPercentLive(float percent) {
 
   }
 
