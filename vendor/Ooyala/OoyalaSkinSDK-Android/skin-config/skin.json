@@ -175,6 +175,32 @@
     "showUpNext": true,
     "timeToShow": 10
   },
+  "playbackSpeed": {
+    "options": [ 0.5, 0.75, 1, 1.25, 1.5, 2 ]
+  },
+  "skipControls": {
+    "enabled": false,
+    "skipBackwardTime": 10,
+    "skipForwardTime": 10,
+    "buttons": {
+      "previousVideo": {
+        "enabled": true,
+        "index": 1
+      },
+      "skipBackward": {
+        "enabled": true,
+        "index": 2
+      },
+      "skipForward": {
+        "enabled": true,
+        "index": 3
+      },
+      "nextVideo": {
+        "enabled": true,
+        "index": 4
+      }
+    }
+  },
   "controlBar": {
     "volumeControl": {
       "color": ""
@@ -289,6 +315,9 @@
     "compress": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006a", "fontStyleClass": "oo-icon oo-icon-system-minimizescreen"},
     "ellipsis": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0066", "fontStyleClass": "oo-icon oo-icon-system-menu"},
     "replay": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0063", "fontStyleClass": "oo-icon oo-icon-system-replay"},
+    "next": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0044", "fontStyleClass": "oo-icon oo-icon-next"},
+    "previous": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003c", "fontStyleClass": "oo-icon oo-icon-previous"},
+    "forward": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0028", "fontStyleClass": "oo-icon oo-icon-forward"},
     "share": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006f", "fontStyleClass": "oo-icon oo-icon-share"},
     "cc": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u006B", "fontStyleClass": "oo-icon oo-icon-cc"},
     "stereoscopic": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0057", "fontStyleClass": "oo-icon"},

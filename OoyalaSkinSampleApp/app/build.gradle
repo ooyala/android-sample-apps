@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.ooyala.sample.SkinCompleteSampleApp"
         minSdkVersion 16
         multiDexEnabled true
-        targetSdkVersion 26
+        targetSdkVersion 27
 
         // Added due to https://github.com/facebook/react-native/issues/2814
         ndk {
@@ -66,6 +66,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
     from new File(vendorDir, 'Google/ima-android-v385.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.55.4.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSSAISDK-Android/OoyalaSSAISDK.aar')
     into new File(projectDir,'./libs')
     println "Jars updated."
 }
@@ -85,7 +86,7 @@ dependencies {
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')
-
+    implementation files('libs/OoyalaSSAISDK.aar')
 
 //    implementation project(':core')
 //    implementation project(':skin')
@@ -108,9 +109,10 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation 'com.google.android.gms:play-services-ads:12.0.0'
     implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.8.5'
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.volley:volley:1.1.0'
 
 }

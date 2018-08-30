@@ -1,0 +1,11 @@
+{
+  "google-ima-ads-manager": {
+    "metadata": {
+      "all_ads": [{
+        "position": "10000",
+        "tag_url": "https://pubads.g.doubleclick.net/gampad/ads?env=vp&gdfp_req=1&output=xml_vast3&sz=1280x720&unviewed_position_start=1&ad_rule=0&pmnd=0&pmxd=90000&pmad=15&d_impl=1&d_imp_hdr=1&iu=/7521029/ibc_ad_unit&url=http://www.ooyala.com&cust_params=ibc_test_unit%3Dat%2Cma%2Csa%2Ctj&ss_req=0",
+        "position_type": "t"
+      }]
+    }
+  }
+}

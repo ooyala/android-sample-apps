@@ -38,6 +38,8 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
+			player.setEmbedCode(embedCode);
+
 			/** DITA_START:<ph id="ima_custom"> **/
 			OoyalaIMAConfiguration imaConfig = new OoyalaIMAConfiguration.Builder().setLocaleOverride("fr").build();
 
@@ -47,8 +49,6 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 			imaManager.setAdUrlOverride("http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7521029/pb_test_mid&ciu_szs=640x480&impl=s&cmsid=949&vid=FjbGRjbzp0DV_5-NtXBVo5Rgp3Sj0R5C&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]");
 			// imaManager.setAdTagParameters(null);
 			/** DITA_END:</ph> **/
-
-			player.setEmbedCode(embedCode);
 		}
 	}
 }
