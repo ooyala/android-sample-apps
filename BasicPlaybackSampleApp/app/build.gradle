@@ -33,7 +33,7 @@ dependencies {
 //    compile project(':core')
 
     implementation files('libs/OoyalaSDK.aar')
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'

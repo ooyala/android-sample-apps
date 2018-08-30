@@ -115,7 +115,7 @@ dependencies {
     implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
 
     implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.8.5'
     implementation 'com.android.support:appcompat-v7:27.1.1'

@@ -41,7 +41,7 @@ dependencies {
 //    compile project(':cast')
 //    compile project(':core')
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:mediarouter-v7:27.1.1'
     implementation 'com.google.android.gms:play-services-cast-framework:15.0.1'
