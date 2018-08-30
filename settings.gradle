@@ -43,8 +43,8 @@ include ':FullScreenSampleApp'
 project(':FullScreenSampleApp').projectDir = new File(settingsDir, './PlaybackLab/FullScreenSampleApp/app')
 
 //ManUntd Scrubber
-include ':ManUScrubberSampleApp'
-project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
+//include ':ManUScrubberSampleApp'
+//project(':ManUScrubberSampleApp').projectDir = new File(settingsDir, './PlaybackLab/ManUntdScrubberSampleApp/app')
 
 include ':VRSampleApp'
 project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')

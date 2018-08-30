@@ -1,0 +1,13 @@
+{
+  "videoplaza-ads-manager": {
+    "metadata": {
+      "all_ads": [{
+        "position": "7"
+      }],
+      "playerLevelCuePoints": "10,20,30",
+      "playerLevelShares": "ssai-playback",
+      "playerLevelTags": "ssai",
+      "vpDomain": "live-team.videoplaza.tv"
+    }
+  }
+}

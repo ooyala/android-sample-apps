@@ -49,10 +49,10 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
 
       playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
+      player.setEmbedCode(embedCode);
+
       @SuppressWarnings("unused")
       OoyalaIMAManager imaManager = new OoyalaIMAManager(player);
-
-      player.setEmbedCode(embedCode);
     }
   }
 }

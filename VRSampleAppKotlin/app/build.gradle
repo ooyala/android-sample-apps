@@ -108,10 +108,10 @@ dependencies {
     implementation 'org.webkit:android-jsc:r174650'
     implementation 'com.facebook.stetho:stetho:1.2.0'
     implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
-    implementation 'javax.inject:javax.inject:1'
     implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
+    implementation 'javax.inject:javax.inject:1'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 
 repositories {

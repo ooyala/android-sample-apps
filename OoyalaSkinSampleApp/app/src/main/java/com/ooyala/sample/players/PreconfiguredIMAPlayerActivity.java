@@ -64,17 +64,17 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity
 
 			player.addObserver(this);
 
+			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
+			}
+
 			@SuppressWarnings("unused")
 			OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 			imaManager.setOnAdErrorListener(this);
 			imaManager.setOnAdEventListener(this);
 			imaManager.setAdsLoadedListener(this);
 			imaManager.setContainerUpdatedListener(this);
-
-			if (player.setEmbedCode(embedCode)) {
-				if(autoPlay)
-					player.play();
-			}
 		}
 	}
 
