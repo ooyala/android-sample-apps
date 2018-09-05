@@ -84,7 +84,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		super.onStop();
 		Log.d(TAG, "Player Activity Stopped");
 		if (null != player) {
-			player.suspend();
+			player.release();
 		}
 	}
 
