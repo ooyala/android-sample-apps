@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.ooyala.android.AdvertisingIdUtils;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
@@ -33,10 +32,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This activity illustrates how you can create, play a basic playback video
- * and fast switching streams by setEmbedCode() method
+ * This activity illustrates how you can create a player, play a basic video
+ * and how to quickly switch between streams by using the setEmbedCode() method.
  */
-public class SetEmbedCodePlayerActivity extends Activity implements OnClickListener, Observer, EmbedTokenGenerator, AdvertisingIdUtils.IAdvertisingIdListener {
+public class SetEmbedCodePlayerActivity extends Activity implements OnClickListener, Observer, EmbedTokenGenerator {
     private static final String TAG = "SetEmbedCodeApp";
     private OoyalaPlayer player;
 
@@ -89,20 +88,10 @@ public class SetEmbedCodePlayerActivity extends Activity implements OnClickListe
                 player,
                 DefaultControlStyle.AUTO
         );
-        player.setAdsSeekable(true); // this will help us skip ads if need be.
         player.addObserver(this);
         player.setVolume(.05f);
-        int r = player.beginFetchingAdvertisingId(this, this);
-        Log.d( TAG, "initAdvertisingId: " + r );
     }
 
-    public void onAdvertisingIdSuccess( String adId ) {
-        Log.d( TAG, "onAdvertisingIdSuccess: " + adId );
-    }
-
-    public void onAdvertisingIdError( OoyalaException oe ) {
-        Log.e( TAG, "onAdvertisingIdError", oe );
-    }
 
     private void setEmbedCode() {
 
@@ -180,7 +169,9 @@ public class SetEmbedCodePlayerActivity extends Activity implements OnClickListe
                                       EmbedTokenGeneratorCallback callback) {
         String embedCodesString = "";
         for (String ec : embedCodes) {
-            if(ec.equals("")) embedCodesString += ",";
+            if (ec.equals("")) {
+                embedCodesString += ",";
+            }
             embedCodesString += ec;
         }
 
