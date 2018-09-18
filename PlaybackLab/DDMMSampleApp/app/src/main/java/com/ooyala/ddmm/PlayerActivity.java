@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.ooyala.android.DefaultPlayerInfo;
+import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -58,6 +59,9 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     protected void setupOoyalaPlayer() {
+        // Uncomment the following line if you want to use the Ooyala server Staging Environment
+        // OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
+
         String myCapabilities = CapabilityUtils.capabilitesToJson(CapabilityUtils.getCapabilities(this));
         String capabilities64 = null;
 
