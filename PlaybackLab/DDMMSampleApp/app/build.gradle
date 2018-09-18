@@ -32,6 +32,7 @@ tasks.copyTask.execute()
 dependencies {
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/capabilities.aar')
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
