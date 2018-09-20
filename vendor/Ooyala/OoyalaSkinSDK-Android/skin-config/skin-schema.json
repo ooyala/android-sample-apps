@@ -535,7 +535,7 @@
     "skipControls": {
       "description": "Toolbar which contains buttons that allow skipping back or forward and switching to the previous or next videos.",
       "type": "object",
-      "required": [ "enabled", "skipBackwardTime", "skipForwardTime", "buttons" ],
+      "required": [ "enabled", "skipBackwardTime", "skipForwardTime", "buttons", "controlBarSkipControls" ],
       "properties": {
         "enabled": {
           "description": "Show the \"Skip Controls\" toolbar if set to true, hide if set to false.",
@@ -571,6 +571,32 @@
             },
             "nextVideo": {
               "description": "Button that allows switching to the next video recommendation or to the next video in a playlist.",
+              "$ref": "#/definitions/skipControlsButton"
+            }
+          }
+        },
+        "controlBarSkipControls": {
+          "description": "The collection of skip controls buttons that can be displayed in the control bar.",
+          "type": "object",
+          "properties": {
+            "previousVideo": {
+              "description": "Button that allows switching to the last video that was played or to the previous video in a playlist.",
+              "$ref": "#/definitions/skipControlsButton"
+            },
+            "skipBackward": {
+              "description": "Button that allows skipping the video backward the amount of seconds defined in \"skipBackwardTime\".",
+              "$ref": "#/definitions/skipControlsButton"
+            },
+            "skipForward": {
+              "description": "Button that allows skipping the video forward the amount of seconds defined in \"skipForwardTime\".",
+              "$ref": "#/definitions/skipControlsButton"
+            },
+            "nextVideo": {
+              "description": "Button that allows switching to the next video recommendation or to the next video in a playlist.",
+              "$ref": "#/definitions/skipControlsButton"
+            },
+            "playPause": {
+              "description": "Button that allows playback or pausing of the video.",
               "$ref": "#/definitions/skipControlsButton"
             }
           }
@@ -805,6 +831,11 @@
           "description": "Set the default audio language. This is a string of the form \"en\" for English, \"fr\" for French, etc.",
           "type": "string",
           "default": "en"
+        },
+        "audioOnly": {
+          "description": "Set to true to enable the audio only player",
+          "type": "boolean",
+          "default": "false"
         }
       }
     },
@@ -826,12 +857,13 @@
       "description": "Defines the buttons that can appear on the controlBar and/or the moreOptions panel. Desktop and Mobile platforms can be configured individually.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["desktopContent", "mobileContent"],
+      "required": ["desktopContent", "mobileContent", "audioOnly"],
       "properties": {
         "desktopContent": { "$ref": "#/definitions/buttonArray" },
         "desktopAd": { "$ref": "#/definitions/buttonArray" },
         "mobileContent": { "$ref": "#/definitions/buttonArray" },
-        "mobileAd": { "$ref": "#/definitions/buttonArray" }
+        "mobileAd": { "$ref": "#/definitions/buttonArray" },
+        "audioOnly": { "$ref": "#/definitions/buttonArray" }
       }
     },
     "icons": {
@@ -865,6 +897,8 @@
         "\"skip\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0075\", \"fontStyleClass\": \"icon icon-skip\"}",
         "\"audioAndCC\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u005F\", \"fontStyleClass\": \"icon icon-audio-and-cc\"}",
         "\"selected\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0040\", \"fontStyleClass\": \"icon icon-selected\"}",
+        "\"chromecast-connected\": {\"fontFamilyName\": \"ooyala-slick-type\", \"fontString\": \"\\u003B\", \"fontStyleClass\": \"oo-icon\"}",
+        "\"chromecast-disconnected\": {\"fontFamilyName\": \"ooyala-slick-type\", \"fontString\": \"\\u003A\", \"fontStyleClass\": \"oo-icon\"}"
         "}"],
       "play": {
         "description": "Set the styling for the play icon on mobile devices.",
@@ -1377,7 +1411,24 @@
     "buttonNames": {
       "description": "These are the only buttons currently supported by the UI SDK.",
       "additionalProperties": false,
-      "enum": ["playPause", "volume", "live", "timeDuration", "flexibleSpace", "share", "discovery", "closedCaption", "quality", "logo", "stereoscopic", "fullscreen", "moreOptions", "arrowsBlack", "audioAndCC", "bitrateSelector"]
+      "enum": ["playPause",
+               "volume",
+               "live",
+               "timeDuration",
+               "flexibleSpace",
+               "share",
+               "discovery",
+               "closedCaption",
+               "quality",
+               "logo",
+               "stereoscopic",
+               "playbackSpeed",
+               "fullscreen",
+               "moreOptions",
+               "arrowsBlack",
+               "audioAndCC",
+               "bitrateSelector",
+               "chromecast"]
     },
     "buttonArray": {
       "description": "Used to list the buttons for a single platform (desktop vs. mobile).",
