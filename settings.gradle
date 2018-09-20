@@ -62,11 +62,11 @@ project(':HeartbeatSampleApp').projectDir = new File(settingsDir, './HeartbeatSa
 
 // Developer
 //include ':skin'
-//project(':skin').projectDir=new File(settingsDir, '../native-skin/sdk/android/skin/')
+//project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin/')
 //include ':core'
-//project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
+//project(':core').projectDir = new File(settingsDir, '../android-sdk/sdk/core/')
 //include ':cast'
-//project(':cast').projectDir=new File(settingsDir, '../android-sdk/sdk/cast/')
+//project(':cast').projectDir = new File(settingsDir, '../android-sdk/sdk/cast/')
 //include(':vrsdk')
 //project(':vrsdk').projectDir = new File(settingsDir, '../android-sdk/sdk/vrsdk/')
 //include(':ima')

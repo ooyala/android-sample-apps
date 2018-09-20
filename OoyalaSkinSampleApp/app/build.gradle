@@ -80,11 +80,13 @@ repositories {
     }
 }
 
+ext.supportLibraryVersion = "27.1.1"
+
 project.configurations.all {
     resolutionStrategy.eachDependency { details ->
         if (details.requested.group == 'com.android.support'
                 && !details.requested.name.contains('multidex')) {
-            details.useVersion "27.1.1"
+            details.useVersion "${supportLibraryVersion}"
         }
     }
 }
@@ -118,8 +120,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.8.5'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibraryVersion}"
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.volley:volley:1.1.0'

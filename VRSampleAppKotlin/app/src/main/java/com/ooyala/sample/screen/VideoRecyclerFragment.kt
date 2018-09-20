@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ooyala.sample.R
-import com.ooyala.sample.R.id.videoRecyclerView
 import com.ooyala.sample.interfaces.VideoChooseInterface
 import com.ooyala.sample.adapters.VideoRecyclerAdapter
 import com.ooyala.sample.utils.AdList
