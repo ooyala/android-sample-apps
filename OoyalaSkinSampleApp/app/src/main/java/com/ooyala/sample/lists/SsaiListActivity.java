@@ -84,7 +84,7 @@ public class SsaiListActivity extends Activity implements AdapterView.OnItemClic
     selectionMap.put("Player Params - vpDomain:live-team", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class, playerParamsLiveTeam));
     selectionMap.put("Player Params - vpDomain:videoplaza", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class, playerParamsVideoPlaza));
     selectionMap.put("VOD - Ooyala Pulse", new SsaiSelectionOption("l5bm11ZjE6VFJyNE2iE6EKpCBVSRroAF", "ZsdGgyOnugo44o442aALkge_dVVK", "http://www.ooyala.com", SsaiPlayerActivity.class, pulseParamsFromJson));
-    selectionMap.put("VOD - DFP", new SsaiSelectionOption("13bm11ZjE6Wl7CQ2iKPH_Z1VpspHGOud", "ZsdGgyOnugo44o442aALkge_dVVK", "http://www.ooyala.com", SsaiPlayerActivity.class, dfpParamsFromJson));
+    selectionMap.put("VOD - DFP", new SsaiSelectionOption("ZhbzNiZzE64qnD5YMEnoi2DcwqSfH4z8", "ZsdGgyOnugo44o442aALkge_dVVK", "http://www.ooyala.com", SsaiPlayerActivity.class, dfpParamsFromJson));
     selectionMap.put("Without Player Params", new SsaiSelectionOption("ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd", "RpOWUyOq86gFq-STNqpgzhzIcXHV", "http://www.ooyala.com", SsaiPlayerActivity.class));
     selectionMap.put("VOD - Ooyala Pulse - CC DFXP", new SsaiSelectionOption("8yZXE0ZzE6596qdcG58aTnvzADUBLC2I", "ZsdGgyOnugo44o442aALkge_dVVK", "http://www.ooyala.com", SsaiPlayerActivity.class, pulseParamsFromJson));
     selectionMap.put("VOD - DFP - CC DFXP", new SsaiSelectionOption("54ZHE0ZzE6JQBu_T099L8NWvzzqsnrKG", "ZsdGgyOnugo44o442aALkge_dVVK", "http://www.ooyala.com", SsaiPlayerActivity.class, dfpParamsFromJson));
