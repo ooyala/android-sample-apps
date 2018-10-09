@@ -48,12 +48,12 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity {
       playerLayoutController.addObserver(this);
       player.addObserver(this);
 
-      @SuppressWarnings("unused")
-      OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
-
       if (player.setEmbedCode(embedCode)) {
         //player.play();
       }
+
+      @SuppressWarnings("unused")
+      OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
     }
   }
 

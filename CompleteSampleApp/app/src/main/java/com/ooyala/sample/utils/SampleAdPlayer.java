@@ -21,6 +21,7 @@ import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.StateNotifier;
 import com.ooyala.android.player.PlayerInterface;
 import com.ooyala.android.player.PlayerType;
+import com.ooyala.android.player.exoplayer.PlayerBitmapListener;
 import com.ooyala.android.plugin.LifeCycleInterface;
 
 public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
@@ -83,7 +84,7 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   }
 
   @Override
-  public void seekToPercentLive(int i) {
+  public void seekToPercentLive(float percent) {
 
   }
 
@@ -208,4 +209,14 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
 
   @Override
   public void setVolume(float v) {}
+
+  @Override
+  public boolean isMultiAudioAvailable() {
+    return false;
+  }
+
+  @Override
+  public void createBitmapScreenshot(PlayerBitmapListener playerBitmapListener) {
+
+  }
 }

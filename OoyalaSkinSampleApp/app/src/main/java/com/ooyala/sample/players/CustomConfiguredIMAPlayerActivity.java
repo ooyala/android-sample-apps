@@ -62,6 +62,10 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity
 
     player.addObserver(this);
 
+    if (player.setEmbedCode(embedCode)) {
+//      player.play();
+    }
+
     /** DITA_START:<ph id="ima_custom"> **/
 
     OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
@@ -74,10 +78,6 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity
     imaManager.setAdUrlOverride("http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7521029/pb_test_mid&ciu_szs=640x480&impl=s&cmsid=949&vid=FjbGRjbzp0DV_5-NtXBVo5Rgp3Sj0R5C&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]");
     // imaManager.setAdTagParameters(null);
     /** DITA_END:</ph> **/
-
-    if (player.setEmbedCode(embedCode)) {
-//      player.play();
-    }
   }
 
   @Override

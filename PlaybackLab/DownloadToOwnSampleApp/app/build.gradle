@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 26
-  buildToolsVersion '26.0.2'
+  compileSdkVersion 27
+  buildToolsVersion '27.0.3'
 
   defaultConfig {
     applicationId "com.ooyala.sample.DownloadToOwnSampleApp"
     minSdkVersion 16
-    targetSdkVersion 26
+    targetSdkVersion 27
 
     // Added due to https://github.com/facebook/react-native/issues/2814
     ndk {
@@ -97,8 +97,8 @@ dependencies {
     implementation 'com.google.code.findbugs:jsr305:3.0.0'
 
     // Android dependencies
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 
     // Ooyala dependencies
     implementation files('libs/OoyalaSDK.aar')
