@@ -3,6 +3,10 @@ package com.ooyala.sample.complete;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -12,6 +16,7 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.DownloadSerializationActivity;
+import com.ooyala.sample.lists.OfflineAnalyticsListActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,7 +26,7 @@ import java.util.Map;
  * @author michael.len
  *
  */
-public class MainExoPlayerActivity extends Activity implements OnItemClickListener {
+public class MainExoPlayerActivity extends AppCompatActivity implements OnItemClickListener {
   final String TAG = this.getClass().toString();
 
   private static Map<String, Class<? extends Activity>> activityMap;
@@ -65,5 +70,22 @@ public class MainExoPlayerActivity extends Activity implements OnItemClickListen
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     startActivity(intent);
     return;
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.offlineAnalyticsMenu:
+        startActivity(new Intent(this, OfflineAnalyticsListActivity.class));
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }
