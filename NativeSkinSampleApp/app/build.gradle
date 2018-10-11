@@ -5,7 +5,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.ooyala.sample.nativeskinsampleapp"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
 
         versionCode 1
@@ -16,6 +16,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            multiDexEnabled true
         }
     }
 }
