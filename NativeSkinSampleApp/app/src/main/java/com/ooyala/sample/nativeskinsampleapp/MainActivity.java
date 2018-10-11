@@ -11,7 +11,8 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
-
+import com.ooyala.sample.lists.FreewheelListActivity;
+import com.ooyala.sample.lists.IMAListActivity;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -36,6 +37,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
     // Begin List of Sample List Activities
     // If you add to this, you must add your activities to AndroidManifest
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
+    activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
+    activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
+
 
 
     for(String key : activityMap.keySet()) {

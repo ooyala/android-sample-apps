@@ -28,6 +28,38 @@ android:versionName="1.0" >
     </activity>
 
     <activity
+        android:name="com.ooyala.sample.lists.FreewheelListActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:label="Freewheel">
+    </activity>
+
+    <activity
+        android:name="com.ooyala.sample.players.PreconfiguredFreewheelPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+
+    <activity
+        android:name="com.ooyala.sample.players.CustomConfiguredFreewheelPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+
+    <activity
+        android:name="com.ooyala.sample.players.OptionsFreewheelPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+
+    <activity
+        android:name="com.ooyala.sample.lists.IMAListActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:label="Google IMA Sample App" >
+    </activity>
+
+    <activity android:name="com.ooyala.sample.players.PreconfiguredIMAPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+
+    <activity android:name="com.ooyala.sample.players.CustomConfiguredIMAPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+
+    <activity
         android:name=".lists.BasicPlaybackListActivity"
         android:configChanges="keyboardHidden|orientation|screenSize" >
     </activity>

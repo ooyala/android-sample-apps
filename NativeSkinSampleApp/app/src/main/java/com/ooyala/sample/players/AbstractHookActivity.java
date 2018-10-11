@@ -12,6 +12,7 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
+import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
@@ -34,6 +35,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
   protected String pcode;
   protected String domain;
   protected OoyalaPlayerLayoutController playerLayoutController;
+	protected OptimizedOoyalaPlayerLayoutController imaPlayerLayoutController;
   protected OoyalaPlayerLayout playerLayout;
 
   OoyalaPlayer player;
