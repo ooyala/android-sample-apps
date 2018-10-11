@@ -42,7 +42,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
     activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
-
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
 
