@@ -7,6 +7,7 @@ android {
         applicationId "com.ooyala.sample.nativeskinsampleapp"
         minSdkVersion 19
         targetSdkVersion 27
+
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -16,10 +17,31 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            multiDexEnabled true
+        }
     }
 }
+task copySkinConfigTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
+    into new File(projectDir, './src/main/assets/skin-config')
+    println "copySkinConfigTask updated."
+}
+tasks.copySkinConfigTask.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(projectDir, './src/main/assets/fonts')
+    println "font Assets updated."
+}
+tasks.copyFontsAssetsTask.execute()
+
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.55.4.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
+    from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -28,11 +50,24 @@ task copyTask(type: Copy) {
 
 tasks.copyTask.execute()
 
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
 // For development purposes only
 //    compile project(':core')
 
     implementation files('libs/OoyalaSDK.aar')
+    implementation files('libs/OoyalaSkinSDK.aar')
+    implementation files('libs/FWAdManager.jar')
+    implementation files('libs/OoyalaFreewheelSDK.jar')
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/ima-android-v385.jar')
+
     implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -44,4 +79,18 @@ dependencies {
     implementation files('libs/OoyalaFreewheelSDK.jar')
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/ima-android-v385.jar')
+    //react-native dependencies
+    implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:1.3.0'
+    implementation 'com.facebook.soloader:soloader:0.1.0'
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.6.0'
+    implementation 'com.squareup.okio:okio:1.13.0'
+    implementation 'org.webkit:android-jsc:r174650'
+    implementation 'com.facebook.stetho:stetho:1.2.0'
+    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    implementation 'javax.inject:javax.inject:1'
+    implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
 }
+

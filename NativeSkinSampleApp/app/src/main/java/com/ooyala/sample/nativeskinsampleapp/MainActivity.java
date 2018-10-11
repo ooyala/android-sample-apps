@@ -10,9 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
+import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
+import com.ooyala.sample.lists.OptionsListActivity;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -40,6 +43,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(FreewheelListActivity.getName(), FreewheelListActivity.class);
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
 
+    activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
+    activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
 
 
     for(String key : activityMap.keySet()) {
