@@ -37,6 +37,79 @@ android:versionName="1.0" >
         android:configChanges="keyboardHidden|orientation|screenSize" >
     </activity>
 
+
+    <activity
+        android:name=".lists.AdvancedPlaybackListActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize" >
+    </activity>
+
+
+    <activity android:name=".players.InsertAdPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.ChangeVideoPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.PluginPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.CustomControlsPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.CustomOverlayPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.MultipleVideosPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.UnbundledPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.SampleVideoPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.NotificationsPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.ProgrammaticVolumePlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.ReinitPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.ReinitSkinPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".lists.OptionsListActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.CuePointsOptionsFreewheelPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.IQConfigurationPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.PreloadOptionsPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.PreloadWithInitTimePlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.PreventVideoViewSharingPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.TimeoutOptionsPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.ServerConfiguredTVRatingsPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+    <activity android:name=".players.TVRatingsPlayerActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+    </activity>
+
+
+
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />

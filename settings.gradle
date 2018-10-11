@@ -10,6 +10,8 @@ project(':OptionsSampleApp').projectDir = new File(settingsDir, './OptionsSample
 include ':ContentProtectionSampleApp'
 project(':ContentProtectionSampleApp').projectDir = new File(settingsDir, './ContentProtectionSampleApp/app')
 
+include ':NativeSkinSampleApp'
+project(':NativeSkinSampleApp').projectDir = new File(settingsDir, './NativeSkinSampleApp/app')
 // Chromecast
 include ':ChromecastSampleApp'
 project(':ChromecastSampleApp').projectDir = new File(settingsDir, './ChromecastSampleApp/app')
