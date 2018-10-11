@@ -12,16 +12,18 @@ import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
+import com.ooyala.sample.lists.ContentProtectionListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
 import com.ooyala.sample.lists.IMAListActivity;
 import com.ooyala.sample.lists.OptionsListActivity;
+import com.ooyala.sample.players.CustomActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * This is the opening activity for the app.
- * @author michael.len
+ * @author skumar
  *
  */
 public class MainActivity extends Activity implements OnItemClickListener {
@@ -44,6 +46,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
     activityMap.put(IMAListActivity.getName(), IMAListActivity.class);
     activityMap.put(AdvancedPlaybackListActivity.getName(), AdvancedPlaybackListActivity.class);
     activityMap.put(OptionsListActivity.getName(), OptionsListActivity.class);
+    activityMap.put(ContentProtectionListActivity.getName(), ContentProtectionListActivity.class);
+    activityMap.put(CustomActivity.getName(), CustomActivity.class);
 
 
     for(String key : activityMap.keySet()) {

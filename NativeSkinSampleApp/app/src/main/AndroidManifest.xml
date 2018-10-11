@@ -121,7 +121,18 @@
         <activity
             android:name=".players.TVRatingsPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
-
+        <activity
+            android:name=".lists.ContentProtectionListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <activity
+            android:name=".players.AdobePassSampleAppAcitivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity
+            android:name=".players.OoyalaPlayerTokenPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity
+            android:name=".players.CustomActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

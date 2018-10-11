@@ -44,6 +44,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
     from new File(vendorDir, 'Google/ima-android-v385.jar')
+    from new File(vendorDir, 'AdobePass/android_accessenabler-1.7.3.jar')
     into new File(projectDir, './libs')
 
     doLast {
@@ -70,7 +71,7 @@ dependencies {
     implementation files('libs/OoyalaFreewheelSDK.jar')
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/ima-android-v385.jar')
-
+    implementation files('libs/android_accessenabler-1.7.3.jar')
     implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
