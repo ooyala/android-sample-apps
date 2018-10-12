@@ -51,6 +51,7 @@ public class IMAListActivity extends Activity implements OnItemClickListener {
     selectionMap.put("IMA Non Ad-Rules Postroll", new PlayerSelectionOption("FjbGRjbzp0DV_5-NtXBVo5Rgp3Sj0R5C", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredIMAPlayerActivity.class) );
     selectionMap.put("IMA Non Ad-Rules Quad Midroll", new PlayerSelectionOption("J3bHFpNTE6E2o2Fx_kZMyusc6m8SENCe", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredIMAPlayerActivity.class) );
     selectionMap.put("IMA Non Ad-Rules Pre-Mid-Mid-Post", new PlayerSelectionOption("g0d3BpNTE6GTTPK7o4ZyIcGqc878DqJ6", "R2NDYyOhSRhYj0UrUVgcdWlFVP-H", "http://www.ooyala.com", PreconfiguredIMAPlayerActivity.class) );
+    selectionMap.put("IMA Non Ad-Rules Podded Pre-Mid-Post Skippable", new PlayerSelectionOption("0wNzJpZjE6UqsQEEH3KES_OcNwdO8Axg", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", "http://www.ooyala.com", PreconfiguredIMAPlayerActivity.class) );
     selectionMap.put("No Ads", new PlayerSelectionOption("JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", PreconfiguredIMAPlayerActivity.class) );
 
     setContentView(com.ooyala.sample.R.layout.ima_list_activity_layout);
