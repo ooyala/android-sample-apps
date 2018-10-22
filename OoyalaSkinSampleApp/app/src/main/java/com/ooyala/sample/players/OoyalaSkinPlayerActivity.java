@@ -3,6 +3,7 @@ package com.ooyala.sample.players;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -36,12 +37,13 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = null;
-			if(selectedFormat.equalsIgnoreCase("default"))
-				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-			else
-				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
-			player = new OoyalaPlayer(pcode, playerDomain, options);
+			player = new OoyalaPlayer(pcode, playerDomain, getOptions());
+			if(isStaging) {
+				Log.i(TAG, "Environment Set to Staging:");
+				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
+			} else {
+				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.PRODUCTION, Environment.PROTOCOL_HTTPS);
+			}
 			//Create the SkinOptions, and setup React
 			JSONObject overrides = createSkinOverrides();
 			SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
@@ -51,8 +53,9 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			player.addObserver(this);
 
 			if (player.setEmbedCode(embedCode)) {
-				if(autoPlay)
+				if(autoPlay) {
 					player.play();
+				}
 			} else {
 				Log.e(TAG, "Asset Failure");
 			}
