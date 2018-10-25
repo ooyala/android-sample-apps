@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 27
-  buildToolsVersion '27.0.3'
+  compileSdkVersion rootProject.compileSdkVersion
 
   defaultConfig {
     applicationId "com.ooyala.sample.ExoPlayerSampleApp"
-    minSdkVersion 16
-    targetSdkVersion 27
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
 
     // Added due to https://github.com/facebook/react-native/issues/2814
     ndk {
@@ -87,34 +86,36 @@ dependencies {
 
 // Uncomment if you need multidex
 //  implementation 'com.android.support:multidex:1.0.1'
-
-  implementation files('libs/FWAdManager.jar')
-  implementation files('libs/OoyalaFreewheelSDK.jar')
-  implementation files('libs/OoyalaIMASDK.jar')
-  implementation files('libs/ima-android-v385.jar')
-  implementation files('libs/OoyalaSDK.aar')
-  implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation files('libs/FWAdManager.jar')
+    implementation files('libs/OoyalaFreewheelSDK.jar')
+    implementation files('libs/OoyalaIMASDK.jar')
+    implementation files('libs/ima-android-v385.jar')
+    implementation files('libs/OoyalaSDK.aar')
+    implementation files('libs/OoyalaSkinSDK.aar')
 
 // For development purposes only
 //  implementation project(':core')
 
-    implementation files('libs/OoyalaSkinSDK.aar')
-    implementation 'com.google.android.gms:play-services-ads:12.0.0'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    // App dependencies
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.supportLibraryVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
+    implementation "javax.inject:javax.inject:$rootProject.injectVersion"
 
-    // React-Native dependencies
-    implementation 'javax.inject:javax.inject:1'
-    implementation 'com.facebook.fresco:fresco:1.3.0'
-    implementation 'com.facebook.fresco:imagepipeline-okhttp3:1.3.0'
-    implementation 'com.facebook.soloader:soloader:0.1.0'
-    implementation 'com.google.code.findbugs:jsr305:3.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
-    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.6.0'
-    implementation 'com.squareup.okio:okio:1.13.0'
-    implementation 'org.webkit:android-jsc:r174650'
-    implementation 'com.facebook.stetho:stetho:1.2.0'
-    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
+
+    //react-native dependencies
+    implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.imagePipelineVersion"
+    implementation "com.facebook.soloader:soloader:$rootProject.soloaderVersion"
+    implementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp:$rootProject.stethoOkhttpVersion"
+    implementation "com.google.code.findbugs:jsr305:$rootProject.findbugsVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.urlconnectionVersion"
+    implementation "com.squareup.okio:okio:$rootProject.okioVersion"
+    implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
     implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
-
 }

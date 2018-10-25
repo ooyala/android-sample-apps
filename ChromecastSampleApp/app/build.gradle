@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "com.ooyala.sample.ChromecastSampleApp"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -40,13 +39,15 @@ dependencies {
 // For development purposes only
 //    compile project(':cast')
 //    compile project(':core')
-
-    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:mediarouter-v7:27.1.1'
-    implementation 'com.google.android.gms:play-services-cast-framework:12.0.0'
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaCastSDK.aar')
+
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.mediarouter:mediarouter:$rootProject.mediaRouterVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-cast-framework:$rootProject.gmsCastVersion"
 
 //    For Development purpose only:
 //    implementation project(':core')

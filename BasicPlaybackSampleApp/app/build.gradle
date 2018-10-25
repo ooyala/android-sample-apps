@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "com.ooyala.sample.BasicPlaybackSampleApp"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
     }
 
     buildTypes {
@@ -29,13 +28,15 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-// For development purposes only
-//    compile project(':core')
-
+    // For development purposes only
+    // implementation project(':core')
     implementation files('libs/OoyalaSDK.aar')
-    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.google.android.gms:play-services-ads:12.0.0'
 
+    // App dependencies
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
 }

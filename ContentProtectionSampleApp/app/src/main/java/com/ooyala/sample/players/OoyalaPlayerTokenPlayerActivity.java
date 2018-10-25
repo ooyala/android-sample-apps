@@ -2,8 +2,8 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
@@ -14,7 +14,6 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.player.exoplayer.upstream.OoyalaDrmHttpDataSource;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;

@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion rootProject.compileSdkVersion
+
     defaultConfig {
         applicationId "com.ooyala.sample.vrsampleapp"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
 
@@ -80,38 +80,41 @@ dependencies {
     implementation files('libs/OoyalaVRSDK.jar')
     implementation files('libs/OoyalaSkinSDK.aar')
 
-
     // IMA ads
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/ima-android-v385.jar')
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.google.android.gms:play-services-ads:12.0.0'
-    implementation 'com.google.vr:sdk-base:1.80.0'
-    implementation 'com.google.vr:sdk-audio:1.80.0'
+    // App dependencies
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.supportLibraryVersion"
+    implementation "androidx.multidex:multidex:$rootProject.multidexVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$rootProject.jacksonVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "javax.inject:javax.inject:$rootProject.injectVersion"
 
-    //React-Native dependencies
-    implementation 'com.facebook.fresco:fresco:1.3.0'
-    implementation 'com.facebook.fresco:imagepipeline-okhttp3:1.3.0'
-    implementation 'com.facebook.soloader:soloader:0.1.0'
-    implementation 'com.google.code.findbugs:jsr305:3.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
-    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.6.0'
-    implementation 'com.squareup.okio:okio:1.13.0'
-    implementation 'org.webkit:android-jsc:r174650'
-    implementation 'com.facebook.stetho:stetho:1.2.0'
-    implementation 'com.facebook.stetho:stetho-okhttp:1.2.0'
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
+
+    //react-native dependencies
+    implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.imagePipelineVersion"
+    implementation "com.facebook.soloader:soloader:$rootProject.soloaderVersion"
+    implementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp:$rootProject.stethoOkhttpVersion"
+    implementation "com.google.code.findbugs:jsr305:$rootProject.findbugsVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.urlconnectionVersion"
+    implementation "com.squareup.okio:okio:$rootProject.okioVersion"
+    implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
     implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
-    implementation 'javax.inject:javax.inject:1'
 
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-    implementation 'com.google.code.findbugs:jsr305:3.0.0'
-    implementation 'com.android.support:multidex:1.0.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
-    testImplementation 'junit:junit:4.12'
+    // VR
+    implementation "com.google.vr:sdk-audio:$rootProject.vrAudioVersion"
+    implementation "com.google.vr:sdk-base:$rootProject.vrBaseVersion"
+
+    testImplementation "junit:junit:$rootProject.junitVersion"
 }
 
 repositories {

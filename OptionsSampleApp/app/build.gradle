@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "com.ooyala.sample.OptionsSampleApp"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
     }
 
     buildTypes {
@@ -38,15 +37,17 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-
     implementation files('libs/FWAdManager.jar')
     implementation files('libs/OoyalaFreewheelSDK.jar')
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/ima-android-v385.jar')
 
-    implementation 'com.google.android.gms:play-services-ads:12.0.0'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    // App dependencies
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
 
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
 }
