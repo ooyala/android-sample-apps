@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/controlsLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal|bottom"
+    android:orientation="vertical" >
+
+    <com.ooyala.android.OoyalaPlayerLayout
+        android:id="@+id/ooyalaPlayer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="20dp"
+        android:layout_weight="4"
+        android:background="#666" >
+    </com.ooyala.android.OoyalaPlayerLayout>
+
+</FrameLayout>

@@ -37,9 +37,13 @@ public class YouboraConfigManager {
         youboraConfig.put("httpSecure", false);
         youboraConfig.put("enableNiceBuffer", true);
         youboraConfig.put("enableNiceSeek", true);
-        youboraConfig.put("accountCode", "nicetest");
+        //Comment as per NPAW-FW instructions
+        //youboraConfig.put("accountCode", "nicetest");
+        youboraConfig.put("accountCode", "ooyalaqa");
         youboraConfig.put("service", "nqs.nice264.com");
-        youboraConfig.put("username", "");
+        //Comment as per NPAW-FW instructions
+        //youboraConfig.put("username", "");
+        youboraConfig.put("username", "qa_android_ooyala");
         youboraConfig.put("transactionCode", "");
         youboraConfig.put("isBalanced", "0");
         youboraConfig.put("isResumed", "0");
