@@ -83,6 +83,6 @@ public class CustomActivity extends Activity {
         intent.putExtra("apikey", apiKey);
         intent.putExtra("secret", secret);
         intent.putExtra("accountid", accountId);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 }

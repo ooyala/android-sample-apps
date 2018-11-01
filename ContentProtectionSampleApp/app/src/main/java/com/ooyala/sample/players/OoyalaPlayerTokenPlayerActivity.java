@@ -79,12 +79,13 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
-    if(getIntent().getExtras().getClass().getSimpleName().equalsIgnoreCase("CustomActivity")) {
+    if(getCallingActivity().getClassName().contains("CustomActivity")) {
       APIKEY = getIntent().getExtras().getString("apikey");
       SECRET = getIntent().getExtras().getString("secret");
       ACCOUNT_ID = getIntent().getExtras().getString("accountid");
       AUTOPLAY = getIntent().getExtras().getBoolean("autoPlay");
     }
+
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
 

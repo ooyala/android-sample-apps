@@ -59,6 +59,15 @@
         <activity android:name=".players.ProgrammaticVolumePlayerActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
+        <activity android:name=".players.ReinitPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+        <activity android:name=".players.ReinitSkinPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+        <activity android:name=".players.SetEmbedCodePlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
         <meta-data android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version" />
     </application>

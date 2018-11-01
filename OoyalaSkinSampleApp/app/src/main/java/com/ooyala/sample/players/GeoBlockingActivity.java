@@ -15,6 +15,7 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
+import com.ooyala.sample.utils.CustomPlayerInfo;
 
 import org.json.JSONObject;
 
@@ -23,14 +24,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTokenGenerator {
-  private final String ACCOUNT_ID = "";
+  private  String ACCOUNT_ID = "";
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private final String APIKEY = "";
-  private final String SECRET = "";
+  private  String APIKEY = "";
+  private  String SECRET = "";
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,30 @@ public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTo
       skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
       // Create the OoyalaPlayer, with some built-in UI disabled
       PlayerDomain playerDomain = new PlayerDomain(domain);
-      Options options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+        Options options = null;
+        if(selectedFormat.equalsIgnoreCase("default"))
+            options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
+        else
+            options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
+
+        //Uncomment next line if you work on STAGING
+        //OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
+
+        if(getCallingActivity().getClassName().contains("AddAssetActivity")) {
+            ACCOUNT_ID = accountId;
+            APIKEY = apiKey;
+            SECRET = secret;
+        }
+
       //Uncomment next line if you work on STAGING
       //OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
+
+      if(isStaging) {
+        Log.i(TAG, "Environment Set to Staging:");
+        OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
+      } else {
+        OoyalaPlayer.setEnvironment(Environment.EnvironmentType.PRODUCTION, Environment.PROTOCOL_HTTPS);
+      }
       player = new OoyalaPlayer(pcode, playerDomain,this, options);
 
       //Create the SkinOptions, and setup React
@@ -60,6 +82,9 @@ public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTo
       player.addObserver(this);
 
       if (player.setEmbedCode(embedCode)) {
+        if(autoPlay) {
+          player.play();
+        }
       } else {
         Log.e(TAG, "Asset Failure");
       }

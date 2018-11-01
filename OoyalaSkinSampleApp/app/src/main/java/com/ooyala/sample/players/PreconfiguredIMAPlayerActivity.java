@@ -7,6 +7,7 @@ import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
 import com.google.ads.interactivemedia.v3.api.AdErrorEvent;
 import com.google.ads.interactivemedia.v3.api.AdEvent;
 import com.google.ads.interactivemedia.v3.api.AdsManagerLoadedEvent;
+import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
@@ -49,13 +50,13 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
-			Options options = null;
-			if(selectedFormat.equalsIgnoreCase("default"))
-				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-			else
-				options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
-			player = new OoyalaPlayer(pcode, playerDomain, options);
-
+			player = new OoyalaPlayer(pcode, playerDomain, getOptions());
+			if(isStaging) {
+				Log.i(TAG, "Environment Set to Staging:");
+				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
+			} else {
+				OoyalaPlayer.setEnvironment(Environment.EnvironmentType.PRODUCTION, Environment.PROTOCOL_HTTPS);
+			}
 			//Create the SkinOptions, and setup React
 			SkinOptions skinOptions = new SkinOptions.Builder().build();
 			playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
@@ -64,17 +65,17 @@ public class PreconfiguredIMAPlayerActivity extends AbstractHookActivity
 
 			player.addObserver(this);
 
+			if (player.setEmbedCode(embedCode)) {
+				if(autoPlay)
+					player.play();
+			}
+
 			@SuppressWarnings("unused")
 			OoyalaIMAManager imaManager = new OoyalaIMAManager(player, skinLayout);
 			imaManager.setOnAdErrorListener(this);
 			imaManager.setOnAdEventListener(this);
 			imaManager.setAdsLoadedListener(this);
 			imaManager.setContainerUpdatedListener(this);
-
-			if (player.setEmbedCode(embedCode)) {
-				if(autoPlay)
-					player.play();
-			}
 		}
 	}
 

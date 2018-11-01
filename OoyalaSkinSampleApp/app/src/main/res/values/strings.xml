@@ -5,10 +5,14 @@
     <string name="open">Open</string>
     <string name="pcode">pcode:</string>
     <string name="embed">embed:</string>
-    <string name="select_player">selectPlayer:</string>
+    <string name="apikey">apikey:</string>
+    <string name="secret">secret:</string>
+    <string name="accountid">account Id:</string>
+    <string name="select_player">Select Player:</string>
     <string name="auto_play">AutoPlay</string>
     <string name="take_screenshot">Take a screenshot</string>
     <string name="set_audio_track">Set an audio track</string>
-    <string name="selectFormat">selectFormat:</string>
-
+    <string name="selectFormat">Select Muxing Format:</string>
+    <string name="select_hevc_mode">Select HEVC Player Preference:</string>
+    <string name="set_env_stg">Set Environment To Staging</string>
 </resources>

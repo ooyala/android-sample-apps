@@ -149,9 +149,9 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
     playerController = OoyalaSkinLayoutController(activity!!.application, playerSkinLayout, player, skinOptions)
     playerController?.addObserver(this)
 
-    initAdManager()
-
     player?.embedCode = embedCode
+
+    initAdManager()
   }
 
   override fun invokeDefaultOnBackPressed() {

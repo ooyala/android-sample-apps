@@ -31,14 +31,22 @@ public class AddAssetActivity extends Activity {
   }
   private EditText embedCodeEditText;
   private EditText pCodeEditText;
+  private EditText apiKeyEditText;
+  private EditText secretEditText;
+  private EditText accountIdEditText;
   private Spinner playerSpinner;
   private Spinner formatSpinner;
   private String embedCode;
   private String pCode;
+  private String secret;
+  private String apiKey;
+  private String accountId;
   private String playerActivity;
   private CheckBox autoPlayCheckBox;
-  private boolean autoPlay;
   private String selectedFormat;
+  private Spinner hevcSpinner;
+  private CheckBox envStgCheckBox;
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -46,8 +54,12 @@ public class AddAssetActivity extends Activity {
     setContentView(R.layout.embed_pcode_layout);
     addItemsOnSpinner();
     embedCodeEditText = (EditText) findViewById(R.id.embed_edit_text);
+    apiKeyEditText = (EditText) findViewById(R.id.apikey_edit_text);
+    secretEditText = (EditText) findViewById(R.id.secret_edit_text);
+    accountIdEditText = (EditText) findViewById(R.id.accountId_edit_text);
     pCodeEditText = (EditText) findViewById(R.id.pcode_edit_text);
     autoPlayCheckBox = (CheckBox) findViewById(R.id.auto_play_check_box);
+    envStgCheckBox = (CheckBox) findViewById(R.id.set_env_stg);
     initButtonListeners();
   }
 
@@ -58,9 +70,11 @@ public class AddAssetActivity extends Activity {
       public void onClick(View v) {
         embedCode = embedCodeEditText.getText().toString();
         pCode = pCodeEditText.getText().toString();
+        secret = secretEditText.getText().toString();
+        apiKey = apiKeyEditText.getText().toString();
+        accountId = accountIdEditText.getText().toString();
         playerActivity =  String.valueOf(playerSpinner.getSelectedItem());
         selectedFormat = String.valueOf(formatSpinner.getSelectedItem());
-        autoPlay = autoPlayCheckBox.isChecked() ? true : false;
         if (embedCode.isEmpty()) {
           Toast.makeText(AddAssetActivity.this, "Embed code can't be empty!", Toast.LENGTH_LONG).show();
           return;
@@ -79,6 +93,7 @@ public class AddAssetActivity extends Activity {
     list.add("OoyalaDefault");
     list.add("GoogleIMA");
     list.add("Freewheel");
+    list.add("Geoblocking");
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, list);
     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,6 +112,16 @@ public class AddAssetActivity extends Activity {
             android.R.layout.simple_spinner_item, list);
     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     formatSpinner.setAdapter(dataAdapter);
+
+    hevcSpinner = (Spinner) findViewById(R.id.hevc_mode);
+    list = new ArrayList<String>();
+    list.add("NoPreference");
+    list.add("HEVCPreferred");
+    list.add("HEVCNotPreferred");
+    dataAdapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, list);
+    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    hevcSpinner.setAdapter(dataAdapter);
   }
 
   private void startPlayerActivity() {
@@ -105,15 +130,20 @@ public class AddAssetActivity extends Activity {
     pActivity.put("OoyalaDefault",OoyalaSkinPlayerActivity.class);
     pActivity.put("GoogleIMA",PreconfiguredIMAPlayerActivity.class);
     pActivity.put("Freewheel",PreconfiguredFreewheelPlayerActivity.class);
-
+    pActivity.put("Geoblocking",GeoBlockingActivity.class);
     //Launch the correct activity
     Intent intent = new Intent(this, pActivity.get(playerActivity));
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", embedCode);
     intent.putExtra("pcode", pCode);
     intent.putExtra("domain", "http://www.ooyala.com");
-    intent.putExtra("autoPlay", autoPlay);
+    intent.putExtra("autoPlay", autoPlayCheckBox.isChecked() ? true : false);
+    intent.putExtra("secret", secret);
+    intent.putExtra("apiKey", apiKey);
+    intent.putExtra("accountId", accountId);
     intent.putExtra("selectedFormat", selectedFormat);
+    intent.putExtra("hevc_mode", String.valueOf(hevcSpinner.getSelectedItem()));
+    intent.putExtra("is_staging", envStgCheckBox.isChecked() ? true : false);
     startActivity(intent);
   }
 }

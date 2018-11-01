@@ -19,9 +19,9 @@ class VideoRecyclerAdapter(private val dataList: List<VideoData>, private val li
 
   override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bindItem(dataList[position], listener)
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ItemViewHolder =
-      ItemViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.view_holder_item, parent, false))
-
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    return ItemViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.view_holder_item, parent, false))
+  }
 
   override fun getItemCount(): Int = dataList.size
 

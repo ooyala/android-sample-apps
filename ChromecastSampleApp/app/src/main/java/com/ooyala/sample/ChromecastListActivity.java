@@ -45,8 +45,8 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     final Intent intent = new Intent(this, videoList[position].activity);
-    SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
-    lastChoosenParams
+    SharedPreferences lastChosenParams = getSharedPreferences("LastChosenParams", MODE_PRIVATE);
+    lastChosenParams
         .edit()
         .putString("embedcode", videoList[position].embedCode)
         .putString("secondEmbedCode", videoList[position].secondEmbedCode)
