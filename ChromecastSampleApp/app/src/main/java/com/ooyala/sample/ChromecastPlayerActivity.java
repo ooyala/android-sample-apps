@@ -19,10 +19,12 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.cast.CastManager;
+import com.ooyala.cast.mediainfo.VideoData;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -37,8 +39,10 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   private final String SECRET = "fill me in";
   private final String ACCOUNT_ID = "accountID";
 
-  CastManager castManager;
-  CastViewManager castViewManager;
+  private OoyalaPlayer player;
+
+  private CastManager castManager;
+  private CastViewManager castViewManager;
 
   private String embedCode;
   private String secondEmbedCode;
@@ -46,9 +50,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   private String domain;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
-  SDCardLogcatOoyalaEventsLogger Playbacklog = new SDCardLogcatOoyalaEventsLogger();
-
-  private OoyalaPlayer player;
+  private SDCardLogcatOoyalaEventsLogger playbackLog = new SDCardLogcatOoyalaEventsLogger();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     setupActionBar();
     parseSharedPreferences();
     castManager = CastManager.getCastManager();
+//    Uncomment to set custom parameters
+//    Map<String, String> userPreferences = loadUserPreferences();
+//    castManager.setAdditionalInitParams(userPreferences);
     initOoyala();
     castViewManager = new CastViewManager(this, castManager);
   }
@@ -69,31 +74,28 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     }
   }
 
-  private void parseSharedPreferences() {
-    SharedPreferences lastChoosenParams = getSharedPreferences("LastChoosenParams", MODE_PRIVATE);
-    if (lastChoosenParams != null) {
-      embedCode = lastChoosenParams.getString("embedcode", "");
-      secondEmbedCode = lastChoosenParams.getString("secondEmbedCode", null);
-      pcode = lastChoosenParams.getString("pcode", "");
-      domain = lastChoosenParams.getString("domain", "");
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if (player != null) {
+      player.resume();
     }
   }
 
-  private void initOoyala() {
-    PlayerDomain playerDomain = new PlayerDomain(domain);
-    Options options = new Options.Builder().setUseExoPlayer(true).build();
-    OoyalaPlayerLayout ooyalaPlayerLayout = findViewById(R.id.ooyalaPlayer);
-    player = new OoyalaPlayer(pcode, playerDomain, this, options);
-    new OoyalaPlayerLayoutController(ooyalaPlayerLayout, player);
-    castManager.registerWithOoyalaPlayer(player);
-    player.addObserver(this);
-    play(embedCode);
+  @Override
+  protected void onPause() {
+    super.onPause();
+    if (player != null) {
+      player.suspend();
+    }
   }
 
-  private void play(String ec) {
-    player.setEmbedCode(ec);
-    // Uncomment for Auto-Play
-    player.play();
+  @Override
+  protected void onStop() {
+    super.onStop();
+    if (castManager != null) {
+      castManager.deregisterFromOoyalaPlayer();
+    }
   }
 
   @Override
@@ -101,13 +103,28 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     boolean createOptionsMenu = super.onCreateOptionsMenu(menu);
     getMenuInflater().inflate(R.menu.browse, menu);
     CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu,
-        R.id.media_route_menu_item);
+            R.id.media_route_menu_item);
     return createOptionsMenu;
   }
 
-  private void setupActionBar() {
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
+  @Override
+  public void getTokenForEmbedCodes(List<String> embedCodes, EmbedTokenGeneratorCallback callback) {
+    String embedCodesString = "";
+    for (String ec : embedCodes) {
+      if (ec.equals("")) embedCodesString += ",";
+      embedCodesString += ec;
+    }
+
+    HashMap<String, String> params = new HashMap<>();
+    params.put("account_id", ACCOUNT_ID);
+
+    String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
+
+    EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
+
+    URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
+
+    callback.setEmbedToken(tokenUrl.toString());
   }
 
   /**
@@ -119,13 +136,18 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
       return;
     }
 
+    OoyalaNotification notification = null;
+    if (argN instanceof OoyalaNotification ){
+      notification = (OoyalaNotification) argN;
+    }
+
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
     }
 
     if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME) {
-      castViewManager.configureCastView(player.getCurrentItem());
+      updateCastView(notification);
     } else if (arg1 == OoyalaPlayer.ERROR_NOTIFICATION_NAME) {
       final String msg = "Error Event Received";
       if (player != null && player.getError() != null) {
@@ -150,54 +172,68 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     // Automation Hook: to write Notifications to a temporary file on the device/emulator
     String text = "Notification Received: " + arg1 + " - state: " + player.getState();
     // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-    Playbacklog.writeToSdcardLog(text);
+    playbackLog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
   }
 
-  @Override
-  public void getTokenForEmbedCodes(List<String> embedCodes, EmbedTokenGeneratorCallback callback) {
-    String embedCodesString = "";
-    for (String ec : embedCodes) {
-      if (ec.equals("")) embedCodesString += ",";
-      embedCodesString += ec;
-    }
-
-    HashMap<String, String> params = new HashMap<>();
-    params.put("account_id", ACCOUNT_ID);
-
-    String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
-
-    EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
-
-    URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
-
-    callback.setEmbedToken(tokenUrl.toString());
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    if (castManager != null) {
-      castManager.deregisterFromOoyalaPlayer();
+  private void parseSharedPreferences() {
+    SharedPreferences lastChosenParams = getSharedPreferences("LastChosenParams", MODE_PRIVATE);
+    if (lastChosenParams != null) {
+      embedCode = lastChosenParams.getString("embedcode", "");
+      secondEmbedCode = lastChosenParams.getString("secondEmbedCode", null);
+      pcode = lastChosenParams.getString("pcode", "");
+      domain = lastChosenParams.getString("domain", "");
     }
   }
 
+  private void initOoyala() {
+    PlayerDomain playerDomain = new PlayerDomain(domain);
+    Options options = new Options.Builder().setUseExoPlayer(true).build();
+    OoyalaPlayerLayout ooyalaPlayerLayout = findViewById(R.id.ooyalaPlayer);
+    player = new OoyalaPlayer(pcode, playerDomain, this, options);
+    new OoyalaPlayerLayoutController(ooyalaPlayerLayout, player);
+    castManager.registerWithOoyalaPlayer(player);
+    player.addObserver(this);
+    play(embedCode);
+  }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-    if (player != null) {
-      player.resume();
+  private void play(String ec) {
+    player.setEmbedCode(ec);
+    // Uncomment for Auto-Play
+    player.play();
+  }
+
+  private void setupActionBar() {
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+  }
+
+  private void updateCastView(OoyalaNotification notification) {
+    if (notification != null && notification.getData() != null && notification.getData() instanceof VideoData) {
+      VideoData data = (VideoData) notification.getData();
+      castViewManager.configureCastView(data.getTitle(), data.getDescription(), data.getUrl());
+    } else if (player != null && player.getCurrentItem() != null) {
+      castViewManager.configureCastView(
+          player.getCurrentItem().getTitle(),
+          player.getCurrentItem().getDescription(),
+          player.getCurrentItem().getPromoImageURL(0, 0)
+      );
     }
   }
 
-  @Override
-  public void onPause() {
-    super.onPause();
-    if (player != null) {
-      player.suspend();
-    }
+  private Map<String, String> loadUserPreferences() {
+    Map<String, String> preferences = new HashMap<>();
+    // Send user name to receiver
+    preferences.put("userName", "User");
+    // Define initial volume based on user preferences (this property will override volume defined in player params)
+    preferences.put("initialVolume", "0");
+    // Pass embed token (Token generated in getTokenForEmbedCodes() will be overridden)
+    preferences.put("embedToken", "some-uu-embed-token");
+    // Change video title and description
+    preferences.put("title", "New title");
+    preferences.put("description", "New description");
+    return preferences;
   }
 }
 
