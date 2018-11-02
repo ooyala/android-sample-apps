@@ -61,6 +61,7 @@ public class ContentProtectionListActivity extends Activity implements OnItemCli
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", selection.getEmbedCode());
+    intent.putExtra("className", this.getClass().getSimpleName());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
     intent.putExtra("pcode", selection.getPcode());
     intent.putExtra("domain", selection.getDomain());
