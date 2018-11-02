@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">Ooyala Complete Sample App</string>
+    <string name="pcode">pcode:</string>
+    <string name="embed">embed:</string>
+    <string name="auto_play">AutoPlay</string>
 
 </resources>
