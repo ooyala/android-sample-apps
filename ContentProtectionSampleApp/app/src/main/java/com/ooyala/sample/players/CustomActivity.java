@@ -77,12 +77,13 @@ public class CustomActivity extends Activity {
         Intent intent = new Intent(this, OoyalaPlayerTokenPlayerActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("embed_code", embedCode);
+        intent.putExtra("className",this.getClass().getSimpleName());
         intent.putExtra("pcode", pCode);
         intent.putExtra("domain", "http://www.ooyala.com");
         intent.putExtra("autoPlay", autoPlay);
         intent.putExtra("apikey", apiKey);
         intent.putExtra("secret", secret);
         intent.putExtra("accountid", accountId);
-        startActivityForResult(intent,1);
+        startActivity(intent);
     }
 }

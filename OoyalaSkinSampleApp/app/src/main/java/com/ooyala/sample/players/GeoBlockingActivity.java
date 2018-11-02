@@ -56,7 +56,7 @@ public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTo
         //Uncomment next line if you work on STAGING
         //OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
 
-        if(getCallingActivity().getClassName().contains("AddAssetActivity")) {
+        if(getIntent().getExtras().getString("className").contains("AddAssetActivity")) {
             ACCOUNT_ID = accountId;
             APIKEY = apiKey;
             SECRET = secret;

@@ -136,6 +136,7 @@ public class AddAssetActivity extends Activity {
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("embed_code", embedCode);
     intent.putExtra("pcode", pCode);
+    intent.putExtra("className",this.getClass().getSimpleName());
     intent.putExtra("domain", "http://www.ooyala.com");
     intent.putExtra("autoPlay", autoPlayCheckBox.isChecked() ? true : false);
     intent.putExtra("secret", secret);
@@ -144,6 +145,6 @@ public class AddAssetActivity extends Activity {
     intent.putExtra("selectedFormat", selectedFormat);
     intent.putExtra("hevc_mode", String.valueOf(hevcSpinner.getSelectedItem()));
     intent.putExtra("is_staging", envStgCheckBox.isChecked() ? true : false);
-    startActivityForResult(intent,1);
+    startActivity(intent);
   }
 }

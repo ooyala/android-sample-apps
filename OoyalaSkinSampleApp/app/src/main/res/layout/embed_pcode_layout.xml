@@ -13,14 +13,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/embed"/>
 
         <EditText
             android:id="@+id/embed_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="@dimen/activity_layout_weight"
             android:inputType="text"
             android:selectAllOnFocus="false"
             android:singleLine="false" />
@@ -36,14 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/pcode"/>
 
         <EditText
             android:id="@+id/pcode_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="@dimen/activity_layout_weight"
             android:hint="c0cTkxOqALQviQIGAHWY5hP0q9gU"
             android:inputType="text" />
 
@@ -58,14 +58,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/apikey"/>
 
         <EditText
             android:id="@+id/apikey_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="@dimen/activity_layout_weight"
             android:hint="BjcWYyOu1KK2DiKOkF41Z2k0X57l.0I-V4"
             android:inputType="text" />
 
@@ -80,14 +80,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/secret"/>
 
         <EditText
             android:id="@+id/secret_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="@dimen/activity_layout_weight"
             android:hint="1ysC3V-g8m9V3QoGJwRa_fXcfi_G2ZV778m17pux"
             android:inputType="text" />
 
@@ -102,14 +102,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/accountid"/>
 
         <EditText
             android:id="@+id/accountId_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="@dimen/activity_layout_weight"
             android:hint="dulari_qa"
             android:inputType="text" />
 
@@ -124,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/select_player"/>
 
         <Spinner
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/selectFormat"/>
 
         <Spinner
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/activity_layout_margin"
             android:text="@string/select_hevc_mode"/>
 
         <Spinner
