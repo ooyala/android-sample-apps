@@ -31,10 +31,10 @@ tasks.copyTask.execute()
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.2.2'
-    implementation 'com.google.android.gms:play-services-ads:12.0.0'
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
     implementation files('libs/android_accessenabler-1.7.3.jar')
     implementation files('libs/OoyalaSDK.aar')
 }
