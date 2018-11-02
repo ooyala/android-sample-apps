@@ -277,8 +277,7 @@
     "vrIcon": false
   },
   "audio": {
-    "audioLanguage": "none",
-    "audioOnly": false
+    "audioLanguage": "none"
   },
   "animationDurations": {
     "vrNotification": 5,
@@ -299,7 +298,7 @@
       {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
       {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"arrowsBlack", "location": "mainView", "whenDoesNotFit":"keep", "minWidth":45 }
     ],
@@ -308,28 +307,28 @@
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 }
     ],
     "mobileContent": [
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
       {"name":"live", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45},
-      {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":100 },
+      {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"chromecast", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":50 },
+      {"name":"chromecast", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
       {"name":"share", "location":"moreOptions" },
       {"name":"discovery", "location":"moreOptions" },
       {"name":"closedCaption", "location":"moreOptions" },
-      {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
-      {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 }
+      {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 }
     ],
     "mobileAd": [
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 }
+      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 }
     ],
     "audioOnly": [
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 },

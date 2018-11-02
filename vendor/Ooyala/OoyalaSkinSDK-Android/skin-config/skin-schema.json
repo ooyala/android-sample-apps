@@ -831,11 +831,6 @@
           "description": "Set the default audio language. This is a string of the form \"en\" for English, \"fr\" for French, etc.",
           "type": "string",
           "default": "en"
-        },
-        "audioOnly": {
-          "description": "Set to true to enable the audio only player",
-          "type": "boolean",
-          "default": "false"
         }
       }
     },
@@ -898,7 +893,7 @@
         "\"audioAndCC\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u005F\", \"fontStyleClass\": \"icon icon-audio-and-cc\"}",
         "\"selected\": { \"fontFamilyName\": \"alice\", \"fontString\": \"\\u0040\", \"fontStyleClass\": \"icon icon-selected\"}",
         "\"chromecast-connected\": {\"fontFamilyName\": \"ooyala-slick-type\", \"fontString\": \"\\u003B\", \"fontStyleClass\": \"oo-icon\"}",
-        "\"chromecast-disconnected\": {\"fontFamilyName\": \"ooyala-slick-type\", \"fontString\": \"\\u003A\", \"fontStyleClass\": \"oo-icon\"}"
+        "\"chromecast-disconnected\": {\"fontFamilyName\": \"ooyala-slick-type\", \"fontString\": \"\\u003A\", \"fontStyleClass\": \"oo-icon\"}",
         "}"],
       "play": {
         "description": "Set the styling for the play icon on mobile devices.",
@@ -1428,6 +1423,7 @@
                "arrowsBlack",
                "audioAndCC",
                "bitrateSelector",
+               "skipControls",
                "chromecast"]
     },
     "buttonArray": {
