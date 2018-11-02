@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.content.Context;
+import android.content.res.Configuration;
 
 import com.ooyala.android.AdPodInfo;
 import com.ooyala.android.OoyalaPlayer;
@@ -29,6 +30,7 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
   private AdPodInfo adPodInfo;
   private StateNotifier _stateNotifier;
   private HashSet<Integer> cuePoints;
+  private boolean allAdsPlayed;
 
   public SampleAdPlugin(Context context, OoyalaPlayer player) {
     _player = new WeakReference<OoyalaPlayer>(player);
@@ -191,5 +193,14 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
       return new HashSet<Integer>(cuePoints);
     }
     return new HashSet<Integer>();
+  }
+
+  @Override
+  public boolean allADSPlayed() {
+    this.allAdsPlayed = this.cuePoints != null && this.cuePoints.size() == 0;
+    return this.allAdsPlayed;
+  }
+
+  public void configurationChanged(Configuration newConfig) {
   }
 }
