@@ -144,6 +144,6 @@ public class AddAssetActivity extends Activity {
     intent.putExtra("selectedFormat", selectedFormat);
     intent.putExtra("hevc_mode", String.valueOf(hevcSpinner.getSelectedItem()));
     intent.putExtra("is_staging", envStgCheckBox.isChecked() ? true : false);
-    startActivity(intent);
+    startActivityForResult(intent,1);
   }
 }

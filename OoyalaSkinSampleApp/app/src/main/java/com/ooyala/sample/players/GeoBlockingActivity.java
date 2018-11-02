@@ -47,11 +47,11 @@ public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTo
       skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
       // Create the OoyalaPlayer, with some built-in UI disabled
       PlayerDomain playerDomain = new PlayerDomain(domain);
-        Options options = null;
-        if(selectedFormat.equalsIgnoreCase("default"))
-            options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).build();
-        else
-            options = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true).setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
+      Options.Builder optionsBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
+      if(!selectedFormat.equalsIgnoreCase("default")) {
+        optionsBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat)).build();
+      }
+      Options options = optionsBuilder.build();
 
         //Uncomment next line if you work on STAGING
         //OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING);
@@ -69,6 +69,7 @@ public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTo
         Log.i(TAG, "Environment Set to Staging:");
         OoyalaPlayer.setEnvironment(Environment.EnvironmentType.STAGING, Environment.PROTOCOL_HTTPS);
       } else {
+        Log.i(TAG, "Environment Set to Production:");
         OoyalaPlayer.setEnvironment(Environment.EnvironmentType.PRODUCTION, Environment.PROTOCOL_HTTPS);
       }
       player = new OoyalaPlayer(pcode, playerDomain,this, options);
