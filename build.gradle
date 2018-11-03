@@ -9,7 +9,7 @@ buildscript {
 
         // App dependencies
         bintrayVersion = '0.8.1'
-        exoplayerVersion = '2.6.1'
+        exoplayerVersion = '2.8.3'
         gradleVersion = '3.2.1'
         hamcrestVersion = '1.3'
         injectVersion = '1'
@@ -22,8 +22,8 @@ buildscript {
         volleyVersion = '1.1.1'
 
         // Google Play Services
-        gmsAdsVersion = '12.0.0'
-        gmsAuthVersion = '12.0.0'
+        gmsAdsVersion = '15.0.1'
+        gmsAuthVersion = '15.0.1'
         interactiveMediaVersion = '3.8.5'
 
         // react-native dependencies

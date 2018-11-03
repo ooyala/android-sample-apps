@@ -29,6 +29,17 @@ task copyTask(type: Copy) {
 
 tasks.copyTask.execute()
 
+ext.supportLibraryVersion = "27.1.1"
+
+project.configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'com.android.support'
+                && !details.requested.name.contains('multidex')) {
+            details.useVersion "${supportLibraryVersion}"
+        }
+    }
+}
+
 dependencies {
     implementation files('libs/FWAdManager.jar')
     implementation files('libs/OoyalaFreewheelSDK.jar')

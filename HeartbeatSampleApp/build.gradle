@@ -8,7 +8,7 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        exoplayerVersion = '2.6.1'
+        exoplayerVersion = '2.8.3'
         supportLibraryVersion = '1.0.0'
         volleyVersion = '1.1.1'
 

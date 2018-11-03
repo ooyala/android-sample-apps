@@ -52,12 +52,6 @@ project(':VRSampleApp').projectDir = new File(settingsDir, './VRSampleApp/app')
 include ':VRSampleAppKotlin'
 project (':VRSampleAppKotlin').projectDir = new File(settingsDir, './VRSampleAppKotlin/app')
 
-/*include ':skin'
-project(':skin').projectDir = new File(settingsDir, '../../Skin/native-skin/sdk/android/skin')
-
-include(':core')
-project(':core').projectDir = new File(settingsDir, '../../android-sdk/sdk/core/')*/
-
 //DownloadToOwnSampleApp
 include ':DownloadToOwnSampleApp'
 project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './PlaybackLab/DownloadToOwnSampleApp/app')
@@ -67,10 +61,16 @@ include ':HeartbeatSampleApp'
 project(':HeartbeatSampleApp').projectDir = new File(settingsDir, './HeartbeatSampleApp/app')
 
 // Developer
-//include ':ooyalaSkinSDK'
-//project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../native-skin/sdk/android/ooyalaSkinSDK/')
+//include ':skin'
+//project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin/')
 //include ':core'
-//project(':core').projectDir=new File(settingsDir, '../android-sdk/sdk/core/')
+//project(':core').projectDir = new File(settingsDir, '../android-sdk/sdk/core/')
+//include ':cast'
+//project(':cast').projectDir = new File(settingsDir, '../android-sdk/sdk/cast/')
 //include(':vrsdk')
 //project(':vrsdk').projectDir = new File(settingsDir, '../android-sdk/sdk/vrsdk/')
+//include(':ima')
+//project(':ima').projectDir = new File(settingsDir, '../android-sdk/sdk/ima/')
+//include(':freewheel')
+//project(':freewheel').projectDir = new File(settingsDir, '../android-sdk/sdk/freewheel/')
 

@@ -48,11 +48,11 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   private final int MAX_RETRY_COUNT = 3;
   private int retry_count;
 
-  private final String APIKEY = "";
-  private final String SECRET = "";
+  private String APIKEY = "";
+  private String SECRET = "";
 
   // An account ID, if you are using Concurrent Streams or Entitlements
-  private final String ACCOUNT_ID = "";
+  private String ACCOUNT_ID = "";
 
   /**
    * Called when the activity is first created.
@@ -65,6 +65,9 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
+    APIKEY = getIntent().getExtras().getString("api_key");
+    SECRET = getIntent().getExtras().getString("secret_key");
+    ACCOUNT_ID = getIntent().getExtras().getString("account_id");
     progressView = (TextView)findViewById(R.id.progress_text);
     progressView.setText("progress: 0");
     handler = new Handler(getMainLooper());

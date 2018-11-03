@@ -8,11 +8,11 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        exoplayerVersion = '2.6.1'
+        exoplayerVersion = '2.8.3'
         supportLibraryVersion = '1.0.0'
 
         // Google Play Services
-        gmsAdsVersion = '12.0.0'
+        gmsAdsVersion = '15.0.1'
 
         // Project dependencies
         bintrayVersion = '0.8.1'
