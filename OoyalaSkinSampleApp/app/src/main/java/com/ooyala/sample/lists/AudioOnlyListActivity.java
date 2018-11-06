@@ -1,8 +1,8 @@
 package com.ooyala.sample.lists;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,9 +15,9 @@ import com.ooyala.sample.utils.PlayerSelectionOption;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class AudioOnlyListActivity extends Activity implements AdapterView.OnItemClickListener {
+public class AudioOnlyListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-  private static Map<String, PlayerSelectionOption> selectionMap;
+  private Map<String, PlayerSelectionOption> selectionMap;
   private ArrayAdapter<String> selectionAdapter;
 
   public final static String getName() {

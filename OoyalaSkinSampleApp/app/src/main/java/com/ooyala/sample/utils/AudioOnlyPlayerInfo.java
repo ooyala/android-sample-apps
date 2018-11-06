@@ -8,7 +8,7 @@ public class AudioOnlyPlayerInfo extends BaseCustomPlayerInfo {
   private final Map<String, String> ADDITIONAL_PARAMS;
 
   {
-    ADDITIONAL_PARAMS = new HashMap();
+    ADDITIONAL_PARAMS = new HashMap<>();
     ADDITIONAL_PARAMS.put("player_type", "audio_only");
   }
 
