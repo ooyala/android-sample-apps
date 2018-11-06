@@ -70,13 +70,13 @@ public class AudioOnlyListActivity extends AppCompatActivity implements AdapterV
   @Override
   public void onItemClick(AdapterView<?> l, View v, int pos, long id) {
     PlayerSelectionOption selection = selectionMap.get(selectionAdapter.getItem(pos));
-    Intent intent = new IntentBuilder(this)
+    Intent intent = new IntentBuilder()
         .setActivity(selection.getActivity())
         .setEmbedCode(selection.getEmbedCode())
         .setPCode(selection.getPcode())
         .setDomain(selection.getDomain())
         .setAutoPlay(true)
-        .build();
+        .build(this);
     startActivity(intent);
   }
 }

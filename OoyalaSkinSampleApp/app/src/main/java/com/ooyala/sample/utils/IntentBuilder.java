@@ -8,15 +8,10 @@ import com.ooyala.sample.players.AbstractHookActivity;
 public class IntentBuilder {
 
   private Class<? extends Activity> activityClass;
-  private Context context;
   private String embedCode;
   private String pcode;
   private String domain;
   private boolean autoPlay;
-
-  public IntentBuilder(Context context) {
-    this.context = context;
-  }
 
   public IntentBuilder setActivity(Class<? extends Activity> activityClass) {
     this.activityClass = activityClass;
@@ -43,7 +38,7 @@ public class IntentBuilder {
     return this;
   }
 
-  public Intent build() {
+  public Intent build(Context context) {
     return new Intent(context, activityClass)
         .setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         .putExtra(AbstractHookActivity.EXTRA_EMBED_CODE, embedCode)
