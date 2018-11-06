@@ -44,12 +44,11 @@ public class IntentBuilder {
   }
 
   public Intent build() {
-    Intent intent = new Intent(context, activityClass)
+    return new Intent(context, activityClass)
         .setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         .putExtra(AbstractHookActivity.EXTRA_EMBED_CODE, embedCode)
         .putExtra(AbstractHookActivity.EXTRA_PCODE, pcode)
         .putExtra(AbstractHookActivity.EXTRA_DOMAIN, domain)
         .putExtra(AbstractHookActivity.EXTRA_AUTO_PLAY, autoPlay);
-    return intent;
   }
 }
