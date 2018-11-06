@@ -45,7 +45,7 @@ repositories {
 
 dependencies {
     implementation 'com.google.android.gms:play-services-ads:12.0.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
