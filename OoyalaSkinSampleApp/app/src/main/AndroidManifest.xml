@@ -108,8 +108,8 @@
         </activity>
 
         <activity
-                android:name=".players.AudioOnlyPlayerActivity"
-                android:configChanges="keyboardHidden|orientation|screenSize">
+            android:name=".players.AudioOnlyPlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
         <meta-data
