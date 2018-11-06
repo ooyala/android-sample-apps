@@ -1,8 +1,9 @@
-package com.ooyala.sample.players;
+package com.ooyala.sample.utils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import com.ooyala.sample.players.AbstractHookActivity;
 
 public class IntentBuilder {
 

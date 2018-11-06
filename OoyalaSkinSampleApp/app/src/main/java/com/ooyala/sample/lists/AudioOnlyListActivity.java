@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.AudioOnlyPlayerActivity;
-import com.ooyala.sample.players.IntentBuilder;
+import com.ooyala.sample.utils.IntentBuilder;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import java.util.LinkedHashMap;
