@@ -5,6 +5,9 @@
     <string name="open">Open</string>
     <string name="pcode">pcode:</string>
     <string name="embed">embed:</string>
+    <string name="apikey">apikey:</string>
+    <string name="secret">secret:</string>
+    <string name="accountid">account Id:</string>
     <string name="select_player">Select Player:</string>
     <string name="auto_play">AutoPlay</string>
     <string name="take_screenshot">Take a screenshot</string>

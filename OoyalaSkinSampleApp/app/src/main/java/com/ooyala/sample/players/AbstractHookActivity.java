@@ -37,6 +37,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String apiKey;
+	protected String secret;
+	protected String accountId;
 	protected String selectedFormat;
 	protected String hevcMode;
 	protected boolean isStaging;
@@ -68,6 +71,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			pcode = extras.getString("pcode");
 			domain = extras.getString("domain");
 			autoPlay = extras.getBoolean("autoPlay",false);
+			apiKey = extras.getString("apiKey");
+			secret = extras.getString("secret");
+			accountId = extras.getString("accountId");
 			selectedFormat = extras.getString("selectedFormat","default");
 			hevcMode = extras.getString("hevc_mode","NoPreference");
 			isStaging = extras.getBoolean("is_staging",false);
