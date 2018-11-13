@@ -1,13 +1,11 @@
 package com.ooyala.sample.utils;
 
-import com.ooyala.android.PlayerInfo;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-public class CustomPlayerInfo implements PlayerInfo {
-    Set<String> supportedFormats;
+public class CustomPlayerInfo extends BaseCustomPlayerInfo {
+    private Set<String> supportedFormats;
 
     public CustomPlayerInfo() {
       supportedFormats = new HashSet<>();
@@ -30,40 +28,12 @@ public class CustomPlayerInfo implements PlayerInfo {
       return supportedFormats;
     }
 
-    @Override
-    public Set<String> getSupportedProfiles() {
-      return null;
-    }
-
-    @Override
-    public int getMaxWidth() {
-      return -1;
-    }
-
-    @Override
-    public int getMaxHeight() {
-      return -1;
-    }
-
-    @Override
-    public int getMaxBitrate() {
-      return -1;
-    }
-
-    @Override
-    public String getUserAgent() {
-      return null;
-    }
-
-  @Override
-  public Map<String, String> getAdditionalParams() {
-    return null;
-  }
-
-  // we want to tell the server that we want to get elements as if we were using iOS
-    // we would get different streams because of it
+  /**
+   * We want to tell the server that we want to get elements as if we were using iOS
+   * We would get different streams because of it
+   */
     @Override
     public String getDevice() {
       return "ios";
     }
-  }
+}
