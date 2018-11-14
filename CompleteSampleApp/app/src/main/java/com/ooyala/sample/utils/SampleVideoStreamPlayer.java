@@ -45,7 +45,7 @@ public class SampleVideoStreamPlayer extends StreamPlayer {
 
     @Override
     public void init(OoyalaPlayer parent, Set<Stream> streams) {
-        WifiManager wifiManager = (WifiManager)parent.getLayout().getContext().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager)parent.getLayout().getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         boolean isWifiEnabled = wifiManager.isWifiEnabled();
 
         stream = Stream.bestStream(streams, isWifiEnabled);

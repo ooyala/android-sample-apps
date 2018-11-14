@@ -3,7 +3,7 @@
     a:layout_height="match_parent"
     a:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         a:id="@+id/videoRecyclerView"
         a:layout_width="match_parent"
         a:layout_height="match_parent"/>

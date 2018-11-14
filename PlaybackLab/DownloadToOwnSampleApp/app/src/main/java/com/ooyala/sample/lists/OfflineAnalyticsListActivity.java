@@ -1,21 +1,14 @@
 package com.ooyala.sample.lists;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.app.Activity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.OfflineAnalyticsAdapter;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 public class OfflineAnalyticsListActivity extends Activity {

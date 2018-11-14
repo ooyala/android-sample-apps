@@ -25,10 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 
 public class OoyalaSkinOPTPlayerActivity extends Activity
   implements Observer, DefaultHardwareBackBtnHandler, EmbedTokenGenerator {
