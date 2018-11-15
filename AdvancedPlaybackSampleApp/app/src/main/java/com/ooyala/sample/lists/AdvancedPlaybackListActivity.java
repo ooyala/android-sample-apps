@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
+import com.ooyala.sample.players.AudioOnlyPlayerActivity;
 import com.ooyala.sample.players.ChangeVideoPlayerActivity;
 import com.ooyala.sample.players.CustomControlsPlayerActivity;
 import com.ooyala.sample.players.CustomOverlayPlayerActivity;
