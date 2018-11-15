@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ooyala.sample.R;
+import com.ooyala.sample.players.AudioOnlyPlayerActivity;
 import com.ooyala.sample.players.ChangeVideoPlayerActivity;
 import com.ooyala.sample.players.CustomControlsPlayerActivity;
 import com.ooyala.sample.players.CustomOverlayPlayerActivity;
@@ -61,6 +62,9 @@ public class AdvancedPlaybackListActivity extends Activity implements OnItemClic
     selectionMap.put(ReinitPlayerActivity.getName(), new PlayerSelectionOption("E4bDRwZTE6rMB8oYrzOsuHSPz0XM0dAV", "BzY2syOq6kIK6PTXN7mmrGVSJEFj", "http://www.ooyala.com", ReinitPlayerActivity.class) );
     selectionMap.put(ReinitSkinPlayerActivity.getName(), new PlayerSelectionOption("E4bDRwZTE6rMB8oYrzOsuHSPz0XM0dAV", "BzY2syOq6kIK6PTXN7mmrGVSJEFj", "http://www.ooyala.com", ReinitSkinPlayerActivity.class) );
     selectionMap.put(SetEmbedCodePlayerActivity.getName(), new PlayerSelectionOption("oza2pxODE6Vm_TTHPKJ68gBD8JQ7oTuj", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", SetEmbedCodePlayerActivity.class) );
+    selectionMap.put(AudioOnlyPlayerActivity.getNameM4a(), new PlayerSelectionOption("A3aTBmZzE6bzQUkQlDOrUu4cjfOlCGPa", "Q1bW0yOsRxnrzAjzXI2wUlZp9h53", "http://www.ooyala.com", AudioOnlyPlayerActivity.class) );
+    selectionMap.put(AudioOnlyPlayerActivity.getNameHls(), new PlayerSelectionOption("NybzBmZzE6n6LYZgsxJNthUnAn1_xrcV", "Q1bW0yOsRxnrzAjzXI2wUlZp9h53", "http://www.ooyala.com", AudioOnlyPlayerActivity.class) );
+
     setContentView(com.ooyala.sample.R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
