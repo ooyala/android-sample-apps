@@ -32,6 +32,7 @@ dependencies {
     // App dependencies
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
 
     // Google Play Services
     implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
