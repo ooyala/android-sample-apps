@@ -13,6 +13,8 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.lists.AdvancedPlaybackListActivity;
 import com.ooyala.sample.lists.BasicPlaybackListActivity;
 import com.ooyala.sample.lists.ContentProtectionListActivity;
+import com.ooyala.sample.lists.NPAWFreewheelListActivity;
+import com.ooyala.sample.lists.NPAWIMAListActivity;
 import com.ooyala.sample.lists.NPAWYouboraListActivity;
 import com.ooyala.sample.lists.OoyalaAPIListActivity;
 import com.ooyala.sample.lists.FreewheelListActivity;
@@ -52,6 +54,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
     //activityMap.put(OoyalaAPIListActivity.getName(), OoyalaAPIListActivity.class);
     activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
     activityMap.put(CustomActivity.getName(), CustomActivity.class);
+    activityMap.put(NPAWFreewheelListActivity.getName(), NPAWFreewheelListActivity.class);
+    activityMap.put(NPAWIMAListActivity.getName(), NPAWIMAListActivity.class);
 
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);
