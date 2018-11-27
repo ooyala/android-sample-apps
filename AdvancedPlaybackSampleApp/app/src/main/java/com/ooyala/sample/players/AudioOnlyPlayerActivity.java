@@ -3,14 +3,12 @@ package com.ooyala.sample.players;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
-import com.ooyala.sample.utils.AudioOnlyPlayerInfo;
 
 public class AudioOnlyPlayerActivity extends AbstractHookActivity {
 
@@ -42,12 +40,11 @@ public class AudioOnlyPlayerActivity extends AbstractHookActivity {
   }
 
   private Options createPlayerOptions() {
-    Options.Builder builder = new Options.Builder()
-            .setShowNativeLearnMoreButton(false)
-            .setShowPromoImage(false)
-            .setUseExoPlayer(true)
-            .setPlayerInfo(new AudioOnlyPlayerInfo());
-
-    return builder.build();
+    return new Options.Builder()
+        .setShowNativeLearnMoreButton(false)
+        .setShowPromoImage(false)
+        .setUseExoPlayer(true)
+        .setAudioOnly(true)
+        .build();
   }
 }
