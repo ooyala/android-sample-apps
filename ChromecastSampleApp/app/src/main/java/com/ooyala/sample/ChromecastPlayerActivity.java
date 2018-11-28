@@ -48,6 +48,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   private String secondEmbedCode;
   private String pcode;
   private String domain;
+  private boolean wasInCastMode;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   private SDCardLogcatOoyalaEventsLogger playbackLog = new SDCardLogcatOoyalaEventsLogger();
@@ -79,6 +80,10 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     super.onResume();
     if (player != null) {
       player.resume();
+      if (!player.isInCastMode() && wasInCastMode) {
+        castManager.hideCastView();
+        wasInCastMode = false;
+      }
     }
   }
 
@@ -159,8 +164,13 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
 
     if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
       if (player.isInCastMode()) {
+        if (!wasInCastMode) {
+          wasInCastMode = true;
+        }
         OoyalaPlayer.State state = player.getState();
         castViewManager.updateCastState(this, state);
+      } else if (wasInCastMode) {
+        wasInCastMode = false;
       }
     }
 
