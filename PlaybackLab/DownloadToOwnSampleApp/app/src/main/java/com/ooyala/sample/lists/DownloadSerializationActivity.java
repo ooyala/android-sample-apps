@@ -197,7 +197,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
     protected void onResume() {
         super.onResume();
 
-        for (final DownloadableAsset a :assets) {
+        for (final DownloadableAsset a : assets) {
             File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), a.getEmbedCode());
             if (folder.exists() && folder.length() > 0){
                 a.setStatus(COMPLETED);
@@ -243,11 +243,11 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                     int status = asset.getStatus();
                     if (status == COMPLETED ){
                         b.setBackgroundResource(android.R.drawable.checkbox_on_background);
-                    }if (status == WAITING || status == DOWNLOADING){
+                    } else if (status == WAITING || status == DOWNLOADING){
                         b.setBackgroundResource(android.R.drawable.ic_popup_sync);
-                    }else if (status == ERROR || status == ABORT){
+                    } else if (status == ERROR || status == ABORT){
                         b.setBackgroundResource(android.R.drawable.stat_notify_error);
-                    }else if (status == NOT_DOWNLOADED){
+                    } else if (status == NOT_DOWNLOADED){
                         b.setBackgroundResource(android.R.drawable.stat_sys_download);
                     }
                 }
@@ -307,6 +307,8 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
             @Override
             public void run() {
                 Log.d("Log","\n Error on " + embedCode + ": "+ ex.getLocalizedMessage());
+                File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), embedCode);
+                folder.delete();
                 removeAssetByEmbedCode(embedCode,downloadQueue);
                 updateDownloadButton(new DownloadableAsset(embedCode, ERROR));
                 getNextAssetToDownload();
