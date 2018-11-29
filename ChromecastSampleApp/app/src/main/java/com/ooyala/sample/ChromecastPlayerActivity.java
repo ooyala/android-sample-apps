@@ -43,6 +43,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
 
   private CastManager castManager;
   private CastViewManager castViewManager;
+  private  OoyalaPlayerLayoutController layoutController;
 
   private String embedCode;
   private String secondEmbedCode;
@@ -72,6 +73,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     if (castManager != null && player != null) {
       castManager.registerWithOoyalaPlayer(player);
     }
+    layoutController.getControls().refresh();
   }
 
   @Override
@@ -192,7 +194,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     Options options = new Options.Builder().setUseExoPlayer(true).build();
     OoyalaPlayerLayout ooyalaPlayerLayout = findViewById(R.id.ooyalaPlayer);
     player = new OoyalaPlayer(pcode, playerDomain, this, options);
-    new OoyalaPlayerLayoutController(ooyalaPlayerLayout, player);
+    layoutController =new OoyalaPlayerLayoutController(ooyalaPlayerLayout, player);
     castManager.registerWithOoyalaPlayer(player);
     player.addObserver(this);
     play(embedCode);
