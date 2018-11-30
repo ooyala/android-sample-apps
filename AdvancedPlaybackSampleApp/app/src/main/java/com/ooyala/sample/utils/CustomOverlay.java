@@ -93,4 +93,10 @@ public class CustomOverlay extends TextView implements OoyalaPlayerControls {
   public void update(Observable observable, Object o) {
 
   }
+
+  @Override
+  public void refresh() {
+    
+  }
+
 }

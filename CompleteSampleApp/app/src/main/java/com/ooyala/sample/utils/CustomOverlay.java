@@ -91,6 +91,11 @@ public class CustomOverlay extends AppCompatTextView implements OoyalaPlayerCont
   }
 
   @Override
+  public void refresh() {
+
+  }
+
+  @Override
   public void update(Observable observable, Object o) {
 
   }

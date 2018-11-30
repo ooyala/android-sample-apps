@@ -46,6 +46,7 @@ public class InsertAdPlayerActivity extends AbstractHookActivity {
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			player.enableSSL(false);
 			player.addObserver(this);
 
 			//  Set up performance monitoring to watch standard events and ads events.
