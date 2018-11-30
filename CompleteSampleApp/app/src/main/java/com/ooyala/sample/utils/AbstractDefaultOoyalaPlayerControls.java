@@ -226,6 +226,11 @@ public abstract class AbstractDefaultOoyalaPlayerControls implements OoyalaPlaye
     }
   }
 
+  @Override
+  public void refresh() {
+
+  }
+
   protected abstract void updateButtonStates();
 
   protected abstract void setupControls();
