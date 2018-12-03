@@ -43,7 +43,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
   String PCODE = null;
   String DOMAIN = null;
   private final String ACCOUNT_ID = "accountID";
-  Boolean autoPlay = false;
+  Boolean AUTOPLAY = false;
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
@@ -66,7 +66,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
-    autoPlay = getIntent().getExtras().getBoolean("autoPlay");
+    AUTOPLAY = getIntent().getExtras().getBoolean("autoPlay");
 
     //Initialize the player
     OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
@@ -78,7 +78,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     player.addObserver(this);
 
     if (player.setEmbedCode(EMBED)) {
-      if(autoPlay) {
+      if(AUTOPLAY) {
         player.play();
       }
     }
