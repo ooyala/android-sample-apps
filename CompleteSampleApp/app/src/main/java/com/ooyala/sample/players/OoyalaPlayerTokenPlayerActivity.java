@@ -43,7 +43,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
   String PCODE = null;
   String DOMAIN = null;
   private final String ACCOUNT_ID = "accountID";
-  Boolean AUTOPLAY = false;
+  private boolean AUTOPLAY = false;
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
