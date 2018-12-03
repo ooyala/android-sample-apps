@@ -101,6 +101,14 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
   }
 
   @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (castManager != null) {
+      castManager.destroy();
+    }
+  }
+
+  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     boolean createOptionsMenu = super.onCreateOptionsMenu(menu);
     getMenuInflater().inflate(R.menu.browse, menu);
