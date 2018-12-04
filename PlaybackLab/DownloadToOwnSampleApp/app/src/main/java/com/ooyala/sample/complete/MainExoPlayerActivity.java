@@ -3,7 +3,7 @@ package com.ooyala.sample.complete;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,6 +51,7 @@ public class MainExoPlayerActivity extends AppCompatActivity implements OnItemCl
 //    activityMap.put(NPAWYouboraListActivity.getName(), NPAWYouboraListActivity.class);
     activityMap.put(BasicPlaybackListActivity.getName(), BasicPlaybackListActivity.class);
     activityMap.put(DownloadSerializationActivity.getName(), DownloadSerializationActivity.class);
+    activityMap.put(AddAssetActivity.getName(), AddAssetActivity.class);
 
     for(String key : activityMap.keySet()) {
       mainListAdapter.add(key);
@@ -68,7 +69,8 @@ public class MainExoPlayerActivity extends AppCompatActivity implements OnItemCl
 
     Intent intent = new Intent(this, selectedClass);
     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    startActivity(intent);
+    //startActivity(intent);
+    startActivityForResult(intent, 0);
     return;
   }
 

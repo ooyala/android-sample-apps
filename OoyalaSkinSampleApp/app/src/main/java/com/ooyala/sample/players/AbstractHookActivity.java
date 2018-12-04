@@ -2,10 +2,10 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
@@ -28,13 +28,6 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * as we need to write into the SD card and automation will parse this file.
  */
 public abstract class AbstractHookActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
-
-	public static final String EXTRA_EMBED_CODE = "embed_code";
-	public static final String EXTRA_PCODE = "pcode";
-	public static final String EXTRA_DOMAIN = "domain";
-	public static final String EXTRA_AUTO_PLAY = "autoPlay";
-	public static final String EXTRA_SELECTED_FORMAT = "selectedFormat";
-
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 	String TAG = this.getClass().toString();
 	protected OoyalaSkinLayoutController playerLayoutController;
@@ -44,6 +37,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String apiKey;
+	protected String secret;
+	protected String accountId;
 	protected String selectedFormat;
 	protected String hevcMode;
 	protected boolean isStaging;
@@ -71,11 +67,14 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		}
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			embedCode = extras.getString(EXTRA_EMBED_CODE);
-			pcode = extras.getString(EXTRA_PCODE);
-			domain = extras.getString(EXTRA_DOMAIN);
-			autoPlay = extras.getBoolean(EXTRA_AUTO_PLAY,false);
-			selectedFormat = extras.getString(EXTRA_SELECTED_FORMAT,"default");
+			embedCode = extras.getString("embed_code");
+			pcode = extras.getString("pcode");
+			domain = extras.getString("domain");
+			autoPlay = extras.getBoolean("autoPlay",false);
+			apiKey = extras.getString("apiKey");
+			secret = extras.getString("secret");
+			accountId = extras.getString("accountId");
+			selectedFormat = extras.getString("selectedFormat","default");
 			hevcMode = extras.getString("hevc_mode","NoPreference");
 			isStaging = extras.getBoolean("is_staging",false);
 		}

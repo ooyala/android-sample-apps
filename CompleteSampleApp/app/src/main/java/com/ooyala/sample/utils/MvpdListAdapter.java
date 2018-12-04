@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.adobe.adobepass.accessenabler.models.Mvpd;
 
-import android.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -54,7 +53,7 @@ public class MvpdListAdapter extends ArrayAdapter<Mvpd> {
     TextView text = new TextView(getContext());
     int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, r.getDisplayMetrics());
     text.setPadding(padding, padding, padding, padding);
-    text.setTextAppearance(getContext(), R.attr.textAppearanceLarge);
+    text.setTextAppearance(getContext(), android.R.style.TextAppearance_Large);
     text.setText(mvpd.getDisplayName());
     layout.addView(text);
 

@@ -3,10 +3,11 @@ package com.ooyala.sample;
 import android.app.ActionBar;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.android.volley.AuthFailureError;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private final String PLAY_TIME = "PLAY_TIME";
     private final String WAS_PLAYING = "WAS_PLAYING";
     private final String LAST_HEARTBEAT = "LAST_HEARTBEAT";
+    private final String  PROTOCOL_HTTP = "http://";
+    private final String  PROTOCOL_HTTPS = "https://";
 
     private long playTime = 0;
     private boolean wasPlaying = false;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private SimpleExoPlayerView playerView;
     private boolean isHandlerRunning = false;
     private long lastHeartbeatEpoch = 0;
+    private String protocol = PROTOCOL_HTTP;
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        protocol = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P ? PROTOCOL_HTTPS : PROTOCOL_HTTP;
         playerView = findViewById(R.id.player_view);
 
         // Check whether we're recreating a previously destroyed instance
@@ -137,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String embedCode = "ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd";
+        String embedCode = "l5bm11ZjE6VFJyNE2iE6EKpCBVSRroAF";
         String uuid = "HeartbeatSampleTest";
-        String url ="http://ssai.ooyala.com/v1/vod_playback_pos/" + embedCode + "?ssai_guid=" + uuid;
+        String url = protocol + "ssai.ooyala.com/v1/vod_playback_pos/" + embedCode + "?ssai_guid=" + uuid;
 
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -187,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startVideoView() {
-        String baseUrl = "http://ssai.ooyala.com/vhls/ltZ3l5YjE6lUAvBdflvcDQ-zti8q8Urd/RpOWUyOq86gFq-STNqpgzhzIcXHV/eyJvIjoiaHR0cDovL3BsYXllci5vb3lhbGEuY29tL3BsYXllci9hbGwvbHRaM2w1WWpFNmxVQXZCZGZsdmNEUS16dGk4cThVcmQubTN1OD90YXJnZXRCaXRyYXRlPTEyMDAmc2VjdXJlX2lvc190b2tlbj1hMWRCYWtoSVFreHNMMFJqT0ZsUFlVZ3hNRFZLTVdSNWEwbDBaSFE0VW5SVFEzWnZVM041UVdsNGRXcFFVRFpXV0VOVVUycFVUazFQTHpWb0NuVnZWM2RoVUVGR2NIUTJjbGhTVmtOYVJIaFRXRkYxUkVaM1BUMEsiLCJlIjoiMTQ5OTQ0Mjg5MiIsInMiOiJHQk9wZFhGNGNzZzhfTzJ3MVlyU2VFejVlQzhQY0h5c054LU5FRDk3cmxzPSJ9/manifest.m3u8?ssai_guid=";
+        String baseUrl = protocol + "ssai.ooyala.com/vhls/l5bm11ZjE6VFJyNE2iE6EKpCBVSRroAF/ZsdGgyOnugo44o442aALkge_dVVK/eyJvIjoiaHR0cDovL3BsYXllci5vb3lhbGEuY29tL2hscy9wbGF5ZXIvYWxsL2w1Ym0xMVpqRTZWRkp5TkUyaUU2RUtwQ0JWU1Jyb0FGLm0zdTg_dGFyZ2V0Qml0cmF0ZT0yMDAwJnNlY3VyZV9pb3NfdG9rZW49UldwQ1YzZ3Zhazl0TDJOQ05rdFlOMjV2V1hScmNqTXpZMFoxU0hKTFNra3daV2xyZEZGVU5ITkNaMlJxWmxoQlQyMXRUVkJGVldSd2NsQlFDbnB1VDI5Vkt6UkVSekV3UjBGdWIySm1jRmR3Y0ZoVFpucEJQVDBLIiwiZSI6IjE1NDA5MjQ5MjEiLCJzIjoiYkJRa0FsVjVEak0wTFEwMXJZRXdkajBWR2UtRkdVd1NnZ2o1SnpzXy1Icz0ifQ==/manifest.m3u8?ssai_guid";
         String SSAI_GUID = "HeartbeatSampleTest";
         Uri uri = Uri.parse(baseUrl + SSAI_GUID);
 

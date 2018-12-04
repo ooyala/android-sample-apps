@@ -5,7 +5,7 @@
     a:layout_height="match_parent">
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         a:id="@+id/toolbar"
         a:layout_width="match_parent"
         a:layout_height="wrap_content"

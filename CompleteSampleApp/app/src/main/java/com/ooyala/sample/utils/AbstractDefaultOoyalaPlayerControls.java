@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
@@ -52,7 +52,7 @@ public abstract class AbstractDefaultOoyalaPlayerControls implements OoyalaPlaye
     }
   });
 
-  protected class TouchButton extends ImageButton {
+  protected class TouchButton extends AppCompatImageButton {
     protected boolean _touching = false;
 
     public TouchButton(Context context) {
@@ -224,6 +224,11 @@ public abstract class AbstractDefaultOoyalaPlayerControls implements OoyalaPlaye
     if (!visible) {
       hide();
     }
+  }
+
+  @Override
+  public void refresh() {
+
   }
 
   protected abstract void updateButtonStates();

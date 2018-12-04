@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +21,6 @@ import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.OfflineDownloadActivity;
 import com.ooyala.sample.players.OfflineSkinPlayerActivity;
 import com.ooyala.sample.utils.DownloadableAsset;
 

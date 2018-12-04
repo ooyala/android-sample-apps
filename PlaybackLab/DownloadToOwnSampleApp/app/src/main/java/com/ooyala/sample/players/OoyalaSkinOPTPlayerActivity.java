@@ -26,20 +26,29 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
+
 public class OoyalaSkinOPTPlayerActivity extends Activity
   implements Observer, DefaultHardwareBackBtnHandler, EmbedTokenGenerator {
 
   private static final String TAG = OoyalaSkinOPTPlayerActivity.class.getSimpleName();
+  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+  boolean writePermission = false;
 
   String EMBED = null;
   String PCODE  = null;
   String DOMAIN = null;
 
-  private final String APIKEY = "";
-  private final String SECRET = "";
+  private String APIKEY = "";
+  private String SECRET = "";
 
   // An account ID, if you are using Concurrent Streams or Entitlements
-  private final String ACCOUNT_ID = "";
+  private String ACCOUNT_ID = "";
 
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
@@ -52,11 +61,19 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+    } else {
+      writePermission= true;
+    }
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_skin_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
+    APIKEY = getIntent().getExtras().getString("api_key");
+    SECRET = getIntent().getExtras().getString("secret_key");
+    ACCOUNT_ID = getIntent().getExtras().getString("account_id");
 
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
@@ -193,6 +210,11 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     Playbacklog.writeToSdcardLog(text);
 
     Log.d(TAG, "Notification Received: " + arg1 + " - state: " + player.getState());
+    if (writePermission) {
+      Log.d(TAG, "Writing log to SD card");
+      // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+      Playbacklog.writeToSdcardLog(text);
+    }
   }
 
 
