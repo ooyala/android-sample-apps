@@ -4,7 +4,6 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
@@ -17,7 +16,6 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
-
 import org.json.JSONObject;
 
 import java.io.File;
@@ -76,7 +74,10 @@ public class OfflineSkinPlayerActivity extends Activity implements Observer, Def
       //Uncomment for autoplay
       //player.play();
     }
-    else {
+    else if (player.setEmbedCode(EMBED)) {
+      //Uncomment for autoplay
+      //player.play();
+    } else {
       Log.e(TAG, "Asset Failure");
     }
   }

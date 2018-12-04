@@ -6,9 +6,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.widget.SeekBar;
 
-public class CuePointsSeekBar extends SeekBar {
+import androidx.appcompat.widget.AppCompatSeekBar;
+
+public class CuePointsSeekBar extends AppCompatSeekBar {
 
   private Set<Integer> _cuePoints;
   private Paint _paint;

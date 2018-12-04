@@ -2,8 +2,8 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
@@ -14,7 +14,6 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.player.exoplayer.upstream.OoyalaDrmHttpDataSource;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.EmbeddedSecureURLGenerator;
@@ -72,14 +71,14 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
     } else {
-      writePermission= true;
+      writePermission = true;
     }
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_simple_layout);
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
-    if(getIntent().getExtras().getClass().getSimpleName().equalsIgnoreCase("CustomActivity")) {
+    if(getIntent().getExtras().getString("className").contains("CustomActivity")) {
       APIKEY = getIntent().getExtras().getString("apikey");
       SECRET = getIntent().getExtras().getString("secret");
       ACCOUNT_ID = getIntent().getExtras().getString("accountid");

@@ -2,10 +2,10 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
@@ -44,6 +44,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String apiKey;
+	protected String secret;
+	protected String accountId;
 	protected String selectedFormat;
 	protected String hevcMode;
 	protected boolean isStaging;
@@ -75,6 +78,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			pcode = extras.getString(EXTRA_PCODE);
 			domain = extras.getString(EXTRA_DOMAIN);
 			autoPlay = extras.getBoolean(EXTRA_AUTO_PLAY,false);
+			apiKey = extras.getString("apiKey");
+			secret = extras.getString("secret");
+			accountId = extras.getString("accountId");
 			selectedFormat = extras.getString(EXTRA_SELECTED_FORMAT,"default");
 			hevcMode = extras.getString("hevc_mode","NoPreference");
 			isStaging = extras.getBoolean("is_staging",false);

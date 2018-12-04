@@ -1,20 +1,59 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    repositories {
-        jcenter()
-        google()
+    // Define versions in a single place
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 28
+        minSdkVersion = 16
+        targetSdkVersion = 28
+
+        // App dependencies
+        constraintLayoutVersion = '1.1.3'
+        exoplayerVersion = '2.8.3'
+        hamcrestVersion = '1.3'
+        injectVersion = '1'
+        jacksonVersion = '2.2.3'
+        junitVersion = '4.12'
+        mediaRouterVersion = '1.0.0'
+        multidexVersion = '2.0.0'
+        supportLibraryVersion = '1.0.0'
+        volleyVersion = '1.1.1'
+
+        // Google Play Services
+        gmsAdsVersion = '15.0.1'
+
+        // Project dependencies
+        bintrayVersion = '0.8.1'
+        gradleVersion = '3.2.1'
+        mavenGradleVersion = '1.5'
+
+        // react-native dependencies
+        androidJscVersion = 'r174650'
+        findbugsVersion = '3.0.0'
+        frescoVersion = '1.3.0'
+        imagePipelineVersion = '1.3.0'
+        okhttpVersion = '3.6.0'
+        okioVersion = '1.13.0'
+        soloaderVersion = '0.1.0'
+        stethoVersion = '1.2.0'
+        stethoOkhttpVersion = '1.2.0'
+        urlconnectionVersion = '3.6.0'
     }
+
+    repositories {
+        google()
+        jcenter()
+    }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
-//        classpath 'com.novoda:bintray-release:0.3.4'
-//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath "com.android.tools.build:gradle:$gradleVersion"
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }
 

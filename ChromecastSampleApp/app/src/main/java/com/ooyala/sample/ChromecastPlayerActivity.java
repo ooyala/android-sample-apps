@@ -2,31 +2,21 @@ package com.ooyala.sample;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.gms.cast.framework.CastButtonFactory;
-import com.ooyala.android.EmbedTokenGenerator;
-import com.ooyala.android.EmbedTokenGeneratorCallback;
-import com.ooyala.android.EmbeddedSecureURLGenerator;
-import com.ooyala.android.OoyalaNotification;
-import com.ooyala.android.OoyalaPlayer;
-import com.ooyala.android.OoyalaPlayerLayout;
-import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.*;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.ui.OoyalaPlayerControls;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.cast.CastManager;
 import com.ooyala.cast.mediainfo.VideoData;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class ChromecastPlayerActivity extends AppCompatActivity implements Observer, EmbedTokenGenerator {
   private static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
@@ -43,11 +33,13 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
 
   private CastManager castManager;
   private CastViewManager castViewManager;
+  private  OoyalaPlayerLayoutController layoutController;
 
   private String embedCode;
   private String secondEmbedCode;
   private String pcode;
   private String domain;
+  private boolean wasInCastMode;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   private SDCardLogcatOoyalaEventsLogger playbackLog = new SDCardLogcatOoyalaEventsLogger();
@@ -72,6 +64,12 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     if (castManager != null && player != null) {
       castManager.registerWithOoyalaPlayer(player);
     }
+    if (layoutController != null) {
+      final OoyalaPlayerControls controls = layoutController.getControls();
+      if (controls != null) {
+        controls.refresh();
+      }
+    }
   }
 
   @Override
@@ -79,6 +77,10 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     super.onResume();
     if (player != null) {
       player.resume();
+      if (!player.isInCastMode() && wasInCastMode) {
+        castManager.hideCastView();
+        wasInCastMode = false;
+      }
     }
   }
 
@@ -167,8 +169,13 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
 
     if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
       if (player.isInCastMode()) {
+        if (!wasInCastMode) {
+          wasInCastMode = true;
+        }
         OoyalaPlayer.State state = player.getState();
         castViewManager.updateCastState(this, state);
+      } else if (wasInCastMode) {
+        wasInCastMode = false;
       }
     }
 
@@ -200,7 +207,7 @@ public class ChromecastPlayerActivity extends AppCompatActivity implements Obser
     Options options = new Options.Builder().setUseExoPlayer(true).build();
     OoyalaPlayerLayout ooyalaPlayerLayout = findViewById(R.id.ooyalaPlayer);
     player = new OoyalaPlayer(pcode, playerDomain, this, options);
-    new OoyalaPlayerLayoutController(ooyalaPlayerLayout, player);
+    layoutController = new OoyalaPlayerLayoutController(ooyalaPlayerLayout, player);
     castManager.registerWithOoyalaPlayer(player);
     player.addObserver(this);
     play(embedCode);

@@ -5,13 +5,14 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OoyalaPlayerControls;
 
 import java.util.Observable;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * This is an example of creating an Overlay.
@@ -22,7 +23,7 @@ import java.util.Observable;
  * Using this method may be "heavy" for many users.  You can simply insert views into the PlayerLayout
  *   if that solves your use case
  */
-public class CustomOverlay extends TextView implements OoyalaPlayerControls {
+public class CustomOverlay extends AppCompatTextView implements OoyalaPlayerControls {
 
   OoyalaPlayerLayout layout;
 
@@ -86,6 +87,11 @@ public class CustomOverlay extends TextView implements OoyalaPlayerControls {
 
   @Override
   public void setVisible(boolean b) {
+
+  }
+
+  @Override
+  public void refresh() {
 
   }
 
