@@ -25,6 +25,7 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.android.vrsdk.player.VRPlayerFactory;
 import com.ooyala.sample.R;
 import com.ooyala.sample.utils.VideoData;
+import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -36,6 +37,8 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
 
   public static final String TAG = VideoFragment.class.getCanonicalName();
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+  private static final String LOGO_NAME = "logo";
+  private static final String LOGO_TYPE = "drawable";
 
   private OoyalaSkinLayoutController playerController;
 
@@ -174,10 +177,13 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
     player.registerFactory(new VRPlayerFactory());
     player.addObserver(this);
 
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) getView().findViewById(R.id.playerSkinLayout);
-    final SkinOptions skinOptions = new SkinOptions.Builder().build();
+    OoyalaSkinLayout skinLayout = getView().findViewById(R.id.playerSkinLayout);
+    final SkinOptions.Builder skinOptionsBuilder = new SkinOptions.Builder();
+    if (getResources().getIdentifier(LOGO_NAME, LOGO_TYPE, getContext().getPackageName()) == 0) {
+      skinOptionsBuilder.setSkinOverrides(createEmptySkinWatermarkOverrides());
+    }
 
-    playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptions);
+    playerController = new OoyalaSkinLayoutController(getActivity().getApplication(), skinLayout, player, skinOptionsBuilder.build());
     playerController.addObserver(this);
 
     player.setEmbedCode(embedCode);
@@ -188,5 +194,25 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
   @Override
   public void invokeDefaultOnBackPressed() {
     getActivity().onBackPressed();
+  }
+
+  /**
+   * Create skin watermark overrides if there is no logo in drawable folder
+   * not to render in react package view for watermark
+   */
+  private JSONObject createEmptySkinWatermarkOverrides() {
+    final JSONObject overrides = new JSONObject();
+    final JSONObject generalOverrides = new JSONObject();
+    final JSONObject watermarkOverrides = new JSONObject();
+    final JSONObject imageResourceOverrides = new JSONObject();
+    try {
+      imageResourceOverrides.put("androidResource", "");
+      watermarkOverrides.put("imageResource", imageResourceOverrides);
+      generalOverrides.put("watermark", watermarkOverrides);
+      overrides.put("general", generalOverrides);
+    } catch (Exception e) {
+      Log.e(TAG, "Exception Thrown", e);
+    }
+    return overrides;
   }
 }
