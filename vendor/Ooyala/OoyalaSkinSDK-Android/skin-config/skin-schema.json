@@ -858,7 +858,16 @@
         "desktopAd": { "$ref": "#/definitions/buttonArray" },
         "mobileContent": { "$ref": "#/definitions/buttonArray" },
         "mobileAd": { "$ref": "#/definitions/buttonArray" },
-        "audioOnly": { "$ref": "#/definitions/buttonArray" }
+        "audioOnly": { 
+          "description": "Defines the buttons that can appear in the audio only view on the controlBar and/or the moreOptions panel. Desktop and Mobile platforms can be configured individually.",
+          "type": "object",
+          "required": ["desktop", "mobile"],
+          "additionalProperties": false,
+          "properties": {
+            "desktop": { "$ref": "#/definitions/buttonArray" },
+            "mobile": { "$ref": "#/definitions/buttonArray" }
+          }
+        }
       }
     },
     "icons": {
@@ -1424,7 +1433,9 @@
                "audioAndCC",
                "bitrateSelector",
                "skipControls",
-               "chromecast"]
+               "chromecast",
+               "seekBackwards",
+               "seekForward"]
     },
     "buttonArray": {
       "description": "Used to list the buttons for a single platform (desktop vs. mobile).",

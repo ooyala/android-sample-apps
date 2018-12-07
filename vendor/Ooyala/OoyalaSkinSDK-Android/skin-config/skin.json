@@ -298,16 +298,16 @@
       {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
       {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
-      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"arrowsBlack", "location": "mainView", "whenDoesNotFit":"keep", "minWidth":45 }
-    ],
-    "desktopAd": [
+    ],   
+    "desktopAd": [  
       {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"logo", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":125 },
-      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 }
     ],
     "mobileContent": [
@@ -319,24 +319,29 @@
       {"name":"share", "location":"moreOptions" },
       {"name":"discovery", "location":"moreOptions" },
       {"name":"closedCaption", "location":"moreOptions" },
-      {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
-      {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
-      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
+      {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 }
     ],
     "mobileAd": [
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
-      {"name":"Fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 }
     ],
-    "audioOnly": [
-      {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 },
-      {"name":"skipControls", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
-      {"name":"share", "location":"moreOptions" },
-      {"name":"playbackSpeed", "location":"moreOptions" }
-    ]
+    "audioOnly": {
+      "desktop": [{"name":"skipControls", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 }],
+      "mobile": [
+        {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
+        {"name":"seekBackwards", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
+        {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
+        {"name":"seekForward", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
+        {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+        {"name":"share", "location":"moreOptions" },
+        {"name":"playbackSpeed", "location":"moreOptions" }
+      ]
+    }
   },
   "icons": {
     "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003e", "fontStyleClass": "oo-icon oo-icon-play-slick"},
