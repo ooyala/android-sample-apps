@@ -91,18 +91,6 @@ public class OfflineSkinPlayerActivity extends Activity implements Observer, Def
 
   /** Start Activity methods for Skin **/
   @Override
-  protected void onPause() {
-    super.onPause();
-    if (playerLayoutController != null) {
-      playerLayoutController.onPause();
-    }
-    Log.d(TAG, "Player Activity Stopped");
-    if (player != null) {
-      player.suspend();
-    }
-  }
-
-  @Override
   protected void onResume() {
     super.onResume();
     if (playerLayoutController != null) {
@@ -115,6 +103,18 @@ public class OfflineSkinPlayerActivity extends Activity implements Observer, Def
   }
 
   @Override
+  protected void onStop() {
+    Log.d(TAG, "zzzz onStop offline");
+    super.onStop();
+    if (playerLayoutController != null) {
+      playerLayoutController.onPause();
+    }
+    if (player != null) {
+      player.suspend();
+    }
+  }
+
+  @Override
   public void onBackPressed() {
     if (playerLayoutController != null) {
       playerLayoutController.onBackPressed();
@@ -122,6 +122,7 @@ public class OfflineSkinPlayerActivity extends Activity implements Observer, Def
       super.onBackPressed();
     }
   }
+
   @Override
   protected void onDestroy() {
     super.onDestroy();
@@ -149,18 +150,6 @@ public class OfflineSkinPlayerActivity extends Activity implements Observer, Def
 //      Log.e(TAG, "Exception Thrown", e);
 //    }
     return overrides;
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-
-  }
-
-  @Override
-  protected void onRestart() {
-    super.onRestart();
-
   }
 
   /**
