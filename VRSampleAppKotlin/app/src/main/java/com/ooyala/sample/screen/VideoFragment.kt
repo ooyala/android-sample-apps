@@ -4,13 +4,13 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import com.ooyala.android.OoyalaNotification
 import com.ooyala.android.OoyalaPlayer
@@ -23,14 +23,17 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger
 import com.ooyala.android.vrsdk.player.VRPlayerFactory
 import com.ooyala.sample.utils.VideoData
 import kotlinx.android.synthetic.main.video_fragment.*
+import org.json.JSONObject
 import java.util.*
 
 
-open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler {
+open class VideoFragment : Fragment(), Observer, DefaultHardwareBackBtnHandler {
 
   companion object {
     val TAG = VideoFragment::class.java.canonicalName
     const val PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1
+    private const val LOGO_NAME = "logo"
+    private const val LOGO_TYPE = "drawable"
   }
 
   private val logger = SDCardLogcatOoyalaEventsLogger()
@@ -114,7 +117,7 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
         logger.writeToSdcardLog(text)
       }
     }
-      changeToolbarVisibilityInFullscreenMode(arg)
+    changeToolbarVisibilityInFullscreenMode(arg)
   }
 
   open fun initAdManager() {
@@ -145,8 +148,12 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
     player?.registerFactory(VRPlayerFactory())
     player?.addObserver(this)
 
-    val skinOptions = SkinOptions.Builder().build()
-    playerController = OoyalaSkinLayoutController(activity!!.application, playerSkinLayout, player, skinOptions)
+    val skinOptionsBuilder = SkinOptions.Builder()
+    if (resources.getIdentifier(LOGO_NAME, LOGO_TYPE, context?.packageName) == 0) {
+      skinOptionsBuilder.setSkinOverrides(createEmptySkinWatermarkOverrides())
+    }
+
+    playerController = OoyalaSkinLayoutController(activity?.application, playerSkinLayout, player, skinOptionsBuilder.build())
     playerController?.addObserver(this)
 
     player?.embedCode = embedCode
@@ -156,5 +163,25 @@ open class VideoFragment() : Fragment(), Observer, DefaultHardwareBackBtnHandler
 
   override fun invokeDefaultOnBackPressed() {
     activity!!.onBackPressed()
+  }
+
+  /**
+   * Create skin watermark overrides if there is no logo in drawable folder
+   * not to render in react package view for watermark
+   */
+  private fun createEmptySkinWatermarkOverrides(): JSONObject {
+    val overrides = JSONObject()
+    val generalOverrides = JSONObject()
+    val watermarkOverrides = JSONObject()
+    val imageResourceOverrides = JSONObject()
+    try {
+      imageResourceOverrides.put("androidResource", "")
+      watermarkOverrides.put("imageResource", imageResourceOverrides)
+      generalOverrides.put("watermark", watermarkOverrides)
+      overrides.put("general", generalOverrides)
+    } catch (e: Exception) {
+      Log.e(TAG, "Exception Thrown", e)
+    }
+    return overrides
   }
 }
