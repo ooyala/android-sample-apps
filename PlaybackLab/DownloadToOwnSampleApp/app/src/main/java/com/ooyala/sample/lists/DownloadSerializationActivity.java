@@ -42,7 +42,6 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
     final String TAG = this.getClass().toString();
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
-    String PCODE = "";
     final String DOMAIN = "http://ooyala.com";
 
     //Here you can define how many simultaneous downloads can happen.
@@ -73,6 +72,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
     private List<DownloadableAsset> downloadQueue;
     private List<DownloadableAsset> onHoldQueue;
     private List<DownloadableAsset> assets;
+    private String currentPCode;
     final File folder = android.os.Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
 
     /**
@@ -84,6 +84,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         setContentView(R.layout.download_activity);
 
         assets = new ArrayList<>();
+        assets.add(new DownloadableAsset("HEVC", "hrODl0ZTE6X4qlmpiUGbx84nI9Uva6TE","BjcWYyOu1KK2DiKOkF41Z2k0X57l"));
         assets.add(new DownloadableAsset("Widevine DASH", "BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7","FoeG863GnBL4IhhlFC1Q2jqbkH9m"));
         assets.add(new DownloadableAsset("Playready + DASH", "tpYTlnMzE6m4S-a1Yonj5ydnVwQXBGyI", "FoeG863GnBL4IhhlFC1Q2jqbkH9m"));
         assets.add(new DownloadableAsset("OTS Test", "04c3IyYzE6WLNzHuPDcBrMgUsDP7nTYq", "35d4ec4fa05645289a127682acc29325"));
@@ -147,7 +148,8 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                         ActivityCompat.requestPermissions(DownloadSerializationActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
                     } else {
                         // Use this DashOptions to download an asset with OPT
-                        DashOptions options = new DashOptions.Builder(a.getpCode(), a.getEmbedCode(), DOMAIN, folder).setEmbedTokenGenerator(DownloadSerializationActivity.this).build();
+                        currentPCode = a.getpCode();
+                        DashOptions options = new DashOptions.Builder(currentPCode, a.getEmbedCode(), DOMAIN, folder).setEmbedTokenGenerator(DownloadSerializationActivity.this).build();
                         downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
 
                         if (downloadQueue.size() < DOWNLOADS_ALLOWED) {
@@ -389,7 +391,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
        This is one reason why you shouldn't keep the Secret in your app/source control */
 //     params.put("override_syndication_group", "override_all_synd_groups");
 
-        String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
+        String uri = "/sas/embed_token/" + currentPCode + "/" + embedCodesString;
 
         EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
 
