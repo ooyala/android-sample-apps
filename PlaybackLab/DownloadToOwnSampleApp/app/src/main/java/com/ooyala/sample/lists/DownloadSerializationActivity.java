@@ -149,6 +149,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                         // Use this DashOptions to download an asset with OPT
                         DashOptions options = new DashOptions.Builder(a.getpCode(), a.getEmbedCode(), DOMAIN, folder).setEmbedTokenGenerator(DownloadSerializationActivity.this).build();
                         downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
+                        PCODE = a.getpCode();
 
                         if (downloadQueue.size() < DOWNLOADS_ALLOWED) {
                             downloadQueue.add(a);
