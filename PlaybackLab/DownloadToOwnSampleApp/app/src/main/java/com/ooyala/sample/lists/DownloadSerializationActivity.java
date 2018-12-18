@@ -107,7 +107,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         onHoldQueue = new ArrayList<>();
 
         // Use this DashOptions to download an asset without OPT
-//    DashOptions options = new DashOptions.Builder(currentPCode, EMBED, DOMAIN, folder).build();
+//    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
 
 
         linearLayoutVertical = findViewById(R.id.linearLayoutVertical);
