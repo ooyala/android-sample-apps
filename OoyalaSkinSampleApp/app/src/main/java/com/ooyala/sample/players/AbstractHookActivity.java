@@ -171,6 +171,9 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 	@Override
 	public void onBackPressed() {
+		if (null != player) {
+			player.suspend();
+		}
 		if (null != playerLayoutController) {
 			playerLayoutController.onBackPressed();
 		} else {
