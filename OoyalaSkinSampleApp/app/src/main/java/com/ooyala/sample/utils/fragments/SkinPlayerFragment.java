@@ -32,7 +32,6 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
 
   private OoyalaPlayer player;
   private OoyalaSkinLayout skinLayout;
-  private TextView aboveSkinLayout;
   OoyalaSkinLayoutController controller;
 
   @Nullable
@@ -42,7 +41,6 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
 
     // Get the SkinLayout from our layout xml
     skinLayout = view.findViewById(R.id.ooyalaSkin);
-    aboveSkinLayout = view.findViewById(R.id.above_skin_layout);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
@@ -107,7 +105,7 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
       params.height = ViewGroup.LayoutParams.MATCH_PARENT;
       params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
     } else {
-      params.height = height - toolbarHeight - aboveSkinLayout.getMeasuredHeight();
+      params.height = height - toolbarHeight;
       params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
       params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
     }
@@ -118,7 +116,7 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
     if (fullscreen) {
       params.height = ViewGroup.LayoutParams.MATCH_PARENT;
     } else {
-      params.height = height - toolbarHeight - aboveSkinLayout.getMeasuredHeight();
+      params.height = height - toolbarHeight;
       params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
     }
     params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
