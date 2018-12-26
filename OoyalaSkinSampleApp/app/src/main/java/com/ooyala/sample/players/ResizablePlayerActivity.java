@@ -65,8 +65,6 @@ public class ResizablePlayerActivity extends AppCompatActivity implements Defaul
   public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
 
-    setViewVisibility(toolbar, fullscreen);
-
     skinPlayerFragment.resizePlayer(lastMenuItemId, getSupportActionBar().getHeight(), fullscreen);
   }
 
