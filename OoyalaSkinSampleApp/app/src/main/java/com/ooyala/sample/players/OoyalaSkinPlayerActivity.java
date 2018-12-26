@@ -67,18 +67,15 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 	 * Default commented. Uncomment to show changes to the start screen.
 	 * @return the overrides to apply to the skin.json in the assets folder
 	 */
-	private JSONObject createSkinOverrides() {
+	private JSONObject createSkinOverrides() { 
 		JSONObject overrides = new JSONObject();
-//    JSONObject startScreenOverrides = new JSONObject();
-//    JSONObject playIconStyleOverrides = new JSONObject();
-//    try {
-//      playIconStyleOverrides.put("color", "red");
-//      startScreenOverrides.put("playButtonPosition", "bottomLeft");
-//      startScreenOverrides.put("playIconStyle", playIconStyleOverrides);
-//      overrides.put("startScreen", startScreenOverrides);
-//    } catch (Exception e) {
-//      Log.e(TAG, "Exception Thrown", e);
-//    }
+    JSONObject controlBarOverrides = new JSONObject();
+    try {
+      controlBarOverrides.put("height", 0);
+      overrides.put("controlBar", controlBarOverrides);
+    } catch (Exception e) {
+      Log.e(TAG, "Exception Thrown", e);
+    }
 		return overrides;
 	}
 }
