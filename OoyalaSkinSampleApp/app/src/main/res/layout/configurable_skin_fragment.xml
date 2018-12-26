@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/controlsLayout"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:layout_gravity="center"
-              android:orientation="vertical" >
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/controlsLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
     <com.ooyala.android.skin.OoyalaSkinLayout
         android:id="@+id/ooyalaSkin"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
-        android:background="#000">
+        android:background="#000"
+        custom:resizableLayout="true">
     </com.ooyala.android.skin.OoyalaSkinLayout>
 
     <TextView
@@ -21,6 +23,7 @@
         android:layout_below="@+id/ooyalaSkin"
         android:text="Below Skin Layout"/>
     <TextView
+        android:id="@+id/above_skin_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
