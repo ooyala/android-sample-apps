@@ -80,43 +80,59 @@ public class SkinPlayerFragment extends Fragment implements Observer, DefaultHar
 
     switch (type) {
       case R.id.action_wide:
-        params.height = height / 2;
-        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        updateParamsWide(params, height);
         break;
       case R.id.action_tall:
-        params.width = width / 2;
-        if (fullscreen) {
-          params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-          params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        } else {
-          params.height = height - toolbarHeight - aboveSkinLayout.getMeasuredHeight();
-          params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-          params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        }
+        updateParamsTall(params, width, height, toolbarHeight, fullscreen);
         break;
       case R.id.action_fill:
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        if (fullscreen) {
-          params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        } else {
-          params.height = height - toolbarHeight - aboveSkinLayout.getMeasuredHeight();
-          params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        }
-        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        updateParamsFill(params, height, toolbarHeight, fullscreen);
         break;
       case UNSET_ID:
-        if (fullscreen) {
-          params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-          params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        } else {
-          params.width = skinLayout.getSourceWidth();
-          params.height = skinLayout.getSourceHeight();
-        }
-        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        updateParamsDefault(params, fullscreen);
         break;
     }
 
     skinLayout.setLayoutParams(params);
+  }
+
+  private void updateParamsWide(RelativeLayout.LayoutParams params, int height){
+    params.height = height / 2;
+    params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+  }
+
+  private void updateParamsTall(RelativeLayout.LayoutParams params, int width, int height, int toolbarHeight, boolean fullscreen) {
+    params.width = width / 2;
+    if (fullscreen) {
+      params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+      params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+    } else {
+      params.height = height - toolbarHeight - aboveSkinLayout.getMeasuredHeight();
+      params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+      params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+    }
+  }
+
+  private void updateParamsFill(RelativeLayout.LayoutParams params, int height, int toolbarHeight, boolean fullscreen) {
+    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+    if (fullscreen) {
+      params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+    } else {
+      params.height = height - toolbarHeight - aboveSkinLayout.getMeasuredHeight();
+      params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+    }
+    params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+  }
+
+  private void updateParamsDefault(RelativeLayout.LayoutParams params, boolean fullscreen) {
+    if (fullscreen) {
+      params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+      params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+    } else {
+      params.width = skinLayout.getSourceWidth();
+      params.height = skinLayout.getSourceHeight();
+    }
+    params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
   }
 
   @Override
