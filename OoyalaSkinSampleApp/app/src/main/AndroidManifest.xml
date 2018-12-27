@@ -46,7 +46,7 @@
             android:name=".lists.IMAListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
-        
+
         <activity android:name=".players.PreconfiguredIMAPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
@@ -60,7 +60,8 @@
         </activity>
 
         <activity android:name=".players.ResizablePlayerActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize">
+                  android:configChanges="keyboardHidden|orientation|screenSize"
+                  android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity android:name=".players.AssetActivity"
                   android:configChanges="keyboardHidden|orientation|screenSize">
