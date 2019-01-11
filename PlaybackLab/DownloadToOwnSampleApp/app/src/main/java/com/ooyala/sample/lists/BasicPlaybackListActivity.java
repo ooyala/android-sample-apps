@@ -47,10 +47,16 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
       selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption(getIntent().getStringExtra("embed_code"), getIntent().getStringExtra("pcode"), getIntent().getStringExtra("api_key"), getIntent().getStringExtra("secret_key"), getIntent().getStringExtra("account_id"), "http://ooyala.com", OfflineSkinPlayerActivity.class));
     }
     else {
-      //Populate the embed map
-      selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l","BjcWYyOu1KK2DiKOkF41Z2k0X57l.0I-V4", "1ysC3V-g8m9V3QoGJwRa_fXcfi_G2ZV778m17pux", "dulari_qa","http://ooyala.com", OoyalaSkinOPTPlayerActivity.class));
-      selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l","BjcWYyOu1KK2DiKOkF41Z2k0X57l.0I-V4", "1ysC3V-g8m9V3QoGJwRa_fXcfi_G2ZV778m17pux", "dulari_qa","http://ooyala.com", OfflineDownloadActivity.class));
-      selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", "BjcWYyOu1KK2DiKOkF41Z2k0X57l.0I-V4", "1ysC3V-g8m9V3QoGJwRa_fXcfi_G2ZV778m17pux", "dulari_qa","http://ooyala.com", OfflineSkinPlayerActivity.class));
+      // Populate the embed map
+
+      // An account ID, if you are using Concurrent Streams or Entitlements
+      String accountId = "";
+      String apikey = "";
+      String secret = "";
+
+      selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OoyalaSkinOPTPlayerActivity.class));
+      selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OfflineDownloadActivity.class));
+      selectionMap.put("Widevine DASH Offline Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OfflineSkinPlayerActivity.class));
     }
 
     setContentView(R.layout.list_activity_layout);
