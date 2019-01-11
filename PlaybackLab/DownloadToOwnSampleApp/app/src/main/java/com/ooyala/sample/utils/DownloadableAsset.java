@@ -1,24 +1,16 @@
 package com.ooyala.sample.utils;
 
-import com.ooyala.sample.lists.DownloadSerializationActivity;
+import static com.ooyala.sample.utils.DownloadState.NOT_DOWNLOADED;
 
 public class DownloadableAsset {
 
-    private int status;
+    private DownloadState status = NOT_DOWNLOADED;
     private String name;
-    private String embedCode;
-    private String pCode;
+    private PlayerSelectionOption playerSelectionOption;
 
-    public DownloadableAsset(String embedCode, int status){
-        this.status = status;
-        this.embedCode = embedCode;
-    }
-
-    public DownloadableAsset(String name, String embedCode, String pCode){
-        this.status = 0;
+    public DownloadableAsset(String name, PlayerSelectionOption playerSelectionOption) {
         this.name = name;
-        this.embedCode = embedCode;
-        this.pCode = pCode;
+        this.playerSelectionOption = playerSelectionOption;
     }
 
     public String getName() {
@@ -29,28 +21,19 @@ public class DownloadableAsset {
         this.name = name;
     }
 
-    public String getpCode() {
-        return pCode;
-    }
-
-    public void setpCode(String pCode) {
-        this.pCode = pCode;
-    }
-
-    public int getStatus() {
+    public DownloadState getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(DownloadState status) {
         this.status = status;
     }
 
-    public String getEmbedCode() {
-        return embedCode;
+    public PlayerSelectionOption getPlayerSelectionOption() {
+        return playerSelectionOption;
     }
 
-    public void setEmbedCode(String embedCode) {
-        this.embedCode = embedCode;
+    public void setPlayerSelectionOption(PlayerSelectionOption playerSelectionOption) {
+        this.playerSelectionOption = playerSelectionOption;
     }
-
 }
