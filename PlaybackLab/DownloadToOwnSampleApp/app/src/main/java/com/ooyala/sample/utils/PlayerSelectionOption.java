@@ -15,7 +15,8 @@ public class PlayerSelectionOption {
   private String secretKey;
   private String accountId;
 
-  public PlayerSelectionOption(String embedCode, String pcode, String apiKey, String secretKey, String accountId, String domain, Class<? extends Activity> activity) {
+  public PlayerSelectionOption(String embedCode, String pcode, String apiKey, String secretKey,
+                               String accountId, String domain, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
     this.activity = activity;
     this.pcode = pcode;
@@ -23,6 +24,13 @@ public class PlayerSelectionOption {
     this.apiKey = apiKey;
     this.secretKey = secretKey;
     this.accountId = accountId;
+  }
+
+  public PlayerSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
+    this.embedCode = embedCode;
+    this.activity = activity;
+    this.pcode = pcode;
+    this.domain = domain;
   }
 
   /**
