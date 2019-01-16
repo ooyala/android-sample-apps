@@ -66,7 +66,6 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         setContentView(R.layout.download_activity);
 
         assets = new ArrayList<>();
-<<<<<<< HEAD
         assets.add(new DownloadableAsset("HEVC", new PlayerSelectionOption("hrODl0ZTE6X4qlmpiUGbx84nI9Uva6TE", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", DOMAIN, OfflineSkinPlayerActivity.class)));
         assets.add(new DownloadableAsset("Widevine DASH", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", DOMAIN, OfflineSkinPlayerActivity.class)));
         assets.add(new DownloadableAsset("Playready + DASH", new PlayerSelectionOption("tpYTlnMzE6m4S-a1Yonj5ydnVwQXBGyI", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", DOMAIN, OfflineSkinPlayerActivity.class)));
@@ -83,24 +82,6 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         assets.add(new DownloadableAsset("Swimming", new PlayerSelectionOption("QyY3BpZDE6pBgGxV4OCGykDKBbj6ZuMs", "1mbWoyOuPzcGLtowbsFNlVHbepva", DOMAIN, OfflineSkinPlayerActivity.class)));
         assets.add(new DownloadableAsset("Butterfly", new PlayerSelectionOption("N4YnBpZDE6P7EIno_y74X9GNhQdJQABt", "1mbWoyOuPzcGLtowbsFNlVHbepva", DOMAIN, OfflineSkinPlayerActivity.class)));
         assets.add(new DownloadableAsset("Big Buck Bunny ", new PlayerSelectionOption("ljNDE2YzE6KTFgw7hfC6IeXZJ_UBlVSK", "1mbWoyOuPzcGLtowbsFNlVHbepva", DOMAIN, OfflineSkinPlayerActivity.class)));
-=======
-        assets.add(new DownloadableAsset("HEVC", "hrODl0ZTE6X4qlmpiUGbx84nI9Uva6TE","BjcWYyOu1KK2DiKOkF41Z2k0X57l"));
-        assets.add(new DownloadableAsset("Widevine DASH", "BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7","FoeG863GnBL4IhhlFC1Q2jqbkH9m"));
-        assets.add(new DownloadableAsset("Playready + DASH", "tpYTlnMzE6m4S-a1Yonj5ydnVwQXBGyI", "FoeG863GnBL4IhhlFC1Q2jqbkH9m"));
-        assets.add(new DownloadableAsset("OTS Test", "04c3IyYzE6WLNzHuPDcBrMgUsDP7nTYq", "35d4ec4fa05645289a127682acc29325"));
-        assets.add(new DownloadableAsset("Enterprise OTS Test", "hsdHIyYzE668escyHgrFiednk4831Un3", "529095912bec4ab7aefe23d6b11fdf2a"));
-        assets.add(new DownloadableAsset("Logan", "dqcGlqOTE6U2FJ8LTxvDV9P_GPzeae_G", "c7ed739d6ef43f1a13577fac2109d22"));
-        assets.add(new DownloadableAsset("Dron construction", "lvN3lpZDE604CHXxbOwswqz4daAPgDq7", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Waves in sunset", "hqZHQ1YjE6tZiEdyKMMiY-kHlxPaFqpG", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Sunrise", "44NHQ1YjE6YGVqOuKUkkmfqGrh2gjTBN", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Jellyfish", "1kZHBpZDE6y90G_NyEf6-tvG6_-BWCd-", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Decomposing doll", "lxcmI2YjE6WCVstI4M1RcaNhyujitVsO", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Tagsgraphic", "hhY3BpZDE60HyUMUrMTU3bX0AXMBFk4y", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Clouds", "M2Y3BpZDE6FyMp_xQEaL_ZPwNOXQnQXL", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Swimming", "QyY3BpZDE6pBgGxV4OCGykDKBbj6ZuMs", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Butterfly", "N4YnBpZDE6P7EIno_y74X9GNhQdJQABt", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
-        assets.add(new DownloadableAsset("Big Buck Bunny ", "ljNDE2YzE6KTFgw7hfC6IeXZJ_UBlVSK", "1mbWoyOuPzcGLtowbsFNlVHbepva"));
->>>>>>> e8fb4f1f9866e42c4cd85a91d1f673885db2da7e
 
         handler = new Handler(getMainLooper());
 
@@ -151,15 +132,10 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                         ActivityCompat.requestPermissions(DownloadSerializationActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
                     } else {
                         // Use this DashOptions to download an asset with OPT
-<<<<<<< HEAD
                         currentPCode = option.getPcode();
                         DashOptions options = new DashOptions.Builder(currentPCode, option.getEmbedCode(), DOMAIN, folder)
                             .setEmbedTokenGenerator(new TokenGenerator(asset.getPlayerSelectionOption())) //new TokenGenerator(asset.getPlayerSelectionOption() //DownloadSerializationActivity.this
                             .build();
-=======
-                        currentPCode = a.getpCode();
-                        DashOptions options = new DashOptions.Builder(currentPCode, a.getEmbedCode(), DOMAIN, folder).setEmbedTokenGenerator(DownloadSerializationActivity.this).build();
->>>>>>> e8fb4f1f9866e42c4cd85a91d1f673885db2da7e
                         downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
 
                         if (downloadQueue.size() < DOWNLOADS_ALLOWED) {
@@ -402,33 +378,4 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         }
         return null;
     }
-<<<<<<< HEAD
-=======
-
-
-    @Override
-    public void getTokenForEmbedCodes(List<String> embedCodes, EmbedTokenGeneratorCallback callback) {
-        String embedCodesString = "";
-        for (String ec : embedCodes) {
-            if (ec.equals("")) embedCodesString += ",";
-            embedCodesString += ec;
-        }
-
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("account_id", ACCOUNT_ID);
-
-    /* Uncommenting this will bypass all syndication rules on your asset
-       This will not work unless you have a working API Key and Secret.
-       This is one reason why you shouldn't keep the Secret in your app/source control */
-//     params.put("override_syndication_group", "override_all_synd_groups");
-
-        String uri = "/sas/embed_token/" + currentPCode + "/" + embedCodesString;
-
-        EmbeddedSecureURLGenerator urlGen = new EmbeddedSecureURLGenerator(APIKEY, SECRET);
-
-        URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
-
-        callback.setEmbedToken(tokenUrl.toString());
-    }
->>>>>>> e8fb4f1f9866e42c4cd85a91d1f673885db2da7e
 }
