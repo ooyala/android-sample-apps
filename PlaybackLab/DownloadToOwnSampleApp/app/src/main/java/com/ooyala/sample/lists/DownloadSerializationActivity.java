@@ -267,9 +267,9 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         for (final DownloadableAsset asset : assets) {
             PlayerSelectionOption option = asset.getPlayerSelectionOption();
             File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), option.getEmbedCode());
-            if (folder.exists() && folder.isDirectory()){
-                for (File f :folder.listFiles()) {
-                    result = f.delete();
+            if (folder.exists() && folder.isDirectory() && folder.listFiles() != null){
+                for (File file : folder.listFiles()) {
+                    result = file.delete();
                     Log.d("Log", "Deletion of" + asset.getName() + ": " + result);
                 }
                 folder.delete();
