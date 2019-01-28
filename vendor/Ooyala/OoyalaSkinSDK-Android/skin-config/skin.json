@@ -225,6 +225,7 @@
     }
   },
   "controlBar": {
+    "enabled": true,
     "volumeControl": {
       "color": ""
     },
@@ -291,6 +292,7 @@
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"drop", "minWidth":145 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"chromecast", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
+      {"name":"airPlay", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
       {"name":"share", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
       {"name":"discovery", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
       {"name":"closedCaption", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":45 },
@@ -301,8 +303,8 @@
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"arrowsBlack", "location": "mainView", "whenDoesNotFit":"keep", "minWidth":45 }
-    ],   
-    "desktopAd": [  
+    ],
+    "desktopAd": [
       {"name":"playPause", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":45 },
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":240 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
@@ -316,6 +318,7 @@
       {"name":"timeDuration", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
       {"name":"flexibleSpace", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":1 },
       {"name":"chromecast", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
+      {"name":"airPlay", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
       {"name":"share", "location":"moreOptions" },
       {"name":"discovery", "location":"moreOptions" },
       {"name":"closedCaption", "location":"moreOptions" },
@@ -380,6 +383,7 @@
     "audioAndCC": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u005F", "fontStyleClass": "oo-icon oo-icon-audio-and-cc"},
     "selected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0040", "fontStyleClass": "oo-icon oo-icon-selected"},
     "chromecast-connected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003B", "fontStyleClass": "oo-icon"},
-    "chromecast-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003A", "fontStyleClass": "oo-icon"}
+    "chromecast-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003A", "fontStyleClass": "oo-icon"},
+    "airPlay": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007B", "fontStyleClass": "oo-icon"}
   }
 }
