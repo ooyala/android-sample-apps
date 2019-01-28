@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.OfflineSkinPlayerActivity;
+import com.ooyala.sample.players.OoyalaSkinOPTPlayerActivity;
 import com.ooyala.sample.utils.DownloadState;
 import com.ooyala.sample.utils.DownloadableAsset;
 import com.ooyala.sample.utils.PlayerSelectionOption;
@@ -68,23 +68,23 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
         assets = new ArrayList<>();
         // if you would like to use OPT, please fill the gaps in the following order:
         // new PlayerSelectionOption(embedCode, pcode, apiKey, secretKey, accountId, domain, activity)
-        // for non-OPT assets use OfflineSkinPlayerActivity.class, for OPT assets use OoyalaSkinOPTPlayerActivity.class
-        assets.add(new DownloadableAsset("HEVC", new PlayerSelectionOption("hrODl0ZTE6X4qlmpiUGbx84nI9Uva6TE", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Widevine DASH", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Playready + DASH", new PlayerSelectionOption("tpYTlnMzE6m4S-a1Yonj5ydnVwQXBGyI", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("OTS Test", new PlayerSelectionOption("04c3IyYzE6WLNzHuPDcBrMgUsDP7nTYq", "35d4ec4fa05645289a127682acc29325", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Enterprise OTS Test", new PlayerSelectionOption("hsdHIyYzE668escyHgrFiednk4831Un3", "529095912bec4ab7aefe23d6b11fdf2a", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Logan", new PlayerSelectionOption("dqcGlqOTE6U2FJ8LTxvDV9P_GPzeae_G", "c7ed739d6ef43f1a13577fac2109d22", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Dron construction", new PlayerSelectionOption("lvN3lpZDE604CHXxbOwswqz4daAPgDq7", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Waves in sunset", new PlayerSelectionOption("hqZHQ1YjE6tZiEdyKMMiY-kHlxPaFqpG", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Sunrise", new PlayerSelectionOption("44NHQ1YjE6YGVqOuKUkkmfqGrh2gjTBN", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Jellyfish", new PlayerSelectionOption("1kZHBpZDE6y90G_NyEf6-tvG6_-BWCd-", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Decomposing doll", new PlayerSelectionOption("lxcmI2YjE6WCVstI4M1RcaNhyujitVsO", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Tagsgraphic", new PlayerSelectionOption("hhY3BpZDE60HyUMUrMTU3bX0AXMBFk4y", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Clouds", new PlayerSelectionOption("M2Y3BpZDE6FyMp_xQEaL_ZPwNOXQnQXL", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Swimming", new PlayerSelectionOption("QyY3BpZDE6pBgGxV4OCGykDKBbj6ZuMs", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Butterfly", new PlayerSelectionOption("N4YnBpZDE6P7EIno_y74X9GNhQdJQABt", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
-        assets.add(new DownloadableAsset("Big Buck Bunny", new PlayerSelectionOption("ljNDE2YzE6KTFgw7hfC6IeXZJ_UBlVSK", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OfflineSkinPlayerActivity.class)));
+
+        assets.add(new DownloadableAsset("HEVC", new PlayerSelectionOption("hrODl0ZTE6X4qlmpiUGbx84nI9Uva6TE", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Widevine DASH", new PlayerSelectionOption("BuY3RsMzE61s6nTC5ct6R-DOapuPt5f7", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Playready + DASH", new PlayerSelectionOption("tpYTlnMzE6m4S-a1Yonj5ydnVwQXBGyI", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("OTS Test", new PlayerSelectionOption("04c3IyYzE6WLNzHuPDcBrMgUsDP7nTYq", "35d4ec4fa05645289a127682acc29325", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Enterprise OTS Test", new PlayerSelectionOption("hsdHIyYzE668escyHgrFiednk4831Un3", "529095912bec4ab7aefe23d6b11fdf2a", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Logan", new PlayerSelectionOption("dqcGlqOTE6U2FJ8LTxvDV9P_GPzeae_G", "c7ed739d6ef43f1a13577fac2109d22", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Dron construction", new PlayerSelectionOption("lvN3lpZDE604CHXxbOwswqz4daAPgDq7", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Waves in sunset", new PlayerSelectionOption("hqZHQ1YjE6tZiEdyKMMiY-kHlxPaFqpG", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Sunrise", new PlayerSelectionOption("44NHQ1YjE6YGVqOuKUkkmfqGrh2gjTBN", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Jellyfish", new PlayerSelectionOption("1kZHBpZDE6y90G_NyEf6-tvG6_-BWCd-", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Decomposing doll", new PlayerSelectionOption("lxcmI2YjE6WCVstI4M1RcaNhyujitVsO", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Tagsgraphic", new PlayerSelectionOption("hhY3BpZDE60HyUMUrMTU3bX0AXMBFk4y", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Clouds", new PlayerSelectionOption("M2Y3BpZDE6FyMp_xQEaL_ZPwNOXQnQXL", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Swimming", new PlayerSelectionOption("QyY3BpZDE6pBgGxV4OCGykDKBbj6ZuMs", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Butterfly", new PlayerSelectionOption("N4YnBpZDE6P7EIno_y74X9GNhQdJQABt", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
+        assets.add(new DownloadableAsset("Big Buck Bunny", new PlayerSelectionOption("ljNDE2YzE6KTFgw7hfC6IeXZJ_UBlVSK", "1mbWoyOuPzcGLtowbsFNlVHbepva", "", "", "", DOMAIN, OoyalaSkinOPTPlayerActivity.class)));
 
         handler = new Handler(getMainLooper());
 
@@ -114,6 +114,9 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     intent.putExtra("embed_code", option.getEmbedCode());
                     intent.putExtra("pcode", option.getPcode());
+                    intent.putExtra("api_key", option.getApiKey());
+                    intent.putExtra("secret_key", option.getSecretKey());
+                    intent.putExtra("account_id", option.getAccountId());
                     intent.putExtra("domain", option.getDomain());
                     intent.putExtra("selection_name", asset.getName());
                     startActivity(intent);
