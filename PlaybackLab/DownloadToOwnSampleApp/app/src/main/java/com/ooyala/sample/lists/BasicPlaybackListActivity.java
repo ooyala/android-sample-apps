@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.OfflineDownloadActivity;
-import com.ooyala.sample.players.OfflineSkinPlayerActivity;
 import com.ooyala.sample.players.OoyalaSkinOPTPlayerActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 

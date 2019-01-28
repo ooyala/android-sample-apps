@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.ooyala.android.offline.DashDownloader;
 import com.ooyala.android.offline.DashOptions;
 import com.ooyala.sample.R;
-import com.ooyala.sample.players.OfflineSkinPlayerActivity;
 import com.ooyala.sample.players.OoyalaSkinOPTPlayerActivity;
 import com.ooyala.sample.utils.DownloadState;
 import com.ooyala.sample.utils.DownloadableAsset;
