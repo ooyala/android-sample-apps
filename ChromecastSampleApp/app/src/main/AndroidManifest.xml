@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".SampleApplication"
-        android:theme="@style/Theme.CastVideosTheme">
+        android:theme="@style/Theme.CastVideosTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".ChromecastListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
