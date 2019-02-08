@@ -16,7 +16,6 @@ import java.util.List;
  * It is used to provide google cast options by manifest.
  */
 public class CastOptionsProvider implements OptionsProvider {
-  private final String APP_ID = "4172C76F";
 
   @Override
   public CastOptions getCastOptions(Context context) {
@@ -31,7 +30,7 @@ public class CastOptionsProvider implements OptionsProvider {
         .build();
 
     return new CastOptions.Builder()
-        .setReceiverApplicationId(APP_ID)
+        .setReceiverApplicationId(context.getResources().getString(R.string.ooyala_cast_id))
         .setCastMediaOptions(mediaOptions)
         .build();
   }
