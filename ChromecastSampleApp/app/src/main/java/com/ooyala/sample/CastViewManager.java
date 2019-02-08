@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.cast.CastManager;
 import com.ooyala.cast.UpdateImageViewRunnable;
-import com.ooyala.android.item.Video;
 
 class CastViewManager {
   private View castView;
