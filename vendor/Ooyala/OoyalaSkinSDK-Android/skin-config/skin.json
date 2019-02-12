@@ -159,6 +159,16 @@
       }
     }
   },
+  "castDevicesScreen": {
+    "iconStyle": {
+      "active": {
+        "color": "#3eb5f7"
+      },
+      "inactive": {
+        "color": "#FFFFFF"
+      }
+    }
+  },
   "closedCaptionOptions": {
     "enabled": true,
     "language": "en",
