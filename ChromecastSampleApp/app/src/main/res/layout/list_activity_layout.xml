@@ -8,7 +8,7 @@
     android:paddingTop="16dp"
     android:orientation="vertical"
     android:background="#313131"
-    tools:context=".simple.ChromecastPlayerActivity" >
+    tools:context=".simple.SimpleCastPlayerActivity" >
 
     <ListView
         android:id="@+id/mainActivityListView"

@@ -9,9 +9,11 @@ import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.PlayerDomain;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
-import com.ooyala.sample.simple.ChromecastPlayerActivity;
+import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -29,7 +31,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public abstract class PlayerActivity extends AppCompatActivity implements EmbedTokenGenerator, Observer {
-  protected static final String TAG = ChromecastPlayerActivity.class.getSimpleName();
+  protected static final String TAG = SimpleCastPlayerActivity.class.getSimpleName();
 
   protected String embedCode;
   protected String secondEmbedCode;
@@ -65,6 +67,28 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       asked = true;
     }
   }
+
+  protected void completePlayerSetup() {
+    if (asked && writePermission) {
+      PlayerDomain playerDomain = new PlayerDomain(domain);
+      player = new OoyalaPlayer(pcode, playerDomain, this, getOptions());
+      initAndBindController();
+      player.addObserver(this);
+      play(embedCode);
+    }
+
+    if (asked && writePermission) {
+      PlayerDomain playerDomain = new PlayerDomain(domain);
+      player = new OoyalaPlayer(pcode, playerDomain,this,  getOptions());
+      initAndBindController();
+      player.addObserver(this);
+      play(embedCode);
+    }
+  }
+
+  protected abstract Options getOptions();
+
+  protected abstract void initAndBindController();
 
   protected void parseSharedPreferences() {
     SharedPreferences lastChosenParams = getSharedPreferences("LastChosenParams", MODE_PRIVATE);

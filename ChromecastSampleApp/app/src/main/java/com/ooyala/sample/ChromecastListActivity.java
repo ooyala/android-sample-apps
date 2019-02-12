@@ -15,8 +15,8 @@ import android.widget.ListView;
 
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.media.widget.MiniControllerFragment;
-import com.ooyala.sample.simple.ChromecastPlayerActivity;
-import com.ooyala.sample.skin.SkinPlayerActivity;
+import com.ooyala.sample.simple.SimpleCastPlayerActivity;
+import com.ooyala.sample.skin.SkinCastPlayerActivity;
 
 public class ChromecastListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
   private static final String TAG = "ChromecastListActivity";
@@ -50,9 +50,9 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
     final Intent intent;
     CheckBox skinChooser = findViewById(R.id.skin_chooser);
     if(skinChooser.isChecked()) {
-      intent = new Intent(this, SkinPlayerActivity.class);
+      intent = new Intent(this, SkinCastPlayerActivity.class);
     } else {
-      intent = new Intent(this, ChromecastPlayerActivity.class);
+      intent = new Intent(this, SimpleCastPlayerActivity.class);
     }
     SharedPreferences lastChosenParams = getSharedPreferences("LastChosenParams", MODE_PRIVATE);
     lastChosenParams

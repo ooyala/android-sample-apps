@@ -21,6 +21,12 @@ public abstract class CastActivity extends PlayerActivity {
   }
 
   @Override
+  protected void completePlayerSetup() {
+    super.completePlayerSetup();
+    castManager.registerWithOoyalaPlayer(player);
+  }
+
+  @Override
   protected void onResume() {
     super.onResume();
     if (player != null && !player.isInCastMode() && wasInCastMode) {

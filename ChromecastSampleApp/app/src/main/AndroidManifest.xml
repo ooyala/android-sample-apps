@@ -23,13 +23,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".simple.ChromecastPlayerActivity"
+            android:name=".simple.SimpleCastPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:textColor="#ffffff" />
         <activity
-            android:name=".skin.SkinPlayerActivity"
+            android:name=".skin.SkinCastPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <meta-data
