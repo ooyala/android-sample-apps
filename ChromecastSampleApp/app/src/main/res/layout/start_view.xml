@@ -15,14 +15,22 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+
+    <CheckBox
+        android:id="@+id/skin_chooser"
+        android:text="Use skin"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <fragment
         android:id="@+id/cast_mini_controller"
+        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        app:castShowImageThumbnail="true"
         android:visibility="gone"
-        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment" />
+        app:castShowImageThumbnail="true" />
 
     <ListView
         android:id="@+id/listView"

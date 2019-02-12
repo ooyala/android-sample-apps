@@ -10,10 +10,13 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.media.widget.MiniControllerFragment;
+import com.ooyala.sample.simple.ChromecastPlayerActivity;
+import com.ooyala.sample.skin.SkinPlayerActivity;
 
 public class ChromecastListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
   private static final String TAG = "ChromecastListActivity";
@@ -44,7 +47,13 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
 
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    final Intent intent = new Intent(this, videoList[position].activity);
+    final Intent intent;
+    CheckBox skinChooser = findViewById(R.id.skin_chooser);
+    if(skinChooser.isChecked()) {
+      intent = new Intent(this, SkinPlayerActivity.class);
+    } else {
+      intent = new Intent(this, ChromecastPlayerActivity.class);
+    }
     SharedPreferences lastChosenParams = getSharedPreferences("LastChosenParams", MODE_PRIVATE);
     lastChosenParams
         .edit()
@@ -75,21 +84,21 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
    */
   private ChromecastPlayerSelectionOption[] getVideoList() {
     return new ChromecastPlayerSelectionOption[]{
-      new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
-      new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
-      new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
-      new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
+      new ChromecastPlayerSelectionOption("HLS Asset", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("MP4 Video", "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("VOD CC", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("Encrypted HLS Asset", "ZtZmtmbjpLGohvF5zBLvDyWexJ70KsL-", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
       // Will play Playready Smooth on Chromecast, Clear HLS on device
-      new ChromecastPlayerSelectionOption("Playready Smooth, Clear HLS Backup", "pkMm1rdTqIAxx9DQ4-8Hyp9P_AHRe4pt", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", ChromecastPlayerActivity.class),
-      new ChromecastPlayerSelectionOption("2 Assets autoplayed", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
+      new ChromecastPlayerSelectionOption("Playready Smooth, Clear HLS Backup", "pkMm1rdTqIAxx9DQ4-8Hyp9P_AHRe4pt", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("2 Assets autoplayed", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "92cWp0ZDpDm4Q8rzHfVK6q9m6OtFP-ww", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
 
       //These asset will not be configured correctly. To test your OPT-enabled assets, you need:
       // 1. an OPT-enabled embed code (set here)
       // 2. the correlating PCode (set in the PlayerViewController)
       // 3. an API Key and Secret for the provider to locally-sign the authorization (set in the PlayerViewController)
-      new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
-      new ChromecastPlayerSelectionOption("Concurrent Streams (unconfigured)", "pwc3J0dTpAL7gMLFNVt2ks2v8j3qOKCS", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com", ChromecastPlayerActivity.class),
-      new ChromecastPlayerSelectionOption("Barebones Player Activity Demo (HLS Asset)", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com", ChromecastPlayerActivity.class),
+      new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("Concurrent Streams (unconfigured)", "pwc3J0dTpAL7gMLFNVt2ks2v8j3qOKCS", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("Barebones Player Activity Demo (HLS Asset)", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
 
     };
   }
