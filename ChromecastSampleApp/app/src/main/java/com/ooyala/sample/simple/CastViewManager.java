@@ -1,4 +1,4 @@
-package com.ooyala.sample;
+package com.ooyala.sample.simple;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,18 +9,19 @@ import android.widget.TextView;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.cast.CastManager;
 import com.ooyala.cast.UpdateImageViewRunnable;
+import com.ooyala.sample.R;
 
-class CastViewManager {
+public class CastViewManager {
   private View castView;
   private TextView stateTextView;
 
-  CastViewManager(Activity activity, CastManager manager) {
+  public CastViewManager(Activity activity, CastManager manager) {
     castView = activity.getLayoutInflater().inflate(R.layout.cast_video_view, null);
     manager.setCastView(castView);
     stateTextView = castView.findViewById(R.id.castStateTextView);
   }
 
-  void configureCastView(String title, String description, String imageUrl) {
+  public void configureCastView(String title, String description, String imageUrl) {
     final ImageView castBackgroundImage = castView.findViewById(R.id.castBackgroundImage);
 
     // Update the ImageView on a separate thread
@@ -33,7 +34,7 @@ class CastViewManager {
     videoDescription.setText(description);
   }
 
-  void updateCastState(Context c, OoyalaPlayer.State state) {
+  public void updateCastState(Context c, OoyalaPlayer.State state) {
     String castDeviceName = CastManager.getCastManager().getDeviceName();
     if (state == OoyalaPlayer.State.LOADING) {
       stateTextView.setText(c.getString(R.string.loading));

@@ -1,26 +1,22 @@
 package com.ooyala.sample;
 
-import android.app.Activity;
-
 public class ChromecastPlayerSelectionOption {
   public String title;
   public String embedCode;
   public String secondEmbedCode;
   public String pcode;
   public String domain;
-  public Class<? extends Activity> activity;
 
-  public ChromecastPlayerSelectionOption(String title, String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
-    this(title, embedCode, null, pcode, domain, activity);
+  ChromecastPlayerSelectionOption(String title, String embedCode, String pcode, String domain) {
+    this(title, embedCode, null, pcode, domain);
   }
 
-  public ChromecastPlayerSelectionOption(String title, String embedCode, String secondEmbedCode, String pcode, String domain, Class<? extends Activity> activity) {
+  ChromecastPlayerSelectionOption(String title, String embedCode, String secondEmbedCode, String pcode, String domain) {
     super();
     this.title = title;
     this.embedCode = embedCode;
     this.secondEmbedCode = secondEmbedCode;
     this.pcode = pcode;
     this.domain = domain;
-    this.activity = activity;
   }
 }
