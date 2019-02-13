@@ -31,23 +31,8 @@ public class SkinCastPlayerActivity extends CastActivity implements Observer, De
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     skinLayout = findViewById(R.id.ooyalaSkin);
-    setupActionBar();
 
     completePlayerSetup();
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    boolean createOptionsMenu = super.onCreateOptionsMenu(menu);
-    getMenuInflater().inflate(R.menu.browse, menu);
-    CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu,
-        R.id.media_route_menu_item);
-    return createOptionsMenu;
-  }
-
-  private void setupActionBar() {
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
   }
 
   @Override

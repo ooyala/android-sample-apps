@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.cast.CastManager;
+import com.ooyala.cast.MediaRouterManager;
 
 import java.util.Observable;
 
@@ -13,11 +14,13 @@ import androidx.annotation.Nullable;
 public abstract class CastActivity extends PlayerActivity {
   private boolean wasInCastMode;
   protected CastManager castManager;
+  protected MediaRouterManager mediaRouterManager;
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     castManager = CastManager.getCastManager();
+    mediaRouterManager = MediaRouterManager.getMediaRouterManager();
   }
 
   @Override
@@ -48,6 +51,9 @@ public abstract class CastActivity extends PlayerActivity {
     super.onStart();
     if (castManager != null && player != null) {
       castManager.registerWithOoyalaPlayer(player);
+      mediaRouterManager.registerToOoyalaPlayer(player);
+      mediaRouterManager.addMediaRouterCallback();
+      mediaRouterManager.sendCurrentCastMediaRoutesToPlayer();
     }
   }
 
@@ -56,6 +62,8 @@ public abstract class CastActivity extends PlayerActivity {
     super.onStop();
     if (castManager != null) {
       castManager.deregisterFromOoyalaPlayer();
+      mediaRouterManager.deregisterFromOoyalaPlayer(player);
+      mediaRouterManager.removeMediaRouterCallback();
     }
   }
 
