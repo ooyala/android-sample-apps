@@ -76,14 +76,6 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       player.addObserver(this);
       play(embedCode);
     }
-
-    if (asked && writePermission) {
-      PlayerDomain playerDomain = new PlayerDomain(domain);
-      player = new OoyalaPlayer(pcode, playerDomain,this,  getOptions());
-      initAndBindController();
-      player.addObserver(this);
-      play(embedCode);
-    }
   }
 
   protected abstract Options getOptions();
