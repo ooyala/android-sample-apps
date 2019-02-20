@@ -3,6 +3,11 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
+    compileOptions {
+        sourceCompatibility rootProject.javaVersion
+        targetCompatibility rootProject.javaVersion
+    }
+
     defaultConfig {
         minSdkVersion 16
         applicationId "com.ooyala.sample.NielsenSampleApp"
@@ -70,7 +75,7 @@ repositories {
 dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.9.5'
     implementation files('libs/OoyalaNielsenSDK.jar')
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')
