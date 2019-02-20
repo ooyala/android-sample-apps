@@ -12,6 +12,7 @@ import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.item.OfflineVideo;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
@@ -20,6 +21,7 @@ import com.ooyala.sample.R;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -89,13 +91,21 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 
     player.addObserver(this);
-    if (player.setEmbedCode(EMBED)) {
+
+    File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), EMBED);
+    OfflineVideo ov = OfflineVideo.getVideo(this, folder);
+
+    if (player.setUnbundledVideo(ov)) {
       //Uncomment for autoplay
       //player.play();
     }
-    else {
+    else if (player.setEmbedCode(EMBED)) {
+      //Uncomment for autoplay
+      //player.play();
+    } else {
       Log.e(TAG, "Asset Failure");
     }
+
   }
 
   /** Start DefaultHardwareBackBtnHandler **/

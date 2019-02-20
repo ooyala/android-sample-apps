@@ -5,6 +5,12 @@
     android:layout_gravity="center_horizontal|bottom"
     android:orientation="vertical" >
 
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="#212121"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     <fragment android:name="com.ooyala.sample.utils.fragments.SkinPlayerFragment"
               android:id="@+id/video_fragment"
               android:layout_width="match_parent"

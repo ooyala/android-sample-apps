@@ -37,17 +37,11 @@
             android:name=".lists.DownloadSerializationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity
-            android:name=".players.OoyalaSkinPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"></activity>
-        <activity
             android:name=".players.OoyalaSkinOPTPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"></activity>
         <activity
             android:name=".players.OfflineDownloadActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
-        <activity
-            android:name=".players.OfflineSkinPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"></activity>
         <activity
             android:name=".lists.OfflineAnalyticsListActivity"
             android:label="@string/title_activity_offline_analytics_list"></activity>
