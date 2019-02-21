@@ -94,12 +94,12 @@ dependencies {
     implementation files('libs/FWAdManager.jar')
     implementation files('libs/OoyalaFreewheelSDK.jar')
     implementation files('libs/OoyalaIMASDK.jar')
-    //implementation files('libs/OoyalaSDK.aar')
-    //implementation files('libs/OoyalaSkinSDK.aar')
+    implementation files('libs/OoyalaSDK.aar')
+    implementation files('libs/OoyalaSkinSDK.aar')
     implementation files('libs/OoyalaSSAISDK.aar')
-     implementation project(':core')
+    // implementation project(':core')
     // implementation project(':ssai')
-     implementation project(':skin')
+    // implementation project(':skin')
     // implementation project(':ima')
 
     // App dependencies

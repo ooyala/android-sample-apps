@@ -61,10 +61,10 @@ include ':HeartbeatSampleApp'
 project(':HeartbeatSampleApp').projectDir = new File(settingsDir, './HeartbeatSampleApp/app')
 
 // Developer
-include ':skin'
-project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin/')
-include ':core'
-project(':core').projectDir = new File(settingsDir, '../android-sdk/sdk/core/')
+//include ':skin'
+//project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin/')
+//include ':core'
+//project(':core').projectDir = new File(settingsDir, '../android-sdk/sdk/core/')
 //include ':cast'
 //project(':cast').projectDir = new File(settingsDir, '../android-sdk/sdk/cast/')
 //include(':vrsdk')
