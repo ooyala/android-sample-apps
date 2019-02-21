@@ -3,6 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
+    compileOptions {
+        sourceCompatibility rootProject.javaVersion
+        targetCompatibility rootProject.javaVersion
+    }
+
     defaultConfig {
         applicationId "com.ooyala.sample.npaw"
         minSdkVersion rootProject.minSdkVersion
