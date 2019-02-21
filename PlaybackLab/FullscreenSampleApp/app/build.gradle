@@ -70,17 +70,16 @@ dependencies {
     implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
 
     //react-native dependencies
+    implementation "com.facebook.infer.annotation:infer-annotation:$rootProject.inferAnnotationVersion"
     implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
-    implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.imagePipelineVersion"
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.frescoVersion"
     implementation "com.facebook.soloader:soloader:$rootProject.soloaderVersion"
-    implementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
-    implementation "com.facebook.stetho:stetho-okhttp:$rootProject.stethoOkhttpVersion"
     implementation "com.google.code.findbugs:jsr305:$rootProject.findbugsVersion"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
-    implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.urlconnectionVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
     implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
-    implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version:'0.58.0', ext:'aar')
 }
 
 repositories {
