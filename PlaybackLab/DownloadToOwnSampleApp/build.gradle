@@ -28,16 +28,13 @@ buildscript {
         mavenGradleVersion = '1.5'
 
         // react-native dependencies
+        inferAnnotationVersion = '0.11.2'
+        frescoVersion = '1.10.0'
+        soloaderVersion = '0.5.1'
+        findbugsVersion = '3.0.2'
+        okhttpVersion = '3.12.1'
+        okioVersion = '1.15.0'
         androidJscVersion = 'r174650'
-        findbugsVersion = '3.0.0'
-        frescoVersion = '1.3.0'
-        imagePipelineVersion = '1.3.0'
-        okhttpVersion = '3.6.0'
-        okioVersion = '1.13.0'
-        soloaderVersion = '0.1.0'
-        stethoVersion = '1.2.0'
-        stethoOkhttpVersion = '1.2.0'
-        urlconnectionVersion = '3.6.0'
     }
 
     repositories {
