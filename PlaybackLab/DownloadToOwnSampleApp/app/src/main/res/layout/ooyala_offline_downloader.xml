@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/progress_text"
+              android:layout_width="fill_parent"
+              android:layout_height="@dimen/default_height"
+              android:layout_weight="5"
+              android:padding="@dimen/default_padding"
+              android:textSize="@dimen/text_size">
+    </TextView>
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height"
+        android:layout_weight="1"
+        android:text="@string/button_start"/>
+
+    <Button
+        android:id="@+id/pause_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height"
+        android:layout_weight="1"
+        android:text="@string/button_pause"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height"
+        android:layout_weight="1"
+        android:text="@string/button_delete"/>
+</LinearLayout>
