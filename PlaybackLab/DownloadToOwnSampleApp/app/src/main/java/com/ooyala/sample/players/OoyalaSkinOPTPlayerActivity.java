@@ -17,6 +17,7 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.sample.DemoApplication;
 import com.ooyala.sample.R;
 
 import org.json.JSONObject;
@@ -93,7 +94,7 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     player.addObserver(this);
 
     File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), EMBED);
-    OfflineVideo ov = OfflineVideo.getVideo(this, folder);
+    OfflineVideo ov = OfflineVideo.getVideo(this, folder, ((DemoApplication) getApplication()).getDownloadCache(), EMBED);
 
     if (player.setUnbundledVideo(ov)) {
       //Uncomment for autoplay

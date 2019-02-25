@@ -60,4 +60,15 @@ public class Utils {
       DebugMode.logI(tag, data.substring(start, end));
     }
   }
+
+  /**
+   * @param x Specify the value to constrain.
+   * @param min Specify the lower end of the range into which to the constrain x.
+   * @param max Specify the upper end of the range into which to the constrain x.
+   * @return the value of x to the range minVal to maxVal.
+   * The returned value is computed as {@code min(max(x, minVal), maxVal)}.
+   */
+  public static float clamp(float x, float min, float max) {
+    return Math.max(min, Math.min(max, x));
+  }
 }

@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +12,8 @@ import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
 import com.ooyala.android.offline.DashDownloader;
-import com.ooyala.android.offline.DashOptions;
+import com.ooyala.android.offline.LicenseDownloader;
+import com.ooyala.android.offline.options.DownloadOptions;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.R;
@@ -26,6 +23,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -33,10 +34,11 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   final String TAG = this.getClass().toString();
 
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+  private static final int MAX_RETRY_COUNT = 3;
 
-  String EMBED = null;
-  String PCODE = null;
-  String DOMAIN = null;
+  String EMBED;
+  String PCODE;
+  String DOMAIN;
 
   // Write the sdk events text along with events count to log file in sdcard if the log file already exists
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
@@ -45,7 +47,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
   protected Handler handler;
   protected DashDownloader downloader;
   protected int progressCompleted;
-  private final int MAX_RETRY_COUNT = 3;
+
   private int retry_count;
 
   private String APIKEY = "";
@@ -62,13 +64,15 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     super.onCreate(savedInstanceState);
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.offline_downloader);
+
     EMBED = getIntent().getExtras().getString("embed_code");
     PCODE = getIntent().getExtras().getString("pcode");
     DOMAIN = getIntent().getExtras().getString("domain");
     APIKEY = getIntent().getExtras().getString("api_key");
     SECRET = getIntent().getExtras().getString("secret_key");
     ACCOUNT_ID = getIntent().getExtras().getString("account_id");
-    progressView = (TextView)findViewById(R.id.progress_text);
+
+    progressView = findViewById(R.id.progress_text);
     progressView.setText("progress: 0");
     handler = new Handler(getMainLooper());
 
@@ -77,60 +81,41 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     // Use this DashOptions to download an asset without OPT
 //    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).build();
     // Use this DashOptions to download an asset with OPT
-    DashOptions options = new DashOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
+    DownloadOptions options = new DownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder).setEmbedTokenGenerator(this).build();
     downloader = new DashDownloader(this, options, this);
 
-    Button startButton = (Button)findViewById(R.id.start_button);
-    startButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        if (ContextCompat.checkSelfPermission(OfflineDownloadActivity.this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-          ActivityCompat.requestPermissions(OfflineDownloadActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-        } else {
-          downloader.startDownload();
-        }
+    Button startButton = findViewById(R.id.start_button);
+    startButton.setOnClickListener(v -> {
+      if (ContextCompat.checkSelfPermission(OfflineDownloadActivity.this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(OfflineDownloadActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+      } else {
+        downloader.startDownload();
       }
     });
 
-    Button cancelButton = (Button)findViewById(R.id.cancel_button);
-    cancelButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        downloader.abort();
-      }
-    });
+    Button cancelButton = findViewById(R.id.cancel_button);
+    cancelButton.setOnClickListener(v -> downloader.abort());
 
-    Button resetButton = (Button)findViewById(R.id.reset_button);
-    resetButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        downloader.abort();
-        boolean isDeleted = downloader.deleteAll();
-        onDeletion(isDeleted);
-      }
+    Button resetButton = findViewById(R.id.reset_button);
+    resetButton.setOnClickListener(v -> {
+      downloader.abort();
+      boolean isDeleted = downloader.deleteAll();
+      onDeletion(isDeleted);
     });
   }
 
   @Override
   public void onCompletion(String embedCode) {
-    handler.post(new Runnable() {
-      @Override
-      public void run() {
-        long expiration = downloader.getLicenseExpirationDate();
-        String expirationString = expiration == DashDownloader.INFINITE_DURATION ? "infinite" : String.valueOf(expiration);
-        progressView.setText("Completed! license expires in " + expirationString);
-      }
+    handler.post(() -> {
+      long expiration = downloader.getLicenseExpirationDate();
+      String expirationString = expiration == LicenseDownloader.INFINITE_DURATION ? "infinite" : String.valueOf(expiration);
+      progressView.setText("Completed! license expires in " + expirationString);
     });
   }
 
   @Override
   public void onAbort(String embedCode) {
-    handler.post(new Runnable() {
-      @Override
-      public void run() {
-        progressView.setText("Aborted");
-      }
-    });
+    handler.post(() -> progressView.setText("Aborted"));
   }
 
   @Override
@@ -139,20 +124,12 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
       retry_count++;
       DebugMode.logD(TAG, "Retrying to download : " + retry_count);
 
-      handler.post(new Runnable() {
-        @Override
-        public void run() {
-          progressView.setText(progressCompleted + " Retrying to download ..");
-          downloader.startDownload();
-        }
+      handler.post(() -> {
+        progressView.setText(progressCompleted + " Retrying to download ..");
+        downloader.startDownload();
       });
     } else {
-      handler.post(new Runnable() {
-        @Override
-        public void run() {
-          progressView.setText("Error:" + ex.getLocalizedMessage());
-        }
-      });
+      handler.post(() -> progressView.setText("Error:" + ex.getLocalizedMessage()));
     }
   }
 
@@ -160,22 +137,11 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
     progressCompleted = percentCompleted;
     final String progress = "progress:" + percentCompleted;
 
-    handler.post(new Runnable() {
-      @Override
-      public void run() {
-        progressView.setText(progress);
-      }
-    });
+    handler.post(() -> progressView.setText(progress));
   }
 
   private void onDeletion(final boolean success) {
-    handler.post(new Runnable() {
-      @Override
-      public void run() {
-        progressView.setText(success ? " Deletion completed" : "Deletion failed");
-
-      }
-    });
+    handler.post(() -> progressView.setText(success ? " Deletion completed" : "Deletion failed"));
   }
 
   @Override
@@ -198,7 +164,7 @@ public class OfflineDownloadActivity extends Activity implements DashDownloader.
       embedCodesString += ec;
     }
 
-    HashMap<String, String> params = new HashMap<String, String>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("account_id", ACCOUNT_ID);
 
     /* Uncommenting this will bypass all syndication rules on your asset
