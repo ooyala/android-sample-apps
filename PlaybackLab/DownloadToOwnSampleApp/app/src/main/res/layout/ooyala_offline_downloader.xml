@@ -14,6 +14,13 @@
     </TextView>
 
     <Button
+        android:id="@+id/request_bitrate_and_start_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height"
+        android:layout_weight="1"
+        android:text="@string/button_request_bitrate_and_start"/>
+
+    <Button
         android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height"
