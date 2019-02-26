@@ -7,6 +7,10 @@ import android.app.Activity;
  *
  */
 public class PlayerSelectionOption {
+
+  public static final int ONLINE_PLAYBACK = 0;  // enforce online playback
+  public static final int OFFLINE_PLAYBACK = 1; // enforce offline playback
+  public static final int OFFLINE_ONLINE_PLAYBACK = 2; // will try offline playback if possible, else try online playback
   private String embedCode;
   private Class <? extends Activity> activity;
   private String pcode;
@@ -14,7 +18,21 @@ public class PlayerSelectionOption {
   private String apiKey;
   private String secretKey;
   private String accountId;
+  private int playbackType = OFFLINE_ONLINE_PLAYBACK;
 
+
+
+  public PlayerSelectionOption(String embedCode, String pcode, String apiKey, String secretKey,
+                               String accountId, String domain, int playbackType, Class<? extends Activity> activity) {
+    this.embedCode = embedCode;
+    this.activity = activity;
+    this.pcode = pcode;
+    this.domain = domain;
+    this.apiKey = apiKey;
+    this.secretKey = secretKey;
+    this.accountId = accountId;
+    this.playbackType = playbackType;
+  }
   public PlayerSelectionOption(String embedCode, String pcode, String apiKey, String secretKey,
                                String accountId, String domain, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
@@ -79,6 +97,15 @@ public class PlayerSelectionOption {
    */
   public String getAccountId() {
     return accountId;
+  }
+
+
+  /**
+   * Get the playbackType for this sample
+   * @return the playbackType
+   */
+  public int getPlaybackType() {
+    return playbackType;
   }
 
   /**
