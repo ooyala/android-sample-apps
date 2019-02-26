@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ooyala Download To Own Sample App</string>
+    <string name="button_request_bitrate_and_start">Request bitrates and Start</string>
     <string name="button_start">Start</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_reset">Reset</string>
@@ -12,4 +13,5 @@
     <string name="canceled_text">Canceled</string>
     <string name="retry_text">Downloaded percentage: %.2f. Retrying to download ..</string>
     <string name="error_text">Error: %s</string>
+    <string name="download_description">Download</string>
 </resources>

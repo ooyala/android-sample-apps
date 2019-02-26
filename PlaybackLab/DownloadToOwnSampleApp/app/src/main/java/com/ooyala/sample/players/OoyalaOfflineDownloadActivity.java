@@ -1,10 +1,16 @@
 package com.ooyala.sample.players;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +29,10 @@ import com.ooyala.sample.utils.Utils;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -33,7 +42,7 @@ import androidx.core.content.ContextCompat;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class OoyalaOfflineDownloadActivity extends Activity implements DownloadListener,
+public class OoyalaOfflineDownloadActivity extends Activity implements DownloadListener, DialogInterface.OnClickListener,
 		EmbedTokenGenerator {
 	final String TAG = this.getClass().toString();
 
@@ -54,9 +63,17 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	private String SECRET = "";
 
 	private Downloader downloader;
+	private OoyalaDownloadOptions options;
+	private Collection<Integer> bitrateValues = new ArrayList<>();
+	private File folder;
 	private int retryCount;
 
+	private View dialogView;
 	private TextView progressView;
+	private ListView bitrateList;
+	private ArrayAdapter<String> bitrateTitles;
+	private AlertDialog.Builder builder;
+
 	private Handler handler;
 	private Runnable updateProgress = () -> {
 		handler.postDelayed(this.updateProgress, UPDATE_TIME);
@@ -90,8 +107,8 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		progressView = findViewById(R.id.progress_text);
 		handler = new Handler(getMainLooper());
 
-		final File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
-		OoyalaDownloadOptions options = new OoyalaDownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder)
+		folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+		options = new OoyalaDownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder)
 				.setEmbedTokenGenerator(this)
 				.build();
 		DownloaderFactory factory = new DownloaderFactory();
@@ -117,6 +134,9 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 			downloader.cancel();
 			downloader.delete();
 		});
+
+		Button requestButton = findViewById(R.id.request_bitrate_and_start_button);
+		requestButton.setOnClickListener(v -> downloader.requestBitrates());
 	}
 
 	@Override
@@ -174,6 +194,31 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		}
 	}
 
+	@Override
+	public void onBitratesObtained(HashMap<String, Integer> bitrates) {
+		builder = new AlertDialog.Builder(this)
+				.setTitle(R.string.download_description)
+				.setPositiveButton(android.R.string.ok, this)
+				.setNegativeButton(android.R.string.cancel, null);
+
+		LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
+		dialogView = dialogInflater.inflate(R.layout.download_dialog, null);
+
+		bitrateTitles = new ArrayAdapter<>(
+				builder.getContext(), android.R.layout.simple_list_item_single_choice);
+		bitrateTitles.addAll(bitrates.keySet());
+
+		bitrateList = dialogView.findViewById(R.id.bitrate_list);
+		bitrateList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		bitrateList.setAdapter(bitrateTitles);
+
+		if (!bitrates.isEmpty()) {
+			bitrateValues.addAll(bitrates.values());
+			builder.setView(dialogView);
+		}
+		builder.create().show();
+	}
+
 	private void onDeletion(final boolean success) {
 		handler.post(() -> progressView.setText(success ? " Deletion completed" : "Deletion failed"));
 	}
@@ -213,5 +258,24 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		URL tokenUrl = urlGen.secureURL("http://player.ooyala.com", uri, params);
 
 		callback.setEmbedToken(tokenUrl.toString());
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		int bitrate = Integer.MAX_VALUE;
+		Iterator<Integer> it = bitrateValues.iterator();
+		for (int i = 0; i < bitrateList.getChildCount(); i++) {
+			int currentBitrate = it.next();
+			if (bitrateList.isItemChecked(i)) {
+				bitrate = currentBitrate;
+				break;
+			}
+		}
+		options = new OoyalaDownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder)
+				.setEmbedTokenGenerator(this)
+				.setBitrate(bitrate)
+				.build();
+		downloader.setOptions(options);
+		downloader.startDownload();
 	}
 }
