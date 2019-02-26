@@ -42,9 +42,11 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     selectionMap = new LinkedHashMap<>();
     String activityName = getCallingActivity().getClassName();
     if (activityName.contains("AddAssetActivity")) {
-      selectionMap.put("Widevine Stream", new PlayerSelectionOption(getIntent().getStringExtra("embed_code"), getIntent().getStringExtra("pcode"), getIntent().getStringExtra("api_key"), getIntent().getStringExtra("secret_key"), getIntent().getStringExtra("account_id"), "http://ooyala.com", OoyalaSkinOPTPlayerActivity.class));
+      selectionMap.put("Widevine Online Stream Player", new PlayerSelectionOption(getIntent().getStringExtra("embed_code"), getIntent().getStringExtra("pcode"), getIntent().getStringExtra("api_key"), getIntent().getStringExtra("secret_key"), getIntent().getStringExtra("account_id"), "http://ooyala.com", PlayerSelectionOption.ONLINE_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
       selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption(getIntent().getStringExtra("embed_code"), getIntent().getStringExtra("pcode"), getIntent().getStringExtra("api_key"), getIntent().getStringExtra("secret_key"), getIntent().getStringExtra("account_id"), "http://ooyala.com", OfflineDownloadActivity.class));
       selectionMap.put("Widevine OOYALA Downloader", new PlayerSelectionOption(getIntent().getStringExtra("embed_code"), getIntent().getStringExtra("pcode"), getIntent().getStringExtra("api_key"), getIntent().getStringExtra("secret_key"), getIntent().getStringExtra("account_id"), "http://ooyala.com", OoyalaOfflineDownloadActivity.class));
+      selectionMap.put("Widevine Offline Stream Player", new PlayerSelectionOption(getIntent().getStringExtra("embed_code"), getIntent().getStringExtra("pcode"), getIntent().getStringExtra("api_key"), getIntent().getStringExtra("secret_key"), getIntent().getStringExtra("account_id"), "http://ooyala.com", PlayerSelectionOption.OFFLINE_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
+
     }
     else {
       // Populate the embed map
@@ -54,9 +56,11 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
       String apikey = "";
       String secret = "";
 
-      selectionMap.put("Widevine DASH Stream", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OoyalaSkinOPTPlayerActivity.class));
+      selectionMap.put("Widevine Online Stream Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", PlayerSelectionOption.ONLINE_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
       selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OfflineDownloadActivity.class));
       selectionMap.put("Widevine OOYALA Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OoyalaOfflineDownloadActivity.class));
+      selectionMap.put("Widevine Offline Stream Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", PlayerSelectionOption.OFFLINE_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
+
     }
 
     setContentView(R.layout.list_activity_layout);
@@ -101,6 +105,7 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
     intent.putExtra("account_id", selection.getAccountId());
     intent.putExtra("domain", selection.getDomain());
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
+    intent.putExtra("playback_type", selection.getPlaybackType());
     startActivity(intent);
     return;
   }
