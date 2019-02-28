@@ -139,8 +139,12 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 
 		Button deleteButton = findViewById(R.id.delete_button);
 		deleteButton.setOnClickListener(v -> {
+			if (TASK_INFO == null) {
+				progressView.setText(R.string.deletion_completed_text);
+				return;
+			}
 			downloader.cancel();
-			downloader.delete();
+			downloader.delete(TASK_INFO.taskId);
 		});
 
 		Button requestButton = findViewById(R.id.request_bitrate_and_start_button);
@@ -228,7 +232,7 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	}
 
 	private void onDeletion(final boolean success) {
-		handler.post(() -> progressView.setText(success ? " Deletion completed" : "Deletion failed"));
+		handler.post(() -> progressView.setText(success ? R.string.deletion_completed_text : R.string.deletion_failed_text));
 	}
 
 	@Override

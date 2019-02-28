@@ -14,5 +14,7 @@
     <string name="paused_text">Paused: %.2f %%</string>
     <string name="retry_text">Downloaded percentage: %.2f. Retrying to download ..</string>
     <string name="error_text">Error: %s</string>
+    <string name="deletion_completed_text">Deletion completed</string>
+    <string name="deletion_failed_text">Deletion failed</string>
     <string name="download_description">Download</string>
 </resources>
