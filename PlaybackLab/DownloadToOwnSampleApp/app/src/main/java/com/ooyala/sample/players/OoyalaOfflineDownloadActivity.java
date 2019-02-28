@@ -130,10 +130,12 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		Button pauseButton = findViewById(R.id.pause_button);
 		pauseButton.setOnClickListener(v -> {
 			handler.removeCallbacks(updateProgress);
-			float progress = Utils.clamp(downloader.getDownloadPercentage(TASK_INFO.taskId),
-					MIN_PROGRESS, MAX_PROGRESS);
-			String text = getString(R.string.paused_text, progress);
-			progressView.setText(text);
+			if (TASK_INFO != null) {
+				float progress = Utils.clamp(downloader.getDownloadPercentage(TASK_INFO.taskId),
+						MIN_PROGRESS, MAX_PROGRESS);
+				String text = getString(R.string.paused_text, progress);
+				progressView.setText(text);
+			}
 			downloader.cancel();
 		});
 
