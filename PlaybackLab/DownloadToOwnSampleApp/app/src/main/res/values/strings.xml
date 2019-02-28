@@ -11,6 +11,7 @@
     <string name="progress_text">Progress: %.2f %%</string>
     <string name="completed_text">Completed</string>
     <string name="canceled_text">Canceled</string>
+    <string name="paused_text">Paused: %.2f %%</string>
     <string name="retry_text">Downloaded percentage: %.2f. Retrying to download ..</string>
     <string name="error_text">Error: %s</string>
     <string name="download_description">Download</string>

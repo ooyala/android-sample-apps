@@ -123,11 +123,19 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 						PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 			} else {
 				downloader.startDownload();
+				handler.post(updateProgress);
 			}
 		});
 
 		Button pauseButton = findViewById(R.id.pause_button);
-		pauseButton.setOnClickListener(v -> downloader.cancel());
+		pauseButton.setOnClickListener(v -> {
+			handler.removeCallbacks(updateProgress);
+			float progress = Utils.clamp(downloader.getDownloadPercentage(TASK_INFO.taskId),
+					MIN_PROGRESS, MAX_PROGRESS);
+			String text = getString(R.string.paused_text, progress);
+			progressView.setText(text);
+			downloader.cancel();
+		});
 
 		Button deleteButton = findViewById(R.id.delete_button);
 		deleteButton.setOnClickListener(v -> {
@@ -277,5 +285,6 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 				.build();
 		downloader.setOptions(options);
 		downloader.startDownload();
+		handler.post(updateProgress);
 	}
 }
