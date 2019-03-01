@@ -223,7 +223,7 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		bitrateTitles.addAll(bitrates.keySet());
 
 		bitrateList = dialogView.findViewById(R.id.bitrate_list);
-		bitrateList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		bitrateList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		bitrateList.setAdapter(bitrateTitles);
 
 		if (!bitrates.isEmpty()) {
