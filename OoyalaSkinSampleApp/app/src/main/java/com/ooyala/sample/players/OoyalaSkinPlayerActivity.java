@@ -34,7 +34,7 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			// Get the SkinLayout from our layout xml
-			skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
+			skinLayout = findViewById(R.id.ooyalaSkin);
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain playerDomain = new PlayerDomain(domain);
 			player = new OoyalaPlayer(pcode, playerDomain, getOptions());

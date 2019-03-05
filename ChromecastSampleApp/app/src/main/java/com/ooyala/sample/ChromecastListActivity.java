@@ -42,7 +42,6 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
     ListView listView = findViewById(R.id.listView);
     listView.setAdapter(selectionAdapter);
     listView.setOnItemClickListener(this);
-
   }
 
   @Override
@@ -96,7 +95,7 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
       // 1. an OPT-enabled embed code (set here)
       // 2. the correlating PCode (set in the PlayerViewController)
       // 3. an API Key and Secret for the provider to locally-sign the authorization (set in the PlayerViewController)
-      new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "0yMjJ2ZDosUnthiqqIM3c8Eb8Ilx5r52", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
+      new ChromecastPlayerSelectionOption("Ooyala Player Token Asset (unconfigured)", "V3NDdnMzE6tPCchL9wYTFZY8jAE8_Y21", "x0b2cyOupu0FFK5hCr4zXg8KKcrm", "http://www.ooyala.com"),
       new ChromecastPlayerSelectionOption("Concurrent Streams (unconfigured)", "pwc3J0dTpAL7gMLFNVt2ks2v8j3qOKCS", "FoeG863GnBL4IhhlFC1Q2jqbkH9m", "http://www.ooyala.com"),
       new ChromecastPlayerSelectionOption("Barebones Player Activity Demo (HLS Asset)", "Y1ZHB1ZDqfhCPjYYRbCEOz0GR8IsVRm1", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com"),
 

@@ -1,6 +1,7 @@
 package com.ooyala.sample.skin;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;

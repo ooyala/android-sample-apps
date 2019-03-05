@@ -19,6 +19,7 @@
     <CheckBox
         android:id="@+id/skin_chooser"
         android:text="Use skin"
+        android:checked="true"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

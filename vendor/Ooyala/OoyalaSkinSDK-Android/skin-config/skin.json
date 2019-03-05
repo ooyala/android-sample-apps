@@ -234,6 +234,29 @@
       }
     }
   },
+  "castControls": {
+    "enabled": false,
+    "skipBackwardTime": 15,
+    "skipForwardTime": 15,
+    "buttons": {
+      "previousVideo": {
+        "enabled": true,
+        "index": 1
+      },
+      "skipBackward": {
+        "enabled": true,
+        "index": 2
+      },
+      "skipForward": {
+        "enabled": true,
+        "index": 3
+      },
+      "nextVideo": {
+        "enabled": true,
+        "index": 4
+      }
+    }
+  },
   "controlBar": {
     "enabled": true,
     "volumeControl": {
