@@ -94,19 +94,4 @@ public class SkinCastPlayerActivity extends CastActivity implements Observer, De
       playerLayoutController.onDestroy();
     }
   }
-
-  @Override
-  public void update(Observable arg0, Object argN) {
-    super.update(arg0, argN);
-  }
-
-  @Override
-  protected void updateCastView(OoyalaNotification notification) {
-
-  }
-
-  @Override
-  protected void updateCastViewState(OoyalaPlayer.State state) {
-
-  }
 }

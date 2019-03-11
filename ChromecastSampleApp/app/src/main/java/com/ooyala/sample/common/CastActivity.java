@@ -12,7 +12,7 @@ import java.util.Observable;
 import androidx.annotation.Nullable;
 
 public abstract class CastActivity extends PlayerActivity {
-  private boolean wasInCastMode;
+  protected boolean wasInCastMode;
   protected CastManager castManager;
   protected MediaRouterManager mediaRouterManager;
 
@@ -68,35 +68,4 @@ public abstract class CastActivity extends PlayerActivity {
       mediaRouterManager.removeMediaRouterCallback();
     }
   }
-
-  @Override
-  public void update(Observable arg0, Object argN) {
-    super.update(arg0, argN);
-
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-
-    OoyalaNotification notification = null;
-    if (argN instanceof OoyalaNotification) {
-      notification = (OoyalaNotification) argN;
-    }
-
-    if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME) {
-      updateCastView(notification);
-    }
-
-    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
-      if (player.isInCastMode()) {
-        if (!wasInCastMode) {
-          wasInCastMode = true;
-        }
-        updateCastViewState(player.getState());
-      } else if (wasInCastMode) {
-        wasInCastMode = false;
-      }
-    }
-  }
-
-  protected abstract void updateCastView(OoyalaNotification notification);
-
-  protected abstract void updateCastViewState(OoyalaPlayer.State state);
 }

@@ -65,6 +65,28 @@ public class SimpleCastPlayerActivity extends CastActivity {
   @Override
   public void update(Observable arg0, Object argN) {
     super.update(arg0, argN);
+
+    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+
+    OoyalaNotification notification = null;
+    if (argN instanceof OoyalaNotification) {
+      notification = (OoyalaNotification) argN;
+    }
+
+    if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME) {
+      updateCastView(notification);
+    }
+
+    if (arg1 == OoyalaPlayer.STATE_CHANGED_NOTIFICATION_NAME) {
+      if (player.isInCastMode()) {
+        if (!wasInCastMode) {
+          wasInCastMode = true;
+        }
+        updateCastViewState(player.getState());
+      } else if (wasInCastMode) {
+        wasInCastMode = false;
+      }
+    }
   }
 
   protected void initAndBindController() {
@@ -75,7 +97,6 @@ public class SimpleCastPlayerActivity extends CastActivity {
     return new Options.Builder().setUseExoPlayer(true).build();
   }
 
-  @Override
   protected void updateCastView(OoyalaNotification notification) {
     if (notification != null && notification.getData() != null && notification.getData() instanceof VideoData) {
       VideoData data = (VideoData) notification.getData();
@@ -84,12 +105,11 @@ public class SimpleCastPlayerActivity extends CastActivity {
       castViewManager.configureCastView(
           player.getCurrentItem().getTitle(),
           player.getCurrentItem().getDescription(),
-          player.getCurrentItem().getPromoImageURL(0, 0)
+          player.getCurrentItem().getPromoImageURL()
       );
     }
   }
 
-  @Override
   protected void updateCastViewState(OoyalaPlayer.State state) {
     castViewManager.updateCastState(this, state);
   }

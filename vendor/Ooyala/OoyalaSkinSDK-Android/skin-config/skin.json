@@ -104,7 +104,7 @@
     "screenToShowOnPause": "default"
   },
   "endScreen": {
-    "screenToShowOnEnd": "discovery",
+    "screenToShowOnEnd": null,
     "showReplayButton": true,
     "replayIconStyle": {
       "color": "white",
@@ -183,7 +183,7 @@
     "textEnhancement": "Uniform"
   },
   "upNext": {
-    "showUpNext": true,
+    "showUpNext": false,
     "timeToShow": 10
   },
   "playbackSpeed": {
@@ -235,7 +235,7 @@
     }
   },
   "castControls": {
-    "enabled": false,
+    "enabled": true,
     "skipBackwardTime": 15,
     "skipForwardTime": 15,
     "buttons": {
