@@ -42,9 +42,9 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private final String APIKEY = "x0b2cyOupu0FFK5hCr4zXg8KKcrm.-s6jH";
-  private final String SECRET = "ZCMQt2CCVqlHWce6dG5w2WA6fkAM_JaWgoI_yzQp";
-  private final String ACCOUNT_ID = "106219";
+  private final String APIKEY = "";
+  private final String SECRET = "";
+  private final String ACCOUNT_ID = "";
 
   protected OoyalaPlayer player;
   protected SDCardLogcatOoyalaEventsLogger playbackLog = new SDCardLogcatOoyalaEventsLogger();
