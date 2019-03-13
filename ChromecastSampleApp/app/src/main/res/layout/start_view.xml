@@ -15,6 +15,15 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <fragment
+        android:id="@+id/cast_mini_controller"
+        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        app:castShowImageThumbnail="true" />
+
     <RadioGroup
         android:id="@+id/player_type_chooser"
         android:layout_width="match_parent"
@@ -42,15 +51,6 @@
             android:text="use custom ui"
             android:textColor="@color/white" />
     </RadioGroup>
-
-    <fragment
-        android:id="@+id/cast_mini_controller"
-        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"
-        app:castShowImageThumbnail="true" />
 
     <ListView
         android:id="@+id/listView"

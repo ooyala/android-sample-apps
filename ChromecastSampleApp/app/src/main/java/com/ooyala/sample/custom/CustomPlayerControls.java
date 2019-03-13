@@ -214,14 +214,17 @@ public class CustomPlayerControls extends AbstractDefaultOoyalaPlayerControls im
       }
 
       if (currentState == OoyalaPlayer.State.PLAYING) {
+        loadingIndicator.setVisibility(View.GONE);
         playImageView.setImageDrawable(playImageView.getResources().getDrawable(R.drawable.pause));
       }
 
       if (currentState == OoyalaPlayer.State.PAUSED) {
+        loadingIndicator.setVisibility(View.GONE);
         playImageView.setImageDrawable(playImageView.getResources().getDrawable(R.drawable.play));
       }
 
       if (currentState == OoyalaPlayer.State.READY) {
+        loadingIndicator.setVisibility(View.GONE);
         seekBar.setMax(_player.getDuration());
         seekBar.setProgress(0);
         isSeekBarReady = true;
@@ -237,6 +240,7 @@ public class CustomPlayerControls extends AbstractDefaultOoyalaPlayerControls im
       }
 
       if (currentState == OoyalaPlayer.State.COMPLETED || currentState == OoyalaPlayer.State.ERROR) {
+        loadingIndicator.setVisibility(View.GONE);
         isSeekBarReady = false;
       }
     }
