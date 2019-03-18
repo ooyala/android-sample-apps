@@ -3,6 +3,7 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.EmbedTokenGenerator;
@@ -17,7 +18,10 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.sample.DemoApplication;
 import com.ooyala.sample.R;
+import com.ooyala.sample.lists.DownloadSerializationActivity;
+import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import org.json.JSONObject;
 
@@ -77,6 +81,8 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     SECRET = getIntent().getExtras().getString("secret_key");
     ACCOUNT_ID = getIntent().getExtras().getString("account_id");
 
+    final int playbackType = getIntent().getExtras().getInt("playback_type");
+
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
 
@@ -92,12 +98,30 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
 
     player.addObserver(this);
 
+    if (playbackType == PlayerSelectionOption.ONLINE_PLAYBACK) {
+      if (player.setEmbedCode(EMBED)) {
+        //Uncomment for autoplay
+        //player.play();
+      } else {
+        Log.e(TAG, "Asset Failure");
+      }
+      return;
+    }
+
     File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), EMBED);
-    OfflineVideo ov = OfflineVideo.getVideo(this, folder);
+    OfflineVideo ov = OfflineVideo.getVideo(this, folder, ((DemoApplication) getApplication()).getDownloadCache(), EMBED);
 
     if (player.setUnbundledVideo(ov)) {
       //Uncomment for autoplay
       //player.play();
+      return;
+    }
+
+    if (playbackType == PlayerSelectionOption.OFFLINE_PLAYBACK) {
+      Log.e(TAG, "No dowloaded files for playback");
+      Toast.makeText(OoyalaSkinOPTPlayerActivity.this, "No dowloaded files for playback", Toast.LENGTH_SHORT).show();
+      finish();
+      return;
     }
     else if (player.setEmbedCode(EMBED)) {
       //Uncomment for autoplay
