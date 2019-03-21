@@ -44,12 +44,6 @@
             android:text="use default"
             android:textColor="@color/white" />
 
-        <RadioButton
-            android:id="@+id/radioButtonCustomUi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="use custom ui"
-            android:textColor="@color/white" />
     </RadioGroup>
 
     <ListView

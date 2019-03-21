@@ -23,7 +23,7 @@ public class CastOptionsProvider implements OptionsProvider {
     NotificationOptions notificationOptions = new NotificationOptions.Builder()
         //Set here the activity that contain player.
         //For this sample there are 3 activity that can play video:
-        //SimpleCastPlayerActivity, SkinCastPlayerActivity and CustomUiPlayerActivity.
+        //SimpleCastPlayerActivity, SkinCastPlayerActivity
         //We set as example SimpleCastPlayerActivity
         .setTargetActivityClassName(SimpleCastPlayerActivity.class.getName())
         .setPlayDrawableResId(R.drawable.ic_media_play_light)

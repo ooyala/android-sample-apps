@@ -13,7 +13,6 @@ import android.widget.RadioGroup;
 
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.media.widget.MiniControllerFragment;
-import com.ooyala.sample.custom.CustomUiPlayerActivity;
 import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 import com.ooyala.sample.skin.SkinCastPlayerActivity;
 
@@ -57,9 +56,6 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
         break;
       case R.id.radioButtonSimple:
         intent = new Intent(this, SimpleCastPlayerActivity.class);
-        break;
-      case R.id.radioButtonCustomUi:
-        intent = new Intent(this, CustomUiPlayerActivity.class);
         break;
       default:
         intent = new Intent(this, SimpleCastPlayerActivity.class);
