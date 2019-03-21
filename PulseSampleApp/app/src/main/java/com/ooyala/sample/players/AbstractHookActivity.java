@@ -70,7 +70,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
     if (null != player) {
       player.suspend();
     }
-    Log.d(TAG, "Player Activity Stopped");
+    Log.d(TAG, "Player Activity Paused");
   }
 
   @Override
