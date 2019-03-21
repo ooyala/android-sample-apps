@@ -8,6 +8,7 @@ import com.google.android.gms.cast.framework.OptionsProvider;
 import com.google.android.gms.cast.framework.SessionProvider;
 import com.google.android.gms.cast.framework.media.CastMediaOptions;
 import com.google.android.gms.cast.framework.media.NotificationOptions;
+import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 
 import java.util.List;
 
@@ -16,22 +17,25 @@ import java.util.List;
  * It is used to provide google cast options by manifest.
  */
 public class CastOptionsProvider implements OptionsProvider {
-  private final String APP_ID = "4172C76F";
 
   @Override
   public CastOptions getCastOptions(Context context) {
     NotificationOptions notificationOptions = new NotificationOptions.Builder()
-        .setTargetActivityClassName(ChromecastPlayerActivity.class.getName())
+        //Set here the activity that contain player.
+        //For this sample there are 3 activity that can play video:
+        //SimpleCastPlayerActivity, SkinCastPlayerActivity
+        //We set as example SimpleCastPlayerActivity
+        .setTargetActivityClassName(SimpleCastPlayerActivity.class.getName())
         .setPlayDrawableResId(R.drawable.ic_media_play_light)
         .setPauseDrawableResId(R.drawable.ic_media_pause_light)
         .build();
     CastMediaOptions mediaOptions = new CastMediaOptions.Builder()
         .setNotificationOptions(notificationOptions)
-        .setExpandedControllerActivityClassName(ChromecastPlayerActivity.class.getName())
+        .setExpandedControllerActivityClassName(SimpleCastPlayerActivity.class.getName())
         .build();
 
     return new CastOptions.Builder()
-        .setReceiverApplicationId(APP_ID)
+        .setReceiverApplicationId(context.getResources().getString(R.string.ooyala_cast_id))
         .setCastMediaOptions(mediaOptions)
         .build();
   }

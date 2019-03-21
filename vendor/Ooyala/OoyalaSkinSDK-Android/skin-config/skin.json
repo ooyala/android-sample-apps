@@ -224,6 +224,37 @@
       }
     }
   },
+  "castControls": {
+    "enabled": true,
+    "skipBackwardTime": 10,
+    "skipForwardTime": 10,
+    "buttons": {
+      "previousVideo": {
+        "enabled": true,
+        "index": 1
+      },
+      "skipBackward": {
+        "enabled": true,
+        "index": 2
+      },
+      "skipForward": {
+        "enabled": true,
+        "index": 3
+      },
+      "nextVideo": {
+        "enabled": true,
+        "index": 4
+      }
+    },
+    "iconStyle": {
+      "active": {
+        "color": "#3eb5f7"
+      },
+      "inactive": {
+        "color": "#FFFFFF"
+      }
+    }
+  },
   "controlBar": {
     "enabled": true,
     "volumeControl": {
@@ -334,7 +365,13 @@
       {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 }
     ],
     "audioOnly": {
-      "desktop": [{"name":"skipControls", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 }],
+      "desktop": [
+        {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 },
+        {"name":"skipControls", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":200 },
+        {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":50 },
+        {"name":"share", "location":"moreOptions" },
+        {"name":"playbackSpeed", "location":"moreOptions" }
+      ],
       "mobile": [
         {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
         {"name":"seekBackwards", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":60 },
@@ -384,6 +421,7 @@
     "selected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0040", "fontStyleClass": "oo-icon oo-icon-selected"},
     "chromecast-connected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003B", "fontStyleClass": "oo-icon"},
     "chromecast-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003A", "fontStyleClass": "oo-icon"},
-    "airPlay": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007B", "fontStyleClass": "oo-icon"}
+    "airPlay-connected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007C", "fontStyleClass": "oo-icon"},
+    "airPlay-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007B", "fontStyleClass": "oo-icon"}
   }
 }

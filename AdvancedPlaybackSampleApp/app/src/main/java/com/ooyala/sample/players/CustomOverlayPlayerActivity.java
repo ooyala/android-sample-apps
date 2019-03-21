@@ -2,7 +2,10 @@ package com.ooyala.sample.players;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 
+import com.google.android.exoplayer2.Player;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
@@ -26,7 +29,7 @@ public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			OoyalaPlayerLayout playerLayout = findViewById(R.id.ooyalaPlayer);
 			Options options = new Options.Builder().setUseExoPlayer(true).build();
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
