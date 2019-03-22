@@ -36,6 +36,7 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 
 	final String PCODE = "tlM2k6i2-WrXX1DE_b8zfhui_eQN";
 	final String DOMAIN = "http://ooyala.com";
+	private OoyalaSkinLayout skinLayout;
 
 	/**
 	 * Called when the activity is first created.
@@ -49,11 +50,18 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	@Override
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			final VideoItem videoItem = getVideoItem();
 			// Get the SkinLayout from our layout xml
-			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
+			skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 			// Create the OoyalaPlayer, with some built-in UI disabled
 			PlayerDomain domain = new PlayerDomain(DOMAIN);
 			Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).build();
@@ -119,5 +127,19 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 		videoItem.setCategory(getIntent().getExtras().getString("category"));
 		videoItem.setContentCode(getIntent().getExtras().getString("embedCode"));
 		return videoItem;
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (skinLayout != null) {
+			skinLayout.release();
+		}
+		if (playerSkinLayoutController != null) {
+			playerSkinLayoutController.deleteObserver(this);
+			playerSkinLayoutController = null;
+		}
 	}
 }

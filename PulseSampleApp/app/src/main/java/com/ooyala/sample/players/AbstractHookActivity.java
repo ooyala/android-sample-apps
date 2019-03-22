@@ -86,14 +86,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
   }
 
   @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (null != playerSkinLayoutController) {
-      playerSkinLayoutController.onDestroy();
-    }
-  }
-
-  @Override
   public void onBackPressed() {
     if (null != playerSkinLayoutController) {
       playerSkinLayoutController.onBackPressed();
