@@ -4,10 +4,6 @@ package com.ooyala.sample.players;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
@@ -18,6 +14,11 @@ import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
@@ -61,15 +62,15 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
   /** Start Activity methods for Skin **/
   @Override
-  protected void onStop() {
-    super.onStop();
+  protected void onPause() {
+    super.onPause();
     if (null != playerSkinLayoutController) {
       playerSkinLayoutController.onPause();
     }
     if (null != player) {
       player.suspend();
     }
-    Log.d(TAG, "Player Activity Stopped");
+    Log.d(TAG, "Player Activity Paused");
   }
 
   @Override
