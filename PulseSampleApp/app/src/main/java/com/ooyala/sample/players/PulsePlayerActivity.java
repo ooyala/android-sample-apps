@@ -37,6 +37,7 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 	final String PCODE = "tlM2k6i2-WrXX1DE_b8zfhui_eQN";
 	final String DOMAIN = "http://ooyala.com";
 	private OoyalaSkinLayout skinLayout;
+	private OoyalaPulseManager pulseManager;
 
 	/**
 	 * Called when the activity is first created.
@@ -75,7 +76,7 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 			player.addObserver(this);
 
 			//Create an instance of OoyalaPulseManager and set a listener.
-			final OoyalaPulseManager pulseManager = new OoyalaPulseManager(player);
+			pulseManager = new OoyalaPulseManager(player);
 
 			pulseManager.setListener(new OoyalaPulseManager.Listener() {
 				/*
@@ -130,6 +131,8 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 	}
 
 	private void destroyPlayer() {
+		pulseManager = null;
+
 		if (player != null) {
 			player.destroy();
 			player = null;
@@ -138,7 +141,7 @@ public class PulsePlayerActivity extends AbstractHookActivity {
 			skinLayout.release();
 		}
 		if (playerSkinLayoutController != null) {
-			playerSkinLayoutController.deleteObserver(this);
+			playerSkinLayoutController.onDestroy();
 			playerSkinLayoutController = null;
 		}
 	}
