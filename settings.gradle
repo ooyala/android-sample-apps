@@ -60,6 +60,9 @@ project(':DownloadToOwnSampleApp').projectDir = new File(settingsDir, './Playbac
 include ':HeartbeatSampleApp'
 project(':HeartbeatSampleApp').projectDir = new File(settingsDir, './HeartbeatSampleApp/app')
 
+include ':ManUSampleApp'
+project(':ManUSampleApp').projectDir = new File(settingsDir, './ManUSampleApp/app')
+
 // Developer
 //include ':skin'
 //project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin/')
@@ -74,3 +77,8 @@ project(':HeartbeatSampleApp').projectDir = new File(settingsDir, './HeartbeatSa
 //include(':freewheel')
 //project(':freewheel').projectDir = new File(settingsDir, '../android-sdk/sdk/freewheel/')
 
+include ':skin'
+project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin')
+//
+include(':core')
+project(':core').projectDir = new File(settingsDir, '../ooyala/android-sdk/sdk/core/')

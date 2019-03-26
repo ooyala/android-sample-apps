@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_parent_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+
+    <com.skin.ooyalaskinsampleapplication.ooyala.CustomRecyclerView
+        android:id="@+id/recycler_view_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+
+        android:scrollbars="none"
+        android:clipToPadding="false" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_view_image_card_fullscreen_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="12dp"
+        android:focusable="true"
+        android:importantForAccessibility="yes"
+        app:srcCompat="@drawable/ic_close_button" />
+
+
+    <FrameLayout
+        android:id="@+id/framelayout_newsList_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="@style/Base.Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="100dp"
+            android:indeterminate="true" />
+    </FrameLayout>
+
+</FrameLayout>

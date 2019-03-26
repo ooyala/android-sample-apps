@@ -1,0 +1,7 @@
+include ':app'
+
+include ':skin'
+project(':skin').projectDir = new File(settingsDir, '../native-skin/sdk/android/skin')
+//
+include(':core')
+project(':core').projectDir = new File(settingsDir, '../ooyala/android-sdk/sdk/core/')

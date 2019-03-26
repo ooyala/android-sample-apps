@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_parent_rl"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="#000000"
+    android:focusable="false"
+    android:importantForAccessibility="no"
+    android:orientation="vertical"
+    android:paddingTop="50dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:importantForAccessibility="no">
+
+        <FrameLayout
+            android:id="@+id/framelayout_player_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:focusable="true"
+            android:importantForAccessibility="yes">
+
+            <ImageView
+                android:id="@+id/image_view_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="false"
+                android:src="@color/colorPrimary"
+                android:importantForAccessibility="no" />
+        </FrameLayout>
+    </RelativeLayout>
+</FrameLayout>
