@@ -64,7 +64,6 @@ tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
-    from new File(vendorDir, 'Google/ima-android-v385.jar')
     from new File(vendorDir, 'Ooyala/OoyalaVRSDK-Android/OoyalaVRSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
@@ -87,7 +86,6 @@ dependencies {
 
     // IMA ads
     implementation files('libs/OoyalaIMASDK.jar')
-    implementation files('libs/ima-android-v385.jar')
 
     // App dependencies
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
@@ -101,6 +99,7 @@ dependencies {
 
     // Google Play Services
     implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
+    implementation "com.google.ads.interactivemedia.v3:interactivemedia:$rootProject.interactiveMediaVersion"
 
     //react-native dependencies
     implementation "com.facebook.infer.annotation:infer-annotation:$rootProject.inferAnnotationVersion"

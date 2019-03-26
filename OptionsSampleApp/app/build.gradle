@@ -32,7 +32,6 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
     from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-    from new File(vendorDir, 'Google/ima-android-v385.jar')
     into new File(projectDir, './libs')
     doLast {
         println "Jars updated."
@@ -46,7 +45,6 @@ dependencies {
     implementation files('libs/OoyalaFreewheelSDK.jar')
     implementation files('libs/OoyalaIMASDK.jar')
     implementation files('libs/OoyalaSDK.aar')
-    implementation files('libs/ima-android-v385.jar')
 
     // App dependencies
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
@@ -55,4 +53,5 @@ dependencies {
 
     // Google Play Services
     implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
+    implementation "com.google.ads.interactivemedia.v3:interactivemedia:$rootProject.interactiveMediaVersion"
 }

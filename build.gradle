@@ -32,7 +32,7 @@ buildscript {
         gmsAdsVersion = '15.0.1'
         gmsAuthVersion = '15.0.1'
         gmsCastVersion = '15.0.1'
-        interactiveMediaVersion = '3.8.5'
+        interactiveMediaVersion = '3.10.6'
 
         // Project dependencies
         bintrayVersion = '0.8.1'
@@ -47,7 +47,6 @@ buildscript {
         okhttpVersion = '3.12.1'
         okioVersion = '1.15.0'
         androidJscVersion = 'r174650'
-
 
         // VR
         vrAudioVersion = '1.80.0'
