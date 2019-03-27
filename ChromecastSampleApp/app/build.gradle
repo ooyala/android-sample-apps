@@ -12,9 +12,30 @@ android {
         applicationId "com.ooyala.sample.ChromecastSampleApp"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
+        vectorDrawables.useSupportLibrary = true
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
+
+        // Added due to https://github.com/facebook/react-native/issues/2814
+        ndk {
+            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        jumboMode true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,37 +45,88 @@ android {
 }
 
 repositories {
+    jcenter()
     flatDir {
         dirs 'libs'
     }
 }
 
+task copyAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
+    into new File(projectDir, './src/main/assets')
+    println "Assets updated."
+}
+tasks.copyAssetsTask.execute()
+
+task copySkinConfigTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
+    into new File(projectDir, './src/main/assets/skin-config')
+    println "copySkinConfigTask updated."
+}
+tasks.copySkinConfigTask.execute()
+
+task copyFontsAssetsTask(type: Copy) {
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/fonts')
+    into new File(projectDir, './src/main/assets/fonts')
+    println "font Assets updated."
+}
+tasks.copyFontsAssetsTask.execute()
+
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.aar')
-    into new File(projectDir, './libs')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.58.0.aar')
+    into new File(projectDir,'./libs')
     doLast {
         println "Jars updated."
     }
 }
-
 tasks.copyTask.execute()
+
+ext.supportLibraryVersion = "27.1.1"
+
+project.configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'com.android.support'
+                && !details.requested.name.contains('multidex')) {
+            details.useVersion "${supportLibraryVersion}"
+        }
+    }
+}
 
 dependencies {
 // For development purposes only
-//    compile project(':cast')
-//    compile project(':core')
+//    implementation project(':cast')
+//    implementation project(':core')
+//    implementation project(':skin')
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaCastSDK.aar')
+    implementation files('libs/OoyalaSkinSDK.aar')
 
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
     implementation "androidx.mediarouter:mediarouter:$rootProject.mediaRouterVersion"
     implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportLibraryVersion"
+    implementation "androidx.multidex:multidex:$rootProject.multidexVersion"
+    implementation "com.android.volley:volley:$rootProject.volleyVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$rootProject.jacksonVersion"
+    implementation "javax.inject:javax.inject:$rootProject.injectVersion"
 
     // Google Play Services
     implementation "com.google.android.gms:play-services-cast-framework:$rootProject.gmsCastVersion"
 
-//    For Development purpose only:
-//    implementation project(':core')
-//    implementation project(':cast')
+    //react-native dependencies
+    implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.frescoVersion"
+    implementation "com.facebook.soloader:soloader:$rootProject.soloaderVersion"
+    implementation "com.google.code.findbugs:jsr305:$rootProject.findbugsVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
+    implementation "com.squareup.okio:okio:$rootProject.okioVersion"
+    implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
+    implementation(group:'com.facebook', name:'react-native', version:'0.58.0', ext:'aar')
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

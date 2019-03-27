@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ooyala.android.offline.DashDownloader;
-import com.ooyala.android.offline.DashOptions;
+import com.ooyala.android.offline.options.DownloadOptions;
 import com.ooyala.sample.R;
 import com.ooyala.sample.players.OoyalaSkinOPTPlayerActivity;
 import com.ooyala.sample.utils.DownloadState;
@@ -139,7 +139,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
                     } else {
                         // Use this DashOptions to download an asset with OPT
                         currentPCode = option.getPcode();
-                        DashOptions options = new DashOptions.Builder(currentPCode, option.getEmbedCode(), DOMAIN, folder)
+                        DownloadOptions options = new DownloadOptions.Builder(currentPCode, option.getEmbedCode(), DOMAIN, folder)
                             .setEmbedTokenGenerator(new TokenGenerator(asset.getPlayerSelectionOption()))
                             .build();
                         downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);
@@ -211,7 +211,7 @@ public class DownloadSerializationActivity extends Activity implements DashDownl
             DownloadableAsset asset = iterator.next();
             if (downloadQueue.size() < DOWNLOADS_ALLOWED) {
                 PlayerSelectionOption option = asset.getPlayerSelectionOption();
-                DashOptions options = new DashOptions.Builder(option.getPcode(), option.getEmbedCode(), DOMAIN, folder)
+                DownloadOptions options = new DownloadOptions.Builder(option.getPcode(), option.getEmbedCode(), DOMAIN, folder)
                     .setEmbedTokenGenerator(new TokenGenerator(option))
                     .build();
                 downloader = new DashDownloader(DownloadSerializationActivity.this, options, DownloadSerializationActivity.this);

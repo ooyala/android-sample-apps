@@ -17,12 +17,34 @@
 
     <fragment
         android:id="@+id/cast_mini_controller"
+        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        app:castShowImageThumbnail="true"
         android:visibility="gone"
-        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment" />
+        app:castShowImageThumbnail="true" />
+
+    <RadioGroup
+        android:id="@+id/player_type_chooser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioButtonSkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="use skin"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/radioButtonSimple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="use default"
+            android:textColor="@color/white" />
+
+    </RadioGroup>
 
     <ListView
         android:id="@+id/listView"
