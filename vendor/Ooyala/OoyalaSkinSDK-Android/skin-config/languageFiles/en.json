@@ -141,5 +141,10 @@
   "Undefined language": "Undefined language",
   "No linguistic content": "No linguistic content",
   "Speed": "Speed",
-  "Normal": "Normal"
+  "Normal": "Normal",
+  "Move left": "Move left",
+  "Move right": "Move right",
+  "Move up": "Move up",
+  "Move down": "Move down",
+  "Reset View": "Reset View"
 }

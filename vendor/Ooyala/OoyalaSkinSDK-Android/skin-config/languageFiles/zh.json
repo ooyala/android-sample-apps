@@ -141,5 +141,10 @@
   "Undefined language": "未定义语言",
   "No linguistic content": "没有语言内容",
   "Speed": "速度",
-  "Normal": "正常"
+  "Normal": "正常",
+  "Move left": "向左移动",
+  "Move right": "向右移动",
+  "Move up": "向前移动",
+  "Move down": "向后移动",
+  "Reset View": "重置视图"
 }

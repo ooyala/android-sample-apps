@@ -225,7 +225,7 @@
     }
   },
   "castControls": {
-    "enabled": true,
+    "enabled": false,
     "skipBackwardTime": 10,
     "skipForwardTime": 10,
     "buttons": {

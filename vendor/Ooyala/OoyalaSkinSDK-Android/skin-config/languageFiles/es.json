@@ -141,5 +141,10 @@
   "Undefined language": "Idioma no definido",
   "No linguistic content": "Sin contenido lingüístico",
   "Speed": "Velocidad",
-  "Normal": "Normal"
+  "Normal": "Normal",
+  "Move left": "Mover a la izquierda",
+  "Move right": "Mover a la derecha",
+  "Move up": "Subir",
+  "Move down": "Bajar",
+  "Reset View": "Restablecer vista"
 }
