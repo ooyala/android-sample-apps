@@ -65,6 +65,8 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("VMAP PreMidPost Single", new PlayerSelectionOption("41MzA5MTE65SC6VQAS3H3d9rX-hwHQSK", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
     selectionMap.put("VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
 
+    selectionMap.put("Chapter markers in a content tree", new PlayerSelectionOption("dvYXZ1ZDE6fv9e0wJz1LpYWu3GeTBPZm", "x2aDkyOt2q3WtOCp-krSyDffASzL", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
+
     setContentView(R.layout.list_activity_layout);
 
     //Create the adapter for the ListView
