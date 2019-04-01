@@ -66,6 +66,10 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     selectionMap.put("VMAP PreMid VASTAdData", new PlayerSelectionOption("10eGE0MjE6TZG6mdHfJJEAGnxbuEv1Vi", "BidTQxOqebpNk1rVsjs2sUJSTOZc", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
 
     selectionMap.put("Chapter markers in a content tree", new PlayerSelectionOption("dvYXZ1ZDE6fv9e0wJz1LpYWu3GeTBPZm", "x2aDkyOt2q3WtOCp-krSyDffASzL", "http://www.ooyala.com", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Chapter markers with options (config)", new PlayerSelectionOption("gwbjJqdDobn3Ky6rNnwPzeA2tVVfQ8YJ", "pyaDkyOqdnY0iQC2sTO4JeaXggl9", "http://www.ooyala.com", "markers1.json", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Chapter markers with options (config) 2", new PlayerSelectionOption("JjMWd1ZDE6VW3ylyPcajnpdTV2Xm04Yb", "x2aDkyOt2q3WtOCp-krSyDffASzL", "http://www.ooyala.com", "markers2.json", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Chapter markers with options (inline)", new PlayerSelectionOption("R3YTZ4ZjE6i9a13MsDQAJwElh7zUQ9HO", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", "http://www.ooyala.com", "markers3.json", OoyalaSkinPlayerActivity.class));
+    selectionMap.put("Chapter markers with options (inline) 2", new PlayerSelectionOption("xiYmRsZTE6CsDnH0HJ3RDF_LND9RLe3L", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", "http://www.ooyala.com", "markers3.json", OoyalaSkinPlayerActivity.class));
 
     setContentView(R.layout.list_activity_layout);
 
@@ -107,6 +111,7 @@ public class OoyalaSkinListActivity extends Activity implements OnItemClickListe
     intent.putExtra("selection_name", selectionAdapter.getItem(pos));
     intent.putExtra("pcode", selection.getPcode());
     intent.putExtra("domain", selection.getDomain());
+    intent.putExtra("markers", selection.getMarkersFileName());
     startActivity(intent);
     return;
   }

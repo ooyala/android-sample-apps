@@ -17,6 +17,11 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.utils.CustomPlayerInfo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,6 +39,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	public static final String EXTRA_DOMAIN = "domain";
 	public static final String EXTRA_AUTO_PLAY = "autoPlay";
 	public static final String EXTRA_SELECTED_FORMAT = "selectedFormat";
+	public static final String EXTRA_MARKERS = "markers";
 
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 	String TAG = this.getClass().toString();
@@ -50,6 +56,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	protected String selectedFormat;
 	protected String hevcMode;
 	protected boolean isStaging;
+	protected String markersFileName = "";
 
 	OoyalaPlayer player;
 	protected OoyalaSkinLayout skinLayout;
@@ -84,6 +91,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			selectedFormat = extras.getString(EXTRA_SELECTED_FORMAT,"default");
 			hevcMode = extras.getString("hevc_mode","NoPreference");
 			isStaging = extras.getBoolean("is_staging",false);
+			markersFileName = extras.getString(EXTRA_MARKERS,"");
 		}
 	}
 
@@ -205,6 +213,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
   }
 
   protected Options getOptions(){
+
+
 	  Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
 	  if(!selectedFormat.equalsIgnoreCase("default")) {
 		  optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
@@ -215,7 +225,35 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	  else if(hevcMode.equalsIgnoreCase("HEVCNotPreferred")) {
 		  optionBuilder.enableHevc(false);
 	  }
+	  if (!markersFileName.isEmpty()) {
+	  	  try {
+			  optionBuilder.setMarkers(loadJSONFromAsset(markersFileName));
+		  }  catch (JSONException e) {
+              Log.e(TAG, "Exception Thrown while json file loading from assets", e);
+	  	  }
+	  }
 	  Options options =  optionBuilder.build();
 	  return options;
   }
+
+	/**
+	 *
+	 * @param name of asset file in a JSON format
+	 * @return asset file as JSON object
+	 */
+	public JSONObject loadJSONFromAsset(String name) throws JSONException {
+		String json;
+		try {
+			InputStream is = getAssets().open(name);
+			int size = is.available();
+			byte[] buffer = new byte[size];
+			is.read(buffer);
+			is.close();
+			json = new String(buffer, "UTF-8");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		return new JSONObject(json);
+	}
 }
