@@ -19,6 +19,7 @@ buildscript {
 
         // Google Play Services
         gmsAdsVersion = '15.0.1'
+        interactiveMediaVersion = '3.10.6'
 
         // Project dependencies
         bintrayVersion = '0.8.1'
