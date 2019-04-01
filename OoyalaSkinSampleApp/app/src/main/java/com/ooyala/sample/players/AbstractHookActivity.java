@@ -213,8 +213,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
   }
 
   protected Options getOptions(){
-
-
 	  Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
 	  if(!selectedFormat.equalsIgnoreCase("default")) {
 		  optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
