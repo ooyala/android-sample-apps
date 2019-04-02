@@ -11,12 +11,21 @@ public class PlayerSelectionOption {
   private Class <? extends Activity> activity;
   private String pcode;
   private String domain;
+  private String markersFileName = "";
 
   public PlayerSelectionOption(String embedCode, String pcode, String domain, Class<? extends Activity> activity) {
     this.embedCode = embedCode;
     this.activity = activity;
     this.pcode = pcode;
     this.domain = domain;
+  }
+
+  public PlayerSelectionOption(String embedCode, String pcode, String domain, String markers, Class<? extends Activity> activity) {
+    this.embedCode = embedCode;
+    this.activity = activity;
+    this.pcode = pcode;
+    this.domain = domain;
+    this.markersFileName = markers;
   }
 
   /**
@@ -41,6 +50,14 @@ public class PlayerSelectionOption {
    */
   public String getEmbedCode() {
     return this.embedCode;
+  }
+
+  /**
+   * Get the chapter markers file name for this sample
+   * @return chapter markers file name
+   */
+  public String getMarkersFileName() {
+    return this.markersFileName;
   }
 
   /**
