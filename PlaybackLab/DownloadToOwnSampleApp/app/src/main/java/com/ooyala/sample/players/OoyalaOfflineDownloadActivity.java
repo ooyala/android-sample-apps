@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.exoplayer2.upstream.cache.Cache;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
@@ -25,6 +26,7 @@ import com.ooyala.android.offline.options.OoyalaDownloadOptions;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.DemoApplication;
 import com.ooyala.sample.R;
+import com.ooyala.sample.utils.PlayerSelectionOption;
 import com.ooyala.sample.utils.Utils;
 
 import java.io.File;
@@ -51,7 +53,7 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	private static final int MAX_RETRY_COUNT = 3;
 	private static final float MIN_PROGRESS = 0.f;
 	private static final float MAX_PROGRESS = 100.f;
-	private static TaskInfo TASK_INFO;
+
 
 	private String EMBED;
 	private String PCODE;
@@ -62,11 +64,15 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	private String APIKEY = "";
 	private String SECRET = "";
 
+	private String URL;
+	private String DELIVERY_TYPE;
+
 	private Downloader downloader;
 	private OoyalaDownloadOptions options;
 	private Collection<Integer> bitrateValues = new ArrayList<>();
 	private File folder;
 	private int retryCount;
+	private TaskInfo taskInfo;
 
 	private View dialogView;
 	private TextView progressView;
@@ -77,11 +83,11 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	private Handler handler;
 	private Runnable updateProgress = () -> {
 		handler.postDelayed(this.updateProgress, UPDATE_TIME);
-		if (TASK_INFO != null) {
-			float progress = Utils.clamp(downloader.getDownloadPercentage(TASK_INFO.taskId),
+		if (taskInfo != null) {
+			float progress = Utils.clamp(downloader.getDownloadPercentage(taskInfo.taskId),
 					MIN_PROGRESS, MAX_PROGRESS);
 			if (progress > MIN_PROGRESS && progress <= MAX_PROGRESS
-					&& TASK_INFO.state == TaskInfo.STATE_STARTED) {
+					&& taskInfo.state == TaskInfo.STATE_STARTED) {
 				String text = getString(R.string.progress_text, progress);
 				progressView.setText(text);
 			}
@@ -103,16 +109,19 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		APIKEY = getIntent().getExtras().getString("api_key");
 		SECRET = getIntent().getExtras().getString("secret_key");
 		ACCOUNT_ID = getIntent().getExtras().getString("account_id");
+		DELIVERY_TYPE = getIntent().getExtras().getString("delivery_type");
+		URL = getIntent().getExtras().getString("url");
 
 		progressView = findViewById(R.id.progress_text);
 		handler = new Handler(getMainLooper());
 
+		taskInfo = retrieveTaskInfo();
 		folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
-		options = new OoyalaDownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder)
-				.setEmbedTokenGenerator(this)
-				.build();
+
+		initializeDownloadOptions();
 		DownloaderFactory factory = new DownloaderFactory();
-		downloader = factory.createOoyalaDownloader(this, ((DemoApplication) getApplication()).getDownloadCache(), options);
+		Cache cache = ((DemoApplication) getApplication()).getDownloadCache();
+		downloader = factory.createOoyalaDownloader(this, cache, options);
 
 		Button startButton = findViewById(R.id.start_button);
 		startButton.setOnClickListener(v -> {
@@ -130,8 +139,8 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 		Button pauseButton = findViewById(R.id.pause_button);
 		pauseButton.setOnClickListener(v -> {
 			handler.removeCallbacks(updateProgress);
-			if (TASK_INFO != null) {
-				float progress = Utils.clamp(downloader.getDownloadPercentage(TASK_INFO.taskId),
+			if (taskInfo != null) {
+				float progress = Utils.clamp(downloader.getDownloadPercentage(taskInfo.taskId),
 						MIN_PROGRESS, MAX_PROGRESS);
 				String text = getString(R.string.paused_text, progress);
 				progressView.setText(text);
@@ -141,21 +150,41 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 
 		Button deleteButton = findViewById(R.id.delete_button);
 		deleteButton.setOnClickListener(v -> {
-			if (TASK_INFO == null) {
+			if (taskInfo == null) {
 				progressView.setText(R.string.deletion_completed_text);
 				return;
 			}
 			downloader.cancel();
-			downloader.delete(TASK_INFO.taskId);
+			downloader.delete(taskInfo.taskId);
 		});
 
 		Button requestButton = findViewById(R.id.request_bitrate_and_start_button);
 		requestButton.setOnClickListener(v -> downloader.requestBitrates());
 	}
 
+	private void initializeDownloadOptions() {
+		if (URL.equals(PlayerSelectionOption.UNDEFINED_VALUE)) {
+			// Options for downloading a media file using embed and pcode
+			options = new OoyalaDownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder)
+					.setEmbedTokenGenerator(this)
+					.build();
+		} else {
+			// Options for downloading a media file using URL
+			// Setting the bitrate as 0 means that a media file will be downloaded in the lowest quality
+			options = new OoyalaDownloadOptions.Builder(EMBED, DELIVERY_TYPE, URL)
+					.setBitrate(0)
+					.build();
+		}
+	}
+
+	private TaskInfo retrieveTaskInfo() {
+		return ((DemoApplication) getApplication()).retrieveCurrentTaskInfo(EMBED);
+	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
+		taskInfo = retrieveTaskInfo();
 		downloader.addListener(this);
 		handler.post(updateProgress);
 	}
@@ -170,7 +199,8 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	@Override
 	public void onStarted(TaskInfo taskInfo) {
 		if (!taskInfo.isRemoveAction) {
-			OoyalaOfflineDownloadActivity.TASK_INFO = taskInfo;
+			this.taskInfo = taskInfo;
+			((DemoApplication) getApplication()).addDownloadTask(EMBED, taskInfo);
 		}
 	}
 
@@ -234,6 +264,10 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	}
 
 	private void onDeletion(final boolean success) {
+		if (success) {
+			taskInfo = null;
+			((DemoApplication) getApplication()).removeDownloadTask(EMBED);
+		}
 		handler.post(() -> progressView.setText(success ? R.string.deletion_completed_text : R.string.deletion_failed_text));
 	}
 
