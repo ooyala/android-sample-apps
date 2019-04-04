@@ -62,8 +62,8 @@ public class BasicPlaybackListActivity extends Activity implements OnItemClickLi
       selectionMap.put("Widevine DASH Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OfflineDownloadActivity.class));
       selectionMap.put("Widevine OOYALA Downloader", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", OoyalaOfflineDownloadActivity.class));
       selectionMap.put("Widevine Offline Stream Player", new PlayerSelectionOption("Q1cG85NTE6Df3A95XMMbKGsPg6yaEZGm", "BjcWYyOu1KK2DiKOkF41Z2k0X57l", apikey, secret, accountId,"http://ooyala.com", PlayerSelectionOption.OFFLINE_EMBED_CODE_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
-      selectionMap.put("Widevine OOYALA Downloader (URL)", new PlayerSelectionOption("dash_file", Stream.DELIVERY_TYPE_DASH, url, OoyalaOfflineDownloadActivity.class));
-      selectionMap.put("Widevine Offline Stream Player (URL)", new PlayerSelectionOption("dash_file", "http://ooyala.com", PlayerSelectionOption.OFFLINE_URL_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
+      selectionMap.put("OOYALA Downloader (URL)", new PlayerSelectionOption("dash_file", Stream.DELIVERY_TYPE_DASH, url, OoyalaOfflineDownloadActivity.class));
+      selectionMap.put("Offline Stream Player (URL)", new PlayerSelectionOption("dash_file", "http://ooyala.com", PlayerSelectionOption.OFFLINE_URL_PLAYBACK, OoyalaSkinOPTPlayerActivity.class));
     }
 
     setContentView(R.layout.list_activity_layout);

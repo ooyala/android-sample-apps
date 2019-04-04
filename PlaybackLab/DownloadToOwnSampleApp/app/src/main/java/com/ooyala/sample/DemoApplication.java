@@ -26,6 +26,10 @@ public class DemoApplication extends MultiDexApplication {
 		DOWNLOAD_TASKS.put(embedCode, info);
 	}
 
+	public void removeDownloadTask(String embedCode) {
+		DOWNLOAD_TASKS.remove(embedCode);
+	}
+
 	public TaskInfo retrieveCurrentTaskInfo(String embedCode) {
 		return DOWNLOAD_TASKS.get(embedCode);
 	}

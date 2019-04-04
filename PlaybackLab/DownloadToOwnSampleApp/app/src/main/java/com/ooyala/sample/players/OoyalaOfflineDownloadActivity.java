@@ -83,7 +83,6 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	private Handler handler;
 	private Runnable updateProgress = () -> {
 		handler.postDelayed(this.updateProgress, UPDATE_TIME);
-		taskInfo = retrieveTaskInfo();
 		if (taskInfo != null) {
 			float progress = Utils.clamp(downloader.getDownloadPercentage(taskInfo.taskId),
 					MIN_PROGRESS, MAX_PROGRESS);
@@ -165,10 +164,13 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 
 	private void initializeDownloadOptions() {
 		if (URL.equals(PlayerSelectionOption.UNDEFINED_VALUE)) {
+			// Options for downloading a media file using embed and pcode
 			options = new OoyalaDownloadOptions.Builder(PCODE, EMBED, DOMAIN, folder)
 					.setEmbedTokenGenerator(this)
 					.build();
 		} else {
+			// Options for downloading a media file using URL
+			// Setting the bitrate as 0 means that a media file will be downloaded in the lowest quality
 			options = new OoyalaDownloadOptions.Builder(EMBED, DELIVERY_TYPE, URL)
 					.setBitrate(0)
 					.build();
@@ -182,6 +184,7 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	@Override
 	protected void onStart() {
 		super.onStart();
+		taskInfo = retrieveTaskInfo();
 		downloader.addListener(this);
 		handler.post(updateProgress);
 	}
@@ -196,6 +199,7 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	@Override
 	public void onStarted(TaskInfo taskInfo) {
 		if (!taskInfo.isRemoveAction) {
+			this.taskInfo = taskInfo;
 			((DemoApplication) getApplication()).addDownloadTask(EMBED, taskInfo);
 		}
 	}
@@ -260,6 +264,10 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	}
 
 	private void onDeletion(final boolean success) {
+		if (success) {
+			taskInfo = null;
+			((DemoApplication) getApplication()).removeDownloadTask(EMBED);
+		}
 		handler.post(() -> progressView.setText(success ? R.string.deletion_completed_text : R.string.deletion_failed_text));
 	}
 
