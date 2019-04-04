@@ -1,7 +1,6 @@
 package com.ooyala.fullscreensampleapp;
 
 import android.app.Application;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,8 @@ import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.skin.util.RecyclerViewFullScreenManager;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * TODO: Add brief for RecyclerAdapter.
@@ -49,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
         return embedCodes.size();
     }
 
-    public class PlayerHolder extends RecyclerView.ViewHolder {
+    class PlayerHolder extends RecyclerView.ViewHolder {
         private OoyalaSkinLayout playerLayout;
         private OoyalaSkinLayoutController playerController;
 

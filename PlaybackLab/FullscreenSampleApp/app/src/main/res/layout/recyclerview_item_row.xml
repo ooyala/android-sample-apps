@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="500dp">
+    android:layout_height="match_parent">
 
     <!--OoyalaSkinLayout has to be placed into a container for a correct transformation between
     a full screen mode to a window mode-->

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.ooyala.fullscreensampleapp.PlayersActivity">
 
-    <com.ooyala.fullscreensampleapp.CustomRecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
