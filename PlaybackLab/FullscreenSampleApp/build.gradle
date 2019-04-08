@@ -40,19 +40,25 @@ buildscript {
     }
 
     repositories {
-        google()
         jcenter()
+        mavenCentral()
+        google()
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        jcenter();
+        maven {
+            url 'https://maven.google.com'
+        }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
