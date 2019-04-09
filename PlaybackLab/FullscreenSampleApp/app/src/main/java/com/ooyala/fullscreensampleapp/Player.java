@@ -9,13 +9,7 @@ public interface Player {
 
 	void pause();
 
-	void mutePlayer(boolean mute);
-
-	boolean isPlayerMuted();
-
 	boolean isPlaying();
-
-	boolean isInitialised();
 
 	int getPlayheadTime();
 }

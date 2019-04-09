@@ -1,9 +1,6 @@
 package com.ooyala.fullscreensampleapp;
 
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-
-import com.ooyala.android.skin.util.RecyclerViewFullScreenManager;
 
 import java.util.List;
 
@@ -15,11 +12,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
 
     private List<Data> dataList;
     private int autoPlayIndex = 0;
-    private RecyclerViewFullScreenManager recyclerFullScreenHelper;
 
-    PlayerAdapter(List<Data> dataList , FrameLayout expandedLayout) {
+    PlayerAdapter(List<Data> dataList) {
         this.dataList = dataList;
-//        recyclerFullScreenHelper = new RecyclerViewFullScreenManager(expandedLayout);
     }
 
     @NonNull
@@ -33,6 +28,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
         Data data = dataList.get(position);
         if (position == autoPlayIndex) {
             // Play the media on start
+            data.setWasPaused(false);
             holder.init(data);
             holder.play(data);
         }

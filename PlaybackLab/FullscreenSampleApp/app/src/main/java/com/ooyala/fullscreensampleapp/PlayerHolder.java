@@ -23,23 +23,13 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 		super(LayoutInflater.from(viewGroup.getContext())
 				.inflate(R.layout.recyclerview_item_row, viewGroup, attachToRoot));
 		ButterKnife.bind(this, itemView);
-
-//            playerLayout = MediaPlayer.getInstance().getPlayerLayout();
-//            playerLayout = itemView.findViewById(R.id.ooyala_skin_layout);
-//            playerLayout.setOnSystemUiVisibilityChangeListener(visibility -> {
-//                boolean isFullScreenMode = playerLayout.isFullscreen();
-//                if (isFullScreenMode) {
-//                    recyclerFullScreenHelper.expandPlayerLayout(playerLayout);
-//                } else {
-//                    recyclerFullScreenHelper.collapsePlayerLayout();
-//                }
-//            });
 	}
 
 	public void init(Data data) {
 		MediaPlayer player = MediaPlayer.getInstance();
 		initPlayerLayout();
 		player.init(playerLayout, data);
+		player.seekTo(data.getPlayedHeadTime());
 	}
 
 	public void play(Data data) {
@@ -47,16 +37,15 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 		player.play(data.getPlayedHeadTime());
 	}
 
-	public void pause(Data data) {
+	public void pause() {
 		MediaPlayer player = MediaPlayer.getInstance();
-		data.setPlayedHeadTime(player.getPlayheadTime());
 		player.pause();
 	}
 
 	private void initPlayerLayout() {
 		playerLayout = MediaPlayer.getInstance().getPlayerLayout();
 		if (playerLayout != null) {
-			DebugMode.logD("PLAYER-5406", "initPlayerLayout(): addView");
+			DebugMode.logD(TAG, "Player layout was added to parent");
 			parentLayout.addView(playerLayout, 1);
 		}
 	}

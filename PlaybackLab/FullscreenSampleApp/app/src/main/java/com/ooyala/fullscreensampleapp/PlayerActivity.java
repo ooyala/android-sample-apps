@@ -1,10 +1,8 @@
 package com.ooyala.fullscreensampleapp;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
-
-import com.ooyala.android.skin.OoyalaSkinLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PlayerActivity extends AppCompatActivity implements MediaPlayerListener {
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
+
+public class PlayerActivity extends AppCompatActivity {
 
     private static final String TAG = "PLAYER-5406"; //PlayerActivity.class.getName();
 
@@ -32,9 +32,13 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
+
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                snapPosition = getCurrentPosition();
-                initItem(snapPosition);
+                int currentPosition = getCurrentPosition();
+                if (snapPosition != currentPosition) {
+                    snapPosition = currentPosition;
+                    initItem(snapPosition);
+                }
                 play(snapPosition);
             }
         }
@@ -42,10 +46,15 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+
             if (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE) {
                 return;
             }
+
             MediaPlayer player = MediaPlayer.getInstance();
+            Data data = playerAdapter.getDataByPosition(snapPosition);
+            data.setPlayedHeadTime(player.getPlayheadTime());
+
             if (player.isPlaying()) {
                 pause(snapPosition);
             }
@@ -66,17 +75,13 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
-        MediaPlayer.getInstance().setActivity(this);
-
         populateData();
 
         scrollListener = new ScrollListener();
         scrollListener.setSnapPosition(0);
 
-        FrameLayout expandedLayout = findViewById(R.id.empty_view);
-        playerAdapter = new PlayerAdapter(dataList , expandedLayout);
+        playerAdapter = new PlayerAdapter(dataList);
         playerAdapter.setAutoPlayIndex(0);
-
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView = findViewById(R.id.recycler_view);
@@ -87,6 +92,9 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
         recyclerView.getItemAnimator().setChangeDuration(0);
         recyclerView.setAdapter(playerAdapter);
+
+        MediaPlayer.getInstance().setRecyclerView(recyclerView);
+        MediaPlayer.getInstance().setActivity(this);
 
         snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
@@ -128,6 +136,14 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         MediaPlayer.getInstance().onBackPressed();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        MediaPlayer player = MediaPlayer.getInstance();
+        player.setFullscreenMode(newConfig.orientation == SCREEN_ORIENTATION_USER);
+    }
+
     private void populateData() {
         final Data data = new Data("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com/");
         dataList = new ArrayList<>();
@@ -162,12 +178,7 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         if (holder != null) {
             Data data = playerAdapter.getDataByPosition(snapPosition);
             data.setWasPaused(true);
-            holder.pause(data);
+            holder.pause();
         }
-    }
-
-    @Override
-    public void onMediaPlay(OoyalaSkinLayout ooyalaSkinLayout, Data data) {
-
     }
 }

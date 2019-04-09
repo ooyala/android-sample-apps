@@ -1,7 +1,6 @@
 package com.ooyala.fullscreensampleapp;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,6 +12,8 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.DebugMode;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHandler {
 	private static final String TAG = "PLAYER-5406"; //MediaPlayer.class.getSimpleName();
 
@@ -22,6 +23,7 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 	private OoyalaSkinLayoutController playerLayoutController;
 	private OoyalaSkinLayout ooyalaSkinLayout;
 	private Activity activity;
+	private RecyclerView recyclerView;
 	private Data data;
 
 	public static MediaPlayer getInstance() {
@@ -35,17 +37,39 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 		this.activity = activity;
 	}
 
+	/**
+	 * Set the instance of {@link RecyclerView}. The recycler view is used to let the player handles
+	 * touches in the special areas like seek bar and volume bar.
+	 *
+	 * @param recyclerView is root container.
+	 */
+	public void setRecyclerView(RecyclerView recyclerView) {
+		this.recyclerView = recyclerView;
+	}
+
+	/**
+	 * Stretch OoyalaSkinLayout to dimensions of the display window.
+	 * Show/Hide system ui (notification and navigation bar) depending if layout is in fullscreen.
+	 *
+	 * @param fullscreen true if fullscreen mode is expected to turn on, false in the other case.
+	 */
+	public void setFullscreenMode(boolean fullscreen) {
+		if (ooyalaSkinLayout != null) {
+			ooyalaSkinLayout.setFullscreen(fullscreen);
+		}
+	}
+
 	public void init(OoyalaSkinLayout ooyalaSkinLayout, Data data) {
 		this.ooyalaSkinLayout = ooyalaSkinLayout;
 		this.data = data;
 
 		if (player != null) {
-			Log.i(TAG, "The player's instance is ready. Set the embed code");
+			DebugMode.logD(TAG, "The player's instance is ready. Set the embed code");
 			player.setEmbedCode(data.getEmbedCode());
 			return;
 		}
 
-		Log.i(TAG, "Initialize a player and play");
+		DebugMode.logD(TAG, "Initialize a player and play");
 		PlayerDomain domain = new PlayerDomain(data.getDomain());
 		Options options = new Options.Builder()
 				.setShowPromoImage(false)
@@ -56,6 +80,7 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 		playerLayoutController = new OoyalaSkinLayoutController(activity.getApplication(), ooyalaSkinLayout, player);
 		// Default hardware back button handler was destroyed in ReactInstanceManager so we need to set it up again.
 		playerLayoutController.onResume(activity, this);
+		playerLayoutController.setRootRecyclerView(recyclerView);
 		player.setEmbedCode(data.getEmbedCode());
 	}
 
@@ -73,23 +98,14 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 
 	@Override
 	public void pause() {
-		if (player != null && player.getState() != OoyalaPlayer.State.PAUSED) {
+		if (player != null) {
 			player.pause();
 		}
-
 	}
 
 	@Override
 	public boolean isPlaying() {
-		if (player != null) {
-			return player.isPlaying();
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isInitialised() {
-		return player != null;
+		return player != null && player.isPlaying();
 	}
 
 	@Override
@@ -102,18 +118,6 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 		if (player != null) {
 			player.seek(data.getPlayedHeadTime());
 		}
-	}
-
-	@Override
-	public void mutePlayer(boolean mute) {
-		if (player != null) {
-			player.setVolume(mute ? 0 : 1);
-		}
-	}
-
-	@Override
-	public boolean isPlayerMuted() {
-		return player != null && player.getVolume() == 1;
 	}
 
 	/** Start DefaultHardwareBackBtnHandler **/
@@ -180,12 +184,12 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 
 	OoyalaSkinLayout getPlayerLayout() {
 		if (ooyalaSkinLayout == null) {
-			DebugMode.logD("PLAYER-5406", "getPlayerLayout(): ooyalaSkinLayout == null, creating");
+			DebugMode.logD(TAG, "Player layout was initialized");
 			ooyalaSkinLayout = (OoyalaSkinLayout) LayoutInflater
 					.from(activity)
 					.inflate(R.layout.ooyala_player_skin_layout, null, false);
 		} else if (ooyalaSkinLayout.getParent() != null) {
-			DebugMode.logD("PLAYER-5406", "getPlayerLayout():ooyalaSkinLayout.getParent() != null: remove view");
+			DebugMode.logD(TAG, "Player layout was removed from the parent");
 			((ViewGroup) ooyalaSkinLayout.getParent()).removeView(ooyalaSkinLayout);
 		}
 		return ooyalaSkinLayout;

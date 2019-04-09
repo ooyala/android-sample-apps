@@ -9,12 +9,12 @@
         android:focusable="false"
         android:importantForAccessibility="no">
 
-        <!--OoyalaSkinLayout has to be placed into a container for a correct transformation between a full screen mode to a window mode-->
+        <!--OoyalaSkinLayout has to be placed into a container for a correct
+        transformation between a full screen mode to a window mode-->
         <FrameLayout
             android:id="@+id/parent_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/image_view_background"
@@ -23,13 +23,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:importantForAccessibility="no"
-                android:src="@color/colorPrimary"/>
-
-            <!--<com.ooyala.android.skin.OoyalaSkinLayout-->
-            <!--android:id="@+id/ooyala_skin_layout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#fff" />-->
+                android:src="@color/itemBackground"/>
 
         </FrameLayout>
 
