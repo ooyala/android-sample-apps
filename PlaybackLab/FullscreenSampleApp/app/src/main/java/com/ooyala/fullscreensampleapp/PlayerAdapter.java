@@ -26,11 +26,12 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
     @Override
     public void onBindViewHolder(@NonNull PlayerHolder holder, int position) {
         Data data = dataList.get(position);
+        holder.setData(data);
+
         if (position == autoPlayIndex) {
             // Play the media on start
-            data.setWasPaused(false);
-            holder.init(data);
-            holder.play(data);
+            holder.init();
+            holder.play();
         }
     }
 

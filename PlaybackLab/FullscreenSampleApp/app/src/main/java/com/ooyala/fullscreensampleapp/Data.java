@@ -6,7 +6,7 @@ public class Data {
 	private final String pcode;
 	private final String domain;
 
-	private boolean wasPaused = true;
+	private boolean autoPaused = true;
 	private int playedHeadTime;
 
 	Data(String embedCode, String pcode, String domain) {
@@ -56,11 +56,11 @@ public class Data {
 		this.playedHeadTime = playedHeadTime;
 	}
 
-	public void setWasPaused(boolean wasPaused) {
-		this.wasPaused = wasPaused;
+	public void setAutoPaused(boolean autoPaused) {
+		this.autoPaused = autoPaused;
 	}
 
-	public boolean isWasPaused() {
-		return wasPaused;
+	public boolean isAutoPaused() {
+		return autoPaused;
 	}
 }

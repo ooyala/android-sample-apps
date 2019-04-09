@@ -160,6 +160,7 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 		destroyPlayer();
 
 		activity = null;
+		recyclerView = null;
 	}
 
 	@Override

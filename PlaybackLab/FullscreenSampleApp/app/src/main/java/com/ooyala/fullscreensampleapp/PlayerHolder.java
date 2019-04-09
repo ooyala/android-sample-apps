@@ -15,6 +15,7 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 	private static final String TAG = PlayerHolder.class.getSimpleName();
 
 	private OoyalaSkinLayout playerLayout;
+	private Data data;
 
 	@BindView(R.id.parent_layout)
 	FrameLayout parentLayout;
@@ -25,21 +26,36 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 		ButterKnife.bind(this, itemView);
 	}
 
-	public void init(Data data) {
+	public void setData(Data data) {
+		this.data = data;
+	}
+
+	public void init() {
 		MediaPlayer player = MediaPlayer.getInstance();
 		initPlayerLayout();
 		player.init(playerLayout, data);
 		player.seekTo(data.getPlayedHeadTime());
 	}
 
-	public void play(Data data) {
-		MediaPlayer player = MediaPlayer.getInstance();
-		player.play(data.getPlayedHeadTime());
+	public void play() {
+		if (data.isAutoPaused()) {
+			data.setAutoPaused(false);
+
+			MediaPlayer player = MediaPlayer.getInstance();
+			player.play(data.getPlayedHeadTime());
+		}
 	}
 
 	public void pause() {
+		data.setAutoPaused(true);
+
 		MediaPlayer player = MediaPlayer.getInstance();
 		player.pause();
+	}
+
+	public void updatePlayheadTime() {
+		MediaPlayer player = MediaPlayer.getInstance();
+		data.setPlayedHeadTime(player.getPlayheadTime());
 	}
 
 	private void initPlayerLayout() {

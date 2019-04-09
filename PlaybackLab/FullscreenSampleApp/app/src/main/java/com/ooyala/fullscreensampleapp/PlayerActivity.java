@@ -55,9 +55,9 @@ public class PlayerActivity extends AppCompatActivity {
                 return;
             }
 
-            MediaPlayer player = MediaPlayer.getInstance();
-            updateCurrentDataPlayheadTime(snapPosition, player.getPlayheadTime());
+            updateCurrentDataPlayheadTime(snapPosition);
 
+            MediaPlayer player = MediaPlayer.getInstance();
             if (player.isPlaying()) {
                 pause(snapPosition);
             }
@@ -161,33 +161,28 @@ public class PlayerActivity extends AppCompatActivity {
     private void initItem(int snapPosition) {
 			PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
 			if (holder != null) {
-				Data data = playerAdapter.getDataByPosition(snapPosition);
-				holder.init(data);
+				holder.init();
 			}
 		}
 
     private void play(int snapPosition) {
         PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
-            Data data = playerAdapter.getDataByPosition(snapPosition);
-            if (data.isWasPaused()) {
-                data.setWasPaused(false);
-                holder.play(data);
-            }
+            holder.play();
         }
     }
 
     private void pause(int snapPosition) {
         PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
-            Data data = playerAdapter.getDataByPosition(snapPosition);
-            data.setWasPaused(true);
             holder.pause();
         }
     }
 
-    private void updateCurrentDataPlayheadTime(int snapPosition, int playheadTime) {
-        Data data = playerAdapter.getDataByPosition(snapPosition);
-        data.setPlayedHeadTime(playheadTime);
+    private void updateCurrentDataPlayheadTime(int snapPosition) {
+        PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
+        if (holder != null) {
+            holder.updatePlayheadTime();
+        }
     }
 }
