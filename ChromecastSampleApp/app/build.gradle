@@ -118,6 +118,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-cast-framework:$rootProject.gmsCastVersion"
 
     //react-native dependencies
+    implementation "com.facebook.infer.annotation:infer-annotation:$rootProject.inferAnnotationVersion"
     implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
     implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.frescoVersion"
     implementation "com.facebook.soloader:soloader:$rootProject.soloaderVersion"
