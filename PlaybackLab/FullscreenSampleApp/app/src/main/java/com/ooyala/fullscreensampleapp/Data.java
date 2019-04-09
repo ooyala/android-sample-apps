@@ -5,17 +5,17 @@ public class Data {
 	private final String embedCode;
 	private final String pcode;
 	private final String domain;
-	private boolean isAutoPlay;
+
 	private boolean wasPaused = true;
 	private int playedHeadTime;
 
-	public Data(String embedCode, String pcode, String domain) {
+	Data(String embedCode, String pcode, String domain) {
 		this.embedCode = embedCode;
 		this.pcode = pcode;
 		this.domain = domain;
 	}
 
-	public Data(Data data) {
+	Data(Data data) {
 		this.embedCode = data.embedCode;
 		this.pcode = data.pcode;
 		this.domain = data.domain;
@@ -46,14 +46,6 @@ public class Data {
 	 */
 	public String getDomain() {
 		return domain;
-	}
-
-	public boolean isAutoPlay() {
-		return isAutoPlay;
-	}
-
-	public void setAutoPlay(boolean autoPlay) {
-		isAutoPlay = autoPlay;
 	}
 
 	public int getPlayedHeadTime() {

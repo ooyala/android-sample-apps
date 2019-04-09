@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
-    private static final String TAG = "PLAYER-5406"; //PlayerAdapter.class.getSimpleName();
+    private static final String TAG = PlayerAdapter.class.getSimpleName();
 
     private List<Data> dataList;
     private int autoPlayIndex = 0;

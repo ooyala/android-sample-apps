@@ -12,14 +12,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
 
 public class PlayerActivity extends AppCompatActivity {
 
-    private static final String TAG = "PLAYER-5406"; //PlayerActivity.class.getName();
+    private static final String TAG = PlayerActivity.class.getName();
 
-    private RecyclerView recyclerView;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
     private RecyclerView.LayoutManager layoutManager;
     private PlayerAdapter playerAdapter;
     private PagerSnapHelper snapHelper;
@@ -52,8 +56,7 @@ public class PlayerActivity extends AppCompatActivity {
             }
 
             MediaPlayer player = MediaPlayer.getInstance();
-            Data data = playerAdapter.getDataByPosition(snapPosition);
-            data.setPlayedHeadTime(player.getPlayheadTime());
+            updateCurrentDataPlayheadTime(snapPosition, player.getPlayheadTime());
 
             if (player.isPlaying()) {
                 pause(snapPosition);
@@ -73,7 +76,9 @@ public class PlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_players);
+        ButterKnife.bind(this);
 
         populateData();
 
@@ -84,7 +89,6 @@ public class PlayerActivity extends AppCompatActivity {
         playerAdapter.setAutoPlayIndex(0);
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(scrollListener);
         recyclerView.setHasFixedSize(true);
@@ -180,5 +184,10 @@ public class PlayerActivity extends AppCompatActivity {
             data.setWasPaused(true);
             holder.pause();
         }
+    }
+
+    private void updateCurrentDataPlayheadTime(int snapPosition, int playheadTime) {
+        Data data = playerAdapter.getDataByPosition(snapPosition);
+        data.setPlayedHeadTime(playheadTime);
     }
 }

@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PlayerHolder extends RecyclerView.ViewHolder {
-	private static final String TAG = "PLAYER-5406"; //PlayerHolder.class.getSimpleName();
+	private static final String TAG = PlayerHolder.class.getSimpleName();
 
 	private OoyalaSkinLayout playerLayout;
 
@@ -45,7 +45,7 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 	private void initPlayerLayout() {
 		playerLayout = MediaPlayer.getInstance().getPlayerLayout();
 		if (playerLayout != null) {
-			DebugMode.logD(TAG, "Player layout was added to parent");
+			DebugMode.logD(TAG, "Player layout was added to the parent");
 			parentLayout.addView(playerLayout, 1);
 		}
 	}

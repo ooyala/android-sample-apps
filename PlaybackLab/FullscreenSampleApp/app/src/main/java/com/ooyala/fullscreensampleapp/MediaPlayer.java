@@ -15,7 +15,7 @@ import com.ooyala.android.util.DebugMode;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHandler {
-	private static final String TAG = "PLAYER-5406"; //MediaPlayer.class.getSimpleName();
+	private static final String TAG = MediaPlayer.class.getSimpleName();
 
 	private static MediaPlayer PLAYER;
 
@@ -158,6 +158,8 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 	@Override
 	public void onDestroy() {
 		destroyPlayer();
+
+		activity = null;
 	}
 
 	@Override
