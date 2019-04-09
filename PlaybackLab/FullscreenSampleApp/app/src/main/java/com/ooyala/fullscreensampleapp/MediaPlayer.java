@@ -170,6 +170,7 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 		}
 		if (ooyalaSkinLayout != null) {
 			ooyalaSkinLayout.release();
+			ooyalaSkinLayout = null;
 		}
 		if (null != playerLayoutController) {
 			playerLayoutController.onDestroy();

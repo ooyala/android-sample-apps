@@ -6,8 +6,8 @@ public class Data {
 	private final String pcode;
 	private final String domain;
 	private boolean isAutoPlay;
-	private int playedHeadTime;
 	private boolean wasPaused = true;
+	private int playedHeadTime;
 
 	public Data(String embedCode, String pcode, String domain) {
 		this.embedCode = embedCode;

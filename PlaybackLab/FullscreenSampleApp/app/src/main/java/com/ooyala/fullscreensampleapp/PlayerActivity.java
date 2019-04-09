@@ -92,6 +92,42 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayerList
         snapHelper.attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MediaPlayer.getInstance().onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MediaPlayer.getInstance().onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MediaPlayer.getInstance().onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MediaPlayer.getInstance().onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MediaPlayer.getInstance().onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MediaPlayer.getInstance().onBackPressed();
+    }
+
     private void populateData() {
         final Data data = new Data("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com/");
         dataList = new ArrayList<>();
