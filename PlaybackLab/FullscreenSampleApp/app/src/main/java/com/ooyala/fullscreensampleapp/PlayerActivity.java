@@ -3,6 +3,7 @@ package com.ooyala.fullscreensampleapp;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class PlayerActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.title_text_view)
+    TextView textView;
 
     private RecyclerView.LayoutManager layoutManager;
     private PlayerAdapter playerAdapter;
@@ -146,6 +150,7 @@ public class PlayerActivity extends AppCompatActivity {
 
         MediaPlayer player = MediaPlayer.getInstance();
         player.setFullscreenMode(newConfig.orientation == SCREEN_ORIENTATION_USER);
+        textView.setVisibility(newConfig.orientation == SCREEN_ORIENTATION_USER ? View.GONE : View.VISIBLE);
     }
 
     private void populateData() {

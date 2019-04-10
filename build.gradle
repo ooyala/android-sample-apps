@@ -27,6 +27,7 @@ buildscript {
         testRunnerVersion = '1.1.0'
         testExtJunitVersion = '1.0.0'
         volleyVersion = '1.1.1'
+        butterknifeVersion = '10.1.0'
 
         // Google Play Services
         gmsAdsVersion = '15.0.1'
