@@ -27,6 +27,15 @@ buildscript {
         bintrayVersion = '0.8.1'
         gradleVersion = '3.2.1'
         mavenGradleVersion = '1.5'
+
+        // react-native dependencies
+        inferAnnotationVersion = '0.11.2'
+        frescoVersion = '1.10.0'
+        soloaderVersion = '0.5.1'
+        findbugsVersion = '3.0.2'
+        okhttpVersion = '3.12.1'
+        okioVersion = '1.15.0'
+        androidJscVersion = 'r174650'
     }
 
 
