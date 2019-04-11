@@ -1,4 +1,4 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import com.ooyala.android.configuration.Options;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.DebugMode;
+import com.ooyala.sample.interfaces.LifeCycle;
+import com.ooyala.sample.interfaces.Player;
 
 import androidx.recyclerview.widget.RecyclerView;
 

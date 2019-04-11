@@ -1,4 +1,4 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample.interfaces;
 
 public interface LifeCycle {
 	void onStart();

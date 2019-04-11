@@ -1,4 +1,4 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -18,9 +18,13 @@ import butterknife.ButterKnife;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
 
-public class PlayerActivity extends AppCompatActivity {
+public class SinglePlayerActivity extends AppCompatActivity {
 
-    private static final String TAG = PlayerActivity.class.getName();
+    private static final String TAG = SinglePlayerActivity.class.getName();
+
+    public static String getName() {
+        return "RecyclerView with the single player";
+    }
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;

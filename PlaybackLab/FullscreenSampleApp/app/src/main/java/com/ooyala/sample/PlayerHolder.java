@@ -1,4 +1,4 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

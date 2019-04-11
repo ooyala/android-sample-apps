@@ -4,13 +4,13 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context="com.ooyala.fullscreensampleapp.PlayerActivity">
+                                                   tools:context="com.ooyala.sample.SinglePlayerActivity">
 
     <TextView
         android:id="@+id/title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/title_margin"
+        android:layout_margin="@dimen/default_margin"
         android:text="@string/title"
         app:layout_constraintBottom_toTopOf="@id/recycler_view"
         app:layout_constraintLeft_toLeftOf="parent"
