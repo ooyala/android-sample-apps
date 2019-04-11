@@ -70,6 +70,8 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-core:$rootProject.jacksonVersion"
     implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
     implementation "javax.inject:javax.inject:$rootProject.injectVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
 
     // Google Play Services
     implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"

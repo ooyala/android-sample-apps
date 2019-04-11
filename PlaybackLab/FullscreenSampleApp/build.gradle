@@ -20,6 +20,7 @@ buildscript {
         multidexVersion = '2.0.0'
         supportLibraryVersion = '1.0.0'
         volleyVersion = '1.1.1'
+        butterknifeVersion = '10.1.0'
 
         // Google Play Services
         gmsAdsVersion = '12.0.0'
@@ -40,19 +41,25 @@ buildscript {
     }
 
     repositories {
-        google()
         jcenter()
+        mavenCentral()
+        google()
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        jcenter();
+        maven {
+            url 'https://maven.google.com'
+        }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
