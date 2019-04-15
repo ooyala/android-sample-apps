@@ -2,6 +2,7 @@ package com.ooyala.fullscreensampleapp;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,19 +36,32 @@ public class PlayerActivity extends AppCompatActivity {
     private List<Data> dataList;
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
+        private static final int PLAY_DELAY = 500;
+
         private int snapPosition = RecyclerView.NO_POSITION;
-
-        @Override
-        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+        private int state = RecyclerView.SCROLL_STATE_IDLE;
+        private Handler handler = new Handler();
+        private Runnable runnable = () -> {
+            if (state == RecyclerView.SCROLL_STATE_IDLE) {
                 int currentPosition = getCurrentPosition();
                 if (snapPosition != currentPosition) {
                     snapPosition = currentPosition;
                     initItem(snapPosition);
                 }
                 play(snapPosition);
+            }
+        };
+
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+
+            state = newState;
+
+            //As the user scrolls, the video autoplays when the player is fully in view AND
+            // the scrolling pauses for 500 ms
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                handler.postDelayed(runnable, PLAY_DELAY);
             }
         }
 
@@ -65,6 +79,10 @@ public class PlayerActivity extends AppCompatActivity {
             if (player.isPlaying()) {
                 pause(snapPosition);
             }
+        }
+
+        void destroy() {
+            handler.removeCallbacks(runnable);
         }
 
         void setSnapPosition(int position) {
@@ -111,6 +129,9 @@ public class PlayerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (scrollListener != null) {
+            scrollListener.destroy();
+        }
         MediaPlayer.getInstance().onDestroy();
     }
 
