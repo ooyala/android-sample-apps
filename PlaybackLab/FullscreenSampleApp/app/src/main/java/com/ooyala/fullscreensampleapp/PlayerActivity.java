@@ -41,7 +41,7 @@ public class PlayerActivity extends AppCompatActivity {
         private int snapPosition = RecyclerView.NO_POSITION;
         private int state = RecyclerView.SCROLL_STATE_IDLE;
         private Handler handler = new Handler();
-        private Runnable runnable = () -> {
+        private Runnable playRunnable = () -> {
             if (state == RecyclerView.SCROLL_STATE_IDLE) {
                 int currentPosition = getCurrentPosition();
                 if (snapPosition != currentPosition) {
@@ -61,7 +61,7 @@ public class PlayerActivity extends AppCompatActivity {
             //As the user scrolls, the video autoplays when the player is fully in view AND
             // the scrolling pauses for 500 ms
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                handler.postDelayed(runnable, PLAY_DELAY);
+                handler.postDelayed(playRunnable, PLAY_DELAY);
             }
         }
 
@@ -82,7 +82,7 @@ public class PlayerActivity extends AppCompatActivity {
         }
 
         void destroy() {
-            handler.removeCallbacks(runnable);
+            handler.removeCallbacks(playRunnable);
         }
 
         void setSnapPosition(int position) {
