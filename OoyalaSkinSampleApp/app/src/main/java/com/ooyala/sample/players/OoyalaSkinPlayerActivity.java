@@ -7,6 +7,7 @@ import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.R;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
@@ -50,6 +51,7 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity {
 			playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
 			//Add observer to listen to fullscreen open and close events
 			playerLayoutController.addObserver(this);
+      playerLayoutController.addOnVisibilityControlsChangeListener(isVisible -> DebugMode.logV(TAG, "Ui is visible: " + isVisible));
 			player.addObserver(this);
 
 			if (player.setEmbedCode(embedCode)) {
