@@ -2,6 +2,7 @@ package com.ooyala.sample.common;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
@@ -74,9 +75,23 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       player = new OoyalaPlayer(pcode, playerDomain, this, getOptions());
       initAndBindController();
       player.addObserver(this);
-      play(embedCode);
+
+      String currentEmbedCode = getCurrentEmbedCode();
+      if (TextUtils.isEmpty(currentEmbedCode)) {
+        play(embedCode);
+      } else {
+        play(currentEmbedCode);
+      }
     }
   }
+
+  /**
+   * Gets embed code that plays on remote device.
+   *
+   * @return current embed code that plays on remote device or null
+   */
+  @Nullable
+  abstract protected String getCurrentEmbedCode();
 
   protected abstract Options getOptions();
 
