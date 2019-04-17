@@ -40,8 +40,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
     private List<Data> dataList;
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
-        private static final int PLAY_DELAY = 500;
-
         private int snapPosition = RecyclerView.NO_POSITION;
         private int state = RecyclerView.SCROLL_STATE_IDLE;
         private Handler handler = new Handler();
@@ -65,7 +63,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             //As the user scrolls, the video autoplays when the player is fully in view AND
             // the scrolling pauses for 500 ms
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                handler.postDelayed(playRunnable, PLAY_DELAY);
+                handler.postDelayed(playRunnable, Constants.PLAY_DELAY);
             }
         }
 

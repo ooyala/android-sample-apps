@@ -3,10 +3,9 @@ package com.ooyala.sample;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
-
-import com.ooyala.android.util.DebugMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,16 +43,27 @@ public class MultiplePlayerActivity extends AppCompatActivity {
     private List<Data> dataList = new ArrayList<>();
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
+        private int state = RecyclerView.SCROLL_STATE_IDLE;
         private int snapPosition = RecyclerView.NO_POSITION;
+        private Handler handler = new Handler();
+        private Runnable playRunnable = () -> {
+            if (state == RecyclerView.SCROLL_STATE_IDLE) {
+                // play the current item
+                snapPosition = getCurrentPosition();
+                play(snapPosition);
+            }
+        };
 
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
 
+            state = newState;
+
+            //As the user scrolls, the video autoplays when the player is fully in view AND
+            // the scrolling pauses for 500 ms
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                // play the current item
-                snapPosition = getCurrentPosition();
-                play(snapPosition);
+                handler.postDelayed(playRunnable, Constants.PLAY_DELAY);
             }
         }
 
@@ -67,6 +77,10 @@ public class MultiplePlayerActivity extends AppCompatActivity {
 
             updateCurrentDataPlayheadTime(snapPosition);
             pause(snapPosition);
+        }
+
+        void destroy() {
+            handler.removeCallbacks(playRunnable);
         }
 
         void setSnapPosition(int position) {
@@ -100,7 +114,6 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setDrawingCacheEnabled(true);
         recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
-        recyclerView.getItemAnimator().setChangeDuration(0);
         recyclerView.setAdapter(playerAdapter);
 
         snapHelper = new PagerSnapHelper();
@@ -111,7 +124,14 @@ public class MultiplePlayerActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        updatePlayerList(MediaPlayer::onDestroy);
+        if (scrollListener != null) {
+            scrollListener.destroy();
+        }
+
+        if (playerAdapter != null) {
+            updatePlayerList(MediaPlayer::onDestroy);
+            playerAdapter.destroy();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -179,15 +199,13 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         MultiplePlayerHolder holder = (MultiplePlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
             holder.play();
-            DebugMode.logD(TAG, "play snapPosition: " + snapPosition);
         }
     }
 
     private void pause(int snapPosition) {
         MultiplePlayerHolder holder = (MultiplePlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
-        if (holder != null && holder.player != null && holder.player.isPlaying()) {
+        if (holder != null && holder.getPlayer() != null && holder.getPlayer().isPlaying()) {
             holder.pause();
-            DebugMode.logD(TAG, "pause snapPosition: " + snapPosition);
         }
     }
 

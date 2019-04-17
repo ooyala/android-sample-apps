@@ -17,7 +17,7 @@ public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
 	@BindView(R.id.parent_layout)
 	FrameLayout parentLayout;
 
-	MediaPlayer player;
+	private MediaPlayer player;
 	private OoyalaSkinLayout playerLayout;
 	private Data data;
 
@@ -58,5 +58,9 @@ public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
 
 	public void updatePlayheadTime() {
 		data.setPlayedHeadTime(player.getPlayheadTime());
+	}
+
+	public MediaPlayer getPlayer() {
+		return player;
 	}
 }

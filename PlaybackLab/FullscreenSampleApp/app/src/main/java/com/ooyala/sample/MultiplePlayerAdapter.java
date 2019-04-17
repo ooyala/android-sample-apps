@@ -22,7 +22,6 @@ public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHo
 	private Activity activity;
 	private RecyclerView recyclerView;
 
-
 	public MultiplePlayerAdapter(List<Data> dataList, Activity activity, RecyclerView recyclerView) {
 		this.dataList = dataList;
 		this.activity = activity;
@@ -39,7 +38,7 @@ public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHo
 
 		// Initialize the player and after that add the player to the array of existing players
 		holder.createPlayer(activity, recyclerView);
-		players.add(holder.player);
+		players.add(holder.getPlayer());
 
 		return holder;
 	}
@@ -70,6 +69,7 @@ public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHo
 	public void destroy() {
 		activity = null;
 		recyclerView = null;
+		players.clear();
 	}
 
 	public void setAutoPlayIndex(int index) {
