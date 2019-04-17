@@ -5,7 +5,7 @@ buildscript {
     ext {
         // Sdk and tools
         compileSdkVersion = 28
-        minSdkVersion = 16
+        minSdkVersion = 24
         targetSdkVersion = 28
         javaVersion = JavaVersion.VERSION_1_8
 

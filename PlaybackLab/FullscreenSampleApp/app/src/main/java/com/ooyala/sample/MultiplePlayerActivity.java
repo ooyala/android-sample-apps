@@ -1,14 +1,19 @@
 package com.ooyala.sample;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ooyala.android.util.DebugMode;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -33,10 +38,10 @@ public class MultiplePlayerActivity extends AppCompatActivity {
     TextView textView;
 
     private RecyclerView.LayoutManager layoutManager;
-    private PlayerAdapter playerAdapter;
+    private MultiplePlayerAdapter playerAdapter;
     private PagerSnapHelper snapHelper;
     private ScrollListener scrollListener;
-    private List<Data> dataList;
+    private List<Data> dataList = new ArrayList<>();
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
         private int snapPosition = RecyclerView.NO_POSITION;
@@ -46,11 +51,8 @@ public class MultiplePlayerActivity extends AppCompatActivity {
             super.onScrollStateChanged(recyclerView, newState);
 
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                int currentPosition = getCurrentPosition();
-                if (snapPosition != currentPosition) {
-                    snapPosition = currentPosition;
-                    initItem(snapPosition);
-                }
+                // play the current item
+                snapPosition = getCurrentPosition();
                 play(snapPosition);
             }
         }
@@ -64,11 +66,7 @@ public class MultiplePlayerActivity extends AppCompatActivity {
             }
 
             updateCurrentDataPlayheadTime(snapPosition);
-
-            MediaPlayer player = MediaPlayer.getInstance();
-            if (player.isPlaying()) {
-                pause(snapPosition);
-            }
+            pause(snapPosition);
         }
 
         void setSnapPosition(int position) {
@@ -93,7 +91,7 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         scrollListener = new ScrollListener();
         scrollListener.setSnapPosition(0);
 
-        playerAdapter = new PlayerAdapter(dataList);
+        playerAdapter = new MultiplePlayerAdapter(dataList, this, recyclerView);
         playerAdapter.setAutoPlayIndex(0);
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -105,47 +103,50 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         recyclerView.getItemAnimator().setChangeDuration(0);
         recyclerView.setAdapter(playerAdapter);
 
-        MediaPlayer.getInstance().setRecyclerView(recyclerView);
-        MediaPlayer.getInstance().setActivity(this);
-
         snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MediaPlayer.getInstance().onDestroy();
+        updatePlayerList(MediaPlayer::onDestroy);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onStart() {
         super.onStart();
-        MediaPlayer.getInstance().onStart();
+        updatePlayerList(MediaPlayer::onStart);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onStop() {
         super.onStop();
-        MediaPlayer.getInstance().onStop();
+        updatePlayerList(MediaPlayer::onStop);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onPause() {
         super.onPause();
-        MediaPlayer.getInstance().onPause();
+        updatePlayerList(MediaPlayer::onPause);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onResume() {
         super.onResume();
-        MediaPlayer.getInstance().onResume();
+        updatePlayerList(MediaPlayer::onResume);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        MediaPlayer.getInstance().onBackPressed();
+        updatePlayerList(MediaPlayer::onBackPressed);
     }
 
     @Override
@@ -155,6 +156,13 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         MediaPlayer player = MediaPlayer.getInstance();
         player.setFullscreenMode(newConfig.orientation == SCREEN_ORIENTATION_USER);
         textView.setVisibility(newConfig.orientation == SCREEN_ORIENTATION_USER ? View.GONE : View.VISIBLE);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void updatePlayerList(Consumer<MediaPlayer> method) {
+        for (MediaPlayer player : playerAdapter.getPlayers()) {
+            method.accept(player);
+        }
     }
 
     private void populateData() {
@@ -167,29 +175,24 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         dataList.add(new Data(data));
     }
 
-    private void initItem(int snapPosition) {
-			PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
-			if (holder != null) {
-				holder.init();
-			}
-		}
-
     private void play(int snapPosition) {
-        PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
+        MultiplePlayerHolder holder = (MultiplePlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
             holder.play();
+            DebugMode.logD(TAG, "play snapPosition: " + snapPosition);
         }
     }
 
     private void pause(int snapPosition) {
-        PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
-        if (holder != null) {
+        MultiplePlayerHolder holder = (MultiplePlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
+        if (holder != null && holder.player != null && holder.player.isPlaying()) {
             holder.pause();
+            DebugMode.logD(TAG, "pause snapPosition: " + snapPosition);
         }
     }
 
     private void updateCurrentDataPlayheadTime(int snapPosition) {
-        PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
+        MultiplePlayerHolder holder = (MultiplePlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
             holder.updatePlayheadTime();
         }
