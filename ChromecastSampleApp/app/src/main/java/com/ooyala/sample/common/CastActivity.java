@@ -57,7 +57,7 @@ public abstract class CastActivity extends PlayerActivity {
 
   @Nullable
   @Override
-  protected String getCurrentEmbedCode() {
+  protected String getCurrentRemoteEmbedCode() {
     String currentEmbedCode = null;
     CastManager castManager = CastManager.getCastManager();
     if (castManager != null && castManager.getCastPlayer() != null) {

@@ -76,11 +76,13 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       initAndBindController();
       player.addObserver(this);
 
-      String currentEmbedCode = getCurrentEmbedCode();
-      if (TextUtils.isEmpty(currentEmbedCode)) {
+      if (!TextUtils.isEmpty(embedCode)) {
         play(embedCode);
       } else {
-        play(currentEmbedCode);
+        String currentEmbedCode = getCurrentRemoteEmbedCode();
+        if (!TextUtils.isEmpty(currentEmbedCode)) {
+          play(currentEmbedCode);
+        }
       }
     }
   }
@@ -91,7 +93,7 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
    * @return current embed code that plays on remote device or null
    */
   @Nullable
-  abstract protected String getCurrentEmbedCode();
+  abstract protected String getCurrentRemoteEmbedCode();
 
   protected abstract Options getOptions();
 
@@ -104,7 +106,17 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       secondEmbedCode = lastChosenParams.getString("secondEmbedCode", null);
       pcode = lastChosenParams.getString("pcode", "");
       domain = lastChosenParams.getString("domain", "");
+
+      removeUsedEmbedCodes(lastChosenParams);
     }
+  }
+
+  private void removeUsedEmbedCodes(SharedPreferences lastChosenParams) {
+    lastChosenParams
+        .edit()
+        .putString("embedcode", null)
+        .putString("secondEmbedCode", null)
+        .apply();
   }
 
   @Override
