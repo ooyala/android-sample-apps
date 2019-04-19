@@ -99,7 +99,7 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_players);
         ButterKnife.bind(this);
 
-        populateData();
+        dataList = Constants.populateData();
 
         scrollListener = new ScrollListener();
         scrollListener.setSnapPosition(0);
@@ -183,16 +183,6 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         for (MediaPlayer player : playerAdapter.getPlayers()) {
             method.accept(player);
         }
-    }
-
-    private void populateData() {
-        final Data data = new Data("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com/");
-        dataList = new ArrayList<>();
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
     }
 
     private void play(int snapPosition) {

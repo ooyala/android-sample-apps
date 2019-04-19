@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
@@ -103,7 +102,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_players);
         ButterKnife.bind(this);
 
-        populateData();
+        dataList = Constants.populateData();
 
         scrollListener = new ScrollListener();
         scrollListener.setSnapPosition(0);
@@ -117,7 +116,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setDrawingCacheEnabled(true);
         recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
-        recyclerView.getItemAnimator().setChangeDuration(0);
         recyclerView.setAdapter(playerAdapter);
 
         MediaPlayer.getInstance().setRecyclerView(recyclerView);
@@ -174,16 +172,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
         MediaPlayer player = MediaPlayer.getInstance();
         player.setFullscreenMode(isFullScreen);
         textView.setVisibility(isFullScreen ? View.GONE : View.VISIBLE);
-    }
-
-    private void populateData() {
-        final Data data = new Data("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx", "c0cTkxOqALQviQIGAHWY5hP0q9gU", "http://www.ooyala.com/");
-        dataList = new ArrayList<>();
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
-        dataList.add(new Data(data));
     }
 
     private void initItem(int snapPosition) {
