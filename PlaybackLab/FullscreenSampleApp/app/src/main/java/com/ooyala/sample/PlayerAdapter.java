@@ -1,11 +1,10 @@
 package com.ooyala.sample;
 
 import android.view.ViewGroup;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
     private static final String TAG = PlayerAdapter.class.getSimpleName();

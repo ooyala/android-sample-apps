@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +12,9 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
 
@@ -188,11 +187,11 @@ public class SinglePlayerActivity extends AppCompatActivity {
     }
 
     private void initItem(int snapPosition) {
-			PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
-			if (holder != null) {
-				holder.init();
-			}
-		}
+        PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
+        if (holder != null) {
+            holder.init();
+        }
+    }
 
     private void play(int snapPosition) {
         PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);

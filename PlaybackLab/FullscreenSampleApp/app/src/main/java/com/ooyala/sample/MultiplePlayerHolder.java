@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.ooyala.android.skin.OoyalaSkinLayout;
-
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ooyala.android.skin.OoyalaSkinLayout;
 
 public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
 	private static final String TAG = MultiplePlayerHolder.class.getSimpleName();

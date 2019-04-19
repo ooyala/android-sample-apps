@@ -6,11 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +14,10 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER;
 
