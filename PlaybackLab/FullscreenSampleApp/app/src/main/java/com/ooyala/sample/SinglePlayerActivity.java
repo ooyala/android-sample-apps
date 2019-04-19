@@ -171,9 +171,10 @@ public class SinglePlayerActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
+        boolean isFullScreen = newConfig.orientation == SCREEN_ORIENTATION_USER;
         MediaPlayer player = MediaPlayer.getInstance();
-        player.setFullscreenMode(newConfig.orientation == SCREEN_ORIENTATION_USER);
-        textView.setVisibility(newConfig.orientation == SCREEN_ORIENTATION_USER ? View.GONE : View.VISIBLE);
+        player.setFullscreenMode(isFullScreen);
+        textView.setVisibility(isFullScreen ? View.GONE : View.VISIBLE);
     }
 
     private void populateData() {

@@ -42,6 +42,7 @@ public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
 	public void init() {
 		player.init(playerLayout, data);
 		player.seekTo(data.getPlayedHeadTime());
+		player.setFullscreenMode(MultiplePlayerAdapter.isFullscreenMode);
 	}
 
 	public void play() {

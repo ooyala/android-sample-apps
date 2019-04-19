@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHolder> {
 	private static final String TAG = MultiplePlayerAdapter.class.getSimpleName();
+	static boolean isFullscreenMode = false;
 
 	private List<Data> dataList;
 	private List<MediaPlayer> players = new ArrayList<>();
@@ -74,5 +75,17 @@ public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHo
 
 	public void setAutoPlayIndex(int index) {
 		autoPlayIndex = index;
+	}
+
+	public void setFullscreenMode(boolean isFullscreenMode) {
+		// Set the full screen mode when the app orientation is changed
+		// Do not call notifyItemChanged(position) and notifyDataSetChanged() because auto-play works for
+		// autoPlayIndex only
+		MultiplePlayerAdapter.isFullscreenMode = isFullscreenMode;
+
+		// Set the full screen mode for all the existing players
+		for (MediaPlayer player: players) {
+			player.setFullscreenMode(isFullscreenMode);
+		}
 	}
 }

@@ -169,13 +169,14 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         updatePlayerList(MediaPlayer::onBackPressed);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        MediaPlayer player = MediaPlayer.getInstance();
-        player.setFullscreenMode(newConfig.orientation == SCREEN_ORIENTATION_USER);
-        textView.setVisibility(newConfig.orientation == SCREEN_ORIENTATION_USER ? View.GONE : View.VISIBLE);
+        boolean isFullScreen = newConfig.orientation == SCREEN_ORIENTATION_USER;
+        textView.setVisibility(isFullScreen ? View.GONE : View.VISIBLE);
+        playerAdapter.setFullscreenMode(isFullScreen);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
