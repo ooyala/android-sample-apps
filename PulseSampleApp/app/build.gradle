@@ -13,11 +13,11 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
 
-        ndk {
-            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
-            abiFilters "armeabi-v7a", "x86"
-        }
         multiDexEnabled true
+    }
+
+    packagingOptions {
+        pickFirst '**/libjsc.so'
     }
 
     buildTypes {

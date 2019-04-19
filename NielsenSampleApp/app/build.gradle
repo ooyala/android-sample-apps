@@ -12,11 +12,10 @@ android {
         minSdkVersion 16
         applicationId "com.ooyala.sample.NielsenSampleApp"
         targetSdkVersion 27
-        // Added due to https://github.com/facebook/react-native/issues/2814
-        ndk {
-            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
-            abiFilters "armeabi-v7a", "x86"
-        }
+    }
+
+    packagingOptions {
+        pickFirst '**/libjsc.so'
     }
 
     buildTypes {
