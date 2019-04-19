@@ -30,7 +30,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaNielsenSDK-Android/OoyalaNielsenSDK.jar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.59.4.aar')
+    from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
 
     println "Ooyala JARs were added, however, Nielsen Integration requires VisualOn and Nielsen SDKs"
 
@@ -93,7 +93,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     implementation 'com.squareup.okio:okio:1.9.0'
     implementation 'org.webkit:android-jsc:r174650'
-    implementation(group:'com.facebook', name:'react-native', version:'0.59.4', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
     implementation 'javax.inject:javax.inject:1'
 
 }

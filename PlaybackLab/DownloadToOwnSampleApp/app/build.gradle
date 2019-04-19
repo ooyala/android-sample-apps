@@ -69,7 +69,7 @@ task copyTask(type: Copy) {
   from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
   from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
   from new File(vendorDir, 'Google/ima-android-v385.jar')
-  from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.59.4.aar')
+  from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
   into new File(projectDir,'./libs')
   println "Jars updated."
 }
@@ -112,5 +112,5 @@ dependencies {
   implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
   implementation "com.squareup.okio:okio:$rootProject.okioVersion"
   implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
-  implementation(group:'com.facebook', name:'react-native', version:'0.59.4', ext:'aar')
+  implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 }
