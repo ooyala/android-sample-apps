@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
 
     compileOptions {
         sourceCompatibility rootProject.javaVersion
@@ -16,12 +15,11 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
-
         renderscriptTargetApi 21
         renderscriptSupportModeEnabled true
+    }
+    packagingOptions {
+        pickFirst '**/libjsc.so'
     }
     buildTypes {
         release {
@@ -34,7 +32,7 @@ android {
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.55.4.aar')
+    from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
     from new File(vendorDir, 'Ooyala/OoyalaIMASDK-Android/OoyalaIMASDK.jar')
 
     into new File(projectDir, './libs')
@@ -78,7 +76,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.2.3'
     implementation 'com.google.code.findbugs:jsr305:3.0.0'
-    implementation(group:'com.facebook', name:'react-native', version:'0.55.4', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 
 
     implementation 'com.google.android.exoplayer:exoplayer:2.9.3'
@@ -112,5 +110,5 @@ buildscript {
 apply plugin: 'testfairy'
 
 configurations.maybeCreate("default")
-artifacts.add("default", file('react-native-0.55.4.aar'))
+artifacts.add("default", file("react-native-${rootProject.reactNativeVersion}.aar"))
 

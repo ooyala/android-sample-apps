@@ -13,11 +13,11 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
 
-        ndk {
-            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
-            abiFilters "armeabi-v7a", "x86"
-        }
         multiDexEnabled true
+    }
+
+    packagingOptions {
+        pickFirst '**/libjsc.so'
     }
 
     buildTypes {
@@ -36,7 +36,7 @@ task copyLibsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaPulseIntegration-Android/OoyalaPulseIntegration.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.58.0.aar')
+    from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
     into new File(projectDir, './libs')
     doLast {
         println "Libs updated."
@@ -119,5 +119,5 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
     implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
-    implementation(group:'com.facebook', name:'react-native', version:'0.58.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 }

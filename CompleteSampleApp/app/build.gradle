@@ -9,6 +9,11 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
     }
 
+    compileOptions {
+        sourceCompatibility rootProject.javaVersion
+        targetCompatibility rootProject.javaVersion
+    }
+
     buildTypes {
         release {
             minifyEnabled false

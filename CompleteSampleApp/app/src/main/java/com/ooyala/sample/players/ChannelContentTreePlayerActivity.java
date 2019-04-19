@@ -114,7 +114,7 @@ public class ChannelContentTreePlayerActivity extends ListActivity {
     }
 
     for (Video v : rootItem.getVideos()) {
-      addItem(myData, v.getTitle(), v.getDuration(), v.getPromoImageURL(50, 50),
+      addItem(myData, v.getTitle(), v.getDuration(), v.getPromoImageURL(),
           browseIntent(v.getEmbedCode(), v.getTitle(), v.getAssetPCode(), DOMAIN));
     }
     return myData;
