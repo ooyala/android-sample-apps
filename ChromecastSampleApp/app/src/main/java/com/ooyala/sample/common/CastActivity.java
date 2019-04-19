@@ -3,6 +3,7 @@ package com.ooyala.sample.common;
 import android.os.Bundle;
 
 import com.ooyala.cast.CastManager;
+import com.ooyala.cast.CastPlayer;
 import com.ooyala.cast.RemoteDeviceConnector;
 
 import androidx.annotation.Nullable;
@@ -52,6 +53,17 @@ public abstract class CastActivity extends PlayerActivity {
       remoteDeviceConnector.registerToOoyalaPlayer(player);
       remoteDeviceConnector.sendAvailableCastDevicesToPlayer();
     }
+  }
+
+  @Nullable
+  @Override
+  protected String getCurrentRemoteEmbedCode() {
+    String currentEmbedCode = null;
+    CastManager castManager = CastManager.getCastManager();
+    if (castManager != null && castManager.getCastPlayer() != null) {
+      currentEmbedCode = castManager.getCastPlayer().getEmbedCode();
+    }
+    return currentEmbedCode;
   }
 
   @Override
