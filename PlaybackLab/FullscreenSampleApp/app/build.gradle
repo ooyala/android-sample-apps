@@ -63,6 +63,10 @@ dependencies {
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')
 
+// For development purposes only
+//    implementation project(':core')
+//    implementation project(':skin')
+
     // App dependencies
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"

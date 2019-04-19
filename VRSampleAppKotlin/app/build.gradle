@@ -20,10 +20,6 @@ android {
 
         multiDexEnabled true
 
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
-
         packagingOptions {
             pickFirst '**/libjsc.so'
         }
@@ -79,6 +75,11 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
+
+// For development purposes only
+//    implementation project(':core')
+//    implementation project(':skin')
+
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaVRSDK.jar')
     implementation files('libs/OoyalaSkinSDK.aar')

@@ -86,7 +86,7 @@ dependencies {
 
 // For development purposes only
 //  implementation project(':core')
-//  implementation project(':ooyalaSkinSDK')
+//  implementation project(':skin')
 
   // App dependencies
   implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
