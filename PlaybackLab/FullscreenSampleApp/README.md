@@ -11,7 +11,7 @@ We'll change the name in the future.
 
 ## Description
 
-The main idea is to use the only one instance of Ooyala player and reuse it when onBind is called in Adapter.
+The main idea is to use the only one instance of Ooyala player (SinglePlayerActivity) or several instances of Ooyala player (MultiplePlayerActivity) and reuse it when onBind is called in Adapter.
 OoyalaSkinLayout is initialized only once, the parent Frame layout adds OoyalaSkinLayout once the next item of RecyclerView is seen and removes it when scrolling reveals another video.
 In the sample app, multiple players should be embedded and perform the following:
 
@@ -26,6 +26,11 @@ Embedded container should use most of the screen when viewed vertically, except 
 - If the user moves the device to view horizontally while a video is being played, it automatically goes full-screen on the video.
 - If the user returns to portrait mode, the video becomes viewed as embedded in video list again.
 - If a video is not playing while viewed horizontally, then the list is expanded to full width.
+
+## Activities
+- MainActivity
+- SinglePlayerActivity demonstrates how to use RecyclerView with the only one instance of OoyalaPlayer
+- MultiplePlayerActivity demonstrates how to use RecyclerView with several reusable instances of OoyalaPlayer
 
 ## Recommendation
 In skin.json the following fields have to be set as shown below:

@@ -23,7 +23,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:importantForAccessibility="no"
-                android:src="@color/itemBackground"/>
+                android:src="@color/item_background_color"/>
 
         </FrameLayout>
 

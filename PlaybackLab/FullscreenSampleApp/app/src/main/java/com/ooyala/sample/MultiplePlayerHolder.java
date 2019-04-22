@@ -1,26 +1,25 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.ooyala.android.skin.OoyalaSkinLayout;
-import com.ooyala.android.util.DebugMode;
-
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ooyala.android.skin.OoyalaSkinLayout;
 
-public class PlayerHolder extends RecyclerView.ViewHolder {
-	private static final String TAG = PlayerHolder.class.getSimpleName();
-
-	private OoyalaSkinLayout playerLayout;
-	private Data data;
+public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
+	private static final String TAG = MultiplePlayerHolder.class.getSimpleName();
 
 	@BindView(R.id.parent_layout)
 	FrameLayout parentLayout;
 
-	PlayerHolder(ViewGroup viewGroup, boolean attachToRoot) {
+	private MediaPlayer player;
+	private OoyalaSkinLayout playerLayout;
+	private Data data;
+
+	MultiplePlayerHolder(ViewGroup viewGroup, boolean attachToRoot) {
 		super(LayoutInflater.from(viewGroup.getContext())
 				.inflate(R.layout.recyclerview_item_row, viewGroup, attachToRoot));
 		ButterKnife.bind(this, itemView);
@@ -30,39 +29,37 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 		this.data = data;
 	}
 
+	public void createPlayer(Activity activity, RecyclerView recyclerView) {
+		player = new MediaPlayer();
+		player.setActivity(activity);
+		player.setRecyclerView(recyclerView);
+		playerLayout = player.getPlayerLayout();
+		parentLayout.addView(playerLayout, 1);
+	}
+
 	public void init() {
-		MediaPlayer player = MediaPlayer.getInstance();
-		initPlayerLayout();
 		player.init(playerLayout, data);
 		player.seekTo(data.getPlayedHeadTime());
+		player.setFullscreenMode(MultiplePlayerAdapter.isFullscreenMode);
 	}
 
 	public void play() {
 		if (data.isAutoPaused()) {
 			data.setAutoPaused(false);
-
-			MediaPlayer player = MediaPlayer.getInstance();
 			player.play(data.getPlayedHeadTime());
 		}
 	}
 
 	public void pause() {
 		data.setAutoPaused(true);
-
-		MediaPlayer player = MediaPlayer.getInstance();
 		player.pause();
 	}
 
 	public void updatePlayheadTime() {
-		MediaPlayer player = MediaPlayer.getInstance();
 		data.setPlayedHeadTime(player.getPlayheadTime());
 	}
 
-	private void initPlayerLayout() {
-		playerLayout = MediaPlayer.getInstance().getPlayerLayout();
-		if (playerLayout != null) {
-			DebugMode.logD(TAG, "Player layout was added to the parent");
-			parentLayout.addView(playerLayout, 1);
-		}
+	public MediaPlayer getPlayer() {
+		return player;
 	}
 }

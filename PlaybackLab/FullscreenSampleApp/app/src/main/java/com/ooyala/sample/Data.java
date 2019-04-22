@@ -1,4 +1,4 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample;
 
 public class Data {
 
@@ -9,13 +9,13 @@ public class Data {
 	private boolean autoPaused = true;
 	private int playedHeadTime;
 
-	Data(String embedCode, String pcode, String domain) {
+	public Data(String embedCode, String pcode, String domain) {
 		this.embedCode = embedCode;
 		this.pcode = pcode;
 		this.domain = domain;
 	}
 
-	Data(Data data) {
+	public Data(Data data) {
 		this.embedCode = data.embedCode;
 		this.pcode = data.pcode;
 		this.domain = data.domain;

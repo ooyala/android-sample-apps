@@ -1,11 +1,10 @@
-package com.ooyala.fullscreensampleapp;
+package com.ooyala.sample;
 
 import android.view.ViewGroup;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
     private static final String TAG = PlayerAdapter.class.getSimpleName();
@@ -13,7 +12,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
     private List<Data> dataList;
     private int autoPlayIndex = 0;
 
-    PlayerAdapter(List<Data> dataList) {
+    public PlayerAdapter(List<Data> dataList) {
         this.dataList = dataList;
     }
 
@@ -38,10 +37,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
     @Override
     public int getItemCount() {
         return dataList.size();
-    }
-
-    public Data getDataByPosition(int position) {
-        return dataList.get(position);
     }
 
     public void setAutoPlayIndex(int index) {
