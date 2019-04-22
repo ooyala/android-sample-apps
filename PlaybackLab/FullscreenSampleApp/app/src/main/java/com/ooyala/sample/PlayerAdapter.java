@@ -26,8 +26,11 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder> {
     public void onBindViewHolder(@NonNull PlayerHolder holder, int position) {
         Data data = dataList.get(position);
         holder.setData(data);
+        holder.setIsRecyclable(false);
 
+        // PlayerHolder is initialized only once on start
         if (position == autoPlayIndex) {
+            autoPlayIndex = RecyclerView.NO_POSITION;
             // Play the media on start
             holder.init();
             holder.play();
