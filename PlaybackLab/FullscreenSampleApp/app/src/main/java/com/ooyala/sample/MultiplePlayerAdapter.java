@@ -2,14 +2,12 @@ package com.ooyala.sample;
 
 import android.app.Activity;
 import android.view.ViewGroup;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import com.ooyala.android.util.DebugMode;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHolder> {
 	private static final String TAG = MultiplePlayerAdapter.class.getSimpleName();
@@ -54,6 +52,7 @@ public class MultiplePlayerAdapter extends RecyclerView.Adapter<MultiplePlayerHo
 
 		if (position == autoPlayIndex) {
 			// Play the media on start
+            autoPlayIndex = RecyclerView.NO_POSITION;
 			holder.play();
 		}
 	}
