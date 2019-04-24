@@ -35,7 +35,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
     private PlayerAdapter playerAdapter;
     private PagerSnapHelper snapHelper;
     private ScrollListener scrollListener;
-    private List<Data> dataList;
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
         private int snapPosition = RecyclerView.NO_POSITION;
@@ -76,7 +75,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
             updateCurrentDataPlayheadTime(snapPosition);
 
             MediaPlayer player = MediaPlayer.getInstance();
-            if (player.isPlaying()) {
+            if (player.isPauseNeeded()) {
                 pause(snapPosition);
             }
         }
@@ -102,7 +101,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_players);
         ButterKnife.bind(this);
 
-        dataList = Constants.populateData();
+        List<Data> dataList = Constants.populateData();
 
         scrollListener = new ScrollListener();
         scrollListener.setSnapPosition(0);

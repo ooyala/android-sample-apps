@@ -3,7 +3,7 @@ package com.ooyala.sample;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
@@ -13,8 +13,6 @@ import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.DebugMode;
 import com.ooyala.sample.interfaces.LifeCycle;
 import com.ooyala.sample.interfaces.Player;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHandler {
 	private static final String TAG = MediaPlayer.class.getSimpleName();
@@ -109,6 +107,11 @@ public class MediaPlayer implements Player, LifeCycle, DefaultHardwareBackBtnHan
 	public boolean isPlaying() {
 		return player != null && player.isPlaying();
 	}
+
+    @Override
+    public boolean isPauseNeeded() {
+        return player != null && player.getDesiredState() != OoyalaPlayer.DesiredState.DESIRED_PAUSE;
+    }
 
 	@Override
 	public int getPlayheadTime() {

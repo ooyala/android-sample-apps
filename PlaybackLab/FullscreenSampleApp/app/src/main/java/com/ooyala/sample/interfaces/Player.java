@@ -11,5 +11,7 @@ public interface Player {
 
 	boolean isPlaying();
 
+	boolean isPauseNeeded();
+
 	int getPlayheadTime();
 }
