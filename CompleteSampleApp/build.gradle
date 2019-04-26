@@ -25,7 +25,6 @@ buildscript {
 
         // react-native dependencies
         reactNativeVersion = '0.59.4'
-        androidJscVersion = 'r174650'
         findbugsVersion = '3.0.0'
         frescoVersion = '1.3.0'
         imagePipelineVersion = '1.3.0'

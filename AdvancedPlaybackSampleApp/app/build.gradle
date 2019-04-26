@@ -97,6 +97,5 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
-    implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
     implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 }
