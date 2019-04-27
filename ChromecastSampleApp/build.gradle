@@ -36,7 +36,6 @@ buildscript {
         findbugsVersion = '3.0.2'
         okhttpVersion = '3.12.1'
         okioVersion = '1.15.0'
-        androidJscVersion = 'r174650'
     }
 
 
