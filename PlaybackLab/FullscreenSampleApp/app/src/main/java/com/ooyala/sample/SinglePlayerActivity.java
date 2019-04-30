@@ -72,7 +72,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
                 return;
             }
 
-            updateCurrentDataPlayheadTime(snapPosition);
+            updateCurrentData(snapPosition);
 
             MediaPlayer player = MediaPlayer.getInstance();
             if (player.isPauseNeeded()) {
@@ -194,10 +194,10 @@ public class SinglePlayerActivity extends AppCompatActivity {
         }
     }
 
-    private void updateCurrentDataPlayheadTime(int snapPosition) {
+    private void updateCurrentData(int snapPosition) {
         PlayerHolder holder = (PlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
-            holder.updatePlayheadTime();
+            holder.updateData();
         }
     }
 }
