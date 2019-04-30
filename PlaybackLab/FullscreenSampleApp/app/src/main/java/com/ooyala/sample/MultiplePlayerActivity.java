@@ -58,7 +58,7 @@ public class MultiplePlayerActivity extends AppCompatActivity {
             int currentSnapPosition = getCurrentPosition();
             if (currentSnapPosition != snapPosition) {
                 if (snapPosition != RecyclerView.NO_POSITION) {
-                    updateCurrentDataPlayheadTime(snapPosition);
+                    updateCurrentData(snapPosition);
                     pause(snapPosition);
                 }
 
@@ -182,10 +182,10 @@ public class MultiplePlayerActivity extends AppCompatActivity {
         }
     }
 
-    private void updateCurrentDataPlayheadTime(int snapPosition) {
+    private void updateCurrentData(int snapPosition) {
         MultiplePlayerHolder holder = (MultiplePlayerHolder) recyclerView.findViewHolderForAdapterPosition(snapPosition);
         if (holder != null) {
-            holder.updatePlayheadTime();
+            holder.updateData();
         }
     }
 }

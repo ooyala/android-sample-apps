@@ -3,13 +3,12 @@ package com.ooyala.sample;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.ooyala.android.skin.OoyalaSkinLayout;
-import com.ooyala.android.util.DebugMode;
-
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.skin.OoyalaSkinLayout;
+import com.ooyala.android.util.DebugMode;
 
 public class PlayerHolder extends RecyclerView.ViewHolder {
 	private static final String TAG = PlayerHolder.class.getSimpleName();
@@ -53,9 +52,13 @@ public class PlayerHolder extends RecyclerView.ViewHolder {
 		player.pause();
 	}
 
-	public void updatePlayheadTime() {
+    public void updateData() {
 		MediaPlayer player = MediaPlayer.getInstance();
 		data.setPlayedHeadTime(player.getPlayheadTime());
+
+        if (player.getState() == OoyalaPlayer.State.COMPLETED) {
+            data.setAutoPaused(true);
+        }
 	}
 
 	private void initPlayerLayout() {

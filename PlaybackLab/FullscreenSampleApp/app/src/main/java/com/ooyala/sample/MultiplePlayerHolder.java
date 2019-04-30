@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 
 public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
@@ -55,8 +56,12 @@ public class MultiplePlayerHolder extends RecyclerView.ViewHolder {
 		player.pause();
 	}
 
-	public void updatePlayheadTime() {
+    public void updateData() {
 		data.setPlayedHeadTime(player.getPlayheadTime());
+
+        if (player.getState() == OoyalaPlayer.State.COMPLETED) {
+            data.setAutoPaused(true);
+        }
 	}
 
 	public MediaPlayer getPlayer() {

@@ -1,5 +1,8 @@
 package com.ooyala.sample.interfaces;
 
+import androidx.annotation.Nullable;
+import com.ooyala.android.OoyalaPlayer;
+
 public interface Player {
 	void play();
 
@@ -14,4 +17,7 @@ public interface Player {
 	boolean isPauseNeeded();
 
 	int getPlayheadTime();
+
+    @Nullable
+    OoyalaPlayer.State getState();
 }
