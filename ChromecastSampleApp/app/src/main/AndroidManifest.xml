@@ -17,23 +17,27 @@
         android:theme="@style/Theme.CastVideosTheme"
         android:name=".SampleApplication"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".ChromecastListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".simple.SimpleCastPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:textColor="#ffffff" />
-        <activity
-            android:name=".skin.SkinCastPlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".custom.CustomUiPlayerActivity" />
 
+        <activity android:name=".skin.SkinCastPlayerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <activity android:name=".common.ExpandedControllerActivity"
+                  android:noHistory="true"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="com.ooyala.sample.CastOptionsProvider" />
