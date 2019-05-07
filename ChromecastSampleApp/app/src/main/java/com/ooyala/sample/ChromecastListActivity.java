@@ -10,14 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.media.widget.MiniControllerFragment;
 import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 import com.ooyala.sample.skin.SkinCastPlayerActivity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 public class ChromecastListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
   private static final String TAG = "ChromecastListActivity";
@@ -30,6 +28,8 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
     super.onCreate(savedInstanceState);
     setContentView(R.layout.start_view);
     setupActionBar();
+    setupSkinChooser();
+
     videoList = getVideoList();
 
     MiniControllerFragment miniControllerFragment = (MiniControllerFragment) getSupportFragmentManager().findFragmentById(R.id.cast_mini_controller);
@@ -47,20 +47,7 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
 
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    final Intent intent;
-    RadioGroup skinChooser = findViewById(R.id.player_type_chooser);
-    int radioButtonID = skinChooser.getCheckedRadioButtonId();
-    switch (radioButtonID) {
-      case R.id.radioButtonSkin:
-        intent = new Intent(this, SkinCastPlayerActivity.class);
-        break;
-      case R.id.radioButtonSimple:
-        intent = new Intent(this, SimpleCastPlayerActivity.class);
-        break;
-      default:
-        intent = new Intent(this, SimpleCastPlayerActivity.class);
-    }
-
+    final Intent intent = new Intent(this, ((SampleApplication) getApplication()).getExpandedControllerActivity());
     SharedPreferences lastChosenParams = getSharedPreferences("LastChosenParams", MODE_PRIVATE);
     lastChosenParams
         .edit()
@@ -84,6 +71,23 @@ public class ChromecastListActivity extends AppCompatActivity implements Adapter
   private void setupActionBar() {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+  }
+
+  private void setupSkinChooser() {
+    RadioGroup skinChooser = findViewById(R.id.player_type_chooser);
+    skinChooser.setOnCheckedChangeListener((radioGroup, radioButtonID) -> {
+      SampleApplication app = ((SampleApplication) getApplication());
+      switch (radioButtonID) {
+        case R.id.radioButtonSkin:
+          app.setExpandedControllerActivity(SkinCastPlayerActivity.class);
+          break;
+        case R.id.radioButtonSimple:
+          app.setExpandedControllerActivity(SimpleCastPlayerActivity.class);
+          break;
+        default:
+          app.setExpandedControllerActivity(SimpleCastPlayerActivity.class);
+      }
+    });
   }
 
   /**

@@ -2,7 +2,8 @@ package com.ooyala.sample.simple;
 
 import android.os.Bundle;
 import android.view.Menu;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
@@ -15,9 +16,6 @@ import com.ooyala.sample.R;
 import com.ooyala.sample.common.CastActivity;
 
 import java.util.Observable;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 
 public class SimpleCastPlayerActivity extends CastActivity {
 
