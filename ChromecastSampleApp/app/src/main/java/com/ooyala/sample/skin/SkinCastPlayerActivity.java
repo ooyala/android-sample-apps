@@ -80,8 +80,15 @@ public class SkinCastPlayerActivity extends CastActivity implements Observer, De
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    if (null != playerLayoutController) {
+
+    if (playerLayoutController != null) {
       playerLayoutController.onDestroy();
+      playerLayoutController = null;
+    }
+
+    if (skinLayout != null) {
+      skinLayout.release();
+      skinLayout = null;
     }
   }
 }
