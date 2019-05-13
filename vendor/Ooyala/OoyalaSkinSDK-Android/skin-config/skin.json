@@ -225,7 +225,7 @@
     }
   },
   "castControls": {
-    "enabled": true,
+    "enabled": false,
     "skipBackwardTime": 10,
     "skipForwardTime": 10,
     "buttons": {
@@ -356,7 +356,8 @@
       {"name":"stereoscopic", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
       {"name":"audioAndCC", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
       {"name":"fullscreen", "location":"controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 },
-      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 }
+      {"name":"moreOptions", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
+      {"name":"pipButton", "location": "controlBar", "whenDoesNotFit":"moveToMoreOptions", "minWidth":28 }
     ],
     "mobileAd": [
       {"name":"volume", "location":"controlBar", "whenDoesNotFit":"keep", "minWidth":28 },
@@ -422,6 +423,8 @@
     "chromecast-connected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003B", "fontStyleClass": "oo-icon"},
     "chromecast-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003A", "fontStyleClass": "oo-icon"},
     "airPlay-connected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007C", "fontStyleClass": "oo-icon"},
-    "airPlay-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007B", "fontStyleClass": "oo-icon"}
+    "airPlay-disconnected": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u007B", "fontStyleClass": "oo-icon"},
+    "pipInButton": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u002B", "fontStyleClass": "oo-icon"},
+    "pipOutButton": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u002C", "fontStyleClass": "oo-icon"}
   }
 }

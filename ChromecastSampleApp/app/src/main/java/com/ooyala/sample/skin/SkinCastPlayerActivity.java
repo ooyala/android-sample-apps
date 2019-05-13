@@ -1,27 +1,17 @@
 package com.ooyala.sample.skin;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-
+import androidx.annotation.Nullable;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
-import com.google.android.gms.cast.framework.CastButtonFactory;
-import com.ooyala.android.OoyalaNotification;
-import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
 import com.ooyala.sample.common.CastActivity;
-
 import org.json.JSONObject;
 
-import java.util.Observable;
 import java.util.Observer;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 
 public class SkinCastPlayerActivity extends CastActivity implements Observer, DefaultHardwareBackBtnHandler {
   protected OoyalaSkinLayoutController playerLayoutController;

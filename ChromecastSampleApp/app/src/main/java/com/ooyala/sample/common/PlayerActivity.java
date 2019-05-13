@@ -2,6 +2,7 @@ package com.ooyala.sample.common;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.ooyala.android.EmbedTokenGenerator;
@@ -74,9 +75,25 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       player = new OoyalaPlayer(pcode, playerDomain, this, getOptions());
       initAndBindController();
       player.addObserver(this);
-      play(embedCode);
+
+      if (!TextUtils.isEmpty(embedCode)) {
+        play(embedCode);
+      } else {
+        String currentEmbedCode = getCurrentRemoteEmbedCode();
+        if (!TextUtils.isEmpty(currentEmbedCode)) {
+          play(currentEmbedCode);
+        }
+      }
     }
   }
+
+  /**
+   * Gets embed code that plays on remote device.
+   *
+   * @return current embed code that plays on remote device or null
+   */
+  @Nullable
+  abstract protected String getCurrentRemoteEmbedCode();
 
   protected abstract Options getOptions();
 
@@ -89,7 +106,17 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       secondEmbedCode = lastChosenParams.getString("secondEmbedCode", null);
       pcode = lastChosenParams.getString("pcode", "");
       domain = lastChosenParams.getString("domain", "");
+
+      removeUsedEmbedCodes(lastChosenParams);
     }
+  }
+
+  private void removeUsedEmbedCodes(SharedPreferences lastChosenParams) {
+    lastChosenParams
+        .edit()
+        .putString("embedcode", null)
+        .putString("secondEmbedCode", null)
+        .apply();
   }
 
   @Override

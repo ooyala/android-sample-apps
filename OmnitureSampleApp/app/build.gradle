@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.ooyala.omnituresampleapp"
@@ -10,11 +9,12 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        ndk {
-            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
-            abiFilters "armeabi-v7a", "x86"
-        }
     }
+
+    packagingOptions {
+        pickFirst '**/libjsc.so'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,7 +29,7 @@ task copyLibs(type: Copy) {
     from new File(vendorDir, 'Adobe/AdobeMobile/AdobeMobileLibrary-4.9.0.jar')
     from new File(vendorDir, 'Adobe/Heartbeat/VideoHeartbeat-1.5.6.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
+    from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
     into 'libs'
     doLast {
         println 'Jars updated'
@@ -88,5 +88,5 @@ dependencies {
     implementation 'com.squareup.okio:okio:1.9.0'
     implementation 'org.webkit:android-jsc:r174650'
     implementation 'javax.inject:javax.inject:1'
-    implementation(name:'react-native', version:'0.35.0', ext:'aar')
+    implementation(name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 }

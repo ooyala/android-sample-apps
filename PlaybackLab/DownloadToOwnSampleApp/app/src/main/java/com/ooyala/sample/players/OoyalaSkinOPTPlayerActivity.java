@@ -20,7 +20,6 @@ import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 import com.ooyala.sample.DemoApplication;
 import com.ooyala.sample.R;
-import com.ooyala.sample.lists.DownloadSerializationActivity;
 import com.ooyala.sample.utils.PlayerSelectionOption;
 
 import org.json.JSONObject;
@@ -81,55 +80,100 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     SECRET = getIntent().getExtras().getString("secret_key");
     ACCOUNT_ID = getIntent().getExtras().getString("account_id");
 
-    final int playbackType = getIntent().getExtras().getInt("playback_type");
+    initializePlayer();
 
+    final int playbackType = getIntent().getExtras().getInt("playback_type");
+    switch (playbackType) {
+      case PlayerSelectionOption.ONLINE_PLAYBACK:
+        tryPlayOnline();
+        break;
+      case PlayerSelectionOption.OFFLINE_ONLINE_PLAYBACK:
+        try {
+          tryPlayOnlineOffline();
+        } catch (Exception ex) {
+          handleError("Asset Failure");
+        }
+        break;
+      case PlayerSelectionOption.OFFLINE_EMBED_CODE_PLAYBACK:
+      case PlayerSelectionOption.OFFLINE_URL_PLAYBACK:
+        tryPlayOffline();
+        break;
+      default:
+        handleError("Playback type is not defined");
+        break;
+    }
+  }
+
+  private void tryPlayOnline() {
+    try {
+      playOnline();
+    } catch (Exception error) {
+      Log.e(TAG, error.getMessage());
+    }
+  }
+
+  private void tryPlayOffline() {
+    try {
+      playOffline();
+    } catch (Exception error) {
+      handleError(error.getMessage());
+    }
+  }
+
+  private void tryPlayOnlineOffline() throws Exception {
+    // Online playback has higher priority than offline playback
+    try {
+      playOnline();
+    } catch (Exception error) {
+      playOffline();
+    }
+  }
+
+  private void initializePlayer() {
     // Get the SkinLayout from our layout xml
     OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
-    Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
+    Options options = new Options.Builder()
+        .setShowPromoImage(false)
+        .setShowNativeLearnMoreButton(false)
+        .setUseExoPlayer(true)
+        .build();
     player = new OoyalaPlayer(PCODE, domain, this, options);
+    player.addObserver(this);
 
     //Create the SkinOptions, and setup React
     JSONObject overrides = createSkinOverrides();
     SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
     playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
+  }
 
-    player.addObserver(this);
-
-    if (playbackType == PlayerSelectionOption.ONLINE_PLAYBACK) {
-      if (player.setEmbedCode(EMBED)) {
-        //Uncomment for autoplay
-        //player.play();
-      } else {
-        Log.e(TAG, "Asset Failure");
-      }
-      return;
+  private void playOnline() throws Exception {
+    if (player.setEmbedCode(EMBED)) {
+      //Uncomment for autoplay
+      //player.play();
+    } else {
+      throw new Exception("Asset Failure");
     }
+  }
 
+  private void playOffline() throws Exception{
     File folder = new File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES), EMBED);
     OfflineVideo ov = OfflineVideo.getVideo(this, folder, ((DemoApplication) getApplication()).getDownloadCache(), EMBED);
 
     if (player.setUnbundledVideo(ov)) {
       //Uncomment for autoplay
       //player.play();
-      return;
-    }
-
-    if (playbackType == PlayerSelectionOption.OFFLINE_PLAYBACK) {
-      Log.e(TAG, "No dowloaded files for playback");
-      Toast.makeText(OoyalaSkinOPTPlayerActivity.this, "No dowloaded files for playback", Toast.LENGTH_SHORT).show();
-      finish();
-      return;
-    }
-    else if (player.setEmbedCode(EMBED)) {
-      //Uncomment for autoplay
-      //player.play();
     } else {
-      Log.e(TAG, "Asset Failure");
+      throw new Exception("No downloaded files for playback");
     }
+  }
 
+  private void handleError(String errorMessage) {
+    Log.e(TAG, errorMessage);
+    Toast.makeText(OoyalaSkinOPTPlayerActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+    finish();
   }
 
   /** Start DefaultHardwareBackBtnHandler **/

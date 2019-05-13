@@ -1,8 +1,5 @@
 include ':app'
 
 // For development purposes only
-//include ':ooyalaSkinSDK'
-//project(':ooyalaSkinSDK').projectDir=new File(settingsDir, '../../../native-skin/sdk/android/ooyalaSkinSDK/')
-////
-//include ':core'
-//project(':core').projectDir=new File(settingsDir, '../../../android-sdk/sdk/core/')
+// include ':core'
+// project(':core').projectDir=new File(settingsDir, '../../../android-sdk/sdk/core/')
