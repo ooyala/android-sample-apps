@@ -2,14 +2,12 @@
 package com.ooyala.sample;
 
 import android.content.Context;
-
 import com.google.android.gms.cast.framework.CastOptions;
 import com.google.android.gms.cast.framework.OptionsProvider;
 import com.google.android.gms.cast.framework.SessionProvider;
 import com.google.android.gms.cast.framework.media.CastMediaOptions;
 import com.google.android.gms.cast.framework.media.NotificationOptions;
 import com.ooyala.sample.common.ExpandedControllerActivity;
-import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class CastOptionsProvider implements OptionsProvider {
         //SimpleCastPlayerActivity, SkinCastPlayerActivity
         //ExpandedControllerActivity starts SimpleCastPlayerActivity or SkinCastPlayerActivity depending on
         // the chosen skin options
-        .setTargetActivityClassName(SimpleCastPlayerActivity.class.getName())
+        .setTargetActivityClassName(ExpandedControllerActivity.class.getName())
         .setPlayDrawableResId(R.drawable.ic_media_play_light)
         .setPauseDrawableResId(R.drawable.ic_media_pause_light)
         .build();
