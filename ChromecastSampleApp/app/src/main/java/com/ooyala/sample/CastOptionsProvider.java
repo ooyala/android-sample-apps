@@ -8,6 +8,7 @@ import com.google.android.gms.cast.framework.OptionsProvider;
 import com.google.android.gms.cast.framework.SessionProvider;
 import com.google.android.gms.cast.framework.media.CastMediaOptions;
 import com.google.android.gms.cast.framework.media.NotificationOptions;
+import com.ooyala.sample.common.ExpandedControllerActivity;
 import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 
 import java.util.List;
@@ -22,16 +23,17 @@ public class CastOptionsProvider implements OptionsProvider {
   public CastOptions getCastOptions(Context context) {
     NotificationOptions notificationOptions = new NotificationOptions.Builder()
         //Set here the activity that contain player.
-        //For this sample there are 3 activity that can play video:
+        //For this sample there are 2 activities that can play video:
         //SimpleCastPlayerActivity, SkinCastPlayerActivity
-        //We set as example SimpleCastPlayerActivity
+        //ExpandedControllerActivity starts SimpleCastPlayerActivity or SkinCastPlayerActivity depending on
+        // the chosen skin options
         .setTargetActivityClassName(SimpleCastPlayerActivity.class.getName())
         .setPlayDrawableResId(R.drawable.ic_media_play_light)
         .setPauseDrawableResId(R.drawable.ic_media_pause_light)
         .build();
     CastMediaOptions mediaOptions = new CastMediaOptions.Builder()
         .setNotificationOptions(notificationOptions)
-        .setExpandedControllerActivityClassName(SimpleCastPlayerActivity.class.getName())
+        .setExpandedControllerActivityClassName(ExpandedControllerActivity.class.getName())
         .build();
 
     return new CastOptions.Builder()

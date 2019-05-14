@@ -2,7 +2,7 @@
   "description": "This JSON schema describes the base UI configuration for the Ooyala Player, which can be customized in the <a href=\"https://github.com/ooyala/skin-config.git\">skin.json</a> file. Also see <a href=\"https://facebook.github.io/react\">https://facebook.github.io/react</a> and <a href=\"https://facebook.github.io/react-native\">https://facebook.github.io/react-native</a>.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["general", "startScreen", "pauseScreen", "endScreen", "upNext", "moreOptionsScreen", "discoveryScreen", "closedCaptionOptions", "icons", "buttons", "controlBar", "shareScreen", "localization"],
+  "required": ["general", "startScreen", "pauseScreen", "endScreen", "upNext", "moreOptionsScreen", "castControls", "discoveryScreen", "closedCaptionOptions", "icons", "buttons", "controlBar", "shareScreen", "localization"],
   "properties": {
     "general": {
       "description": "Configuration of things that do not appear in only one part of the UI.",
@@ -603,6 +603,81 @@
         }
       }
     },
+    "castControls": {
+      "description": "Toolbar for cast which contains buttons that allow skipping back or forward, switching to the previous or next videos in cast mode and show button to display cast devices",
+      "type": "object",
+      "required": [
+        "enabled",
+        "skipBackwardTime",
+        "skipForwardTime",
+        "buttons",
+        "iconStyle"
+      ],
+      "properties": {
+        "enabled": {
+          "description": "Show the \"Cast button\" if set to true, hide if set to false.",
+          "type": "boolean",
+          "default": false
+        },
+        "skipBackwardTime": {
+          "description": "An integer number ranging from 1 to 60. Controls the amount of seconds that the playhead moves when the \"Skip Backward\" button is clicked in cast mode.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 60,
+          "default": 15
+        },
+        "skipForwardTime": {
+          "description": "An integer number ranging from 1 to 60. Controls the amount of seconds that the playhead moves when the \"Skip Forward\" button is clicked in cast mode.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 60,
+          "default": 15
+        },
+        "buttons": {
+          "description": "The collection of buttons that can be displayed on the \"Cast Controls\" toolbar.",
+          "type": "object",
+          "properties": {
+            "previousVideo": {
+              "description": "Button that allows switching to the last video that was played or to the previous video in a playlist.",
+              "$ref": "#/definitions/castControlsButton"
+            },
+            "skipBackward": {
+              "description": "Button that allows skipping the video backward the amount of seconds defined in \"skipBackwardTime\".",
+              "$ref": "#/definitions/castControlsButton"
+            },
+            "skipForward": {
+              "description": "Button that allows skipping the video forward the amount of seconds defined in \"skipForwardTime\".",
+              "$ref": "#/definitions/castControlsButton"
+            },
+            "nextVideo": {
+              "description": "Button that allows switching to the next video recommendation or to the next video in a playlist.",
+              "$ref": "#/definitions/castControlsButton"
+            }
+          }
+        },
+        "iconStyle": {
+          "description": "Provide possibility to change color of cast elements. The default color is #3eb5f7",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "active": {
+              "color": {
+                "description": "Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
+                "type": "string",
+                "default": "#3eb5f7"
+              }
+            },
+            "inactive": {
+              "color": {
+                "description": "Any valid CSS color value (named colors, three-digit hex color, six-digit hex color, RGB colors).",
+                "type": "string",
+                "default": "#FFFFFF"
+              }
+            }
+          }
+        }
+      }
+    },
     "controlBar": {
       "description": "The playback control bar. Generally contains a play-pause button, scrubber control, etc. The set of items to show comes from the 'buttons' part of the schema.",
       "type": "object",
@@ -610,9 +685,9 @@
       "required": [ "height", "autoHide", "logo" ],
       "properties": {
         "enabled": {
-            "description": "Show the control bar if set to true. Hide the control bar if set to false. Default is true.",
-            "type": "boolean",
-            "default": true
+          "description": "Show the control bar if set to true. Hide the control bar if set to false. Default is true.",
+          "type": "boolean",
+          "default": true
         },
         "volumeControl": {
           "description": "Defines color of volume control in control bar.",
@@ -863,7 +938,7 @@
         "desktopAd": { "$ref": "#/definitions/buttonArray" },
         "mobileContent": { "$ref": "#/definitions/buttonArray" },
         "mobileAd": { "$ref": "#/definitions/buttonArray" },
-        "audioOnly": { 
+        "audioOnly": {
           "description": "Defines the buttons that can appear in the audio only view on the controlBar and/or the moreOptions panel. Desktop and Mobile platforms can be configured individually.",
           "type": "object",
           "required": ["desktop", "mobile"],
@@ -1439,6 +1514,7 @@
                "bitrateSelector",
                "skipControls",
                "chromecast",
+               "airPlay",
                "seekBackwards",
                "seekForward"]
     },
@@ -1455,6 +1531,24 @@
         "enabled": {
           "description": "Show the button if set to true, hide if set to false.",
           "type": "boolean"
+        },
+        "index": {
+          "description": "An integer number which determines the order in which the button will be shown within the toolbar. Buttons are sorted in ascending order.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "castControlsButton": {
+      "description": "Buttons displayed on the \"CastConnected\" screen.",
+      "type": "object",
+      "required": [ "enabled", "index" ],
+      "properties": {
+        "enabled": {
+          "description": "Show the button if set to true, hide if set to false.",
+          "type": "boolean",
+          "default": true
         },
         "index": {
           "description": "An integer number which determines the order in which the button will be shown within the toolbar. Buttons are sorted in ascending order.",

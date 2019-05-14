@@ -106,25 +106,5 @@ public class AssetActivity extends AbstractHookActivity {
     JSONObject overrides = new JSONObject();
     return overrides;
   }
-
-  /**
-   *
-   * @param name of asset file
-   * @return asset file as text
-   */
-  public JSONObject loadJSONFromAsset(String name) throws JSONException {
-    String json;
-    try {
-      InputStream is = getAssets().open(name);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      json = new String(buffer, "UTF-8");
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      return null;
-    }
-    return new JSONObject(json);
-  }
+  
 }

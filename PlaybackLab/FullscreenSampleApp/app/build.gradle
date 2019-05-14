@@ -17,6 +17,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    packagingOptions {
+        pickFirst '**/libjsc.so'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -50,7 +53,7 @@ tasks.copyFontsAssetsTask.execute()
 task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.58.0.aar')
+    from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
     into new File(projectDir,'./libs')
     println "Jars updated."
 }
@@ -59,6 +62,10 @@ tasks.copyTask.execute()
 dependencies {
     implementation files('libs/OoyalaSDK.aar')
     implementation files('libs/OoyalaSkinSDK.aar')
+
+// For development purposes only
+//    implementation project(':core')
+//    implementation project(':skin')
 
     // App dependencies
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
@@ -70,6 +77,8 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-core:$rootProject.jacksonVersion"
     implementation "com.google.android.exoplayer:exoplayer:$rootProject.exoplayerVersion"
     implementation "javax.inject:javax.inject:$rootProject.injectVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
 
     // Google Play Services
     implementation "com.google.android.gms:play-services-ads:$rootProject.gmsAdsVersion"
@@ -83,8 +92,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
-    implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
-    implementation(group:'com.facebook', name:'react-native', version:'0.58.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 }
 
 repositories {

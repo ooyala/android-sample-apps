@@ -27,6 +27,7 @@ buildscript {
         testRunnerVersion = '1.1.0'
         testExtJunitVersion = '1.0.0'
         volleyVersion = '1.1.1'
+        butterknifeVersion = '10.1.0'
 
         // Google Play Services
         gmsAdsVersion = '15.0.1'
@@ -40,13 +41,13 @@ buildscript {
         mavenGradleVersion = '1.5'
 
         // react-native dependencies
+        reactNativeVersion = '0.59.4'
         inferAnnotationVersion = '0.11.2'
         frescoVersion = '1.10.0'
-        soloaderVersion = '0.5.1'
+        soloaderVersion = '0.6.0'
         findbugsVersion = '3.0.2'
         okhttpVersion = '3.12.1'
         okioVersion = '1.15.0'
-        androidJscVersion = 'r174650'
 
         // VR
         vrAudioVersion = '1.80.0'

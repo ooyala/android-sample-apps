@@ -13,19 +13,12 @@ android {
     minSdkVersion rootProject.minSdkVersion
     targetSdkVersion rootProject.targetSdkVersion
 
-    // Added due to https://github.com/facebook/react-native/issues/2814
-    ndk {
-      // React Native for Android is incompatible with 3rd-party 64-bit libraries.
-      abiFilters "armeabi-v7a", "x86"
-    }
-
 // Uncomment if you need multidex
     multiDexEnabled true
   }
 
   packagingOptions {
-    exclude 'META-INF/LICENSE.txt'
-    exclude 'META-INF/NOTICE.txt'
+    pickFirst '**/libjsc.so'
   }
 
   buildTypes {
@@ -75,7 +68,7 @@ task copyTask(type: Copy) {
   from new File(vendorDir, 'Ooyala/OoyalaFreewheelSDK-Android/OoyalaFreewheelSDK.jar')
   from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
   from new File(vendorDir, 'Freewheel/Android_AdManagerDistribution/FWAdManager.jar')
-  from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.58.0.aar')
+  from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
   into new File(projectDir,'./libs')
   println "Jars updated."
 }
@@ -91,7 +84,7 @@ dependencies {
 
 // For development purposes only
 //  implementation project(':core')
-//  implementation project(':ooyalaSkinSDK')
+//  implementation project(':skin')
 
   // App dependencies
   implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
@@ -117,6 +110,5 @@ dependencies {
   implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
   implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
   implementation "com.squareup.okio:okio:$rootProject.okioVersion"
-  implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
-  implementation(group:'com.facebook', name:'react-native', version:'0.58.0', ext:'aar')
+  implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
 }

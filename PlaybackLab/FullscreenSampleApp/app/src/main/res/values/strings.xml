@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FullscreenSampleApp</string>
+    <string name="title">Video Feed Sample App</string>
 </resources>

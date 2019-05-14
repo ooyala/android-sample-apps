@@ -17,12 +17,6 @@ android {
         versionName "1.0"
 
         multiDexEnabled true
-
-        // Added due to https://github.com/facebook/react-native/issues/2814
-        ndk {
-            // React Native for Android is incompatible with 3rd-party 64-bit libraries.
-            abiFilters "armeabi-v7a", "x86"
-        }
     }
 
     dexOptions {
@@ -31,9 +25,7 @@ android {
     }
 
     packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
+        pickFirst '**/libjsc.so'
     }
 
     buildTypes {
@@ -77,7 +69,7 @@ task copyTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaCastSDK-Android/OoyalaCastSDK.aar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.aar')
-    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.58.0.aar')
+    from new File(vendorDir, "Ooyala/OoyalaSkinSDK-Android/react-native-${rootProject.reactNativeVersion}.aar")
     into new File(projectDir,'./libs')
     doLast {
         println "Jars updated."
@@ -118,6 +110,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-cast-framework:$rootProject.gmsCastVersion"
 
     //react-native dependencies
+    implementation "com.facebook.infer.annotation:infer-annotation:$rootProject.inferAnnotationVersion"
     implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"
     implementation "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.frescoVersion"
     implementation "com.facebook.soloader:soloader:$rootProject.soloaderVersion"
@@ -125,8 +118,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
-    implementation "org.webkit:android-jsc:$rootProject.androidJscVersion"
-    implementation(group:'com.facebook', name:'react-native', version:'0.58.0', ext:'aar')
+    implementation(group:'com.facebook', name:'react-native', version: rootProject.reactNativeVersion, ext:'aar')
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
