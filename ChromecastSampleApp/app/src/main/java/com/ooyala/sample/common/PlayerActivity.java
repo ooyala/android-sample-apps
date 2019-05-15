@@ -128,25 +128,17 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
     }
   }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    if (player != null) {
-      player.resume();
-    }
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    if (player != null) {
-      player.pause();
-    }
-  }
-
   protected void play(String ec) {
     player.setEmbedCode(ec);
     player.play();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    if (null != player) {
+      player.resume();
+    }
   }
 
   @Override
