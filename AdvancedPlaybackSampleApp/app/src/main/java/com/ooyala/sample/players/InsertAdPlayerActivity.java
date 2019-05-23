@@ -31,20 +31,20 @@ import java.net.URL;
  *
  */
 public class InsertAdPlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
+	private final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
+
+	private PerformanceMonitor performanceMonitor;
+
+	public static String getName() {
 		return "Insert Ad at Runtime";
 	}
-
-	public static PerformanceMonitor performanceMonitor;
 
 	@Override
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.enableSSL(false);
 			player.addObserver(this);
@@ -100,5 +100,22 @@ public class InsertAdPlayerActivity extends AbstractHookActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_double_button_layout);
 		completePlayerSetup(asked);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		if(performanceMonitor != null) {
+			Log.d(PERFORMANCE_MONITOR_TAG, performanceMonitor.buildStatisticsSnapshot().generateReport());
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		performanceMonitor.destroy();
+		performanceMonitor = null;
 	}
 }

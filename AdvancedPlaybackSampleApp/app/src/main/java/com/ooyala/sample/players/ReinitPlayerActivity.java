@@ -18,8 +18,6 @@ import com.ooyala.sample.R;
  */
 public class ReinitPlayerActivity extends AbstractHookActivity {
 
-  private OoyalaPlayerLayout playerLayout;
-
   public static String getName() {
     return "Reinit player activity";
   }
@@ -37,24 +35,12 @@ public class ReinitPlayerActivity extends AbstractHookActivity {
   }
 
   @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    destroyPlayer();
-  }
-
-  @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
-
       // Create the OoyalaPlayer, with some built-in UI disabled
       PlayerDomain playerDomain = new PlayerDomain(domain);
-      Options options = new Options.Builder()
-        .setShowNativeLearnMoreButton(false)
-        .setShowPromoImage(false)
-        .setUseExoPlayer(true)
-        .build();
 
-      player = new OoyalaPlayer(pcode, playerDomain, options);
+      player = new OoyalaPlayer(pcode, playerDomain, createPlayerOptions());
       // Use setupPlayerFrame() method only after release() method has been called
       playerLayout.setupPlayerFrame();
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
@@ -66,6 +52,15 @@ public class ReinitPlayerActivity extends AbstractHookActivity {
         Log.e(TAG, "Asset Failure");
       }
     }
+  }
+
+  @Override
+  protected Options createPlayerOptions() {
+    return new Options.Builder()
+      .setShowNativeLearnMoreButton(false)
+      .setShowPromoImage(false)
+      .setUseExoPlayer(true)
+      .build();
   }
 
   private void initButtonListeners() {
@@ -94,7 +89,10 @@ public class ReinitPlayerActivity extends AbstractHookActivity {
     if (playerLayout != null) {
       playerLayout.release();
     }
-    playerLayoutController = null;
+    if (playerLayoutController != null) {
+      playerLayoutController.destroy();
+      playerLayoutController = null;
+    }
   }
 
   private void reinitPlayer(String embedCode) {

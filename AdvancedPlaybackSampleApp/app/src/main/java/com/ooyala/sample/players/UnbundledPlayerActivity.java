@@ -28,11 +28,10 @@ public class UnbundledPlayerActivity extends AbstractHookActivity {
   void completePlayerSetup(boolean asked) {
     if (asked) {
       //Initialize the player
-      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-      Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-      player.addObserver(this);
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+      playerLayout = findViewById(R.id.ooyalaPlayer);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      player.addObserver(this);
 
       final String url = getIntent().getExtras().getString("embed_code");
       stream = new Stream(url, Stream.DELIVERY_TYPE_MP4);

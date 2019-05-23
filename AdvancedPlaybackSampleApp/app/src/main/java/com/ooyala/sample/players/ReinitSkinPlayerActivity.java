@@ -34,12 +34,6 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
   }
 
   @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    destroyPlayer();
-  }
-
-  @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
       // Create the OoyalaPlayer, with some built-in UI disabled
@@ -67,35 +61,10 @@ public class ReinitSkinPlayerActivity extends AbstractSkinHookActivity {
 
   private void initButtonListeners() {
     Button setFirstAssetButton = findViewById(R.id.set_first_asset);
-    setFirstAssetButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        reinitPlayer("E4bDRwZTE6rMB8oYrzOsuHSPz0XM0dAV");
-      }
-    });
+    setFirstAssetButton.setOnClickListener(v -> reinitPlayer("E4bDRwZTE6rMB8oYrzOsuHSPz0XM0dAV"));
 
     Button setSecondAssetButton = findViewById(R.id.set_second_asset);
-    setSecondAssetButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        reinitPlayer("92cmZwZTE613kYlorJkkSJXAw4DnFRxv");
-      }
-    });
-  }
-
-  private void destroyPlayer() {
-    if (player != null) {
-      player.destroy();
-      player = null;
-    }
-    if (skinLayout != null) {
-      skinLayout.release();
-    }
-    if (null != playerLayoutController) {
-      playerLayoutController.deleteObserver(this);
-      playerLayoutController.onDestroy();
-      playerLayoutController = null;
-    }
+    setSecondAssetButton.setOnClickListener(v -> reinitPlayer("92cmZwZTE613kYlorJkkSJXAw4DnFRxv"));
   }
 
   private void reinitPlayer(String embedCode) {

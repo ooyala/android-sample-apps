@@ -19,7 +19,8 @@ import java.util.ArrayList;
  *
  */
 public class MultipleVideosPlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
+
+	public static String getName() {
 		return "Multiple Video Playback";
 	}
 
@@ -27,10 +28,8 @@ public class MultipleVideosPlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
@@ -55,7 +54,6 @@ public class MultipleVideosPlayerActivity extends AbstractHookActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_simple_layout);
 		completePlayerSetup(asked);
-
 	}
 }
 

@@ -17,19 +17,16 @@ import com.ooyala.sample.utils.SampleVideoPlayerFactory;
  *
  */
 public class SampleVideoPlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
+
+	public static String getName() {
 		return "Custom Video Player Sample";
 	}
-
-	protected OoyalaPlayerLayoutController playerLayoutController;
 
 	@Override
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			// Below step will make sure that player is being chosen each time
 			// make sure to put large integer value so that new player gets selected

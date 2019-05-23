@@ -26,19 +26,19 @@ import java.util.Observable;
  *
  */
 public class NotificationsPlayerActivity extends AbstractHookActivity {
-  public final static String getName() {
+
+  private SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
+
+  public static String getName() {
     return "Notifications Demonstration";
   }
-  SDCardLogcatOoyalaEventsLogger playbacklog = new SDCardLogcatOoyalaEventsLogger();
 
   @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
       //Initialize the player
-      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
-      Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+      playerLayout = findViewById(R.id.ooyalaPlayer);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
       player.addObserver(this);
 
@@ -230,5 +230,4 @@ public class NotificationsPlayerActivity extends AbstractHookActivity {
     //Generic notification handler
     Log.d(TAG, text);
   }
-
 }
