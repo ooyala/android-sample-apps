@@ -14,6 +14,8 @@ import com.ooyala.sample.utils.SampleAdPlugin;
 
 public class PluginPlayerActivity extends AbstractHookActivity {
 
+	private SampleAdPlugin plugin;
+
 	public static String getName() {
 		return "Custom Plugin Sample";
 	}
@@ -27,7 +29,7 @@ public class PluginPlayerActivity extends AbstractHookActivity {
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 
-			SampleAdPlugin plugin = new SampleAdPlugin(this, player);
+			plugin = new SampleAdPlugin(this, player);
 			player.registerPlugin(plugin);
 			if (player.setEmbedCode(embedCode)) {
 				//Uncomment for Auto-Play
@@ -46,5 +48,14 @@ public class PluginPlayerActivity extends AbstractHookActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_simple_layout);
 		completePlayerSetup(asked);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		if (plugin != null) {
+			plugin.destroy();
+		}
 	}
 }

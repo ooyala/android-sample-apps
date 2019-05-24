@@ -36,6 +36,7 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
   private String _adText;
   private Handler _timerHandler;
   private TextView textView;
+  private Runnable refreshRunnable = () -> refresh();
 
   public SampleAdPlayer(Context context, StateNotifier notifier,
       ViewGroup parent) {
@@ -48,11 +49,8 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
     this.addView(textView);
     parent.addView(this);
     _stateNotifier = notifier;
-    _timerHandler = new Handler() {
-      public void handleMessage(Message msg) {
-        refresh();
-      }
-    };
+    _timerHandler = new Handler();
+
     _stateNotifier.setState(State.LOADING);
   }
 
@@ -113,7 +111,7 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
       _timer.scheduleAtFixedRate(new TimerTask() {
         @Override
         public void run() {
-          _timerHandler.sendEmptyMessage(0);
+          _timerHandler.post(refreshRunnable);
         }
       }, REFRESH_RATE, REFRESH_RATE);
     }
@@ -148,9 +146,18 @@ public class SampleAdPlayer extends LinearLayout implements PlayerInterface,
 
   @Override
   public void destroy() {
-    // TODO Auto-generated method stub
     if (getParent() != null) {
       ((ViewGroup) getParent()).removeView(this);
+    }
+
+    if (_timer != null) {
+      _timer.cancel();
+      _timer.purge();
+      _timer = null;
+    }
+
+    if (_timerHandler != null) {
+      _timerHandler.removeCallbacks(refreshRunnable);
     }
   }
 
