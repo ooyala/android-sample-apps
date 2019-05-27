@@ -20,7 +20,8 @@ import com.ooyala.sample.R;
  *
  */
 public class ProgrammaticVolumePlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
+
+	public static String getName() {
 		return "Programmatic Volume";
 	}
 
@@ -28,9 +29,8 @@ public class ProgrammaticVolumePlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			//Initialize the player
-			Options opts = new Options.Builder().setUseExoPlayer(true).build();
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), opts);
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);
 

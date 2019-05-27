@@ -24,12 +24,11 @@ import com.ooyala.sample.R;
  *
  */
 public class ChangeVideoPlayerActivity extends AbstractHookActivity {
+  private static final String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
 
-  public final static String getName() {
+  public static String getName() {
     return "Change Video Programatically";
   }
-
-  String EMBED_TWO = "h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx";
 
   /**
    * Called when the activity is first created.
@@ -44,10 +43,9 @@ public class ChangeVideoPlayerActivity extends AbstractHookActivity {
   @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
-      Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-
+      //Initialize the player
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+      playerLayout = findViewById(R.id.ooyalaPlayer);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
       player.addObserver(this);
 

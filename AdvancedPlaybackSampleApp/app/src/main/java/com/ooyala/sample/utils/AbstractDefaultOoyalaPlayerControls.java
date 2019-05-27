@@ -231,6 +231,17 @@ public abstract class AbstractDefaultOoyalaPlayerControls implements OoyalaPlaye
 
   }
 
+  @Override
+  public void release() {
+    _layout = null;
+    _baseLayout = null;
+
+    if (_hideTimer != null) {
+      _hideTimer.cancel();
+      _hideTimer = null;
+    }
+  }
+
   protected abstract void updateButtonStates();
 
   protected abstract void setupControls();

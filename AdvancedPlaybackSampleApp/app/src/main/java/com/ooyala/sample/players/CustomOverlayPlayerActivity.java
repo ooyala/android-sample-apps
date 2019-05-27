@@ -21,7 +21,7 @@ import com.ooyala.sample.utils.CustomOverlay;
  */
 public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 
-	public final static String getName() {
+	public static String getName() {
 		return "Custom Overlay";
 	}
 
@@ -29,9 +29,8 @@ public class CustomOverlayPlayerActivity extends AbstractHookActivity {
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
 			//Initialize the player
-			OoyalaPlayerLayout playerLayout = findViewById(R.id.ooyalaPlayer);
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
 			//Insert the new overlay into the LayoutController

@@ -11,43 +11,40 @@ import com.ooyala.sample.R;
 
 /**
  * This activity illustrates how you can play a video with an initial time set
- *
+ * <p>
  * This can be used in conjunction with Cross Device Resume (XDR) to start videos where
  * an end user left off
- *
- *
  */
 public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
-		return "Play With InitialTime";
-	}
 
-	@Override
-	void completePlayerSetup(boolean asked) {
-		if (asked) {
-			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+  public static String getName() {
+    return "Play With InitialTime";
+  }
 
-			Options options = new Options.Builder().setUseExoPlayer(true).build();
-			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
-			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-			player.addObserver(this);
+  @Override
+  void completePlayerSetup(boolean asked) {
+    if (asked) {
+      //Initialize the player
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+      playerLayout = findViewById(R.id.ooyalaPlayer);
+      playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+      player.addObserver(this);
 
-			if (player.setEmbedCode(embedCode)) {
-				//Play from the 20 second mark;
-				player.play(20000);
-			}
-		}
-	}
+      if (player.setEmbedCode(embedCode)) {
+        //Play from the 20 second mark;
+        player.play();
+      }
+    }
+  }
 
-	/**
-	 * Called when the activity is first created.
-	 */
+  /**
+   * Called when the activity is first created.
+   */
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_simple_layout);
-		completePlayerSetup(asked);
-	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.player_simple_layout);
+    completePlayerSetup(asked);
+  }
 }

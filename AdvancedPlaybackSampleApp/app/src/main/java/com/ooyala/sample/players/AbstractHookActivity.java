@@ -10,6 +10,8 @@ import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaPlayerLayout;
+import com.ooyala.android.configuration.Options;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
@@ -18,7 +20,6 @@ import java.util.Observer;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static com.ooyala.sample.players.InsertAdPlayerActivity.performanceMonitor;
 
 /**
  * This class asks permission for WRITE_EXTERNAL_STORAGE. We need it for automation hooks
@@ -26,22 +27,20 @@ import static com.ooyala.sample.players.InsertAdPlayerActivity.performanceMonito
  */
 public abstract class AbstractHookActivity extends Activity implements Observer {
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-	String TAG = this.getClass().toString();
-	final String PERFORMANCE_MONITOR_TAG = "MONITOR_" + TAG;
 
+	protected OoyalaPlayer player;
+	protected OoyalaPlayerLayout playerLayout;
 	protected OoyalaPlayerLayoutController playerLayoutController;
-	//private PerformanceMonitor performanceMonitor;
-
-	SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
 	protected String embedCode;
 	protected String pcode;
 	protected String domain;
+	protected String TAG = this.getClass().toString();
 
-	OoyalaPlayer player;
+	protected boolean writePermission = false;
+	protected boolean asked = false;
 
-	boolean writePermission = false;
-	boolean asked = false;
+	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
 	// complete player setup after we asked for permission to write into external storage
 	abstract void completePlayerSetup(final boolean asked);
@@ -96,11 +95,33 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 		if (null != player) {
 			player.suspend();
 		}
-		if(TAG.equalsIgnoreCase("class com.ooyala.sample.players.InsertAdPlayerActivity"))
-		{
-			Log.d(PERFORMANCE_MONITOR_TAG, performanceMonitor.buildStatisticsSnapshot().generateReport());
-			performanceMonitor.destroy();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
 		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
+		}
+	}
+
+	protected Options createPlayerOptions() {
+		return new Options.Builder()
+			.setUseExoPlayer(true)
+			.build();
 	}
 
 	@Override

@@ -99,4 +99,9 @@ public class CustomOverlay extends TextView implements OoyalaPlayerControls {
     
   }
 
+  @Override
+  public void release() {
+
+  }
+
 }

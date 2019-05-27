@@ -26,18 +26,17 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * as we need to write into the SD card and automation will parse this file.
  */
 public abstract class AbstractSkinHookActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
-  String TAG = this.getClass().toString();
-
   private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
+  protected OoyalaPlayer player;
+  protected OoyalaSkinLayout skinLayout;
   protected OoyalaSkinLayoutController playerLayoutController;
+
   protected String embedCode;
   protected String pcode;
   protected String domain;
   protected String selectedFormat;
-
-  protected OoyalaPlayer player;
-  protected OoyalaSkinLayout skinLayout;
+  protected String TAG = this.getClass().toString();
 
   protected boolean writePermission = false;
   protected boolean asked = false;
@@ -156,6 +155,27 @@ public abstract class AbstractSkinHookActivity extends Activity implements Obser
       playerLayoutController.onBackPressed();
     } else {
       super.onBackPressed();
+    }
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    destroyPlayer();
+  }
+
+  protected void destroyPlayer() {
+    if (player != null) {
+      player.destroy();
+      player = null;
+    }
+    if (skinLayout != null) {
+      skinLayout.release();
+    }
+    if (null != playerLayoutController) {
+      playerLayoutController.deleteObserver(this);
+      playerLayoutController.onDestroy();
+      playerLayoutController = null;
     }
   }
 

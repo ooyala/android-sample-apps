@@ -32,8 +32,9 @@ public class AudioOnlyPlayerActivity extends AbstractHookActivity {
   @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
-      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+      //Initialize the player
       player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+      playerLayout = findViewById(R.id.ooyalaPlayer);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
       player.addObserver(this);
 
@@ -42,7 +43,8 @@ public class AudioOnlyPlayerActivity extends AbstractHookActivity {
     }
   }
 
-  private Options createPlayerOptions() {
+  @Override
+  protected Options createPlayerOptions() {
     return new Options.Builder()
         .setShowNativeLearnMoreButton(false)
         .setShowPromoImage(false)

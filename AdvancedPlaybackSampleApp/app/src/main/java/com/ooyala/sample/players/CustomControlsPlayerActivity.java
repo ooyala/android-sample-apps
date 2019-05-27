@@ -12,28 +12,29 @@ import com.ooyala.sample.utils.CustomPlayerControls;
 
 /**
  * This activity illustrates how you can implement Custom controls for the OoyalaPlayer
- *
+ * <p>
  * The following files were slightly modified from the DefaultControlsSource provided with the
  * Ooyala SDK:
- *   CustomPlayerControls (was DefaultOoyalaPlayerInlineControls)
- *   CuePointsSeekBar
- *   AbstractDefaultOoyalaPlayerControls
- *   Images
- *
- *  This example was made with Ooyala SDK 3.4.0 source, but is still a good example of how
- *  the default controls can be overridden.
+ * CustomPlayerControls (was DefaultOoyalaPlayerInlineControls)
+ * CuePointsSeekBar
+ * AbstractDefaultOoyalaPlayerControls
+ * Images
+ * <p>
+ * This example was made with Ooyala SDK 3.4.0 source, but is still a good example of how
+ * the default controls can be overridden.
  */
 public class CustomControlsPlayerActivity extends AbstractHookActivity {
-  public final static String getName() {
+
+  public static String getName() {
     return "Custom Controls";
   }
 
   @Override
   void completePlayerSetup(boolean asked) {
     if (asked) {
-      OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
-      Options options = new Options.Builder().setUseExoPlayer(true).build();
-      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
+      //Initialize the player
+      player = new OoyalaPlayer(pcode, new PlayerDomain(domain), createPlayerOptions());
+      playerLayout = findViewById(R.id.ooyalaPlayer);
       playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 
       //Set the controls to use for Inline Control style.
