@@ -12,6 +12,7 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.OoyalaPlayer.State;
 import com.ooyala.android.StateNotifier;
 import com.ooyala.android.StateNotifierListener;
+import com.ooyala.android.analytics.Constants;
 import com.ooyala.android.player.PlayerInterface;
 import com.ooyala.android.plugin.AdPluginInterface;
 
@@ -93,9 +94,9 @@ public class SampleAdPlugin implements AdPluginInterface, StateNotifierListener 
     _preroll = new SampleAdSpot(0, "PREROLL");
     _midroll = new SampleAdSpot(20000, "MIDROLL");
     _postroll = new SampleAdSpot(Integer.MAX_VALUE - 1000, "POSTROLL");
-    prerollAdPodInfo = new AdPodInfo("Preroll Ad", _preroll.text(), "http://www.ooyala.com", 1, 0);
-    midrollAdPodInfo = new AdPodInfo("Midroll Ad", _midroll.text(), "http://www.ooyala.com", 1, 0);
-    postrollAdPodInfo = new AdPodInfo("Postroll Ad", _postroll.text(), "http://www.ooyala.com", 1, 0);
+    prerollAdPodInfo = new AdPodInfo("Preroll Ad", _preroll.text(), "http://www.ooyala.com", 1, 0, Constants.OOYALA_AD_PLUGIN);
+    midrollAdPodInfo = new AdPodInfo("Midroll Ad", _midroll.text(), "http://www.ooyala.com", 1, 0, Constants.OOYALA_AD_PLUGIN);
+    postrollAdPodInfo = new AdPodInfo("Postroll Ad", _postroll.text(), "http://www.ooyala.com", 1, 0, Constants.OOYALA_AD_PLUGIN);
 
     cuePoints = new HashSet<Integer>();
     cuePoints.add(_preroll.getTime());
