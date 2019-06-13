@@ -32,7 +32,7 @@ public class PlayWithInitialTimePlayerActivity extends AbstractHookActivity {
 
       if (player.setEmbedCode(embedCode)) {
         //Play from the 20 second mark;
-        player.play();
+        player.play(20000);
       }
     }
   }
