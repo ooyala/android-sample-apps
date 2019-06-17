@@ -8,8 +8,8 @@ import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
-import com.ooyala.sample.common.CastActivity;
 import org.json.JSONObject;
+import com.ooyala.sample.common.CastActivity;
 
 import java.util.Observer;
 
