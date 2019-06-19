@@ -6,10 +6,10 @@ import android.util.Log;
 import com.ooyala.android.EmbedTokenGenerator;
 import com.ooyala.android.EmbedTokenGeneratorCallback;
 import com.ooyala.android.EmbeddedSecureURLGenerator;
+import com.ooyala.android.Environment;
 import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
-import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 import com.ooyala.sample.R;
@@ -25,18 +25,21 @@ public class OoyalaSkinOPTPlayerActivity extends AbstractHookActivity implements
 
   @Override
   void completePlayerSetup(boolean asked) {
-    if(asked) {
+    if (asked) {
       // Get the SkinLayout from our layout xml
-      OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
+      skinLayout = findViewById(R.id.ooyalaSkin);
 
       // Create the OoyalaPlayer, with some built-in UI disabled
-      PlayerDomain domain = new PlayerDomain(DOMAIN);
-      Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
+      PlayerDomain domain = new PlayerDomain(this.domain);
+      Options options = createOptions();
       player = new OoyalaPlayer(pcode, domain, this, options);
 
       //Create the SkinOptions, and setup React
       JSONObject overrides = createSkinOverrides();
-      SkinOptions skinOptions = new SkinOptions.Builder().setSkinOverrides(overrides).build();
+      SkinOptions skinOptions = new SkinOptions.Builder()
+        .setSkinOverrides(overrides)
+        .build();
+
       playerLayoutController = new OoyalaSkinLayoutController(getApplication(), skinLayout, player, skinOptions);
       //Add observer to listen to fullscreen open and close events
       playerLayoutController.addObserver(this);
@@ -60,15 +63,12 @@ public class OoyalaSkinOPTPlayerActivity extends AbstractHookActivity implements
     setTitle(getIntent().getExtras().getString("selection_name"));
     setContentView(R.layout.player_skin_simple_layout);
     completePlayerSetup(asked);
-
-
   }
-
-
 
   /**
    * Create skin overrides to show up in the skin.
    * Default commented. Uncomment to show changes to the start screen.
+   *
    * @return the overrides to apply to the skin.json in the assets folder
    */
   private JSONObject createSkinOverrides() {
@@ -117,5 +117,4 @@ public class OoyalaSkinOPTPlayerActivity extends AbstractHookActivity implements
 
     callback.setEmbedToken(tokenUrl.toString());
   }
-
 }

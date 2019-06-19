@@ -27,7 +27,7 @@ import com.ooyala.sample.R;
  *
  */
 public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
-	public final static String getName() {
+	public static String getName() {
 		return "Preconfigured Freewheel Player";
 	}
 
@@ -38,8 +38,8 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
 
 			// Create the OoyalaPlayer, with some built-in UI disabled
-			PlayerDomain domain = new PlayerDomain(DOMAIN);
-			Options options = new Options.Builder().setShowPromoImage(false).setUseExoPlayer(true).setShowNativeLearnMoreButton(false).build();
+			PlayerDomain domain = new PlayerDomain(this.domain);
+			Options options = createOptions();
 			player = new OoyalaPlayer(pcode, domain, options);
 
 			//Create the SkinOptions, and setup React

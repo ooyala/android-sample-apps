@@ -8,7 +8,6 @@ import com.ooyala.android.OoyalaPlayer;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.sample.R;
-import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.skin.configuration.SkinOptions;
 
@@ -26,10 +25,10 @@ public class OoyalaSkinPlayerActivity extends AbstractHookActivity  {
 	void completePlayerSetup(boolean asked) {
 		if(asked) {
 			// Get the SkinLayout from our layout xml
-			OoyalaSkinLayout skinLayout = (OoyalaSkinLayout) findViewById(R.id.ooyalaSkin);
-			PlayerDomain domain = new PlayerDomain(DOMAIN);
+			skinLayout = findViewById(R.id.ooyalaSkin);
+			PlayerDomain domain = new PlayerDomain(this.domain);
 			// Create the OoyalaPlayer, with some built-in UI disabled
-			Options options = new Options.Builder().setShowPromoImage(false).setShowNativeLearnMoreButton(false).setUseExoPlayer(true).build();
+			Options options = createOptions();
 			player = new OoyalaPlayer(pcode, domain, options);
 
 			//Create the SkinOptions, and setup React

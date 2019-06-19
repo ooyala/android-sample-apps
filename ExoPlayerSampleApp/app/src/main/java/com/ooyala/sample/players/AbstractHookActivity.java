@@ -13,6 +13,8 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.configuration.Options;
+import com.ooyala.android.skin.OoyalaSkinLayout;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
@@ -28,24 +30,25 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  */
 public abstract class AbstractHookActivity extends Activity implements Observer, DefaultHardwareBackBtnHandler {
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-	String TAG = this.getClass().toString();
+
+	protected OoyalaPlayer player;
+	protected OoyalaSkinLayout skinLayout;
 	protected OoyalaSkinLayoutController playerLayoutController;
 
-	SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
-
-	String embedCode;
-	String pcode;
-	String DOMAIN;
-	protected final String APIKEY = "Use this for testing, don't keep your secret in the application";
-	protected final String SECRET = "Use this for testing, don't keep your secret in the application";
+	protected String embedCode;
+	protected String pcode;
+	protected String domain;
+	protected String TAG = this.getClass().toString();
 
 	// An account ID, if you are using Concurrent Streams or Entitlements
 	protected final String ACCOUNT_ID = "Account_ID";
+	protected final String APIKEY = "Use this for testing, don't keep your secret in the application";
+	protected final String SECRET = "Use this for testing, don't keep your secret in the application";
 
-	OoyalaPlayer player;
+	protected boolean writePermission = false;
+	protected boolean asked = false;
 
-	boolean writePermission = false;
-	boolean asked = false;
+	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
 	// complete player setup after we asked for permission to write into external storage
 	abstract void completePlayerSetup(final boolean asked);
@@ -63,7 +66,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 
 		embedCode = getIntent().getExtras().getString("embed_code");;
 		pcode = getIntent().getExtras().getString("pcode");;
-		DOMAIN = getIntent().getExtras().getString("domain");
+		domain = getIntent().getExtras().getString("domain");
 	}
 
 	@Override
@@ -78,20 +81,55 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
 
 	@Override
-	protected void onStop() {
-		super.onStop();
-		Log.d(TAG, "Player Activity Stopped");
+	public void onStart() {
+		super.onStart();
 		if (null != player) {
+			player.resume();
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (player != null) {
 			player.suspend();
 		}
 	}
 
 	@Override
-	protected void onRestart() {
-		super.onRestart();
-		Log.d(TAG, "Player Activity Restarted");
-		if (null != player) {
-			player.resume();
+	public void onPause() {
+		super.onPause();
+		if (playerLayoutController != null) {
+			playerLayoutController.onPause();
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (playerLayoutController != null) {
+			playerLayoutController.onResume(this, this);
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (skinLayout != null) {
+			skinLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
 		}
 	}
 
@@ -108,22 +146,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
 	/** End DefaultHardwareBackBtnHandler **/
 
-	/** Start Activity methods for Skin **/
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (null != playerLayoutController) {
-			playerLayoutController.onPause();
-		}
-	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (null != playerLayoutController) {
-			playerLayoutController.onResume( this, this );
-		}
-	}
 
 	@Override
 	public void onBackPressed() {
@@ -131,13 +154,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			playerLayoutController.onBackPressed();
 		} else {
 			super.onBackPressed();
-		}
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (null != playerLayoutController) {
-			playerLayoutController.onDestroy();
 		}
 	}
 
@@ -169,5 +185,13 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
 		log.writeToSdcardLog(text);
 		Log.d(TAG, text);
+	}
+
+	protected Options createOptions() {
+		return new Options.Builder()
+			.setShowPromoImage(false)
+			.setShowNativeLearnMoreButton(false)
+			.setUseExoPlayer(true)
+			.build();
 	}
 }
