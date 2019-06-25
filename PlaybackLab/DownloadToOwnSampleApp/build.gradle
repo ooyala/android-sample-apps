@@ -27,8 +27,7 @@ buildscript {
         gmsAdsVersion = '15.0.1'
         gmsAuthVersion = '15.0.1'
         gmsCastVersion = '15.0.1'
-        interactiveMediaVersion = '3.8.5'
-        interactiveMediaVersion = '3.10.6'
+        interactiveMediaVersion = '3.11.2'
 
         // Project dependencies
         bintrayVersion = '0.8.1'
