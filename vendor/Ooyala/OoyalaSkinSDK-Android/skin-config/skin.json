@@ -385,7 +385,7 @@
     }
   },
   "icons": {
-    "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u003e", "fontStyleClass": "oo-icon oo-icon-play-slick"},
+    "play": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0076", "fontStyleClass": "oo-icon oo-icon-play-slick"},
     "pause": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0067", "fontStyleClass": "oo-icon oo-icon-pause-slick"},
     "volume": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0062", "fontStyleClass": "oo-icon oo-icon-volume-on-ooyala-default"},
     "volumeOff": {"fontFamilyName": "ooyala-slick-type", "fontString": "\u0070", "fontStyleClass": "oo-icon oo-icon-volume-mute-ooyala-default"},

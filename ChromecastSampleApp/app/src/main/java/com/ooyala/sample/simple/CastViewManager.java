@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.util.DebugMode;
 import com.ooyala.cast.CastManager;
 import com.ooyala.cast.UpdateImageViewRunnable;
 import com.ooyala.sample.R;
@@ -18,6 +19,7 @@ public class CastViewManager {
   public CastViewManager(Activity activity, CastManager manager) {
     castView = activity.getLayoutInflater().inflate(R.layout.cast_video_view, null);
     manager.setCastView(castView);
+    manager.displayCastView();
     stateTextView = castView.findViewById(R.id.castStateTextView);
   }
 

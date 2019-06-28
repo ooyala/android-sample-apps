@@ -14,6 +14,8 @@ import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.configuration.Options;
 import com.ooyala.android.skin.OoyalaSkinLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
+import com.ooyala.cast.mediainfo.VideoData;
+import com.ooyala.sample.SampleApplication;
 import com.ooyala.sample.simple.SimpleCastPlayerActivity;
 
 import java.net.URL;
@@ -78,22 +80,9 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
 
       if (!TextUtils.isEmpty(embedCode)) {
         play(embedCode);
-      } else {
-        String currentEmbedCode = getCurrentRemoteEmbedCode();
-        if (!TextUtils.isEmpty(currentEmbedCode)) {
-          play(currentEmbedCode);
-        }
       }
     }
   }
-
-  /**
-   * Gets embed code that plays on remote device.
-   *
-   * @return current embed code that plays on remote device or null
-   */
-  @Nullable
-  abstract protected String getCurrentRemoteEmbedCode();
 
   protected abstract Options getOptions();
 
@@ -106,17 +95,7 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
       secondEmbedCode = lastChosenParams.getString("secondEmbedCode", null);
       pcode = lastChosenParams.getString("pcode", "");
       domain = lastChosenParams.getString("domain", "");
-
-      removeUsedEmbedCodes(lastChosenParams);
     }
-  }
-
-  private void removeUsedEmbedCodes(SharedPreferences lastChosenParams) {
-    lastChosenParams
-        .edit()
-        .putString("embedcode", null)
-        .putString("secondEmbedCode", null)
-        .apply();
   }
 
   @Override
@@ -177,6 +156,21 @@ public abstract class PlayerActivity extends AppCompatActivity implements EmbedT
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
     if (arg1 == OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME) {
       return;
+    }
+
+    if (arg1 == OoyalaPlayer.CURRENT_ITEM_CHANGED_NOTIFICATION_NAME) {
+      OoyalaNotification notification = null;
+      if (argN instanceof OoyalaNotification) {
+        notification = (OoyalaNotification) argN;
+      }
+
+      if (notification != null) {
+        VideoData data = (VideoData) notification.getData();
+        if (data != null) {
+          SampleApplication.updatePlayerData(getApplicationContext(), data);
+          parseSharedPreferences();
+        }
+      }
     }
 
     if (arg1 == OoyalaPlayer.PLAY_COMPLETED_NOTIFICATION_NAME && secondEmbedCode != null) {
