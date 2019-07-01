@@ -107,20 +107,55 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
 
 	@Override
-	protected void onStop() {
-		super.onStop();
-		Log.d(TAG, "Player Activity Stopped");
+	public void onStart() {
+		super.onStart();
 		if (null != player) {
+			player.resume();
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (player != null) {
 			player.suspend();
 		}
 	}
 
 	@Override
-	protected void onRestart() {
-		super.onRestart();
-		Log.d(TAG, "Player Activity Restarted");
-		if (null != player) {
-			player.resume();
+	public void onPause() {
+		super.onPause();
+		if (playerLayoutController != null) {
+			playerLayoutController.onPause();
+		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (playerLayoutController != null) {
+			playerLayoutController.onResume(this, this);
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (skinLayout != null) {
+			skinLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
 		}
 	}
 
@@ -160,26 +195,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
 	/** End DefaultHardwareBackBtnHandler **/
 
-	/** Start Activity methods for Skin **/
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (null != player) {
-			player.suspend();
-		}
-		if (null != playerLayoutController) {
-			playerLayoutController.onPause();
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (null != playerLayoutController) {
-			playerLayoutController.onResume( this, this );
-		}
-	}
-
 	@Override
 	public void onBackPressed() {
 		if (null != playerLayoutController) {
@@ -189,13 +204,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		}
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (null != playerLayoutController) {
-			playerLayoutController.onDestroy();
-		}
-	}
 
   private String getLog(Object argN) {
     final String arg1 = OoyalaNotification.getNameOrUnknown(argN);

@@ -78,7 +78,7 @@ public class SsaiPlayerActivity extends AbstractHookActivity {
   }
 
   @Override
-  protected void onDestroy() {
+  public void onDestroy() {
     ssaiManager.remove();
     super.onDestroy();
   }
