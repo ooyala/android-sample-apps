@@ -32,7 +32,7 @@ buildscript {
 
         // react-native dependencies
         // react-native dependencies
-        reactNativeVersion = '0.59.4'
+        reactNativeVersion = '0.59.9'
         inferAnnotationVersion = '0.11.2'
         frescoVersion = '1.10.0'
         soloaderVersion = '0.5.1'

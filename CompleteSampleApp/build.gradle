@@ -25,7 +25,7 @@ buildscript {
         mavenGradleVersion = '1.5'
 
         // react-native dependencies
-        reactNativeVersion = '0.59.4'
+        reactNativeVersion = '0.59.9'
         findbugsVersion = '3.0.0'
         frescoVersion = '1.3.0'
         imagePipelineVersion = '1.3.0'

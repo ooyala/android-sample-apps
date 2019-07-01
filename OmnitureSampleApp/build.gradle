@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        reactNativeVersion = '0.59.4'
+        reactNativeVersion = '0.59.9'
     }
     repositories {
         jcenter()
