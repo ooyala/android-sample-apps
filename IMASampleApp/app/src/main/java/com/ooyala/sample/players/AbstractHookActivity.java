@@ -71,26 +71,17 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
   }
 
   @Override
-  protected void onPause() {
-    super.onPause();
-    if (null != player) {
-      player.suspend();
-    }
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
+  public void onStart() {
+    super.onStart();
     if (null != player) {
       player.resume();
     }
   }
 
   @Override
-  protected void onStop() {
+  public void onStop() {
     super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
-    if (null != player) {
+    if (player != null) {
       player.suspend();
     }
   }
@@ -98,7 +89,6 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
   @Override
   public void onDestroy() {
     super.onDestroy();
-
     destroyPlayer();
   }
 

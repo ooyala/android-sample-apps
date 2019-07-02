@@ -57,7 +57,7 @@ public class NPAWDefaultPlayerActivity extends AbstractHookActivity {
   }
 
   @Override
-  protected void onStop() {
+  public void onStop() {
     super.onStop();
     Log.d(TAG, "Player Activity Stopped");
     if (isFinishing()) {
