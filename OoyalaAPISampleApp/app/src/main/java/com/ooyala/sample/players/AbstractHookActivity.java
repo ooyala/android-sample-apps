@@ -85,6 +85,37 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	}
 
 	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "Player Activity Stopped");
+		if (null != player) {
+			player.suspend();
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
+		}
+	}
+
+
+	@Override
 	public void update(Observable arg0, Object argN) {
 		if (arg0 != player) {
 			return;
