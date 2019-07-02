@@ -23,7 +23,6 @@ import java.util.Map;
 public class OptionsFreewheelPlayerActivity extends AbstractHookActivity implements
 		OnClickListener {
 
-	private OptimizedOoyalaPlayerLayoutController playerLayoutController;
 	private Button setButton;
 	private ToggleButton cuePointsButton;
 	private ToggleButton adsControlsButton;
@@ -39,16 +38,16 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 
 		setContentView(R.layout.player_toggle_button_layout);
 
-		setButton = (Button) findViewById(R.id.setButton);
+		setButton = findViewById(R.id.setButton);
 		setButton.setText("Create Video");
 		setButton.setOnClickListener(this);
 
-		cuePointsButton = (ToggleButton) findViewById(R.id.toggleButton1);
+		cuePointsButton = findViewById(R.id.toggleButton1);
 		cuePointsButton.setTextOn("CuePoints On");
 		cuePointsButton.setTextOff("CuePoints Off");
 		cuePointsButton.setChecked(true);
 
-		adsControlsButton = (ToggleButton) findViewById(R.id.toggleButton2);
+		adsControlsButton = findViewById(R.id.toggleButton2);
 		adsControlsButton.setTextOn("AdsControls On");
 		adsControlsButton.setTextOff("AdsControls Off");
 		adsControlsButton.setChecked(true);
@@ -57,7 +56,7 @@ public class OptionsFreewheelPlayerActivity extends AbstractHookActivity impleme
 
 	@Override
 	public void onClick(View v) {
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		playerLayout = findViewById(R.id.ooyalaPlayer);
 		PlayerDomain playerDomain = new PlayerDomain(domain);
 		boolean showAdsControls = this.adsControlsButton.isChecked();
 		boolean showCuePoints = this.cuePointsButton.isChecked();
