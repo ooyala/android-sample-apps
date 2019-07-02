@@ -75,23 +75,41 @@ open class VideoFragment : Fragment(), Observer, DefaultHardwareBackBtnHandler {
     }
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    playerController?.onDestroy()
+  override fun onStart() {
+    super.onStart()
+    player?.resume()
   }
 
-
-  override fun onResume() {
-    super.onResume()
-    player?.resume()
-    playerController?.onResume(activity, this)
+  override fun onStop() {
+    super.onStop()
+    player?.suspend()
   }
 
   override fun onPause() {
     super.onPause()
-    player?.suspend()
     playerController?.onPause()
   }
+
+  override fun onResume() {
+    super.onResume()
+    playerController?.onResume(activity, this)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    destroyPlayer()
+  }
+
+  private fun destroyPlayer() {
+    player?.destroy()
+    player = null
+
+    playerController?.destroy()
+    playerController = null
+  }
+
+
+
 
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
     if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
