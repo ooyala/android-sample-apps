@@ -30,6 +30,7 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
   String DOMAIN = null;
   private AdobePassLoginController adobePassController;
 
+  OoyalaPlayerLayout playerLayout;
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
@@ -50,48 +51,64 @@ public class AdobePassSampleAppAcitivity extends Activity implements OnAuthoriza
     DOMAIN = getIntent().getExtras().getString("domain");
 
     //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    playerLayout = findViewById(R.id.ooyalaPlayer);
 
     Options options = new Options.Builder().setUseExoPlayer(true).build();
     player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
     playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
     player.addObserver(this);
 
-    Button loginButton = (Button)findViewById(R.id.doubleLeftButton);
+    Button loginButton = findViewById(R.id.doubleLeftButton);
     loginButton.setText("Login");
-    loginButton.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        Button loginButton = (Button) v;
-        if (loginButton.getText().equals("Login")) {
-          adobePassController.login();
-        } else {
-          adobePassController.logout();
-        }
+    loginButton.setOnClickListener(v -> {
+      Button loginButton1 = (Button) v;
+      if (loginButton1.getText().equals("Login")) {
+        adobePassController.login();
+      } else {
+        adobePassController.logout();
       }
     });
-    Button setEmbedCodeButton = (Button)findViewById(R.id.doubleRightButton);
+    Button setEmbedCodeButton = findViewById(R.id.doubleRightButton);
     setEmbedCodeButton.setText("SetEmbedCode");
-    setEmbedCodeButton.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        playerLayoutController.getPlayer().setEmbedCode(EMBED);
-        playerLayoutController.getPlayer().play();
-      }
+    setEmbedCodeButton.setOnClickListener(v -> {
+      player.setEmbedCode(EMBED);
+      player.play();
     });
   }
 
   @Override
-  protected void onStop() {
+  public void onStart() {
+    super.onStart();
+    if (null != player) {
+      player.resume();
+    }
+  }
+
+  @Override
+  public void onStop() {
     super.onStop();
-    if (null != player && player.getState() == PLAYING) {
+    if (player != null) {
       player.suspend();
     }
   }
 
   @Override
-  protected void onResume() {
-    super.onResume();
-    if (null != player) {
-      player.resume();
+  public void onDestroy() {
+    super.onDestroy();
+    destroyPlayer();
+  }
+
+  private void destroyPlayer() {
+    if (player != null) {
+      player.destroy();
+      player = null;
+    }
+    if (playerLayout != null) {
+      playerLayout.release();
+    }
+    if (playerLayoutController != null) {
+      playerLayoutController.destroy();
+      playerLayoutController = null;
     }
   }
 

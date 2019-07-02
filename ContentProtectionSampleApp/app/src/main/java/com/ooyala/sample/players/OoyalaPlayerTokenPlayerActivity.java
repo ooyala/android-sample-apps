@@ -58,6 +58,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
   private String APIKEY = "";
   private String SECRET = "";
 
+  protected OoyalaPlayerLayout playerLayout;
   protected OoyalaPlayerLayoutController playerLayoutController;
   protected OoyalaPlayer player;
   boolean writePermission = false;
@@ -86,7 +87,7 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     }
 
     //Initialize the player
-    OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+    playerLayout = findViewById(R.id.ooyalaPlayer);
 
     Options options = new Options.Builder().setUseExoPlayer(true).build();
     //Need to pass `this` as the embedTokenGenerator
@@ -104,21 +105,40 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     }
   }
 
+
   @Override
-  protected void onStop() {
+  public void onStart() {
+    super.onStart();
+    if (null != player) {
+      player.resume();
+    }
+  }
+
+  @Override
+  public void onStop() {
     super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
     if (player != null) {
       player.suspend();
     }
   }
 
   @Override
-  protected void onRestart() {
-    super.onRestart();
-    Log.d(TAG, "Player Activity Restarted");
+  public void onDestroy() {
+    super.onDestroy();
+    destroyPlayer();
+  }
+
+  private void destroyPlayer() {
     if (player != null) {
-      player.resume();
+      player.destroy();
+      player = null;
+    }
+    if (playerLayout != null) {
+      playerLayout.release();
+    }
+    if (playerLayoutController != null) {
+      playerLayoutController.destroy();
+      playerLayoutController = null;
     }
   }
 
