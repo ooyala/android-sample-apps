@@ -57,6 +57,7 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
 
   SDCardLogcatOoyalaEventsLogger Playbacklog= new SDCardLogcatOoyalaEventsLogger();
 
+  protected OoyalaSkinLayout skinLayout;
   protected OoyalaSkinLayoutController playerLayoutController;
   protected OoyalaPlayer player;
 
@@ -131,7 +132,7 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
 
   private void initializePlayer() {
     // Get the SkinLayout from our layout xml
-    OoyalaSkinLayout skinLayout = (OoyalaSkinLayout)findViewById(R.id.ooyalaSkin);
+    skinLayout = findViewById(R.id.ooyalaSkin);
 
     // Create the OoyalaPlayer, with some built-in UI disabled
     PlayerDomain domain = new PlayerDomain(DOMAIN);
@@ -185,28 +186,58 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
 
   /** Start Activity methods for Skin **/
   @Override
-  protected void onResume() {
-    super.onResume();
-    if (playerLayoutController != null) {
-      playerLayoutController.onResume( this, this );
-    }
-    Log.d(TAG, "Player Activity Restarted");
-    if (player != null) {
+  public void onStart() {
+    super.onStart();
+    if (null != player) {
       player.resume();
     }
   }
 
   @Override
-  protected void onStop() {
+  public void onStop() {
     super.onStop();
-    Log.d(TAG, "Player Activity Stopped");
-    if (playerLayoutController != null) {
-      playerLayoutController.onPause();
-    }
     if (player != null) {
       player.suspend();
     }
   }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    if (playerLayoutController != null) {
+      playerLayoutController.onPause();
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (playerLayoutController != null) {
+      playerLayoutController.onResume(this, this);
+    }
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+
+    destroyPlayer();
+  }
+
+  private void destroyPlayer() {
+    if (player != null) {
+      player.destroy();
+      player = null;
+    }
+    if (skinLayout != null) {
+      skinLayout.release();
+    }
+    if (playerLayoutController != null) {
+      playerLayoutController.destroy();
+      playerLayoutController = null;
+    }
+  }
+
 
   @Override
   public void onBackPressed() {
@@ -217,14 +248,6 @@ public class OoyalaSkinOPTPlayerActivity extends Activity
     }
   }
 
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    Log.d(TAG, "Player Activity Destroyed");
-    if (playerLayoutController != null) {
-      playerLayoutController.onDestroy();
-    }
-  }
   /** End Activity methods for Skin **/
 
   /**
