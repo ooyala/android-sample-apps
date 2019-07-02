@@ -25,82 +25,102 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * as we need to write into the SD card and automation will parse this file.
  */
 public abstract class AbstractHookActivity extends Activity implements Observer {
-  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-  final String TAG = this.getClass().toString();
+	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+	final String TAG = this.getClass().toString();
 
-  private final SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
+	private final SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 
-  protected String embedCode;
-  protected String pcode;
-  protected String domain;
-  protected OoyalaPlayerLayoutController playerLayoutController;
-  protected OoyalaPlayerLayout playerLayout;
+	protected String embedCode;
+	protected String pcode;
+	protected String domain;
+	protected OoyalaPlayerLayoutController playerLayoutController;
+	protected OoyalaPlayerLayout playerLayout;
 
-  OoyalaPlayer player;
+	OoyalaPlayer player;
 
-  private boolean writePermission = false;
-  boolean asked = false;
+	private boolean writePermission = false;
+	boolean asked = false;
 
-  // complete player setup after we asked for permission to write into external storage
-  abstract void completePlayerSetup(final boolean asked);
+	// complete player setup after we asked for permission to write into external storage
+	abstract void completePlayerSetup(final boolean asked);
+
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		} else {
+			writePermission= true;
+			asked = true;
+		}
+
+		embedCode = getIntent().getExtras().getString("embed_code");
+		pcode = getIntent().getExtras().getString("pcode");
+		domain = getIntent().getExtras().getString("domain");
+	}
 
   @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-
-	if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-	  ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-	} else {
-	  writePermission= true;
-	  asked = true;
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+			asked = true;
+			if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+				writePermission = true;
+			}
+			completePlayerSetup(asked);
+		}
 	}
 
-	embedCode = getIntent().getExtras().getString("embed_code");
-	pcode = getIntent().getExtras().getString("pcode");
-	domain = getIntent().getExtras().getString("domain");
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-	if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-	  asked = true;
-	  if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-		writePermission = true;
-	  }
-	  completePlayerSetup(asked);
-	}
-  }
-
-  @Override
-  protected void onPause() {
-	super.onPause();
-	if (null != player) {
-	  player.suspend();
-	}
-  }
-
-  @Override
-  protected void onResume() {
-	super.onResume();
-	if (null != player) {
-	  player.resume();
-	}
-  }
-
-  @Override
-  public void update(Observable o, Object arg) {
-	final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
-	if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
-	  return;
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (null != player) {
+			player.resume();
+		}
 	}
 
-	String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-	Log.d(TAG, text);
-
-	if (writePermission) {
-	  Log.d(TAG, "Writing log to SD card");
-	  // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-	  log.writeToSdcardLog(text);
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (player != null) {
+			player.suspend();
+		}
 	}
-  }
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
+		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
+		if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
+			return;
+		}
+
+		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+		Log.d(TAG, text);
+
+		if (writePermission) {
+			Log.d(TAG, "Writing log to SD card");
+			// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+			log.writeToSdcardLog(text);
+		}
+	}
 }
