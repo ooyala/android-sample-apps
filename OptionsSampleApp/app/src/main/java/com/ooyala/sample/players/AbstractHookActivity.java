@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -28,6 +29,7 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 
 	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 	private String text;
+	protected OoyalaPlayerLayout playerLayout;
 	protected OptimizedOoyalaPlayerLayoutController optimizedOoyalaPlayerLayoutController;
 	protected OoyalaPlayerLayoutController playerLayoutController;
 	protected String EMBED_CODE;
@@ -82,6 +84,40 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 		super.onResume();
 		if (null != player) {
 			player.resume();
+		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "Player Activity Stopped");
+		if (null != player) {
+			player.suspend();
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (optimizedOoyalaPlayerLayoutController != null) {
+			optimizedOoyalaPlayerLayoutController.destroy();
+			optimizedOoyalaPlayerLayoutController = null;
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
 		}
 	}
 

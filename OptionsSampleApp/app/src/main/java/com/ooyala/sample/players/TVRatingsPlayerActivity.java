@@ -67,7 +67,7 @@ public class TVRatingsPlayerActivity extends AbstractHookActivity implements OnC
             player.suspend();
             player.removeVideoView();
         }
-        OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+        playerLayout = findViewById(R.id.ooyalaPlayer);
 
         FCCTVRatingConfiguration fccConfig = new FCCTVRatingConfiguration.Builder().setPosition(getTVRatingPosition()).setDurationSeconds(TVRATING_DURATION).build();
         Options options = new Options.Builder().setTVRatingConfiguration(fccConfig).setUseExoPlayer(true).build();

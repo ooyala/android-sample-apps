@@ -65,7 +65,7 @@ public class CuePointsOptionsFreewheelPlayerActivity extends AbstractHookActivit
 			player.suspend();
 			player.removeVideoView();
 		}
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		playerLayout = findViewById(R.id.ooyalaPlayer);
 		boolean showAdsControls = this.adsControlsButton.isChecked();
 		boolean showCuePoints = this.cuePointsButton.isChecked();
 		DebugMode.logD(TAG, "showAdsControls: " + showAdsControls
