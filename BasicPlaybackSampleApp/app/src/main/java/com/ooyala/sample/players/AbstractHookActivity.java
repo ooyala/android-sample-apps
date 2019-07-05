@@ -2,10 +2,12 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
@@ -51,7 +53,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 		} else {
-			writePermission= true;
+			writePermission = true;
 			asked = true;
 		}
 
@@ -60,7 +62,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 		domain = getIntent().getExtras().getString("domain");
 	}
 
-  @Override
+	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
 			asked = true;

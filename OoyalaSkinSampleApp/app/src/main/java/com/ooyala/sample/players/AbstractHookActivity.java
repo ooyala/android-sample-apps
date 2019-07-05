@@ -2,10 +2,12 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
@@ -76,7 +78,7 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 		} else {
-			writePermission= true;
+			writePermission = true;
 			asked = true;
 		}
 		Bundle extras = getIntent().getExtras();
@@ -84,14 +86,14 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			embedCode = extras.getString(EXTRA_EMBED_CODE);
 			pcode = extras.getString(EXTRA_PCODE);
 			domain = extras.getString(EXTRA_DOMAIN);
-			autoPlay = extras.getBoolean(EXTRA_AUTO_PLAY,false);
+			autoPlay = extras.getBoolean(EXTRA_AUTO_PLAY, false);
 			apiKey = extras.getString("apiKey");
 			secret = extras.getString("secret");
 			accountId = extras.getString("accountId");
-			selectedFormat = extras.getString(EXTRA_SELECTED_FORMAT,"default");
-			hevcMode = extras.getString("hevc_mode","NoPreference");
-			isStaging = extras.getBoolean("is_staging",false);
-			markersFileName = extras.getString(EXTRA_MARKERS,"");
+			selectedFormat = extras.getString(EXTRA_SELECTED_FORMAT, "default");
+			hevcMode = extras.getString("hevc_mode", "NoPreference");
+			isStaging = extras.getBoolean("is_staging", false);
+			markersFileName = extras.getString(EXTRA_MARKERS, "");
 		}
 	}
 
@@ -170,15 +172,14 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 			final String msg = "Error Event Received";
 			if (null != player && null != player.getError()) {
 				Log.e(TAG, msg, player.getError());
-			}
-			else {
+			} else {
 				Log.e(TAG, msg);
 			}
 			return;
 		}
 
 		if (arg1.equalsIgnoreCase(OoyalaSkinLayoutController.FULLSCREEN_CHANGED_NOTIFICATION_NAME)) {
-			Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification)argN).getData());
+			Log.d(TAG, "Fullscreen Notification received : " + arg1 + " - fullScreen: " + ((OoyalaNotification) argN).getData());
 		}
 
 		// Automation Hook: to write Notifications to a temporary file on the device/emulator
@@ -188,12 +189,17 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 		Log.d(TAG, text);
 	}
 
-	/** Start DefaultHardwareBackBtnHandler **/
+	/**
+	 * Start DefaultHardwareBackBtnHandler
+	 **/
 	@Override
 	public void invokeDefaultOnBackPressed() {
 		super.onBackPressed();
 	}
-	/** End DefaultHardwareBackBtnHandler **/
+
+	/**
+	 * End DefaultHardwareBackBtnHandler
+	 **/
 
 	@Override
 	public void onBackPressed() {
@@ -205,45 +211,43 @@ public abstract class AbstractHookActivity extends Activity implements Observer,
 	}
 
 
-  private String getLog(Object argN) {
-    final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
-    final Object data = ((OoyalaNotification) argN).getData();
-    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+	private String getLog(Object argN) {
+		final String arg1 = OoyalaNotification.getNameOrUnknown(argN);
+		final Object data = ((OoyalaNotification) argN).getData();
+		String text = "Notification Received: " + arg1 + " - state: " + player.getState();
 
-    if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
-      if (data != null && data instanceof Boolean) {
-        boolean isMultiAudioEnabled = (Boolean) data;
-        String multiAudioState = isMultiAudioEnabled ? " is enabled" : " is disabled";
-        text = "Notification Received: " + arg1 + multiAudioState + " - state: " + player.getState();
-      }
-    }
-    return text;
-  }
+		if (arg1.equalsIgnoreCase(OoyalaPlayer.MULTI_AUDIO_ENABLED_NOTIFICATION_NAME)) {
+			if (data != null && data instanceof Boolean) {
+				boolean isMultiAudioEnabled = (Boolean) data;
+				String multiAudioState = isMultiAudioEnabled ? " is enabled" : " is disabled";
+				text = "Notification Received: " + arg1 + multiAudioState + " - state: " + player.getState();
+			}
+		}
+		return text;
+	}
 
-  protected Options getOptions(){
-	  Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
-	  if(!selectedFormat.equalsIgnoreCase("default")) {
-		  optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
-	  }
-	  if(hevcMode.equalsIgnoreCase("HEVCPreferred")) {
-		  optionBuilder.enableHevc(true);
-	  }
-	  else if(hevcMode.equalsIgnoreCase("HEVCNotPreferred")) {
-		  optionBuilder.enableHevc(false);
-	  }
-	  if (!markersFileName.isEmpty()) {
-	  	  try {
-			  optionBuilder.setMarkers(loadJSONFromAsset(markersFileName));
-		  }  catch (JSONException e) {
-              Log.e(TAG, "Exception Thrown while json file loading from assets", e);
-	  	  }
-	  }
-	  Options options =  optionBuilder.build();
-	  return options;
-  }
+	protected Options getOptions() {
+		Options.Builder optionBuilder = new Options.Builder().setShowNativeLearnMoreButton(false).setShowPromoImage(false).setUseExoPlayer(true);
+		if (!selectedFormat.equalsIgnoreCase("default")) {
+			optionBuilder.setPlayerInfo(new CustomPlayerInfo(selectedFormat));
+		}
+		if (hevcMode.equalsIgnoreCase("HEVCPreferred")) {
+			optionBuilder.enableHevc(true);
+		} else if (hevcMode.equalsIgnoreCase("HEVCNotPreferred")) {
+			optionBuilder.enableHevc(false);
+		}
+		if (!markersFileName.isEmpty()) {
+			try {
+				optionBuilder.setMarkers(loadJSONFromAsset(markersFileName));
+			} catch (JSONException e) {
+				Log.e(TAG, "Exception Thrown while json file loading from assets", e);
+			}
+		}
+		Options options = optionBuilder.build();
+		return options;
+	}
 
 	/**
-	 *
 	 * @param name of asset file in a JSON format
 	 * @return asset file as JSON object
 	 */

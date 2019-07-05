@@ -2,10 +2,12 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
