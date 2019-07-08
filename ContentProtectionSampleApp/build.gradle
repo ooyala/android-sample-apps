@@ -12,7 +12,7 @@ buildscript {
         gradleVersion = '3.2.1'
 
         // App dependencies
-        exoplayerVersion = '2.9.3'
+        exoplayerVersion = '2.10.2'
         gsonVersion = '2.8.5'
         supportLibraryVersion = '1.0.0'
 
