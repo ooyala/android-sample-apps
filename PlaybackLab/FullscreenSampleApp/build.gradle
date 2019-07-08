@@ -11,7 +11,7 @@ buildscript {
 
         // App dependencies
         constraintLayoutVersion = '1.1.3'
-        exoplayerVersion = '2.9.3'
+        exoplayerVersion = '2.10.2'
         hamcrestVersion = '1.3'
         injectVersion = '1'
         jacksonVersion = '2.2.3'

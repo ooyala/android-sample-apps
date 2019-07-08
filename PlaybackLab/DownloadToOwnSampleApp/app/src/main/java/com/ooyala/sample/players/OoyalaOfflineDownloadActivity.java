@@ -83,11 +83,10 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 	private Handler handler;
 	private Runnable updateProgress = () -> {
 		handler.postDelayed(this.updateProgress, UPDATE_TIME);
-		if (taskInfo != null) {
+		if (taskInfo != null && taskInfo.state == TaskInfo.STATE_DOWNLOADING) {
 			float progress = Utils.clamp(downloader.getDownloadPercentage(taskInfo.taskId),
 					MIN_PROGRESS, MAX_PROGRESS);
-			if (progress > MIN_PROGRESS && progress <= MAX_PROGRESS
-					&& taskInfo.state == TaskInfo.STATE_STARTED) {
+			if (progress > MIN_PROGRESS && progress <= MAX_PROGRESS) {
 				String text = getString(R.string.progress_text, progress);
 				progressView.setText(text);
 			}
@@ -198,10 +197,8 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 
 	@Override
 	public void onStarted(TaskInfo taskInfo) {
-		if (!taskInfo.isRemoveAction) {
 			this.taskInfo = taskInfo;
 			((DemoApplication) getApplication()).addDownloadTask(EMBED, taskInfo);
-		}
 	}
 
 	@Override
@@ -221,20 +218,16 @@ public class OoyalaOfflineDownloadActivity extends Activity implements DownloadL
 
 	@Override
 	public void onFailed(TaskInfo taskInfo, final Throwable ex) {
-		if (taskInfo.isRemoveAction) {
-			onDeletion(false);
-		} else {
-			if (retryCount < MAX_RETRY_COUNT) {
-				DebugMode.logD(TAG, "Retrying to download : " + retryCount);
+		if (retryCount < MAX_RETRY_COUNT) {
+			DebugMode.logD(TAG, "Retrying to download : " + retryCount);
 
-				retryCount++;
-				handler.post(() -> {
-					progressView.setText(getString(R.string.retry_text, taskInfo.downloadPercentage));
-					downloader.startDownload();
-				});
-			} else {
-				handler.post(() -> progressView.setText(getString(R.string.error_text, ex.getLocalizedMessage())));
-			}
+			retryCount++;
+			handler.post(() -> {
+				progressView.setText(getString(R.string.retry_text, taskInfo.downloadPercentage));
+				downloader.startDownload();
+			});
+		} else {
+			handler.post(() -> progressView.setText(getString(R.string.error_text, ex.getLocalizedMessage())));
 		}
 	}
 
