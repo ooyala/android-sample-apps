@@ -17,33 +17,33 @@ import com.ooyala.sample.R;
  */
 public class BasicPlaybackVideoPlayerActivity extends AbstractHookActivity {
 
-  @Override
-  void completePlayerSetup(boolean asked) {
-	if (asked) {
-	  player = new OoyalaPlayer(pcode, new PlayerDomain(domain));
-	  playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+	@Override
+	void completePlayerSetup(boolean asked) {
+		if (asked) {
+			player = new OoyalaPlayer(pcode, new PlayerDomain(domain));
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 
-	  playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
-	  player.addObserver(this);
+			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
+			player.addObserver(this);
 
-	  if (player.setEmbedCode(embedCode)) {
-		//Uncomment for Auto Play
-		//player.play();
-	  }
-	  else {
-		Log.e(TAG, "Asset Failure");
-	  }
+			if (player.setEmbedCode(embedCode)) {
+				//Uncomment for Auto Play
+				//player.play();
+			}
+			else {
+				Log.e(TAG, "Asset Failure");
+			}
+		}
 	}
-  }
-  /**
-   * Called when the activity is first created.
-   */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.player_simple_layout);
-	completePlayerSetup(asked);
-  }
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.player_simple_layout);
+		completePlayerSetup(asked);
+	}
 }
 
 

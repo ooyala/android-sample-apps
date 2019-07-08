@@ -26,8 +26,6 @@ import java.util.Map;
  */
 public class CustomConfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
-	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +41,7 @@ public class CustomConfiguredFreewheelPlayerActivity extends AbstractHookActivit
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			player.addObserver(this);
 
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
 			/** DITA_START:<ph id="freewheel_custom"> **/

@@ -34,7 +34,7 @@ public class ServerConfiguredTVRatingsPlayerActivity extends AbstractHookActivit
 	@Override
 	void completePlayerSetup(boolean asked) {
 		if (asked) {
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			PlayerDomain domain = new PlayerDomain(DOMAIN);
 
 			// Configure FCC TV Ratings

@@ -25,7 +25,7 @@ public class IQConfigurationPlayerActivity extends AbstractHookActivity {
 			Options options = new Options.Builder().setIqConfiguration(iqConfiguration).setUseExoPlayer(true).build();
 
 			//Initialize the player
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			player = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN), options);
 			playerLayoutController = new OoyalaPlayerLayoutController(playerLayout, player);
 			player.addObserver(this);

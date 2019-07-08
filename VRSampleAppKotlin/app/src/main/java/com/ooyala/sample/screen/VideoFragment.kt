@@ -17,6 +17,7 @@ import com.ooyala.android.OoyalaPlayer
 import com.ooyala.android.PlayerDomain
 import com.ooyala.android.configuration.FCCTVRatingConfiguration
 import com.ooyala.android.configuration.Options
+import com.ooyala.android.skin.OoyalaSkinLayout
 import com.ooyala.android.skin.OoyalaSkinLayoutController
 import com.ooyala.android.skin.configuration.SkinOptions
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger
@@ -75,23 +76,41 @@ open class VideoFragment : Fragment(), Observer, DefaultHardwareBackBtnHandler {
     }
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    playerController?.onDestroy()
+  override fun onStart() {
+    super.onStart()
+    player?.resume()
   }
 
-
-  override fun onResume() {
-    super.onResume()
-    player?.resume()
-    playerController?.onResume(activity, this)
+  override fun onStop() {
+    super.onStop()
+    player?.suspend()
   }
 
   override fun onPause() {
     super.onPause()
-    player?.suspend()
     playerController?.onPause()
   }
+
+  override fun onResume() {
+    super.onResume()
+    playerController?.onResume(activity, this)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    destroyPlayer()
+  }
+
+  private fun destroyPlayer() {
+    player?.destroy()
+    player = null
+    playerSkinLayout?.release();
+    playerController?.destroy()
+    playerController = null
+  }
+
+
+
 
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
     if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {

@@ -2,14 +2,17 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
@@ -24,91 +27,103 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * as we need to write into the SD card and automation will parse this file.
  */
 public abstract class AbstractHookActivity extends Activity implements Observer {
-  private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-  String TAG = this.getClass().toString();
+	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+	String TAG = this.getClass().toString();
 
-  private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
-  protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-  protected String embedCode;
-  protected String pcode;
-  protected String domain;
+	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
+	protected OoyalaPlayerLayout playerLayout;
+	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
+	protected String embedCode;
+	protected String pcode;
+	protected String domain;
 
-  OoyalaPlayer player;
+	OoyalaPlayer player;
 
-  boolean writePermission = false;
-  boolean asked = false;
+	boolean writePermission = false;
+	boolean asked = false;
 
-  // complete player setup after we asked for permission to write into external storage
-  abstract void completePlayerSetup(final boolean asked);
+	// complete player setup after we asked for permission to write into external storage
+	abstract void completePlayerSetup(final boolean asked);
 
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-	if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-	  ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-	} else {
-	  writePermission= true;
-	  asked = true;
+		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		} else {
+			writePermission = true;
+			asked = true;
+		}
+
+		embedCode = getIntent().getExtras().getString("embed_code");
+		pcode = getIntent().getExtras().getString("pcode");
+		domain = getIntent().getExtras().getString("domain");
 	}
 
-	embedCode = getIntent().getExtras().getString("embed_code");
-	pcode = getIntent().getExtras().getString("pcode");
-	domain = getIntent().getExtras().getString("domain");
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-	if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-	  asked = true;
-	  if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-		writePermission = true;
-	  }
-	  completePlayerSetup(asked);
-	}
-  }
-
-  @Override
-  protected void onPause() {
-	super.onPause();
-	if (null != player) {
-	  player.suspend();
-	}
-  }
-
-  @Override
-  protected void onResume() {
-	super.onResume();
-	if (null != player) {
-	  player.resume();
-	}
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (null != player) {
-      player.release();
-      player = null;
-    }
-  }
-
-  @Override
-  public void update(Observable o, Object arg) {
-	final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
-	if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
-	  return;
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+			asked = true;
+			if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+				writePermission = true;
+			}
+			completePlayerSetup(asked);
+		}
 	}
 
-	if (null != player) {
-    String text = "Notification Received: " + arg1 + " - state: " + player.getState();
-    Log.d(TAG, text);
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (null != player) {
+			player.resume();
+		}
+	}
 
-    if (writePermission) {
-      Log.d(TAG, "Writing log to SD card");
-      // Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
-      log.writeToSdcardLog(text);
-    }
-  }
-  }
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (player != null) {
+			player.suspend();
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
+		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		final String arg1 = OoyalaNotification.getNameOrUnknown(arg);
+		if (arg1.equals(OoyalaPlayer.TIME_CHANGED_NOTIFICATION_NAME)) {
+			return;
+		}
+
+		if (null != player) {
+			String text = "Notification Received: " + arg1 + " - state: " + player.getState();
+			Log.d(TAG, text);
+
+			if (writePermission) {
+				Log.d(TAG, "Writing log to SD card");
+				// Automation Hook: Write the event text along with event count to log file in sdcard if the log file exists
+				log.writeToSdcardLog(text);
+			}
+		}
+	}
 }

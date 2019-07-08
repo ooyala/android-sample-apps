@@ -35,7 +35,7 @@ public class CustomConfiguredIMAPlayerActivity extends AbstractHookActivity {
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			player.addObserver(this);
 
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
 			player.setEmbedCode(embedCode);

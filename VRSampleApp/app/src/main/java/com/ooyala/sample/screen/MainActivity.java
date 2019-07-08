@@ -32,15 +32,12 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
     setupToolbar();
     showRecyclerFragment();
 
-    getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-      @Override
-      public void onBackStackChanged() {
-        if (getSupportActionBar() != null) {
-          boolean showHomeAsUp = getSupportFragmentManager().getBackStackEntryCount() > 0;
-          getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
-          if (!showHomeAsUp) {
-            toolbar.setTitle(R.string.app_name);
-          }
+    getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+      if (getSupportActionBar() != null) {
+        boolean showHomeAsUp = getSupportFragmentManager().getBackStackEntryCount() > 0;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeAsUp);
+        if (!showHomeAsUp) {
+          toolbar.setTitle(R.string.app_name);
         }
       }
     });
@@ -92,12 +89,7 @@ public class MainActivity extends AppCompatActivity implements VideoChooseInterf
     toolbar.bringToFront();
     toolbar.showOverflowMenu();
 
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        MainActivity.this.onBackPressed();
-      }
-    });
+    toolbar.setNavigationOnClickListener(v -> MainActivity.this.onBackPressed());
   }
 
   @Override

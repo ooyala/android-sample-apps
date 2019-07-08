@@ -27,8 +27,6 @@ import java.util.Observer;
  */
 public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 
-	protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +42,7 @@ public class PreconfiguredFreewheelPlayerActivity extends AbstractHookActivity {
 			player = new OoyalaPlayer(pcode, new PlayerDomain(domain), options);
 			player.addObserver(this);
 
-			OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+			playerLayout = findViewById(R.id.ooyalaPlayer);
 			playerLayoutController = new OptimizedOoyalaPlayerLayoutController(playerLayout, player);
 
 			@SuppressWarnings("unused")

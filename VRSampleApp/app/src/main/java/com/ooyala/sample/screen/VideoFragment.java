@@ -40,6 +40,7 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
   private static final String LOGO_NAME = "logo";
   private static final String LOGO_TYPE = "drawable";
 
+  private OoyalaSkinLayout skinLayout;
   private OoyalaSkinLayoutController playerController;
 
   private final SDCardLogcatOoyalaEventsLogger logger = new SDCardLogcatOoyalaEventsLogger();
@@ -84,11 +85,24 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
   }
 
   @Override
-  public void onResume() {
-    super.onResume();
-    if (player != null) {
+  public void onStart() {
+    super.onStart();
+    if (null != player) {
       player.resume();
     }
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    if (player != null) {
+      player.suspend();
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
     if (playerController != null) {
       playerController.onResume(getActivity(), this);
     }
@@ -97,17 +111,27 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
   @Override
   public void onDestroy() {
     super.onDestroy();
+
+    destroyPlayer();
+  }
+
+  private void destroyPlayer() {
+    if (player != null) {
+      player.destroy();
+      player = null;
+    }
+    if (skinLayout != null) {
+      skinLayout.release();
+    }
     if (playerController != null) {
-      playerController.onDestroy();
+      playerController.destroy();
+      playerController = null;
     }
   }
 
-  @Override
+    @Override
   public void onPause() {
     super.onPause();
-    if (player != null) {
-      player.suspend();
-    }
     if (playerController != null) {
       playerController.onPause();
     }
@@ -177,7 +201,7 @@ public class VideoFragment extends Fragment implements Observer, DefaultHardware
     player.registerFactory(new VRPlayerFactory());
     player.addObserver(this);
 
-    OoyalaSkinLayout skinLayout = getView().findViewById(R.id.playerSkinLayout);
+    skinLayout = getView().findViewById(R.id.playerSkinLayout);
     final SkinOptions.Builder skinOptionsBuilder = new SkinOptions.Builder();
     if (getResources().getIdentifier(LOGO_NAME, LOGO_TYPE, getContext().getPackageName()) == 0) {
       skinOptionsBuilder.setSkinOverrides(createEmptySkinWatermarkOverrides());

@@ -60,7 +60,8 @@ public class TimeoutOptionsPlayerActivity extends AbstractHookActivity implement
 			player.suspend();
 			player.removeVideoView();
 		}
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+
+		playerLayout = findViewById(R.id.ooyalaPlayer);
 
 		//If the connection timeout is specified, add it to the builder
 		Options.Builder builder = new Options.Builder();

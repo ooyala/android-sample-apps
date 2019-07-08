@@ -2,10 +2,12 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
@@ -69,18 +71,39 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
+	public void onStart() {
+		super.onStart();
 		if (null != player) {
+			player.resume();
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (player != null) {
 			player.suspend();
 		}
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		if (null != player) {
-			player.resume();
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
 		}
 	}
 

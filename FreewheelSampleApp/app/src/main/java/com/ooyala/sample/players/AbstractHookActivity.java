@@ -10,6 +10,8 @@ import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaPlayerLayout;
+import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
 
 import java.util.Observable;
@@ -32,6 +34,8 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
     String pcode;
     String domain;
 
+    protected OoyalaPlayerLayout playerLayout;
+    protected OptimizedOoyalaPlayerLayoutController playerLayoutController;
     OoyalaPlayer player;
 
     boolean writePermission = false;
@@ -68,20 +72,41 @@ public abstract class AbstractHookActivity extends Activity implements Observer 
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onStart() {
+        super.onStart();
         if (null != player) {
+            player.resume();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (player != null) {
             player.suspend();
         }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (null != player) {
-            player.resume();
+    public void onDestroy() {
+        super.onDestroy();
+        destroyPlayer();
+    }
+
+    private void destroyPlayer() {
+        if (player != null) {
+            player.destroy();
+            player = null;
+        }
+        if (playerLayout != null) {
+            playerLayout.release();
+        }
+        if (playerLayoutController != null) {
+            playerLayoutController.destroy();
+            playerLayoutController = null;
         }
     }
+
 
     @Override
     public void update(Observable o, Object arg) {

@@ -67,7 +67,7 @@ public class PreloadWithInitTimePlayerActivity extends AbstractHookActivity impl
 			player.removeVideoView();
 		}
 
-		OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout) findViewById(R.id.ooyalaPlayer);
+		playerLayout = findViewById(R.id.ooyalaPlayer);
 		boolean showPromoImage = this.showPromoImageButton.isChecked();
 		boolean preload = this.preloadButton.isChecked();
 		DebugMode.logD(TAG, "showPromoImage: " + showPromoImage

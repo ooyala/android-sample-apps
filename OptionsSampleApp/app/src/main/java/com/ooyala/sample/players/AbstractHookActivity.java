@@ -2,14 +2,17 @@ package com.ooyala.sample.players;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 
 import com.ooyala.android.OoyalaNotification;
 import com.ooyala.android.OoyalaPlayer;
+import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 import com.ooyala.android.ui.OptimizedOoyalaPlayerLayoutController;
 import com.ooyala.android.util.SDCardLogcatOoyalaEventsLogger;
@@ -28,6 +31,7 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 
 	private SDCardLogcatOoyalaEventsLogger log = new SDCardLogcatOoyalaEventsLogger();
 	private String text;
+	protected OoyalaPlayerLayout playerLayout;
 	protected OptimizedOoyalaPlayerLayoutController optimizedOoyalaPlayerLayoutController;
 	protected OoyalaPlayerLayoutController playerLayoutController;
 	protected String EMBED_CODE;
@@ -49,7 +53,7 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 		if (ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 		} else {
-			writePermission= true;
+			writePermission = true;
 			asked = true;
 		}
 
@@ -70,18 +74,43 @@ abstract class AbstractHookActivity extends Activity implements Observer {
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
+	public void onStart() {
+		super.onStart();
 		if (null != player) {
+			player.resume();
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		if (player != null) {
 			player.suspend();
 		}
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		if (null != player) {
-			player.resume();
+	public void onDestroy() {
+		super.onDestroy();
+
+		destroyPlayer();
+	}
+
+	private void destroyPlayer() {
+		if (player != null) {
+			player.destroy();
+			player = null;
+		}
+		if (playerLayout != null) {
+			playerLayout.release();
+		}
+		if (optimizedOoyalaPlayerLayoutController != null) {
+			optimizedOoyalaPlayerLayoutController.destroy();
+			optimizedOoyalaPlayerLayoutController = null;
+		}
+		if (playerLayoutController != null) {
+			playerLayoutController.destroy();
+			playerLayoutController = null;
 		}
 	}
 

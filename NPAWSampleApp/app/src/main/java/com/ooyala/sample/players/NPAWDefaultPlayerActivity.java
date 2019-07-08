@@ -57,12 +57,9 @@ public class NPAWDefaultPlayerActivity extends AbstractHookActivity {
   }
 
   @Override
-  protected void onStop() {
+  public void onStop() {
     super.onStop();
     Log.d(TAG, "Player Activity Stopped");
-    if (null != player) {
-      player.suspend();
-    }
     if (isFinishing()) {
       pluginOoyala.stopMonitoring();
     } else {
@@ -74,9 +71,6 @@ public class NPAWDefaultPlayerActivity extends AbstractHookActivity {
   protected void onRestart() {
     super.onRestart();
     Log.d(TAG, "Player Activity Restarted");
-    if (null != player) {
-      player.resume();
-    }
     pluginOoyala.resumeMonitoring();
   }
 

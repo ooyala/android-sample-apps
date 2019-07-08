@@ -103,7 +103,7 @@ public class InsertAdPlayerActivity extends AbstractHookActivity {
 	}
 
 	@Override
-	protected void onStop() {
+	public void onStop() {
 		super.onStop();
 
 		if(performanceMonitor != null) {
