@@ -6,12 +6,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.widget.SeekBar;
 
-public class CuePointsSeekBar extends SeekBar {
+import androidx.appcompat.widget.AppCompatSeekBar;
 
-  private Set<Integer> _cuePoints;
-  private Paint _paint;
+public class CuePointsSeekBar extends AppCompatSeekBar {
+
+  private Set<Float> cuePoints;
+  private Paint paint;
 
   private static final int CUE_POINT_COLOR = 0xffffffff;
   private static final float CUE_POINT_RADIUS_FACTOR = 0.15f;
@@ -27,35 +28,36 @@ public class CuePointsSeekBar extends SeekBar {
   }
 
   public CuePointsSeekBar(final Context context, final AttributeSet attrs,
-      final int defStyle) {
+                          final int defStyle) {
     super(context, attrs, defStyle);
     init();
   }
 
-  public void setCuePoints(Set<Integer> cuePoints) {
-    _cuePoints = cuePoints;
+  public void setCuePoints(Set<Float> cuePoints) {
+    this.cuePoints = cuePoints;
     this.invalidate();
   }
 
   private void init() {
-    _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    _paint.setStyle(Paint.Style.FILL);
-    _paint.setColor(CUE_POINT_COLOR);
+    paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    paint.setStyle(Paint.Style.FILL);
+    paint.setColor(CUE_POINT_COLOR);
   }
 
   @Override
   protected synchronized void onDraw(final Canvas canvas) {
     super.onDraw(canvas);
 
-    if (_cuePoints != null) {
-      float width = getWidth() - getThumbOffset() * 2;
+    if (cuePoints != null) {
+      float offset = getThumbOffset() * 2;
+      float width = getWidth() - offset * 2;
       float height = getHeight();
-      float step = width / getMax();
 
-      for (Integer i : _cuePoints) {
-        canvas.drawCircle(i * step + getThumbOffset(), height / 2, height
-            * CUE_POINT_RADIUS_FACTOR,
-            _paint);
+      for (Float cuePointPercentage : cuePoints) {
+        float radius = height * CUE_POINT_RADIUS_FACTOR;
+        float cx = cuePointPercentage * width * 0.01f + offset;
+        float cy = height * 0.5f;
+        canvas.drawCircle(cx, cy, radius, paint);
       }
     }
   }
