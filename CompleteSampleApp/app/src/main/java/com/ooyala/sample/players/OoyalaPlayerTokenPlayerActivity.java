@@ -150,10 +150,6 @@ public class OoyalaPlayerTokenPlayerActivity extends Activity implements Observe
     HashMap<String, String> params = new HashMap<String, String>();
     params.put("account_id", ACCOUNT_ID);
 
-    // Uncommenting this will bypass all syndication rules on your asset
-    // This will not work unless you have a working API Key and Secret.
-    // This is one reason why you shouldn't keep the Secret in your app/source control
-    // params.put("override_syndication_group", "override_all_synd_groups"); 
 
     String uri = "/sas/embed_token/" + PCODE + "/" + embedCodesString;
 
