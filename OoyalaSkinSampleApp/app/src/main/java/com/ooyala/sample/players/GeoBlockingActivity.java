@@ -24,14 +24,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTokenGenerator {
-  private  String ACCOUNT_ID = "";
+  private  String ACCOUNT_ID = "player-qa";
 
   /*
    * The API Key and Secret should not be saved inside your applciation (even in git!).
    * However, for debugging you can use them to locally generate Ooyala Player Tokens.
    */
-  private  String APIKEY = "";
-  private  String SECRET = "";
+  private  String APIKEY = "FhN2MyOlEAUn2NZ0OM94L7XNcL0f.yPx4J";
+  private  String SECRET = "6TCPX_HENTkNUlaO34U4qcoi2SkCoXQwCDgQOcaW";
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -119,10 +119,6 @@ public class GeoBlockingActivity extends AbstractHookActivity implements EmbedTo
     HashMap<String, String> params = new HashMap<String, String>();
     params.put("account_id", ACCOUNT_ID);
 
-    // Uncommenting this will bypass all syndication rules on your asset
-    // This will not work unless you have a working API Key and Secret.
-    // This is one reason why you shouldn't keep the Secret in your app/source control
-    // params.put("override_syndication_group", "override_all_synd_groups");
 
     String uri = "/sas/embed_token/" + pcode + "/" + embedCodesString;
 
